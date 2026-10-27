@@ -1,0 +1,9 @@
+{
+  "name": "pronto-food-delivery-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "python3 scripts/start.py"
+  }
+}

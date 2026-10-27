@@ -1,0 +1,111 @@
+spring:
+  application:
+    name: food-delivery-api
+  profiles:
+    default: postgres
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  jackson:
+    time-zone: UTC
+app:
+  media:
+    store-assets-dir: ${STORE_ASSETS_DIR:./data/store-assets}
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY:}
+      image-model: ${OPENAI_IMAGE_MODEL:gpt-image-2.5-sunburst}
+  security:
+    # Chave local de desenvolvimento. Nunca reutilizar em produção.
+    jwt-secret: ${JWT_SECRET:ZGV2LW9ubHktc2VjcmV0LWtleS1mb3ItZm9vZC1kZWxpdmVyeS1hcGk=}
+  payment:
+    mercadopago:
+      client-id: ${MP_CLIENT_ID:}
+      client-secret: ${MP_CLIENT_SECRET:}
+      redirect-uri: ${MP_REDIRECT_URI:http://127.0.0.1:8080/api/v1/payments/mercadopago/callback}
+      frontend-url: ${FRONTEND_URL:http://127.0.0.1:5173}
+      token-encryption-key: ${MP_TOKEN_ENCRYPTION_KEY:}
+      webhook-secret: ${MP_WEBHOOK_SECRET:}
+      notification-base-url: ${MP_NOTIFICATION_BASE_URL:}
+      sandbox: ${MP_SANDBOX:true}
+      test-webhook-signature: ${MP_TEST_WEBHOOK_SIGNATURE:false}
+      currency: BRL
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: never
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: postgres
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://127.0.0.1:5433/fooddelivery}
+    username: ${DATABASE_USERNAME:fooddelivery_app}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev-h2
+  datasource:
+    url: jdbc:h2:file:./data/fooddelivery;MODE=PostgreSQL;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  flyway:
+    enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  h2:
+    console:
+      enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  h2:
+    console:
+      enabled: false
+app:
+  security:
+    jwt-secret: ${JWT_SECRET}
+  payment:
+    mercadopago:
+      sandbox: false
+      test-webhook-signature: false

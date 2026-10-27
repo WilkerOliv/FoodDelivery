@@ -1,0 +1,2 @@
+package br.com.fooddelivery.orders;
+public enum OrderStatus { AWAITING_PAYMENT, AWAITING_ACCEPTANCE, ACCEPTED, PREPARING, READY, COMPLETED, REJECTED, CANCELLED }

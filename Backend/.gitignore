@@ -1,0 +1,5 @@
+.env
+.postgres-data/
+data/
+target/
+*.log

@@ -1,0 +1,1 @@
+ALTER TABLE accounts ADD COLUMN credential_version INTEGER NOT NULL DEFAULT 0;

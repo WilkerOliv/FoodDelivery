@@ -1,0 +1,7 @@
+{
+  "name": "pronto-food-delivery",
+  "private": true,
+  "scripts": {
+    "start": "python3 scripts/dev.py"
+  }
+}
