@@ -45,8 +45,12 @@ export function storeApprovalPath(storeId, platformRequestId) {
 }
 
 export function adminStoreStatus(store) {
-  if (!store.active) return 'CANCELLED';
+  if (!store.active) return 'STORE_SUSPENDED';
   return store.approved ? 'CONFIRMED' : 'PENDING_REVIEW';
+}
+
+export function filterAdminStores(stores = [], status = 'ALL') {
+  return stores.filter(store => status === 'ALL' || adminStoreStatus(store) === status);
 }
 
 export function storeApprovalId(button) {

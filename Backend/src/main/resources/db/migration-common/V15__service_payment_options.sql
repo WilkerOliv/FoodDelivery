@@ -1,0 +1,2 @@
+ALTER TABLE catalog_items ADD COLUMN pay_after_service BOOLEAN NOT NULL DEFAULT FALSE;
+ALTER TABLE reservations ADD COLUMN pay_after_service BOOLEAN NOT NULL DEFAULT FALSE;

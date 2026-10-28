@@ -8,7 +8,7 @@ Plataforma de pedidos, reservas e entregas para cidades pequenas e comércios lo
 |---|---|---|
 | Interface web | JavaScript puro (módulo ES), sem framework, servido por um script Python | `Frontend/` |
 | API | Java 21, Spring Boot 3.5, Spring Security (JWT), Spring Data JPA | `Backend/` |
-| Banco | PostgreSQL (padrão), H2 em arquivo no perfil `dev-h2`; migrações Flyway V1 a V12 | `Backend/src/main/resources/db/migration-common` e pastas específicas por banco |
+| Banco | PostgreSQL (padrão), H2 em arquivo no perfil `dev-h2`; migrações Flyway versionadas | `Backend/src/main/resources/db/migration-common` e pastas específicas por banco |
 | Pagamento | Mercado Pago (Marketplace + Checkout Pro) | `payments/` |
 | Imagens de capa por IA | API de imagens da OpenAI (opcional) | `catalog/StoreImageAiController` |
 | Inicialização local | `npm start` roda `scripts/dev.py`: sobe banco, API e interface juntos | raiz |
@@ -20,9 +20,11 @@ A interface fala com a API em `/api/v1`. Em desenvolvimento a interface roda em 
 Existem quatro papéis: `CUSTOMER`, `MERCHANT`, `COURIER` e `ADMIN`.
 
 - Todo cadastro público cria uma conta de **cliente**. O CPF é obrigatório, validado e único.
-- Vendedor e entregador **pedem acesso profissional** vinculado à conta existente (`POST /account/operator-applications`) ou no cadastro (`POST /auth/operator-applications`). O administrador aprova ou recusa em `/admin/operator-applications/{id}/approve|reject`. Enquanto o pedido está pendente, a conta continua ativa como cliente.
+- Vendedor e entregador **pedem acesso profissional** vinculado à conta existente (`POST /account/platform-requests/roles`). O administrador aprova ou recusa em `/admin/platform-requests/{id}/review`. Enquanto o pedido está pendente, a conta continua ativa como cliente. As rotas antigas de `operator-applications` são compatibilidade e não criam contas novas.
 - Uma conta pode ter vários papéis concedidos (`granted_roles`) e escolhe o perfil ativo na interface. O administrador pode suspender um papel sem afetar os demais (`suspended_roles`).
 - O administrador pode suspender a conta inteira e gerar senha temporária; a pessoa precisa trocá-la no próximo acesso (`password_change_required`).
+- O administrador não precisa de CPF. Pode corrigir dados cadastrais das contas e gerenciar a cobertura de cidades em **Definições**; CPF continua obrigatório para clientes e profissionais e permanece uma coluna opcional/única, nunca a chave primária.
+- Em **Definições > Integrações**, a interface informa se as variáveis privadas de SMTP, WhatsApp, OpenAI e Mercado Pago estão presentes. Segredos são configurados no ambiente do backend e não passam pelo navegador. O indicador não representa homologação do provedor.
 - Trocar ou redefinir a senha incrementa `credential_version`, o que invalida os tokens anteriores.
 - A recuperação pública usa códigos de uso único enviados por SMTP ou, opcionalmente, WhatsApp Cloud. O telefone precisa ser confirmado pelo próprio titular antes da recuperação por WhatsApp.
 - Cada requisição autenticada valida assinatura, emissor e validade do JWT e confirma que a conta continua ativa.
@@ -124,8 +126,8 @@ Todas as rotas começam com `/api/v1`. Públicas: cadastro, login, pedido de ace
 
 | Grupo | Rotas principais |
 |---|---|
-| Autenticação | `POST /auth/register`, `/auth/login`, `/auth/operator-applications` |
-| Conta | `GET /account/me`, `PUT /account/profile`, `POST /account/password`, `POST /account/operator-applications`, `/account/addresses` (CRUD e padrão), `/account/notifications` |
+| Autenticação | `POST /auth/register`, `/auth/login`, `/auth/password-recovery`, `/auth/password-recovery/reset` |
+| Conta | `GET /account/me`, `PUT /account/profile`, `POST /account/password`, `/account/addresses` (CRUD e padrão), `/account/notifications` |
 | Catálogo | `GET /store-categories`, `GET /store-locations`, `GET /stores`, `GET /stores/{id}/items`, `/merchant/stores`, `/merchant/items/{id}` |
 | Pedidos | `POST /orders`, `GET /orders/mine`, `POST /orders/{id}/cancel`, `GET /merchant/orders`, `PATCH /merchant/orders/{id}/status` |
 | Reservas | `POST /reservations`, `GET /reservations/mine`, `POST /reservations/{id}/cancel`, `GET /merchant/reservations`, `PATCH /merchant/reservations/{id}` |
@@ -182,15 +184,18 @@ Revisão realizada em 28/10/2026 sobre os fluxos de compra, reserva, entrega, me
 - A tela de chamados consulta os detalhes em `GET /api/v1/admin/support-tickets/{id}` (e respostas em `POST /api/v1/admin/support-tickets/{id}/messages`). O endereço anterior do frontend não correspondia à rota do backend e fazia o modal falhar ao abrir.
 - A aprovação de loja usa `PATCH /api/v1/admin/platform-requests/{id}/review` quando existe solicitação pendente vinculada à loja; cadastros legados sem solicitação usam `PATCH /api/v1/admin/stores/{id}/approval`. A interface recarrega as informações administrativas após a decisão.
 - O identificador do botão **Aprovar loja** é lido de `data-approve-store`; o listener deve usar esse mesmo atributo para montar a rota. Ações administrativas repetidas enquanto uma requisição está em andamento são ignoradas para evitar envios concorrentes.
+- A aprovação comercial da loja não depende de pagamento. A decisão do administrador é a aprovação: o backend marca a loja como aprovada e ativa; então ela pode aparecer aos clientes se a conta do vendedor e o perfil profissional estiverem ativos. Taxas/comissões configuradas são regras financeiras do marketplace e não uma cobrança para liberar a loja.
+- A seção de revisão de lojas diferencia **Aguardando análise**, **Confirmada** e **Loja suspensa**. Os estados de pagamento pertencem a pedidos e reservas, não ao cadastro/aprovação de estabelecimentos.
+- Os campos de CPF/CNPJ exibem máscaras no navegador, mas enviam apenas os dígitos para a API. A máscara monetária exibe BRL com vírgula decimal e converte para centavos antes do envio; os valores persistidos e calculados continuam inteiros em centavos.
 - A resposta de cliente usa `POST /support/tickets/{id}/messages`; a resposta administrativa usa `POST /admin/support-tickets/{id}/messages`. O frontend atualiza a conversa e a lista após o envio.
 - A descoberta da página inicial mostra a quantidade de lojas por categoria na cidade selecionada. As categorias rolam horizontalmente em telas estreitas e exibem estado ativo, foco e contagem sem cortar o conteúdo.
 
 - A aplicação está organizada como um **monólito modular**: controllers definem as rotas, serviços concentram regras de negócio, entidades/repositorios persistem no banco e o frontend chama a API autenticada. Os limites dos módulos ficam em `Backend/src/main/java/br/com/fooddelivery/`.
 - A compra mantém o preço dos itens, taxa de entrega e endereço como dados do pedido. O pagamento é uma etapa separada e confirmada pelo provedor; só então a loja recebe o pedido.
-- A reserva bloqueia o horário no banco e só aparece para a loja após a confirmação do pagamento.
+- A reserva bloqueia o horário no banco. Serviço com pagamento antecipado fica pendente até a confirmação do pagamento; serviço com pagamento após atendimento fica confirmado de imediato e é pago diretamente à loja.
 - A entrega separa oferta, atribuição, coleta, trajeto e conclusão. Endereço e chat só são liberados ao entregador atribuído. O chat aceita novas mensagens até a coleta; após isso, o histórico permanece disponível em modo de leitura.
 - As rotas de mensagens validam o papel e, além disso, verificam se o usuário é o cliente da operação, o proprietário da loja ou o entregador que recebeu aquela entrega. O banco exige que cada mensagem esteja ligada a exatamente um pedido, reserva ou entrega.
-- O projeto compila com Maven e os arquivos JavaScript passam na verificação sintática. A suíte Maven foi executada com sucesso após permitir o agente Byte Buddy que o Mockito usa para criar mocks no JDK 21. A migração V14 adiciona estado de confirmação de telefone e armazenamento dos hashes de recuperação.
+- O projeto compila com Maven e os arquivos JavaScript passam na verificação sintática. A suíte Maven foi executada com sucesso após configurar o agente Byte Buddy que o Mockito usa para criar mocks no JDK 21. A migração V14 adiciona confirmação de telefone e hashes de recuperação; a V15 adiciona as opções de pagamento de serviços e reservas; a V16 persiste seções adicionais de comércio e serviço.
 - A conversa atualiza por consultas periódicas, não por WebSocket ou notificações push. Para alto volume, a evolução natural é mover mensagens para entrega em tempo real e limitar consultas por usuário/dispositivo.
 
 As migrações comuns ficam em `Backend/src/main/resources/db/migration-common`; somente a migração V9 varia por banco em `migration-postgres` e `migration-h2`. Essa separação mantém os checksums já aplicados em PostgreSQL e adapta o índice único de CPF à sintaxe do H2.
@@ -212,3 +217,23 @@ O documento descreve o código local revisado. Integrações de pagamento real e
 - Para recuperação por WhatsApp, o usuário precisa receber e confirmar um código no telefone da conta em **Minha conta > Segurança**. Se o telefone for alterado, o status confirmado volta a falso. O número não confirmado não pode receber código de redefinição por WhatsApp.
 - A redefinição chama `Account.changePassword`, incrementando `credential_version`; o validador JWT verifica essa versão em cada autenticação, revogando sessões anteriores. O reset do administrador permanece separado: gera uma senha temporária de uso único exibida no painel, exige troca no próximo acesso e também revoga tokens.
 - Os provedores são opcionais em ambiente local. SMTP usa `SMTP_*` e `RECOVERY_EMAIL_FROM`; WhatsApp usa a API Cloud oficial com credenciais apenas no backend e um template de mensagem aprovado. Falhas dos provedores não expõem detalhes nem códigos na resposta HTTP.
+
+## 16. Catálogo de produtos, serviços e pagamento presencial (V15)
+
+- Uma mesma loja, inclusive barbearias, pode oferecer produtos e serviços no mesmo catálogo. Produtos entram na sacola e seguem o checkout; serviços abrem o fluxo de reserva por data e horário.
+- Cada serviço pode cobrar antecipadamente pelo checkout ou depois do atendimento, diretamente na loja. O padrão é pagamento antecipado. O vendedor precisa reconhecer o risco de falta do cliente e de não recebimento para habilitar a segunda opção.
+- Reservas com pagamento antecipado continuam em `PENDING_PAYMENT` até o provedor confirmar. Reservas com pagamento presencial são confirmadas ao salvar e não geram uma entidade `Payment`; o cliente e a loja recebem aviso claro de que o pagamento ocorrerá fora do site.
+- A opção de pagamento é copiada para a reserva no momento da criação. Alterar a configuração do serviço não modifica reservas existentes. A migração V15 adiciona colunas compatíveis com dados antigos, que permanecem no modo antecipado.
+- A administração pode filtrar estabelecimentos por todos, aguardando aprovação, confirmados e suspensos. Aprovar é decisão administrativa; não existe etapa de pagamento para publicar uma loja.
+- A tela do vendedor carrega lojas, catálogo, pagamentos, solicitações e pedidos de forma independente. Se um serviço auxiliar falhar, o restante do painel continua disponível e a interface aponta a área afetada.
+- O formulário **Adicionar ao catálogo** usa uma grade responsiva própria: o painel do catálogo e o formulário empilham quando a área útil fica menor, e os campos de preço/tipo deixam de esticar um ao outro quando a ajuda de preço ocupa mais linhas. Em telas estreitas, os campos passam para uma coluna para que opções como “Produto à venda” e “Serviço agendado” permaneçam legíveis.
+- As rotas de loja e catálogo entregam DTOs (respostas com campos explícitos), não entidades JPA. Isso evita serializar relações tardias do Hibernate depois que a sessão do banco fecha; também mantém os dados de conta do proprietário fora da resposta de catálogo.
+- Validação local de 28/10/2026 com o acesso de teste da barbearia: login HTTP 200, lista de lojas 200 (loja ativa/aprovada), catálogo 200 e reservas 200. O painel do navegador mostrou a loja como **Confirmada** e **Publicada**, e a aba Catálogo exibiu o tipo de serviço, modo de cobrança e alerta de risco.
+
+## 17. Seções personalizadas do marketplace (V16)
+
+- Em **Definições > Categorias**, o administrador cria uma seção com nome e ícone. Ela passa a aparecer na busca de clientes e na seleção de categoria do cadastro de lojas, porque ambas consomem `GET /api/v1/store-categories`.
+- As dez categorias que já existem permanecem fixas no catálogo de domínio. O painel lista essas opções como protegidas; não permite renomear, suspender ou excluir nenhuma delas.
+- A administração pode excluir apenas as seções adicionais que criou. Se alguma loja estiver usando uma dessas seções, a API recusa a exclusão e informa quantas lojas precisam primeiro ser associadas a outra categoria. Lojas e histórico não são apagados junto com uma categoria.
+- O backend valida a categoria ao cadastrar ou atualizar uma loja. Portanto, enviar uma categoria inventada diretamente à API não contorna a lista disponível.
+- A tabela `store_categories`, criada pela migração V16, armazena nome, slug único, ícone e data de criação. As rotas administrativas são `GET/POST /api/v1/admin/store-categories` e `DELETE /api/v1/admin/store-categories/{id}`; exigem papel de administrador.

@@ -16,6 +16,7 @@ public interface AccountRepository extends JpaRepository<Account, UUID> {
     @Query("select a from Account a where lower(a.email) = lower(:email)")
     Optional<Account> findByEmailForUpdate(@Param("email") String email);
     boolean existsByEmailIgnoreCase(String email);
+    boolean existsByEmailIgnoreCaseAndIdNot(String email, UUID id);
     boolean existsByCpf(String cpf);
     Optional<Account> findByCpf(String cpf);
     List<Account> findByRoleIn(Collection<AccountRole> roles);

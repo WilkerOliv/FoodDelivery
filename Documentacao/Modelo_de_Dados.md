@@ -47,9 +47,10 @@ erDiagram
 ## Regras de negócio e integridade
 
 - E-mail de conta é único; a busca de identidade não diferencia maiúsculas de minúsculas.
-- O CPF obrigatório no cadastro é validado e armazenado em coluna única, separado do UUID da conta. CPF permanece reservado mesmo quando a conta ou um perfil é suspenso; o cadastro nunca cria uma nova identidade para outro tipo de acesso.
+- CPF é validado e armazenado em coluna única, separado do UUID da conta; é obrigatório para cadastro de clientes e perfis profissionais, mas opcional para `ADMIN`. CPF permanece reservado mesmo quando a conta ou um perfil é suspenso; o cadastro nunca cria uma nova identidade para outro tipo de acesso.
 - Perfis de cliente, vendedor e entregador pertencem à mesma conta. A solicitação de perfil é revisada pelo administrador; cada decisão aprovada adiciona o perfil à conta sem criar outro usuário.
 - A liberação de uma cidade e o cadastro de cada loja são solicitações independentes com histórico de revisão administrativa.
+- O administrador também pode cadastrar cidades diretamente em **Definições > Cidades**; cidade suspensa continua registrada e pode ser reativada.
 - Novas lojas exigem CNPJ válido e único. O CNPJ fica imutável após o cadastro; lojas adicionais passam pela mesma aprovação individual.
 - Valores monetários são inteiros em centavos (BRL), sem aritmética de ponto flutuante.
 - Cada loja configura sua própria **taxa fixa de entrega**, cobrada somente em pedidos de delivery. Ela é copiada para o pedido no checkout; uma edição futura do perfil da loja não altera pedidos existentes. O valor permitido atualmente vai de R$ 0,00 a R$ 1.000,00.
@@ -70,7 +71,7 @@ erDiagram
 - Chaves estrangeiras protegem relações com clientes, lojas, serviços, pagamentos e tarefas.
 - Webhooks do Mercado Pago validam assinatura; a rota é publicamente acessível para permitir chamadas do provedor, mas requisições sem assinatura válida não podem atualizar pagamentos.
 
-## Evoluções das migrações V7 a V14
+## Evoluções das migrações V7 a V16
 
 - **V7:** `customer_addresses`.
 - **V8:** `delivery_tasks` ganha latitude, longitude e data da localização do entregador.
@@ -80,6 +81,8 @@ erDiagram
 - **V12:** `support_tickets` e `support_ticket_messages`, com vínculo à conta proprietária, estado e autoria de cada mensagem.
 - **V13:** coluna única `stores.cnpj`, tabelas `platform_requests` e `service_cities`, com índices por conta/data e estado/data para análise e histórico.
 - **V14:** `accounts.phone_verified` e tabela `recovery_codes`. O código em texto puro nunca é persistido; a expiração é de 10 minutos, a contagem de tentativas é limitada e o consumo é registrado.
+- **V15:** `catalog_items.pay_after_service` e `reservations.pay_after_service`. A escolha do vendedor é copiada à reserva; pagamento após serviço só é permitido em itens de serviço e reservas assim são confirmadas sem criar um pagamento online.
+- **V16:** tabela `store_categories` para seções adicionais criadas pela administração. Categorias padrão continuam no código e não são modificáveis por esta tabela. Seções personalizadas têm slug único e só podem ser removidas quando não houver loja usando a categoria.
 
 Contas de operador pendentes continuam ativas como cliente até a aprovação; o acesso profissional só é concedido pelo administrador.
 

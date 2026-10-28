@@ -17,11 +17,16 @@ public class CatalogItem {
     @Column(nullable = false) private int stock;
     @Column(nullable = false) private boolean active = true;
     @Column(nullable = false) private boolean serviceItem = false;
+    @Column(name = "pay_after_service", nullable = false) private boolean payAfterService = false;
     @Column(nullable = false, updatable = false) private Instant createdAt = Instant.now();
     @Version private long version;
     protected CatalogItem() {}
     public CatalogItem(Store store, String name, String description, long priceCents, int stock, boolean serviceItem) {
-        this.store = store; this.name = name; this.description = description; this.priceCents = priceCents; this.stock = stock; this.serviceItem = serviceItem;
+        this(store, name, description, priceCents, stock, serviceItem, false);
+    }
+    public CatalogItem(Store store, String name, String description, long priceCents, int stock, boolean serviceItem, boolean payAfterService) {
+        if (payAfterService && !serviceItem) throw new IllegalArgumentException("Pagamento após o atendimento só pode ser usado em serviços.");
+        this.store = store; this.name = name; this.description = description; this.priceCents = priceCents; this.stock = stock; this.serviceItem = serviceItem; this.payAfterService = payAfterService;
     }
     public UUID getId() { return id; }
     public Store getStore() { return store; }
@@ -31,8 +36,10 @@ public class CatalogItem {
     public int getStock() { return stock; }
     public boolean isActive() { return active; }
     public boolean isServiceItem() { return serviceItem; }
-    public void update(String name, String description, long priceCents, int stock, boolean active) {
-        this.name = name; this.description = description; this.priceCents = priceCents; this.stock = stock; this.active = active;
+    public boolean isPayAfterService() { return payAfterService; }
+    public void update(String name, String description, long priceCents, int stock, boolean active, boolean serviceItem, boolean payAfterService) {
+        if (payAfterService && !serviceItem) throw new IllegalArgumentException("Pagamento após o atendimento só pode ser usado em serviços.");
+        this.name = name; this.description = description; this.priceCents = priceCents; this.stock = stock; this.active = active; this.serviceItem = serviceItem; this.payAfterService = payAfterService;
     }
     public void reserve(int quantity) {
         if (!active || (!serviceItem && stock < quantity)) throw new IllegalStateException("Item indisponível ou sem estoque suficiente.");

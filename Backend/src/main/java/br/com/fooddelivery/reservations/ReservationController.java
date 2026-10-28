@@ -73,10 +73,19 @@ public class ReservationController {
             throw new IllegalStateException("Horário indisponível.");
         }
         Reservation reservation = reservations.save(new Reservation(store, customer, request.startsAt(),
-                item.getId(), item.getName(), item.getPriceCents(), request.customerNote()));
+                item.getId(), item.getName(), item.getPriceCents(), request.customerNote(), item.isPayAfterService()));
         slots.save(new ReservationSlot(store.getId(), reservation.getId(), reservation.getStartsAt()));
-        Payment payment = payments.save(new Payment(reservation));
-        return new CreateResponse(view(reservation, payment), payment.getId(), payment.getStatus());
+        Payment payment = null;
+        if (item.isPayAfterService()) {
+            notifications.send(customer, "Reserva confirmada", "Seu horário na " + store.getName()
+                    + " foi confirmado. O pagamento de R$ " + String.format(java.util.Locale.forLanguageTag("pt-BR"), "%.2f", item.getPriceCents() / 100.0)
+                    + " será feito diretamente à loja após o atendimento.", "success");
+            notifications.send(store.getOwner(), "Nova reserva confirmada", "Uma reserva foi adicionada à agenda."
+                    + " O cliente pagará diretamente à loja após o atendimento.", "info");
+        } else {
+            payment = payments.save(new Payment(reservation));
+        }
+        return new CreateResponse(view(reservation, payment), payment == null ? null : payment.getId(), payment == null ? null : payment.getStatus());
     }
 
     @GetMapping("/reservations/mine")
@@ -156,7 +165,7 @@ public class ReservationController {
         StoreView storeView = new StoreView(store.getId(), store.getName(), store.getAddress(), store.getCategory());
         return new ReservationView(reservation.getId(), storeView, reservation.getStartsAt(),
                 reservation.getServiceName(), reservation.getAmountCents(), reservation.getCustomerNote(), reservation.getStatus(),
-                reservation.getCreatedAt(), payment == null ? null : payment.getId(),
+                reservation.getCreatedAt(), reservation.isPayAfterService(), payment == null ? null : payment.getId(),
                 payment == null ? null : payment.getStatus());
     }
 
@@ -168,7 +177,7 @@ public class ReservationController {
     public record Change(@NotNull ReservationStatus status) {}
     public record CreateResponse(ReservationView reservation, UUID paymentId, PaymentStatus paymentStatus) {}
     public record ReservationView(UUID id, StoreView store, Instant startsAt, String serviceName, long amountCents, String customerNote,
-                                  ReservationStatus status, Instant createdAt, UUID paymentId,
+                                  ReservationStatus status, Instant createdAt, boolean payAfterService, UUID paymentId,
                                   PaymentStatus paymentStatus) {}
     public record StoreView(UUID id, String name, String address, String category) {}
 }

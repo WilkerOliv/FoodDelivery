@@ -1,11 +1,16 @@
 package br.com.fooddelivery.admin;
 
 import br.com.fooddelivery.catalog.Store;
+import br.com.fooddelivery.catalog.StoreCategories;
+import br.com.fooddelivery.catalog.StoreCategory;
+import br.com.fooddelivery.catalog.StoreCategoryRepository;
 import br.com.fooddelivery.catalog.StoreRepository;
 import br.com.fooddelivery.identity.Account;
 import br.com.fooddelivery.identity.AccountRepository;
 import br.com.fooddelivery.identity.AccountRole;
 import br.com.fooddelivery.notifications.NotificationService;
+import br.com.fooddelivery.platform.ServiceCity;
+import br.com.fooddelivery.platform.ServiceCityRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
@@ -19,6 +24,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Value;
 
 @RestController
 @RequestMapping("/api/v1/admin")
@@ -28,13 +34,134 @@ public class AdminController {
     private final StoreRepository stores;
     private final PasswordEncoder encoder;
     private final NotificationService notifications;
+    private final ServiceCityRepository serviceCities;
+    private final StoreCategoryRepository storeCategories;
+    @Value("${spring.mail.host:}") private String smtpHost;
+    @Value("${spring.mail.username:}") private String smtpUsername;
+    @Value("${spring.mail.password:}") private String smtpPassword;
+    @Value("${app.recovery.whatsapp.enabled:false}") private boolean whatsappEnabled;
+    @Value("${app.recovery.whatsapp.phone-number-id:}") private String whatsappPhoneId;
+    @Value("${app.recovery.whatsapp.access-token:}") private String whatsappToken;
+    @Value("${app.ai.openai.api-key:}") private String openAiKey;
+    @Value("${app.payment.mercadopago.client-id:}") private String mercadoPagoClientId;
+    @Value("${app.payment.mercadopago.client-secret:}") private String mercadoPagoClientSecret;
+    @Value("${app.payment.mercadopago.token-encryption-key:}") private String mercadoPagoEncryptionKey;
+    @Value("${app.payment.mercadopago.webhook-secret:}") private String mercadoPagoWebhookSecret;
+    @Value("${app.payment.mercadopago.notification-base-url:}") private String mercadoPagoNotificationUrl;
 
-    public AdminController(AccountRepository accounts, StoreRepository stores, PasswordEncoder encoder, NotificationService notifications) {
+    public AdminController(AccountRepository accounts, StoreRepository stores, PasswordEncoder encoder, NotificationService notifications, ServiceCityRepository serviceCities, StoreCategoryRepository storeCategories) {
         this.accounts = accounts;
         this.stores = stores;
         this.encoder = encoder;
         this.notifications = notifications;
+        this.serviceCities = serviceCities;
+        this.storeCategories = storeCategories;
     }
+
+    @GetMapping("/store-categories")
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public List<AdminStoreCategoryView> storeCategories() {
+        List<AdminStoreCategoryView> builtIns = StoreCategories.ALL.stream()
+                .map(category -> new AdminStoreCategoryView(null, category.name(), category.emoji(), true)).toList();
+        List<AdminStoreCategoryView> custom = storeCategories.findAllByOrderByNameAsc().stream()
+                .map(category -> new AdminStoreCategoryView(category.getId(), category.getName(), category.getEmoji(), false)).toList();
+        return java.util.stream.Stream.concat(builtIns.stream(), custom.stream()).toList();
+    }
+
+    @PostMapping("/store-categories")
+    @ResponseStatus(HttpStatus.CREATED)
+    @org.springframework.transaction.annotation.Transactional
+    public AdminStoreCategoryView createStoreCategory(@Valid @RequestBody StoreCategoryRequest request) {
+        String name = request.name().trim();
+        if (StoreCategories.isSupported(name))
+            throw new IllegalArgumentException("Essa categoria já existe e não pode ser duplicada.");
+        StoreCategory category = new StoreCategory(name, request.emoji());
+        if (storeCategories.findBySlugIgnoreCase(category.getSlug()).isPresent())
+            throw new IllegalArgumentException("Já existe uma categoria com esse nome ou uma forma equivalente.");
+        StoreCategory saved = storeCategories.save(category);
+        return new AdminStoreCategoryView(saved.getId(), saved.getName(), saved.getEmoji(), false);
+    }
+
+    @DeleteMapping("/store-categories/{id}")
+    @org.springframework.transaction.annotation.Transactional
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteStoreCategory(@PathVariable UUID id) {
+        StoreCategory category = storeCategories.findById(id).orElseThrow();
+        long storesUsingCategory = stores.countByCategoryIgnoreCase(category.getName());
+        if (storesUsingCategory > 0)
+            throw new IllegalArgumentException("Esta seção está vinculada a " + storesUsingCategory + " loja(s). Altere a categoria dessas lojas antes de excluí-la.");
+        storeCategories.delete(category);
+    }
+
+    @GetMapping("/service-cities")
+    public List<ServiceCityView> serviceCities() {
+        return serviceCities.findAllByOrderByCityAscStateAsc().stream().map(ServiceCityView::of).toList();
+    }
+
+    @PostMapping("/service-cities")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ServiceCityView createServiceCity(@Valid @RequestBody ServiceCityRequest request) {
+        String city = request.city().trim();
+        String state = request.state().trim().toUpperCase(Locale.ROOT);
+        if (serviceCities.findByCityIgnoreCaseAndStateIgnoreCase(city, state).isPresent())
+            throw new IllegalArgumentException("Esta cidade já está cadastrada. Reative ou edite o cadastro existente.");
+        return ServiceCityView.of(serviceCities.save(new ServiceCity(city, state, request.postalCode())));
+    }
+
+    @PutMapping("/service-cities/{id}")
+    public ServiceCityView updateServiceCity(@PathVariable UUID id, @Valid @RequestBody ServiceCityRequest request) {
+        ServiceCity city = serviceCities.findById(id).orElseThrow();
+        String name = request.city().trim();
+        String state = request.state().trim().toUpperCase(Locale.ROOT);
+        serviceCities.findByCityIgnoreCaseAndStateIgnoreCase(name, state)
+                .filter(existing -> !existing.getId().equals(id))
+                .ifPresent(existing -> { throw new IllegalArgumentException("Já existe um cadastro para esta cidade e estado."); });
+        city.update(name, state, request.postalCode(), request.enabled());
+        return ServiceCityView.of(serviceCities.save(city));
+    }
+
+    /** Returns readiness only; credentials are always configured outside the browser. */
+    @GetMapping("/integrations")
+    public List<IntegrationView> integrations() {
+        return List.of(
+                integration("SMTP", "E-mail de recuperação e avisos", ready(smtpHost, smtpUsername, smtpPassword), "SMTP_HOST, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD, RECOVERY_EMAIL_FROM"),
+                integration("WHATSAPP", "WhatsApp Cloud para códigos e avisos", whatsappEnabled && ready(whatsappPhoneId, whatsappToken), "WHATSAPP_CLOUD_ENABLED, WHATSAPP_PHONE_NUMBER_ID, WHATSAPP_ACCESS_TOKEN, WHATSAPP_OTP_TEMPLATE"),
+                integration("OPENAI", "Geração de imagens para lojas", ready(openAiKey), "OPENAI_API_KEY, OPENAI_IMAGE_MODEL"),
+                integration("MERCADOPAGO", "Checkout, pagamentos e webhooks", ready(mercadoPagoClientId, mercadoPagoClientSecret, mercadoPagoEncryptionKey, mercadoPagoWebhookSecret, mercadoPagoNotificationUrl), "MP_CLIENT_ID, MP_CLIENT_SECRET, MP_TOKEN_ENCRYPTION_KEY, MP_WEBHOOK_SECRET, MP_NOTIFICATION_BASE_URL"),
+                integration("VIACEP", "Consulta pública de CEP", true, "Integração pública; não exige chave"),
+                integration("MAPAS", "Mapa e localização das cidades", true, "Mapa incorporado; requer conexão com a internet")
+        );
+    }
+
+    private static boolean ready(String... values) { return java.util.Arrays.stream(values).allMatch(value -> value != null && !value.isBlank()); }
+    private static IntegrationView integration(String id, String name, boolean ready, String variables) {
+        return new IntegrationView(id, name, ready, ready ? "Configurada (conexão não homologada)" : "Configuração incompleta", variables);
+    }
+
+    @PutMapping("/accounts/{id}/profile")
+    @org.springframework.transaction.annotation.Transactional
+    public AdminAccountView updateAccountProfile(@PathVariable UUID id, @Valid @RequestBody AdminProfileUpdate request) {
+        Account account = accounts.findByIdForUpdate(id).orElseThrow();
+        String email = request.email().trim().toLowerCase(Locale.ROOT);
+        if (accounts.existsByEmailIgnoreCaseAndIdNot(email, id)) throw new IllegalArgumentException("Este e-mail já está vinculado a outra conta.");
+        String cpf = request.cpf() == null || request.cpf().isBlank() ? null : request.cpf().replaceAll("\\D", "");
+        if (cpf != null) {
+            if (!br.com.fooddelivery.identity.Cpf.isValid(cpf)) throw new IllegalArgumentException("Informe um CPF válido ou deixe o campo vazio.");
+            accounts.findByCpf(cpf).filter(existing -> !existing.getId().equals(id))
+                    .ifPresent(existing -> { throw new IllegalArgumentException("Este CPF já está vinculado a outra conta."); });
+        }
+        account.updateProfile(request.name().trim(), clean(request.phone()), clean(request.addressLine()), clean(request.addressComplement()),
+                clean(request.neighborhood()), clean(request.city()), clean(request.state()), clean(request.postalCode()));
+        account.changeEmailByAdministrator(email);
+        if (cpf != null) account.setCpfByAdministrator(cpf);
+        else if (request.clearCpf()) {
+            if (account.getRole() != AccountRole.ADMIN) throw new IllegalArgumentException("O CPF continua obrigatório para clientes e perfis profissionais.");
+            account.setCpfByAdministrator(null);
+        }
+        return adminAccountView(accounts.save(account));
+    }
+
+    private static String clean(String value) { return value == null || value.isBlank() ? null : value.trim(); }
 
     @PostMapping("/operators")
     @ResponseStatus(HttpStatus.CREATED)
@@ -98,7 +225,6 @@ public class AdminController {
     @PostMapping("/accounts/{id}/password-reset")
     public Map<String, Object> resetPassword(@PathVariable UUID id) {
         Account account = accounts.findById(id).orElseThrow();
-        if (account.getRole() == AccountRole.ADMIN) throw new IllegalArgumentException("O painel não pode redefinir a senha de outra conta administrativa.");
         byte[] secret = new byte[18]; new SecureRandom().nextBytes(secret);
         String temporaryPassword = Base64.getUrlEncoder().withoutPadding().encodeToString(secret);
         account.requirePasswordChange(encoder.encode(temporaryPassword));
@@ -202,7 +328,8 @@ public class AdminController {
     private static AdminAccountView adminAccountView(Account account) {
         String cpf = account.getCpf();
         String maskedCpf = cpf == null ? "Não informado" : "•••.•••.•••-" + cpf.substring(7);
-        return new AdminAccountView(account.getId(), account.getName(), account.getEmail(), maskedCpf,
+        return new AdminAccountView(account.getId(), account.getName(), account.getEmail(), maskedCpf, account.getPhone(), account.getAddressLine(),
+                account.getAddressComplement(), account.getNeighborhood(), account.getCity(), account.getState(), account.getPostalCode(),
                 account.getRole(), account.getRegisteredRoles(), account.getGrantedRoles(), account.isActive(), account.getOperatorApplicationStatus(), account.getCreatedAt());
     }
 
@@ -215,15 +342,32 @@ public class AdminController {
         }
     }
     public record Approval(boolean approved) {}
+    public record StoreCategoryRequest(@NotBlank @Size(max=60) String name,
+                                       @NotBlank @Size(max=16) String emoji) {}
+    public record AdminStoreCategoryView(UUID id, String name, String emoji, boolean builtIn) {}
     public record StoreActivity(boolean active) {}
     public record AccountActivity(boolean active) {}
     public record Commission(@NotNull @DecimalMin("0.00") @DecimalMax("50.00") BigDecimal percent) {}
     public record OperatorView(UUID id, String name, String email, AccountRole role, boolean active,
                                String applicationStatus, java.time.Instant createdAt) {}
-    public record AdminAccountView(UUID id, String name, String email, String maskedCpf, AccountRole role,
+    public record AdminAccountView(UUID id, String name, String email, String maskedCpf, String phone, String addressLine,
+                                   String addressComplement, String neighborhood, String city, String state, String postalCode, AccountRole role,
                                    List<AccountRole> registeredRoles, List<AccountRole> grantedRoles, boolean active, String applicationStatus,
                                    java.time.Instant createdAt) {}
     public record AdminStoreView(UUID id, String name, String description, String category, String address, String city, String state, String cnpj,
                                  boolean active, boolean approved, String ownerName, String ownerEmail,
                                  double commissionPercent, long deliveryFeeCents, String coverImageUrl) {}
+    public record ServiceCityRequest(@NotBlank @Size(max=100) String city,
+                                     @NotBlank @jakarta.validation.constraints.Pattern(regexp="[A-Za-z]{2}") String state,
+                                     @jakarta.validation.constraints.Pattern(regexp="^$|\\d{5}-?\\d{3}") String postalCode,
+                                     boolean enabled) {}
+    public record ServiceCityView(UUID id, String city, String state, String postalCode, boolean enabled) {
+        static ServiceCityView of(ServiceCity city) { return new ServiceCityView(city.getId(), city.getCity(), city.getState(), city.getPostalCode(), city.isEnabled()); }
+    }
+    public record IntegrationView(String id, String name, boolean configured, String status, String configuration) {}
+    public record AdminProfileUpdate(@NotBlank @Size(max=120) String name, @Email @NotBlank @Size(max=254) String email,
+                                     @Size(max=30) String phone, @Size(max=14) String cpf,
+                                     @Size(max=250) String addressLine, @Size(max=120) String addressComplement,
+                                     @Size(max=120) String neighborhood, @Size(max=100) String city,
+                                     @Size(max=2) String state, @Size(max=9) String postalCode, boolean clearCpf) {}
 }

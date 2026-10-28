@@ -174,6 +174,19 @@ public class Account {
         cpf = normalized;
     }
 
+    /** Administrative correction path; regular profile updates remain immutable. */
+    public void setCpfByAdministrator(String value) {
+        String normalized = value == null || value.isBlank() ? null : value.replaceAll("\\D", "");
+        if (normalized != null && !Cpf.isValid(normalized)) throw new IllegalArgumentException("Informe um CPF válido ou deixe o campo vazio.");
+        cpf = normalized;
+    }
+
+    public void changeEmailByAdministrator(String value) {
+        if (value == null || value.isBlank() || value.length() > 254 || !value.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"))
+            throw new IllegalArgumentException("Informe um e-mail válido.");
+        email = value.trim().toLowerCase(java.util.Locale.ROOT);
+    }
+
     public void changePassword(String encodedPassword) { passwordHash = encodedPassword; passwordChangeRequired = false; credentialVersion = Math.addExact(credentialVersion, 1); }
     public void requirePasswordChange(String encodedPassword) { passwordHash = encodedPassword; passwordChangeRequired = true; credentialVersion = Math.addExact(credentialVersion, 1); }
 
