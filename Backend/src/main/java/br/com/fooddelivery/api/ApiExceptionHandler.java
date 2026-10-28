@@ -14,6 +14,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(ApiExceptionHandler.class);
+
     @ExceptionHandler(AuthenticationException.class)
     ResponseEntity<Map<String, String>> unauthenticated(AuthenticationException exception) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
@@ -52,6 +54,7 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     ResponseEntity<Map<String, String>> internalError(Exception exception) {
+        LOG.error("Erro inesperado ao processar a requisição", exception);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(Map.of("error", "Ocorreu um erro inesperado. Tente novamente em instantes."));
     }

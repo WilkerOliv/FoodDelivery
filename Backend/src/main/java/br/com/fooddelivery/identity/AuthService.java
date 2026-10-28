@@ -75,7 +75,19 @@ public class AuthService {
                 .build();
         JwsHeader header = JwsHeader.with(MacAlgorithm.HS256).build();
         return Map.of("accessToken", jwtEncoder.encode(JwtEncoderParameters.from(header, claims)).getTokenValue(),
-                "tokenType", "Bearer", "expiresIn", 3600, "account", Map.of(
-                        "id", account.getId(), "name", account.getName(), "email", account.getEmail(), "role", account.getRole(), "grantedRoles", account.getGrantedRoles(), "cpf", account.getCpf(), "passwordChangeRequired", account.isPasswordChangeRequired()));
+                "tokenType", "Bearer", "expiresIn", 3600, "account", accountView(account));
+    }
+
+    /** Map.of rejeita valores nulos; contas anteriores à V9 (como o administrador inicial) não têm CPF. */
+    private static Map<String, Object> accountView(Account account) {
+        Map<String, Object> view = new java.util.LinkedHashMap<>();
+        view.put("id", account.getId());
+        view.put("name", account.getName());
+        view.put("email", account.getEmail());
+        view.put("role", account.getRole());
+        view.put("grantedRoles", account.getGrantedRoles());
+        view.put("cpf", account.getCpf());
+        view.put("passwordChangeRequired", account.isPasswordChangeRequired());
+        return view;
     }
 }
