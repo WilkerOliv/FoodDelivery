@@ -8,7 +8,7 @@ import socket
 
 
 HOST = "127.0.0.1"
-DEFAULT_PORT = int(os.environ.get("PORT", "5173"))
+DEFAULT_PORT = int(os.environ.get("FOODDELIVERY_FRONTEND_PORT", os.environ.get("PORT", "5173")))
 ALLOWED_PORTS = (5173, 5174, 5175)
 
 

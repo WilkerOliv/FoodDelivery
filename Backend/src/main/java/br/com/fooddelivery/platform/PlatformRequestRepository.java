@@ -1,0 +1,4 @@
+package br.com.fooddelivery.platform;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.*;
+public interface PlatformRequestRepository extends JpaRepository<PlatformRequest,UUID>{ List<PlatformRequest> findByAccountIdOrderByCreatedAtDesc(UUID accountId); List<PlatformRequest> findAllByOrderByCreatedAtDesc(); boolean existsByAccountIdAndRequestTypeAndStatus(UUID accountId,String type,String status); boolean existsByAccountIdAndRequestTypeAndRequestedRoleAndStatus(UUID accountId,String type,br.com.fooddelivery.identity.AccountRole role,String status); boolean existsByAccountIdAndRequestTypeAndCityIgnoreCaseAndStateIgnoreCaseAndStatus(UUID accountId,String type,String city,String state,String status); Optional<PlatformRequest> findFirstByStoreIdOrderByCreatedAtDesc(UUID storeId); }

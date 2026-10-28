@@ -41,7 +41,7 @@ public class MercadoPagoCheckoutService {
         var store=order!=null?order.getStore():reservation.getStore();
         if(!customer.getId().equals(customerId))throw new org.springframework.security.access.AccessDeniedException("Este pagamento pertence a outra conta.");
         if(payment.getStatus()!=PaymentStatus.PENDING&&payment.getStatus()!=PaymentStatus.FAILED)throw new IllegalStateException("Este pagamento não está disponível para um novo checkout.");
-        if(!store.isActive()||!store.isApproved())throw new IllegalStateException("A loja não está disponível para receber pagamentos.");
+        if(!store.isAvailable())throw new IllegalStateException("A loja não está disponível para receber pagamentos.");
         if(order!=null&&order.getStatus()!=br.com.fooddelivery.orders.OrderStatus.AWAITING_PAYMENT)throw new IllegalStateException("O pedido não está mais aguardando pagamento.");
         if(reservation!=null&&reservation.getStatus()!=br.com.fooddelivery.reservations.ReservationStatus.PENDING_PAYMENT)throw new IllegalStateException("A reserva não está mais aguardando pagamento.");
         Instant operationCreatedAt=order!=null?order.getCreatedAt():reservation.getCreatedAt();

@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "python3 scripts/start.py"
+    "start": "python3 scripts/start.py",
+    "test": "node tests/adminAndSupport.test.js"
   }
 }

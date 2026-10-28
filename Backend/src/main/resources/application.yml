@@ -13,7 +13,27 @@ spring:
           time_zone: UTC
   jackson:
     time-zone: UTC
+  mail:
+    host: ${SMTP_HOST:}
+    port: ${SMTP_PORT:587}
+    username: ${SMTP_USERNAME:}
+    password: ${SMTP_PASSWORD:}
+    properties:
+      mail.smtp.auth: ${SMTP_AUTH:true}
+      mail.smtp.starttls.enable: ${SMTP_STARTTLS:true}
+      mail.smtp.connectiontimeout: 5000
+      mail.smtp.timeout: 5000
+      mail.smtp.writetimeout: 5000
 app:
+  recovery:
+    email-from: ${RECOVERY_EMAIL_FROM:no-reply@fooddelivery.local}
+    whatsapp:
+      enabled: ${WHATSAPP_CLOUD_ENABLED:false}
+      graph-version: ${WHATSAPP_GRAPH_VERSION:v23.0}
+      phone-number-id: ${WHATSAPP_PHONE_NUMBER_ID:}
+      access-token: ${WHATSAPP_ACCESS_TOKEN:}
+      template-name: ${WHATSAPP_OTP_TEMPLATE:fooddelivery_password_recovery}
+      language: ${WHATSAPP_TEMPLATE_LANGUAGE:pt_BR}
   media:
     store-assets-dir: ${STORE_ASSETS_DIR:./data/store-assets}
   ai:
@@ -40,6 +60,9 @@ server:
   error:
     include-message: never
 management:
+  health:
+    mail:
+      enabled: false
   endpoints:
     web:
       exposure:
@@ -61,6 +84,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   flyway:
     enabled: true
+    locations: classpath:db/migration-common,classpath:db/migration-postgres
   jpa:
     hibernate:
       ddl-auto: validate
@@ -77,6 +101,7 @@ spring:
     password:
   flyway:
     enabled: true
+    locations: classpath:db/migration-common,classpath:db/migration-h2
   jpa:
     hibernate:
       ddl-auto: validate
@@ -96,6 +121,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   flyway:
     enabled: true
+    locations: classpath:db/migration-common,classpath:db/migration-postgres
   jpa:
     hibernate:
       ddl-auto: validate

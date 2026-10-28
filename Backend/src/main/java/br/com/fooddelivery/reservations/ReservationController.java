@@ -61,7 +61,7 @@ public class ReservationController {
         if (customer.getPhone() == null || customer.getPhone().isBlank()) {
             throw new IllegalArgumentException("Complete seu telefone antes de reservar.");
         }
-        Store store = stores.findById(request.storeId()).filter(s -> s.isActive() && s.isApproved())
+        Store store = stores.findById(request.storeId()).filter(Store::isAvailable)
                 .orElseThrow();
         var item = items.findById(request.serviceItemId())
                 .filter(i -> i.isActive() && i.isServiceItem() && i.getStore().getId().equals(request.storeId()))

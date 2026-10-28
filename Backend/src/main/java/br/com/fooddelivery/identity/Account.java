@@ -37,6 +37,9 @@ public class Account {
     @Column(name = "phone", length = 30)
     private String phone;
 
+    @Column(name = "phone_verified", nullable = false)
+    private boolean phoneVerified;
+
     @Column(name = "address_line", length = 250)
     private String addressLine;
 
@@ -114,6 +117,7 @@ public class Account {
     public int getCredentialVersion() { return credentialVersion; }
     public Instant getCreatedAt() { return createdAt; }
     public String getPhone() { return phone; }
+    public boolean isPhoneVerified() { return phoneVerified; }
     public String getAddressLine() { return addressLine; }
     public String getAddressComplement() { return addressComplement; }
     public String getNeighborhood() { return neighborhood; }
@@ -184,6 +188,9 @@ public class Account {
 
     public void updateProfile(String name, String phone, String addressLine, String addressComplement,
                               String neighborhood, String city, String state, String postalCode) {
+        String normalizedPhone = phone == null ? null : phone.replaceAll("\\D", "");
+        String oldPhone = this.phone == null ? null : this.phone.replaceAll("\\D", "");
+        if (!java.util.Objects.equals(oldPhone, normalizedPhone)) this.phoneVerified = false;
         this.name = name;
         this.phone = phone;
         this.addressLine = addressLine;
@@ -193,6 +200,8 @@ public class Account {
         this.state = state;
         this.postalCode = postalCode;
     }
+
+    public void markPhoneVerified() { this.phoneVerified = true; }
 
     public void updateAddress(String addressLine, String addressComplement, String neighborhood,
                               String city, String state, String postalCode) {

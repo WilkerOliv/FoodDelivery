@@ -16,7 +16,7 @@ public class OrderService {
     @Transactional public Order create(UUID customerId,UUID storeId,FulfillmentType type,String address,String customerNote,List<RequestedLine> requested){
         Account customer=accounts.findById(customerId).orElseThrow();
         if(customer.getPhone()==null||customer.getPhone().isBlank()||(type==FulfillmentType.DELIVERY&&(address==null||address.isBlank())))throw new IllegalArgumentException("Complete telefone e endereço de entrega antes de pedir.");
-        Store store=stores.findById(storeId).filter(s->s.isActive()&&s.isApproved()).orElseThrow(()->new NoSuchElementException("Loja indisponível."));
+        Store store=stores.findById(storeId).filter(Store::isAvailable).orElseThrow(()->new NoSuchElementException("Loja indisponível."));
         if(requested==null||requested.isEmpty())throw new IllegalArgumentException("O pedido precisa ter ao menos um item.");
         long total=0; List<CatalogItem> selected=new ArrayList<>();
         for(RequestedLine line:requested){if(line.quantity()<1||line.quantity()>50)throw new IllegalArgumentException("Quantidade inválida.");CatalogItem item=items.findById(line.itemId()).orElseThrow();if(!item.getStore().getId().equals(storeId))throw new IllegalArgumentException("Item não pertence à loja.");if(item.isServiceItem())throw new IllegalArgumentException("Este serviço deve ser reservado, não adicionado a um pedido de entrega ou retirada.");item.reserve(line.quantity());selected.add(item);total=Math.addExact(total,Math.multiplyExact(item.getPriceCents(),line.quantity()));}

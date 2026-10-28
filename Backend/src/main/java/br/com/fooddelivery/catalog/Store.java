@@ -17,6 +17,7 @@ public class Store {
     @Column(nullable = false, length = 250) private String address;
     @Column(length = 100) private String city;
     @Column(length = 2) private String state;
+    @Column(length = 14, unique = true) private String cnpj;
     @Column(nullable = false, length = 60) private String category;
     @Column(name = "cover_image_url", length = 255) private String coverImageUrl;
     @Column(nullable = false) private boolean active = true;
@@ -36,15 +37,18 @@ public class Store {
     public String getAddress() { return address; }
     public String getCity() { return city; }
     public String getState() { return state; }
+    public String getCnpj() { return cnpj; }
     public String getCategory() { return category; }
     public String getCoverImageUrl() { return coverImageUrl; }
     public boolean isActive() { return active; }
     public boolean isApproved() { return approved; }
+    public boolean isAvailable() { return active && approved && owner != null && owner.isActive() && owner.getGrantedRoles().contains(br.com.fooddelivery.identity.AccountRole.MERCHANT); }
     @JsonIgnore public int getMarketplaceFeeBps() { return marketplaceFeeBps; }
     public long getDeliveryFeeCents() { return deliveryFeeCents; }
     public void setDeliveryFeeCents(long feeCents) { if(feeCents<0||feeCents>100000)throw new IllegalArgumentException("A taxa de entrega deve ficar entre R$ 0,00 e R$ 1.000,00.");this.deliveryFeeCents=feeCents; }
     public void setMarketplaceFeeBps(int feeBps) { if(feeBps<0||feeBps>5000)throw new IllegalArgumentException("A comissão por loja deve ficar entre 0% e 50%.");this.marketplaceFeeBps=feeBps; }
     public void setLocation(String city, String state) { this.city=city; this.state=state==null?null:state.toUpperCase(java.util.Locale.ROOT); }
+    public void setCnpjOnce(String value) { String normalized=br.com.fooddelivery.identity.Cnpj.normalize(value); if(!br.com.fooddelivery.identity.Cnpj.isValid(normalized))throw new IllegalArgumentException("Informe um CNPJ válido."); if(cnpj!=null&&!cnpj.equals(normalized))throw new IllegalArgumentException("O CNPJ não pode ser alterado após o cadastro da loja."); cnpj=normalized; }
     public void update(String name, String description, String address, String city, String state, String category, boolean active, long deliveryFeeCents) {
         this.name = name; this.description = description; this.address = address; setLocation(city,state); this.category = category; this.active = active; setDeliveryFeeCents(deliveryFeeCents);
     }

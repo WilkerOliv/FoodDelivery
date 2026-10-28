@@ -26,20 +26,11 @@ public class AuthService {
 
     @Transactional
     public Account register(String name, String email, String password, String cpf, org.springframework.security.crypto.password.PasswordEncoder encoder) {
-        return createAccount(name, email, password, cpf, encoder, null);
-    }
-
-    @Transactional
-    public Account applyForOperator(String name, String email, String password, String cpf, AccountRole requestedRole,
-                                     org.springframework.security.crypto.password.PasswordEncoder encoder) {
-        if (requestedRole != AccountRole.MERCHANT && requestedRole != AccountRole.COURIER)
-            throw new IllegalArgumentException("Solicitações públicas são somente para vendedor ou entregador.");
-        return createAccount(name, email, password, cpf, encoder, requestedRole);
+        return createAccount(name, email, password, cpf, encoder);
     }
 
     private Account createAccount(String name, String email, String password, String cpf,
-                                  org.springframework.security.crypto.password.PasswordEncoder encoder,
-                                  AccountRole requestedRole) {
+                                  org.springframework.security.crypto.password.PasswordEncoder encoder) {
         String normalizedEmail = email.trim().toLowerCase(java.util.Locale.ROOT);
         if (accounts.existsByEmailIgnoreCase(normalizedEmail)) {
             throw new IllegalArgumentException("Já existe uma conta com este e-mail.");
@@ -49,7 +40,6 @@ public class AuthService {
         if (accounts.existsByCpf(normalizedCpf)) throw new IllegalArgumentException("Este CPF já está vinculado a uma conta. Entre na conta existente para solicitar outro perfil.");
         Account account = new Account(normalizedEmail, name.trim(), encoder.encode(password));
         account.setCpfOnce(normalizedCpf);
-        if (requestedRole != null) account.submitOperatorApplication(requestedRole);
         return accounts.save(account);
     }
 
@@ -86,7 +76,9 @@ public class AuthService {
         view.put("email", account.getEmail());
         view.put("role", account.getRole());
         view.put("grantedRoles", account.getGrantedRoles());
+        view.put("registeredRoles", account.getRegisteredRoles());
         view.put("cpf", account.getCpf());
+        view.put("phoneVerified", account.isPhoneVerified());
         view.put("passwordChangeRequired", account.isPasswordChangeRequired());
         return view;
     }

@@ -8,7 +8,7 @@ Plataforma de pedidos, reservas e entregas para cidades pequenas e comércios lo
 |---|---|---|
 | Interface web | JavaScript puro (módulo ES), sem framework, servido por um script Python | `Frontend/` |
 | API | Java 21, Spring Boot 3.5, Spring Security (JWT), Spring Data JPA | `Backend/` |
-| Banco | PostgreSQL (padrão), H2 em arquivo no perfil `dev-h2`; migrações Flyway V1 a V11 | `Backend/src/main/resources/db/migration` |
+| Banco | PostgreSQL (padrão), H2 em arquivo no perfil `dev-h2`; migrações Flyway V1 a V12 | `Backend/src/main/resources/db/migration-common` e pastas específicas por banco |
 | Pagamento | Mercado Pago (Marketplace + Checkout Pro) | `payments/` |
 | Imagens de capa por IA | API de imagens da OpenAI (opcional) | `catalog/StoreImageAiController` |
 | Inicialização local | `npm start` roda `scripts/dev.py`: sobe banco, API e interface juntos | raiz |
@@ -24,6 +24,7 @@ Existem quatro papéis: `CUSTOMER`, `MERCHANT`, `COURIER` e `ADMIN`.
 - Uma conta pode ter vários papéis concedidos (`granted_roles`) e escolhe o perfil ativo na interface. O administrador pode suspender um papel sem afetar os demais (`suspended_roles`).
 - O administrador pode suspender a conta inteira e gerar senha temporária; a pessoa precisa trocá-la no próximo acesso (`password_change_required`).
 - Trocar ou redefinir a senha incrementa `credential_version`, o que invalida os tokens anteriores.
+- A recuperação pública usa códigos de uso único enviados por SMTP ou, opcionalmente, WhatsApp Cloud. O telefone precisa ser confirmado pelo próprio titular antes da recuperação por WhatsApp.
 - Cada requisição autenticada valida assinatura, emissor e validade do JWT e confirma que a conta continua ativa.
 
 ## 3. Fluxo de compra (pedido)
@@ -74,7 +75,7 @@ Regras comuns:
 - Cada mensagem gera uma notificação para a outra parte. Enquanto a pessoa não lê a anterior, não é criada outra com o mesmo título, para não encher a lista.
 - A observação do cliente aparece para a loja e, no caso de entrega, também para o entregador depois do aceite. Ela deixa de ser exposta ao entregador quando a entrega é concluída.
 
-Na interface, o painel de conversa atualiza a lista de mensagens a cada 5 segundos sem recriar a página, o que preserva o texto em digitação. O rascunho é guardado por conversa. Sair da conta, expirar a sessão ou trocar de página para o polling e limpa as conversas da memória.
+Na interface, o painel de conversa consulta novas mensagens a cada 5 segundos enquanto está aberto e a aba está visível. As atualizações da lista não recriam o formulário, preservando o texto em digitação, e cada conversa mantém seu rascunho durante a sessão. Trocar de seção interrompe a consulta periódica; sair da conta ou expirar a sessão limpa conversas e rascunhos da memória do navegador.
 
 ## 6. Entrega
 
@@ -107,7 +108,17 @@ stateDiagram-v2
 - A interface consulta `/account/notifications` a cada 30 segundos com a aba visível e mostra as novas como aviso temporário.
 - Confirmações e erros da própria interface são avisos temporários e não são gravados.
 
-## 9. Mapa da API
+## 9. Atendimento por chamados
+
+O botão **Falar com atendimento** abre uma central onde cliente, vendedor ou entregador podem enviar uma solicitação e consultar o histórico. Cada chamado guarda assunto, categoria, estado, conta proprietária e mensagens com remetente e horário. Chamados ficam em `OPEN`, `IN_PROGRESS` ou `CLOSED`; uma resposta do usuário reabre um chamado encerrado. O administrador tem a seção **Chamados**, pode responder, encerrar e reabrir. O usuário só consulta chamados vinculados à própria conta; a API exige papel autenticado e valida a propriedade antes de ler ou responder. A resposta do cliente usa `POST /api/v1/support/tickets/{id}/messages`; a resposta administrativa usa `POST /api/v1/admin/support-tickets/{id}/messages`. Novos chamados e respostas geram notificações persistentes para a equipe.
+
+A migração `V12__support_tickets.sql` cria `support_tickets` e `support_ticket_messages`. O painel administrativo carrega cada área separadamente: falhas pontuais preservam as demais informações, e indisponibilidade geral mostra uma orientação explícita para iniciar API e banco.
+
+## 10. Localização e conta
+
+O seletor de localização lista cidades que têm lojas ativas e aprovadas (`GET /store-locations`), aceita CEP via ViaCEP e filtra a descoberta por cidade/UF. O mapa incorporado é uma referência da cidade escolhida; ele não representa a posição em tempo real do cliente. A seleção fica salva no navegador. A página Minha conta separa dados pessoais, endereços, segurança e acessos profissionais em seções próprias para facilitar a navegação e reduzir formulários simultâneos. A tela de localização apresenta cidades com lojas ativas em uma lista e um campo de CEP abaixo; o mapa ajuda a conferir a cidade selecionada.
+
+## 11. Mapa da API
 
 Todas as rotas começam com `/api/v1`. Públicas: cadastro, login, pedido de acesso profissional, categorias, imagens de loja, retorno e webhook do Mercado Pago, `/status` e `/actuator/health`. As demais exigem token.
 
@@ -115,13 +126,16 @@ Todas as rotas começam com `/api/v1`. Públicas: cadastro, login, pedido de ace
 |---|---|
 | Autenticação | `POST /auth/register`, `/auth/login`, `/auth/operator-applications` |
 | Conta | `GET /account/me`, `PUT /account/profile`, `POST /account/password`, `POST /account/operator-applications`, `/account/addresses` (CRUD e padrão), `/account/notifications` |
-| Catálogo | `GET /stores`, `GET /stores/{id}/items`, `/merchant/stores`, `/merchant/items/{id}` |
+| Catálogo | `GET /store-categories`, `GET /store-locations`, `GET /stores`, `GET /stores/{id}/items`, `/merchant/stores`, `/merchant/items/{id}` |
 | Pedidos | `POST /orders`, `GET /orders/mine`, `POST /orders/{id}/cancel`, `GET /merchant/orders`, `PATCH /merchant/orders/{id}/status` |
 | Reservas | `POST /reservations`, `GET /reservations/mine`, `POST /reservations/{id}/cancel`, `GET /merchant/reservations`, `PATCH /merchant/reservations/{id}` |
 | Entregas | `/merchant/orders/{id}/delivery`, `/courier/offers`, `/courier/deliveries` |
 | Mensagens | `/orders/{id}/messages`, `/reservations/{id}/messages`, `/deliveries/{id}/messages` |
 | Pagamentos | `/payments/{id}`, `/payments/{id}/checkout`, `/payments/{id}/sync`, `/webhooks/mercadopago`, `/merchant/stores/{storeId}/mercadopago/*` |
-| Administração | `/admin/stores`, `/admin/accounts`, `/admin/operators`, `/admin/operator-applications`, `/admin/refunds` |
+| Administração | `/admin/stores`, `/admin/accounts`, `/admin/operators`, `/admin/operator-applications` (legado), `/admin/platform-requests` (perfis, cidades e lojas), `/admin/refunds`, `/admin/support-tickets` |
+| Solicitações na conta | `GET /account/platform-requests`, `POST /account/platform-requests/roles`, `POST /account/platform-requests/cities` |
+| Revisão administrativa | `PATCH /admin/platform-requests/{id}/review` com aprovação ou reprovação e nota opcional |
+| Atendimento | `/support/tickets/mine`, `POST /support/tickets`, `/support/tickets/{id}` e `/messages` |
 | Somente `dev-h2` | `/dev/payments/{id}/approve`, `/dev/reservations/{id}/approve-payment` simulam o pagamento sem o Mercado Pago |
 
 ## 10. Configuração e execução
@@ -152,5 +166,49 @@ Execução local: `npm start` na raiz. Docker: `Backend/Dockerfile` usa Java 21,
 - Não há testes automatizados de ponta a ponta nem testes da interface; existe uma classe de testes unitários do chat (`OperationMessageControllerTest`).
 - Reservas usam horário pontual: sem duração, grade nem capacidade por profissional.
 - Não há indicador de "não lido" por conversa; o aviso de mensagem nova chega pela notificação.
+- O navegador mantém o JWT em `localStorage`; antes de uma publicação, vale avaliar uma política CSP rigorosa e uma estratégia de sessão em cookie `HttpOnly`/`Secure` com proteção CSRF adequada.
+- A API não aplica limite distribuído de tentativas de login nem de envio de mensagens. Em produção, configure limitação por IP/conta no gateway ou em armazenamento compartilhado para evitar força bruta e abuso sem depender de uma única instância.
 - A geração de capa por IA usa um único modelo e provedor, sem repetição nem alternativa em caso de falha.
 - Conciliação contábil, chargebacks e saque iniciado pela plataforma não existem.
+
+## 13. Revisão técnica do estado atual
+
+Atualização da revisão: suspensão da conta ou do perfil de vendedor retira as lojas do catálogo e exige nova aprovação para publicação. A aprovação de uma loja também verifica o estado da conta e do perfil do vendedor. Enquanto o pedido de cadastro da loja estiver pendente, seus dados não podem ser editados. A área administrativa concentra as ações de ativação por perfil em “Contas e segurança”; a lista de perfis operacionais é apenas informativa para evitar suspender acidentalmente outro perfil da mesma conta.
+
+Revisão realizada em 28/10/2026 sobre os fluxos de compra, reserva, entrega, mensagens, autorização e migrações:
+
+- As áreas do administrador são renderizadas por identificadores nomeados (`stats`, `applications`, `stores`, `team`, `finance` e `tickets`), nunca por posição dos elementos. Os cartões de lojas, solicitações e contas levam diretamente à respectiva tela de análise. Chamados ficam isolados da criação de acessos.
+- A área **Equipe** agora tem três subseções independentes: **Perfis operacionais**, **Contas e segurança** e **Criar acesso**. Somente o conteúdo escolhido é exibido. O atalho “Abrir contas e segurança” seleciona a subseção correta. As ações de conta ficam agrupadas no menu de três pontos de cada cartão.
+- A tela de chamados consulta os detalhes em `GET /api/v1/admin/support-tickets/{id}` (e respostas em `POST /api/v1/admin/support-tickets/{id}/messages`). O endereço anterior do frontend não correspondia à rota do backend e fazia o modal falhar ao abrir.
+- A aprovação de loja usa `PATCH /api/v1/admin/platform-requests/{id}/review` quando existe solicitação pendente vinculada à loja; cadastros legados sem solicitação usam `PATCH /api/v1/admin/stores/{id}/approval`. A interface recarrega as informações administrativas após a decisão.
+- O identificador do botão **Aprovar loja** é lido de `data-approve-store`; o listener deve usar esse mesmo atributo para montar a rota. Ações administrativas repetidas enquanto uma requisição está em andamento são ignoradas para evitar envios concorrentes.
+- A resposta de cliente usa `POST /support/tickets/{id}/messages`; a resposta administrativa usa `POST /admin/support-tickets/{id}/messages`. O frontend atualiza a conversa e a lista após o envio.
+- A descoberta da página inicial mostra a quantidade de lojas por categoria na cidade selecionada. As categorias rolam horizontalmente em telas estreitas e exibem estado ativo, foco e contagem sem cortar o conteúdo.
+
+- A aplicação está organizada como um **monólito modular**: controllers definem as rotas, serviços concentram regras de negócio, entidades/repositorios persistem no banco e o frontend chama a API autenticada. Os limites dos módulos ficam em `Backend/src/main/java/br/com/fooddelivery/`.
+- A compra mantém o preço dos itens, taxa de entrega e endereço como dados do pedido. O pagamento é uma etapa separada e confirmada pelo provedor; só então a loja recebe o pedido.
+- A reserva bloqueia o horário no banco e só aparece para a loja após a confirmação do pagamento.
+- A entrega separa oferta, atribuição, coleta, trajeto e conclusão. Endereço e chat só são liberados ao entregador atribuído. O chat aceita novas mensagens até a coleta; após isso, o histórico permanece disponível em modo de leitura.
+- As rotas de mensagens validam o papel e, além disso, verificam se o usuário é o cliente da operação, o proprietário da loja ou o entregador que recebeu aquela entrega. O banco exige que cada mensagem esteja ligada a exatamente um pedido, reserva ou entrega.
+- O projeto compila com Maven e os arquivos JavaScript passam na verificação sintática. A suíte Maven foi executada com sucesso após permitir o agente Byte Buddy que o Mockito usa para criar mocks no JDK 21. A migração V14 adiciona estado de confirmação de telefone e armazenamento dos hashes de recuperação.
+- A conversa atualiza por consultas periódicas, não por WebSocket ou notificações push. Para alto volume, a evolução natural é mover mensagens para entrega em tempo real e limitar consultas por usuário/dispositivo.
+
+As migrações comuns ficam em `Backend/src/main/resources/db/migration-common`; somente a migração V9 varia por banco em `migration-postgres` e `migration-h2`. Essa separação mantém os checksums já aplicados em PostgreSQL e adapta o índice único de CPF à sintaxe do H2.
+
+O documento descreve o código local revisado. Integrações de pagamento real e geração por IA dependem das credenciais externas listadas acima; a aprovação comercial e a homologação dos fluxos de estorno devem ocorrer antes de receber pagamentos reais.
+
+## 14. Identidade, perfis, cidades e lojas (V13)
+
+- O cadastro público cria somente a conta de cliente e exige CPF válido. O UUID da conta é a chave primária; CPF tem unicidade própria e nunca é usado como chave ou identificador de rota. Contas suspensas continuam ocupando o CPF e não podem ser recriadas com outra função.
+- Cliente, vendedor e entregador são perfis vinculados à mesma conta. Em **Minha conta > Acessos**, a pessoa solicita vendedor ou entregador; a permissão só entra em vigor após aprovação administrativa. A rota antiga de cadastro profissional não cria contas novas e orienta a usar o perfil existente.
+- Em **Minha conta > Acessos**, qualquer perfil pode pedir a liberação do FoodDelivery em uma cidade informando município, UF e CEP de referência. O pedido fica pendente; após aprovação, a cidade aparece na lista de localização, mesmo antes de haver loja publicada.
+- O vendedor cadastra cada estabelecimento com CNPJ válido, único e imutável. A criação gera solicitação de loja; até a aprovação, a loja não aparece para clientes. Lojas adicionais são solicitadas individualmente e o painel permite selecionar qual unidade editar.
+- O administrador consulta pendências e histórico em **Solicitações**, aprova ou reprova cada pedido e o sistema registra o responsável e o horário da decisão. A aprovação de perfil, cidade e loja executa a mudança de acesso/publicação correspondente e avisa a conta.
+
+## 15. Recuperação de senha e confirmação de telefone (V14)
+
+- Na tela de login, a pessoa solicita recuperação pelo e-mail cadastrado e escolhe SMTP ou WhatsApp. A API retorna a mesma resposta genérica sem confirmar se a conta existe.
+- O código possui seis dígitos, validade de dez minutos, uso único, cinco tentativas e intervalo mínimo de 60 segundos entre emissões. A tabela `recovery_codes` armazena somente o hash BCrypt do código, o prazo, o canal, a contagem de tentativas e o estado de consumo.
+- Para recuperação por WhatsApp, o usuário precisa receber e confirmar um código no telefone da conta em **Minha conta > Segurança**. Se o telefone for alterado, o status confirmado volta a falso. O número não confirmado não pode receber código de redefinição por WhatsApp.
+- A redefinição chama `Account.changePassword`, incrementando `credential_version`; o validador JWT verifica essa versão em cada autenticação, revogando sessões anteriores. O reset do administrador permanece separado: gera uma senha temporária de uso único exibida no painel, exige troca no próximo acesso e também revoga tokens.
+- Os provedores são opcionais em ambiente local. SMTP usa `SMTP_*` e `RECOVERY_EMAIL_FROM`; WhatsApp usa a API Cloud oficial com credenciais apenas no backend e um template de mensagem aprovado. Falhas dos provedores não expõem detalhes nem códigos na resposta HTTP.

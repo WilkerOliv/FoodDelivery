@@ -139,7 +139,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authenticationProvider(provider)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/operator-applications").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/operator-applications", "/api/v1/auth/password-recovery", "/api/v1/auth/password-recovery/reset").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/payments/mercadopago/callback").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/store-assets/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/store-categories").permitAll()

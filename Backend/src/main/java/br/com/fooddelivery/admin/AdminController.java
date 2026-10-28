@@ -40,10 +40,15 @@ public class AdminController {
     @ResponseStatus(HttpStatus.CREATED)
     public Account createOperator(@Valid @RequestBody OperatorRequest request) {
         String email = request.email().trim().toLowerCase(Locale.ROOT);
-        if (accounts.existsByEmailIgnoreCase(email)) throw new IllegalArgumentException("E-mail já cadastrado.");
         String cpf = request.cpf().replaceAll("\\D", "");
         if (!br.com.fooddelivery.identity.Cpf.isValid(cpf)) throw new IllegalArgumentException("Informe um CPF válido.");
-        if (accounts.existsByCpf(cpf)) throw new IllegalArgumentException("Este CPF já está vinculado a outra conta.");
+        if (accounts.existsByCpf(cpf)) {
+            Account existing=accounts.findByCpf(cpf).orElseThrow();
+            if(!existing.getEmail().equalsIgnoreCase(email))throw new IllegalArgumentException("Este CPF já pertence a outra conta. Peça à pessoa que solicite o novo perfil pela própria conta.");
+            if(existing.getRegisteredRoles().contains(request.role()))throw new IllegalArgumentException("Este perfil já está vinculado à conta existente.");
+            existing.setRole(request.role());return accounts.save(existing);
+        }
+        if (accounts.existsByEmailIgnoreCase(email)) throw new IllegalArgumentException("E-mail já cadastrado.");
         Account account = new Account(email, request.name().trim(), encoder.encode(request.password()));
         account.setCpfOnce(cpf);
         account.setRole(request.role());
@@ -52,7 +57,7 @@ public class AdminController {
 
     @GetMapping("/operators")
     public List<OperatorView> operators() {
-        return accounts.findByRoleIn(List.of(AccountRole.MERCHANT, AccountRole.COURIER)).stream()
+        return accounts.findAll().stream().filter(a -> a.getRegisteredRoles().stream().anyMatch(r -> r==AccountRole.MERCHANT||r==AccountRole.COURIER))
                 .map(AdminController::operatorView).toList();
     }
 
@@ -62,11 +67,18 @@ public class AdminController {
     }
 
     @PatchMapping("/accounts/{id}/active")
+    @org.springframework.transaction.annotation.Transactional
     public AdminAccountView setAccountActive(@PathVariable UUID id, @RequestBody AccountActivity request) {
         Account account = accounts.findById(id).orElseThrow();
         if (account.getRole() == AccountRole.ADMIN) throw new IllegalArgumentException("A conta administrativa não pode ser suspensa por este painel.");
         if (request.active()) account.activate(); else account.deactivate();
-        return adminAccountView(accounts.save(account));
+        Account saved = accounts.save(account);
+        if (!request.active()) {
+            List<Store> ownedStores = stores.findByOwnerId(saved.getId());
+            ownedStores.forEach(store -> { store.setActive(false); store.setApproved(false); });
+            stores.saveAll(ownedStores);
+        }
+        return adminAccountView(saved);
     }
 
     @PatchMapping("/accounts/{id}/roles/{role}")
@@ -146,17 +158,22 @@ public class AdminController {
     }
 
     @GetMapping("/stores")
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<AdminStoreView> stores() {
         return stores.findAll().stream().map(store -> new AdminStoreView(store.getId(), store.getName(),
-                store.getDescription(), store.getCategory(), store.getAddress(), store.getCity(), store.getState(), store.isActive(), store.isApproved(),
+                store.getDescription(), store.getCategory(), store.getAddress(), store.getCity(), store.getState(), store.getCnpj(), store.isActive(), store.isApproved(),
                 store.getOwner().getName(), store.getOwner().getEmail(), store.getMarketplaceFeeBps() / 100.0,
                 store.getDeliveryFeeCents(), store.getCoverImageUrl())).toList();
     }
 
     @PatchMapping("/stores/{id}/approval")
+    @org.springframework.transaction.annotation.Transactional
     public Store approveStore(@PathVariable UUID id, @RequestBody Approval request) {
         Store store = stores.findById(id).orElseThrow();
+        if (request.approved() && (!store.getOwner().isActive() || !store.getOwner().getGrantedRoles().contains(AccountRole.MERCHANT)))
+            throw new IllegalArgumentException("A conta do vendedor está suspensa ou sem acesso ativo. Reative o perfil antes de aprovar a loja.");
         store.setApproved(request.approved());
+        if (!request.approved()) store.setActive(false);
         return stores.save(store);
     }
 
@@ -206,7 +223,7 @@ public class AdminController {
     public record AdminAccountView(UUID id, String name, String email, String maskedCpf, AccountRole role,
                                    List<AccountRole> registeredRoles, List<AccountRole> grantedRoles, boolean active, String applicationStatus,
                                    java.time.Instant createdAt) {}
-    public record AdminStoreView(UUID id, String name, String description, String category, String address, String city, String state,
+    public record AdminStoreView(UUID id, String name, String description, String category, String address, String city, String state, String cnpj,
                                  boolean active, boolean approved, String ownerName, String ownerEmail,
                                  double commissionPercent, long deliveryFeeCents, String coverImageUrl) {}
 }

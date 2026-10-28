@@ -14,7 +14,8 @@ O backend libera CORS apenas para `localhost:5173` e `127.0.0.1:5173`. Para outr
 - Descoberta e pesquisa local de lojas/categorias; catálogo de produtos e serviços.
 - Seções de restaurantes, mercados, conveniências, lanchonetes, pizzarias, cafeterias, farmácias e serviços.
 - Sacola com retirada ou delivery, endereço, taxa fixa de entrega da loja e checkout Mercado Pago.
-- Histórico de pedidos, reservas e perfil.
+- Histórico de pedidos, reservas e perfil; observações enviadas no fechamento da compra/reserva.
+- Conversas com a loja após a confirmação do pagamento e chat do entregador enquanto ele está a caminho da coleta; o histórico fica disponível após o encerramento.
 - Painel de comerciante com criação/edição de loja, catálogo, pedidos e agenda.
 - Painel do entregador com ofertas, aceite exclusivo e progresso da entrega.
 - Painel administrativo para operadores e aprovação de lojas.
