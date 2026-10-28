@@ -63,6 +63,7 @@ Valores monetários são enviados como centavos inteiros (por exemplo, R$ 19,90 
 | Pedidos | `POST /api/v1/orders`, `POST /api/v1/orders/{id}/cancel` (antes do pagamento), `GET /api/v1/orders/mine`, `/api/v1/merchant/orders` |
 | Reservas | `POST /api/v1/reservations`, `POST /api/v1/reservations/{id}/cancel` (antes do pagamento), `GET /api/v1/reservations/mine`, `/api/v1/merchant/reservations` |
 | Entregas | `/api/v1/merchant/orders/{id}/delivery`, `/api/v1/courier/offers`, `/api/v1/courier/deliveries`, `PATCH /api/v1/courier/deliveries/{id}/location` |
+| Mensagens | `GET/POST /api/v1/orders/{id}/messages`, `/api/v1/reservations/{id}/messages`, `/api/v1/deliveries/{id}/messages` (liberadas após o pagamento; chat do entregador encerra na coleta) |
 | Administração | `/api/v1/admin/operators`, `/api/v1/admin/stores/{id}/approval`, `GET /api/v1/admin/refunds` |
 
 ## Execução com PostgreSQL
@@ -75,4 +76,4 @@ Ainda não estão implementados recuperação de senha, MFA, notificações por 
 
 ## Modelo de dados
 
-O esquema inicial está em `src/main/resources/db/migration/V1__initial_schema.sql`; migrações posteriores estendem endereço/perfil, pagamentos do marketplace, expiração/slots de reserva e rastreio idempotente de estornos (V5). Valores de pedido ficam em centavos e datas são armazenadas com fuso. Restrições únicas impedem conta repetida por e-mail, mais de um pagamento por pedido, dois pedidos de entrega para o mesmo pedido e duas reservas ativas da mesma loja no mesmo instante.
+O esquema inicial está em `src/main/resources/db/migration/V1__initial_schema.sql`; migrações posteriores estendem endereço/perfil, pagamentos do marketplace, expiração/slots de reserva, rastreio idempotente de estornos (V5), solicitações de acesso e marca da loja (V6), endereços do cliente (V7), localização do entregador (V8), segurança de contas e cidade da loja (V9), versão de credencial (V10) e observações com mensagens de operação (V11). Veja `Documentacao/Funcionamento_do_Projeto.md` para o funcionamento completo. Valores de pedido ficam em centavos e datas são armazenadas com fuso. Restrições únicas impedem conta repetida por e-mail, mais de um pagamento por pedido, dois pedidos de entrega para o mesmo pedido e duas reservas ativas da mesma loja no mesmo instante.

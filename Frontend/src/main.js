@@ -34,7 +34,7 @@ const state = {
   storeItems: [], cart: [], cartMode: 'PICKUP', deliveryAddress: '', cartOpen: false,
   addresses: [], selectedAddressId: '', addressFormOpen: false,
   orders: [], reservations: [], deliveries: [], offers: [], ownStores: [],
-  checkoutNote: '', openChat: null, chatThreads: {}, chatPollHandle: null,
+  checkoutNote: '', openChat: null, chatThreads: {}, chatDrafts: {}, chatPollHandle: null,
   notifications: readLocalNotifications(savedAccount?.id),
   checkout: null, profile: null, adminStores: [], adminRefunds: [], adminOperators: [], adminAccounts: [], adminApplications: [], adminLoadError: '', backendStatus: 'checking',
   paymentConnection: null,
@@ -62,6 +62,7 @@ function notify(title, message, kind = 'success', persist = false) {
 }
 
 window.addEventListener('session-expired', () => {
+  resetChatState();
   stopNotificationPolling();
   stopCourierLocation();
   setToken(null);
@@ -158,6 +159,8 @@ function stopNotificationPolling() {
   notificationPollHandle = null;
 }
 
+function isTypingInPage(){const el=document.activeElement;return !!el&&el.matches?.('#page-content textarea, #page-content input, #page-content select');}
+
 async function refreshNotifications() {
   if (!state.account || document.visibilityState !== 'visible') return;
   const accountId = state.account.id;
@@ -172,7 +175,7 @@ async function refreshNotifications() {
     if (state.page === 'notifications' && fresh.length) renderPage();
   } catch { /* a próxima rodada tenta novamente sem interromper a tela */ }
   if (state.page === 'orders') {
-    try { state.orders = await api('/orders/mine'); renderPage(); } catch { /* o próximo ciclo atualiza o acompanhamento */ }
+    try { state.orders = await api('/orders/mine'); if(!isTypingInPage())renderPage(); } catch { /* o próximo ciclo atualiza o acompanhamento */ }
   }
 }
 
@@ -313,6 +316,7 @@ function renderShell() {
 async function navigate(page) {
   if(state.mustChangePassword&&page!=='account')return;
   if(!navByRole[role()]?.some(([allowed])=>allowed===page) && page!=='checkout')return;
+  if(state.page!==page)stopChat();
   state.page=page;state.mobileMenu=false;state.cartOpen=false;state.selectedStore=null;
   if(location.hash!==`#${page}`)history.pushState({page},'',`#${page}`);
   render();
@@ -403,6 +407,7 @@ function bindPage() {
   }));
   document.querySelectorAll('[data-open-chat-type]').forEach(button=>button.addEventListener('click',()=>openChat(button.dataset.openChatType,button.dataset.openChatId)));
   document.querySelectorAll('[data-chat-form]').forEach(form=>form.addEventListener('submit',sendChatMessage));
+  document.querySelectorAll('[data-chat-draft]').forEach(area=>area.addEventListener('input',()=>{state.chatDrafts[area.dataset.chatDraft]=area.value;}));
   document.querySelectorAll('[data-close-chat]').forEach(button=>button.addEventListener('click',()=>closeChat(button.dataset.closeChat)));
 }
 
@@ -550,7 +555,7 @@ function renderOrders() {
     ${orders.length?orders.map(order=>`<article class="order-card"><div class="order-card-top"><div><h3>${esc(order.store.name)} · ${order.fulfillmentType==='DELIVERY'?'Entrega':'Retirada'}</h3><p>Pedido ${esc(String(order.id).slice(0,8).toUpperCase())} · ${shortDate(order.createdAt)}</p></div>${pill(order.tracking?.status||order.status)}</div>
       ${order.fulfillmentType==='DELIVERY'?`<div class="tracking-panel"><span class="tracking-mark">⌖</span><div><strong>${esc(trackingMessage(order))}</strong><small>As atualizações aparecem automaticamente nesta tela.</small></div></div>${order.tracking?.latitude!=null&&order.tracking?.longitude!=null?`<div class="tracking-map-actions"><button class="btn outline small" data-tracking-map="${esc(order.id)}">${state.trackingMapOrderId===String(order.id)?'Fechar mapa':'Ver mapa do entregador'}</button><small>O mapa externo recebe a posição compartilhada para mostrar o trajeto.</small></div>${state.trackingMapOrderId===String(order.id)?`<iframe class="tracking-map" title="Localização aproximada do entregador" loading="lazy" referrerpolicy="no-referrer" src="https://www.openstreetmap.org/export/embed.html?bbox=${Number(order.tracking.longitude)-0.006}%2C${Number(order.tracking.latitude)-0.006}%2C${Number(order.tracking.longitude)+0.006}%2C${Number(order.tracking.latitude)+0.006}&layer=mapnik&marker=${Number(order.tracking.latitude)}%2C${Number(order.tracking.longitude)}"></iframe>`:''}`:''}`:''}
       <div class="order-items">${order.lines.map(line=>`${line.quantity} × ${esc(line.name)}`).join('<br/>')}</div>${order.customerNote?`<div class="customer-note"><strong>Observação enviada à loja</strong><p>${esc(order.customerNote)}</p></div>`:''}<div class="order-bottom"><span>${money(order.totalCents)}</span><span>${order.fulfillmentType==='DELIVERY'?'⌖ '+esc(order.deliveryAddress||'Endereço informado'):'Retirada na loja'}</span></div>
-      <div class="action-row">${order.fulfillmentType==='DELIVERY'&&order.deliveryAddress?`<a class="btn outline small" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(order.deliveryAddress)}" target="_blank" rel="noopener noreferrer">Ver endereço no mapa</a>`:''}${order.tracking?.deliveryId?`<button class="btn outline small" data-open-chat-type="deliveries" data-open-chat-id="${esc(order.tracking.deliveryId)}">${order.tracking.status==='ASSIGNED'?'Conversar com entregador':'Histórico do chat de entrega'}</button>`:''}${order.tracking?.latitude!=null&&order.tracking?.longitude!=null?`<a class="btn small" href="https://maps.google.com/?q=${encodeURIComponent(`${order.tracking.latitude},${order.tracking.longitude}`)}" target="_blank" rel="noopener noreferrer">Ver localização do entregador</a><small class="location-updated">Atualizado ${shortDate(order.tracking.locationUpdatedAt)}</small>`:''}<button class="btn outline small" data-open-chat-type="orders" data-open-chat-id="${esc(order.id)}">Mensagens com a loja</button>${order.status==='AWAITING_PAYMENT'&&order.paymentId?'<button class="btn small" data-resume-order="'+esc(order.id)+'">Continuar pagamento</button><button class="btn outline small" data-cancel-order="'+esc(order.id)+'">Cancelar pedido</button>':''}</div>${chatPanel('orders',order.id)}${order.tracking?.deliveryId?chatPanel('deliveries',order.tracking.deliveryId):''}${refundNotice(order.paymentStatus)}</article>`).join(''):emptyState('🧾','Seus pedidos vão aparecer aqui','Quando fizer seu primeiro pedido, você acompanha cada etapa nesta tela.','Encontrar uma loja','go-home')}`;
+      <div class="action-row">${order.fulfillmentType==='DELIVERY'&&order.deliveryAddress?`<a class="btn outline small" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(order.deliveryAddress)}" target="_blank" rel="noopener noreferrer">Ver endereço no mapa</a>`:''}${order.tracking?.deliveryId&&order.tracking.status!=='OFFERED'?`<button class="btn outline small" data-open-chat-type="deliveries" data-open-chat-id="${esc(order.tracking.deliveryId)}">${order.tracking.status==='ASSIGNED'?'Conversar com entregador':'Histórico do chat de entrega'}</button>`:''}${order.tracking?.latitude!=null&&order.tracking?.longitude!=null?`<a class="btn small" href="https://maps.google.com/?q=${encodeURIComponent(`${order.tracking.latitude},${order.tracking.longitude}`)}" target="_blank" rel="noopener noreferrer">Ver localização do entregador</a><small class="location-updated">Atualizado ${shortDate(order.tracking.locationUpdatedAt)}</small>`:''}<button class="btn outline small" data-open-chat-type="orders" data-open-chat-id="${esc(order.id)}">Mensagens com a loja</button>${order.status==='AWAITING_PAYMENT'&&order.paymentId?'<button class="btn small" data-resume-order="'+esc(order.id)+'">Continuar pagamento</button><button class="btn outline small" data-cancel-order="'+esc(order.id)+'">Cancelar pedido</button>':''}</div>${chatPanel('orders',order.id)}${order.tracking?.deliveryId?chatPanel('deliveries',order.tracking.deliveryId):''}${refundNotice(order.paymentStatus)}</article>`).join(''):emptyState('🧾','Seus pedidos vão aparecer aqui','Quando fizer seu primeiro pedido, você acompanha cada etapa nesta tela.','Encontrar uma loja','go-home')}`;
 }
 
 function trackingMessage(order) {
@@ -567,12 +572,24 @@ function renderReservations() {
 }
 
 function chatKey(type,id){return `${type}:${id}`;}
-function chatPanel(type,id){const key=chatKey(type,id);if(state.openChat!==key)return '';const thread=state.chatThreads[key];if(!thread)return '<section class="chat-panel"><p>Carregando conversa…</p></section>';return `<section class="chat-panel"><div class="chat-heading"><div><strong>${type==='deliveries'?'Chat com o entregador':type==='reservations'?'Conversa sobre a reserva':'Conversa sobre o pedido'}</strong><small>${thread.open?'Mensagens visíveis para as pessoas envolvidas nesta operação.':esc(thread.closedReason||'Conversa encerrada; o histórico continua disponível.')}</small></div><button class="btn outline small" data-close-chat="${esc(key)}">Fechar</button></div><div class="chat-messages">${thread.messages.length?thread.messages.map(m=>`<article class="chat-message ${String(m.senderId)===String(state.account?.id)?'mine':''}"><strong>${esc(m.senderName)}</strong><p>${esc(m.body)}</p><time>${shortDate(m.createdAt)}</time></article>`).join(''):'<p class="chat-empty">Ainda não há mensagens. Escreva se precisar combinar algum detalhe.</p>'}</div>${thread.open?`<form class="chat-compose" data-chat-form data-chat-type="${type}" data-chat-id="${esc(id)}"><label class="sr-only" for="message-${esc(key)}">Escreva uma mensagem</label><textarea id="message-${esc(key)}" name="body" maxlength="1000" rows="2" required placeholder="Escreva sua mensagem…"></textarea><button class="btn small" type="submit">Enviar</button></form>`:'<div class="chat-closed">Este chat foi encerrado conforme o andamento da operação. Você ainda pode consultar as mensagens anteriores.</div>'}</section>`;}
+function chatMessagesHtml(thread){return thread.messages.length?thread.messages.map(m=>`<article class="chat-message ${String(m.senderId)===String(state.account?.id)?'mine':''}"><strong>${esc(m.senderName)}</strong><p>${esc(m.body)}</p><time>${shortDate(m.createdAt)}</time></article>`).join(''):'<p class="chat-empty">Ainda não há mensagens. Escreva se precisar combinar algum detalhe.</p>';}
+function stopChat(){if(state.chatPollHandle)clearInterval(state.chatPollHandle);state.chatPollHandle=null;state.openChat=null;}
+function resetChatState(){stopChat();state.chatThreads={};state.chatDrafts={};state.checkoutNote='';}
+function applyChatUpdate(key,next){
+  const previous=state.chatThreads[key];state.chatThreads[key]=next;
+  const panel=document.querySelector(`[data-chat-panel="${CSS.escape(key)}"]`),box=panel?.querySelector('.chat-messages');
+  if(!panel||!box||!previous||previous.open!==next.open){renderPage();return;}
+  if(previous.messages.length===next.messages.length&&previous.messages.at(-1)?.id===next.messages.at(-1)?.id)return;
+  const atBottom=box.scrollHeight-box.scrollTop-box.clientHeight<48;
+  box.innerHTML=chatMessagesHtml(next);
+  if(atBottom)box.scrollTop=box.scrollHeight;
+}
+function chatPanel(type,id){const key=chatKey(type,id);if(state.openChat!==key)return '';const thread=state.chatThreads[key];if(!thread)return '<section class="chat-panel"><p>Carregando conversa…</p></section>';return `<section class="chat-panel" data-chat-panel="${esc(key)}"><div class="chat-heading"><div><strong>${type==='deliveries'?'Chat com o entregador':type==='reservations'?'Conversa sobre a reserva':'Conversa sobre o pedido'}</strong><small>${thread.open?'Mensagens visíveis para as pessoas envolvidas nesta operação.':esc(thread.closedReason||'Conversa encerrada; o histórico continua disponível.')}</small></div><button class="btn outline small" data-close-chat="${esc(key)}">Fechar</button></div><div class="chat-messages">${chatMessagesHtml(thread)}</div>${thread.open?`<form class="chat-compose" data-chat-form data-chat-type="${type}" data-chat-id="${esc(id)}"><label class="sr-only" for="message-${esc(key)}">Escreva uma mensagem</label><textarea id="message-${esc(key)}" name="body" maxlength="1000" rows="2" required placeholder="Escreva sua mensagem…" data-chat-draft="${esc(key)}">${esc(state.chatDrafts[key]||'')}</textarea><button class="btn small" type="submit">Enviar</button></form>`:'<div class="chat-closed">Este chat foi encerrado conforme o andamento da operação. Você ainda pode consultar as mensagens anteriores.</div>'}</section>`;}
 
-async function openChat(type,id){const key=chatKey(type,id);state.openChat=key;state.chatThreads[key]=null;renderPage();try{state.chatThreads[key]=await api(`/${type}/${encodeURIComponent(id)}/messages`);renderPage();if(state.chatPollHandle)clearInterval(state.chatPollHandle);state.chatPollHandle=setInterval(()=>refreshOpenChat(key),5000);}catch(error){state.openChat=null;notify('Não foi possível abrir a conversa',error.message,'error');renderPage();}}
-async function refreshOpenChat(key){if(state.openChat!==key||document.visibilityState!=='visible')return;const [type,id]=key.split(':');try{const next=await api(`/${type}/${encodeURIComponent(id)}/messages`);if(state.openChat===key){state.chatThreads[key]=next;renderPage();}}catch{/* a próxima atualização tenta novamente sem interromper o atendimento */}}
-function closeChat(key){if(state.openChat!==key)return;state.openChat=null;if(state.chatPollHandle)clearInterval(state.chatPollHandle);state.chatPollHandle=null;renderPage();}
-async function sendChatMessage(event){event.preventDefault();const form=event.currentTarget;const type=form.dataset.chatType,id=form.dataset.chatId,body=String(new FormData(form).get('body')||'').trim();if(!body)return;const button=form.querySelector('button[type="submit"]');if(button)button.disabled=true;try{state.chatThreads[chatKey(type,id)]=await api(`/${type}/${encodeURIComponent(id)}/messages`,{method:'POST',body:JSON.stringify({body})});renderPage();}catch(error){if(button)button.disabled=false;notify('Mensagem não enviada',error.message,'error');}}
+async function openChat(type,id){const key=chatKey(type,id);stopChat();state.openChat=key;state.chatThreads[key]=null;renderPage();try{state.chatThreads[key]=await api(`/${type}/${encodeURIComponent(id)}/messages`);renderPage();if(state.chatPollHandle)clearInterval(state.chatPollHandle);state.chatPollHandle=setInterval(()=>refreshOpenChat(key),5000);}catch(error){state.openChat=null;notify('Não foi possível abrir a conversa',error.message,'error');renderPage();}}
+async function refreshOpenChat(key){if(state.openChat!==key||document.visibilityState!=='visible')return;const [type,id]=key.split(':');try{const next=await api(`/${type}/${encodeURIComponent(id)}/messages`);if(state.openChat===key)applyChatUpdate(key,next);}catch{/* a próxima atualização tenta novamente sem interromper o atendimento */}}
+function closeChat(key){if(state.openChat!==key)return;stopChat();renderPage();}
+async function sendChatMessage(event){event.preventDefault();const form=event.currentTarget;const type=form.dataset.chatType,id=form.dataset.chatId,body=String(new FormData(form).get('body')||'').trim();if(!body)return;const button=form.querySelector('button[type="submit"]');if(button)button.disabled=true;try{state.chatThreads[chatKey(type,id)]=await api(`/${type}/${encodeURIComponent(id)}/messages`,{method:'POST',body:JSON.stringify({body})});delete state.chatDrafts[chatKey(type,id)];renderPage();}catch(error){if(button)button.disabled=false;notify('Mensagem não enviada',error.message,'error');}}
 
 function renderAccount() {
   const profile=state.profile||state.account;
@@ -606,7 +623,7 @@ async function saveProfile(event) {
 
 async function changePassword(event){event.preventDefault();const form=new FormData(event.currentTarget);const currentPassword=String(form.get('currentPassword')),newPassword=String(form.get('newPassword'));if(newPassword!==String(form.get('confirmPassword'))){notify('As senhas não conferem','Digite a mesma senha nos dois campos.','error');return;}try{const response=await api('/account/password',{method:'POST',body:JSON.stringify({currentPassword,newPassword})});setToken(response.accessToken);state.account={...state.account,...response.account,activeRole:state.activeRole};state.profile=state.account;state.mustChangePassword=false;localStorage.setItem('pronto_account',JSON.stringify(state.account));notify('Senha alterada','Sua conta está protegida com a nova senha.');render();}catch(error){notify('Não foi possível alterar a senha',error.message,'error');}}
 
-async function switchRole(nextRole){if(!(state.account?.grantedRoles||[]).includes(nextRole))return;state.activeRole=nextRole;state.account={...state.account,activeRole:nextRole};localStorage.setItem('pronto_account',JSON.stringify(state.account));state.page=nextRole==='ADMIN'?'admin':nextRole==='MERCHANT'?'merchant':nextRole==='COURIER'?'courier':'home';await loadCurrentPage();render();}
+async function switchRole(nextRole){if(!(state.account?.grantedRoles||[]).includes(nextRole))return;stopChat();state.activeRole=nextRole;state.account={...state.account,activeRole:nextRole};localStorage.setItem('pronto_account',JSON.stringify(state.account));state.page=nextRole==='ADMIN'?'admin':nextRole==='MERCHANT'?'merchant':nextRole==='COURIER'?'courier':'home';await loadCurrentPage();render();}
 
 function renderNotifications() {
   const list=state.notifications;
@@ -679,7 +696,7 @@ function renderCourier(){
     <div class="section-head"><h2>Ofertas disponíveis</h2><span class="store-meta">${state.offers.length} aguardando aceite</span></div>
     ${state.offers.length?`<div class="store-grid">${state.offers.map(o=>`<article class="panel"><span class="eyebrow">Nova entrega</span><h3 style="margin-top:8px">${esc(o.storeName)}</h3><p class="store-desc">Pedido ${esc(String(o.orderId).slice(0,8).toUpperCase())} · valor ${money(o.orderTotalCents)}</p><div class="alert-strip info">⌖ Endereço e dados do cliente ficam visíveis depois que você aceitar.</div><button class="btn block" data-accept-delivery="${esc(o.deliveryId)}">Aceitar entrega</button></article>`).join('')}</div>`:emptyState('🚲','Nenhuma oferta por enquanto','Fique de olho. As novas entregas aparecerão nesta tela.')}
     <div class="section-head"><h2>Em andamento</h2></div>
-    ${state.deliveries.length?state.deliveries.map(d=>`<article class="order-card"><div class="order-card-top"><div><h3>${esc(d.storeName)} · ${money(d.orderTotalCents)}</h3><p>Retirar na loja e entregar em: ${esc(d.deliveryAddress||'Endereço não informado')}</p></div>${pill(d.status)}</div><div class="order-bottom"><span>Pedido ${esc(String(d.orderId).slice(0,8).toUpperCase())}</span><span>${courierNext(d)}</span></div>${d.status==='ASSIGNED'?`<div class="action-row"><button class="btn outline small" data-open-chat-type="deliveries" data-open-chat-id="${esc(d.deliveryId)}">Conversar com cliente</button></div>`:d.status==='PICKED_UP'||d.status==='IN_TRANSIT'||d.status==='DELIVERED'?'<div class="chat-closed">Chat encerrado após a coleta do pedido.</div>':''}${chatPanel('deliveries',d.deliveryId)}</article>`).join(''):''}`;
+    ${state.deliveries.length?state.deliveries.map(d=>`<article class="order-card"><div class="order-card-top"><div><h3>${esc(d.storeName)} · ${money(d.orderTotalCents)}</h3><p>Retirar na loja e entregar em: ${esc(d.deliveryAddress||'Endereço não informado')}</p></div>${pill(d.status)}</div>${d.customerNote?`<div class="customer-note"><strong>Observação do cliente</strong><p>${esc(d.customerNote)}</p></div>`:''}<div class="order-bottom"><span>Pedido ${esc(String(d.orderId).slice(0,8).toUpperCase())}</span><span>${courierNext(d)}</span></div>${d.status==='ASSIGNED'?`<div class="action-row"><button class="btn outline small" data-open-chat-type="deliveries" data-open-chat-id="${esc(d.deliveryId)}">Conversar com cliente</button></div>`:d.status==='PICKED_UP'||d.status==='IN_TRANSIT'||d.status==='DELIVERED'?`<div class="action-row"><button class="btn outline small" data-open-chat-type="deliveries" data-open-chat-id="${esc(d.deliveryId)}">Ver histórico do chat</button></div>`:''}${chatPanel('deliveries',d.deliveryId)}</article>`).join(''):''}`;
 }
 
 function courierNext(d){const action={ASSIGNED:['PICKED_UP','Marcar como coletado'],PICKED_UP:['IN_TRANSIT','Iniciar trajeto'],IN_TRANSIT:['DELIVERED','Marcar como entregue']}[d.status];return `<div class="action-row">${action?`<button class="btn small" data-delivery-status="${action[0]}" data-id="${esc(d.deliveryId)}">${action[1]}</button>`:''}${d.status==='IN_TRANSIT'?`<button class="btn outline small" data-share-location="${esc(d.deliveryId)}">${state.sharingDeliveryId===String(d.deliveryId)?'Localização compartilhada':'Compartilhar localização'}</button>`:''}</div>`;}
@@ -729,7 +746,7 @@ async function setAccountRole(id,roleName,active){try{await api(`/admin/accounts
 async function resetAccountPassword(id,name){if(!window.confirm(`Gerar uma senha temporária para ${name}? A pessoa deverá alterá-la no próximo acesso.`))return;try{const result=await api(`/admin/accounts/${id}/password-reset`,{method:'POST'});state.adminTemporaryPassword={name,password:result.temporaryPassword};notify('Senha temporária gerada','Compartilhe a senha diretamente com a pessoa por um canal seguro.','info');renderPage();}catch(e){notify('Não foi possível redefinir a senha',e.message,'error');}}
 
 async function reviewOperatorApplication(id,decision){
-  const verb=decision==='approve'?'aprovar':'reject';
+  const verb=decision==='approve'?'approve':'reject';
   try{await api(`/admin/operator-applications/${id}/${verb}`,{method:'PATCH'});[state.adminApplications,state.adminOperators]=await Promise.all([api('/admin/operator-applications'),api('/admin/operators')]);notify(decision==='approve'?'Acesso aprovado':'Solicitação recusada',decision==='approve'?'A conta já pode entrar na área de vendedor ou entregador.':'A conta não poderá entrar no sistema.','info');render();}
   catch(error){notify('Não foi possível revisar a solicitação',error.message,'error');}
 }
@@ -833,7 +850,7 @@ function bindEvents() {
   });
 }
 
-window.addEventListener('popstate',async()=>{const page=location.hash.slice(1);if(knownPage(page)&&navByRole[role()]?.some(([allowed])=>allowed===page)){state.page=page;await loadCurrentPage();render();}});
+window.addEventListener('popstate',async()=>{const page=location.hash.slice(1);if(knownPage(page)&&navByRole[role()]?.some(([allowed])=>allowed===page)){if(state.page!==page)stopChat();state.page=page;await loadCurrentPage();render();}});
 
 function showLogoutConfirmation(){
   $('#logout-confirm')?.remove();
@@ -846,13 +863,17 @@ function showLogoutConfirmation(){
 }
 
 function performLogout(){
-  stopNotificationPolling();stopCourierLocation();setToken(null);localStorage.removeItem('pronto_account');state.account=null;state.profile=null;state.cart=[];state.addresses=[];state.selectedAddressId='';state.addressFormOpen=false;state.orders=[];state.reservations=[];state.deliveries=[];state.offers=[];state.ownStores=[];state.checkout=null;state.selectedStore=null;state.storeItems=[];state.paymentConnection=null;state.notifications=readLocalNotifications(null);state.authMode='login';state.page='home';if(location.hash)history.replaceState({page:'home'},'',location.pathname+location.search);render();notify('Você saiu da conta','Até a próxima!','info',false);
+  resetChatState();stopNotificationPolling();stopCourierLocation();setToken(null);localStorage.removeItem('pronto_account');state.account=null;state.profile=null;state.cart=[];state.addresses=[];state.selectedAddressId='';state.addressFormOpen=false;state.orders=[];state.reservations=[];state.deliveries=[];state.offers=[];state.ownStores=[];state.checkout=null;state.selectedStore=null;state.storeItems=[];state.paymentConnection=null;state.notifications=readLocalNotifications(null);state.authMode='login';state.page='home';if(location.hash)history.replaceState({page:'home'},'',location.pathname+location.search);render();notify('Você saiu da conta','Até a próxima!','info',false);
 }
 
 bindEvents();
 
 // Rebind page-specific events after each render. The app shell remains delegated.
 const originalRenderPage = renderPage;
-renderPage = function(){originalRenderPage();bindPageActions();};
+renderPage = function(){
+  const el=document.activeElement,keep=el&&el.id&&el.matches?.('#page-content textarea, #page-content input')?{id:el.id,value:el.value,start:el.selectionStart,end:el.selectionEnd}:null;
+  originalRenderPage();bindPageActions();
+  if(keep){const next=document.getElementById(keep.id);if(next){if(next.value!==keep.value)next.value=keep.value;next.focus({preventScroll:true});try{next.setSelectionRange(keep.start,keep.end);}catch{/* tipos sem seleção */}}}
+};
 
 boot();

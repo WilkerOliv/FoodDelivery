@@ -25,6 +25,6 @@ import org.springframework.web.bind.annotation.*;
  public record Update(@NotNull DeliveryStatus status){}
  public record LocationUpdate(@jakarta.validation.constraints.NotNull @jakarta.validation.constraints.DecimalMin("-90.0") @jakarta.validation.constraints.DecimalMax("90.0") Double latitude,@jakarta.validation.constraints.NotNull @jakarta.validation.constraints.DecimalMin("-180.0") @jakarta.validation.constraints.DecimalMax("180.0") Double longitude){}
  public record OfferView(UUID deliveryId,UUID orderId,String storeName,long orderTotalCents){}
- private AssignedView view(DeliveryTask d){return new AssignedView(d.getId(),d.getStatus(),d.getOrder().getId(),d.getOrder().getStore().getName(),d.getOrder().getDeliveryAddress(),d.getOrder().getTotalCents());}
- public record AssignedView(UUID deliveryId,DeliveryStatus status,UUID orderId,String storeName,String deliveryAddress,long orderTotalCents){}
+ private AssignedView view(DeliveryTask d){String note=d.getStatus()==DeliveryStatus.DELIVERED?null:d.getOrder().getCustomerNote();return new AssignedView(d.getId(),d.getStatus(),d.getOrder().getId(),d.getOrder().getStore().getName(),d.getOrder().getDeliveryAddress(),d.getOrder().getTotalCents(),note);}
+ public record AssignedView(UUID deliveryId,DeliveryStatus status,UUID orderId,String storeName,String deliveryAddress,long orderTotalCents,String customerNote){}
 }

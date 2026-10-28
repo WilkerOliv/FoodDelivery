@@ -69,6 +69,7 @@ public class OrderController {
     @Transactional(readOnly = true)
     public List<OrderView> merchantOrders(Authentication auth) {
         return orders.findByStoreOwnerIdOrderByCreatedAtDesc(subject(auth)).stream()
+                .filter(order -> order.getStatus() != OrderStatus.AWAITING_PAYMENT)
                 .map(order -> view(order, null, false)).toList();
     }
 

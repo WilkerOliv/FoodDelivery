@@ -1,6 +1,6 @@
 # Modelo de dados do backend
 
-**Banco:** PostgreSQL 17 · **Migrações:** `Backend/src/main/resources/db/migration/V1` a `V6` (Flyway).
+**Banco:** PostgreSQL 17 · **Migrações:** `Backend/src/main/resources/db/migration/V1` a `V11` (Flyway).
 
 ## Entidades e relações
 
@@ -35,6 +35,8 @@ erDiagram
 | `delivery_tasks` | Oferta/atribuição e progresso de uma entrega associada a pedido de delivery. |
 | `account_notifications` | Notificações persistidas e isoladas por conta, com data de leitura. |
 | `marketplace_payment_accounts` | Vínculo OAuth da loja com a conta Mercado Pago; tokens são armazenados criptografados. |
+| `customer_addresses` | Livro de endereços do cliente, com endereço padrão (V7). |
+| `operation_messages` | Mensagens de pedido, reserva ou entrega, com remetente e data (V11). |
 | `flyway_schema_history` | Versões, checksums e resultado das migrações aplicadas pelo Flyway. |
 
 ## Regras de negócio e integridade
@@ -47,7 +49,7 @@ erDiagram
 - Pagamento pertence exclusivamente a um pedido ou a uma reserva; uma constraint impede ambos (ou nenhum) e há no máximo um pagamento por alvo.
 - Um horário de reserva ativo é único por loja no banco. A tabela `reservation_slots` impede disputa concorrente; slots de reserva cancelada/expirada são liberados transacionalmente.
 - Notificações são associadas a `account_id`; endpoints autenticados consultam apenas a conta da sessão.
-- Solicitações públicas de vendedores e entregadores ficam pendentes e inativas até a aprovação administrativa; `operator_application_status` registra o resultado.
+- Solicitações de vendedores e entregadores ficam pendentes até a aprovação administrativa; a conta continua ativa como cliente e `operator_application_status` registra o resultado.
 - Cada requisição autenticada valida assinatura, emissor e validade do JWT e consulta se a conta do titular continua ativa; a suspensão administrativa revoga imediatamente o acesso do token existente.
 - A atribuição de entregador é feita por atualização condicional atômica: só uma requisição consegue atribuir uma tarefa ofertada e ainda sem entregador.
 - Estados de pedido, reserva, pagamento e entrega têm transições controladas no domínio. Pagamentos não confirmam pedidos cancelados sem iniciar o fluxo de estorno.
@@ -56,6 +58,16 @@ erDiagram
 - Colunas `version` dão suporte a controle otimista de concorrência em catálogo, pedido, pagamento, reserva e entrega.
 - Chaves estrangeiras protegem relações com clientes, lojas, serviços, pagamentos e tarefas.
 - Webhooks do Mercado Pago validam assinatura; a rota é publicamente acessível para permitir chamadas do provedor, mas requisições sem assinatura válida não podem atualizar pagamentos.
+
+## Evoluções das migrações V7 a V11
+
+- **V7:** `customer_addresses`.
+- **V8:** `delivery_tasks` ganha latitude, longitude e data da localização do entregador.
+- **V9:** `accounts` ganha `cpf`, `granted_roles`, `suspended_roles`, `requested_operator_role` e `password_change_required`; `stores` ganha `city` e `state`.
+- **V10:** `accounts.credential_version` invalida tokens quando a senha muda.
+- **V11:** `customer_note` em pedidos e reservas e a tabela `operation_messages`.
+
+Contas de operador pendentes continuam ativas como cliente até a aprovação; o acesso profissional só é concedido pelo administrador.
 
 ## Estornos
 

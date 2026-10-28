@@ -94,6 +94,7 @@ public class ReservationController {
     @Transactional(readOnly = true)
     public List<ReservationView> merchant(Authentication auth) {
         return reservations.findByStoreOwnerIdOrderByStartsAt(subject(auth)).stream()
+                .filter(reservation -> reservation.getStatus() != ReservationStatus.PENDING_PAYMENT)
                 .map(reservation -> view(reservation, payments.findByReservationId(reservation.getId()).orElse(null)))
                 .toList();
     }
