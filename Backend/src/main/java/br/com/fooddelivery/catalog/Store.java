@@ -17,12 +17,17 @@ public class Store {
     @Column(nullable = false, length = 250) private String address;
     @Column(length = 100) private String city;
     @Column(length = 2) private String state;
+    @Column private Double latitude;
+    @Column private Double longitude;
     @Column(length = 14, unique = true) private String cnpj;
     @Column(nullable = false, length = 60) private String category;
     @Column(name = "cover_image_url", length = 255) private String coverImageUrl;
     @Column(nullable = false) private boolean active = true;
     @Column(nullable = false) private boolean approved = false;
     @Column(nullable = false, length = 80) private String timezone = "America/Sao_Paulo";
+    @Column(name = "operating_hours_enabled", nullable = false) private boolean operatingHoursEnabled;
+    @Column(name = "weekly_hours_json", columnDefinition = "TEXT", nullable = false) private String weeklyHoursJson = "{}";
+    @Column(name = "hours_exceptions_json", columnDefinition = "TEXT", nullable = false) private String hoursExceptionsJson = "[]";
     @Column(name = "marketplace_fee_bps", nullable = false) private int marketplaceFeeBps;
     @Column(name = "delivery_fee_cents", nullable = false) private long deliveryFeeCents;
     @Column(nullable = false, updatable = false) private Instant createdAt = Instant.now();
@@ -37,8 +42,13 @@ public class Store {
     public String getAddress() { return address; }
     public String getCity() { return city; }
     public String getState() { return state; }
+    public Double getLatitude(){return latitude;} public Double getLongitude(){return longitude;}
     public String getCnpj() { return cnpj; }
     public String getCategory() { return category; }
+    public String getTimezone() { return timezone; }
+    public boolean isOperatingHoursEnabled() { return operatingHoursEnabled; }
+    public String getWeeklyHoursJson() { return weeklyHoursJson; }
+    public String getHoursExceptionsJson() { return hoursExceptionsJson; }
     public String getCoverImageUrl() { return coverImageUrl; }
     public boolean isActive() { return active; }
     public boolean isApproved() { return approved; }
@@ -48,11 +58,22 @@ public class Store {
     public void setDeliveryFeeCents(long feeCents) { if(feeCents<0||feeCents>100000)throw new IllegalArgumentException("A taxa de entrega deve ficar entre R$ 0,00 e R$ 1.000,00.");this.deliveryFeeCents=feeCents; }
     public void setMarketplaceFeeBps(int feeBps) { if(feeBps<0||feeBps>5000)throw new IllegalArgumentException("A comissão por loja deve ficar entre 0% e 50%.");this.marketplaceFeeBps=feeBps; }
     public void setLocation(String city, String state) { this.city=city; this.state=state==null?null:state.toUpperCase(java.util.Locale.ROOT); }
+    public void setCoordinates(Double latitude,Double longitude){if((latitude==null)!=(longitude==null))throw new IllegalArgumentException("Informe latitude e longitude juntas ou deixe os dois campos vazios.");if(latitude!=null&&(!Double.isFinite(latitude)||latitude < -90||latitude > 90||!Double.isFinite(longitude)||longitude < -180||longitude > 180))throw new IllegalArgumentException("As coordenadas informadas estão fora dos limites válidos.");this.latitude=latitude;this.longitude=longitude;}
     public void setCnpjOnce(String value) { String normalized=br.com.fooddelivery.identity.Cnpj.normalize(value); if(!br.com.fooddelivery.identity.Cnpj.isValid(normalized))throw new IllegalArgumentException("Informe um CNPJ válido."); if(cnpj!=null&&!cnpj.equals(normalized))throw new IllegalArgumentException("O CNPJ não pode ser alterado após o cadastro da loja."); cnpj=normalized; }
     public void update(String name, String description, String address, String city, String state, String category, boolean active, long deliveryFeeCents) {
         this.name = name; this.description = description; this.address = address; setLocation(city,state); this.category = category; this.active = active; setDeliveryFeeCents(deliveryFeeCents);
     }
     public void setApproved(boolean approved) { this.approved = approved; }
     public void setActive(boolean active) { this.active = active; }
+    public void setTimezone(String timezone) {
+        String value=timezone==null||timezone.isBlank()?"America/Sao_Paulo":timezone.trim();
+        try { java.time.ZoneId.of(value); } catch (java.time.DateTimeException ex) { throw new IllegalArgumentException("Escolha um fuso horário válido."); }
+        this.timezone=value;
+    }
     public void setCoverImageUrl(String coverImageUrl) { this.coverImageUrl = coverImageUrl; }
+    public void setOperatingHours(boolean enabled, String weeklyHoursJson, String hoursExceptionsJson) {
+        this.operatingHoursEnabled = enabled;
+        this.weeklyHoursJson = weeklyHoursJson == null || weeklyHoursJson.isBlank() ? "{}" : weeklyHoursJson;
+        this.hoursExceptionsJson = hoursExceptionsJson == null || hoursExceptionsJson.isBlank() ? "[]" : hoursExceptionsJson;
+    }
 }

@@ -22,11 +22,24 @@ public class NotificationService {
         notifications.save(new AccountNotification(recipient, title, message, kind));
     }
 
+    @Transactional
+    public void sendLinked(Account recipient, String title, String message, String kind,
+            NotificationTarget targetType, UUID targetId) {
+        notifications.save(new AccountNotification(recipient, title, message, kind, targetType, targetId));
+    }
+
     /** Envia o aviso apenas se a pessoa ainda não leu outro com o mesmo título (evita uma notificação por mensagem). */
     @Transactional
     public void sendUnreadOnce(Account recipient, String title, String message, String kind) {
         if (notifications.existsByAccountIdAndTitleAndReadAtIsNull(recipient.getId(), title)) return;
         notifications.save(new AccountNotification(recipient, title, message, kind));
+    }
+
+    @Transactional
+    public void sendUnreadOnceLinked(Account recipient, String title, String message, String kind,
+            NotificationTarget targetType, UUID targetId) {
+        if (notifications.existsByAccountIdAndTitleAndReadAtIsNull(recipient.getId(), title)) return;
+        notifications.save(new AccountNotification(recipient, title, message, kind, targetType, targetId));
     }
 
     @Transactional(readOnly = true)

@@ -50,16 +50,26 @@ stateDiagram-v2
 5. A loja atualiza o estado em `PATCH /merchant/orders/{id}/status`; cada mudança notifica o cliente. Recusar ou cancelar um pedido pago repõe o estoque e solicita o estorno integral.
 6. A cada 60 segundos o `UnpaidCheckoutExpirationJob` cancela pedidos e reservas cujo pagamento não foi concluído, libera estoque ou horário e avisa as partes.
 
-O cliente pode cancelar enquanto o pagamento não foi aprovado (`POST /orders/{id}/cancel`). Depois do pagamento, o cancelamento é feito pela loja.
+O cliente pode cancelar enquanto o pagamento não foi aprovado (`POST /orders/{id}/cancel`). Depois de pago, pode abrir uma solicitação (`POST /orders/{id}/cancellation-request`); a loja aceita ou recusa em `PATCH /merchant/orders/{id}/cancellation-request`. Aceitar repõe o estoque e solicita estorno integral. O estorno só aparece como concluído após confirmação do provedor.
 
 ## 4. Fluxo de reserva
 
 `PENDING_PAYMENT → CONFIRMED → IN_SERVICE → COMPLETED`, com `CANCELLED` e `NO_SHOW` como saídas.
 
 - `POST /reservations` recebe loja, serviço, horário (mínimo de 30 minutos de antecedência) e **comentário opcional de até 500 caracteres**.
-- A tabela `reservation_slots` impede dois clientes no mesmo horário da mesma loja. O horário é liberado ao cancelar, expirar, concluir ou marcar falta.
+- Cada serviço guarda duração em minutos (5 a 480; padrão de 30 para itens antigos ou sem valor). A reserva congela esse intervalo. O servidor valida todo o intervalo contra a rotina/exceção de funcionamento e impede sobreposição para o mesmo profissional; quando não há profissional, a loja inteira ocupa um único recurso. Uma linha bloqueada da loja serializa verificações concorrentes.
+- O intervalo é liberado ao cancelar, expirar, concluir ou marcar falta.
 - O pagamento segue o mesmo caminho do pedido. A loja vê a reserva somente depois do pagamento (`/merchant/reservations`) e a atualiza em `PATCH /merchant/reservations/{id}`.
-- Cancelar uma reserva paga pela loja solicita o estorno integral.
+- O cliente pode solicitar cancelamento de reserva confirmada em `POST /reservations/{id}/cancellation-request`; o vendedor aceita/recusa em `PATCH /merchant/reservations/{id}/cancellation-request`. Aceitar libera o intervalo e inicia estorno integral se houve pagamento online.
+
+### Horário de funcionamento por loja
+
+- Em **Minha loja > Dados da loja > Funcionamento e exceções**, o vendedor pode ativar uma rotina semanal e selecionar dias independentes, com abertura e fechamento para cada dia. Dias não selecionados ficam fechados enquanto a rotina está ativa. Horários que cruzam a meia-noite são aceitos.
+- A configuração é opcional. Lojas existentes começam sem restrição semanal. Exceções por data, como fechar no mesmo dia ou abrir/fechar em horário especial, substituem a rotina naquela data mesmo quando ela está desativada. Remover a exceção restaura a regra habitual.
+- **Fechar hoje** usa a data no fuso configurado na loja. As exceções são limitadas a 90 registros; cada data pode ter apenas uma. A observação é privada, não é devolvida na rota pública.
+- O horário é conferido pelo servidor ao criar o pedido, iniciar o checkout do pedido e criar a reserva. A reserva inteira (início e fim) precisa caber no intervalo de atendimento; a data e o horário enviados pelo cliente são convertidos usando o fuso da loja. A interface também informa quando a loja está fechada e bloqueia as ações naquele momento.
+- Rotas: `GET/PUT /api/v1/merchant/stores/{id}/hours` para o vendedor proprietário; `GET /api/v1/stores/{id}/hours` para a vitrine pública. A migração V19 guarda ativação, rotina semanal e exceções.
+- **Limites conhecidos:** não há capacidade maior que um por profissional, intervalos de pausa múltiplos ou agenda semanal individual por profissional. A concorrência entre reservas é protegida por lock transacional no banco; a suíte H2 não substitui homologação de concorrência em PostgreSQL.
 
 ## 5. Mensagens e comentários
 
@@ -166,11 +176,24 @@ Execução local: `npm start` na raiz. Docker: `Backend/Dockerfile` usa Java 21,
 ## 12. Limites conhecidos
 
 - Não há testes automatizados de ponta a ponta nem testes da interface; existe uma classe de testes unitários do chat (`OperationMessageControllerTest`).
-- Reservas usam horário pontual: sem duração, grade nem capacidade por profissional.
+- Reservas usam horário pontual: não há duração do serviço nem grade configurável. Quando a loja possui profissionais, cada instante é reservado para um profissional específico; a opção “Primeiro disponível” seleciona uma pessoa ativa sem reserva naquele instante. Lojas sem profissionais cadastrados mantêm a reserva legada por loja.
 - Não há indicador de "não lido" por conversa; o aviso de mensagem nova chega pela notificação.
 - O navegador mantém o JWT em `localStorage`; antes de uma publicação, vale avaliar uma política CSP rigorosa e uma estratégia de sessão em cookie `HttpOnly`/`Secure` com proteção CSRF adequada.
 - A API não aplica limite distribuído de tentativas de login nem de envio de mensagens. Em produção, configure limitação por IP/conta no gateway ou em armazenamento compartilhado para evitar força bruta e abuso sem depender de uma única instância.
 - A geração de capa por IA usa um único modelo e provedor, sem repetição nem alternativa em caso de falha.
+
+## Atualização de catálogo, agenda e suporte (31/10/2026)
+
+- **Cliente:** conta legada sem CPF ou telefone pode acessar o site, mas deve completar os dados em **Minha conta > Dados pessoais** antes de comprar ou reservar. O servidor valida CPF e telefone em cada fluxo de compra/reserva.
+- **Vendedor:** a tela **Catálogo** permite editar, remover e reativar itens. Remover é exclusão lógica: muda o item para inativo, deixa de exibi-lo na loja e mantém o histórico operacional. A autorização confirma que o item pertence à loja do vendedor logado.
+- **Profissionais e reservas:** a agenda permite cadastrar profissionais e ativá-los/suspendê-los. O cliente pode selecionar um profissional ou pedir o primeiro disponível. O backend verifica a disponibilidade e registra o vínculo na reserva e no slot; slots legados sem profissional também bloqueiam o horário geral.
+- **Pagamento fora da cidade:** uma reserva de serviço com pagamento após atendimento só é permitida se cliente e loja tiverem cidade e UF iguais. Caso contrário, será necessário pagar online na plataforma, mesmo que o vendedor tenha habilitado pagamento posterior. O perfil no servidor é a fonte da comparação.
+- **Fuso operacional:** cada loja usa fuso IANA editável, com `America/Sao_Paulo` como padrão. O cliente escolhe o horário no relógio da loja; a interface converte para UTC e exibe as reservas no fuso correspondente. O backend valida o identificador do fuso, e a migração V17 atualiza slots para a unicidade por profissional e instante.
+- **Dados da loja:** **Minha loja > Dados da loja** edita o perfil da loja selecionada. O seletor de loja sincroniza catálogo, integração de pagamento e lista de profissionais. O cadastro adicional segue separado para não sobrescrever a loja atual.
+- **Chamados:** o retorno da conversa administrativa volta à listagem administrativa e atualiza os chamados; não abre a central do cliente.
+- **Telas estreitas:** as abas do vendedor quebram em várias linhas, sem exigir rolagem lateral. Ações e campos do catálogo também podem se reorganizar em coluna.
+
+**Verificações desta alteração:** Frontend: 18 testes aprovados e sintaxe de `main.js` válida. Backend: `mvn test -q` concluiu com sucesso e Flyway aplicou até V17 no banco H2 em memória. O frontend respondeu em `127.0.0.1:5173`; a API na porta `8080` respondeu no endpoint de status, mas falhou em `/actuator/health`. O iniciador `npm start` interrompeu a inicialização para não criar uma segunda API. Assim, não foi possível confirmar visualmente as telas internas nem autenticar os seis fluxos contra o PostgreSQL local nesta rodada; nenhum dado ou arquivo do banco foi apagado.
 - Conciliação contábil, chargebacks e saque iniciado pela plataforma não existem.
 
 ## 13. Revisão técnica do estado atual
@@ -202,12 +225,30 @@ As migrações comuns ficam em `Backend/src/main/resources/db/migration-common`;
 
 O documento descreve o código local revisado. Integrações de pagamento real e geração por IA dependem das credenciais externas listadas acima; a aprovação comercial e a homologação dos fluxos de estorno devem ocorrer antes de receber pagamentos reais.
 
+## Segurança, notificações e recuperação operacional (V18)
+
+- **Chave de assinatura JWT:** `JWT_SECRET` passou a ser obrigatória em todos os perfis. O valor padrão anterior era conhecido e permitiria a falsificação de tokens caso a API fosse iniciada sem configuração. `Backend/scripts/run-api.sh` carrega a chave do arquivo local `Backend/.env`, que não deve ser versionado nem compartilhado. Em instalação nova, gere uma chave aleatória com `openssl rand -base64 32` e salve-a nesse arquivo. Tokens existentes deixam de valer quando a instância passa a usar a nova chave; usuários precisam entrar novamente.
+- **Cabeçalhos HTTP:** a API bloqueia enquadramento externo, MIME sniffing e envio desnecessário do referenciador, além de restringir câmera/microfone e manter a geolocalização disponível para o próprio site. O frontend ainda precisa de uma política CSP configurada no servidor que o publica.
+- **Notificações direcionáveis:** a V18 acrescenta `target_type` e `target_id`; os tipos são uma enumeração interna, nunca URLs fornecidas pelo usuário. Avisos de pedido, reserva, entrega e chamado podem abrir a área correspondente e destacar o registro exato. Cada tela continua carregando os dados por API autenticada, que verifica a titularidade antes de exibir informações privadas.
+- **Recebimentos de vendedor:** o checkout usa o token OAuth da própria loja e direciona o pagamento ao Mercado Pago conectado. O vendedor pode abrir o portal do provedor a partir de **Financeiro** e consultar saldo e retirada lá. O FoodDelivery não recebe a senha do provedor nem inicia saque em nome do vendedor.
+- **Entregadores:** ainda não há remuneração por corrida, saldo devido persistido, chave Pix de repasse ou API de transferência configurados. A aba **Financeiro** informa esse estado e não inventa saldo nem aceita pedidos de saque sem obrigação registrada. Para habilitar repasses, definir remuneração e origem dos fundos, criar ledger imutável com idempotência, verificar titularidade da chave Pix e homologar API de transferência e webhook de liquidação.
+- **Backups PostgreSQL:** `Backend/scripts/backup-db.sh` cria dump customizado, testa se o arquivo pode ser lido e gera SHA-256, com permissões restritas. `Backend/scripts/restore-db.sh` verifica o hash e exige `RESTORE_CONFIRM_DATABASE` com o nome exato do banco antes de substituir objetos. A restauração é destrutiva para o conteúdo atual. Armazene cópias criptografadas fora do disco/volume principal e faça ensaios periódicos em banco isolado; estes scripts não configuram agendamento, criptografia externa, replicação nem recuperação ponto no tempo.
+
+### Teste e recuperação manual
+
+1. Configure `DATABASE_NAME` (opcional; padrão `fooddelivery`), `DB_PORT`, `DATABASE_USERNAME` e `DATABASE_PASSWORD` em `Backend/.env`.
+2. Rode `Backend/scripts/backup-db.sh`; guarde o `.dump` e o `.sha256` em armazenamento protegido fora da máquina.
+3. Para recuperação, pare a API, confirme que o backup correto está disponível e execute `RESTORE_CONFIRM_DATABASE=fooddelivery Backend/scripts/restore-db.sh /caminho/fooddelivery-data-hora.dump`.
+4. Inicie a API, confira `/actuator/health`, valide registros essenciais e faça uma nova cópia após a recuperação.
+
+Os backups cobrem o PostgreSQL. Arquivos enviados de lojas ficam em `STORE_ASSETS_DIR` e precisam de uma política de cópia própria. Não foi habilitada uma transferência real de dinheiro nem declarada homologação de SMTP, WhatsApp, OpenAI ou Mercado Pago nesta mudança.
+
 ## 14. Identidade, perfis, cidades e lojas (V13)
 
 - O cadastro público cria somente a conta de cliente e exige CPF válido. O UUID da conta é a chave primária; CPF tem unicidade própria e nunca é usado como chave ou identificador de rota. Contas suspensas continuam ocupando o CPF e não podem ser recriadas com outra função.
 - Cliente, vendedor e entregador são perfis vinculados à mesma conta. Em **Minha conta > Acessos**, a pessoa solicita vendedor ou entregador; a permissão só entra em vigor após aprovação administrativa. A rota antiga de cadastro profissional não cria contas novas e orienta a usar o perfil existente.
 - Em **Minha conta > Acessos**, qualquer perfil pode pedir a liberação do FoodDelivery em uma cidade informando município, UF e CEP de referência. O pedido fica pendente; após aprovação, a cidade aparece na lista de localização, mesmo antes de haver loja publicada.
-- O vendedor cadastra cada estabelecimento com CNPJ válido, único e imutável. A criação gera solicitação de loja; até a aprovação, a loja não aparece para clientes. Lojas adicionais são solicitadas individualmente e o painel permite selecionar qual unidade editar.
+- O vendedor pode informar CNPJ válido, único e imutável quando a loja possuir um; o campo é opcional. A criação gera solicitação de loja; até a aprovação, a loja não aparece para clientes. Lojas adicionais são solicitadas individualmente e o painel permite selecionar qual unidade editar.
 - O administrador consulta pendências e histórico em **Solicitações**, aprova ou reprova cada pedido e o sistema registra o responsável e o horário da decisão. A aprovação de perfil, cidade e loja executa a mudança de acesso/publicação correspondente e avisa a conta.
 
 ## 15. Recuperação de senha e confirmação de telefone (V14)
@@ -237,3 +278,18 @@ O documento descreve o código local revisado. Integrações de pagamento real e
 - A administração pode excluir apenas as seções adicionais que criou. Se alguma loja estiver usando uma dessas seções, a API recusa a exclusão e informa quantas lojas precisam primeiro ser associadas a outra categoria. Lojas e histórico não são apagados junto com uma categoria.
 - O backend valida a categoria ao cadastrar ou atualizar uma loja. Portanto, enviar uma categoria inventada diretamente à API não contorna a lista disponível.
 - A tabela `store_categories`, criada pela migração V16, armazena nome, slug único, ícone e data de criação. As rotas administrativas são `GET/POST /api/v1/admin/store-categories` e `DELETE /api/v1/admin/store-categories/{id}`; exigem papel de administrador.
+
+
+## Recuperação de inicialização local (31/10/2026)
+
+Quando uma instância antiga da API ainda responde ao endpoint de status, mas o healthcheck falha, `npm start` verifica se o PostgreSQL local do projeto está ativo. Se o banco estiver parado, inicia o serviço existente a partir do diretório de dados já configurado e aguarda até 20 segundos pela recuperação do healthcheck da API. O inicializador não remove arquivos, recria o banco nem inicia outra API em uma porta ocupada. Se a saúde continuar falhando, encerra com erro em vez de declarar o sistema operacional.
+
+Na recuperação observada em 31/10/2026, `/api/v1/status` retornou HTTP 200 enquanto `/actuator/health` expirava; após iniciar o PostgreSQL, o healthcheck retornou `UP`, e `npm start` detectou os serviços ativos nas portas 8080 e 5173.
+
+## Autorização, limitação de tentativas e auditoria (01/11/2026)
+
+- Rotas não listadas explicitamente como públicas exigem uma sessão JWT autenticada. Uma sessão com troca obrigatória de senha não pode acessar essas rotas; as exceções necessárias para concluir a troca continuam explicitamente autorizadas. Testes cobrem chamadas anônimas, autenticadas e sessão com troca pendente.
+- O backend limita por IP de origem as tentativas de login (10/15 min), recuperação (5/h) e cadastro (10/h), respondendo `429` e `Retry-After`. Os contadores residem no processo e não leem `X-Forwarded-For`; em proxy ou múltiplas instâncias é necessário configurar limitador compartilhado considerando a topologia.
+- V23 acrescenta `admin_audit_events`; administradores consultam `GET /api/v1/admin/audit-events?page=0&size=50` na aba **Definições > Auditoria**. A lista registra mutações administrativas instrumentadas sem senha, CPF ou token.
+- A tabela e a autorização padrão são verificadas nos testes automatizados com H2. Isso não certifica implantação no PostgreSQL real, cobertura completa de auditoria, proteção contra alteração por quem tem acesso direto ao banco, nem mitigação distribuída de abuso.
+- **Ativação local confirmada em 01/11/2026:** foi validado backup antes da inicialização. A API iniciou no PostgreSQL local e Flyway avançou para V23. Health retornou `UP`; categorias públicas retornaram HTTP 200; auditoria administrativa sem login retornou HTTP 401; interface retornou HTTP 200. A API e o frontend ficaram ativos depois da conferência.

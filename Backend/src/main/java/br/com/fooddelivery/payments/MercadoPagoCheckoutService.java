@@ -3,6 +3,7 @@ package br.com.fooddelivery.payments;
 import br.com.fooddelivery.orders.Order;
 import br.com.fooddelivery.orders.OrderRepository;
 import br.com.fooddelivery.reservations.Reservation;
+import br.com.fooddelivery.catalog.StoreOperatingHours;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
@@ -27,8 +28,9 @@ public class MercadoPagoCheckoutService {
     private final Environment environment;
     private final PaymentService paymentService;
     private final RestClient http;
+    private final StoreOperatingHours operatingHours;
 
-    public MercadoPagoCheckoutService(PaymentRepository payments,MarketplaceAccountService marketplaceAccounts,MercadoPagoProperties properties,Environment environment,PaymentService paymentService,@Qualifier("mercadoPagoRestClient") RestClient http){this.payments=payments;this.marketplaceAccounts=marketplaceAccounts;this.properties=properties;this.environment=environment;this.paymentService=paymentService;this.http=http;}
+    public MercadoPagoCheckoutService(PaymentRepository payments,MarketplaceAccountService marketplaceAccounts,MercadoPagoProperties properties,Environment environment,PaymentService paymentService,@Qualifier("mercadoPagoRestClient") RestClient http,StoreOperatingHours operatingHours){this.payments=payments;this.marketplaceAccounts=marketplaceAccounts;this.properties=properties;this.environment=environment;this.paymentService=paymentService;this.http=http;this.operatingHours=operatingHours;}
 
     @Transactional
     public CheckoutView create(UUID paymentId,UUID customerId){
@@ -42,6 +44,8 @@ public class MercadoPagoCheckoutService {
         if(!customer.getId().equals(customerId))throw new org.springframework.security.access.AccessDeniedException("Este pagamento pertence a outra conta.");
         if(payment.getStatus()!=PaymentStatus.PENDING&&payment.getStatus()!=PaymentStatus.FAILED)throw new IllegalStateException("Este pagamento não está disponível para um novo checkout.");
         if(!store.isAvailable())throw new IllegalStateException("A loja não está disponível para receber pagamentos.");
+        if(order!=null)operatingHours.requireOpenNow(store);
+        if(reservation!=null)operatingHours.requireOpenForInterval(store,reservation.getStartsAt(),reservation.getEndsAt());
         if(order!=null&&order.getStatus()!=br.com.fooddelivery.orders.OrderStatus.AWAITING_PAYMENT)throw new IllegalStateException("O pedido não está mais aguardando pagamento.");
         if(reservation!=null&&reservation.getStatus()!=br.com.fooddelivery.reservations.ReservationStatus.PENDING_PAYMENT)throw new IllegalStateException("A reserva não está mais aguardando pagamento.");
         Instant operationCreatedAt=order!=null?order.getCreatedAt():reservation.getCreatedAt();

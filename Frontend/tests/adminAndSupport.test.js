@@ -3,6 +3,9 @@ import assert from 'node:assert/strict';
 import { runOnce } from '../src/actionGuard.js';
 import { formatCpfMask, formatCnpjMask, formatCurrencyMask, parseCurrencyDecimal, formatCurrencyValue } from '../src/inputMasks.js';
 import { mobileNavigation } from '../src/mobileNavigation.js';
+import { catalogItemIcon, customerOutsideStoreCity } from '../src/catalogPolicy.js';
+import { dateTimeInZone, localDateTimeInZoneToIso, localDateTimeMinimum, storeOpenAt, storeScheduleAllowsLocalDateTime, storeHoursStatusRelevant } from '../src/storeTime.js';
+import { coordinatesFromForm, storeMapUrl } from '../src/storeLocation.js';
 import { adminAreaNames, adminStoreStatus, filterAdminStores, renderAdminAreas, renderAdminTeamArea, storeApprovalId, storeApprovalPath, supportDetailPath, supportMessagePath } from '../src/adminSections.js';
 
 test('the admin tickets view contains only support tickets', () => {
@@ -97,3 +100,73 @@ test('short mobile navigation does not show an unnecessary menu action', () => {
   const links = [['admin','grid','Visão geral'],['notifications','bell','Notificações'],['account','user','Minha conta']];
   assert.deepEqual(mobileNavigation(links, 'ADMIN'), { visible: links, hasMore: false });
 });
+
+test('store reservation input is converted using the store timezone', () => {
+  assert.equal(localDateTimeInZoneToIso('2026-01-15T09:00', 'America/Sao_Paulo'), '2026-01-15T12:00:00.000Z');
+  assert.equal(dateTimeInZone('2026-01-15T12:00:00.000Z', 'America/Sao_Paulo'), '15 de jan. de 2026, 09:00');
+});
+
+test('reservation minimum uses store local time and rejects impossible DST times', () => {
+  assert.equal(localDateTimeMinimum('America/Sao_Paulo', 31, new Date('2026-01-15T12:00:00Z')), '2026-01-15T09:31');
+  assert.throws(() => localDateTimeInZoneToIso('2026-03-08T02:30', 'America/New_York'), /não existe no fuso/);
+});
+
+test('out-of-city reservations require prepayment even when the seller allows payment after service', () => {
+  assert.equal(customerOutsideStoreCity({city:'Nantes',state:'SP'},{city:'Iepê',state:'SP'}),true);
+  assert.equal(customerOutsideStoreCity({city:'Iepê',state:'SP'},{city:'Iepê',state:'SP'}),false);
+  assert.equal(customerOutsideStoreCity({city:'Iepê',state:'SP'},{city:'IEPE',state:'sp'}),false);
+  assert.equal(customerOutsideStoreCity({city:'Nantes',state:'SP'},{}),true);
+});
+
+test('catalog icons describe the offered item type', () => {
+  assert.equal(catalogItemIcon(true),'🗓️');
+  assert.equal(catalogItemIcon(false),'📦');
+});
+
+test('weekly store hours allow selected days and treat the closing time as exclusive', () => {
+  const config={enabled:true,weekly:{MONDAY:{opensAt:'09:00',closesAt:'20:00'},SUNDAY:{opensAt:'09:00',closesAt:'12:00'}},exceptions:[]};
+  assert.equal(storeScheduleAllowsLocalDateTime(config,'2026-11-02T09:00'),true);
+  assert.equal(storeScheduleAllowsLocalDateTime(config,'2026-11-02T20:00'),false);
+  assert.equal(storeScheduleAllowsLocalDateTime(config,'2026-11-03T10:00'),false);
+  assert.equal(storeOpenAt(config,'UTC',new Date('2026-11-02T19:59:00Z')),true);
+  assert.equal(storeOpenAt(config,'UTC',new Date('2026-11-02T20:00:00Z')),false);
+});
+
+test('dated closures and special hours override the regular schedule even without weekly limits', () => {
+  const config={enabled:false,weekly:{},exceptions:[{date:'2026-11-01',closed:true},{date:'2026-11-02',closed:false,opensAt:'08:00',closesAt:'12:00'}]};
+  assert.equal(storeScheduleAllowsLocalDateTime(config,'2026-11-01T10:00'),false);
+  assert.equal(storeScheduleAllowsLocalDateTime(config,'2026-11-02T11:59'),true);
+  assert.equal(storeScheduleAllowsLocalDateTime(config,'2026-11-02T12:00'),false);
+  assert.equal(storeOpenAt(config,'UTC',new Date('2026-11-01T10:00:00Z')),false);
+  assert.equal(storeOpenAt(config,'UTC',new Date('2026-11-02T12:00:00Z')),false);
+});
+
+test('the store modal shows status for dated exceptions even when weekly limits are disabled', () => {
+  const config={enabled:false,weekly:{},exceptions:[{date:'2026-11-01',closed:true}]};
+  assert.equal(storeHoursStatusRelevant(config,'UTC',new Date('2026-11-01T10:00:00Z')),true);
+  assert.equal(storeHoursStatusRelevant(config,'UTC',new Date('2026-11-02T01:00:00Z')),true);
+  assert.equal(storeHoursStatusRelevant({enabled:false,weekly:{},exceptions:[]},'UTC',new Date('2026-11-01T10:00:00Z')),false);
+});
+
+test('overnight weekly hours remain available after midnight until closing', () => {
+  const config={enabled:true,weekly:{FRIDAY:{opensAt:'22:00',closesAt:'02:00'}},exceptions:[]};
+  assert.equal(storeScheduleAllowsLocalDateTime(config,'2026-11-07T01:30'),true);
+  assert.equal(storeScheduleAllowsLocalDateTime(config,'2026-11-07T02:00'),false);
+});
+
+test('store coordinates are optional but must be a valid pair', () => {
+  assert.deepEqual(coordinatesFromForm(new MapForm({latitude:'',longitude:''})), {latitude:null,longitude:null});
+  assert.deepEqual(coordinatesFromForm(new MapForm({latitude:'-23.55',longitude:'-46.63'})), {latitude:-23.55,longitude:-46.63});
+  assert.throws(() => coordinatesFromForm(new MapForm({latitude:'-23.55',longitude:''})), /juntas/);
+  assert.throws(() => coordinatesFromForm(new MapForm({latitude:'91',longitude:'0'})), /limites válidos/);
+});
+
+test('store map links prefer saved coordinates and otherwise use its address', () => {
+  assert.match(storeMapUrl({latitude:-23.55,longitude:-46.63}), /-23\.55%2C-46\.63/);
+  assert.match(storeMapUrl({address:'Rua A',city:'Nantes',state:'SP'}), /Rua%20A/);
+});
+
+class MapForm {
+  constructor(values) { this.values = values; }
+  get(name) { return this.values[name]; }
+}

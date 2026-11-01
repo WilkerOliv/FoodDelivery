@@ -41,8 +41,8 @@ app:
       api-key: ${OPENAI_API_KEY:}
       image-model: ${OPENAI_IMAGE_MODEL:gpt-image-2.5-sunburst}
   security:
-    # Chave local de desenvolvimento. Nunca reutilizar em produção.
-    jwt-secret: ${JWT_SECRET:ZGV2LW9ubHktc2VjcmV0LWtleS1mb3ItZm9vZC1kZWxpdmVyeS1hcGk=}
+    # Chave obrigatória: um fallback conhecido permite falsificar tokens assinados.
+    jwt-secret: ${JWT_SECRET}
   payment:
     mercadopago:
       client-id: ${MP_CLIENT_ID:}

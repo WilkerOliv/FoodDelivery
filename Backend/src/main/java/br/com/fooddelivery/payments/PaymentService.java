@@ -3,6 +3,7 @@ package br.com.fooddelivery.payments;
 import br.com.fooddelivery.orders.Order;
 import br.com.fooddelivery.orders.OrderRepository;
 import br.com.fooddelivery.notifications.NotificationService;
+import br.com.fooddelivery.notifications.NotificationTarget;
 import br.com.fooddelivery.reservations.Reservation;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
@@ -19,11 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
         payment.confirm(providerReference);
         if(payment.getOrder()!=null){
             Order order=orders.findById(payment.getOrder().getId()).orElseThrow();
-            if(order.getStatus()==br.com.fooddelivery.orders.OrderStatus.AWAITING_PAYMENT){order.paid();notifications.send(order.getCustomer(),"Pagamento aprovado","Seu pedido para "+order.getStore().getName()+" foi enviado à loja.","success");notifications.send(order.getStore().getOwner(),"Novo pedido pago","Um novo pedido aguarda confirmação.","info");}
+            if(order.getStatus()==br.com.fooddelivery.orders.OrderStatus.AWAITING_PAYMENT){order.paid();notifications.sendLinked(order.getCustomer(),"Pagamento aprovado","Seu pedido para "+order.getStore().getName()+" foi enviado à loja.","success",NotificationTarget.ORDER,order.getId());notifications.sendLinked(order.getStore().getOwner(),"Novo pedido pago","Pagamento confirmado pela plataforma. Um novo pedido aguarda confirmação.","info",NotificationTarget.ORDER,order.getId());}
             else if(order.getStatus()==br.com.fooddelivery.orders.OrderStatus.CANCELLED||order.getStatus()==br.com.fooddelivery.orders.OrderStatus.REJECTED){payment.requestFullRefund();notifications.send(order.getCustomer(),"Pagamento aprovado após o cancelamento","O pedido não está mais ativo. Já solicitamos o estorno e avisaremos quando o Mercado Pago atualizar o status.","info");}
         }else{
             Reservation reservation=payment.getReservation();if(reservation==null)throw new IllegalStateException("Pagamento sem pedido ou reserva associados.");
-            if(reservation.getStatus()==br.com.fooddelivery.reservations.ReservationStatus.PENDING_PAYMENT){reservation.confirmPayment();notifications.send(reservation.getCustomer(),"Reserva confirmada","Seu horário na "+reservation.getStore().getName()+" foi confirmado.","success");notifications.send(reservation.getStore().getOwner(),"Nova reserva confirmada","Uma reserva paga entrou na agenda da loja.","info");}
+            if(reservation.getStatus()==br.com.fooddelivery.reservations.ReservationStatus.PENDING_PAYMENT){reservation.confirmPayment();notifications.sendLinked(reservation.getCustomer(),"Reserva confirmada","Seu horário na "+reservation.getStore().getName()+" foi confirmado.","success",NotificationTarget.RESERVATION,reservation.getId());notifications.sendLinked(reservation.getStore().getOwner(),"Nova reserva paga","Pagamento antecipado confirmado pela plataforma. A reserva já está na agenda da loja.","info",NotificationTarget.RESERVATION,reservation.getId());}
             else if(reservation.getStatus()==br.com.fooddelivery.reservations.ReservationStatus.CANCELLED){payment.requestFullRefund();notifications.send(reservation.getCustomer(),"Pagamento aprovado após liberar o horário","O horário não está mais ativo. Já solicitamos o estorno e avisaremos quando o Mercado Pago atualizar o status.","info");}
         }
         return payment;

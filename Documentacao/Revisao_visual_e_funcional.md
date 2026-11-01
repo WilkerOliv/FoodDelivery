@@ -101,7 +101,119 @@ O compose foi revisado e validado com `docker compose config --quiet`; o daemon 
 2. **Média — cobertura de segurança por fluxo:** há checagens de autorização e testes de unidade, mas a suíte não faz uma matriz completa de chamadas HTTP autenticadas para cada papel (cliente, vendedor, entregador e administrador) com tentativas de acesso cruzado.
 3. **Média — rastreabilidade administrativa:** o projeto não mantém trilha de auditoria imutável e completa para decisões e mudanças de conta (autor, valor anterior, motivo e horário). Essa lacuna já aparece em “Limites desta entrega” do guia operacional.
 4. **Média — localização e rastreio:** coordenadas do entregador e atualização periódica estão implementadas, mas não equivalem a despacho por distância, roteamento turn-by-turn, geocodificação garantida ou SLA de entregador. O navegador exige permissão de localização e HTTPS fora do ambiente local.
-5. **Média — agenda:** a reserva ocupa um único horário por loja, sem agenda por profissional, duração de serviço, intervalos, capacidade por equipe ou fuso operacional validado em interface. A especificação de agenda por profissional permanece em documento de design e não foi implementada nesta revisão.
+5. **Média — agenda (corrigido em 01/11/2026):** a duração do serviço e a sobreposição do intervalo completo agora são validadas; seguem pendentes grade configurável, pausas múltiplas e jornada por profissional.
 6. **Baixa — volume de dados:** listagens administrativas e algumas consultas fazem carregamento integral e a composição de alguns cartões pode gerar consultas repetidas. Para o volume pequeno/local atual é funcional; antes de crescer, adotar paginação, filtros no servidor e métricas de consultas.
 
 Os testes não substituem homologação operacional. O navegador permitiu examinar telas, mas ações de escrita no banco real foram deliberadamente evitadas; integrações que dependem de segredos permanecem não verificadas, não aprovadas.
+
+## Descoberta por categorias e cobertura local (30/10/2026)
+
+A página **Descobrir** apresenta cartões ilustrados apenas para categorias com atividade na cidade selecionada e reserva o último cartão para **Todas as categorias**. Esse atalho abre a rota `#categories`; ao escolher uma categoria, a rota `#categoryStores` mostra apenas os estabelecimentos públicos disponíveis nela. O botão **Todas as categorias** retorna ao catálogo completo, e o histórico do navegador também mantém a navegação entre essas telas.
+
+A interface não apresenta classificação, pontuação ou volume de vendas por categoria. O endpoint público que expunha esse cálculo foi removido. A descoberta mostra apenas a quantidade de lojas disponíveis em cada categoria; categorias oficiais continuam preservadas, e as personalizadas seguem sob gestão administrativa.
+
+## Escritas administrativas e avisos de cadastro
+
+Os formulários de cidade e categoria agora tratam a resposta da gravação separadamente da atualização das listas. Depois que a API confirma a gravação, a interface informa sucesso mesmo se a consulta posterior falhar e mantém o registro retornado visível até a próxima atualização. Falhas da própria gravação continuam apresentadas como erro. O mesmo cuidado foi aplicado à edição e suspensão/reativação de cidades e à exclusão de categoria.
+
+Na descoberta, a faixa horizontal antiga de categorias foi substituída por cartões em grade responsiva. A grade se reorganiza conforme a largura da tela e não usa rolagem horizontal; nomes longos podem quebrar linha e os cartões mantêm uma área confortável para toque. Essa regra também cobre a marcação antiga caso uma sessão ou versão em cache ainda a renderize.
+
+## Ícone do navegador
+
+O frontend agora publica `Frontend/favicon.svg` e `Frontend/favicon.ico`, com a marca FoodDelivery. Isso atende o pedido automático do navegador por `/favicon.ico` e elimina o 404 no servidor estático iniciado por `npm start`.
+
+## Correções dos fluxos de cliente, vendedor, agenda e suporte (31/10/2026)
+
+- **Cadastro legado de cliente:** clientes sem CPF válido ou telefone continuam podendo entrar e navegar, mas a compra e a reserva são bloqueadas com explicação. O atalho leva a **Minha conta > Dados pessoais**; após salvar, o perfil e os dados de checkout são recarregados. A API valida CPF e telefone no servidor, então a exigência não depende apenas do formulário.
+- **Catálogo do vendedor:** cada item oferece **Editar**, **Remover** e, quando removido, **Reativar**. Remover executa exclusão lógica (`active=false`), preservando vínculos e histórico. As rotas verificam que o item pertence a uma loja do vendedor autenticado.
+- **Agenda da barbearia:** o vendedor pode cadastrar profissionais e suspender/reativar cada cadastro. Na reserva, o cliente escolhe um nome ou **Primeiro disponível**; o backend escolhe apenas profissionais ativos sem reserva naquele instante. A migração V17 cria `store_professionals`, associa profissional opcional a reserva/slot e torna a unicidade do horário profissional-específica. Lojas sem profissionais cadastrados conservam a agenda legada por loja.
+- **Fuso da loja:** cadastro e edição da loja permitem definir o fuso (Brasília como padrão, com opções para regiões brasileiras e UTC). O backend valida identificadores IANA, entrega o fuso nos DTOs de loja/reserva e mantém instantes em UTC. A tela converte entrada e exibição usando o fuso da loja e rejeita horários locais inexistentes durante mudança de relógio.
+- **Chamados administrativos:** o botão de retorno do detalhe recarrega a lista administrativa e fecha o detalhe; não encaminha à central do cliente. Respostas e atualização de status continuam no detalhe do chamado.
+- **Dados da loja:** a aba usa o formulário de edição associado à loja atualmente selecionada. Trocar loja sincroniza catálogo, conexão de pagamento e equipe profissional; o formulário separado de **Adicionar outra loja** permanece disponível.
+- **Responsividade do vendedor:** abas da loja quebram linha em telas estreitas, cartões do catálogo permitem que ações ocupem novas linhas e os formulários usam grade adaptativa. Isso elimina a rolagem horizontal na navegação interna do vendedor.
+
+### Validação desta rodada
+
+- `cd Frontend && npm test`: 18 testes aprovados, incluindo conversão de horários entre fuso local da loja e UTC, limite de antecedência e horário inexistente na transição de horário de verão.
+- `node --check Frontend/src/main.js`: sintaxe válida.
+- `cd Backend && mvn test -q`: concluído com sucesso; H2/Flyway aplicou as 17 migrações e inicializou Hibernate.
+- `git diff --check`: sem erros de whitespace.
+- Diagnóstico da aplicação local: a API antiga em `8080` mantinha `/api/v1/status` online, mas `/actuator/health` expirava porque o PostgreSQL local estava parado. O banco foi iniciado sem apagar nem migrar dados; em seguida, a API respondeu `UP` e `npm start` reconheceu API e frontend ativos em `8080` e `5173`.
+- `scripts/dev.py` agora, diante de uma API conhecida como FoodDelivery mas sem healthcheck, verifica o estado do PostgreSQL e o inicia se estiver parado; aguarda até 20 segundos pela recuperação da API antes de classificar a instância como indisponível. Continua sem lançar uma segunda API sobre uma porta ocupada.
+- A aplicação foi iniciada nesta sessão e os endpoints de status e health foram confirmados. Os seis fluxos visuais autenticados continuam sem revalidação pelo navegador nesta rodada.
+
+
+## Ajustes de catálogo, cidade e experiência pública (31/10/2026)
+
+- **Ícones coerentes:** serviços usam um calendário (`🗓️`) e produtos usam uma caixa (`📦`); não existe mais tesoura como ícone genérico de serviço.
+- **Edição completa de catálogo:** o vendedor pode alterar nome, descrição, preço, estoque, tipo (produto/serviço) e regra de pagamento. Ao converter para serviço, estoque é zerado; ao converter para produto, o campo de estoque é reativado. Pagamento após o atendimento exige aceite explícito do risco novamente. Registros antigos mantêm os snapshots de pedido e reserva.
+- **Remoção recuperável:** `DELETE /merchant/items/{id}` marca `active=false` por uma atualização SQL limitada ao dono da loja, incrementa a versão e preserva os vínculos históricos; a ação é repetível e o vendedor pode reativar o item.
+- **Pagamento fora da cidade:** a API compara cidade e UF do perfil persistido do cliente com cidade e UF cadastradas na loja, normalizando acentos e caixa. Se diferirem ou faltarem, uma reserva oferecida com pagamento posterior vira uma reserva pendente de pagamento antecipado. O navegador avisa antes do envio, mas a regra é aplicada no backend. Compras de produtos já são antecipadas para todos.
+- **Notificação do comerciante:** pedidos e reservas com pagamento online geram notificação direcionada à operação quando o provedor confirma o pagamento; a mensagem deixa explícito que a plataforma confirmou o pagamento.
+- **Região sem lojas:** o estado vazio explica que as lojas aparecem na cidade em que foram cadastradas e oferece trocar de cidade, evitando sugerir que dados de outra cidade sumiram. A escolha de região não altera o endereço real da loja.
+- **Acesso e confiança:** a tela de login ganhou cores mais legíveis, contraste, apresentação responsiva e uma janela “Saiba mais” com explicação para clientes, comerciantes e entregadores.
+- **Mapa:** a prévia continua centrada na cidade selecionada e agora oferece um link explícito para abrir o mapa completo.
+- **Categorias:** a grade não exibe pontos, vendas concluídas ou tabela de classificação. A lista completa mantém contagem de lojas por categoria e navegação de retorno.
+
+A política de pagamento usa a cidade/UF do perfil do cliente como referência persistente. Alterar a cidade de navegação não muda o endereço do cliente nem o da loja; isso impede que um parâmetro editável do navegador reduza a exigência de pagamento antecipado.
+
+### Verificações desta revisão (31/10/2026)
+
+- Navegador autenticado como vendedor: catálogo abriu com ícones de caixa para produto e calendário para serviço. O editor abriu os campos de tipo, estoque e forma de pagamento; ao alternar serviço para produto, estoque apareceu e forma de pagamento de serviço foi ocultada. A edição foi cancelada sem gravar alterações.
+- Navegador: a seleção de Iepê mostrou 0 lojas e explicou que nenhuma loja aprovada está disponível nessa região; a ação de trocar de cidade estava disponível. A seleção foi restaurada para Nantes. Nenhum endereço real da loja foi alterado.
+- Backend: teste H2/Flyway confirma remoção lógica por SQL, repetibilidade, preservação do registro e bloqueio para usuário que não é dono da loja.
+- Reinício local: `npm start` iniciou PostgreSQL e API do projeto; `/actuator/health` retornou `UP`, `/api/v1/status` retornou `online` e a interface autenticada voltou a carregar catálogo e dados da loja.
+- `cd Frontend && npm test`: 20 testes aprovados.
+- `JWT_SECRET=<chave temporária de teste em Base64> mvn -q test`: 21 testes aprovados, sem falhas ou erros; inclui 18 migrações Flyway no contexto H2.
+- `node --check` em `Frontend/src/main.js` e `Frontend/src/catalogPolicy.js`, mais `git diff --check`: sem erros.
+
+Não foram criados pedidos ou reservas reais, nem enviados pagamentos a um provedor. SMTP, WhatsApp, geocodificação externa e credenciais reais de pagamento exigem configuração e homologação fora da suíte local. O fluxo de cidades utiliza a região selecionada pelo usuário e o CEP informado; GPS automático não foi validado nesta rodada.
+
+## Correção de catálogo e publicação da loja antiga (01/11/2026)
+
+- **Remover/reativar catálogo:** a tela chamava `setCatalogItemActive`, que não existia no JavaScript; por isso o clique gerava `ReferenceError` e nenhuma requisição era enviada. A função agora chama `DELETE /merchant/items/{id}` para arquivar logicamente e atualiza o catálogo após a confirmação do servidor. Para reativar, usa a atualização autenticada do mesmo item, preservando os dados. Ações repetidas ficam bloqueadas enquanto a operação está em andamento e falhas exibem a mensagem devolvida pela API.
+- **Loja ausente da vitrine:** a “Venda da esquina” tinha cidade, UF e CNPJ vazios no registro legado. A loja aparecia como aprovada no painel do vendedor, mas a busca pública por cidade não podia incluí-la sem localização. A aba **Dados da loja** agora explica essa condição e sugere como rascunho a região atualmente selecionada; o vendedor precisa salvar para confirmar. A cidade e UF sugeridas (Nantes/SP) foram salvas a pedido do responsável, e a loja passou a aparecer no endpoint público e na descoberta da cidade.
+- **CNPJ da loja:** o campo agora é opcional na criação e na edição. Quando informado, precisa ser válido, único e não pode ser trocado depois de salvo.
+- **Layout estreito:** o cabeçalho móvel passou a usar uma linha para navegação/ações e outra para busca. No catálogo, preço, ações e texto ocupam linhas próprias quando necessário; os botões permanecem com área de toque legível. Conferência visual feita a 560 px, sem rolagem horizontal.
+
+### Validação desta correção
+
+- Navegador autenticado como vendedor: salvar a localização foi confirmado pela notificação de sucesso; a aba deixou de exibir o alerta de localização ausente.
+- `GET /api/v1/stores?city=Nantes&state=SP`: retornou “Venda da esquina” com `active=true` e `approved=true`, além das lojas já publicadas.
+- Tela **Descobrir**: exibiu 3 lugares e o cartão de Mercados abriu “Venda da esquina”.
+- Remoção lógica manual do item de teste `teste`: o botão mudou para **Reativar** e o aviso confirmou preservação do histórico; a reativação retornou o botão **Remover**. O item foi restaurado ao estado ativo ao final da verificação.
+- Frontend: `npm test` — 20 aprovados; `node --check Frontend/src/main.js` e `git diff --check` sem erros.
+- Backend: `JWT_SECRET=<chave efêmera em Base64> mvn test -q` — 21 testes aprovados, sem falhas ou erros. A primeira execução sem `JWT_SECRET` falhou ao inicializar o contexto de teste; com a chave de teste local exigida pela configuração, toda a suíte passou.
+- Reinício local: a API foi reiniciada para usar o código novo; PostgreSQL permaneceu ativo, sem recriação ou limpeza dos dados. API e frontend voltaram a responder nas portas 8080 e 5173.
+
+## Horários da loja e CNPJ opcional (01/11/2026)
+
+- O comerciante pode ativar a rotina semanal por loja, selecionar qualquer combinação de dias e definir abertura/fechamento de cada um. Dias não selecionados ficam fechados; intervalos que cruzam a meia-noite são tratados até o horário de encerramento.
+- Exceções por data substituem a rotina: fechamento integral ou horário especial/fechamento antecipado. O atalho **Fechar hoje** usa o fuso local da loja. As exceções valem mesmo quando a rotina semanal está desativada; removê-las restaura a rotina. Observações internas não são expostas na rota pública.
+- A verificação no servidor bloqueia novo pedido quando a loja está fechada, confere novamente no início do checkout e exige que todo o intervalo da reserva caiba na janela de funcionamento. O painel/modal também desabilita ações quando identifica a loja fechada. A validação do servidor é a autoridade final em caso de tela desatualizada.
+- O cadastro de lojas aceita CNPJ ausente. Quando preenchido, o CNPJ é validado, único e imutável. Lojas legadas permanecem sem restrição semanal e sem necessidade de CNPJ.
+- Revisão manual no navegador, sessão de vendedor, em viewport móvel (578 × 678): a aba **Dados da loja** mostrou a configuração sem rolagem horizontal; ao ativar a rotina e selecionar quinta-feira, o campo de abertura ficou habilitado; ao desfazer os controles, voltou ao estado desativado. Nenhuma alteração foi enviada ou salva durante essa inspeção.
+- A tela de carregamento que persistia por causa de módulo ES antigo em cache foi corrigida com uma versão explícita nas URLs de `main.js` e `storeTime.js`; após recarregar, a descoberta e o painel do vendedor abriram normalmente. Os erros de console anteriores à correção eram históricos e não reapareceram na página já atualizada.
+- A migração V19 foi aplicada no PostgreSQL local e em H2 durante os testes. `GET /api/v1/store-locations`, `GET /api/v1/stores` e `GET /api/v1/stores/{id}/hours` responderam sem autenticação; a consulta pública removeu as observações das exceções.
+- Frontend: `npm test` — 23 aprovados; `node --check` em `src/main.js` e `src/storeTime.js` sem erros.
+- Backend: `JWT_SECRET=<chave temporária de teste em Base64> mvn -q test` — 27 testes, 0 falhas e 0 erros; o contexto H2 validou as 19 migrações e Hibernate validou o esquema.
+- `npm start` reiniciado com sucesso. `/actuator/health` retornou `UP` e a interface respondeu HTTP 200 em `127.0.0.1:5173`.
+
+**Limite funcional no momento da revisão:** reservas guardavam somente o instante de início, sem duração do serviço. Corrigido pela migração V20, conforme a atualização de riscos abaixo.
+
+## Atualização da revisão de riscos (01/11/2026)
+
+Os limites históricos descritos acima sobre duração de serviço, intervalo de reserva e cancelamento pós-pagamento foram tratados na atualização seguinte. A revisão original permanece como registro do estado observado naquela data; use este adendo e `Arquitetura_e_operacao.md` para o comportamento atual.
+
+- **Concorrência e duração de reservas:** a migração V20 guarda duração no item e início/fim na reserva. O backend bloqueia a linha da loja durante a decisão de disponibilidade, consulta sobreposição de intervalos e ocupa o profissional escolhido ou o recurso da loja inteira. O mesmo intervalo precisa caber no horário de funcionamento. Testes de domínio e esquema verificam duração, janela completa e unicidade quando não há profissional.
+- **Cancelamento pós-pagamento:** o cliente pode solicitar em pedido/reserva; a operação fica bloqueada para avanço até a decisão do vendedor. Aceitar pedido repõe estoque e inicia estorno; aceitar reserva libera o intervalo e inicia estorno apenas quando houve pagamento online. Recusar permite continuar a operação. O provedor continua sendo a autoridade sobre o resultado financeiro final.
+- **Localização de loja:** V22 armazena coordenadas opcionais, com validação de par e limites, e o painel gera um link do Google Maps. Isso não cria nem edita automaticamente um Perfil da Empresa do Google.
+- **Validação desta atualização:** os novos testes de cancelamento, coordenadas, agenda e migrações são parte da suíte. A validação automatizada local não comprova checkout/estorno real, entrega de mensagens, migração PostgreSQL em produção nem inspeção visual manual em todos os tamanhos de tela.
+- **Riscos prioritários ainda abertos:** homologação externa de pagamentos/estornos e notificações; disponibilidade/recuperação operacional fora da máquina local; MFA e rate limit distribuído; trilha administrativa completa; tarifa/ledger e repasse de entregadores; e capacidade avançada de agenda por profissional. A relação e as dependências estão detalhadas no guia de arquitetura e operação.
+
+### Segurança adicional e evidência local (01/11/2026)
+
+- **Autorização padrão:** foi fechado um caminho de acesso anônimo a rotas não classificadas: rotas sem regra pública explícita agora exigem JWT autenticado. Testes unitários verificam visitante, sessão JWT normal e usuário forçado a trocar senha.
+- **Abuso de autenticação:** o servidor limita por endereço remoto as requisições de login, recuperação e cadastro. A proteção é por instância e não confia em `X-Forwarded-For`; implantação atrás de proxy/múltiplas réplicas ainda requer gateway ou armazenamento distribuído consciente da topologia.
+- **Auditoria administrativa:** V23 e a aba **Definições > Auditoria** registram as ações administrativas instrumentadas e exibem um histórico recente. O registro exclui deliberadamente CPF, senha e tokens, mas ainda não cobre toda alteração sensível, não detecta alteração feita diretamente no banco e não substitui armazenamento imutável ou trilha de conformidade.
+- **Verificação:** suíte Java executada com H2/Flyway e testes de autorização/limites; `npm run check` e `npm test` executados. Essa validação não atesta serviços externos, banco PostgreSQL de produção, inspeção de navegador nesta rodada, pentest ou operação pronta para cobrança real.

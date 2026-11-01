@@ -16,6 +16,7 @@ import br.com.fooddelivery.delivery.DeliveryTask;
 import br.com.fooddelivery.identity.Account;
 import br.com.fooddelivery.identity.AccountRepository;
 import br.com.fooddelivery.notifications.NotificationService;
+import br.com.fooddelivery.notifications.NotificationTarget;
 import br.com.fooddelivery.orders.Order;
 import br.com.fooddelivery.orders.OrderRepository;
 import br.com.fooddelivery.orders.OrderStatus;
@@ -95,7 +96,7 @@ class OperationMessageControllerTest {
     void sendingNotifiesTheOtherParty() {
         controller.sendOrderMessage(orderId, new OperationMessageController.SendMessage("Sem cebola, por favor"), auth(customerId));
         verify(messages).save(any(OperationMessage.class));
-        verify(notifications).sendUnreadOnce(eq(merchant), any(), any(), eq("info"));
+        verify(notifications).sendUnreadOnceLinked(eq(merchant), any(), any(), eq("info"), eq(NotificationTarget.ORDER), eq(orderId));
     }
 
     @Test

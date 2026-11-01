@@ -15,7 +15,7 @@ public final class StoreCategories {
             new Category("Farmácias", "💊"),
             new Category("Beleza", "💇"),
             new Category("Barbearias", "💈"),
-            new Category("Serviços", "✂️")
+            new Category("Serviços", "🧰")
     );
 
     public static boolean isSupported(String value) {

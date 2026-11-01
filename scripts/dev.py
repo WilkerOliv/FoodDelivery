@@ -83,6 +83,21 @@ def main() -> int:
     database_started = False
     try:
         api_state = probe_api(API_STATUS_URL)
+        if api_state == "unhealthy":
+            # A stale API process can keep its status route alive while PostgreSQL is down.
+            # Recover the existing database before refusing to start the frontend.
+            pg_bin = Path(os.environ.get("PG_BIN", "/usr/lib/postgresql/17/bin"))
+            database_status = subprocess.run(
+                [str(pg_bin / "pg_ctl"), "-D", str(BACKEND / ".postgres-data"), "status"],
+                cwd=BACKEND, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
+            if database_status.returncode != 0:
+                subprocess.run([str(BACKEND / "scripts/start-db.sh")], cwd=BACKEND, check=True)
+                deadline = time.monotonic() + 20
+                while time.monotonic() < deadline:
+                    api_state = probe_api(API_STATUS_URL)
+                    if api_state != "unhealthy":
+                        break
+                    time.sleep(1)
         if api_state == "healthy":
             print(f"API FoodDelivery já está ativa em {API_STATUS_URL}; usando a instância existente.", flush=True)
         elif api_state == "unhealthy":

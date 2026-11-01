@@ -36,6 +36,7 @@ public class AdminController {
     private final NotificationService notifications;
     private final ServiceCityRepository serviceCities;
     private final StoreCategoryRepository storeCategories;
+    private final AdminAuditService auditService;
     @Value("${spring.mail.host:}") private String smtpHost;
     @Value("${spring.mail.username:}") private String smtpUsername;
     @Value("${spring.mail.password:}") private String smtpPassword;
@@ -49,13 +50,14 @@ public class AdminController {
     @Value("${app.payment.mercadopago.webhook-secret:}") private String mercadoPagoWebhookSecret;
     @Value("${app.payment.mercadopago.notification-base-url:}") private String mercadoPagoNotificationUrl;
 
-    public AdminController(AccountRepository accounts, StoreRepository stores, PasswordEncoder encoder, NotificationService notifications, ServiceCityRepository serviceCities, StoreCategoryRepository storeCategories) {
+    public AdminController(AccountRepository accounts, StoreRepository stores, PasswordEncoder encoder, NotificationService notifications, ServiceCityRepository serviceCities, StoreCategoryRepository storeCategories, AdminAuditService auditService) {
         this.accounts = accounts;
         this.stores = stores;
         this.encoder = encoder;
         this.notifications = notifications;
         this.serviceCities = serviceCities;
         this.storeCategories = storeCategories;
+        this.auditService = auditService;
     }
 
     @GetMapping("/store-categories")
@@ -79,6 +81,7 @@ public class AdminController {
         if (storeCategories.findBySlugIgnoreCase(category.getSlug()).isPresent())
             throw new IllegalArgumentException("Já existe uma categoria com esse nome ou uma forma equivalente.");
         StoreCategory saved = storeCategories.save(category);
+        audit("CATEGORY_CREATED", "STORE_CATEGORY", saved.getId(), "Seção personalizada criada.");
         return new AdminStoreCategoryView(saved.getId(), saved.getName(), saved.getEmoji(), false);
     }
 
@@ -91,6 +94,7 @@ public class AdminController {
         if (storesUsingCategory > 0)
             throw new IllegalArgumentException("Esta seção está vinculada a " + storesUsingCategory + " loja(s). Altere a categoria dessas lojas antes de excluí-la.");
         storeCategories.delete(category);
+        audit("CATEGORY_DELETED", "STORE_CATEGORY", id, "Seção personalizada excluída.");
     }
 
     @GetMapping("/service-cities")
@@ -100,15 +104,19 @@ public class AdminController {
 
     @PostMapping("/service-cities")
     @ResponseStatus(HttpStatus.CREATED)
+    @org.springframework.transaction.annotation.Transactional
     public ServiceCityView createServiceCity(@Valid @RequestBody ServiceCityRequest request) {
         String city = request.city().trim();
         String state = request.state().trim().toUpperCase(Locale.ROOT);
         if (serviceCities.findByCityIgnoreCaseAndStateIgnoreCase(city, state).isPresent())
             throw new IllegalArgumentException("Esta cidade já está cadastrada. Reative ou edite o cadastro existente.");
-        return ServiceCityView.of(serviceCities.save(new ServiceCity(city, state, request.postalCode())));
+        ServiceCity saved = serviceCities.save(new ServiceCity(city, state, request.postalCode()));
+        audit("CITY_CREATED", "SERVICE_CITY", saved.getId(), "Cidade adicionada à cobertura.");
+        return ServiceCityView.of(saved);
     }
 
     @PutMapping("/service-cities/{id}")
+    @org.springframework.transaction.annotation.Transactional
     public ServiceCityView updateServiceCity(@PathVariable UUID id, @Valid @RequestBody ServiceCityRequest request) {
         ServiceCity city = serviceCities.findById(id).orElseThrow();
         String name = request.city().trim();
@@ -117,7 +125,9 @@ public class AdminController {
                 .filter(existing -> !existing.getId().equals(id))
                 .ifPresent(existing -> { throw new IllegalArgumentException("Já existe um cadastro para esta cidade e estado."); });
         city.update(name, state, request.postalCode(), request.enabled());
-        return ServiceCityView.of(serviceCities.save(city));
+        ServiceCity saved = serviceCities.save(city);
+        audit("CITY_UPDATED", "SERVICE_CITY", id, "Cidade ou estado de cobertura atualizado.");
+        return ServiceCityView.of(saved);
     }
 
     /** Returns readiness only; credentials are always configured outside the browser. */
@@ -158,13 +168,16 @@ public class AdminController {
             if (account.getRole() != AccountRole.ADMIN) throw new IllegalArgumentException("O CPF continua obrigatório para clientes e perfis profissionais.");
             account.setCpfByAdministrator(null);
         }
-        return adminAccountView(accounts.save(account));
+        Account saved = accounts.save(account);
+        audit("ACCOUNT_PROFILE_UPDATED", "ACCOUNT", id, "Dados de perfil atualizados pelo administrador.");
+        return adminAccountView(saved);
     }
 
     private static String clean(String value) { return value == null || value.isBlank() ? null : value.trim(); }
 
     @PostMapping("/operators")
     @ResponseStatus(HttpStatus.CREATED)
+    @org.springframework.transaction.annotation.Transactional
     public Account createOperator(@Valid @RequestBody OperatorRequest request) {
         String email = request.email().trim().toLowerCase(Locale.ROOT);
         String cpf = request.cpf().replaceAll("\\D", "");
@@ -173,13 +186,15 @@ public class AdminController {
             Account existing=accounts.findByCpf(cpf).orElseThrow();
             if(!existing.getEmail().equalsIgnoreCase(email))throw new IllegalArgumentException("Este CPF já pertence a outra conta. Peça à pessoa que solicite o novo perfil pela própria conta.");
             if(existing.getRegisteredRoles().contains(request.role()))throw new IllegalArgumentException("Este perfil já está vinculado à conta existente.");
-            existing.setRole(request.role());return accounts.save(existing);
+            existing.setRole(request.role());Account saved=accounts.save(existing);audit("OPERATOR_PROFILE_LINKED", "ACCOUNT", saved.getId(), "Perfil profissional vinculado à conta existente.");return saved;
         }
         if (accounts.existsByEmailIgnoreCase(email)) throw new IllegalArgumentException("E-mail já cadastrado.");
         Account account = new Account(email, request.name().trim(), encoder.encode(request.password()));
         account.setCpfOnce(cpf);
         account.setRole(request.role());
-        return accounts.save(account);
+        Account saved=accounts.save(account);
+        audit("OPERATOR_ACCOUNT_CREATED", "ACCOUNT", saved.getId(), "Acesso profissional criado pelo administrador.");
+        return saved;
     }
 
     @GetMapping("/operators")
@@ -205,10 +220,12 @@ public class AdminController {
             ownedStores.forEach(store -> { store.setActive(false); store.setApproved(false); });
             stores.saveAll(ownedStores);
         }
+        audit(request.active()?"ACCOUNT_ACTIVATED":"ACCOUNT_SUSPENDED", "ACCOUNT", id, "Situação da conta alterada pelo administrador.");
         return adminAccountView(saved);
     }
 
     @PatchMapping("/accounts/{id}/roles/{role}")
+    @org.springframework.transaction.annotation.Transactional
     public AdminAccountView setRoleActive(@PathVariable UUID id, @PathVariable AccountRole role, @RequestBody AccountActivity request) {
         Account account = accounts.findById(id).orElseThrow();
         if (account.getRole() == AccountRole.ADMIN) throw new IllegalArgumentException("A conta administrativa não pode ser alterada por este painel.");
@@ -219,16 +236,19 @@ public class AdminController {
             ownedStores.forEach(store -> { store.setActive(false); store.setApproved(false); });
             stores.saveAll(ownedStores);
         }
+        audit(request.active()?"ACCOUNT_ROLE_ACTIVATED":"ACCOUNT_ROLE_SUSPENDED", "ACCOUNT", id, "Acesso de perfil " + role.name() + " alterado.");
         return adminAccountView(saved);
     }
 
     @PostMapping("/accounts/{id}/password-reset")
+    @org.springframework.transaction.annotation.Transactional
     public Map<String, Object> resetPassword(@PathVariable UUID id) {
         Account account = accounts.findById(id).orElseThrow();
         byte[] secret = new byte[18]; new SecureRandom().nextBytes(secret);
         String temporaryPassword = Base64.getUrlEncoder().withoutPadding().encodeToString(secret);
         account.requirePasswordChange(encoder.encode(temporaryPassword));
         accounts.save(account);
+        audit("PASSWORD_RESET", "ACCOUNT", id, "Senha redefinida pelo administrador; troca obrigatória no próximo acesso.");
         return Map.of("temporaryPassword", temporaryPassword, "mustChangePassword", true);
     }
 
@@ -238,20 +258,24 @@ public class AdminController {
     }
 
     @PatchMapping("/operator-applications/{id}/approve")
+    @org.springframework.transaction.annotation.Transactional
     public OperatorView approveApplication(@PathVariable UUID id) {
         Account account = accounts.findById(id).orElseThrow();
         account.approveOperatorApplication();
         Account saved=accounts.save(account);
         notifications.send(saved, "Acesso aprovado", "Seu acesso de "+(saved.getRole()==AccountRole.MERCHANT?"vendedor":"entregador")+" foi aprovado. Entre novamente para escolher esse espaço.", "success");
+        audit("OPERATOR_REQUEST_APPROVED", "ACCOUNT", id, "Solicitação de acesso profissional aprovada.");
         return operatorView(saved);
     }
 
     @PatchMapping("/operator-applications/{id}/reject")
+    @org.springframework.transaction.annotation.Transactional
     public OperatorView rejectApplication(@PathVariable UUID id) {
         Account account = accounts.findById(id).orElseThrow();
         account.rejectOperatorApplication();
         Account saved=accounts.save(account);
         notifications.send(saved, "Solicitação analisada", "Sua solicitação de acesso não foi aprovada desta vez. Sua conta de cliente continua disponível.", "info");
+        audit("OPERATOR_REQUEST_REJECTED", "ACCOUNT", id, "Solicitação de acesso profissional recusada.");
         return operatorView(saved);
     }
 
@@ -269,10 +293,12 @@ public class AdminController {
             ownedStores.forEach(store -> { store.setActive(false); store.setApproved(false); });
             stores.saveAll(ownedStores);
         }
+        audit("OPERATOR_SUSPENDED", "ACCOUNT", id, "Perfil profissional suspenso pelo administrador.");
         return Map.of("status", "deactivated");
     }
 
     @PatchMapping("/operators/{id}/activate")
+    @org.springframework.transaction.annotation.Transactional
     public Map<String, String> activate(@PathVariable UUID id) {
         Account account = accounts.findById(id).orElseThrow();
         if ((account.getRole() != AccountRole.MERCHANT && account.getRole() != AccountRole.COURIER)
@@ -280,6 +306,7 @@ public class AdminController {
             throw new IllegalArgumentException("Esta conta não pode ser ativada por este fluxo.");
         account.setRoleActive(account.getRole(), true);
         accounts.save(account);
+        audit("OPERATOR_REACTIVATED", "ACCOUNT", id, "Perfil profissional reativado pelo administrador.");
         return Map.of("status", "active");
     }
 
@@ -300,23 +327,45 @@ public class AdminController {
             throw new IllegalArgumentException("A conta do vendedor está suspensa ou sem acesso ativo. Reative o perfil antes de aprovar a loja.");
         store.setApproved(request.approved());
         if (!request.approved()) store.setActive(false);
-        return stores.save(store);
+        Store saved=stores.save(store);
+        audit(request.approved()?"STORE_APPROVED":"STORE_REJECTED", "STORE", id, request.approved()?"Loja aprovada pelo administrador.":"Loja reprovada pelo administrador.");
+        return saved;
     }
 
     @PatchMapping("/stores/{id}/active")
+    @org.springframework.transaction.annotation.Transactional
     public Store setStoreActive(@PathVariable UUID id, @RequestBody StoreActivity request) {
         Store store = stores.findById(id).orElseThrow();
         store.setActive(request.active());
         if (!request.active()) store.setApproved(false);
-        return stores.save(store);
+        Store saved=stores.save(store);
+        audit(request.active()?"STORE_ACTIVATED":"STORE_SUSPENDED", "STORE", id, "Disponibilidade da loja alterada pelo administrador.");
+        return saved;
     }
 
     @PatchMapping("/stores/{id}/commission")
+    @org.springframework.transaction.annotation.Transactional
     public Map<String, Object> setCommission(@PathVariable UUID id, @Valid @RequestBody Commission request) {
         Store store = stores.findById(id).orElseThrow();
         store.setMarketplaceFeeBps(request.percent().movePointRight(2).intValueExact());
         stores.save(store);
+        audit("STORE_COMMISSION_UPDATED", "STORE", id, "Comissão do marketplace atualizada.");
         return Map.of("storeId", id, "commissionPercent", request.percent());
+    }
+
+    @GetMapping("/audit-events")
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public org.springframework.data.domain.Page<AdminAuditView> auditEvents(
+            @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "50") int size) {
+        return auditService.latest(page, size).map(event -> new AdminAuditView(event.getId(), event.getActorId(),
+                event.getAction(), event.getTargetType(), event.getTargetId(), event.getSummary(), event.getCreatedAt()));
+    }
+
+    private void audit(String action, String targetType, Object targetId, String summary) {
+        var authentication = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !(authentication.getPrincipal() instanceof org.springframework.security.oauth2.jwt.Jwt jwt))
+            throw new IllegalStateException("Não foi possível identificar o administrador da alteração.");
+        auditService.record(UUID.fromString(jwt.getSubject()), action, targetType, targetId, summary);
     }
 
     private static OperatorView operatorView(Account account) {
@@ -365,6 +414,7 @@ public class AdminController {
         static ServiceCityView of(ServiceCity city) { return new ServiceCityView(city.getId(), city.getCity(), city.getState(), city.getPostalCode(), city.isEnabled()); }
     }
     public record IntegrationView(String id, String name, boolean configured, String status, String configuration) {}
+    public record AdminAuditView(UUID id, UUID actorId, String action, String targetType, String targetId, String summary, java.time.Instant createdAt) {}
     public record AdminProfileUpdate(@NotBlank @Size(max=120) String name, @Email @NotBlank @Size(max=254) String email,
                                      @Size(max=30) String phone, @Size(max=14) String cpf,
                                      @Size(max=250) String addressLine, @Size(max=120) String addressComplement,

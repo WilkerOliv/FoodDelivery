@@ -81,6 +81,22 @@ public class OrderController {
         return view(order, payments.findByOrderId(id).orElse(null), false);
     }
 
+    @PostMapping("/orders/{id}/cancellation-request")
+    @PreAuthorize("hasRole('CUSTOMER')")
+    @Transactional
+    public OrderView requestCancellation(@PathVariable UUID id,@Valid @RequestBody CancellationRequest request,Authentication auth){
+        Order order=service.requestCustomerCancellation(id,subject(auth),request.note());
+        return view(order,payments.findByOrderId(id).orElse(null),false);
+    }
+
+    @PatchMapping("/merchant/orders/{id}/cancellation-request")
+    @PreAuthorize("hasRole('MERCHANT')")
+    @Transactional
+    public OrderView decideCancellation(@PathVariable UUID id,@Valid @RequestBody CancellationDecision request,Authentication auth){
+        Order order=service.decideCustomerCancellation(id,subject(auth),request.accepted());
+        return view(order,payments.findByOrderId(id).orElse(null),false);
+    }
+
     @PatchMapping("/merchant/orders/{id}/status")
     @PreAuthorize("hasRole('MERCHANT')")
     @Transactional
@@ -99,7 +115,7 @@ public class OrderController {
         return new OrderView(order.getId(), storeView, order.getStatus(), order.getFulfillmentType(),
                 order.getDeliveryAddress(), order.getCustomerNote(), order.getTotalCents(), order.getSubtotalCents(), order.getDeliveryFeeCents(),
                 order.getCurrency(), order.getCreatedAt(), lines, payment == null ? null : payment.getId(),
-                payment == null ? null : payment.getStatus(),
+                payment == null ? null : payment.getStatus(),order.getCancellationRequestedAt(),order.getCancellationRequestStatus(),order.getCancellationRequestNote(),
                 includeTracking ? deliveries.findByOrderId(order.getId()).map(d -> new TrackingView(d.getId(), d.getStatus().name(), d.getCourierLatitude(),
                         d.getCourierLongitude(), d.getLocationUpdatedAt())).orElse(null) : null);
     }
@@ -112,11 +128,13 @@ public class OrderController {
     public record CreateOrder(@NotNull UUID storeId, @NotNull FulfillmentType fulfillmentType,
                               String deliveryAddress, @jakarta.validation.constraints.Size(max=500) String customerNote, @NotEmpty List<@Valid ItemLine> items) {}
     public record StatusChange(@NotNull OrderStatus status) {}
+    public record CancellationRequest(@jakarta.validation.constraints.Size(max=500) String note) {}
+    public record CancellationDecision(@NotNull Boolean accepted) {}
     public record CheckoutResponse(OrderView order, UUID paymentId, PaymentStatus paymentStatus) {}
     public record OrderView(UUID id, StoreView store, OrderStatus status, FulfillmentType fulfillmentType,
                             String deliveryAddress, String customerNote, long totalCents, long subtotalCents, long deliveryFeeCents,
                             String currency, Instant createdAt, List<OrderLineView> lines, UUID paymentId,
-                            PaymentStatus paymentStatus, TrackingView tracking) {}
+                            PaymentStatus paymentStatus,Instant cancellationRequestedAt,String cancellationRequestStatus,String cancellationRequestNote,TrackingView tracking) {}
     public record TrackingView(UUID deliveryId, String status, Double latitude, Double longitude, Instant locationUpdatedAt) {}
     public record StoreView(UUID id, String name, String description, String address, String category,
                             boolean active, boolean approved, long deliveryFeeCents) {}

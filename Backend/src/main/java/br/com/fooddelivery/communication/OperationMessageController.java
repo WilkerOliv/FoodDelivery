@@ -5,6 +5,7 @@ import br.com.fooddelivery.delivery.DeliveryStatus;
 import br.com.fooddelivery.identity.Account;
 import br.com.fooddelivery.identity.AccountRepository;
 import br.com.fooddelivery.notifications.NotificationService;
+import br.com.fooddelivery.notifications.NotificationTarget;
 import br.com.fooddelivery.orders.Order;
 import br.com.fooddelivery.orders.OrderRepository;
 import br.com.fooddelivery.orders.OrderStatus;
@@ -72,7 +73,7 @@ public class OperationMessageController {
         Account sender = account(senderId);
         messages.save(OperationMessage.forOrder(order, sender, request.body()));
         Account recipient = order.getCustomer().getId().equals(senderId) ? order.getStore().getOwner() : order.getCustomer();
-        notifications.sendUnreadOnce(recipient, "Nova mensagem sobre o pedido " + shortId(id), "Abra o pedido para ler e responder.", "info");
+        notifications.sendUnreadOnceLinked(recipient, "Nova mensagem sobre o pedido " + shortId(id), "Abra o pedido para ler e responder.", "info", NotificationTarget.ORDER, id);
         return orderMessages(id, auth);
     }
 
@@ -102,7 +103,7 @@ public class OperationMessageController {
         Account sender = account(senderId);
         messages.save(OperationMessage.forReservation(reservation, sender, request.body()));
         Account recipient = reservation.getCustomer().getId().equals(senderId) ? reservation.getStore().getOwner() : reservation.getCustomer();
-        notifications.sendUnreadOnce(recipient, "Nova mensagem sobre a reserva " + shortId(id), "Abra a reserva para ler e responder.", "info");
+        notifications.sendUnreadOnceLinked(recipient, "Nova mensagem sobre a reserva " + shortId(id), "Abra a reserva para ler e responder.", "info", NotificationTarget.RESERVATION, id);
         return reservationMessages(id, auth);
     }
 
@@ -130,7 +131,7 @@ public class OperationMessageController {
         Account sender = account(userId);
         messages.save(OperationMessage.forDelivery(delivery, sender, request.body()));
         Account recipient = delivery.getOrder().getCustomer().getId().equals(userId) ? delivery.getCourier() : delivery.getOrder().getCustomer();
-        notifications.sendUnreadOnce(recipient, "Nova mensagem do chat de entrega " + shortId(id), "Abra a entrega para ler e responder.", "info");
+        notifications.sendUnreadOnceLinked(recipient, "Nova mensagem do chat de entrega " + shortId(id), "Abra a entrega para ler e responder.", "info", NotificationTarget.DELIVERY, id);
         return deliveryMessages(id, auth);
     }
 

@@ -23,8 +23,10 @@ public class CatalogController {
     private final PlatformRequestRepository platformRequests;
     private final ServiceCityRepository serviceCities;
     private final StoreCategoryRepository storeCategories;
-    public CatalogController(StoreRepository stores, CatalogItemRepository items, AccountRepository accounts, PlatformRequestRepository platformRequests, ServiceCityRepository serviceCities, StoreCategoryRepository storeCategories) {
-        this.stores = stores; this.items = items; this.accounts = accounts; this.platformRequests=platformRequests;this.serviceCities=serviceCities;this.storeCategories=storeCategories;
+    private final StoreProfessionalRepository professionals;
+    private final StoreOperatingHours operatingHours;
+    public CatalogController(StoreRepository stores, CatalogItemRepository items, AccountRepository accounts, PlatformRequestRepository platformRequests, ServiceCityRepository serviceCities, StoreCategoryRepository storeCategories, StoreProfessionalRepository professionals, StoreOperatingHours operatingHours) {
+        this.stores = stores; this.items = items; this.accounts = accounts; this.platformRequests=platformRequests;this.serviceCities=serviceCities;this.storeCategories=storeCategories;this.professionals=professionals;this.operatingHours=operatingHours;
     }
     @GetMapping("/store-categories") @Transactional(readOnly=true)
     public List<StoreCategories.Category> categories() {
@@ -59,7 +61,7 @@ public class CatalogController {
     public StoreView createStore(@Valid @RequestBody StoreRequest req, Authentication auth) {
         validateCategory(req.category());
         Account owner = current(auth);
-        Store store=new Store(owner, req.name(), req.description(), req.address(), req.category());store.setLocation(req.city().trim(),req.state());store.setCnpjOnce(req.cnpj());store.setDeliveryFeeCents(req.deliveryFeeCents());store=stores.save(store);platformRequests.save(PlatformRequest.store(owner,store));return StoreView.of(store);
+        Store store=new Store(owner, req.name(), req.description(), req.address(), req.category());store.setLocation(req.city().trim(),req.state());store.setCoordinates(req.latitude(),req.longitude());if(req.cnpj()!=null&&!req.cnpj().isBlank())store.setCnpjOnce(req.cnpj());store.setDeliveryFeeCents(req.deliveryFeeCents());store.setTimezone(req.timezone());store=stores.save(store);platformRequests.save(PlatformRequest.store(owner,store));return StoreView.of(store);
     }
     @GetMapping("/merchant/stores/mine") @PreAuthorize("hasRole('MERCHANT')")
     @Transactional(readOnly=true)
@@ -70,13 +72,29 @@ public class CatalogController {
         validateCategory(req.category());
         Store store = owned(id, auth);
         if (platformRequests.findFirstByStoreIdOrderByCreatedAtDesc(id).filter(r -> "PENDING".equals(r.getStatus())).isPresent()) throw new IllegalStateException("A loja está em análise. Aguarde a decisão da administração antes de alterar os dados.");
-        store.update(req.name(), req.description(), req.address(), req.city().trim(), req.state(), req.category(), req.active(),req.deliveryFeeCents()); return StoreView.of(stores.save(store));
+        store.update(req.name(), req.description(), req.address(), req.city().trim(), req.state(), req.category(), req.active(),req.deliveryFeeCents());store.setCoordinates(req.latitude(),req.longitude());if(req.timezone()!=null&&!req.timezone().isBlank())store.setTimezone(req.timezone()); return StoreView.of(stores.save(store));
+    }
+    @GetMapping("/merchant/stores/{id}/hours") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true)
+    public StoreOperatingHours.Configuration merchantHours(@PathVariable UUID id, Authentication auth) { return operatingHours.read(owned(id, auth)); }
+    @PutMapping("/merchant/stores/{id}/hours") @PreAuthorize("hasRole('MERCHANT')") @Transactional
+    public StoreOperatingHours.Configuration updateMerchantHours(@PathVariable UUID id, @RequestBody StoreOperatingHours.Configuration request, Authentication auth) {
+        Store store=owned(id,auth); return operatingHours.save(store,request);
+    }
+    @GetMapping("/stores/{id}/hours") @Transactional(readOnly=true)
+    public StoreOperatingHours.Configuration publicHours(@PathVariable UUID id) {
+        Store store=stores.findById(id).filter(Store::isAvailable).orElseThrow(()->new NoSuchElementException("Loja não encontrada."));
+        StoreOperatingHours.Configuration configuration=operatingHours.read(store);
+        // Seller notes may describe private incidents; never expose them through the public catalog.
+        List<StoreOperatingHours.ExceptionHours> publicExceptions=configuration.exceptions().stream()
+                .map(exception->new StoreOperatingHours.ExceptionHours(exception.date(),exception.closed(),
+                        exception.opensAt(),exception.closesAt(),null)).toList();
+        return new StoreOperatingHours.Configuration(configuration.enabled(),configuration.weekly(),publicExceptions);
     }
     @PostMapping("/merchant/stores/{id}/items") @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('MERCHANT')")
     public CatalogItemView createItem(@PathVariable UUID id, @Valid @RequestBody ItemRequest req, Authentication auth) {
         Store store = owned(id, auth);
-        return CatalogItemView.of(items.save(new CatalogItem(store, req.name(), req.description(), req.priceCents(), req.stock(), req.serviceItem(), req.payAfterService())));
+        return CatalogItemView.of(items.save(new CatalogItem(store, req.name(), req.description(), req.priceCents(), req.stock(), req.serviceItem(), req.payAfterService(), req.appointmentDurationMinutes()==null?30:req.appointmentDurationMinutes())));
     }
     @GetMapping("/merchant/stores/{id}/items") @PreAuthorize("hasRole('MERCHANT')")
     @Transactional(readOnly=true)
@@ -84,10 +102,42 @@ public class CatalogController {
         owned(id, auth);
         return items.findByStoreId(id).stream().map(CatalogItemView::of).toList();
     }
+    @GetMapping("/stores/{id}/professionals") @Transactional(readOnly=true)
+    public List<ProfessionalView> storeProfessionals(@PathVariable UUID id) {
+        if (stores.findById(id).filter(Store::isAvailable).isEmpty()) throw new NoSuchElementException("Loja não encontrada.");
+        return professionals.findByStoreIdAndActiveTrueOrderByNameAsc(id).stream().map(ProfessionalView::of).toList();
+    }
+    @GetMapping("/merchant/stores/{id}/professionals") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true)
+    public List<ProfessionalView> myProfessionals(@PathVariable UUID id, Authentication auth) {
+        owned(id,auth); return professionals.findByStoreIdOrderByNameAsc(id).stream().map(ProfessionalView::of).toList();
+    }
+    @PostMapping("/merchant/stores/{id}/professionals") @PreAuthorize("hasRole('MERCHANT')") @ResponseStatus(HttpStatus.CREATED) @Transactional
+    public ProfessionalView createProfessional(@PathVariable UUID id,@Valid @RequestBody ProfessionalRequest request,Authentication auth) {
+        Store store=owned(id,auth); return ProfessionalView.of(professionals.save(new StoreProfessional(store,request.name())));
+    }
+    @PutMapping("/merchant/professionals/{id}") @PreAuthorize("hasRole('MERCHANT')") @Transactional
+    public ProfessionalView updateProfessional(@PathVariable UUID id,@Valid @RequestBody ProfessionalRequest request,Authentication auth) {
+        StoreProfessional professional=professionals.findById(id).orElseThrow();
+        if(!professional.getStore().getOwner().getId().equals(subject(auth)))throw new AccessDeniedException("Profissional não pertence à sua loja.");
+        professional.updateName(request.name()); return ProfessionalView.of(professionals.save(professional));
+    }
+    @PatchMapping("/merchant/professionals/{id}/active") @PreAuthorize("hasRole('MERCHANT')") @Transactional
+    public ProfessionalView setProfessionalActive(@PathVariable UUID id,@RequestBody ProfessionalActiveRequest request,Authentication auth) {
+        StoreProfessional professional=professionals.findById(id).orElseThrow();
+        if(!professional.getStore().getOwner().getId().equals(subject(auth)))throw new AccessDeniedException("Profissional não pertence à sua loja.");
+        professional.setActive(request.active()); return ProfessionalView.of(professionals.save(professional));
+    }
     @PutMapping("/merchant/items/{id}") @PreAuthorize("hasRole('MERCHANT')") @Transactional public CatalogItemView updateItem(@PathVariable UUID id, @Valid @RequestBody ItemRequest req, Authentication auth) {
         CatalogItem item = items.findById(id).orElseThrow();
         if (!item.getStore().getOwner().getId().equals(subject(auth))) throw new AccessDeniedException("Item não pertence à sua loja.");
-        item.update(req.name(), req.description(), req.priceCents(), req.stock(), req.active(), req.serviceItem(), req.payAfterService()); return CatalogItemView.of(items.save(item));
+        item.update(req.name(), req.description(), req.priceCents(), req.stock(), req.active(), req.serviceItem(), req.payAfterService(), req.appointmentDurationMinutes()==null?30:req.appointmentDurationMinutes()); return CatalogItemView.of(items.save(item));
+    }
+    @DeleteMapping("/merchant/items/{id}") @PreAuthorize("hasRole('MERCHANT')") @ResponseStatus(HttpStatus.NO_CONTENT) @Transactional
+    public void deactivateItem(@PathVariable UUID id,Authentication auth) {
+        CatalogItem item=items.findById(id).orElseThrow();
+        if(!item.getStore().getOwner().getId().equals(subject(auth)))throw new AccessDeniedException("Item não pertence à sua loja.");
+        if (!item.isActive()) return;
+        if (items.deactivateOwned(id, subject(auth)) != 1) throw new IllegalStateException("O item mudou em outra sessão. Atualize o catálogo e tente novamente.");
     }
     private Store owned(UUID id, Authentication auth) {
         Store store = stores.findById(id).orElseThrow();
@@ -103,21 +153,27 @@ public class CatalogController {
     public record StoreRequest(@NotBlank @Size(max=140) String name, @Size(max=1000) String description,
                                @NotBlank @Size(max=250) String address, @NotBlank @Size(max=60) String category,
                                @NotBlank @Size(max=100) String city,@NotBlank @Size(min=2,max=2) String state,
-                               @NotBlank @jakarta.validation.constraints.Pattern(regexp="\\d{14}|\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}") String cnpj,
-                               boolean active,@jakarta.validation.constraints.PositiveOrZero @jakarta.validation.constraints.Max(100000) long deliveryFeeCents) {}
+                               @jakarta.validation.constraints.Pattern(regexp="|\\d{14}|\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}") String cnpj,
+                               boolean active,@jakarta.validation.constraints.PositiveOrZero @jakarta.validation.constraints.Max(100000) long deliveryFeeCents,
+                               @Size(max=80) String timezone,
+                               @DecimalMin("-90.0") @DecimalMax("90.0") Double latitude,
+                               @DecimalMin("-180.0") @DecimalMax("180.0") Double longitude) {}
     public record ItemRequest(@NotBlank @Size(max=140) String name, @Size(max=1000) String description,
                               @PositiveOrZero long priceCents, @PositiveOrZero int stock, boolean serviceItem, boolean active,
-                              boolean payAfterService) {}
+                              boolean payAfterService,@Min(5) @Max(480) Integer appointmentDurationMinutes) {}
+    public record ProfessionalRequest(@NotBlank @Size(max=100) String name) {}
+    public record ProfessionalActiveRequest(boolean active) {}
+    public record ProfessionalView(UUID id,String name,boolean active) { static ProfessionalView of(StoreProfessional p){return new ProfessionalView(p.getId(),p.getName(),p.isActive());} }
     public record StoreView(UUID id, String name, String description, String address, String city, String state,
                             String cnpj, String category, String coverImageUrl, boolean active, boolean approved,
-                            long deliveryFeeCents, boolean available) {
+                            long deliveryFeeCents, boolean available,String timezone,Double latitude,Double longitude) {
         static StoreView of(Store s) { return new StoreView(s.getId(), s.getName(), s.getDescription(), s.getAddress(),
                 s.getCity(), s.getState(), s.getCnpj(), s.getCategory(), s.getCoverImageUrl(), s.isActive(),
-                s.isApproved(), s.getDeliveryFeeCents(), s.isAvailable()); }
+                s.isApproved(), s.getDeliveryFeeCents(), s.isAvailable(),s.getTimezone(),s.getLatitude(),s.getLongitude()); }
     }
     public record CatalogItemView(UUID id, String name, String description, long priceCents, int stock,
-                                  boolean active, boolean serviceItem, boolean payAfterService) {
+                                  boolean active, boolean serviceItem, boolean payAfterService,int appointmentDurationMinutes) {
         static CatalogItemView of(CatalogItem i) { return new CatalogItemView(i.getId(), i.getName(), i.getDescription(),
-                i.getPriceCents(), i.getStock(), i.isActive(), i.isServiceItem(), i.isPayAfterService()); }
+                i.getPriceCents(), i.getStock(), i.isActive(), i.isServiceItem(), i.isPayAfterService(),i.getAppointmentDurationMinutes()); }
     }
 }

@@ -3,6 +3,9 @@ package br.com.fooddelivery.reservations;
 import br.com.fooddelivery.catalog.CatalogItemRepository;
 import br.com.fooddelivery.catalog.Store;
 import br.com.fooddelivery.catalog.StoreRepository;
+import br.com.fooddelivery.catalog.StoreProfessional;
+import br.com.fooddelivery.catalog.StoreProfessionalRepository;
+import br.com.fooddelivery.platform.CityMatcher;
 import br.com.fooddelivery.identity.Account;
 import br.com.fooddelivery.identity.AccountRepository;
 import br.com.fooddelivery.notifications.NotificationService;
@@ -38,10 +41,13 @@ public class ReservationController {
     private final CatalogItemRepository items;
     private final NotificationService notifications;
     private final PaymentRepository payments;
+    private final StoreProfessionalRepository professionals;
+    private final br.com.fooddelivery.catalog.StoreOperatingHours operatingHours;
 
     public ReservationController(ReservationRepository reservations, ReservationSlotRepository slots,
             StoreRepository stores, AccountRepository accounts, CatalogItemRepository items,
-            NotificationService notifications, PaymentRepository payments) {
+            NotificationService notifications, PaymentRepository payments, StoreProfessionalRepository professionals,
+            br.com.fooddelivery.catalog.StoreOperatingHours operatingHours) {
         this.reservations = reservations;
         this.slots = slots;
         this.stores = stores;
@@ -49,6 +55,8 @@ public class ReservationController {
         this.items = items;
         this.notifications = notifications;
         this.payments = payments;
+        this.professionals = professionals;
+        this.operatingHours = operatingHours;
     }
 
     @PostMapping("/reservations")
@@ -58,10 +66,11 @@ public class ReservationController {
     public CreateResponse create(@Valid @RequestBody Request request, Authentication auth) {
         UUID customerId = subject(auth);
         Account customer = accounts.findById(customerId).orElseThrow();
+        if (!br.com.fooddelivery.identity.Cpf.isValid(customer.getCpf())) throw new IllegalArgumentException("Cadastre um CPF válido no seu perfil antes de reservar.");
         if (customer.getPhone() == null || customer.getPhone().isBlank()) {
             throw new IllegalArgumentException("Complete seu telefone antes de reservar.");
         }
-        Store store = stores.findById(request.storeId()).filter(Store::isAvailable)
+        Store store = stores.findByIdForUpdate(request.storeId()).filter(Store::isAvailable)
                 .orElseThrow();
         var item = items.findById(request.serviceItemId())
                 .filter(i -> i.isActive() && i.isServiceItem() && i.getStore().getId().equals(request.storeId()))
@@ -69,14 +78,24 @@ public class ReservationController {
         if (request.startsAt().isBefore(Instant.now().plusSeconds(1800))) {
             throw new IllegalArgumentException("A reserva precisa ser feita com ao menos 30 minutos de antecedência.");
         }
-        if (slots.existsByStoreIdAndStartsAt(request.storeId(), request.startsAt())) {
-            throw new IllegalStateException("Horário indisponível.");
-        }
+        operatingHours.requireOpenAt(store, request.startsAt());
+        Instant endsAt=request.startsAt().plusSeconds(item.getAppointmentDurationMinutes()*60L);
+        operatingHours.requireOpenForInterval(store,request.startsAt(),endsAt);
+        List<StoreProfessional> activeProfessionals=professionals.findByStoreIdAndActiveTrueOrderByNameAsc(store.getId());
+        List<UUID> occupied=slots.occupiedResources(store.getId(),request.startsAt(),endsAt);
+        StoreProfessional selected=null;
+        if(!activeProfessionals.isEmpty()&&occupied.contains(ReservationSlot.STORE_RESOURCE_KEY))throw new IllegalStateException("Este horário já está reservado. Escolha outro horário.");
+        if(request.professionalId()!=null){selected=activeProfessionals.stream().filter(p->p.getId().equals(request.professionalId())).findFirst().orElseThrow(()->new IllegalArgumentException("Escolha um profissional ativo desta loja."));if(occupied.contains(selected.getId()))throw new IllegalStateException("Este profissional já tem uma reserva neste intervalo. Escolha outro horário.");}
+        else if(!activeProfessionals.isEmpty()){
+            selected=activeProfessionals.stream().filter(p->!occupied.contains(p.getId())).findFirst().orElseThrow(()->new IllegalStateException("Não há profissional disponível nesse horário. Escolha outro horário."));
+        } else if(!occupied.isEmpty()) throw new IllegalStateException("Horário indisponível neste intervalo.");
+        boolean payAfterService = CityMatcher.allowPayAfterService(item.isPayAfterService(), customer.getCity(),
+                customer.getState(), store.getCity(), store.getState());
         Reservation reservation = reservations.save(new Reservation(store, customer, request.startsAt(),
-                item.getId(), item.getName(), item.getPriceCents(), request.customerNote(), item.isPayAfterService()));
-        slots.save(new ReservationSlot(store.getId(), reservation.getId(), reservation.getStartsAt()));
+                item.getId(), item.getName(), item.getPriceCents(), request.customerNote(), payAfterService,selected,endsAt));
+        slots.save(new ReservationSlot(store.getId(), reservation.getId(), reservation.getStartsAt(),endsAt,selected==null?null:selected.getId()));
         Payment payment = null;
-        if (item.isPayAfterService()) {
+        if (payAfterService) {
             notifications.send(customer, "Reserva confirmada", "Seu horário na " + store.getName()
                     + " foi confirmado. O pagamento de R$ " + String.format(java.util.Locale.forLanguageTag("pt-BR"), "%.2f", item.getPriceCents() / 100.0)
                     + " será feito diretamente à loja após o atendimento.", "success");
@@ -132,6 +151,40 @@ public class ReservationController {
         return view(reservations.save(reservation), payment);
     }
 
+    @PostMapping("/reservations/{id}/cancellation-request")
+    @PreAuthorize("hasRole('CUSTOMER')")
+    @Transactional
+    public ReservationView requestCancellation(@PathVariable UUID id,@Valid @RequestBody CancellationNote request,Authentication auth){
+        Reservation reservation=reservations.findById(id).orElseThrow();
+        if(!reservation.getCustomer().getId().equals(subject(auth)))throw new org.springframework.security.access.AccessDeniedException("Reserva de outra conta.");
+        Payment payment=payments.findByReservationId(id).orElse(null);
+        if(reservation.getStatus()==ReservationStatus.PENDING_PAYMENT){
+            if(payment!=null&&payment.getStatus()==PaymentStatus.PAID)throw new IllegalStateException("O pagamento foi aprovado. Atualize a tela e solicite o cancelamento à loja.");
+            reservation.cancelUnpaid();slots.deleteByReservationId(id);if(payment!=null)payment.cancelPendingCheckout();
+            notifications.sendLinked(reservation.getStore().getOwner(),"Reserva não paga cancelada","O cliente cancelou uma reserva ainda não paga; o horário foi liberado.","info",br.com.fooddelivery.notifications.NotificationTarget.RESERVATION,id);
+            return view(reservations.save(reservation),payment);
+        }
+        boolean alreadyRequested="REQUESTED".equals(reservation.getCancellationRequestStatus());
+        reservation.requestCancellation(request.note());
+        if(!alreadyRequested)notifications.sendLinked(reservation.getStore().getOwner(),"Cancelamento de reserva solicitado","O cliente pediu o cancelamento de um horário. Revise a solicitação na aba Agenda.","info",br.com.fooddelivery.notifications.NotificationTarget.RESERVATION,id);
+        return view(reservations.save(reservation),payment);
+    }
+
+    @PatchMapping("/merchant/reservations/{id}/cancellation-request")
+    @PreAuthorize("hasRole('MERCHANT')")
+    @Transactional
+    public ReservationView decideCancellation(@PathVariable UUID id,@Valid @RequestBody CancellationDecision request,Authentication auth){
+        Reservation reservation=reservations.findById(id).orElseThrow();
+        if(!reservation.getStore().getOwner().getId().equals(subject(auth)))throw new org.springframework.security.access.AccessDeniedException("Reserva de outra loja.");
+        reservation.decideCancellation(request.accepted());
+        if(request.accepted()){reservation.change(ReservationStatus.CANCELLED);slots.deleteByReservationId(id);}
+        Payment payment=payments.findByReservationId(id).orElse(null);
+        if(request.accepted()&&payment!=null&&payment.getStatus()==PaymentStatus.PAID){payment.requestFullRefund();notifications.send(reservation.getCustomer(),"Cancelamento aceito","A loja aceitou o cancelamento. O estorno foi solicitado ao Mercado Pago e será atualizado após a confirmação do provedor.","info");}
+        else if(request.accepted())notifications.send(reservation.getCustomer(),"Cancelamento aceito","A loja aceitou o cancelamento e liberou o horário.","success");
+        else notifications.send(reservation.getCustomer(),"Cancelamento recusado","A loja recusou a solicitação. Fale com ela pelo chat se precisar de ajuda.","warn");
+        return view(reservations.save(reservation),payment);
+    }
+
     @PatchMapping("/merchant/reservations/{id}")
     @PreAuthorize("hasRole('MERCHANT')")
     @Transactional
@@ -162,22 +215,24 @@ public class ReservationController {
 
     private static ReservationView view(Reservation reservation, Payment payment) {
         Store store = reservation.getStore();
-        StoreView storeView = new StoreView(store.getId(), store.getName(), store.getAddress(), store.getCategory());
+        StoreView storeView = new StoreView(store.getId(), store.getName(), store.getAddress(), store.getCategory(),store.getTimezone());
         return new ReservationView(reservation.getId(), storeView, reservation.getStartsAt(),
-                reservation.getServiceName(), reservation.getAmountCents(), reservation.getCustomerNote(), reservation.getStatus(),
+                reservation.getEndsAt(),reservation.getServiceName(), reservation.getAmountCents(), reservation.getCustomerNote(), reservation.getStatus(),
                 reservation.getCreatedAt(), reservation.isPayAfterService(), payment == null ? null : payment.getId(),
-                payment == null ? null : payment.getStatus());
+                payment == null ? null : payment.getStatus(),reservation.getProfessional()==null?null:reservation.getProfessional().getId(),reservation.getProfessional()==null?null:reservation.getProfessional().getName(),reservation.getCancellationRequestedAt(),reservation.getCancellationRequestStatus(),reservation.getCancellationRequestNote());
     }
 
     private UUID subject(Authentication auth) {
         return UUID.fromString(((Jwt) auth.getPrincipal()).getSubject());
     }
 
-    public record Request(@NotNull UUID storeId, @NotNull UUID serviceItemId, @NotNull Instant startsAt, @jakarta.validation.constraints.Size(max=500) String customerNote) {}
+    public record Request(@NotNull UUID storeId, @NotNull UUID serviceItemId, @NotNull Instant startsAt, @jakarta.validation.constraints.Size(max=500) String customerNote,UUID professionalId) {}
     public record Change(@NotNull ReservationStatus status) {}
+    public record CancellationNote(@jakarta.validation.constraints.Size(max=500) String note) {}
+    public record CancellationDecision(@NotNull Boolean accepted) {}
     public record CreateResponse(ReservationView reservation, UUID paymentId, PaymentStatus paymentStatus) {}
-    public record ReservationView(UUID id, StoreView store, Instant startsAt, String serviceName, long amountCents, String customerNote,
+    public record ReservationView(UUID id, StoreView store, Instant startsAt, Instant endsAt, String serviceName, long amountCents, String customerNote,
                                   ReservationStatus status, Instant createdAt, boolean payAfterService, UUID paymentId,
-                                  PaymentStatus paymentStatus) {}
-    public record StoreView(UUID id, String name, String address, String category) {}
+                                  PaymentStatus paymentStatus,UUID professionalId,String professionalName,Instant cancellationRequestedAt,String cancellationRequestStatus,String cancellationRequestNote) {}
+    public record StoreView(UUID id, String name, String address, String category,String timezone) {}
 }

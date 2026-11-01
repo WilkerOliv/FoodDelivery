@@ -29,9 +29,8 @@ import org.springframework.security.oauth2.core.OAuth2TokenValidator;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -41,6 +40,9 @@ import com.nimbusds.jose.jwk.source.ImmutableSecret;
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
+    @Bean
+    AuthenticatedAccessManager authenticatedAccessManager() { return new AuthenticatedAccessManager(); }
+
     @Bean
     PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
 
@@ -133,25 +135,30 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http, DaoAuthenticationProvider provider,
-                                            JwtAuthenticationConverter jwtConverter) throws Exception {
+                                            JwtAuthenticationConverter jwtConverter,
+                                            AuthenticatedAccessManager authenticatedAccessManager) throws Exception {
         return http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
+                .headers(headers -> headers
+                        .contentTypeOptions(org.springframework.security.config.Customizer.withDefaults())
+                        .frameOptions(frame -> frame.deny())
+                        .referrerPolicy(referrer -> referrer.policy(
+                                org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy.SAME_ORIGIN))
+                        .permissionsPolicy(policy -> policy.policy(
+                                "camera=(), microphone=(), geolocation=(self)")))
                 .authenticationProvider(provider)
+                .addFilterBefore(new AuthenticationRateLimitFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/operator-applications", "/api/v1/auth/password-recovery", "/api/v1/auth/password-recovery/reset").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/payments/mercadopago/callback").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/store-assets/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/store-categories").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/store-locations", "/api/v1/stores/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/webhooks/mercadopago").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/status", "/actuator/health", "/actuator/health/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/account/password").authenticated()
-                        .anyRequest().access((authentication, context) -> {
-                            var current = authentication.get();
-                            boolean forcedPasswordChange = current instanceof JwtAuthenticationToken token
-                                    && Boolean.TRUE.equals(token.getToken().getClaim("password_change_required"));
-                            return new AuthorizationDecision(!forcedPasswordChange);
-                        }))
+                        .anyRequest().access(authenticatedAccessManager))
                 .sessionManagement(session -> session.sessionCreationPolicy(org.springframework.security.config.http.SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(oauth -> oauth.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtConverter)))
                 .build();

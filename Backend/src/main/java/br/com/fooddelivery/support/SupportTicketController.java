@@ -2,6 +2,7 @@ package br.com.fooddelivery.support;
 
 import br.com.fooddelivery.identity.*;
 import br.com.fooddelivery.notifications.NotificationService;
+import br.com.fooddelivery.notifications.NotificationTarget;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -45,8 +46,8 @@ public class SupportTicketController {
         Account owner=account(subject(auth));
         SupportTicket ticket=tickets.save(new SupportTicket(owner,request.subject().trim(),category));
         messages.save(new SupportTicketMessage(ticket,owner,request.body().trim()));
-        accounts.findByRoleIn(List.of(AccountRole.ADMIN)).forEach(admin -> notifications.sendUnreadOnce(admin,
-                "Novo chamado de atendimento", "Há um novo chamado aguardando análise.", "info"));
+        accounts.findByRoleIn(List.of(AccountRole.ADMIN)).forEach(admin -> notifications.sendUnreadOnceLinked(admin,
+                "Novo chamado de atendimento", "Há um novo chamado aguardando análise.", "info", NotificationTarget.SUPPORT, ticket.getId()));
         return detail(ticket);
     }
 
@@ -83,7 +84,7 @@ public class SupportTicketController {
         SupportTicket ticket=ticket(id);
         if(ticket.getStatus()==SupportTicketStatus.CLOSED) throw new IllegalStateException("Reabra o chamado antes de responder.");
         ticket.touch(); messages.save(new SupportTicketMessage(ticket,account(subject(auth)),request.body().trim()));
-        notifications.sendUnreadOnce(ticket.getAccount(),"Resposta do atendimento", "A equipe respondeu ao seu chamado: "+ticket.getSubject(),"info");
+        notifications.sendUnreadOnceLinked(ticket.getAccount(),"Resposta do atendimento", "A equipe respondeu ao seu chamado: "+ticket.getSubject(),"info", NotificationTarget.SUPPORT, ticket.getId());
         return detail(ticket);
     }
 
@@ -99,7 +100,7 @@ public class SupportTicketController {
     private SupportTicket ticket(UUID id){return tickets.findById(id).orElseThrow(()->new NoSuchElementException("Chamado não encontrado."));}
     private Account account(UUID id){return accounts.findById(id).orElseThrow();}
     private UUID subject(Authentication auth){return UUID.fromString(((Jwt)auth.getPrincipal()).getSubject());}
-    private void notifyAdmins(SupportTicket ticket){accounts.findByRoleIn(List.of(AccountRole.ADMIN)).forEach(admin->notifications.sendUnreadOnce(admin,"Atualização em chamado","Uma nova mensagem foi adicionada a um chamado.","info"));}
+    private void notifyAdmins(SupportTicket ticket){accounts.findByRoleIn(List.of(AccountRole.ADMIN)).forEach(admin->notifications.sendUnreadOnceLinked(admin,"Atualização em chamado","Uma nova mensagem foi adicionada a um chamado.","info",NotificationTarget.SUPPORT,ticket.getId()));}
     private TicketView view(SupportTicket ticket){
         SupportTicketMessage last=messages.findTopByTicketIdOrderByCreatedAtDesc(ticket.getId());
         return new TicketView(ticket.getId(),ticket.getSubject(),ticket.getCategory(),ticket.getStatus(),ticket.getAccount().getId(),ticket.getAccount().getName(),ticket.getAccount().getEmail(),ticket.getCreatedAt(),ticket.getUpdatedAt(),last==null?"":last.getBody(),last==null?ticket.getCreatedAt():last.getCreatedAt());

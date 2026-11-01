@@ -21,6 +21,9 @@ public class Order {
     @Column(name="delivery_fee_cents",nullable=false) private long deliveryFeeCents;
     @Column(nullable=false, length=3) private String currency="BRL";
     @Column(name="created_at", nullable=false, updatable=false) private Instant createdAt=Instant.now();
+    @Column(name="cancellation_requested_at") private Instant cancellationRequestedAt;
+    @Column(name="cancellation_request_status",nullable=false,length=16) private String cancellationRequestStatus="NONE";
+    @Column(name="cancellation_request_note",length=500) private String cancellationRequestNote;
     @ElementCollection @CollectionTable(name="order_lines", joinColumns=@JoinColumn(name="order_id")) private List<OrderLine> lines=new ArrayList<>();
     @Version private long version;
     protected Order() {}
@@ -31,10 +34,12 @@ public class Order {
     public FulfillmentType getFulfillmentType(){return fulfillmentType;} public String getDeliveryAddress(){return deliveryAddress;} public long getTotalCents(){return totalCents;}
     public long getSubtotalCents(){return subtotalCents;} public long getDeliveryFeeCents(){return deliveryFeeCents;}
     public String getCurrency(){return currency;} public Instant getCreatedAt(){return createdAt;} public List<OrderLine> getLines(){return lines;}
-    public String getCustomerNote(){return customerNote;}
+    public String getCustomerNote(){return customerNote;} public Instant getCancellationRequestedAt(){return cancellationRequestedAt;} public String getCancellationRequestStatus(){return cancellationRequestStatus;} public String getCancellationRequestNote(){return cancellationRequestNote;}
+    public void requestCancellation(String note){if(!java.util.Set.of(OrderStatus.AWAITING_ACCEPTANCE,OrderStatus.ACCEPTED,OrderStatus.PREPARING,OrderStatus.READY).contains(status))throw new IllegalStateException("Este pedido não pode receber uma solicitação de cancelamento agora.");if("REQUESTED".equals(cancellationRequestStatus))return;cancellationRequestedAt=Instant.now();cancellationRequestStatus="REQUESTED";cancellationRequestNote=note==null||note.isBlank()?null:note.trim();if(cancellationRequestNote!=null&&cancellationRequestNote.length()>500)throw new IllegalArgumentException("O motivo pode ter até 500 caracteres.");}
+    public void decideCancellation(boolean accepted){if(!"REQUESTED".equals(cancellationRequestStatus))throw new IllegalStateException("Não há solicitação de cancelamento pendente.");cancellationRequestStatus=accepted?"ACCEPTED":"DECLINED";}
     public void paid(){if(status!=OrderStatus.AWAITING_PAYMENT)throw new IllegalStateException("Pedido não aguarda pagamento.");status=OrderStatus.AWAITING_ACCEPTANCE;}
     public void cancelUnpaid(){if(status!=OrderStatus.AWAITING_PAYMENT)throw new IllegalStateException("Pedido não aguarda pagamento.");status=OrderStatus.CANCELLED;}
-    public void transition(OrderStatus next){boolean valid=switch(status){case AWAITING_ACCEPTANCE->next==OrderStatus.ACCEPTED||next==OrderStatus.REJECTED||next==OrderStatus.CANCELLED;case ACCEPTED->next==OrderStatus.PREPARING||next==OrderStatus.CANCELLED;case PREPARING->next==OrderStatus.READY||next==OrderStatus.CANCELLED;case READY->next==OrderStatus.COMPLETED;default->false;};if(!valid)throw new IllegalStateException("Transição inválida: "+status+" → "+next);status=next;}
+    public void transition(OrderStatus next){if("REQUESTED".equals(cancellationRequestStatus)&&next!=OrderStatus.CANCELLED)throw new IllegalStateException("Responda à solicitação de cancelamento antes de avançar o pedido.");boolean valid=switch(status){case AWAITING_ACCEPTANCE->next==OrderStatus.ACCEPTED||next==OrderStatus.REJECTED||next==OrderStatus.CANCELLED;case ACCEPTED->next==OrderStatus.PREPARING||next==OrderStatus.CANCELLED;case PREPARING->next==OrderStatus.READY||next==OrderStatus.CANCELLED;case READY->next==OrderStatus.COMPLETED||next==OrderStatus.CANCELLED;default->false;};if(!valid)throw new IllegalStateException("Transição inválida: "+status+" → "+next);status=next;}
     @Embeddable public static class OrderLine {
         @Column(name="catalog_item_id",nullable=false) private UUID itemId; @Column(nullable=false,length=140) private String name;
         @Column(nullable=false) private int quantity; @Column(name="unit_price_cents",nullable=false) private long unitPriceCents;

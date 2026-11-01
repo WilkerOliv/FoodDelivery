@@ -18,6 +18,7 @@ public class CatalogItem {
     @Column(nullable = false) private boolean active = true;
     @Column(nullable = false) private boolean serviceItem = false;
     @Column(name = "pay_after_service", nullable = false) private boolean payAfterService = false;
+    @Column(name = "appointment_duration_minutes", nullable = false) private int appointmentDurationMinutes = 30;
     @Column(nullable = false, updatable = false) private Instant createdAt = Instant.now();
     @Version private long version;
     protected CatalogItem() {}
@@ -25,8 +26,12 @@ public class CatalogItem {
         this(store, name, description, priceCents, stock, serviceItem, false);
     }
     public CatalogItem(Store store, String name, String description, long priceCents, int stock, boolean serviceItem, boolean payAfterService) {
+        this(store, name, description, priceCents, stock, serviceItem, payAfterService, 30);
+    }
+    public CatalogItem(Store store, String name, String description, long priceCents, int stock, boolean serviceItem, boolean payAfterService, int appointmentDurationMinutes) {
         if (payAfterService && !serviceItem) throw new IllegalArgumentException("Pagamento após o atendimento só pode ser usado em serviços.");
-        this.store = store; this.name = name; this.description = description; this.priceCents = priceCents; this.stock = stock; this.serviceItem = serviceItem; this.payAfterService = payAfterService;
+        validateDuration(serviceItem, appointmentDurationMinutes);
+        this.store = store; this.name = name; this.description = description; this.priceCents = priceCents; this.stock = stock; this.serviceItem = serviceItem; this.payAfterService = payAfterService; this.appointmentDurationMinutes = serviceItem ? appointmentDurationMinutes : 30;
     }
     public UUID getId() { return id; }
     public Store getStore() { return store; }
@@ -37,13 +42,23 @@ public class CatalogItem {
     public boolean isActive() { return active; }
     public boolean isServiceItem() { return serviceItem; }
     public boolean isPayAfterService() { return payAfterService; }
+    public int getAppointmentDurationMinutes() { return appointmentDurationMinutes; }
     public void update(String name, String description, long priceCents, int stock, boolean active, boolean serviceItem, boolean payAfterService) {
+        update(name, description, priceCents, stock, active, serviceItem, payAfterService, appointmentDurationMinutes);
+    }
+    public void update(String name, String description, long priceCents, int stock, boolean active, boolean serviceItem, boolean payAfterService, int appointmentDurationMinutes) {
         if (payAfterService && !serviceItem) throw new IllegalArgumentException("Pagamento após o atendimento só pode ser usado em serviços.");
+        validateDuration(serviceItem, appointmentDurationMinutes);
         this.name = name; this.description = description; this.priceCents = priceCents; this.stock = stock; this.active = active; this.serviceItem = serviceItem; this.payAfterService = payAfterService;
+        this.appointmentDurationMinutes = serviceItem ? appointmentDurationMinutes : 30;
+    }
+    private static void validateDuration(boolean serviceItem, int duration) {
+        if (serviceItem && (duration < 5 || duration > 480)) throw new IllegalArgumentException("A duração do serviço deve ficar entre 5 minutos e 8 horas.");
     }
     public void reserve(int quantity) {
         if (!active || (!serviceItem && stock < quantity)) throw new IllegalStateException("Item indisponível ou sem estoque suficiente.");
         if (!serviceItem) stock -= quantity;
     }
     public void restore(int quantity) { if (!serviceItem) stock += quantity; }
+    public void deactivate() { active=false; }
 }

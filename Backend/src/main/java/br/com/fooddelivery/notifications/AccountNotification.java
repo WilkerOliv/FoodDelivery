@@ -33,6 +33,13 @@ public class AccountNotification {
     @Column(name = "read_at")
     private Instant readAt;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "target_type", length = 30)
+    private NotificationTarget targetType;
+
+    @Column(name = "target_id")
+    private UUID targetId;
+
     protected AccountNotification() {}
 
     public AccountNotification(Account account, String title, String message, String kind) {
@@ -42,11 +49,20 @@ public class AccountNotification {
         this.kind = kind;
     }
 
+    public AccountNotification(Account account, String title, String message, String kind,
+            NotificationTarget targetType, UUID targetId) {
+        this(account, title, message, kind);
+        this.targetType = targetType;
+        this.targetId = targetId;
+    }
+
     public UUID getId() { return id; }
     public String getTitle() { return title; }
     public String getMessage() { return message; }
     public String getKind() { return kind; }
     public Instant getCreatedAt() { return createdAt; }
     public Instant getReadAt() { return readAt; }
+    public NotificationTarget getTargetType() { return targetType; }
+    public UUID getTargetId() { return targetId; }
     public void markRead() { if (readAt == null) readAt = Instant.now(); }
 }
