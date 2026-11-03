@@ -7,7 +7,7 @@ Plataforma de pedidos, reservas e entregas para cidades pequenas e comércios lo
 | Camada | Tecnologia | Pasta |
 |---|---|---|
 | Interface web | JavaScript puro (módulo ES), sem framework, servido por um script Python | `Frontend/` |
-| API | Java 21, Spring Boot 3.5, Spring Security (JWT), Spring Data JPA | `Backend/` |
+| API | Java 21, Spring Boot 3.5, Spring Security (JWT em cookie `HttpOnly`), Spring Data JPA | `Backend/` |
 | Banco | PostgreSQL (padrão), H2 em arquivo no perfil `dev-h2`; migrações Flyway versionadas | `Backend/src/main/resources/db/migration-common` e pastas específicas por banco |
 | Pagamento | Mercado Pago (Marketplace + Checkout Pro) | `payments/` |
 | Imagens de capa por IA | API de imagens da OpenAI (opcional) | `catalog/StoreImageAiController` |
@@ -132,7 +132,7 @@ O seletor de localização lista cidades que têm lojas ativas e aprovadas (`GET
 
 ## 11. Mapa da API
 
-Todas as rotas começam com `/api/v1`. Públicas: cadastro, login, pedido de acesso profissional, categorias, imagens de loja, retorno e webhook do Mercado Pago, `/status` e `/actuator/health`. As demais exigem token.
+Todas as rotas começam com `/api/v1`. Públicas: cadastro, login/logout e recuperação, pedido de acesso profissional, categorias, imagens/lojas públicas, cidades, busca e geocodificação de mapa (`/geography/search` e `/geography/reverse`), retorno e webhook do Mercado Pago, `/status` e `/actuator/health`. As demais exigem sessão válida. Login e troca de senha definem cookie `fooddelivery_session` `HttpOnly`; o frontend não armazena o bearer em `localStorage`. Clientes de API fora do navegador podem continuar usando `Authorization: Bearer`.
 
 | Grupo | Rotas principais |
 |---|---|
@@ -157,7 +157,9 @@ Variáveis em `Backend/.env.example` (copie para `.env`; nunca versione valores 
 | Variável | Para que serve | Obrigatória |
 |---|---|---|
 | `DATABASE_URL`, `DATABASE_USERNAME`, `DATABASE_PASSWORD` | Banco PostgreSQL | Sim (perfil `postgres` e `prod`) |
-| `JWT_SECRET` | Assinatura dos tokens | Sim em produção |
+| `JWT_SECRET` | Assinatura dos tokens | Sim em todos os perfis |
+| `FOODDELIVERY_ALLOWED_ORIGINS` | Origens completas permitidas no CORS e nas mutações com cookie | Sim para domínio público; padrão inclui apenas portas locais |
+| `AUTH_COOKIE_SECURE` | Exige HTTPS para enviar o cookie | `true` em produção; `false` apenas no desenvolvimento HTTP |
 | `APP_ADMIN_EMAIL`, `APP_ADMIN_PASSWORD` | Administrador inicial | Sim na primeira execução |
 | `MP_CLIENT_ID`, `MP_CLIENT_SECRET`, `MP_REDIRECT_URI`, `MP_TOKEN_ENCRYPTION_KEY`, `MP_WEBHOOK_SECRET`, `MP_NOTIFICATION_BASE_URL`, `MP_SANDBOX` | Mercado Pago | Sim para pagamentos reais |
 | `OPENAI_API_KEY`, `OPENAI_IMAGE_MODEL` | Geração de capa por IA | Não; sem chave a rota responde indisponível |
@@ -167,18 +169,23 @@ Perfis: `postgres` (padrão), `dev-h2` (banco em arquivo e rotas de pagamento si
 
 Execução local: `npm start` na raiz. Docker: `Backend/Dockerfile` usa Java 21, a mesma versão do `pom.xml`.
 
+### CPF da conta administrativa
+
+O CPF não é obrigatório para contas com papel administrativo. Em **Definições > Perfil do administrador**, marque **“Remover o CPF desta conta administrativa”** e salve. Deixar o campo vazio sem marcar essa opção mantém o CPF existente. A API só permite essa remoção para contas que tenham o papel `ADMIN` registrado; clientes, vendedores e entregadores mantêm a exigência de CPF para seus fluxos protegidos.
+
 ## 11. Pontos que dependem de configuração externa
 
 - Mercado Pago: credenciais reais ou de teste, URL pública para webhook e homologação do estorno automático.
 - OpenAI: chave de API; sem ela a geração de capa não funciona.
 - Produção: `JWT_SECRET` forte, banco próprio, HTTPS e domínio para o retorno do pagamento.
+- Produção: defina `FOODDELIVERY_ALLOWED_ORIGINS` apenas com o endereço oficial do frontend e mantenha `AUTH_COOKIE_SECURE=true`. Com `SameSite=Lax`, frontend e API precisam compartilhar o mesmo site; TLS/HSTS devem ser configurados no proxy/CDN.
 
 ## 12. Limites conhecidos
 
-- Não há testes automatizados de ponta a ponta nem testes da interface; existe uma classe de testes unitários do chat (`OperationMessageControllerTest`).
-- Reservas usam horário pontual: não há duração do serviço nem grade configurável. Quando a loja possui profissionais, cada instante é reservado para um profissional específico; a opção “Primeiro disponível” seleciona uma pessoa ativa sem reserva naquele instante. Lojas sem profissionais cadastrados mantêm a reserva legada por loja.
+- Não há testes automatizados de ponta a ponta. Há testes unitários para backend e testes de helpers/regressões de frontend; eles não cobrem jornadas completas no navegador nem a matriz de aparelhos.
+- Reservas têm duração de serviço, horários semanais, exceções, fuso configurável, capacidade e escolha de profissional/“Primeiro disponível”. Ainda não há pausas múltiplas por dia ou capacidade superior a uma reserva simultânea por profissional.
 - Não há indicador de "não lido" por conversa; o aviso de mensagem nova chega pela notificação.
-- O navegador mantém o JWT em `localStorage`; antes de uma publicação, vale avaliar uma política CSP rigorosa e uma estratégia de sessão em cookie `HttpOnly`/`Secure` com proteção CSRF adequada.
+- A sessão do navegador usa cookie `HttpOnly` e `SameSite=Lax`; mutações com cookie também validam `Origin` contra a lista CORS. O frontend local e a API publicam CSP. HSTS e a política final de CSP ainda precisam ser configurados e verificados no domínio HTTPS de produção.
 - A API não aplica limite distribuído de tentativas de login nem de envio de mensagens. Em produção, configure limitação por IP/conta no gateway ou em armazenamento compartilhado para evitar força bruta e abuso sem depender de uma única instância.
 - A geração de capa por IA usa um único modelo e provedor, sem repetição nem alternativa em caso de falha.
 
@@ -228,7 +235,8 @@ O documento descreve o código local revisado. Integrações de pagamento real e
 ## Segurança, notificações e recuperação operacional (V18)
 
 - **Chave de assinatura JWT:** `JWT_SECRET` passou a ser obrigatória em todos os perfis. O valor padrão anterior era conhecido e permitiria a falsificação de tokens caso a API fosse iniciada sem configuração. `Backend/scripts/run-api.sh` carrega a chave do arquivo local `Backend/.env`, que não deve ser versionado nem compartilhado. Em instalação nova, gere uma chave aleatória com `openssl rand -base64 32` e salve-a nesse arquivo. Tokens existentes deixam de valer quando a instância passa a usar a nova chave; usuários precisam entrar novamente.
-- **Cabeçalhos HTTP:** a API bloqueia enquadramento externo, MIME sniffing e envio desnecessário do referenciador, além de restringir câmera/microfone e manter a geolocalização disponível para o próprio site. O frontend ainda precisa de uma política CSP configurada no servidor que o publica.
+- **Cabeçalhos HTTP:** a API bloqueia enquadramento externo, MIME sniffing e envio desnecessário do referenciador, além de restringir câmera/microfone e manter a geolocalização disponível para o próprio site. API e servidor frontend local aplicam CSP; o host/CDN de produção precisa aplicar política equivalente e HSTS.
+- **Sessão web (03/11/2026):** JWT do login/troca de senha é entregue em cookie `HttpOnly`, removido do JSON e do armazenamento local. `AUTH_COOKIE_SECURE` ativa `Secure` em produção. O logout limpa o cookie no servidor; CORS e validação de `Origin` usam `FOODDELIVERY_ALLOWED_ORIGINS`. O servidor local aplica CSP e cabeçalhos de proteção; produção deve aplicar a política equivalente no host/CDN e HSTS no terminador TLS.
 - **Notificações direcionáveis:** a V18 acrescenta `target_type` e `target_id`; os tipos são uma enumeração interna, nunca URLs fornecidas pelo usuário. Avisos de pedido, reserva, entrega e chamado podem abrir a área correspondente e destacar o registro exato. Cada tela continua carregando os dados por API autenticada, que verifica a titularidade antes de exibir informações privadas.
 - **Recebimentos de vendedor:** o checkout usa o token OAuth da própria loja e direciona o pagamento ao Mercado Pago conectado. O vendedor pode abrir o portal do provedor a partir de **Financeiro** e consultar saldo e retirada lá. O FoodDelivery não recebe a senha do provedor nem inicia saque em nome do vendedor.
 - **Entregadores:** ainda não há remuneração por corrida, saldo devido persistido, chave Pix de repasse ou API de transferência configurados. A aba **Financeiro** informa esse estado e não inventa saldo nem aceita pedidos de saque sem obrigação registrada. Para habilitar repasses, definir remuneração e origem dos fundos, criar ledger imutável com idempotência, verificar titularidade da chave Pix e homologar API de transferência e webhook de liquidação.
@@ -293,3 +301,11 @@ Na recuperação observada em 31/10/2026, `/api/v1/status` retornou HTTP 200 enq
 - V23 acrescenta `admin_audit_events`; administradores consultam `GET /api/v1/admin/audit-events?page=0&size=50` na aba **Definições > Auditoria**. A lista registra mutações administrativas instrumentadas sem senha, CPF ou token.
 - A tabela e a autorização padrão são verificadas nos testes automatizados com H2. Isso não certifica implantação no PostgreSQL real, cobertura completa de auditoria, proteção contra alteração por quem tem acesso direto ao banco, nem mitigação distribuída de abuso.
 - **Ativação local confirmada em 01/11/2026:** foi validado backup antes da inicialização. A API iniciou no PostgreSQL local e Flyway avançou para V23. Health retornou `UP`; categorias públicas retornaram HTTP 200; auditoria administrativa sem login retornou HTTP 401; interface retornou HTTP 200. A API e o frontend ficaram ativos depois da conferência.
+
+## Localização do cliente e navegação por categorias (02/11/2026)
+
+- A região do cliente pode ser identificada por GPS ao tocar em **Usar minha localização**. O navegador precisa conceder permissão e a página deve estar em HTTPS ou `localhost`. A localização não é acompanhada continuamente; coordenadas precisas são usadas apenas durante a consulta e não são gravadas. A cidade/UF e, quando disponível, o CEP ficam salvos como preferência de navegação.
+- O seletor de região permite buscar município por nome e UF, escolher uma cidade disponível, consultar CEP via ViaCEP ou clicar em um ponto do mapa. Se o ViaCEP não reconhecer um CEP, a consulta tenta localizar o código pelo OpenStreetMap/Nominatim. A busca por município e o clique no mapa usam a API autenticada `GET /api/v1/geography/search?query=Iepê%2C%20SP` e `GET /api/v1/geography/reverse?latitude=...&longitude=...`; CEP é preenchido quando o serviço o retorna. Uma cidade pode ter muitos CEPs, portanto escolher somente o município não produz um CEP único.
+- O mapa usa Leaflet 1.9.4 e os tiles do OpenStreetMap com atribuição visível. O backend identifica a aplicação com `FoodDelivery/1.0`, limita a uma consulta externa por vez e a pelo menos 1,1 segundo entre consultas, e mantém cache de resultados por 24 horas em memória. O serviço público Nominatim não oferece SLA e impõe limite de uso; limitação/cache são locais à instância e não compartilham estado entre réplicas. Para operação comercial em escala, use um provedor contratado/configurado ou instância própria. A página oferece cidade cadastrada e CEP como alternativas se o mapa/serviço externo não carregar.
+- Filtros e contagens de categorias agora reconhecem acentos, singular/plural das categorias padrão e nomes personalizados sem alterar a categoria armazenada. Os botões de seção **Ver todas** agora abrem a lista de estabelecimentos; a página de categoria mantém o retorno para todas as categorias.
+- A preferência de região filtra estabelecimentos por cidade e UF na consulta pública. Se GPS for negado, não existir suporte no navegador ou a consulta externa falhar, o cliente continua podendo selecionar uma cidade da lista ou buscar pelo CEP.

@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import java.util.Map;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,11 +21,14 @@ public class AuthController {
     private final AuthService authService;
     private final PasswordEncoder passwordEncoder;
     private final PasswordRecoveryService recovery;
+    private final AuthSessionCookie sessionCookie;
 
-    public AuthController(AuthService authService, PasswordEncoder passwordEncoder, PasswordRecoveryService recovery) {
+    public AuthController(AuthService authService, PasswordEncoder passwordEncoder, PasswordRecoveryService recovery,
+                          AuthSessionCookie sessionCookie) {
         this.authService = authService;
         this.passwordEncoder = passwordEncoder;
         this.recovery = recovery;
+        this.sessionCookie = sessionCookie;
     }
 
     @PostMapping("/register")
@@ -40,8 +45,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Map<String, Object> login(@Valid @RequestBody LoginRequest request) {
-        return authService.login(request.email(), request.password());
+    public ResponseEntity<Map<String, Object>> login(@Valid @RequestBody LoginRequest request) {
+        return sessionCookie.responseWithToken(authService.login(request.email(), request.password()));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout() {
+        return ResponseEntity.noContent().header(HttpHeaders.SET_COOKIE, sessionCookie.clear().toString()).build();
     }
 
     @PostMapping("/password-recovery")

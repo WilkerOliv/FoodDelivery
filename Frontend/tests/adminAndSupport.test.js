@@ -3,10 +3,11 @@ import assert from 'node:assert/strict';
 import { runOnce } from '../src/actionGuard.js';
 import { formatCpfMask, formatCnpjMask, formatCurrencyMask, parseCurrencyDecimal, formatCurrencyValue } from '../src/inputMasks.js';
 import { mobileNavigation } from '../src/mobileNavigation.js';
-import { catalogItemIcon, customerOutsideStoreCity } from '../src/catalogPolicy.js';
+import { catalogItemIcon, categoryMatches, customerOutsideStoreCity } from '../src/catalogPolicy.js';
 import { dateTimeInZone, localDateTimeInZoneToIso, localDateTimeMinimum, storeOpenAt, storeScheduleAllowsLocalDateTime, storeHoursStatusRelevant } from '../src/storeTime.js';
 import { coordinatesFromForm, storeMapUrl } from '../src/storeLocation.js';
 import { adminAreaNames, adminStoreStatus, filterAdminStores, renderAdminAreas, renderAdminTeamArea, storeApprovalId, storeApprovalPath, supportDetailPath, supportMessagePath } from '../src/adminSections.js';
+import { adminProfilePayload, applyAdminProfileResponse } from '../src/adminProfile.js';
 
 test('the admin tickets view contains only support tickets', () => {
   const content = Object.fromEntries(adminAreaNames.map(name => [name, `<section>${name}</section>`]));
@@ -36,6 +37,19 @@ test('admin ticket detail uses the implemented support endpoint', () => {
 
 test('customer support replies use the customer ticket messages endpoint', () => {
   assert.equal(supportMessagePath(false, 'ticket/42'), '/support/tickets/ticket%2F42/messages');
+});
+
+test('category filtering handles accents and singular/plural built-in names', () => {
+  assert.equal(categoryMatches('Barbearia', 'Barbearias'), true);
+  assert.equal(categoryMatches('conveniencias', 'Conveniência'), true);
+  assert.equal(categoryMatches('Farmácia', 'Farmacias'), true);
+  assert.equal(categoryMatches('Pizzarias', 'Mercados'), false);
+});
+
+test('custom categories match without changing their configured name', () => {
+  assert.equal(categoryMatches('Pet shop', 'Pet shop'), true);
+  assert.equal(categoryMatches('Pet shop', 'Pet Shop'), true);
+  assert.equal(categoryMatches('Pet shop', 'Banho e tosa'), false);
 });
 
 test('admin support replies use the admin ticket messages endpoint', () => {
@@ -164,6 +178,16 @@ test('store coordinates are optional but must be a valid pair', () => {
 test('store map links prefer saved coordinates and otherwise use its address', () => {
   assert.match(storeMapUrl({latitude:-23.55,longitude:-46.63}), /-23\.55%2C-46\.63/);
   assert.match(storeMapUrl({address:'Rua A',city:'Nantes',state:'SP'}), /Rua%20A/);
+});
+
+test('administrator can explicitly remove an optional CPF without retaining it in browser state', () => {
+  const account = { id: 'admin-1', cpf: '47329438880', addressLine: 'Rua A' };
+  const values = new Map([['name', 'Administrador'], ['email', 'admin@fooddelivery.local'], ['phone', ''], ['cpf', '473.294.388-80'], ['clearCpf', 'on']]);
+  const payload = adminProfilePayload(values, account);
+  const next = applyAdminProfileResponse(account, { name: 'Administrador', email: 'admin@fooddelivery.local', phone: null }, payload);
+  assert.equal(payload.cpf, null);
+  assert.equal(payload.clearCpf, true);
+  assert.equal(Object.hasOwn(next, 'cpf'), false);
 });
 
 class MapForm {

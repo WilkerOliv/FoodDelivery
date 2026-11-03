@@ -119,15 +119,13 @@ public class SecurityConfig {
     }
 
     @Bean
-    CorsConfigurationSource corsConfigurationSource() {
+    CorsConfigurationSource corsConfigurationSource(@Value("${app.web.allowed-origins}") String configuredOrigins) {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of(
-                "http://localhost:5173", "http://127.0.0.1:5173",
-                "http://localhost:5174", "http://127.0.0.1:5174",
-                "http://localhost:5175", "http://127.0.0.1:5175"));
+        config.setAllowedOrigins(java.util.Arrays.stream(configuredOrigins.split(","))
+                .map(String::trim).filter(origin -> !origin.isEmpty()).toList());
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
-        config.setAllowCredentials(false);
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-CSRF-TOKEN"));
+        config.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/api/**", config);
         return source;
@@ -136,31 +134,39 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http, DaoAuthenticationProvider provider,
                                             JwtAuthenticationConverter jwtConverter,
-                                            AuthenticatedAccessManager authenticatedAccessManager) throws Exception {
+                                            AuthenticatedAccessManager authenticatedAccessManager,
+                                            @Value("${app.web.allowed-origins}") String configuredOrigins) throws Exception {
         return http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .cors(cors -> cors.configurationSource(corsConfigurationSource(configuredOrigins)))
                 .csrf(csrf -> csrf.disable())
                 .headers(headers -> headers
                         .contentTypeOptions(org.springframework.security.config.Customizer.withDefaults())
+                        .cacheControl(org.springframework.security.config.Customizer.withDefaults())
                         .frameOptions(frame -> frame.deny())
+                        .contentSecurityPolicy(csp -> csp.policyDirectives(
+                                "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"))
                         .referrerPolicy(referrer -> referrer.policy(
                                 org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy.SAME_ORIGIN))
                         .permissionsPolicy(policy -> policy.policy(
                                 "camera=(), microphone=(), geolocation=(self)")))
                 .authenticationProvider(provider)
+                .addFilterBefore(new SessionOriginFilter(configuredOrigins), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new AuthenticationRateLimitFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/operator-applications", "/api/v1/auth/password-recovery", "/api/v1/auth/password-recovery/reset").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/logout", "/api/v1/auth/operator-applications", "/api/v1/auth/password-recovery", "/api/v1/auth/password-recovery/reset").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/payments/mercadopago/callback").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/store-assets/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/store-categories").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/store-locations", "/api/v1/stores/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/geography/search", "/api/v1/geography/reverse").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/webhooks/mercadopago").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/status", "/actuator/health", "/actuator/health/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/account/password").authenticated()
                         .anyRequest().access(authenticatedAccessManager))
                 .sessionManagement(session -> session.sessionCreationPolicy(org.springframework.security.config.http.SessionCreationPolicy.STATELESS))
-                .oauth2ResourceServer(oauth -> oauth.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtConverter)))
+                .oauth2ResourceServer(oauth -> oauth
+                        .bearerTokenResolver(new CookieOrBearerTokenResolver())
+                        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtConverter)))
                 .build();
     }
 }

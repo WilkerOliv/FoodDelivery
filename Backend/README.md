@@ -100,7 +100,11 @@ Valores monetários são enviados como centavos inteiros (por exemplo, R$ 19,90 
 
 ## Autorização e proteção de autenticação
 
-Rotas não declaradas publicamente na `SecurityConfig` exigem JWT válido por padrão. Cadastro, login e recuperação têm limites locais por IP (10 logins/15 min, 5 recuperações/h, 10 cadastros/h); o filtro não confia em cabeçalhos de proxy. Essa implementação é por processo: produção atrás de proxy deve configurar limites e origem confiável no gateway e, em múltiplas réplicas, usar contador compartilhado.
+Rotas não declaradas publicamente na `SecurityConfig` exigem JWT válido por padrão. No navegador, login e troca de senha definem o JWT em cookie `fooddelivery_session` `HttpOnly`, `SameSite=Lax` e com escopo `/api/v1`; a resposta não devolve o JWT no JSON. Logout remove o cookie. Clientes não-browser ainda podem autenticar com `Authorization: Bearer`. O frontend não salva o token nem o perfil da conta no `localStorage`; mantém somente preferência de perfil ativo e região escolhida para descoberta.
+
+`FOODDELIVERY_ALLOWED_ORIGINS` define as origens exatas aceitas por CORS e pelas mutações autenticadas via cookie. Para produção, configure apenas a origem oficial do frontend e `AUTH_COOKIE_SECURE=true`; o frontend e a API precisam compartilhar o mesmo site para o cookie `SameSite=Lax`. HTTPS/HSTS devem ser configurados no proxy/CDN. Para evitar CSRF, uma mutação com cookie precisa enviar um `Origin` presente na lista; clientes bearer sem cookie não dependem desse cabeçalho. CSP, cache-control, `nosniff`, frame options, referrer policy e permissions policy são aplicados pela API; o servidor local do frontend acrescenta CSP e cabeçalhos de navegador.
+
+Cadastro, login e recuperação têm limites locais por IP (10 logins/15 min, 5 recuperações/h, 10 cadastros/h); o filtro não confia em cabeçalhos de proxy. Essa implementação é por processo: produção atrás de proxy deve configurar limites e origem confiável no gateway e, em múltiplas réplicas, usar contador compartilhado. As rotas de busca e geocodificação `/geography/search` e `/geography/reverse` são públicas para descoberta de cidades; respeitam validação, cache e limite local de consulta ao provedor.
 
 A aba **Definições > Auditoria** consome `GET /api/v1/admin/audit-events?page=0&size=50`. A migração V23 guarda ações administrativas instrumentadas e resumos sem credenciais ou CPF. A trilha atual é operacional, ainda não completa nem inviolável contra acesso direto ao banco; não a trate como requisito de conformidade concluído.
 

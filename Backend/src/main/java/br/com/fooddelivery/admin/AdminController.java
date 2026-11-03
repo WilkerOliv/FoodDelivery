@@ -165,7 +165,9 @@ public class AdminController {
         account.changeEmailByAdministrator(email);
         if (cpf != null) account.setCpfByAdministrator(cpf);
         else if (request.clearCpf()) {
-            if (account.getRole() != AccountRole.ADMIN) throw new IllegalArgumentException("O CPF continua obrigatório para clientes e perfis profissionais.");
+            // A conta pode ter mais de um papel registrado. A regra de CPF opcional
+            // acompanha a permissão administrativa, não o último papel ativo.
+            if (!account.getRegisteredRoles().contains(AccountRole.ADMIN)) throw new IllegalArgumentException("O CPF continua obrigatório para clientes e perfis profissionais.");
             account.setCpfByAdministrator(null);
         }
         Account saved = accounts.save(account);

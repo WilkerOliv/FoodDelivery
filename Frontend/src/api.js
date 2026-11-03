@@ -1,27 +1,19 @@
-const API_BASE = import.meta.env?.VITE_API_BASE || 'http://127.0.0.1:8080/api/v1';
+const localHost = globalThis.location?.hostname || '127.0.0.1';
+const API_BASE = import.meta.env?.VITE_API_BASE || `http://${localHost}:8080/api/v1`;
 export const apiAssetUrl = (path) => path ? new URL(path, API_BASE).href : '';
 
-export function setToken(token) {
-  if (token) localStorage.setItem('pronto_token', token);
-  else localStorage.removeItem('pronto_token');
-}
-
-export function getToken() {
-  return localStorage.getItem('pronto_token');
-}
+// Remove tokens issued by older builds; browser sessions now live in HttpOnly cookies.
+try { localStorage.removeItem('pronto_token'); } catch { /* storage can be disabled */ }
 
 export async function api(path, options = {}) {
   const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
-  const token = getToken();
-  if (token) headers.Authorization = `Bearer ${token}`;
   let response;
   try {
-    response = await fetch(`${API_BASE}${path}`, { ...options, headers });
+    response = await fetch(`${API_BASE}${path}`, { ...options, headers, credentials: 'include' });
   } catch {
     throw new Error('Não conseguimos falar com o servidor. Confira se o banco e o backend estão iniciados e tente novamente.');
   }
-  if (response.status === 401 && path !== '/auth/login' && path !== '/auth/register') {
-    setToken(null);
+  if (response.status === 401 && !['/auth/login', '/auth/register', '/auth/logout', '/account/me'].includes(path)) {
     localStorage.removeItem('pronto_account');
     window.dispatchEvent(new CustomEvent('session-expired'));
   }

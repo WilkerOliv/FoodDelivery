@@ -25,6 +25,8 @@ spring:
       mail.smtp.timeout: 5000
       mail.smtp.writetimeout: 5000
 app:
+  web:
+    allowed-origins: ${FOODDELIVERY_ALLOWED_ORIGINS:http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175}
   recovery:
     email-from: ${RECOVERY_EMAIL_FROM:no-reply@fooddelivery.local}
     whatsapp:
@@ -41,6 +43,7 @@ app:
       api-key: ${OPENAI_API_KEY:}
       image-model: ${OPENAI_IMAGE_MODEL:gpt-image-2.5-sunburst}
   security:
+    cookie-secure: ${AUTH_COOKIE_SECURE:false}
     # Chave obrigatória: um fallback conhecido permite falsificar tokens assinados.
     jwt-secret: ${JWT_SECRET}
   payment:
@@ -131,6 +134,7 @@ spring:
 app:
   security:
     jwt-secret: ${JWT_SECRET}
+    cookie-secure: ${AUTH_COOKIE_SECURE:true}
   payment:
     mercadopago:
       sandbox: false
