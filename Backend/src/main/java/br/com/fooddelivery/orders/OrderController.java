@@ -126,7 +126,7 @@ public class OrderController {
 
     public record ItemLine(@NotNull UUID itemId, @Min(1) @Max(50) int quantity) {}
     public record CreateOrder(@NotNull UUID storeId, @NotNull FulfillmentType fulfillmentType,
-                              String deliveryAddress, @jakarta.validation.constraints.Size(max=500) String customerNote, @NotEmpty List<@Valid ItemLine> items) {}
+                              @jakarta.validation.constraints.Size(max=400) String deliveryAddress, @jakarta.validation.constraints.Size(max=500) String customerNote, @NotEmpty @jakarta.validation.constraints.Size(max=100) List<@Valid ItemLine> items) {}
     public record StatusChange(@NotNull OrderStatus status) {}
     public record CancellationRequest(@jakarta.validation.constraints.Size(max=500) String note) {}
     public record CancellationDecision(@NotNull Boolean accepted) {}

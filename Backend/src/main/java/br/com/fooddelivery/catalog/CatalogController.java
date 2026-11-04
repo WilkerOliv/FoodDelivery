@@ -46,8 +46,8 @@ public class CatalogController {
     @GetMapping("/stores") @Transactional(readOnly=true) public List<StoreView> stores(@RequestParam(required=false) String city,@RequestParam(required=false) String state) {
         List<Store> available=stores.findByActiveTrueAndApprovedTrue().stream().filter(Store::isAvailable).toList();
         if(city==null||city.isBlank()) return available.stream().map(StoreView::of).toList();
-        return available.stream().filter(store->store.getCity()!=null&&store.getCity().equalsIgnoreCase(city.trim()))
-                .filter(store->state==null||state.isBlank()||(store.getState()!=null&&store.getState().equalsIgnoreCase(state.trim())))
+        return available.stream().filter(store->br.com.fooddelivery.platform.CityMatcher.sameCity(
+                        city, state==null||state.isBlank()?store.getState():state, store.getCity(), store.getState()))
                 .map(StoreView::of).toList();
     }
     @GetMapping("/stores/{id}/items") @Transactional(readOnly=true) public List<CatalogItemView> items(@PathVariable UUID id) {

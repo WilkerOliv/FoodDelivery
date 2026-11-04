@@ -1,0 +1,8 @@
+name: fooddelivery-homologacao
+services:
+  mailpit:
+    image: axllent/mailpit:v1.27.8
+    ports:
+      - "127.0.0.1:1026:1025"
+      - "127.0.0.1:8026:8025"
+    restart: "no"

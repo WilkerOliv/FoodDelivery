@@ -8,6 +8,14 @@ import { dateTimeInZone, localDateTimeInZoneToIso, localDateTimeMinimum, storeOp
 import { coordinatesFromForm, storeMapUrl } from '../src/storeLocation.js';
 import { adminAreaNames, adminStoreStatus, filterAdminStores, renderAdminAreas, renderAdminTeamArea, storeApprovalId, storeApprovalPath, supportDetailPath, supportMessagePath } from '../src/adminSections.js';
 import { adminProfilePayload, applyAdminProfileResponse } from '../src/adminProfile.js';
+import { postalCodeResponse } from '../src/postalCode.js';
+
+test('demo postal codes never call the external provider and reject unknown fixtures',async()=>{
+  const oldDemo=globalThis.FOODDELIVERY_DEMO,oldFetch=globalThis.fetch;
+  globalThis.FOODDELIVERY_DEMO=true;globalThis.fetch=()=>{throw new Error('External network forbidden');};
+  try{assert.equal((await (await postalCodeResponse('19645000')).json()).localidade,'Nantes');assert.equal((await (await postalCodeResponse('00000000')).json()).erro,true);}
+  finally{globalThis.FOODDELIVERY_DEMO=oldDemo;globalThis.fetch=oldFetch;}
+});
 
 test('the admin tickets view contains only support tickets', () => {
   const content = Object.fromEntries(adminAreaNames.map(name => [name, `<section>${name}</section>`]));
@@ -164,6 +172,9 @@ test('the store modal shows status for dated exceptions even when weekly limits 
 
 test('overnight weekly hours remain available after midnight until closing', () => {
   const config={enabled:true,weekly:{FRIDAY:{opensAt:'22:00',closesAt:'02:00'}},exceptions:[]};
+  assert.equal(storeScheduleAllowsLocalDateTime(config,'2026-11-06T01:30'),false);
+  assert.equal(storeOpenAt(config,'UTC',new Date('2026-11-06T01:30:00Z')),false);
+  assert.equal(storeOpenAt(config,'UTC',new Date('2026-11-07T01:30:00Z')),true);
   assert.equal(storeScheduleAllowsLocalDateTime(config,'2026-11-07T01:30'),true);
   assert.equal(storeScheduleAllowsLocalDateTime(config,'2026-11-07T02:00'),false);
 });

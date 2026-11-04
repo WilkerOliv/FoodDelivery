@@ -13,6 +13,15 @@ import org.springframework.mock.web.MockHttpServletResponse;
 class SessionOriginFilterTest {
     private final SessionOriginFilter filter = new SessionOriginFilter("http://localhost:5173,http://127.0.0.1:5173");
 
+    @Test void customDemoCookieStillRequiresAnAllowedOrigin() throws Exception {
+        var request=new MockHttpServletRequest();request.setMethod("POST");
+        request.setCookies(new jakarta.servlet.http.Cookie("fooddelivery_demo_session","opaque"));
+        request.addHeader("Origin","https://attacker.example");
+        var response=new MockHttpServletResponse();var chain=new TrackingChain();
+        new SessionOriginFilter("http://127.0.0.1:5180","fooddelivery_demo_session").doFilter(request,response,chain);
+        assertFalse(chain.called);assertEquals(403,response.getStatus());
+    }
+
     @Test
     void permitsMutationFromConfiguredOrigin() throws ServletException, IOException {
         var request = request("POST", "http://localhost:5173");

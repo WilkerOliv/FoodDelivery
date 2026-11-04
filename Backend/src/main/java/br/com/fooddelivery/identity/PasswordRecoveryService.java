@@ -47,6 +47,12 @@ public class PasswordRecoveryService {
     }
 
     @Transactional
+    public void invalidatePhoneCodes(Account account) {
+        codes.deleteForPurpose(account.getId(),"PHONE_VERIFY");
+        codes.deleteForPurpose(account.getId(),"PASSWORD_RESET");
+    }
+
+    @Transactional
     public boolean verifyPhone(Account account, String rawCode) {
         RecoveryCode code = latest(account, "PHONE_VERIFY");
         if (code == null || !code.isReadyAt(Instant.now())) return false;

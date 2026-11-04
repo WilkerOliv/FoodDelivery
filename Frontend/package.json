@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "python3 scripts/start.py",
-    "test": "node tests/adminAndSupport.test.js && node tests/apiSession.test.js",
+    "test": "node tests/adminAndSupport.test.js && node tests/apiSession.test.js && node tests/storeCovers.test.js",
     "check": "node scripts/check.mjs"
   }
 }

@@ -16,6 +16,13 @@ import org.springframework.web.server.ResponseStatusException;
 public class ApiExceptionHandler {
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(ApiExceptionHandler.class);
 
+    @ExceptionHandler({org.springframework.http.converter.HttpMessageNotReadableException.class,
+            org.springframework.web.method.annotation.MethodArgumentTypeMismatchException.class,
+            org.springframework.web.bind.MissingServletRequestParameterException.class})
+    ResponseEntity<Map<String,String>> malformedRequest(Exception exception) {
+        return ResponseEntity.badRequest().body(Map.of("error","Confira o formato dos dados enviados e tente novamente."));
+    }
+
     @ExceptionHandler(AuthenticationException.class)
     ResponseEntity<Map<String, String>> unauthenticated(AuthenticationException exception) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)

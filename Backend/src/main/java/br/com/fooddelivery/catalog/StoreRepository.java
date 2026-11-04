@@ -10,4 +10,5 @@ public interface StoreRepository extends JpaRepository<Store, UUID> {
     List<Store> findByActiveTrueAndApprovedTrue();
     List<Store> findByOwnerId(UUID ownerId);
     long countByCategoryIgnoreCase(String category);
+    Optional<Store> findByCoverImageUrl(String coverImageUrl);
 }

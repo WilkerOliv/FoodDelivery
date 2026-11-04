@@ -61,7 +61,7 @@ cd ../Backend
 JWT_SECRET='<chave de teste com pelo menos 256 bits>' mvn test
 ```
 
-O workflow `.github/workflows/quality.yml` executa as verificações de sintaxe/testes do frontend e os testes Spring com as migrações H2. O conjunto não faz chamada real a Mercado Pago, SMTP, WhatsApp Cloud, OpenAI, Google Maps ou ViaCEP e não substitui homologação no PostgreSQL real, navegador e dispositivos móveis.
+O workflow `.github/workflows/quality.yml` executa as verificações de sintaxe/testes do frontend e os testes Spring com as migrações H2. O conjunto não faz chamada real a Mercado Pago, SMTP, WhatsApp Cloud, Google Maps ou ViaCEP e não substitui homologação no PostgreSQL real, navegador e dispositivos móveis.
 
 **Validação local adicional em 01/11/2026:** foi criado e verificado um dump do PostgreSQL local antes da inicialização da API; a API iniciou no perfil PostgreSQL, Flyway registrou a versão 23, `/actuator/health` retornou `UP`, a rota pública de categorias retornou HTTP 200, `/api/v1/admin/audit-events` sem sessão retornou HTTP 401 e o frontend retornou HTTP 200. A aplicação permaneceu ativa após essa verificação. Isso valida esta instalação local; não representa homologação de integrações externas nem ambiente de produção.
 

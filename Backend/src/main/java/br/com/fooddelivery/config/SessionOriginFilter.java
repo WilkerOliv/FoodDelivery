@@ -15,8 +15,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
 /** Blocks cross-origin state changes made with the browser's ambient session cookie. */
 public final class SessionOriginFilter extends OncePerRequestFilter {
     private final Set<String> allowedOrigins;
+    private final String cookieName;
 
     public SessionOriginFilter(String configuredOrigins) {
+        this(configuredOrigins, AuthSessionCookie.NAME);
+    }
+    public SessionOriginFilter(String configuredOrigins, String cookieName) {
+        this.cookieName=cookieName;
         allowedOrigins = Stream.of(configuredOrigins.split(","))
                 .map(String::trim).filter(value -> !value.isEmpty()).collect(Collectors.toUnmodifiableSet());
     }
@@ -34,11 +39,11 @@ public final class SessionOriginFilter extends OncePerRequestFilter {
         chain.doFilter(request, response);
     }
 
-    private static boolean hasSessionCookie(HttpServletRequest request) {
+    private boolean hasSessionCookie(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies == null) return false;
         for (Cookie cookie : cookies) {
-            if (AuthSessionCookie.NAME.equals(cookie.getName())) return true;
+            if (cookieName.equals(cookie.getName())) return true;
         }
         return false;
     }

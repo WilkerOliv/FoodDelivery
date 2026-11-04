@@ -13,13 +13,15 @@ public class AuthSessionCookie {
     private static final String PATH = "/api/v1";
     private static final long MAX_AGE_SECONDS = 3600;
     private final boolean secure;
+    @Value("${app.security.cookie-name:fooddelivery_session}")
+    private String name = NAME;
 
     public AuthSessionCookie(@Value("${app.security.cookie-secure:false}") boolean secure) {
         this.secure = secure;
     }
 
     public ResponseCookie issue(String token) {
-        return ResponseCookie.from(NAME, token)
+        return ResponseCookie.from(name, token)
                 .httpOnly(true)
                 .secure(secure)
                 .sameSite("Lax")
@@ -29,7 +31,7 @@ public class AuthSessionCookie {
     }
 
     public ResponseCookie clear() {
-        return ResponseCookie.from(NAME, "")
+        return ResponseCookie.from(name, "")
                 .httpOnly(true)
                 .secure(secure)
                 .sameSite("Lax")

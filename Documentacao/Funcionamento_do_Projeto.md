@@ -1,5 +1,7 @@
 # FoodDelivery — como o projeto funciona
 
+**Homologação sem dados reais (04/11/2026):** `npm run start:demo` inicia banco isolado, contas fictícias e simuladores locais em `http://127.0.0.1:5180`. Use `npm run start:demo:mailpit` para incluir captura SMTP por Docker. Consulte [acessos, roteiros, isolamento e limites](Homologacao_sem_dados_reais.md).
+
 Plataforma de pedidos, reservas e entregas para cidades pequenas e comércios locais. Este documento descreve o que o código faz hoje; o que depende de configuração externa está marcado como tal. Documentos complementares: `Modelo_de_Dados.md` (tabelas e regras de integridade) e `Visao_e_Especificacao_do_Produto.md` (visão de produto).
 
 ## 1. Visão geral
@@ -10,7 +12,7 @@ Plataforma de pedidos, reservas e entregas para cidades pequenas e comércios lo
 | API | Java 21, Spring Boot 3.5, Spring Security (JWT em cookie `HttpOnly`), Spring Data JPA | `Backend/` |
 | Banco | PostgreSQL (padrão), H2 em arquivo no perfil `dev-h2`; migrações Flyway versionadas | `Backend/src/main/resources/db/migration-common` e pastas específicas por banco |
 | Pagamento | Mercado Pago (Marketplace + Checkout Pro) | `payments/` |
-| Imagens de capa por IA | API de imagens da OpenAI (opcional) | `catalog/StoreImageAiController` |
+| Capas por upload | Arquivos locais e aprovação ADMIN, sem IA | `catalog/StoreAssetController` |
 | Inicialização local | `npm start` roda `scripts/dev.py`: sobe banco, API e interface juntos | raiz |
 
 A interface fala com a API em `/api/v1`. Em desenvolvimento a interface roda em `127.0.0.1:5173` e a API em `127.0.0.1:8080`.
@@ -24,7 +26,7 @@ Existem quatro papéis: `CUSTOMER`, `MERCHANT`, `COURIER` e `ADMIN`.
 - Uma conta pode ter vários papéis concedidos (`granted_roles`) e escolhe o perfil ativo na interface. O administrador pode suspender um papel sem afetar os demais (`suspended_roles`).
 - O administrador pode suspender a conta inteira e gerar senha temporária; a pessoa precisa trocá-la no próximo acesso (`password_change_required`).
 - O administrador não precisa de CPF. Pode corrigir dados cadastrais das contas e gerenciar a cobertura de cidades em **Definições**; CPF continua obrigatório para clientes e profissionais e permanece uma coluna opcional/única, nunca a chave primária.
-- Em **Definições > Integrações**, a interface informa se as variáveis privadas de SMTP, WhatsApp, OpenAI e Mercado Pago estão presentes. Segredos são configurados no ambiente do backend e não passam pelo navegador. O indicador não representa homologação do provedor.
+- Em **Definições > Integrações**, a interface informa se as variáveis privadas de SMTP, WhatsApp e Mercado Pago estão presentes. Segredos são configurados no ambiente do backend e não passam pelo navegador. O indicador não representa homologação do provedor.
 - Trocar ou redefinir a senha incrementa `credential_version`, o que invalida os tokens anteriores.
 - A recuperação pública usa códigos de uso único enviados por SMTP ou, opcionalmente, WhatsApp Cloud. O telefone precisa ser confirmado pelo próprio titular antes da recuperação por WhatsApp.
 - Cada requisição autenticada valida assinatura, emissor e validade do JWT e confirma que a conta continua ativa.
@@ -110,7 +112,7 @@ stateDiagram-v2
 
 - Cada loja tem categoria, endereço, **cidade e estado** (usados para filtrar lojas pela cidade do cliente), capa, taxa fixa de entrega (R$ 0,00 a R$ 1.000,00) e comissão do marketplace (0% a 50%, definida pelo administrador).
 - Lojas novas precisam de aprovação do administrador antes de aparecer.
-- A capa pode ser enviada como arquivo (`POST /merchant/stores/{id}/cover`) ou gerada por IA (`POST /merchant/stores/{storeId}/ai/cover`, limite de 5 imagens por hora por conta).
+- A capa é enviada pelo vendedor, normalizada para 1200 × 600 (2:1) e só publicada após aprovação ADMIN. Limite de dez envios por loja/hora; PNG/JPG de origem até 5 MB. [Fluxo e contratos](Capas_das_lojas.md).
 - A loja conecta a conta do Mercado Pago por OAuth (`/merchant/stores/{storeId}/mercadopago/connect`). Os tokens ficam criptografados no banco.
 - Estornos usam chave de idempotência. Tentativas que falham entram na rotina de repetição (`RefundRetryJob`) e, esgotadas, em `REFUND_REVIEW` para ação do administrador (`GET /admin/refunds`).
 
@@ -162,7 +164,7 @@ Variáveis em `Backend/.env.example` (copie para `.env`; nunca versione valores 
 | `AUTH_COOKIE_SECURE` | Exige HTTPS para enviar o cookie | `true` em produção; `false` apenas no desenvolvimento HTTP |
 | `APP_ADMIN_EMAIL`, `APP_ADMIN_PASSWORD` | Administrador inicial | Sim na primeira execução |
 | `MP_CLIENT_ID`, `MP_CLIENT_SECRET`, `MP_REDIRECT_URI`, `MP_TOKEN_ENCRYPTION_KEY`, `MP_WEBHOOK_SECRET`, `MP_NOTIFICATION_BASE_URL`, `MP_SANDBOX` | Mercado Pago | Sim para pagamentos reais |
-| `OPENAI_API_KEY`, `OPENAI_IMAGE_MODEL` | Geração de capa por IA | Não; sem chave a rota responde indisponível |
+| `STORE_ASSETS_DIR` | Arquivos das capas e prévias privadas | Diretório persistente, incluído nos backups |
 | `STORE_ASSETS_DIR` | Pasta das capas | Não |
 
 Perfis: `postgres` (padrão), `dev-h2` (banco em arquivo e rotas de pagamento simulado) e `prod`.
@@ -176,7 +178,7 @@ O CPF não é obrigatório para contas com papel administrativo. Em **Definiçõ
 ## 11. Pontos que dependem de configuração externa
 
 - Mercado Pago: credenciais reais ou de teste, URL pública para webhook e homologação do estorno automático.
-- OpenAI: chave de API; sem ela a geração de capa não funciona.
+- Capas: armazenamento local com permissão de leitura/escrita e aprovação administrativa; não exige API de IA.
 - Produção: `JWT_SECRET` forte, banco próprio, HTTPS e domínio para o retorno do pagamento.
 - Produção: defina `FOODDELIVERY_ALLOWED_ORIGINS` apenas com o endereço oficial do frontend e mantenha `AUTH_COOKIE_SECURE=true`. Com `SameSite=Lax`, frontend e API precisam compartilhar o mesmo site; TLS/HSTS devem ser configurados no proxy/CDN.
 
@@ -187,7 +189,7 @@ O CPF não é obrigatório para contas com papel administrativo. Em **Definiçõ
 - Não há indicador de "não lido" por conversa; o aviso de mensagem nova chega pela notificação.
 - A sessão do navegador usa cookie `HttpOnly` e `SameSite=Lax`; mutações com cookie também validam `Origin` contra a lista CORS. O frontend local e a API publicam CSP. HSTS e a política final de CSP ainda precisam ser configurados e verificados no domínio HTTPS de produção.
 - A API não aplica limite distribuído de tentativas de login nem de envio de mensagens. Em produção, configure limitação por IP/conta no gateway ou em armazenamento compartilhado para evitar força bruta e abuso sem depender de uma única instância.
-- A geração de capa por IA usa um único modelo e provedor, sem repetição nem alternativa em caso de falha.
+- Capas aguardam revisão humana; arquivos precisam de backup e acompanhamento de espaço em disco.
 
 ## Atualização de catálogo, agenda e suporte (31/10/2026)
 
@@ -249,7 +251,7 @@ O documento descreve o código local revisado. Integrações de pagamento real e
 3. Para recuperação, pare a API, confirme que o backup correto está disponível e execute `RESTORE_CONFIRM_DATABASE=fooddelivery Backend/scripts/restore-db.sh /caminho/fooddelivery-data-hora.dump`.
 4. Inicie a API, confira `/actuator/health`, valide registros essenciais e faça uma nova cópia após a recuperação.
 
-Os backups cobrem o PostgreSQL. Arquivos enviados de lojas ficam em `STORE_ASSETS_DIR` e precisam de uma política de cópia própria. Não foi habilitada uma transferência real de dinheiro nem declarada homologação de SMTP, WhatsApp, OpenAI ou Mercado Pago nesta mudança.
+Os backups cobrem o PostgreSQL. Arquivos enviados de lojas ficam em `STORE_ASSETS_DIR` e precisam de uma política de cópia própria. Não foi habilitada uma transferência real de dinheiro nem declarada homologação de SMTP, WhatsApp ou Mercado Pago nesta mudança.
 
 ## 14. Identidade, perfis, cidades e lojas (V13)
 

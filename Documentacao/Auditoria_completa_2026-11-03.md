@@ -1,5 +1,15 @@
 # Auditoria técnica e funcional do FoodDelivery — 03/11/2026
 
+## Adendo de homologação — 04/11/2026
+
+Foi implementado ambiente local isolado com comando `npm run start:demo`, banco H2 próprio, quatro contas fictícias, mercado/barbearia e profissionais de demonstração, simuladores de pagamento/estorno, captura de recuperação EMAIL/WHATSAPP, capa PNG local e fixtures de CEP/geocodificação. `npm run start:demo:mailpit` acrescenta entrega SMTP ao Mailpit, acessível apenas em loopback. Guia completo: [Homologação sem dados reais](Homologacao_sem_dados_reais.md).
+
+Evidência: suíte Java com 60 testes aprovados, sem falhas/erros; frontend com 32 testes aprovados e sintaxe validada em 12 módulos; `git diff --check` sem erros. O roteiro HTTP `scripts/test_homologacao.py` passou com quatro perfis, restrição de inbox, tentativa de aprovação por outra conta, cookie isolado, checkout externo bloqueado, aprovação/recusa/repetição de pagamento, pedido na fila do vendedor, reserva paga, recuperação EMAIL/WHATSAPP, PNG simulado e cancelamento/estorno local. Mailpit recebeu um e-mail pelo SMTP local.
+
+No navegador, foi confirmado login de cliente, abertura de mercado, adição à sacola, checkout simulado, aviso de recusa, aprovação e retorno à lista com pedido aguardando a loja. Esse teste não constitui revisão visual completa. A inspeção revelou cookie expirado bloqueando novo login após reinício; a resolução do cookie foi corrigida para permitir autenticação/recuperação e descoberta pública com cookie antigo, mantendo validação em rotas privadas e teste de regressão.
+
+O simulador não homologa os provedores externos nem implementa saque/ledger de entregadores. O mapa visual ainda depende de Leaflet/tiles/fontes externos; busca geográfica e CEP usam somente Nantes e Iepê como fixtures locais. As conclusões e contagens abaixo pertencem à revisão original de 03/11/2026.
+
 ## Resumo executivo
 
 O FoodDelivery já tem uma base funcional substancial para um marketplace local: API Spring Boot, PostgreSQL com migrações Flyway, autenticação, autorização por perfil, catálogo de produtos/serviços, pedidos, reservas, agenda, suporte, notificações, localização, pagamentos Mercado Pago e fluxos administrativos. Depois da primeira revisão, corrigi a exposição do bearer token no navegador, acrescentei proteção de origem para mutações por cookie, CSP na API e no servidor local e tornei públicas as rotas geográficas necessárias para a descoberta. A suíte ampliada agora contém 54 testes de backend e 31 de frontend; a verificação sintática continua cobrindo 10 módulos JavaScript.

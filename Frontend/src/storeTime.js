@@ -91,5 +91,6 @@ export function storeScheduleAllowsLocalDateTime(configuration, value) {
 function intervalContains(time, interval) {
   if (!interval?.opensAt || !interval?.closesAt) return false;
   if (interval.closesAt > interval.opensAt) return time >= interval.opensAt && time < interval.closesAt;
-  return time >= interval.opensAt || time < interval.closesAt;
+  // A madrugada pertence ao intervalo do dia anterior, consultado pelo chamador.
+  return time >= interval.opensAt;
 }

@@ -11,10 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderService {
+    private final br.com.fooddelivery.delivery.DeliveryRepository deliveries;
     private final OrderRepository orders; private final AccountRepository accounts; private final StoreRepository stores;
     private final CatalogItemRepository items; private final PaymentRepository payments; private final NotificationService notifications;
     private final StoreOperatingHours operatingHours;
-    public OrderService(OrderRepository orders,AccountRepository accounts,StoreRepository stores,CatalogItemRepository items,PaymentRepository payments,NotificationService notifications,StoreOperatingHours operatingHours){this.orders=orders;this.accounts=accounts;this.stores=stores;this.items=items;this.payments=payments;this.notifications=notifications;this.operatingHours=operatingHours;}
+    public OrderService(OrderRepository orders,AccountRepository accounts,StoreRepository stores,CatalogItemRepository items,PaymentRepository payments,NotificationService notifications,StoreOperatingHours operatingHours,br.com.fooddelivery.delivery.DeliveryRepository deliveries){this.orders=orders;this.accounts=accounts;this.stores=stores;this.items=items;this.payments=payments;this.notifications=notifications;this.operatingHours=operatingHours;this.deliveries=deliveries;}
     @Transactional public Order create(UUID customerId,UUID storeId,FulfillmentType type,String address,String customerNote,List<RequestedLine> requested){
         Account customer=accounts.findById(customerId).orElseThrow();
         if(!Cpf.isValid(customer.getCpf()))throw new IllegalArgumentException("Cadastre um CPF válido no seu perfil antes de comprar.");
@@ -30,8 +31,10 @@ public class OrderService {
     }
     @Transactional(readOnly=true) public List<Order> customerOrders(UUID id){return orders.findByCustomerIdOrderByCreatedAtDesc(id);}
     @Transactional public Order merchantTransition(UUID id,UUID merchantId,OrderStatus status){
-        Order order=orders.findById(id).orElseThrow();
+        Order order=orders.findByIdForUpdate(id).orElseThrow();
         if(!order.getStore().getOwner().getId().equals(merchantId))throw new org.springframework.security.access.AccessDeniedException("Pedido de outra loja.");
+        if(status==OrderStatus.CANCELLED||status==OrderStatus.REJECTED)cancelDelivery(order.getId());
+        if(status==OrderStatus.COMPLETED&&order.getFulfillmentType()==FulfillmentType.DELIVERY)throw new IllegalStateException("A conclusão de um delivery é confirmada pelo entregador ao marcar a entrega.");
         order.transition(status);
         if(status==OrderStatus.CANCELLED||status==OrderStatus.REJECTED){
             for(Order.OrderLine line:order.getLines())items.findById(line.getItemId()).ifPresent(item->{item.restore(line.getQuantity());items.save(item);});
@@ -40,11 +43,11 @@ public class OrderService {
                 notifications.send(order.getCustomer(),"Estorno solicitado","A loja encerrou o pedido. Solicitamos o estorno pelo Mercado Pago; o status será atualizado quando o provedor confirmar.","info");
             });
         }
-        notifications.sendLinked(order.getCustomer(),"Pedido atualizado",order.getStore().getName()+": seu pedido agora está “"+status.name().toLowerCase(Locale.ROOT).replace('_',' ')+"”.","info",NotificationTarget.ORDER,order.getId());
+        notifications.sendLinked(order.getCustomer(),"Pedido atualizado",order.getStore().getName()+": seu pedido agora está “"+status.descriptionPtBr()+"”.","info",NotificationTarget.ORDER,order.getId());
         return order;
     }
     @Transactional public Order cancelUnpaidByCustomer(UUID id,UUID customerId){
-        Order order=orders.findById(id).orElseThrow();
+        Order order=orders.findByIdForUpdate(id).orElseThrow();
         if(!order.getCustomer().getId().equals(customerId))throw new org.springframework.security.access.AccessDeniedException("Pedido de outra conta.");
         Payment payment=payments.findByOrderId(id).orElse(null);
         if(order.getStatus()==OrderStatus.CANCELLED||order.getStatus()==OrderStatus.REJECTED)return order;
@@ -57,21 +60,23 @@ public class OrderService {
         return order;
     }
     @Transactional public Order requestCustomerCancellation(UUID id,UUID customerId,String note){
-        Order order=orders.findById(id).orElseThrow();
+        Order order=orders.findByIdForUpdate(id).orElseThrow();
         if(!order.getCustomer().getId().equals(customerId))throw new org.springframework.security.access.AccessDeniedException("Pedido de outra conta.");
         if(order.getStatus()==OrderStatus.AWAITING_PAYMENT)return cancelUnpaidByCustomer(id,customerId);
         Payment payment=payments.findByOrderId(id).orElseThrow(()->new IllegalStateException("Não encontramos o pagamento deste pedido."));
         if(payment.getStatus()!=PaymentStatus.PAID)throw new IllegalStateException("Somente pedidos com pagamento aprovado podem solicitar cancelamento por este fluxo.");
+        deliveries.findByOrderId(id).ifPresent(br.com.fooddelivery.delivery.DeliveryTask::requireCancellable);
         boolean alreadyRequested="REQUESTED".equals(order.getCancellationRequestStatus());
         order.requestCancellation(note);
         if(!alreadyRequested)notifications.sendLinked(order.getStore().getOwner(),"Pedido com cancelamento solicitado","O cliente pediu o cancelamento do pedido "+order.getId().toString().substring(0,8)+". Revise a solicitação na aba Pedidos.","info",NotificationTarget.ORDER,order.getId());
         return orders.save(order);
     }
     @Transactional public Order decideCustomerCancellation(UUID id,UUID merchantId,boolean accepted){
-        Order order=orders.findById(id).orElseThrow();
+        Order order=orders.findByIdForUpdate(id).orElseThrow();
         if(!order.getStore().getOwner().getId().equals(merchantId))throw new org.springframework.security.access.AccessDeniedException("Pedido de outra loja.");
         order.decideCancellation(accepted);
         if(accepted){
+            cancelDelivery(id);
             order.transition(OrderStatus.CANCELLED);
             for(Order.OrderLine line:order.getLines())items.findById(line.getItemId()).ifPresent(item->{item.restore(line.getQuantity());items.save(item);});
             payments.findByOrderId(id).filter(p->p.getStatus()==PaymentStatus.PAID).ifPresent(Payment::requestFullRefund);
@@ -80,4 +85,5 @@ public class OrderService {
         return orders.save(order);
     }
     public record RequestedLine(UUID itemId,int quantity){}
+    private void cancelDelivery(UUID orderId){deliveries.findByOrderId(orderId).ifPresent(task->{task.cancel();deliveries.save(task);});}
 }

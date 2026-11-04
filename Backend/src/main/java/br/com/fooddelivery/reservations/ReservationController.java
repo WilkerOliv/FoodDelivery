@@ -208,7 +208,7 @@ public class ReservationController {
         }
         notifications.send(reservation.getCustomer(), "Reserva atualizada",
                 reservation.getStore().getName() + ": sua reserva agora está “"
-                        + change.status().name().toLowerCase(java.util.Locale.ROOT).replace('_', ' ') + "”.",
+                        + change.status().descriptionPtBr() + "”.",
                 "info");
         return view(reservations.save(reservation), payment);
     }

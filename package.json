@@ -2,6 +2,9 @@
   "name": "pronto-food-delivery",
   "private": true,
   "scripts": {
-    "start": "python3 scripts/dev.py"
+    "start": "python3 scripts/dev.py",
+    "start:demo": "python3 scripts/homologacao.py",
+    "start:demo:mailpit": "python3 scripts/homologacao.py --mailpit",
+    "test:demo": "python3 scripts/test_homologacao.py"
   }
 }

@@ -13,6 +13,10 @@ import java.time.Duration;
 
 @Component
 public class RecoveryMessageSender {
+    @org.springframework.beans.factory.annotation.Autowired
+    private br.com.fooddelivery.config.DemoEnvironment demo;
+    @Value("${app.demo.mailpit:false}")
+    private boolean mailpit;
     private final ObjectProvider<JavaMailSender> mailSender;
     private final String emailFrom;
     private final boolean whatsappEnabled;
@@ -41,6 +45,7 @@ public class RecoveryMessageSender {
     }
 
     public void sendEmail(String recipient, String code) {
+        if (demo != null && demo.enabled()) { demo.capture("EMAIL", recipient, code); if(!mailpit)return; }
         JavaMailSender sender = mailSender.getIfAvailable();
         if (sender == null) throw new IllegalStateException("SMTP não configurado.");
         SimpleMailMessage message = new SimpleMailMessage();
@@ -50,6 +55,7 @@ public class RecoveryMessageSender {
     }
 
     public void sendWhatsApp(String phone, String code) {
+        if (demo != null && demo.enabled()) { demo.capture("WHATSAPP", phone, code); return; }
         if (!whatsappEnabled || phoneNumberId.isBlank() || accessToken.isBlank())
             throw new IllegalStateException("WhatsApp Cloud não configurado.");
         String recipient = phone.replaceAll("\\D", "");

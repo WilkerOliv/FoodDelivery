@@ -32,7 +32,7 @@ public class CustomerAddressController {
     @PostMapping @ResponseStatus(HttpStatus.CREATED) @Transactional
     public AddressView create(@Valid @RequestBody AddressRequest request, Authentication auth) {
         UUID owner = subject(auth);
-        Account account = accounts.findById(owner).orElseThrow();
+        Account account = accounts.findByIdForUpdate(owner).orElseThrow();
         boolean makeDefault = request.defaultAddress() || !addresses.existsByAccountId(owner);
         if (makeDefault) addresses.findByAccountIdOrderByDefaultAddressDescIdAsc(owner).forEach(a -> a.setDefaultAddress(false));
         CustomerAddress saved = addresses.save(new CustomerAddress(account, label(request.label()), request.addressLine().trim(),
@@ -45,6 +45,7 @@ public class CustomerAddressController {
     @PutMapping("/{id}") @Transactional
     public AddressView update(@PathVariable UUID id, @Valid @RequestBody AddressRequest request, Authentication auth) {
         UUID owner = subject(auth);
+        accounts.findByIdForUpdate(owner).orElseThrow();
         CustomerAddress address = addresses.findByIdAndAccountId(id, owner).orElseThrow();
         address.update(label(request.label()), request.addressLine().trim(), clean(request.addressComplement()),
                 request.neighborhood().trim(), request.city().trim(), request.state().trim().toUpperCase(), normalizeCep(request.postalCode()));
@@ -56,6 +57,7 @@ public class CustomerAddressController {
     @PatchMapping("/{id}/default") @Transactional
     public AddressView makeDefault(@PathVariable UUID id, Authentication auth) {
         UUID owner = subject(auth);
+        accounts.findByIdForUpdate(owner).orElseThrow();
         CustomerAddress address = addresses.findByIdAndAccountId(id, owner).orElseThrow();
         setDefault(owner, address); updateProfileAddress(address.getAccount(), address);
         return AddressView.from(address);
@@ -64,6 +66,7 @@ public class CustomerAddressController {
     @DeleteMapping("/{id}") @ResponseStatus(HttpStatus.NO_CONTENT) @Transactional
     public void delete(@PathVariable UUID id, Authentication auth) {
         UUID owner = subject(auth);
+        accounts.findByIdForUpdate(owner).orElseThrow();
         CustomerAddress address = addresses.findByIdAndAccountId(id, owner).orElseThrow();
         boolean wasDefault = address.isDefaultAddress();
         addresses.delete(address);

@@ -47,11 +47,16 @@ public class PlatformRequestController {
 
     @PatchMapping("/admin/platform-requests/{id}/review") @PreAuthorize("hasRole('ADMIN')") @Transactional
     public RequestView review(@PathVariable UUID id,@Valid @RequestBody Review body,Authentication auth){
-        PlatformRequest request=requests.findById(id).orElseThrow(); Account reviewer=account(subject(auth));Account owner=request.getAccount();boolean approve=body.approved();
+        // Lock the owner before loading mutable state: two approvals must not overwrite roles.
+        UUID ownerId=requests.findAccountId(id).orElseThrow();
+        Account owner=accounts.findByIdForUpdate(ownerId).orElseThrow();
+        PlatformRequest request=requests.findByIdForUpdate(id).orElseThrow();
+        if(!"PENDING".equals(request.getStatus()))throw new IllegalArgumentException("Esta solicitação já foi analisada.");
+        Account reviewer=account(subject(auth));boolean approve=body.approved();
         switch(request.getRequestType()){
             case "ROLE" -> {if(approve){if(!owner.isActive())throw new IllegalArgumentException("Reative a conta antes de aprovar um novo perfil.");owner.setRole(request.getRequestedRole());accounts.save(owner);}}
             case "CITY" -> {if(approve){ServiceCity city=cities.findByCityIgnoreCaseAndStateIgnoreCase(request.getCity(),request.getState()).orElseGet(()->new ServiceCity(request.getCity(),request.getState(),request.getPostalCode()));city.enable(request.getPostalCode());cities.save(city);}}
-            case "STORE" -> {Store store=request.getStore();if(store==null)throw new IllegalArgumentException("A loja desta solicitação não foi encontrada.");if(approve&&(!owner.isActive()||!owner.getGrantedRoles().contains(AccountRole.MERCHANT)))throw new IllegalArgumentException("A conta do vendedor está suspensa ou sem acesso ativo. Reative o perfil antes de aprovar a loja.");store.setApproved(approve);store.setActive(approve);stores.save(store);}
+            case "STORE" -> {Store store=request.getStore();if(store!=null)store=stores.findByIdForUpdate(store.getId()).orElseThrow();if(store==null)throw new IllegalArgumentException("A loja desta solicitação não foi encontrada.");if(approve&&(!owner.isActive()||!owner.getGrantedRoles().contains(AccountRole.MERCHANT)))throw new IllegalArgumentException("A conta do vendedor está suspensa ou sem acesso ativo. Reative o perfil antes de aprovar a loja.");store.setApproved(approve);store.setActive(approve);stores.save(store);}
             default -> throw new IllegalArgumentException("Tipo de solicitação desconhecido.");
         }
         request.review(approve,reviewer,body.note()==null?null:body.note().trim());requests.save(request);

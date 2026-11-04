@@ -53,7 +53,7 @@ erDiagram
 - Perfis de cliente, vendedor e entregador pertencem à mesma conta. A solicitação de perfil é revisada pelo administrador; cada decisão aprovada adiciona o perfil à conta sem criar outro usuário.
 - A liberação de uma cidade e o cadastro de cada loja são solicitações independentes com histórico de revisão administrativa.
 - O administrador também pode cadastrar cidades diretamente em **Definições > Cidades**; cidade suspensa continua registrada e pode ser reativada.
-- O CNPJ da loja é opcional, mas, quando informado, deve ser válido, único e imutável. Lojas adicionais passam pela mesma aprovação individual.
+- O CNPJ da loja é opcional. Quando informado, deve ser válido e único; o vendedor não o troca depois de vinculado. O administrador pode corrigir ou remover o documento em **Lojas > Editar dados da loja**, com evento de auditoria. Lojas adicionais passam pela aprovação individual.
 - Valores monetários são inteiros em centavos (BRL), sem aritmética de ponto flutuante.
 - Cada loja configura sua própria **taxa fixa de entrega**, cobrada somente em pedidos de delivery. Ela é copiada para o pedido no checkout; uma edição futura do perfil da loja não altera pedidos existentes. O valor permitido atualmente vai de R$ 0,00 a R$ 1.000,00.
 - Cada loja também configura a comissão do marketplace em pontos-base (0% a 50%). A comissão e a taxa de entrega são conceitos separados.
@@ -68,6 +68,9 @@ erDiagram
 - Uma loja só é considerada disponível quando está ativa e aprovada e sua conta proprietária está ativa com o perfil de vendedor liberado. Suspender a conta ou o perfil de vendedor também desativa e retira a aprovação das lojas; reativar a conta não republica automaticamente as lojas.
 - Cada requisição autenticada valida assinatura, emissor e validade do JWT e consulta se a conta do titular continua ativa; a suspensão administrativa revoga imediatamente o acesso do token existente.
 - A atribuição de entregador é feita por atualização condicional atômica: só uma requisição consegue atribuir uma tarefa ofertada e ainda sem entregador.
+- Mutações do pedido usam bloqueio da linha do pedido. Ofertar entrega é idempotente; cancelamento permitido cancela também a tarefa. Depois de coletar, o cancelamento comum é recusado e exige atendimento. A conclusão pelo entregador conclui o pedido; o vendedor não pode concluir um delivery antecipadamente. Endereço e observação deixam de compor a resposta das tarefas encerradas.
+- Alterações do livro de endereços bloqueiam a conta antes de escolher o endereço padrão, serializando mudanças concorrentes dessa pessoa.
+- Alterar telefone ou corrigir o e-mail administrativamente invalida códigos de verificação e recuperação pendentes. Um código emitido para o contato anterior não comprova o novo contato.
 - Estados de pedido, reserva, pagamento e entrega têm transições controladas no domínio. Pagamentos não confirmam pedidos cancelados sem iniciar o fluxo de estorno.
 - Estoque é reservado ao criar pedido; é liberado quando o checkout expira e reposto quando a loja rejeita/cancela o pedido. Itens de serviço não usam estoque.
 - O cliente pode cancelar pedido ou reserva antes da aprovação do pagamento; a ação falha/encerra o checkout, libera estoque/horário e avisa a loja. Depois do pagamento, o cliente pode solicitar cancelamento e a loja aceita ou recusa. Aceitar pedido pago repõe estoque e inicia estorno integral; aceitar reserva libera o intervalo e inicia estorno se houve pagamento online. O estado de estorno só é concluído após confirmação do provedor.
@@ -109,3 +112,7 @@ Cancelamento/recusa pela loja de pedido ou reserva já pago gera pedido de estor
 - O estorno automático precisa de homologação com credenciais reais/de teste do Mercado Pago. Em Marketplace Split 1:1, saldo insuficiente na conta do vendedor pode exigir ação manual no provedor.
 - Conciliação contábil/liquidação, chargebacks e saque Pix iniciado pela plataforma ainda não fazem parte do modelo implementado. Cancelamentos pós-pagamento iniciados pelo cliente seguem solicitação com decisão da loja.
 - Capas são gravadas em armazenamento de arquivos configurável; o banco mantém somente `stores.cover_image_url`.
+
+## Moderação de capas — V24
+
+`store_cover_submissions` referencia a loja e guarda arquivo aleatório único, status, motivo, data de criação, data/administrador da decisão e versão otimista. Estados: PENDING, APPROVED, REJECTED, SUPERSEDED. Índices por loja/data e status/data atendem cota e fila. Aprovação troca `stores.cover_image_url` dentro da mesma transação de auditoria/notificação. Arquivos são persistidos separadamente e precisam acompanhar o backup do banco. Rejeitados/substituídos ficam privados; não há purga automática de histórico.

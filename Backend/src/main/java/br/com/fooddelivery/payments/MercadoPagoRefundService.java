@@ -19,6 +19,8 @@ import org.springframework.web.client.RestClientResponseException;
 /** Retries full refunds with the same provider idempotency key after ambiguous failures. */
 @Service
 public class MercadoPagoRefundService {
+    @org.springframework.beans.factory.annotation.Autowired
+    private br.com.fooddelivery.config.DemoEnvironment demo;
     private static final int MAX_AMBIGUOUS_ATTEMPTS = 8;
     private final PaymentRepository payments;
     private final MarketplaceAccountService marketplaceAccounts;
@@ -43,6 +45,7 @@ public class MercadoPagoRefundService {
     public void attempt(UUID paymentId) {
         Payment payment = payments.findById(paymentId).orElse(null);
         if (payment == null || !payment.beginRefundAttempt()) return;
+        if (demo != null && demo.enabled()) { payment.refundSucceeded("local-simulator-refund-"+paymentId); return; }
         if (payment.getProviderReference() == null || !payment.getProviderReference().matches("[0-9]{1,30}")) {
             payment.refundNeedsReview("O Mercado Pago não retornou o identificador do pagamento. Verifique a transação no painel do provedor.");
             return;

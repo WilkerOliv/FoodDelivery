@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
+@org.springframework.context.annotation.Profile("!homologacao")
 @RequestMapping("/api/v1/geography")
 public class GeocodingController {
     private static final long CACHE_TTL_MILLIS = Duration.ofHours(24).toMillis();

@@ -28,12 +28,24 @@ import static org.mockito.Mockito.when;
 class AdminProfileCpfTest {
     private final AccountRepository accounts = mock(AccountRepository.class);
     private final AdminAuditService audit = mock(AdminAuditService.class);
-    private final AdminController controller = new AdminController(accounts, mock(StoreRepository.class), mock(org.springframework.security.crypto.password.PasswordEncoder.class), mock(NotificationService.class), mock(ServiceCityRepository.class), mock(StoreCategoryRepository.class), audit);
+    private final br.com.fooddelivery.identity.PasswordRecoveryService recovery = mock(br.com.fooddelivery.identity.PasswordRecoveryService.class);
+    private final AdminController controller = new AdminController(accounts, mock(StoreRepository.class), mock(org.springframework.security.crypto.password.PasswordEncoder.class), mock(NotificationService.class), mock(ServiceCityRepository.class), mock(StoreCategoryRepository.class), audit, recovery);
     private final UUID id = UUID.fromString("00000000-0000-0000-0000-000000000011");
 
     @AfterEach
     void clearSecurityContext() {
         SecurityContextHolder.clearContext();
+    }
+
+    @Test
+    void changingEmailInvalidatesPreviouslyIssuedRecoveryCodes() {
+        Account account = account(AccountRole.ADMIN);
+        when(accounts.findByIdForUpdate(id)).thenReturn(Optional.of(account));
+        when(accounts.save(account)).thenReturn(account);
+        authenticateAs(id);
+        controller.updateAccountProfile(id,new AdminController.AdminProfileUpdate("Administrador","novo@example.test",null,null,null,null,null,null,null,null,false));
+        org.mockito.Mockito.verify(recovery).invalidatePhoneCodes(account);
+        org.junit.jupiter.api.Assertions.assertEquals("novo@example.test",account.getEmail());
     }
 
     @Test

@@ -135,7 +135,8 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http, DaoAuthenticationProvider provider,
                                             JwtAuthenticationConverter jwtConverter,
                                             AuthenticatedAccessManager authenticatedAccessManager,
-                                            @Value("${app.web.allowed-origins}") String configuredOrigins) throws Exception {
+                                            @Value("${app.web.allowed-origins}") String configuredOrigins,
+                                            @Value("${app.security.cookie-name:fooddelivery_session}") String cookieName) throws Exception {
         return http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource(configuredOrigins)))
                 .csrf(csrf -> csrf.disable())
@@ -150,9 +151,10 @@ public class SecurityConfig {
                         .permissionsPolicy(policy -> policy.policy(
                                 "camera=(), microphone=(), geolocation=(self)")))
                 .authenticationProvider(provider)
-                .addFilterBefore(new SessionOriginFilter(configuredOrigins), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new SessionOriginFilter(configuredOrigins,cookieName), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new AuthenticationRateLimitFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.GET, "/api/v1/demo/status").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/logout", "/api/v1/auth/operator-applications", "/api/v1/auth/password-recovery", "/api/v1/auth/password-recovery/reset").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/payments/mercadopago/callback").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/store-assets/**").permitAll()
@@ -165,7 +167,7 @@ public class SecurityConfig {
                         .anyRequest().access(authenticatedAccessManager))
                 .sessionManagement(session -> session.sessionCreationPolicy(org.springframework.security.config.http.SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(oauth -> oauth
-                        .bearerTokenResolver(new CookieOrBearerTokenResolver())
+                        .bearerTokenResolver(new CookieOrBearerTokenResolver(cookieName))
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtConverter)))
                 .build();
     }

@@ -22,6 +22,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import java.time.Instant;
 
 @SpringBootTest(properties = {
+    "app.security.jwt-secret=dGVzdC1vbmx5LWtleS1uZXZlci11c2UtaW4tcHJvZHVjdGlvbg==",
         "spring.datasource.url=jdbc:h2:mem:recovery-schema;MODE=PostgreSQL;DB_CLOSE_DELAY=-1",
         "spring.datasource.username=sa", "spring.datasource.password="
 })

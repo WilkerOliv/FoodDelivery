@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Value;
 @RequestMapping("/api/v1/admin")
 @PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
+    private final br.com.fooddelivery.identity.PasswordRecoveryService recovery;
     private final AccountRepository accounts;
     private final StoreRepository stores;
     private final PasswordEncoder encoder;
@@ -43,14 +44,14 @@ public class AdminController {
     @Value("${app.recovery.whatsapp.enabled:false}") private boolean whatsappEnabled;
     @Value("${app.recovery.whatsapp.phone-number-id:}") private String whatsappPhoneId;
     @Value("${app.recovery.whatsapp.access-token:}") private String whatsappToken;
-    @Value("${app.ai.openai.api-key:}") private String openAiKey;
     @Value("${app.payment.mercadopago.client-id:}") private String mercadoPagoClientId;
     @Value("${app.payment.mercadopago.client-secret:}") private String mercadoPagoClientSecret;
     @Value("${app.payment.mercadopago.token-encryption-key:}") private String mercadoPagoEncryptionKey;
     @Value("${app.payment.mercadopago.webhook-secret:}") private String mercadoPagoWebhookSecret;
     @Value("${app.payment.mercadopago.notification-base-url:}") private String mercadoPagoNotificationUrl;
 
-    public AdminController(AccountRepository accounts, StoreRepository stores, PasswordEncoder encoder, NotificationService notifications, ServiceCityRepository serviceCities, StoreCategoryRepository storeCategories, AdminAuditService auditService) {
+    public AdminController(AccountRepository accounts, StoreRepository stores, PasswordEncoder encoder, NotificationService notifications, ServiceCityRepository serviceCities, StoreCategoryRepository storeCategories, AdminAuditService auditService, br.com.fooddelivery.identity.PasswordRecoveryService recovery) {
+        this.recovery = recovery;
         this.accounts = accounts;
         this.stores = stores;
         this.encoder = encoder;
@@ -136,7 +137,7 @@ public class AdminController {
         return List.of(
                 integration("SMTP", "E-mail de recuperação e avisos", ready(smtpHost, smtpUsername, smtpPassword), "SMTP_HOST, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD, RECOVERY_EMAIL_FROM"),
                 integration("WHATSAPP", "WhatsApp Cloud para códigos e avisos", whatsappEnabled && ready(whatsappPhoneId, whatsappToken), "WHATSAPP_CLOUD_ENABLED, WHATSAPP_PHONE_NUMBER_ID, WHATSAPP_ACCESS_TOKEN, WHATSAPP_OTP_TEMPLATE"),
-                integration("OPENAI", "Geração de imagens para lojas", ready(openAiKey), "OPENAI_API_KEY, OPENAI_IMAGE_MODEL"),
+                new IntegrationView("STORE_IMAGES", "Capas enviadas pelo vendedor", true, "Upload local com aprovação administrativa", "Sem chave ou API de IA; PNG/JPG ajustado para 1.200 × 600 pixels"),
                 integration("MERCADOPAGO", "Checkout, pagamentos e webhooks", ready(mercadoPagoClientId, mercadoPagoClientSecret, mercadoPagoEncryptionKey, mercadoPagoWebhookSecret, mercadoPagoNotificationUrl), "MP_CLIENT_ID, MP_CLIENT_SECRET, MP_TOKEN_ENCRYPTION_KEY, MP_WEBHOOK_SECRET, MP_NOTIFICATION_BASE_URL"),
                 integration("VIACEP", "Consulta pública de CEP", true, "Integração pública; não exige chave"),
                 integration("MAPAS", "Mapa e localização das cidades", true, "Mapa incorporado; requer conexão com a internet")
@@ -160,6 +161,8 @@ public class AdminController {
             accounts.findByCpf(cpf).filter(existing -> !existing.getId().equals(id))
                     .ifPresent(existing -> { throw new IllegalArgumentException("Este CPF já está vinculado a outra conta."); });
         }
+        if (!account.getEmail().equalsIgnoreCase(email)
+                || !java.util.Objects.equals(phoneDigits(account.getPhone()),phoneDigits(request.phone()))) recovery.invalidatePhoneCodes(account);
         account.updateProfile(request.name().trim(), clean(request.phone()), clean(request.addressLine()), clean(request.addressComplement()),
                 clean(request.neighborhood()), clean(request.city()), clean(request.state()), clean(request.postalCode()));
         account.changeEmailByAdministrator(email);
@@ -176,6 +179,21 @@ public class AdminController {
     }
 
     private static String clean(String value) { return value == null || value.isBlank() ? null : value.trim(); }
+    private static String phoneDigits(String value) { return value == null ? "" : value.replaceAll("\\D", ""); }
+
+    @PutMapping("/stores/{id}/profile")
+    @org.springframework.transaction.annotation.Transactional
+    public AdminStoreView updateStoreProfile(@PathVariable UUID id,@Valid @RequestBody br.com.fooddelivery.catalog.CatalogController.StoreRequest request) {
+        Store store=stores.findByIdForUpdate(id).orElseThrow();
+        String category=request.category().trim();
+        if(!StoreCategories.isSupported(category)&&storeCategories.findByNameIgnoreCase(category).isEmpty())throw new IllegalArgumentException("Escolha uma categoria cadastrada.");
+        store.update(request.name().trim(),clean(request.description()),request.address().trim(),request.city().trim(),request.state(),category,store.isActive(),request.deliveryFeeCents());
+        store.setTimezone(request.timezone());store.setCoordinates(request.latitude(),request.longitude());
+        store.correctCnpjByAdministrator(request.cnpj());
+        stores.save(store);
+        audit("STORE_PROFILE_UPDATED","STORE",id,"Dados do estabelecimento corrigidos pelo administrador.");
+        return adminStoreView(store);
+    }
 
     @PostMapping("/operators")
     @ResponseStatus(HttpStatus.CREATED)
@@ -315,10 +333,12 @@ public class AdminController {
     @GetMapping("/stores")
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<AdminStoreView> stores() {
-        return stores.findAll().stream().map(store -> new AdminStoreView(store.getId(), store.getName(),
+        return stores.findAll().stream().map(AdminController::adminStoreView).toList();
+    }
+    private static AdminStoreView adminStoreView(Store store){return new AdminStoreView(store.getId(), store.getName(),
                 store.getDescription(), store.getCategory(), store.getAddress(), store.getCity(), store.getState(), store.getCnpj(), store.isActive(), store.isApproved(),
                 store.getOwner().getName(), store.getOwner().getEmail(), store.getMarketplaceFeeBps() / 100.0,
-                store.getDeliveryFeeCents(), store.getCoverImageUrl())).toList();
+                store.getDeliveryFeeCents(), store.getCoverImageUrl(),store.getTimezone(),store.getLatitude(),store.getLongitude());
     }
 
     @PatchMapping("/stores/{id}/approval")
@@ -407,7 +427,7 @@ public class AdminController {
                                    java.time.Instant createdAt) {}
     public record AdminStoreView(UUID id, String name, String description, String category, String address, String city, String state, String cnpj,
                                  boolean active, boolean approved, String ownerName, String ownerEmail,
-                                 double commissionPercent, long deliveryFeeCents, String coverImageUrl) {}
+                                 double commissionPercent, long deliveryFeeCents, String coverImageUrl,String timezone,Double latitude,Double longitude) {}
     public record ServiceCityRequest(@NotBlank @Size(max=100) String city,
                                      @NotBlank @jakarta.validation.constraints.Pattern(regexp="[A-Za-z]{2}") String state,
                                      @jakarta.validation.constraints.Pattern(regexp="^$|\\d{5}-?\\d{3}") String postalCode,
