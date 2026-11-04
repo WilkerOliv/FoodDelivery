@@ -1,0 +1,10 @@
+# Arquivos gerados localmente pelo Python e dependências do frontend.
+__pycache__/
+*.py[cod]
+node_modules/
+
+# Configuração privada e logs; exemplos podem ser versionados.
+.env
+.env.*
+!.env.example
+*.log
