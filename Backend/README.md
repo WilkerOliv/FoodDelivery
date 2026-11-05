@@ -44,7 +44,7 @@ O administrador inicial é `admin@fooddelivery.local`; consulte a senha aleatór
 - O vendedor configura a disponibilidade opcionalmente em **Minha loja > Dados da loja > Funcionamento e exceções**. Cada dia da semana pode ter seu próprio horário, inclusive horários que cruzam a meia-noite. Dias desmarcados ficam fechados quando a regra está ativa.
 - Sem ativar a regra semanal, lojas antigas continuam sem restrição de horário. Exceções datadas (fechamento total ou horário especial) valem mesmo com a regra semanal desativada e substituem a rotina na data indicada.
 - **Fechar hoje** grava uma exceção para a data local da loja; é possível remover a exceção para restaurar a rotina. Observações são privadas e não aparecem na consulta pública.
-- O backend verifica o horário local IANA ao criar pedido, ao iniciar checkout de pedido e ao criar reserva. Reservas precisam começar durante o horário de abertura; não há duração do serviço modelada, então o sistema ainda não consegue validar o horário final do atendimento.
+- O backend verifica o horário local IANA ao criar pedido, ao iniciar checkout de pedido e ao criar reserva. O intervalo inteiro da reserva precisa caber nos turnos abertos, sem atravessar pausas. Reservas futuras não exigem que a loja esteja aberta agora.
 - Endpoints: `GET/PUT /api/v1/merchant/stores/{id}/hours` (vendedor dono da loja) e `GET /api/v1/stores/{id}/hours` (consulta pública sem observações privadas). Horários usam `HH:mm`; exceções usam data `YYYY-MM-DD` e intervalos de meia-noite são aceitos.
 
 ## Atendimento
@@ -127,3 +127,7 @@ Ainda não estão implementados MFA, notificações transacionais por push, rote
 ## Modelo de dados
 
 O esquema inicial está em `src/main/resources/db/migration-common/V1__initial_schema.sql`; as migrações V20 a V24 adicionam duração de serviço e intervalos de reserva, pedidos de cancelamento do cliente, coordenadas opcionais de loja auditoria administrativa e moderação de capas. Flyway aplica as migrações comuns no PostgreSQL e no H2 usado nos testes. Valores monetários ficam em centavos e instantes são armazenados em UTC. A criação de reserva bloqueia a linha da loja durante a validação de disponibilidade e a gravação; a chave única por recurso/horário é uma proteção adicional contra duplicidade exata. Veja `Documentacao/Funcionamento_do_Projeto.md` e `Documentacao/Arquitetura_e_operacao.md`.
+
+## Expediente e impacto na agenda
+
+Até seis turnos por dia, pausas, 24 horas e exceções datadas. Vendedor e administrador usam prévia antes de confirmar alterações com impacto. A V26 guarda a exceção individual e o aviso de reservas preservadas/canceladas. Veja [regras, contratos, segurança e testes](../Documentacao/Funcionamento_e_reservas.md).

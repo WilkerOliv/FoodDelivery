@@ -44,7 +44,7 @@ Não confundir escolher uma cidade no mapa com comprovar presença física. Não
 
 - “Minha loja” permite alternar o estabelecimento quando o titular possui mais de um. Confira o seletor “Loja em edição” antes de salvar.
 - “Resumo” informa publicação e próximos passos. A aprovação administrativa não cobra uma taxa de aprovação.
-- “Dados da loja” edita nome, categoria, endereço, região, descrição, fuso, coordenadas e taxa. CNPJ é opcional no cadastro; correção posterior de documento vinculado cabe ao administrador.
+- “Dados da loja” edita nome, categoria, endereço, região, descrição, fuso, ponto opcional no mapa, modalidades de atendimento e taxa. CNPJ é opcional no cadastro; correção posterior de documento vinculado cabe ao administrador.
 - “Adicionar outra loja” cria estabelecimento separado com análise própria. Não é a edição da loja atual.
 - “Catálogo” cadastra produto ou serviço. Produto usa estoque. Serviço usa duração e cobrança antecipada/posterior. A escolha de cobrança posterior exige atenção ao risco de não comparecimento/inadimplência.
 - “Editar” permite mudar os campos do item, inclusive tipo, duração e cobrança. “Remover” pausa a publicação preservando histórico; “Reativar” devolve à vitrine quando as demais condições forem atendidas.
@@ -58,9 +58,9 @@ Não confundir escolher uma cidade no mapa com comprovar presença física. Não
 3. Marque somente os dias em que abre e defina início/fim de cada um. É possível segunda/quarta/sexta, só um dia ou toda semana com domingo diferente.
 4. Salve funcionamento. O servidor verifica compras e o intervalo das reservas.
 5. Para imprevisto, use “Fechar hoje” ou escolha uma data e salve exceção de dia fechado/horário especial.
-6. Revise compromissos já confirmados e comunique clientes; registrar fechamento não é uma comunicação ou cancelamento automático de toda a agenda.
+6. Se houver reservas afetadas, revise a prévia e escolha manter e avisar, ou cancelar e avisar. O cancelamento libera a agenda e solicita estorno de pagamentos aprovados; atendimentos em andamento são preservados.
 
-Há uma faixa por dia; múltiplos turnos com intervalo e rotina individual por profissional ainda não são suportados.
+Cada dia aceita até seis turnos, pausas e a opção 24 horas. A rotina individual por profissional ainda não é modelada. Consulte [Funcionamento e reservas](Funcionamento_e_reservas.md) para regras e testes.
 
 ## Vendedor: operação
 
@@ -99,3 +99,7 @@ Há uma faixa por dia; múltiplos turnos com intervalo e rotina individual por p
 Botões principais têm texto e contraste visível antes do hover. Campos têm rótulo; mensagens explicam resultado/falha. Janelas usam Tab/Shift+Tab, Escape e devolução de foco. Menus móveis exibem destinos prioritários e “Menu”. Formulários quebram para uma coluna em telas estreitas; uma janela longa pode rolar verticalmente para tornar todos os campos alcançáveis.
 
 Se um fornecedor falhar, preserve os dados já preenchidos quando possível, explique a falha e permita tentar novamente. Não repetir pagamento cegamente; consulte o estado existente antes de criar outra operação.
+
+## Localização e atendimento
+
+O vendedor marca opcionalmente a entrada do comércio no mapa e salva o perfil. O cliente encontra as lojas marcadas em **Ver lojas no mapa** e vê as bandeiras Entrega, Retirada na loja e Agendamento presencial. Somente Entrega habilitada apresenta **Somente delivery**. Opções desativadas são rejeitadas pela API, além de indisponíveis na interface. [Guia completo e verificação](Mapa_e_atendimento_das_lojas.md).

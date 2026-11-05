@@ -29,7 +29,7 @@ class AdminProfileCpfTest {
     private final AccountRepository accounts = mock(AccountRepository.class);
     private final AdminAuditService audit = mock(AdminAuditService.class);
     private final br.com.fooddelivery.identity.PasswordRecoveryService recovery = mock(br.com.fooddelivery.identity.PasswordRecoveryService.class);
-    private final AdminController controller = new AdminController(accounts, mock(StoreRepository.class), mock(org.springframework.security.crypto.password.PasswordEncoder.class), mock(NotificationService.class), mock(ServiceCityRepository.class), mock(StoreCategoryRepository.class), audit, recovery);
+    private final AdminController controller = new AdminController(accounts, mock(StoreRepository.class), mock(org.springframework.security.crypto.password.PasswordEncoder.class), mock(NotificationService.class), mock(ServiceCityRepository.class), mock(StoreCategoryRepository.class), audit, recovery, mock(br.com.fooddelivery.catalog.StoreHoursChangeService.class));
     private final UUID id = UUID.fromString("00000000-0000-0000-0000-000000000011");
 
     @AfterEach

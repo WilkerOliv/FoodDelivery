@@ -64,7 +64,9 @@ O fechamento é exclusivo: uma compra exatamente às 20h não passa quando a loj
 
 Na reserva, o cliente escolhe profissional ou primeiro disponível. O intervalo usa duração congelada no momento da reserva; editar um serviço depois não muda compromissos existentes. A transação bloqueia a loja para consultar conflito e criar o slot. O recurso é o profissional ou uma chave fixa para a loja quando não existe profissional. Há proteção de duplicidade e validação de sobreposição.
 
-**Limites reais:** uma faixa por dia, sem vários turnos/pausas; disponibilidade individual semanal do profissional não é modelada; não existe agenda com capacidade maior que um por recurso. O seletor atual é data/hora nativo, não uma grade que lista somente horários livres. O conflito pode exigir escolher outro horário. Alterar o expediente não equivale a cancelar e comunicar automaticamente todos os compromissos previamente confirmados; o comerciante precisa resolver ocorrências com clientes.
+O expediente admite até seis turnos por dia, pausas, 24 horas e exceções datadas. Alterações com impacto exigem prévia e decisão: manter reservas e avisar ou cancelar, liberar slots e solicitar estorno quando aplicável. Atendimentos iniciados são preservados. Reservas futuras independem da abertura no instante da compra. Veja [Funcionamento e reservas](Funcionamento_e_reservas.md).
+
+**Limites reais:** disponibilidade individual semanal do profissional e capacidade maior que um por recurso não são modeladas. O seletor atual é data/hora nativo, não uma grade que lista somente horários livres. O conflito pode exigir escolher outro horário.
 
 ## 6. Compras, estoque e cancelamentos
 

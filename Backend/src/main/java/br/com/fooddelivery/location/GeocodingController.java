@@ -41,7 +41,7 @@ public class GeocodingController {
     public JsonNode search(@RequestParam("query") String query) {
         String normalized = query == null ? "" : query.trim().replaceAll("\\s+", " ");
         if (normalized.length() < 2 || normalized.length() > 100) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Informe uma cidade com até 100 caracteres.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Informe uma cidade ou endereço com até 100 caracteres.");
         }
         URI uri = UriComponentsBuilder.fromPath("/search")
                 .queryParam("format", "jsonv2")

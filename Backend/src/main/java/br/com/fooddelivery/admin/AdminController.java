@@ -38,6 +38,7 @@ public class AdminController {
     private final ServiceCityRepository serviceCities;
     private final StoreCategoryRepository storeCategories;
     private final AdminAuditService auditService;
+    private final br.com.fooddelivery.catalog.StoreHoursChangeService hoursChanges;
     @Value("${spring.mail.host:}") private String smtpHost;
     @Value("${spring.mail.username:}") private String smtpUsername;
     @Value("${spring.mail.password:}") private String smtpPassword;
@@ -50,8 +51,8 @@ public class AdminController {
     @Value("${app.payment.mercadopago.webhook-secret:}") private String mercadoPagoWebhookSecret;
     @Value("${app.payment.mercadopago.notification-base-url:}") private String mercadoPagoNotificationUrl;
 
-    public AdminController(AccountRepository accounts, StoreRepository stores, PasswordEncoder encoder, NotificationService notifications, ServiceCityRepository serviceCities, StoreCategoryRepository storeCategories, AdminAuditService auditService, br.com.fooddelivery.identity.PasswordRecoveryService recovery) {
-        this.recovery = recovery;
+    public AdminController(AccountRepository accounts, StoreRepository stores, PasswordEncoder encoder, NotificationService notifications, ServiceCityRepository serviceCities, StoreCategoryRepository storeCategories, AdminAuditService auditService, br.com.fooddelivery.identity.PasswordRecoveryService recovery, br.com.fooddelivery.catalog.StoreHoursChangeService hoursChanges) {
+        this.recovery = recovery;this.hoursChanges=hoursChanges;
         this.accounts = accounts;
         this.stores = stores;
         this.encoder = encoder;
@@ -131,14 +132,16 @@ public class AdminController {
         return ServiceCityView.of(saved);
     }
 
-    /** Returns readiness only; credentials are always configured outside the browser. */
+    @org.springframework.beans.factory.annotation.Autowired private br.com.fooddelivery.settings.IntegrationSettings privateSettings;
+    private String setting(String key,String fallback){return privateSettings==null?fallback:privateSettings.value(key,fallback);}
+    /** Returns readiness only; secret values are never returned to the browser. */
     @GetMapping("/integrations")
     public List<IntegrationView> integrations() {
         return List.of(
-                integration("SMTP", "E-mail de recuperação e avisos", ready(smtpHost, smtpUsername, smtpPassword), "SMTP_HOST, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD, RECOVERY_EMAIL_FROM"),
-                integration("WHATSAPP", "WhatsApp Cloud para códigos e avisos", whatsappEnabled && ready(whatsappPhoneId, whatsappToken), "WHATSAPP_CLOUD_ENABLED, WHATSAPP_PHONE_NUMBER_ID, WHATSAPP_ACCESS_TOKEN, WHATSAPP_OTP_TEMPLATE"),
+                integration("SMTP", "E-mail de recuperação e avisos", ready(setting("SMTP_HOST",smtpHost), setting("SMTP_USERNAME",smtpUsername), setting("SMTP_PASSWORD",smtpPassword)), "SMTP_HOST, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD, RECOVERY_EMAIL_FROM"),
+                integration("WHATSAPP", "WhatsApp Cloud para códigos e avisos", Boolean.parseBoolean(setting("WHATSAPP_CLOUD_ENABLED",Boolean.toString(whatsappEnabled))) && ready(setting("WHATSAPP_PHONE_NUMBER_ID",whatsappPhoneId),setting("WHATSAPP_ACCESS_TOKEN",whatsappToken)), "WHATSAPP_CLOUD_ENABLED, WHATSAPP_PHONE_NUMBER_ID, WHATSAPP_ACCESS_TOKEN, WHATSAPP_OTP_TEMPLATE"),
                 new IntegrationView("STORE_IMAGES", "Capas enviadas pelo vendedor", true, "Upload local com aprovação administrativa", "Sem chave ou API de IA; PNG/JPG ajustado para 1.200 × 600 pixels"),
-                integration("MERCADOPAGO", "Checkout, pagamentos e webhooks", ready(mercadoPagoClientId, mercadoPagoClientSecret, mercadoPagoEncryptionKey, mercadoPagoWebhookSecret, mercadoPagoNotificationUrl), "MP_CLIENT_ID, MP_CLIENT_SECRET, MP_TOKEN_ENCRYPTION_KEY, MP_WEBHOOK_SECRET, MP_NOTIFICATION_BASE_URL"),
+                integration("MERCADOPAGO", "Checkout, pagamentos e webhooks", ready(setting("MP_CLIENT_ID",mercadoPagoClientId),setting("MP_CLIENT_SECRET",mercadoPagoClientSecret),mercadoPagoEncryptionKey,setting("MP_WEBHOOK_SECRET",mercadoPagoWebhookSecret),mercadoPagoNotificationUrl), "MP_CLIENT_ID, MP_CLIENT_SECRET, MP_TOKEN_ENCRYPTION_KEY, MP_WEBHOOK_SECRET, MP_NOTIFICATION_BASE_URL"),
                 integration("VIACEP", "Consulta pública de CEP", true, "Integração pública; não exige chave"),
                 integration("MAPAS", "Mapa e localização das cidades", true, "Mapa incorporado; requer conexão com a internet")
         );
@@ -188,7 +191,8 @@ public class AdminController {
         String category=request.category().trim();
         if(!StoreCategories.isSupported(category)&&storeCategories.findByNameIgnoreCase(category).isEmpty())throw new IllegalArgumentException("Escolha uma categoria cadastrada.");
         store.update(request.name().trim(),clean(request.description()),request.address().trim(),request.city().trim(),request.state(),category,store.isActive(),request.deliveryFeeCents());
-        store.setTimezone(request.timezone());store.setCoordinates(request.latitude(),request.longitude());
+        hoursChanges.requireSafeTimezoneChange(store,request.timezone()==null||request.timezone().isBlank()?"America/Sao_Paulo":request.timezone());
+        store.setTimezone(request.timezone());store.setCoordinates(request.latitude(),request.longitude());store.configureFulfillment(request.deliveryEnabled(),request.pickupEnabled(),request.inPersonEnabled());
         store.correctCnpjByAdministrator(request.cnpj());
         stores.save(store);
         audit("STORE_PROFILE_UPDATED","STORE",id,"Dados do estabelecimento corrigidos pelo administrador.");
@@ -338,7 +342,7 @@ public class AdminController {
     private static AdminStoreView adminStoreView(Store store){return new AdminStoreView(store.getId(), store.getName(),
                 store.getDescription(), store.getCategory(), store.getAddress(), store.getCity(), store.getState(), store.getCnpj(), store.isActive(), store.isApproved(),
                 store.getOwner().getName(), store.getOwner().getEmail(), store.getMarketplaceFeeBps() / 100.0,
-                store.getDeliveryFeeCents(), store.getCoverImageUrl(),store.getTimezone(),store.getLatitude(),store.getLongitude());
+                store.getDeliveryFeeCents(), store.getCoverImageUrl(),store.getTimezone(),store.getLatitude(),store.getLongitude(),store.isDeliveryEnabled(),store.isPickupEnabled(),store.isInPersonEnabled());
     }
 
     @PatchMapping("/stores/{id}/approval")
@@ -427,7 +431,7 @@ public class AdminController {
                                    java.time.Instant createdAt) {}
     public record AdminStoreView(UUID id, String name, String description, String category, String address, String city, String state, String cnpj,
                                  boolean active, boolean approved, String ownerName, String ownerEmail,
-                                 double commissionPercent, long deliveryFeeCents, String coverImageUrl,String timezone,Double latitude,Double longitude) {}
+                                 double commissionPercent, long deliveryFeeCents, String coverImageUrl,String timezone,Double latitude,Double longitude,boolean deliveryEnabled,boolean pickupEnabled,boolean inPersonEnabled) {}
     public record ServiceCityRequest(@NotBlank @Size(max=100) String city,
                                      @NotBlank @jakarta.validation.constraints.Pattern(regexp="[A-Za-z]{2}") String state,
                                      @jakarta.validation.constraints.Pattern(regexp="^$|\\d{5}-?\\d{3}") String postalCode,

@@ -25,8 +25,9 @@ public class CatalogController {
     private final StoreCategoryRepository storeCategories;
     private final StoreProfessionalRepository professionals;
     private final StoreOperatingHours operatingHours;
-    public CatalogController(StoreRepository stores, CatalogItemRepository items, AccountRepository accounts, PlatformRequestRepository platformRequests, ServiceCityRepository serviceCities, StoreCategoryRepository storeCategories, StoreProfessionalRepository professionals, StoreOperatingHours operatingHours) {
-        this.stores = stores; this.items = items; this.accounts = accounts; this.platformRequests=platformRequests;this.serviceCities=serviceCities;this.storeCategories=storeCategories;this.professionals=professionals;this.operatingHours=operatingHours;
+    private final StoreHoursChangeService hoursChanges;
+    public CatalogController(StoreRepository stores, CatalogItemRepository items, AccountRepository accounts, PlatformRequestRepository platformRequests, ServiceCityRepository serviceCities, StoreCategoryRepository storeCategories, StoreProfessionalRepository professionals, StoreOperatingHours operatingHours,StoreHoursChangeService hoursChanges) {
+        this.stores = stores; this.items = items; this.accounts = accounts; this.platformRequests=platformRequests;this.serviceCities=serviceCities;this.storeCategories=storeCategories;this.professionals=professionals;this.operatingHours=operatingHours;this.hoursChanges=hoursChanges;
     }
     @GetMapping("/store-categories") @Transactional(readOnly=true)
     public List<StoreCategories.Category> categories() {
@@ -61,7 +62,7 @@ public class CatalogController {
     public StoreView createStore(@Valid @RequestBody StoreRequest req, Authentication auth) {
         validateCategory(req.category());
         Account owner = current(auth);
-        Store store=new Store(owner, req.name(), req.description(), req.address(), req.category());store.setLocation(req.city().trim(),req.state());store.setCoordinates(req.latitude(),req.longitude());if(req.cnpj()!=null&&!req.cnpj().isBlank())store.setCnpjOnce(req.cnpj());store.setDeliveryFeeCents(req.deliveryFeeCents());store.setTimezone(req.timezone());store=stores.save(store);platformRequests.save(PlatformRequest.store(owner,store));return StoreView.of(store);
+        Store store=new Store(owner, req.name(), req.description(), req.address(), req.category());store.setLocation(req.city().trim(),req.state());store.setCoordinates(req.latitude(),req.longitude());store.configureFulfillment(req.deliveryEnabled(),req.pickupEnabled(),req.inPersonEnabled());if(req.cnpj()!=null&&!req.cnpj().isBlank())store.setCnpjOnce(req.cnpj());store.setDeliveryFeeCents(req.deliveryFeeCents());store.setTimezone(req.timezone());store=stores.save(store);platformRequests.save(PlatformRequest.store(owner,store));return StoreView.of(store);
     }
     @GetMapping("/merchant/stores/mine") @PreAuthorize("hasRole('MERCHANT')")
     @Transactional(readOnly=true)
@@ -70,16 +71,24 @@ public class CatalogController {
     public StoreView resubmitStore(@PathVariable UUID id,Authentication auth){Store store=owned(id,auth);var previous=platformRequests.findFirstByStoreIdOrderByCreatedAtDesc(id).orElseThrow(()->new IllegalArgumentException("Não encontramos uma solicitação anterior desta loja."));if(!"REJECTED".equals(previous.getStatus()))throw new IllegalArgumentException("Só é possível reenviar uma loja que já foi reprovada.");store.setApproved(false);store.setActive(true);stores.save(store);platformRequests.save(PlatformRequest.store(store.getOwner(),store));return StoreView.of(store);}
     @PutMapping("/merchant/stores/{id}") @PreAuthorize("hasRole('MERCHANT')") @Transactional public StoreView updateStore(@PathVariable UUID id, @Valid @RequestBody StoreRequest req, Authentication auth) {
         validateCategory(req.category());
-        Store store = owned(id, auth);
+        Store store = stores.findByIdForUpdate(id).orElseThrow();
+        if(!store.getOwner().getId().equals(subject(auth)))throw new AccessDeniedException("Loja não pertence à sua conta.");
         if (platformRequests.findFirstByStoreIdOrderByCreatedAtDesc(id).filter(r -> "PENDING".equals(r.getStatus())).isPresent()) throw new IllegalStateException("A loja está em análise. Aguarde a decisão da administração antes de alterar os dados.");
-        store.update(req.name(), req.description(), req.address(), req.city().trim(), req.state(), req.category(), req.active(),req.deliveryFeeCents());store.setCoordinates(req.latitude(),req.longitude());if(req.timezone()!=null&&!req.timezone().isBlank())store.setTimezone(req.timezone()); return StoreView.of(stores.save(store));
+        hoursChanges.requireSafeTimezoneChange(store,req.timezone());
+        store.update(req.name(), req.description(), req.address(), req.city().trim(), req.state(), req.category(), req.active(),req.deliveryFeeCents());store.setCoordinates(req.latitude(),req.longitude());store.configureFulfillment(req.deliveryEnabled(),req.pickupEnabled(),req.inPersonEnabled());if(req.timezone()!=null&&!req.timezone().isBlank())store.setTimezone(req.timezone()); return StoreView.of(stores.save(store));
     }
     @GetMapping("/merchant/stores/{id}/hours") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true)
     public StoreOperatingHours.Configuration merchantHours(@PathVariable UUID id, Authentication auth) { return operatingHours.read(owned(id, auth)); }
-    @PutMapping("/merchant/stores/{id}/hours") @PreAuthorize("hasRole('MERCHANT')") @Transactional
-    public StoreOperatingHours.Configuration updateMerchantHours(@PathVariable UUID id, @RequestBody StoreOperatingHours.Configuration request, Authentication auth) {
-        Store store=owned(id,auth); return operatingHours.save(store,request);
-    }
+    @PostMapping("/merchant/stores/{id}/hours/preview") @PreAuthorize("hasRole('MERCHANT')")
+    public StoreHoursChangeService.Preview previewHours(@PathVariable UUID id,@RequestBody StoreHoursChangeService.ChangeRequest request,Authentication auth){return hoursChanges.preview(id,subject(auth),request);}
+    @PutMapping("/merchant/stores/{id}/hours") @PreAuthorize("hasRole('MERCHANT')")
+    public StoreHoursChangeService.Saved updateMerchantHours(@PathVariable UUID id,@RequestBody StoreHoursChangeService.ChangeRequest request,Authentication auth){return hoursChanges.save(id,subject(auth),request);}
+    @GetMapping("/admin/stores/{id}/hours") @PreAuthorize("hasRole('ADMIN')") @Transactional(readOnly=true)
+    public StoreOperatingHours.Configuration administratorHours(@PathVariable UUID id){return operatingHours.read(stores.findById(id).orElseThrow());}
+    @PostMapping("/admin/stores/{id}/hours/preview") @PreAuthorize("hasRole('ADMIN')")
+    public StoreHoursChangeService.Preview administratorPreviewHours(@PathVariable UUID id,@RequestBody StoreHoursChangeService.ChangeRequest request,Authentication auth){return hoursChanges.preview(id,subject(auth),request,true);}
+    @PutMapping("/admin/stores/{id}/hours") @PreAuthorize("hasRole('ADMIN')")
+    public StoreHoursChangeService.Saved administratorSaveHours(@PathVariable UUID id,@RequestBody StoreHoursChangeService.ChangeRequest request,Authentication auth){return hoursChanges.save(id,subject(auth),request,true);}
     @GetMapping("/stores/{id}/hours") @Transactional(readOnly=true)
     public StoreOperatingHours.Configuration publicHours(@PathVariable UUID id) {
         Store store=stores.findById(id).filter(Store::isAvailable).orElseThrow(()->new NoSuchElementException("Loja não encontrada."));
@@ -87,8 +96,8 @@ public class CatalogController {
         // Seller notes may describe private incidents; never expose them through the public catalog.
         List<StoreOperatingHours.ExceptionHours> publicExceptions=configuration.exceptions().stream()
                 .map(exception->new StoreOperatingHours.ExceptionHours(exception.date(),exception.closed(),
-                        exception.opensAt(),exception.closesAt(),null)).toList();
-        return new StoreOperatingHours.Configuration(configuration.enabled(),configuration.weekly(),publicExceptions);
+                        exception.opensAt(),exception.closesAt(),null,exception.shifts())).toList();
+        return new StoreOperatingHours.Configuration(configuration.enabled(),configuration.weekly(),publicExceptions,configuration.weeklyShifts());
     }
     @PostMapping("/merchant/stores/{id}/items") @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('MERCHANT')")
@@ -157,7 +166,7 @@ public class CatalogController {
                                boolean active,@jakarta.validation.constraints.PositiveOrZero @jakarta.validation.constraints.Max(100000) long deliveryFeeCents,
                                @Size(max=80) String timezone,
                                @DecimalMin("-90.0") @DecimalMax("90.0") Double latitude,
-                               @DecimalMin("-180.0") @DecimalMax("180.0") Double longitude) {}
+                               @DecimalMin("-180.0") @DecimalMax("180.0") Double longitude,Boolean deliveryEnabled,Boolean pickupEnabled,Boolean inPersonEnabled) {}
     public record ItemRequest(@NotBlank @Size(max=140) String name, @Size(max=1000) String description,
                               @PositiveOrZero long priceCents, @PositiveOrZero int stock, boolean serviceItem, boolean active,
                               boolean payAfterService,@Min(5) @Max(480) Integer appointmentDurationMinutes) {}
@@ -166,10 +175,10 @@ public class CatalogController {
     public record ProfessionalView(UUID id,String name,boolean active) { static ProfessionalView of(StoreProfessional p){return new ProfessionalView(p.getId(),p.getName(),p.isActive());} }
     public record StoreView(UUID id, String name, String description, String address, String city, String state,
                             String cnpj, String category, String coverImageUrl, boolean active, boolean approved,
-                            long deliveryFeeCents, boolean available,String timezone,Double latitude,Double longitude) {
+                            long deliveryFeeCents, boolean available,String timezone,Double latitude,Double longitude,boolean deliveryEnabled,boolean pickupEnabled,boolean inPersonEnabled) {
         static StoreView of(Store s) { return new StoreView(s.getId(), s.getName(), s.getDescription(), s.getAddress(),
                 s.getCity(), s.getState(), s.getCnpj(), s.getCategory(), s.getCoverImageUrl(), s.isActive(),
-                s.isApproved(), s.getDeliveryFeeCents(), s.isAvailable(),s.getTimezone(),s.getLatitude(),s.getLongitude()); }
+                s.isApproved(), s.getDeliveryFeeCents(), s.isAvailable(),s.getTimezone(),s.getLatitude(),s.getLongitude(),s.isDeliveryEnabled(),s.isPickupEnabled(),s.isInPersonEnabled()); }
     }
     public record CatalogItemView(UUID id, String name, String description, long priceCents, int stock,
                                   boolean active, boolean serviceItem, boolean payAfterService,int appointmentDurationMinutes) {

@@ -44,8 +44,8 @@ public class MercadoPagoCheckoutService {
         if(!customer.getId().equals(customerId))throw new org.springframework.security.access.AccessDeniedException("Este pagamento pertence a outra conta.");
         if(payment.getStatus()!=PaymentStatus.PENDING&&payment.getStatus()!=PaymentStatus.FAILED)throw new IllegalStateException("Este pagamento não está disponível para um novo checkout.");
         if(!store.isAvailable())throw new IllegalStateException("A loja não está disponível para receber pagamentos.");
-        if(order!=null)operatingHours.requireOpenNow(store);
-        if(reservation!=null)operatingHours.requireOpenForInterval(store,reservation.getStartsAt(),reservation.getEndsAt());
+        if(order!=null){store.requireFulfillment(order.getFulfillmentType());operatingHours.requireOpenNow(store);}
+        if(reservation!=null){store.requireInPerson();if(!reservation.isOperatingHoursOverride()){operatingHours.requireOpenForInterval(store,reservation.getStartsAt(),reservation.getEndsAt());if(reservation.getProfessional()!=null&&!operatingHours.fits(reservation.getProfessional(),java.time.ZoneId.of(store.getTimezone()),reservation.getStartsAt(),reservation.getEndsAt()))throw new IllegalStateException("O profissional não está disponível nesse intervalo.");}}
         if(order!=null&&order.getStatus()!=br.com.fooddelivery.orders.OrderStatus.AWAITING_PAYMENT)throw new IllegalStateException("O pedido não está mais aguardando pagamento.");
         if(reservation!=null&&reservation.getStatus()!=br.com.fooddelivery.reservations.ReservationStatus.PENDING_PAYMENT)throw new IllegalStateException("A reserva não está mais aguardando pagamento.");
         Instant operationCreatedAt=order!=null?order.getCreatedAt():reservation.getCreatedAt();

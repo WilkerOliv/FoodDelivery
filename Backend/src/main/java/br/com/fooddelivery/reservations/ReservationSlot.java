@@ -17,5 +17,6 @@ public class ReservationSlot {
     @Column(name="ends_at",nullable=false) private Instant endsAt;
     protected ReservationSlot(){}
     public ReservationSlot(UUID storeId,UUID reservationId,Instant startsAt,Instant endsAt,UUID professionalId){this.id=reservationId;this.storeId=storeId;this.reservationId=reservationId;this.startsAt=startsAt;this.endsAt=endsAt;this.professionalId=professionalId;this.slotKey=professionalId==null?STORE_RESOURCE_KEY:professionalId;}
+    public boolean overlaps(Instant start,Instant end){return startsAt.isBefore(end)&&endsAt.isAfter(start);}
     public UUID getSlotKey(){return slotKey;}
 }

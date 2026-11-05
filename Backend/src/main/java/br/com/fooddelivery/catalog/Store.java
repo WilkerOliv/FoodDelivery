@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "stores")
+@org.hibernate.annotations.DynamicUpdate
 public class Store {
     @Id @GeneratedValue(strategy = GenerationType.UUID) private UUID id;
     @JsonIgnore
@@ -19,12 +20,20 @@ public class Store {
     @Column(length = 2) private String state;
     @Column private Double latitude;
     @Column private Double longitude;
+    @Column(nullable=false) private boolean deliveryEnabled=true;
+    @Column(nullable=false) private boolean pickupEnabled=true;
+    @Column(nullable=false) private boolean inPersonEnabled=true;
     @Column(length = 14, unique = true) private String cnpj;
     @Column(nullable = false, length = 60) private String category;
     @Column(name = "cover_image_url", length = 255) private String coverImageUrl;
     @Column(nullable = false) private boolean active = true;
     @Column(nullable = false) private boolean approved = false;
     @Column(nullable = false, length = 80) private String timezone = "America/Sao_Paulo";
+    @Column(name="booking_notice_minutes",nullable=false) private int bookingNoticeMinutes=30;
+    @Column(name="booking_step_minutes",nullable=false) private int bookingStepMinutes=15;
+    @Column(name="automatic_cancellation_notice_minutes",nullable=false) private int automaticCancellationNoticeMinutes=-1;
+    public int getBookingNoticeMinutes(){return bookingNoticeMinutes;}public int getBookingStepMinutes(){return bookingStepMinutes;}public int getAutomaticCancellationNoticeMinutes(){return automaticCancellationNoticeMinutes;}
+    public void configureBookingPolicy(int notice,int step,int cancellation){if(notice<0||notice>10080||!java.util.Set.of(5,10,15,20,30,60).contains(step)||cancellation < -1||cancellation>10080)throw new IllegalArgumentException("Revise a antecedência, o intervalo e a política de cancelamento.");bookingNoticeMinutes=notice;bookingStepMinutes=step;automaticCancellationNoticeMinutes=cancellation;}
     @Column(name = "operating_hours_enabled", nullable = false) private boolean operatingHoursEnabled;
     @Column(name = "weekly_hours_json", columnDefinition = "TEXT", nullable = false) private String weeklyHoursJson = "{}";
     @Column(name = "hours_exceptions_json", columnDefinition = "TEXT", nullable = false) private String hoursExceptionsJson = "[]";
@@ -43,6 +52,20 @@ public class Store {
     public String getCity() { return city; }
     public String getState() { return state; }
     public Double getLatitude(){return latitude;} public Double getLongitude(){return longitude;}
+    public boolean isDeliveryEnabled(){return deliveryEnabled;}
+    public boolean isPickupEnabled(){return pickupEnabled;}
+    public boolean isInPersonEnabled(){return inPersonEnabled;}
+    public void configureFulfillment(Boolean delivery,Boolean pickup,Boolean inPerson){
+        boolean d=delivery==null?deliveryEnabled:delivery,p=pickup==null?pickupEnabled:pickup,i=inPerson==null?inPersonEnabled:inPerson;
+        if(!d&&!p&&!i)throw new IllegalArgumentException("Escolha ao menos uma modalidade de atendimento.");
+        deliveryEnabled=d;pickupEnabled=p;inPersonEnabled=i;
+    }
+    public void requireFulfillment(br.com.fooddelivery.orders.FulfillmentType type){
+        if(type==null)throw new IllegalArgumentException("Escolha entrega ou retirada.");
+        if(type==br.com.fooddelivery.orders.FulfillmentType.DELIVERY&&!deliveryEnabled)throw new IllegalArgumentException("Esta loja não oferece entrega. Confira as modalidades disponíveis.");
+        if(type==br.com.fooddelivery.orders.FulfillmentType.PICKUP&&!pickupEnabled)throw new IllegalArgumentException("Esta loja não oferece retirada no local.");
+    }
+    public void requireInPerson(){if(!inPersonEnabled)throw new IllegalArgumentException("Esta loja não oferece agendamentos presenciais.");}
     public String getCnpj() { return cnpj; }
     public String getCategory() { return category; }
     public String getTimezone() { return timezone; }

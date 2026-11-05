@@ -72,11 +72,12 @@ public class ReservationController {
         }
         Store store = stores.findByIdForUpdate(request.storeId()).filter(Store::isAvailable)
                 .orElseThrow();
+        store.requireInPerson();
         var item = items.findById(request.serviceItemId())
                 .filter(i -> i.isActive() && i.isServiceItem() && i.getStore().getId().equals(request.storeId()))
                 .orElseThrow(() -> new IllegalArgumentException("Serviço indisponível nesta loja."));
-        if (request.startsAt().isBefore(Instant.now().plusSeconds(1800))) {
-            throw new IllegalArgumentException("A reserva precisa ser feita com ao menos 30 minutos de antecedência.");
+        if (request.startsAt().isBefore(Instant.now().plusSeconds(store.getBookingNoticeMinutes()*60L))) {
+            throw new IllegalArgumentException("A reserva precisa respeitar a antecedência mínima de "+store.getBookingNoticeMinutes()+" minutos desta loja.");
         }
         operatingHours.requireOpenAt(store, request.startsAt());
         Instant endsAt=request.startsAt().plusSeconds(item.getAppointmentDurationMinutes()*60L);
@@ -85,9 +86,9 @@ public class ReservationController {
         List<UUID> occupied=slots.occupiedResources(store.getId(),request.startsAt(),endsAt);
         StoreProfessional selected=null;
         if(!activeProfessionals.isEmpty()&&occupied.contains(ReservationSlot.STORE_RESOURCE_KEY))throw new IllegalStateException("Este horário já está reservado. Escolha outro horário.");
-        if(request.professionalId()!=null){selected=activeProfessionals.stream().filter(p->p.getId().equals(request.professionalId())).findFirst().orElseThrow(()->new IllegalArgumentException("Escolha um profissional ativo desta loja."));if(occupied.contains(selected.getId()))throw new IllegalStateException("Este profissional já tem uma reserva neste intervalo. Escolha outro horário.");}
+        if(request.professionalId()!=null){selected=activeProfessionals.stream().filter(p->p.getId().equals(request.professionalId())).findFirst().orElseThrow(()->new IllegalArgumentException("Escolha um profissional ativo desta loja."));if(!operatingHours.fits(selected,java.time.ZoneId.of(store.getTimezone()),request.startsAt(),endsAt))throw new IllegalStateException("Este profissional não atende nesse intervalo.");if(occupied.contains(selected.getId()))throw new IllegalStateException("Este profissional já tem uma reserva neste intervalo. Escolha outro horário.");}
         else if(!activeProfessionals.isEmpty()){
-            selected=activeProfessionals.stream().filter(p->!occupied.contains(p.getId())).findFirst().orElseThrow(()->new IllegalStateException("Não há profissional disponível nesse horário. Escolha outro horário."));
+            selected=activeProfessionals.stream().filter(p->!occupied.contains(p.getId())&&operatingHours.fits(p,java.time.ZoneId.of(store.getTimezone()),request.startsAt(),endsAt)).findFirst().orElseThrow(()->new IllegalStateException("Não há profissional disponível nesse horário. Escolha outro horário."));
         } else if(!occupied.isEmpty()) throw new IllegalStateException("Horário indisponível neste intervalo.");
         boolean payAfterService = CityMatcher.allowPayAfterService(item.isPayAfterService(), customer.getCity(),
                 customer.getState(), store.getCity(), store.getState());
@@ -164,6 +165,8 @@ public class ReservationController {
             notifications.sendLinked(reservation.getStore().getOwner(),"Reserva não paga cancelada","O cliente cancelou uma reserva ainda não paga; o horário foi liberado.","info",br.com.fooddelivery.notifications.NotificationTarget.RESERVATION,id);
             return view(reservations.save(reservation),payment);
         }
+        var store=reservation.getStore();int cancellationNotice=store.getAutomaticCancellationNoticeMinutes();
+        if(cancellationNotice>=0&&reservation.getStatus()==ReservationStatus.CONFIRMED&&!reservation.getStartsAt().isBefore(Instant.now().plusSeconds(cancellationNotice*60L))){reservation.requestCancellation(request.note());reservation.decideCancellation(true);reservation.change(ReservationStatus.CANCELLED);slots.deleteByReservationId(id);if(payment!=null&&payment.getStatus()==PaymentStatus.PAID)payment.requestFullRefund();notifications.sendLinked(reservation.getCustomer(),"Reserva cancelada","A política da loja permitiu cancelar automaticamente. Se houve pagamento online, acompanhe o estorno.","info",br.com.fooddelivery.notifications.NotificationTarget.RESERVATION,id);notifications.sendLinked(store.getOwner(),"Reserva cancelada pela política da loja","O cliente cancelou dentro da antecedência configurada. O horário foi liberado.","info",br.com.fooddelivery.notifications.NotificationTarget.RESERVATION,id);return view(reservation,payment);}
         boolean alreadyRequested="REQUESTED".equals(reservation.getCancellationRequestStatus());
         reservation.requestCancellation(request.note());
         if(!alreadyRequested)notifications.sendLinked(reservation.getStore().getOwner(),"Cancelamento de reserva solicitado","O cliente pediu o cancelamento de um horário. Revise a solicitação na aba Agenda.","info",br.com.fooddelivery.notifications.NotificationTarget.RESERVATION,id);
@@ -219,7 +222,7 @@ public class ReservationController {
         return new ReservationView(reservation.getId(), storeView, reservation.getStartsAt(),
                 reservation.getEndsAt(),reservation.getServiceName(), reservation.getAmountCents(), reservation.getCustomerNote(), reservation.getStatus(),
                 reservation.getCreatedAt(), reservation.isPayAfterService(), payment == null ? null : payment.getId(),
-                payment == null ? null : payment.getStatus(),reservation.getProfessional()==null?null:reservation.getProfessional().getId(),reservation.getProfessional()==null?null:reservation.getProfessional().getName(),reservation.getCancellationRequestedAt(),reservation.getCancellationRequestStatus(),reservation.getCancellationRequestNote());
+                payment == null ? null : payment.getStatus(),reservation.getProfessional()==null?null:reservation.getProfessional().getId(),reservation.getProfessional()==null?null:reservation.getProfessional().getName(),reservation.getCancellationRequestedAt(),reservation.getCancellationRequestStatus(),reservation.getCancellationRequestNote(),reservation.isOperatingHoursOverride(),reservation.getOperatingHoursNotice(),reservation.getOperatingHoursChangedAt());
     }
 
     private UUID subject(Authentication auth) {
@@ -233,6 +236,6 @@ public class ReservationController {
     public record CreateResponse(ReservationView reservation, UUID paymentId, PaymentStatus paymentStatus) {}
     public record ReservationView(UUID id, StoreView store, Instant startsAt, Instant endsAt, String serviceName, long amountCents, String customerNote,
                                   ReservationStatus status, Instant createdAt, boolean payAfterService, UUID paymentId,
-                                  PaymentStatus paymentStatus,UUID professionalId,String professionalName,Instant cancellationRequestedAt,String cancellationRequestStatus,String cancellationRequestNote) {}
+                                  PaymentStatus paymentStatus,UUID professionalId,String professionalName,Instant cancellationRequestedAt,String cancellationRequestStatus,String cancellationRequestNote,boolean operatingHoursOverride,String operatingHoursNotice,Instant operatingHoursChangedAt) {}
     public record StoreView(UUID id, String name, String address, String category,String timezone) {}
 }

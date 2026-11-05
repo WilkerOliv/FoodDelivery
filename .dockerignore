@@ -1,0 +1,11 @@
+.git
+**/.env
+**/.env.*
+**/data
+**/target
+**/node_modules
+**/__pycache__
+**/backups
+**/*.log
+**/*.dump
+Documentacao

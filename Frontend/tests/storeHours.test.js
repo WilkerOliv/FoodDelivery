@@ -1,0 +1,10 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { storeOpenAt,storeScheduleAllowsAppointment,storeScheduleAllowsLocalDateTime } from '../src/storeTime.js';
+const shifts={enabled:true,weeklyShifts:{MONDAY:[{opensAt:'08:00',closesAt:'12:00'},{opensAt:'14:00',closesAt:'18:00'}]},exceptions:[]};
+test('split shifts close for lunch and allow the afternoon',()=>{assert.equal(storeOpenAt(shifts,'UTC',new Date('2026-11-02T13:00:00Z')),false);assert.equal(storeOpenAt(shifts,'UTC',new Date('2026-11-02T14:00:00Z')),true);});
+test('whole service must fit and may end exactly at closing',()=>{assert.equal(storeScheduleAllowsAppointment(shifts,'2026-11-02T11:30',30,'UTC'),true);assert.equal(storeScheduleAllowsAppointment(shifts,'2026-11-02T11:30',180,'UTC'),false);assert.equal(storeScheduleAllowsAppointment(shifts,'2026-11-02T17:45',30,'UTC'),false);});
+test('24-hour day remains open at the end of the day',()=>{const c={enabled:true,weeklyShifts:{MONDAY:[{opensAt:'00:00',closesAt:'24:00'}]},exceptions:[]};assert.equal(storeOpenAt(c,'UTC',new Date('2026-11-02T23:59:59Z')),true);assert.equal(storeScheduleAllowsLocalDateTime(c,'2026-11-03T00:00'),false);});
+test('special split shifts override the weekly schedule',()=>{const c={...shifts,exceptions:[{date:'2026-11-02',closed:false,shifts:[{opensAt:'09:00',closesAt:'10:00'},{opensAt:'16:00',closesAt:'17:00'}]}]};assert.equal(storeScheduleAllowsLocalDateTime(c,'2026-11-02T11:00'),false);assert.equal(storeScheduleAllowsLocalDateTime(c,'2026-11-02T16:00'),true);});
+test('dated closure blocks previous-night continuation',()=>{const c={enabled:true,weeklyShifts:{FRIDAY:[{opensAt:'22:00',closesAt:'02:00'}]},exceptions:[{date:'2026-11-07',closed:true}]};assert.equal(storeOpenAt(c,'UTC',new Date('2026-11-07T01:00:00Z')),false);});
+test('future appointment validity is independent of whether shop is open now',()=>{assert.equal(storeOpenAt(shifts,'UTC',new Date('2026-11-01T12:00:00Z')),false);assert.equal(storeScheduleAllowsAppointment(shifts,'2026-11-02T09:00',30,'UTC'),true);});

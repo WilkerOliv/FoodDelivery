@@ -17,8 +17,11 @@ public class DeliveryTask {
  @Column(name="courier_latitude") private Double courierLatitude;
  @Column(name="courier_longitude") private Double courierLongitude;
  @Column(name="location_updated_at") private Instant locationUpdatedAt;
+ @Column(name="courier_fee_cents") private Long courierFeeCents;
  @Version private long version;
  protected DeliveryTask(){} public DeliveryTask(Order order){this.order=order;}
+ public Long getCourierFeeCents(){return courierFeeCents;}
+ public void setCourierFeeOnce(long amount){if(amount<1)throw new IllegalArgumentException("Remuneração inválida.");if(courierFeeCents==null)courierFeeCents=amount;}
  public UUID getId(){return id;} public Order getOrder(){return order;} public Account getCourier(){return courier;} public DeliveryStatus getStatus(){return status;} public Instant getCreatedAt(){return createdAt;}
  public void assign(Account courier){if(status!=DeliveryStatus.OFFERED||this.courier!=null)throw new IllegalStateException("Entrega já atribuída.");this.courier=courier;this.status=DeliveryStatus.ASSIGNED;}
  public void requireCancellable(){if(status!=DeliveryStatus.OFFERED&&status!=DeliveryStatus.ASSIGNED&&status!=DeliveryStatus.CANCELLED)throw new IllegalStateException("A entrega já foi coletada. Fale com o atendimento para resolver a ocorrência.");}

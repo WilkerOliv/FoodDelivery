@@ -59,6 +59,7 @@ public final class AuthenticationRateLimitFilter extends OncePerRequestFilter {
 
     private static Limit limitFor(String method, String path) {
         if (!"POST".equalsIgnoreCase(method)) return null;
+        if(path.equals("/api/v1/account/whatsapp-link")||path.startsWith("/api/v1/admin/mfa")||path.startsWith("/api/v1/courier/payout")||path.startsWith("/api/v1/admin/courier-finance"))return new Limit("finance-reauth",20,15*60*1000L);
         if ("/api/v1/auth/login".equals(path)) return new Limit("login", 10, 15 * 60 * 1000L);
         if ("/api/v1/auth/password-recovery".equals(path)
                 || "/api/v1/auth/password-recovery/reset".equals(path)) return new Limit("recovery", 5, 60 * 60 * 1000L);

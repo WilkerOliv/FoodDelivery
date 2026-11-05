@@ -107,7 +107,7 @@ Cancelamento/recusa pela loja de pedido ou reserva já pago gera pedido de estor
 
 ## Limites conhecidos
 
-- A agenda bloqueia o intervalo completo do serviço e impede sobreposição por profissional/recurso. Ainda não há capacidade maior que um por recurso, grade de intervalos configurável, múltiplas pausas por dia ou disponibilidade semanal individual de cada profissional.
+- A agenda bloqueia o intervalo completo do serviço e impede sobreposição por profissional/recurso. Ainda não há capacidade maior que um por recurso, grade de intervalos configurável ou disponibilidade semanal individual de cada profissional.
 - `order_lines.catalog_item_id` e `reservations.catalog_item_id` preservam o identificador do item como snapshot, sem FK que impediria removê-lo do catálogo.
 - O estorno automático precisa de homologação com credenciais reais/de teste do Mercado Pago. Em Marketplace Split 1:1, saldo insuficiente na conta do vendedor pode exigir ação manual no provedor.
 - Conciliação contábil/liquidação, chargebacks e saque Pix iniciado pela plataforma ainda não fazem parte do modelo implementado. Cancelamentos pós-pagamento iniciados pelo cliente seguem solicitação com decisão da loja.
@@ -116,3 +116,11 @@ Cancelamento/recusa pela loja de pedido ou reserva já pago gera pedido de estor
 ## Moderação de capas — V24
 
 `store_cover_submissions` referencia a loja e guarda arquivo aleatório único, status, motivo, data de criação, data/administrador da decisão e versão otimista. Estados: PENDING, APPROVED, REJECTED, SUPERSEDED. Índices por loja/data e status/data atendem cota e fila. Aprovação troca `stores.cover_image_url` dentro da mesma transação de auditoria/notificação. Arquivos são persistidos separadamente e precisam acompanhar o backup do banco. Rejeitados/substituídos ficam privados; não há purga automática de histórico.
+
+## Modalidades da loja — V25
+
+Três booleanos persistidos (`delivery_enabled`, `pickup_enabled`, `in_person_enabled`) definem entrega, retirada e agendamento presencial. Ao menos um precisa estar ativo (CHECK). O padrão true mantém compatibilidade com lojas existentes. Coordenadas continuam em V22 e podem ser removidas sem remover a loja. [Fluxo e regras](Mapa_e_atendimento_das_lojas.md).
+
+## Expediente e reservas — V26
+
+O JSON semanal aceita listas de até seis turnos por dia e lê objetos legados. `reservations` acrescenta `operating_hours_override`, `operating_hours_notice` e `operating_hours_changed_at`, com índice para futuras reservas ativas. A exceção permite manter o compromisso após alteração de expediente; não é parâmetro aceito na criação pelo cliente. Prévia, locks, avisos e cancelamento são descritos em [Funcionamento e reservas](Funcionamento_e_reservas.md).

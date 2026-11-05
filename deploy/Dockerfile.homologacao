@@ -1,0 +1,17 @@
+FROM maven:3.9-eclipse-temurin-21 AS build
+WORKDIR /build
+COPY Backend/pom.xml ./
+COPY Backend/src ./src
+RUN mvn --batch-mode -DskipTests package
+
+FROM eclipse-temurin:21-jre
+RUN apt-get update && apt-get install -y --no-install-recommends python3 && rm -rf /var/lib/apt/lists/* \
+    && groupadd --gid 10001 fooddelivery && useradd --uid 10001 --gid 10001 --no-create-home fooddelivery
+WORKDIR /app
+COPY --from=build /build/target/food-delivery-api-*.jar /app/api.jar
+COPY Frontend/ /app/Frontend/
+COPY deploy/homologacao_publica.py /app/launcher.py
+USER 10001:10001
+ENV PORT=10000
+EXPOSE 10000
+CMD ["python3", "-u", "/app/launcher.py"]

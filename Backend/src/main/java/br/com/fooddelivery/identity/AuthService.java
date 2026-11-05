@@ -17,6 +17,7 @@ public class AuthService {
     private final AccountRepository accounts;
     private final AuthenticationManager authenticationManager;
     private final JwtEncoder jwtEncoder;
+    @org.springframework.beans.factory.annotation.Autowired private AdminMfaService mfa;
 
     public AuthService(AccountRepository accounts, AuthenticationManager authenticationManager, JwtEncoder jwtEncoder) {
         this.accounts = accounts;
@@ -43,10 +44,12 @@ public class AuthService {
         return accounts.save(account);
     }
 
-    public Map<String, Object> login(String email, String password) {
+    public Map<String,Object> login(String email,String password){return login(email,password,null);}
+    public Map<String, Object> login(String email, String password,String code) {
         String normalizedEmail = email.trim().toLowerCase(java.util.Locale.ROOT);
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(normalizedEmail, password));
         Account account = accounts.findByEmailIgnoreCase(normalizedEmail).orElseThrow();
+        if(mfa!=null&&!mfa.authenticate(account.getId(),code))throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.UNAUTHORIZED,"Informe um código válido do autenticador ou um código de recuperação.");
         return issueToken(account);
     }
 

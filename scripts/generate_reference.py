@@ -25,9 +25,12 @@ CONTEXT={
  'api':'Transporte HTTP e sessão. Cookies não ficam acessíveis ao JavaScript; mensagens de falha precisam distinguir autorização, validação e indisponibilidade.',
  'accessibility':'Acessibilidade dinâmica. Associa rótulos, identifica diálogos, contém Tab, aceita Escape e devolve foco. Não substitui validação com leitor de tela e pessoas reais.',
  'adminStoreEditor':'Editor administrativo criado com elementos DOM e valores textuais. Evita interpolar dados de usuário em atributos HTML; a API valida novamente cada alteração.',
+ 'storeHours':'Editor compartilhado de turnos semanais e exceções. Consulta prévia, exige decisão sobre reservas afetadas e trata desistência, concorrência e avisos. A configuração pública não revela observações internas.',
  'storeTime':'Regras puras de fuso e horário para feedback imediato. A API valida novamente antes de comprar/reservar. Madrugada pertence à abertura do dia anterior.',
  'inputMasks':'Apresentação e interpretação de CPF, CNPJ, CEP, telefone e dinheiro. Máscara melhora digitação; não prova identidade e não substitui validação no servidor.',
  'catalogPolicy':'Regras visuais de catálogo, região e pagamento posterior. A política definitiva é aplicada na API, pois a cidade selecionada no navegador é manipulável.',
+ 'storeMaps':'Mapas de lojas. Seleção opcional, marcador arrastável, busca explícita, popups textuais e lista alternativa. Somente pontos publicados entram no mapa; ausência de coordenadas não oculta a loja da lista.',
+ 'storeOptions':'Modalidades de entrega, retirada e agendamento presencial. Bandeiras são informativas; a API rejeita modalidades desativadas e exige ao menos uma opção.',
  'storeLocation':'Coordenadas e links de mapa. Coordenadas precisam formar um par válido; link de mapa não cadastra automaticamente uma empresa no Google.',
  'actionGuard':'Controle visual de ações assíncronas. Evita repetição acidental de clique; idempotência e concorrência continuam sendo responsabilidade do backend.',
  'mobileNavigation':'Navegação móvel e prioridade de destinos. As opções devem permanecer acessíveis sem depender de rolagem horizontal.',
@@ -54,7 +57,7 @@ def describe(name,kind):
 def generate(language,files,filename):
     parser=Parser(Language((tree_sitter_java if language=='java' else tree_sitter_javascript).language()))
     title='backend Java' if language=='java' else 'frontend JavaScript'
-    out=[f'# Referência completa de funções — {title}', '', 'Gerada em 04/11/2026 a partir da árvore sintática do código final. Inclui funções explícitas, métodos privados, construtores e callbacks. Não é uma certificação de segurança: use junto da análise de engenharia e da matriz de testes.', '', 'Cada seção identifica localização, assinatura, regras locais, chamadas e efeitos observáveis. Getters implícitos de `record`, métodos herdados de bibliotecas e APIs nativas são descritos por seus contratos, não reproduzidos como código do projeto.', '', 'Regeneração: criar ambiente Python isolado, instalar `scripts/reference-requirements.txt` e executar `python scripts/generate_reference.py` na raiz.', '']
+    out=[f'# Referência completa de funções — {title}', '', 'Gerada em 05/11/2026 a partir da árvore sintática do código final. Inclui funções explícitas, métodos privados, construtores e callbacks. Não é uma certificação de segurança: use junto da análise de engenharia e da matriz de testes.', '', 'Cada seção identifica localização, assinatura, regras locais, chamadas e efeitos observáveis. Getters implícitos de `record`, métodos herdados de bibliotecas e APIs nativas são descritos por seus contratos, não reproduzidos como código do projeto.', '', 'Regeneração: criar ambiente Python isolado, instalar `scripts/reference-requirements.txt` e executar `python scripts/generate_reference.py` na raiz.', '']
     count=0
     digest=hashlib.sha256()
     for path in files:
@@ -110,7 +113,7 @@ def generate(language,files,filename):
 generate('java',sorted((ROOT/'Backend/src/main/java').rglob('*.java')),'Referencia_Backend.md')
 generate('javascript',sorted((ROOT/'Frontend/src').glob('*.js')),'Referencia_Frontend.md')
 
-inventory=['# Inventário de interface, HTTP e migrações','', 'Data: 04/11/2026. Inventário estático; uma linha aqui não significa que a ação foi executada em todas as combinações. Consulte a matriz de validação.','', '## Atributos de interação do frontend','', 'Os atributos `data-*` conectam botões, formulários e estados aos handlers documentados na referência. Alguns são seletores de apresentação, não ações. Valores dinâmicos são escapados no template e revalidados no servidor.','', '| Atributo | Primeira ocorrência |','|---|---|']
+inventory=['# Inventário de interface, HTTP e migrações','', 'Data: 05/11/2026. Inventário estático; uma linha aqui não significa que a ação foi executada em todas as combinações. Consulte a matriz de validação.','', '## Atributos de interação do frontend','', 'Os atributos `data-*` conectam botões, formulários e estados aos handlers documentados na referência. Alguns são seletores de apresentação, não ações. Valores dinâmicos são escapados no template e revalidados no servidor.','', '| Atributo | Primeira ocorrência |','|---|---|']
 attrs={}
 for path in sorted((ROOT/'Frontend').rglob('*.js')):
     if 'node_modules' in path.parts:continue
@@ -135,7 +138,7 @@ for path in sorted((ROOT/'Backend/src/main/java').rglob('*.java')):
         inventory += [f'### {path.stem}','']
         for line,name,cls,head in routes:inventory += [f'- [{name}]({path}:{line})',f'  - Classe: `{cls}`',f'  - Método: `{head}`']
         inventory.append('')
-inventory += ['## Migrações e razão da separação','', 'Flyway executa a sequência V1–V24. V9 tem variantes H2/PostgreSQL para diferenças de mecanismo. O perfil escolhe uma variante, nunca as duas. Os demais scripts são comuns. Hibernate valida o resultado; não é proprietário do esquema.','', '| Versão / arquivo | DDL e finalidade identificável |','|---|---|']
+inventory += ['## Migrações e razão da separação','', 'Flyway executa a sequência V1–V26. V9 tem variantes H2/PostgreSQL para diferenças de mecanismo. O perfil escolhe uma variante, nunca as duas. Os demais scripts são comuns. Hibernate valida o resultado; não é proprietário do esquema.','', '| Versão / arquivo | DDL e finalidade identificável |','|---|---|']
 for path in sorted((ROOT/'Backend/src/main/resources/db').rglob('*.sql'),key=lambda p:(int(re.search(r'V(\d+)',p.name)[1]),str(p))):
     statements=[compact(s) for s in path.read_text().split(';') if s.strip()]
     tables=sorted(set(re.findall(r'(?:TABLE(?: IF NOT EXISTS)?|INDEX[^;]*? ON)\s+([a-z_]+)',path.read_text(),re.I)))

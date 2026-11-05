@@ -77,4 +77,31 @@ class StoreOperatingHoursTest {
                 new StoreOperatingHours.ExceptionHours(java.time.LocalDate.parse("2026-11-02"), true, null, null, null),
                 new StoreOperatingHours.ExceptionHours(java.time.LocalDate.parse("2026-11-02"), true, null, null, null)))));
     }
+
+    @Test void multipleShiftsRejectLunchBreakAndAcceptClosingBoundary(){
+        Store s=store();hours.save(s,new StoreOperatingHours.Configuration(true,java.util.Map.of(),java.util.List.of(),java.util.Map.of(java.time.DayOfWeek.MONDAY,java.util.List.of(new StoreOperatingHours.Interval("08:00","12:00"),new StoreOperatingHours.Interval("14:00","18:00")))));
+        assertFalse(hours.isOpenAt(s,Instant.parse("2026-11-02T13:00:00Z")));
+        assertTrue(hours.isOpenAt(s,Instant.parse("2026-11-02T14:00:00Z")));
+        assertTrue(hours.fits(s,Instant.parse("2026-11-02T11:30:00Z"),Instant.parse("2026-11-02T12:00:00Z")));
+        assertFalse(hours.fits(s,Instant.parse("2026-11-02T11:30:00Z"),Instant.parse("2026-11-02T14:30:00Z")));
+        assertEquals(2,hours.read(s).weeklyShifts().get(java.time.DayOfWeek.MONDAY).size());
+    }
+    @Test void rejectOverlapsWithinDayAndAcrossWeekBoundary(){
+        var a=new StoreOperatingHours.Interval("22:00","02:00");var b=new StoreOperatingHours.Interval("01:00","03:00");
+        assertThrows(IllegalArgumentException.class,()->hours.validate(new StoreOperatingHours.Configuration(true,java.util.Map.of(),java.util.List.of(),java.util.Map.of(java.time.DayOfWeek.SUNDAY,java.util.List.of(a),java.time.DayOfWeek.MONDAY,java.util.List.of(b)))));
+        assertThrows(IllegalArgumentException.class,()->hours.validate(new StoreOperatingHours.Configuration(true,java.util.Map.of(),java.util.List.of(),java.util.Map.of(java.time.DayOfWeek.MONDAY,java.util.List.of(new StoreOperatingHours.Interval("08:00","12:00"),new StoreOperatingHours.Interval("11:00","14:00"))))));
+    }
+    @Test void allDayAndMultipleSpecialShiftsAreSupported(){
+        Store s=store();hours.save(s,new StoreOperatingHours.Configuration(true,java.util.Map.of(),java.util.List.of(new StoreOperatingHours.ExceptionHours(java.time.LocalDate.parse("2026-11-02"),false,null,null,null,java.util.List.of(new StoreOperatingHours.Interval("08:00","10:00"),new StoreOperatingHours.Interval("16:00","18:00")))),java.util.Map.of(java.time.DayOfWeek.TUESDAY,java.util.List.of(new StoreOperatingHours.Interval("00:00","24:00")))));
+        assertFalse(hours.isOpenAt(s,Instant.parse("2026-11-02T15:00:00Z")));assertTrue(hours.isOpenAt(s,Instant.parse("2026-11-02T17:00:00Z")));assertTrue(hours.isOpenAt(s,Instant.parse("2026-11-03T23:59:59Z")));
+    }
+    @Test void exactCoverageFindsOneMinuteGapAcrossMidnight(){
+        Store s=store();hours.save(s,new StoreOperatingHours.Configuration(true,java.util.Map.of(),java.util.List.of(),java.util.Map.of(java.time.DayOfWeek.MONDAY,java.util.List.of(new StoreOperatingHours.Interval("22:00","23:59")),java.time.DayOfWeek.TUESDAY,java.util.List.of(new StoreOperatingHours.Interval("00:00","02:00")))));
+        assertFalse(hours.fits(s,Instant.parse("2026-11-02T23:58:30Z"),Instant.parse("2026-11-03T00:01:30Z")));
+    }
+    @Test void explicitClosureOverridesPreviousNightAndInvalidSecondsAreRejected(){
+        Store s=store();s.setOperatingHours(true,"{\"FRIDAY\":{\"opensAt\":\"22:00\",\"closesAt\":\"02:00\"}}","[{\"date\":\"2026-11-07\",\"closed\":true}]");
+        assertFalse(hours.isOpenAt(s,Instant.parse("2026-11-07T01:00:00Z")));
+        assertThrows(IllegalArgumentException.class,()->hours.validate(new StoreOperatingHours.Configuration(true,java.util.Map.of(java.time.DayOfWeek.MONDAY,new StoreOperatingHours.Interval("08:00:30","12:00")),java.util.List.of())));
+    }
 }

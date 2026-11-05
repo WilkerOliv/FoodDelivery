@@ -88,3 +88,7 @@ Os scripts `Backend/scripts/backup-db.sh` e `restore-db.sh` dão uma base manual
 4. Executar teste de navegador nas jornadas de cliente, vendedor, entregador e administrador em tamanhos móveis e desktop antes de publicação.
 5. Homologar as integrações externas em contas de teste e documentar configurações sem gravar segredos no repositório.
 6. Revisar e commitar alterações em unidades coerentes; não publicar o estado de trabalho sem inspeção do diff e migrações.
+
+## Expediente e alterações concorrentes
+
+A rotina semanal admite múltiplos turnos e exceções datadas. A alteração bloqueia loja e reservas futuras, verifica revisão da prévia e exige decisão explícita sobre compromissos afetados. Cancelamentos, slots, avisos internos e solicitação de estorno são transacionais; o estorno externo segue o processamento idempotente já existente. Mudança de fuso com compromissos ativos é impedida. Veja [Funcionamento e reservas](Funcionamento_e_reservas.md), incluindo compatibilidade dos JSONs, V26 e limitações de rollback.

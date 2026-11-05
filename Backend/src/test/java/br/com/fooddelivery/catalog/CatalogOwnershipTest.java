@@ -21,7 +21,7 @@ class CatalogOwnershipTest {
         UUID itemId=UUID.randomUUID();
         var items=mock(CatalogItemRepository.class);
         when(items.findById(itemId)).thenReturn(Optional.of(item));
-        var controller=new CatalogController(mock(StoreRepository.class),items,mock(AccountRepository.class),mock(PlatformRequestRepository.class),mock(ServiceCityRepository.class),mock(StoreCategoryRepository.class),mock(StoreProfessionalRepository.class),mock(StoreOperatingHours.class));
+        var controller=new CatalogController(mock(StoreRepository.class),items,mock(AccountRepository.class),mock(PlatformRequestRepository.class),mock(ServiceCityRepository.class),mock(StoreCategoryRepository.class),mock(StoreProfessionalRepository.class),mock(StoreOperatingHours.class),mock(StoreHoursChangeService.class));
         var auth=new JwtAuthenticationToken(Jwt.withTokenValue("test").header("alg","HS256").subject(UUID.randomUUID().toString()).build(),List.of(new SimpleGrantedAuthority("ROLE_MERCHANT")));
         var body=new CatalogController.ItemRequest("Alteração indevida",null,1,0,false,true,false,30);
         assertThrows(AccessDeniedException.class,()->controller.updateItem(itemId,body,auth));

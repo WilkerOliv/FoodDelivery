@@ -14,6 +14,8 @@ spring:
     console:
       enabled: false
 app:
+  private:
+    encryption-key: ZmFrZS1kZW1vLWtleS1uZXZlci11c2UtaW4tcHJvZCE=
   demo:
     enabled: true
   web:

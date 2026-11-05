@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: fooddelivery
+      POSTGRES_USER: fooddelivery_app
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:?Defina DATABASE_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U fooddelivery_app -d fooddelivery']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+  api:
+    build: ../Backend
+    env_file: ${PRIVATE_ENV_FILE:?Informe caminho absoluto do arquivo privado}
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DATABASE_URL: jdbc:postgresql://postgres:5432/fooddelivery
+      DATABASE_USERNAME: fooddelivery_app
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      AUTH_COOKIE_SECURE: 'true'
+      FOODDELIVERY_ALLOWED_ORIGINS: https://${SITE_DOMAIN:?Defina SITE_DOMAIN}
+      FRONTEND_URL: https://${SITE_DOMAIN}
+      MP_REDIRECT_URI: https://${SITE_DOMAIN}/api/v1/payments/mercadopago/callback
+      MP_NOTIFICATION_BASE_URL: https://${SITE_DOMAIN}
+      STORE_ASSETS_DIR: /app/data/store-assets
+    volumes:
+      - assets:/app/data/store-assets
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    cap_drop: [ALL]
+    security_opt: ['no-new-privileges:true']
+  web:
+    image: caddy:2-alpine
+    environment:
+      SITE_DOMAIN: ${SITE_DOMAIN}
+    ports: ['80:80','443:443','443:443/udp']
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ../Frontend:/srv:ro
+      - tls:/data
+      - caddy_config:/config
+    depends_on: [api]
+    restart: unless-stopped
+volumes:
+  database:
+  assets:
+  tls:
+  caddy_config:

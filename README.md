@@ -16,8 +16,18 @@ Abra `http://127.0.0.1:5180`. Para SMTP local com Docker, use `npm run start:dem
 
 O ambiente é isolado e não movimenta dinheiro. Não substituir homologação de provedor por simulação local.
 
+### Homologação gratuita pela internet
+
+[Passo a passo no Render](Documentacao/Publicacao_gratuita_de_homologacao.md): demonstração protegida por senha, endereço HTTPS gratuito, dados fictícios e descartáveis. O Blueprint `render.yaml` usa um único serviço Free. Não serve para operação comercial nem guarda dados após reinícios.
+
 ## Desenvolvimento e validação
 
 Configuração normal: [backend e operação](Backend/README.md). Validação e comandos reproduzíveis: [matriz de testes](Documentacao/Validacao_2026-11-04.md). O teste de esquema usa chave exclusiva de teste; produção exige segredo próprio.
 
 Capas: vendedor envia foto/logo em proporção 2:1; publicação exige aprovação administrativa. [Fluxo, segurança e operação](Documentacao/Capas_das_lojas.md).
+
+Localização opcional no mapa e modalidades de atendimento: [configuração, comportamento e validação](Documentacao/Mapa_e_atendimento_das_lojas.md).
+
+### Funcionamento da loja e reservas
+
+[Regras de turnos, pausas, exceções e tratamento das reservas afetadas](Documentacao/Funcionamento_e_reservas.md), incluindo contratos, segurança e testes locais.

@@ -59,6 +59,9 @@ public class ApiExceptionHandler {
                 message == null || message.isBlank() ? "Registro não encontrado." : message));
     }
 
+    @ExceptionHandler({org.springframework.dao.OptimisticLockingFailureException.class,org.springframework.dao.PessimisticLockingFailureException.class})
+    ResponseEntity<Map<String,String>> concurrentChange(Exception exception){return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","Esta operação foi atualizada por outra sessão. Atualize os dados antes de tentar novamente."));}
+
     @ExceptionHandler(Exception.class)
     ResponseEntity<Map<String, String>> internalError(Exception exception) {
         LOG.error("Erro inesperado ao processar a requisição", exception);

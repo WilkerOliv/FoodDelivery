@@ -76,3 +76,11 @@ Verificação de 04/11/2026: 60 testes Java e 32 testes JavaScript aprovados, 12
 ## Teste específico das capas
 
 Execute `python3 scripts/test_store_covers.py` com a homologação iniciada. O roteiro usa três logins, gera PNG sintético e testa envio, proporção, permissões, prévia privada, substituição de pendência, motivo obrigatório, aprovação única e preservação da capa anterior. Altera somente dados do banco isolado. O teste completo `test_homologacao.py` também envia e aprova capa. Os limites de dez uploads/loja/hora continuam ativos; não executar repetidamente sem considerar a cota. Evidências da implementação atual: [Capas das lojas](Capas_das_lojas.md).
+
+## Localização e modalidades
+
+Execute `python3 scripts/test_store_location_modes.py` para conferir ponto opcional, edição ADMIN, publicação e bloqueio de entrega/retirada/agendamento desativados. Usa três logins; considere o limite de autenticação ao repetir roteiros. Os mapas desenhados dependem da internet, enquanto as buscas usam cidades simuladas. [Detalhes e evidências de 05/11](Mapa_e_atendimento_das_lojas.md).
+
+### Verificar funcionamento e reservas
+
+Com o ambiente de demonstração iniciado, execute `python3 scripts/test_store_hours.py`. O script usa três logins fictícios, cria uma loja isolada e a suspende no encerramento. Testa rotas de vendedor e administrador, turnos, pausas, impacto, cancelamento, avisos e estorno simulado. Aguarda até 45 segundos pela confirmação dos estornos. Respeite o limite de logins de teste; não execute repetidamente outras jornadas autenticadas na mesma janela sem reiniciar o processo da API. Não use este script em produção.

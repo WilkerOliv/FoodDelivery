@@ -1,5 +1,5 @@
 const localHost = globalThis.location?.hostname || '127.0.0.1';
-const API_BASE = globalThis.FOODDELIVERY_DEMO ? `${globalThis.location.origin}/api/v1` : import.meta.env?.VITE_API_BASE || `http://${localHost}:8080/api/v1`;
+const API_BASE = globalThis.FOODDELIVERY_DEMO ? `${globalThis.location.origin}/api/v1` : import.meta.env?.VITE_API_BASE || (['localhost','127.0.0.1','[::1]'].includes(localHost) ? `http://${localHost}:8080/api/v1` : `${globalThis.location.origin}/api/v1`);
 export const apiAssetUrl = (path) => path ? new URL(path, API_BASE).href : '';
 
 // Remove tokens issued by older builds; browser sessions now live in HttpOnly cookies.

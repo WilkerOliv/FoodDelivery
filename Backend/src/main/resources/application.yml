@@ -25,6 +25,8 @@ spring:
       mail.smtp.timeout: 5000
       mail.smtp.writetimeout: 5000
 app:
+  private:
+    encryption-key: ${PRIVATE_CONFIG_ENCRYPTION_KEY:}
   web:
     allowed-origins: ${FOODDELIVERY_ALLOWED_ORIGINS:http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175}
   recovery:

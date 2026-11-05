@@ -18,7 +18,7 @@ CONTENT_SECURITY_POLICY = (
     "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; "
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; "
     "font-src 'self' https://fonts.gstatic.com data:; "
-    "img-src 'self' data: blob: http://localhost:8080 http://127.0.0.1:8080 https://*.tile.openstreetmap.org; "
+    "img-src 'self' data: blob: http://localhost:8080 http://127.0.0.1:8080 https://tile.openstreetmap.org https://*.tile.openstreetmap.org; "
     "connect-src 'self' http://localhost:8080 http://127.0.0.1:8080 https://viacep.com.br; "
     "frame-src https://www.openstreetmap.org; object-src 'none'; base-uri 'self'; form-action 'self'"
 )

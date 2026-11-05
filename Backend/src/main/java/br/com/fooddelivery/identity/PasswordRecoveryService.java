@@ -50,6 +50,7 @@ public class PasswordRecoveryService {
     public void invalidatePhoneCodes(Account account) {
         codes.deleteForPurpose(account.getId(),"PHONE_VERIFY");
         codes.deleteForPurpose(account.getId(),"PASSWORD_RESET");
+        codes.deleteForPurpose(account.getId(),"PAYOUT_VERIFY");
     }
 
     @Transactional
@@ -58,6 +59,22 @@ public class PasswordRecoveryService {
         if (code == null || !code.isReadyAt(Instant.now())) return false;
         if (!encoder.matches(rawCode, code.getCodeHash())) { code.recordFailedAttempt(); return false; }
         code.consume(Instant.now()); account.markPhoneVerified(); return true;
+    }
+
+    @Transactional public void requestPayoutVerification(Account account) {
+        RecoveryCode previous=latest(account,"PAYOUT_VERIFY");Instant now=Instant.now();
+        if(previous!=null&&previous.getNextAllowedAt().isAfter(now))throw new IllegalStateException("Aguarde um minuto antes de pedir outro código.");
+        codes.deleteForPurpose(account.getId(),"PAYOUT_VERIFY");
+        String code=String.format(Locale.ROOT,"%06d",random.nextInt(1_000_000));
+        codes.save(new RecoveryCode(account,"PAYOUT_VERIFY","EMAIL",encoder.encode(code),now));
+        sender.sendEmail(account.getEmail(),code);
+    }
+    /** Returning false lets the caller commit the failed attempt before reporting the error. */
+    @Transactional public boolean verifyPayout(Account account,String rawCode) {
+        RecoveryCode code=latest(account,"PAYOUT_VERIFY");
+        if(code==null||!code.isReadyAt(Instant.now()))return false;
+        if(!encoder.matches(rawCode,code.getCodeHash())){code.recordFailedAttempt();return false;}
+        code.consume(Instant.now());return true;
     }
 
     private void issue(Account account, String purpose, String channel, boolean phoneVerification) {

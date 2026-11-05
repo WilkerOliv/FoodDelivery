@@ -46,7 +46,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@Valid @RequestBody LoginRequest request) {
-        return sessionCookie.responseWithToken(authService.login(request.email(), request.password()));
+        return sessionCookie.responseWithToken(authService.login(request.email(), request.password(),request.code()));
     }
 
     @PostMapping("/logout")
@@ -77,7 +77,7 @@ public class AuthController {
                                   @NotBlank @Size(min = 12, max = 72) String password,
                                   @NotBlank @jakarta.validation.constraints.Pattern(regexp="\\d{11}|\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}") String cpf,
                                   @jakarta.validation.constraints.NotNull br.com.fooddelivery.identity.AccountRole role) {}
-    public record LoginRequest(@NotBlank @Email String email, @NotBlank String password) {}
+    public record LoginRequest(@NotBlank @Email String email, @NotBlank @Size(max=72) String password,@Size(max=32)String code) {}
     public record RecoveryRequest(@NotBlank @Email @Size(max=254) String email,
                                   @NotBlank @jakarta.validation.constraints.Pattern(regexp="EMAIL|WHATSAPP") String channel) {}
     public record RecoveryResetRequest(@NotBlank @Email @Size(max=254) String email,

@@ -21,6 +21,9 @@ public class Reservation {
     @Column(name="amount_cents",nullable=false) private long amountCents;
     @Column(name="customer_note",length=500) private String customerNote;
     @Column(name="pay_after_service", nullable=false) private boolean payAfterService;
+    @Column(name="operating_hours_override",nullable=false) private boolean operatingHoursOverride;
+    @Column(name="operating_hours_notice",length=500) private String operatingHoursNotice;
+    @Column(name="operating_hours_changed_at") private Instant operatingHoursChangedAt;
     @Column(name="cancellation_requested_at") private Instant cancellationRequestedAt;
     @Column(name="cancellation_request_status",nullable=false,length=16) private String cancellationRequestStatus="NONE";
     @Column(name="cancellation_request_note",length=500) private String cancellationRequestNote;
@@ -37,6 +40,16 @@ public class Reservation {
     public void requestCancellation(String note){if(status!=ReservationStatus.CONFIRMED)throw new IllegalStateException("Esta reserva não pode receber uma solicitação de cancelamento agora.");if("REQUESTED".equals(cancellationRequestStatus))return;cancellationRequestedAt=Instant.now();cancellationRequestStatus="REQUESTED";cancellationRequestNote=note==null||note.isBlank()?null:note.trim();if(cancellationRequestNote!=null&&cancellationRequestNote.length()>500)throw new IllegalArgumentException("O motivo pode ter até 500 caracteres.");}
     public void decideCancellation(boolean accepted){if(!"REQUESTED".equals(cancellationRequestStatus))throw new IllegalStateException("Não há solicitação de cancelamento pendente.");cancellationRequestStatus=accepted?"ACCEPTED":"DECLINED";}
     public boolean isPayAfterService(){return payAfterService;}
+    public boolean isOperatingHoursOverride(){return operatingHoursOverride;}
+    public String getOperatingHoursNotice(){return operatingHoursNotice;}
+    public Instant getOperatingHoursChangedAt(){return operatingHoursChangedAt;}
+    public void keepAfterHoursChange(){operatingHoursOverride=true;operatingHoursNotice="A loja alterou o expediente, mas manteve este atendimento no horário combinado. Fale com a loja se precisar confirmar detalhes.";operatingHoursChangedAt=Instant.now();}
+    public void clearHoursOverride(){operatingHoursOverride=false;}
+    public void cancelForHoursChange(){
+        if(status!=ReservationStatus.PENDING_PAYMENT&&status!=ReservationStatus.CONFIRMED)throw new IllegalStateException("Somente reservas ainda não iniciadas podem ser canceladas pela mudança de expediente.");
+        status=ReservationStatus.CANCELLED;operatingHoursOverride=false;operatingHoursNotice="A loja cancelou este atendimento por mudança no expediente. Se houve pagamento online, consulte o andamento do estorno.";operatingHoursChangedAt=Instant.now();
+        if("REQUESTED".equals(cancellationRequestStatus))cancellationRequestStatus="ACCEPTED";
+    }
     public void confirmPayment(){if(status!=ReservationStatus.PENDING_PAYMENT)throw new IllegalStateException("Reserva não aguarda pagamento.");status=ReservationStatus.CONFIRMED;}
     public void cancelUnpaid(){if(status!=ReservationStatus.PENDING_PAYMENT)throw new IllegalStateException("Somente reservas que aguardam pagamento podem ser canceladas por este fluxo.");status=ReservationStatus.CANCELLED;}
     public void expireUnpaid(){if(status==ReservationStatus.PENDING_PAYMENT)status=ReservationStatus.CANCELLED;}

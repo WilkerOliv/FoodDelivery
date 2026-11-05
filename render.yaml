@@ -1,0 +1,15 @@
+# Demonstração temporária: nenhum serviço pago, banco externo ou disco persistente.
+services:
+  - type: web
+    name: fooddelivery-homologacao
+    runtime: docker
+    plan: free
+    dockerfilePath: ./deploy/Dockerfile.homologacao
+    dockerContext: .
+    autoDeployTrigger: "off"
+    healthCheckPath: /healthz
+    envVars:
+      - key: DEMO_ACCESS_USER
+        value: avaliador
+      - key: DEMO_ACCESS_PASSWORD
+        generateValue: true

@@ -31,3 +31,9 @@ test('guest session probe does not emit session-expired event', async () => {
   await assert.rejects(api('/account/me'));
   assert.equal(expired, false);
 });
+
+test('published site uses its HTTPS origin without a development API port',async()=>{
+  globalThis.location={hostname:'lojas.example.test',origin:'https://lojas.example.test'};
+  let called;globalThis.fetch=async url=>{called=url;return {ok:true,status:200,headers:{get:()=> 'application/json'},json:async()=>({})};};
+  const {api}=await import(`../src/api.js?production=${Date.now()}`);await api('/stores');assert.equal(called,'https://lojas.example.test/api/v1/stores');
+});

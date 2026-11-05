@@ -20,7 +20,8 @@ public class OrderService {
         Account customer=accounts.findById(customerId).orElseThrow();
         if(!Cpf.isValid(customer.getCpf()))throw new IllegalArgumentException("Cadastre um CPF válido no seu perfil antes de comprar.");
         if(customer.getPhone()==null||customer.getPhone().isBlank()||(type==FulfillmentType.DELIVERY&&(address==null||address.isBlank())))throw new IllegalArgumentException("Complete telefone e endereço de entrega antes de pedir.");
-        Store store=stores.findById(storeId).filter(Store::isAvailable).orElseThrow(()->new NoSuchElementException("Loja indisponível."));
+        Store store=stores.findByIdForUpdate(storeId).filter(Store::isAvailable).orElseThrow(()->new NoSuchElementException("Loja indisponível."));
+        store.requireFulfillment(type);
         operatingHours.requireOpenNow(store);
         if(requested==null||requested.isEmpty())throw new IllegalArgumentException("O pedido precisa ter ao menos um item.");
         long total=0; List<CatalogItem> selected=new ArrayList<>();

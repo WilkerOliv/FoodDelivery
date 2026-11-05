@@ -26,6 +26,8 @@ public class RecoveryMessageSender {
     private final String templateName;
     private final String language;
     private final RestClient http;
+    @org.springframework.beans.factory.annotation.Autowired private br.com.fooddelivery.settings.IntegrationSettings settings;
+    private String setting(String key,String fallback){return settings==null?fallback:settings.value(key,fallback);}
 
     public RecoveryMessageSender(ObjectProvider<JavaMailSender> mailSender,
             @Value("${app.recovery.email-from}") String emailFrom,
@@ -48,23 +50,27 @@ public class RecoveryMessageSender {
         if (demo != null && demo.enabled()) { demo.capture("EMAIL", recipient, code); if(!mailpit)return; }
         JavaMailSender sender = mailSender.getIfAvailable();
         if (sender == null) throw new IllegalStateException("SMTP não configurado.");
+        if(sender instanceof org.springframework.mail.javamail.JavaMailSenderImpl original){
+            var configured=new org.springframework.mail.javamail.JavaMailSenderImpl();configured.setHost(setting("SMTP_HOST",original.getHost()));configured.setPort(Integer.parseInt(setting("SMTP_PORT",Integer.toString(original.getPort()))));configured.setUsername(setting("SMTP_USERNAME",original.getUsername()));configured.setPassword(setting("SMTP_PASSWORD",original.getPassword()));configured.getJavaMailProperties().putAll(original.getJavaMailProperties());sender=configured;
+        }
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(emailFrom); message.setTo(recipient); message.setSubject("Código de segurança FoodDelivery");
+        message.setFrom(setting("RECOVERY_EMAIL_FROM",emailFrom)); message.setTo(recipient); message.setSubject("Código de segurança FoodDelivery");
         message.setText("Seu código de segurança é " + code + ". Ele expira em 10 minutos. Se você não solicitou, ignore este e-mail.");
         sender.send(message);
     }
 
     public void sendWhatsApp(String phone, String code) {
         if (demo != null && demo.enabled()) { demo.capture("WHATSAPP", phone, code); return; }
-        if (!whatsappEnabled || phoneNumberId.isBlank() || accessToken.isBlank())
+        String currentPhone=setting("WHATSAPP_PHONE_NUMBER_ID",phoneNumberId),currentToken=setting("WHATSAPP_ACCESS_TOKEN",accessToken);
+        if (!Boolean.parseBoolean(setting("WHATSAPP_CLOUD_ENABLED",Boolean.toString(whatsappEnabled))) || currentPhone.isBlank() || currentToken.isBlank())
             throw new IllegalStateException("WhatsApp Cloud não configurado.");
         String recipient = phone.replaceAll("\\D", "");
         if (recipient.length() == 10 || recipient.length() == 11) recipient = "55" + recipient;
         if (recipient.length() < 12 || recipient.length() > 15) throw new IllegalArgumentException("Telefone inválido.");
-        http.post().uri("https://graph.facebook.com/{version}/{phoneId}/messages", graphVersion, phoneNumberId)
-                .contentType(MediaType.APPLICATION_JSON).headers(h -> h.setBearerAuth(accessToken))
+        http.post().uri("https://graph.facebook.com/{version}/{phoneId}/messages", setting("WHATSAPP_GRAPH_VERSION",graphVersion), currentPhone)
+                .contentType(MediaType.APPLICATION_JSON).headers(h -> h.setBearerAuth(currentToken))
                 .body(java.util.Map.of("messaging_product", "whatsapp", "to", recipient, "type", "template",
-                        "template", java.util.Map.of("name", templateName, "language", java.util.Map.of("code", language),
+                        "template", java.util.Map.of("name", setting("WHATSAPP_OTP_TEMPLATE",templateName), "language", java.util.Map.of("code", setting("WHATSAPP_TEMPLATE_LANGUAGE",language)),
                                 "components", java.util.List.of(java.util.Map.of("type", "body", "parameters",
                                         java.util.List.of(java.util.Map.of("type", "text", "text", code)))))))
                 .retrieve().toBodilessEntity();

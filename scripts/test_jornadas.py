@@ -10,6 +10,7 @@ def main():
         assert b'FOODDELIVERY_DEMO=true' in response.read()
     admin,customer,merchant,courier,other=[Client() for _ in range(5)]
     for client,name in [(admin,'admin'),(customer,'cliente'),(merchant,'vendedor'),(courier,'entregador'),(other,'outro')]:client.login(name)
+    admin.call('/admin/courier-finance/policy','POST',{'amountCents':500,'password':'DemoLocal!2026#Teste'})
     tag=str(uuid.uuid4())[:8]
     store=next(s for s in merchant.call('/merchant/stores/mine') if s['category']=='Mercados')
     item=merchant.call('/merchant/stores/'+store['id']+'/items','POST',{'name':'Item QA '+tag,'description':'Fixture descartável','priceCents':1700,'stock':10,'serviceItem':False,'active':True,'payAfterService':False},201)

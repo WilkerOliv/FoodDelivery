@@ -4,6 +4,8 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ReservationSlotRepository extends JpaRepository<ReservationSlot,UUID>{
+    @org.springframework.data.jpa.repository.Query("select s from ReservationSlot s where s.storeId=:id and s.startsAt < :end and s.endsAt > :start")
+    java.util.List<ReservationSlot> findAcrossInterval(@org.springframework.data.repository.query.Param("id") UUID id,@org.springframework.data.repository.query.Param("start")java.time.Instant start,@org.springframework.data.repository.query.Param("end")java.time.Instant end);
     boolean existsByStoreIdAndStartsAt(UUID storeId,java.time.Instant startsAt);
     boolean existsByStoreIdAndProfessionalIdAndStartsAt(UUID storeId,UUID professionalId,java.time.Instant startsAt);
     boolean existsByStoreIdAndProfessionalIdIsNullAndStartsAt(UUID storeId,java.time.Instant startsAt);

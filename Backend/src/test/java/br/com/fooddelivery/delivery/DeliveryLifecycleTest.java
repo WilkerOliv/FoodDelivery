@@ -22,7 +22,7 @@ class DeliveryLifecycleTest {
         var deliveries=mock(DeliveryRepository.class);var orders=mock(OrderRepository.class);
         when(deliveries.findById(id)).thenReturn(Optional.of(task));when(orders.findByIdForUpdate(id)).thenReturn(Optional.of(order));when(deliveries.save(task)).thenReturn(task);
         var auth=new JwtAuthenticationToken(Jwt.withTokenValue("test").header("alg","HS256").subject(courierId.toString()).build());
-        var response=new DeliveryController(deliveries,orders,mock(AccountRepository.class)).progress(id,new DeliveryController.Update(DeliveryStatus.DELIVERED),auth);
+        var response=new DeliveryController(deliveries,orders,mock(AccountRepository.class),mock(br.com.fooddelivery.finance.CourierFinanceService.class)).progress(id,new DeliveryController.Update(DeliveryStatus.DELIVERED),auth);
         assertEquals(OrderStatus.COMPLETED,order.getStatus());assertEquals(DeliveryStatus.DELIVERED,response.status());assertNull(response.deliveryAddress());assertNull(response.customerNote());
     }
     @Test void cancellationRemovesOfferedDelivery(){
