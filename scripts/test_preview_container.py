@@ -1,4 +1,5 @@
 """Smoke-test the already built preview image with a 512 MiB memory limit."""
+import argparse
 import base64
 import json
 import secrets
@@ -9,11 +10,14 @@ import urllib.request
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--cpus', default='1', help='Use 0.1 para reproduzir um início com CPU restrita.')
+    options = parser.parse_args()
     name = 'fooddelivery-preview-qa-' + secrets.token_hex(4)
     password = secrets.token_urlsafe(32)
     origin = 'https://preview.example.test'
     container = subprocess.check_output([
-        'docker', 'run', '-d', '--name', name, '--memory=512m', '--cpus=1',
+        'docker', 'run', '-d', '--name', name, '--memory=512m', '--cpus=' + options.cpus,
         '-p', '127.0.0.1::10000', '-e', 'RENDER_EXTERNAL_URL=' + origin,
         '-e', 'DEMO_ACCESS_PASSWORD=' + password, 'fooddelivery-preview:qa'], text=True).strip()
     try:
@@ -32,17 +36,23 @@ def main():
                 return urllib.request.urlopen(urllib.request.Request(base + path, data=data, headers=headers), timeout=10)
             except urllib.error.HTTPError as error:
                 return error
-        deadline = time.monotonic() + 180
+        started = time.monotonic()
+        deadline = started + 600
+        saw_startup = False
         while time.monotonic() < deadline:
             try:
                 with request('/healthz', authenticated=False) as response:
                     if response.status == 200:
                         break
+                    assert response.status == 503, response.status
+                    saw_startup = True
             except OSError:
                 pass
             time.sleep(1)
         else:
-            raise AssertionError('O contêiner não ficou pronto em 180 segundos; consulte docker logs ' + name)
+            raise AssertionError('O contêiner não ficou pronto em 600 segundos; consulte docker logs ' + name)
+        assert saw_startup, 'A porta deve responder durante a inicialização, com saúde 503.'
+        startup_seconds = round(time.monotonic() - started, 1)
         with request('/', authenticated=False) as response:
             assert response.status == 401
         with request('/') as response:
@@ -59,7 +69,7 @@ def main():
                 assert response.status == 200, (role, response.status)
             with request('/api/v1/auth/logout', {}, cookie, request_origin='https://untrusted.example.test') as response:
                 assert response.status == 403
-        print('PASS: contêiner com 512 MiB, gateway, API, quatro perfis, cookie protegido e bloqueio de origem.')
+        print(f'PASS: contêiner com 512 MiB e {options.cpus} CPU; início em {startup_seconds}s; saúde 503→200, gateway, API, quatro perfis, cookie protegido e bloqueio de origem.')
     finally:
         subprocess.run(['docker', 'rm', '-f', '-v', container], check=True, stdout=subprocess.DEVNULL)
 

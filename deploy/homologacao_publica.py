@@ -2,7 +2,9 @@
 """Temporary HTTPS preview behind a shared access password; never loads production .env."""
 import base64
 import hmac
+import http.client
 import importlib.util
+import json
 import os
 from pathlib import Path
 import secrets
@@ -12,8 +14,6 @@ import tempfile
 import threading
 import time
 from urllib.parse import unquote, urlsplit
-import urllib.error
-import urllib.request
 from http.server import ThreadingHTTPServer
 
 ROOT = Path(__file__).resolve().parent
@@ -34,18 +34,32 @@ def access_token(username, password):
 class PreviewHandler(frontend.FrontendHandler):
     expected_authorization = ''
 
+    def is_ready(self):
+        return self.server.api_ready.is_set()
+
+    def starting(self):
+        self.send_response(503)
+        self.send_header('Content-Type', 'text/plain; charset=utf-8')
+        self.send_header('Retry-After', '10')
+        self.end_headers()
+        self.wfile.write('A demonstração está iniciando. Aguarde e atualize a página.'.encode())
+
     def do_HEAD(self):
         self.send_error(405)
 
     def do_GET(self):
         # Health reveals only readiness, never credentials or business data.
         if self.path == '/healthz':
+            if not self.is_ready():
+                return self.starting()
             self.send_response(200)
             self.end_headers()
             self.wfile.write(b'ok')
             return
         if not self.authorized():
             return
+        if not self.is_ready():
+            return self.starting()
         path = unquote(urlsplit(self.path).path)
         if path == '/runtime-config.js':
             self.send_response(200)
@@ -77,6 +91,8 @@ class PreviewHandler(frontend.FrontendHandler):
     def mutate(self):
         if not self.authorized():
             return
+        if not self.is_ready():
+            return self.starting()
         if self.headers.get('Transfer-Encoding'):
             self.send_error(400)
             return
@@ -108,6 +124,33 @@ class PreviewHandler(frontend.FrontendHandler):
         self.connection.settimeout(35)
 
 
+def demo_ready():
+    connection = http.client.HTTPConnection('127.0.0.1', 8181, timeout=2)
+    try:
+        connection.request('GET', '/api/v1/demo/status')
+        response = connection.getresponse()
+        if response.status != 200:
+            return False
+        status = json.load(response)
+        return status.get('mode') == 'homologacao' and status.get('ready') is True
+    except (OSError, http.client.HTTPException, ValueError, AttributeError):
+        return False
+    finally:
+        connection.close()
+
+
+def wait_for_api(api, timeout=600, clock=time.monotonic, sleep=time.sleep):
+    """Allow slow free-tier cold starts, but only accept a completely seeded demo."""
+    deadline = clock() + timeout
+    while clock() < deadline:
+        if api.poll() is not None:
+            raise RuntimeError('A API de demonstração encerrou durante a inicialização.')
+        if demo_ready():
+            return
+        sleep(1)
+    raise RuntimeError('Tempo de inicialização da API excedido (600 segundos por padrão).')
+
+
 def main():
     PreviewHandler.expected_authorization = access_token(os.environ.get('DEMO_ACCESS_USER', 'avaliador'), os.environ.get('DEMO_ACCESS_PASSWORD', ''))
     origin = os.environ.get('RENDER_EXTERNAL_URL', '')
@@ -127,44 +170,39 @@ def main():
                 '--app.payment.mercadopago.frontend-url=' + origin,
                 '--spring.datasource.url=jdbc:h2:file:' + data + '/database;MODE=PostgreSQL',
                 '--app.media.store-assets-dir=' + data + '/store-assets']
-        api = subprocess.Popen(args, env=env)
+        # Bind Render's public port immediately; readiness remains 503 until Java and seed finish.
+        os.chdir(FRONTEND)
+        server = ThreadingHTTPServer(('0.0.0.0', int(os.environ.get('PORT', '10000'))), PreviewHandler)
+        server.api_ready = threading.Event()
+        server_thread = threading.Thread(target=server.serve_forever, daemon=True)
+        server_thread.start()
+        print('Porta pública aberta; aguardando a API. /healthz retorna 503 durante a inicialização.', flush=True)
+        api = None
         def terminate(*_):
             raise KeyboardInterrupt
         signal.signal(signal.SIGTERM, terminate)
         try:
-            deadline = time.monotonic() + 180
-            while time.monotonic() < deadline:
-                if api.poll() is not None:
-                    raise RuntimeError('A API de demonstração encerrou durante a inicialização.')
-                try:
-                    with urllib.request.urlopen('http://127.0.0.1:8181/api/v1/demo/status', timeout=1) as response:
-                        if response.status == 200:
-                            break
-                except (OSError, urllib.error.URLError):
-                    pass
-                time.sleep(1)
-            else:
-                raise RuntimeError('Tempo de inicialização da API excedido.')
-            os.chdir(FRONTEND)
-            server = ThreadingHTTPServer(('0.0.0.0', int(os.environ.get('PORT', '10000'))), PreviewHandler)
-            def watch_api():
-                api.wait()
-                server.shutdown()
-            threading.Thread(target=watch_api, daemon=True).start()
+            api = subprocess.Popen(args, env=env)
+            wait_for_api(api)
+            server.api_ready.set()
             print('Homologação pronta: acesso protegido, dados fictícios e temporários.', flush=True)
-            try:
-                server.serve_forever()
-            finally:
-                server.server_close()
+            exit_code = api.wait()
+            server.api_ready.clear()
+            raise RuntimeError(f'A API de demonstração encerrou (código {exit_code}).')
         except KeyboardInterrupt:
             pass
         finally:
-            api.terminate()
-            try:
-                api.wait(timeout=20)
-            except subprocess.TimeoutExpired:
-                api.kill()
-                api.wait()
+            server.api_ready.clear()
+            server.shutdown()
+            server.server_close()
+            server_thread.join(timeout=5)
+            if api is not None and api.poll() is None:
+                api.terminate()
+                try:
+                    api.wait(timeout=20)
+                except subprocess.TimeoutExpired:
+                    api.kill()
+                    api.wait()
 
 
 if __name__ == '__main__':

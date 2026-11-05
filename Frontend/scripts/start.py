@@ -8,6 +8,7 @@ import socket
 import urllib.request
 import urllib.error
 import json
+import http.client
 
 
 HOST = "127.0.0.1"
@@ -41,20 +42,25 @@ class FrontendHandler(SimpleHTTPRequestHandler):
     def proxy(self):
         if not DEMO or not self.path.startswith('/api/v1/'):
             self.send_error(404);return
-        length=int(self.headers.get('Content-Length','0'))
-        if length > 10_000_000: self.send_error(413);return
+        if self.headers.get('Transfer-Encoding'): self.send_error(400);return
+        try: length=int(self.headers.get('Content-Length','0'))
+        except ValueError: self.send_error(400);return
+        if length < 0 or length > 10_000_000: self.send_error(413);return
         data=self.rfile.read(length) if length else None
         headers={key:self.headers[key] for key in ('Content-Type','Cookie','Origin') if key in self.headers}
-        request=urllib.request.Request('http://127.0.0.1:8181'+self.path,data=data,headers=headers,method=self.command)
+        # Fixed loopback destination; no URL schemes, environment proxies or redirect following.
+        connection=http.client.HTTPConnection('127.0.0.1',8181,timeout=30)
         try:
-            result=urllib.request.urlopen(request,timeout=30)
-        except urllib.error.HTTPError as error: result=error
-        except urllib.error.URLError: self.send_error(502,'API de homologação indisponível');return
-        with result:
+            connection.request(self.command,self.path,body=data,headers=headers)
+            result=connection.getresponse()
             body=result.read();self.send_response(result.status)
             for key in ('Content-Type','Set-Cookie','Cache-Control'):
                 for value in result.headers.get_all(key,[]): self.send_header(key,value)
             self.end_headers();self.wfile.write(body)
+        except (OSError,http.client.HTTPException):
+            self.send_error(502,'API de homologacao indisponivel')
+        finally:
+            connection.close()
 
     def end_headers(self):
         self.send_header("Content-Security-Policy", CONTENT_SECURITY_POLICY)

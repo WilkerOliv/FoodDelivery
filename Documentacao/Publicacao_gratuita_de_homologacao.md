@@ -60,7 +60,7 @@ Para trocar de perfil, use **Sair** dentro do site. Para encerrar também a aute
 ## 5. Conferência após a publicação
 
 - Sem a primeira senha, `/`, `/demo.html` e os endereços da API devem solicitar autenticação.
-- `/healthz` mostra apenas `ok`, sem dados ou credenciais.
+- `/healthz` retorna `503` enquanto a API inicia e `200` com `ok` quando os dados fictícios estão prontos, sem expor dados ou credenciais.
 - Abra cada um dos quatro perfis e confira navegação e permissões.
 - Utilize apenas os simuladores de pagamento e mensagens disponíveis em homologação.
 - Cadastre um item fictício e confirme que ele aparece até o próximo reinício.
@@ -73,13 +73,15 @@ O processo não lê `.env` nem herda variáveis de banco, SMTP, WhatsApp ou Merc
 
 O serviço usa um limite de memória Java compatível com uma demonstração pequena; é necessário acompanhar o consumo real no Render. Se houver encerramento por falta de memória, reduza o uso simultâneo ou avalie outra hospedagem. Não habilite serviços pagos automaticamente para contornar limites.
 
+A porta pública abre antes de a API terminar de iniciar. Durante esse período, a verificação de saúde responde `503` e o acesso continua protegido. O inicializador aguarda até 600 segundos, exige confirmação de que a carga de dados fictícios terminou e encerra o pacote se a API falhar. O Render decide quando encaminhar tráfego a partir de `/healthz`; não altere essa rota para retornar sucesso durante a inicialização. Em instâncias com pouca CPU, a primeira inicialização pode levar alguns minutos.
+
 ## Estado da entrega e limites
 
 Os arquivos e testes locais do gateway estão no repositório. A publicação externa depende de criar a conta, enviar o código revisado ao GitHub e concluir o Blueprint. Nenhuma URL pública foi criada por estes arquivos, e nenhum resultado na infraestrutura do Render é presumido antes da publicação.
 
 Validação local realizada em 05/11/2026:
 
-- `python3 scripts/test_public_preview.py`: cinco testes aprovados, cobrindo autenticação, arquivos privados, diretórios, flag de demonstração, bloqueio de configuração real e rejeição de senha fraca.
+- `python3 scripts/test_public_preview.py`: onze testes aprovados, cobrindo autenticação, arquivos privados, diretórios, flag de demonstração, bloqueio de configuração real, rejeição de senha fraca, saúde durante a inicialização, espera acima de 180 segundos, falha do processo e limite de espera e proxy restrito a loopback.
 - `docker build -f deploy/Dockerfile.homologacao -t fooddelivery-preview:qa .`: pacote compilado com sucesso.
 - `python3 scripts/test_preview_container.py`: pacote iniciado com 512 MiB e uma CPU; página, API, login dos quatro perfis, cookie Secure/HttpOnly e bloqueio de origem não autorizada conferidos por HTTP. O contêiner de teste e seus dados foram removidos ao terminar.
 

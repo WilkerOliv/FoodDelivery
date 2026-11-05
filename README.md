@@ -20,6 +20,8 @@ O ambiente é isolado e não movimenta dinheiro. Não substituir homologação d
 
 [Passo a passo no Render](Documentacao/Publicacao_gratuita_de_homologacao.md): demonstração protegida por senha, endereço HTTPS gratuito, dados fictícios e descartáveis. O Blueprint `render.yaml` usa um único serviço Free. Não serve para operação comercial nem guarda dados após reinícios.
 
+[Inicialização, nova publicação e verificações de segurança no GitHub](Documentacao/Publicacao_e_verificacoes_de_seguranca.md), com os limites de CodeQL em repositórios privados e a análise gratuita disponível.
+
 ## Desenvolvimento e validação
 
 Configuração normal: [backend e operação](Backend/README.md). Validação e comandos reproduzíveis: [matriz de testes](Documentacao/Validacao_2026-11-04.md). O teste de esquema usa chave exclusiva de teste; produção exige segredo próprio.
