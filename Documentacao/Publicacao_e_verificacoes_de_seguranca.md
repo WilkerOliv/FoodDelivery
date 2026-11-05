@@ -52,7 +52,7 @@ python3 scripts/test_preview_container.py --cpus 0.1
 
 O último comando aplica uma restrição artificial de CPU para testar uma inicialização mais lenta, mantendo 512 MiB de memória. Não é uma medição contratual dos recursos do Render. Os contêineres de teste são removidos ao terminar. O fluxo `Project quality` inclui os testes de regressão do gateway para evitar a volta de uma declaração prematura de saúde ou da rejeição de inícios acima de 180 segundos.
 
-Resultados locais desta correção: onze testes do gateway/inicializador e três testes da detecção de disponibilidade aprovados; Semgrep executou 192 regras sobre 204 arquivos e não encontrou apontamentos nesse escopo. A implantação externa só pode ser considerada confirmada após o Render mostrar **Live** e a URL responder corretamente.
+Resultados locais desta correção: onze testes do gateway/inicializador e três testes da detecção de disponibilidade aprovados; Semgrep executou 192 regras sobre 204 arquivos e não encontrou apontamentos nesse escopo. O pacote também passou nos testes HTTP dos quatro perfis com 512 MiB: iniciou em 19,1 segundos com uma CPU e em 453,3 segundos no ensaio com 0,1 CPU, mantendo saúde `503` durante o início e `200` somente depois de pronto. Os contêineres temporários foram removidos. A implantação externa só pode ser considerada confirmada após o Render mostrar **Live** e a URL responder corretamente.
 
 Referências oficiais verificadas em 05/11/2026:
 
