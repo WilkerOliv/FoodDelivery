@@ -15,6 +15,8 @@ jobs:
           python-version: '3.12'
       - name: Test protected gateway and slow startup
         run: python3 scripts/test_public_preview.py
+      - name: Test detection of Code Scanning availability
+        run: python3 -m unittest discover -s scripts -p test_security_capabilities.py
 
   backend:
     runs-on: ubuntu-latest

@@ -12,20 +12,19 @@ permissions:
 jobs:
   security-capabilities:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: read
+    outputs:
+      codeql: ${{ steps.capabilities.outputs.codeql }}
     steps:
-      - name: Explain security coverage for this repository
+      - uses: actions/checkout@v4
+      - name: Check available Code Scanning features
+        id: capabilities
         env:
-          VISIBILITY: ${{ github.event.repository.visibility }}
+          GH_TOKEN: ${{ github.token }}
           CODEQL_ENABLED: ${{ vars.CODEQL_ENABLED }}
-        run: |
-          {
-            echo '## Security checks'
-            echo 'Semgrep Community Edition and the backend SBOM run without a paid security subscription.'
-            echo 'Semgrep reports do not replace CodeQL or a complete security review.'
-            if [ "$VISIBILITY" != 'public' ] && [ "$CODEQL_ENABLED" != 'true' ]; then
-              echo 'CodeQL is not enabled: this repository is private. Keep it private; enable CODEQL_ENABLED only after confirming an existing GitHub Code Security entitlement.'
-            fi
-          } >> "$GITHUB_STEP_SUMMARY"
+        run: python3 scripts/check_code_scanning.py
 
   semgrep:
     name: Free static security analysis
@@ -54,7 +53,8 @@ jobs:
 
   codeql:
     name: CodeQL · ${{ matrix.language }}
-    if: github.event.repository.visibility == 'public' || vars.CODEQL_ENABLED == 'true'
+    needs: security-capabilities
+    if: needs.security-capabilities.outputs.codeql == 'true'
     runs-on: ubuntu-latest
     permissions:
       actions: read

@@ -30,12 +30,12 @@ O fluxo `Security checks` tem cobertura explícita:
 |---|---|---|
 | Semgrep Community Edition 1.184.0 | Push, pull request e agenda semanal | Regras `p/security-audit` e `p/secrets`; findings ou falha da ferramenta fazem o job falhar. Relatório SARIF disponível nos artefatos da execução, sem depender da aba Code Scanning. Não usa login, token Semgrep ou envio de métricas. |
 | SBOM CycloneDX do backend | Push, pull request e agenda semanal | Inventário de dependências; não é, isoladamente, um diagnóstico de vulnerabilidades. |
-| CodeQL | Repositório público ou variável `CODEQL_ENABLED=true` | JavaScript usa `build-mode: none`; Java usa compilação manual com Java 21, no diretório `Backend`. A habilitação em repositório privado depende de uma licença/funcionalidade GitHub já disponível. |
+| CodeQL | A API do GitHub permite consultar análises de Code Scanning e `CODEQL_ENABLED` não é `false` | JavaScript usa `build-mode: none`; Java usa compilação manual com Java 21, no diretório `Backend`. A habilitação em repositório privado depende de uma licença/funcionalidade GitHub já disponível. |
 | Dependency Review | Pull request em repositório público ou `DEPENDENCY_REVIEW_ENABLED=true` | Requer funcionalidade habilitada na conta para repositórios privados. Não executa em push comum. |
 
-O repositório foi consultado e estava **privado**, com Code Scanning indisponível. Não houve mudança de visibilidade, contratação ou habilitação de serviço pago. CodeQL e Dependency Review não são apresentados como executados quando estão indisponíveis: seus jobs ficam explicitamente ignorados, e um resumo informa a cobertura. A análise Semgrep continua executando no repositório privado.
+O usuário confirmou que o repositório deve permanecer **privado**. As consultas de visibilidade variaram durante a investigação, e a API continuou informando Code Scanning indisponível. Por isso, a decisão de executar CodeQL usa a disponibilidade real da API, e não a visibilidade registrada no evento de push. Esta correção não alterou a visibilidade, não contratou serviços e não habilitou serviços pagos. CodeQL e Dependency Review não são apresentados como executados quando estão indisponíveis: seus jobs ficam explicitamente ignorados, e um resumo informa a cobertura. A análise Semgrep continua executando no repositório privado.
 
-Não ative `CODEQL_ENABLED` ou `DEPENDENCY_REVIEW_ENABLED` sem confirmar acesso ao recurso nas configurações do GitHub. As variáveis apenas controlam o workflow; não concedem licença. Os dois motores de análise têm coberturas diferentes: Semgrep não equivale a uma prova de ausência de vulnerabilidades ou à execução de CodeQL.
+A variável `CODEQL_ENABLED=false` desativa explicitamente o job opcional. Definir `true` não contorna a consulta de disponibilidade nem concede licença. Não ative `DEPENDENCY_REVIEW_ENABLED` sem confirmar acesso ao recurso nas configurações do GitHub. A consulta de disponibilidade trata respostas 403/404 como recurso indisponível; erros de autenticação (401), limite de requisições (429), rede e falhas do provedor fazem a verificação falhar, em vez de fingir sucesso. Os dois motores de análise têm coberturas diferentes: Semgrep não equivale a uma prova de ausência de vulnerabilidades ou à execução de CodeQL.
 
 ### Escopo da análise gratuita
 
@@ -52,7 +52,7 @@ python3 scripts/test_preview_container.py --cpus 0.1
 
 O último comando aplica uma restrição artificial de CPU para testar uma inicialização mais lenta, mantendo 512 MiB de memória. Não é uma medição contratual dos recursos do Render. Os contêineres de teste são removidos ao terminar. O fluxo `Project quality` inclui os testes de regressão do gateway para evitar a volta de uma declaração prematura de saúde ou da rejeição de inícios acima de 180 segundos.
 
-Resultados locais desta correção: onze testes do gateway/inicializador aprovados; Semgrep executou 192 regras sobre 204 arquivos e não encontrou apontamentos nesse escopo. A implantação externa só pode ser considerada confirmada após o Render mostrar **Live** e a URL responder corretamente.
+Resultados locais desta correção: onze testes do gateway/inicializador e três testes da detecção de disponibilidade aprovados; Semgrep executou 192 regras sobre 204 arquivos e não encontrou apontamentos nesse escopo. A implantação externa só pode ser considerada confirmada após o Render mostrar **Live** e a URL responder corretamente.
 
 Referências oficiais verificadas em 05/11/2026:
 
