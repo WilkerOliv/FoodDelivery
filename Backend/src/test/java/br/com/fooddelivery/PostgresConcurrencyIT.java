@@ -24,6 +24,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(properties={"spring.datasource.url=${QA_DATABASE_URL}","spring.datasource.username=${QA_DATABASE_USERNAME}","spring.datasource.password=${QA_DATABASE_PASSWORD}","app.security.jwt-secret=dGVzdC1vbmx5LWtleS1uZXZlci11c2UtaW4tcHJvZHVjdGlvbg=="})
 @ActiveProfiles("postgres")
 class PostgresConcurrencyIT {
+ @Autowired org.springframework.context.ApplicationContext context;
+ @Test void normalDatabaseProfileDoesNotExposePaymentSimulators(){
+  assertFalse(context.getBean(br.com.fooddelivery.config.DemoEnvironment.class).enabled());
+  assertTrue(context.getBeansOfType(br.com.fooddelivery.config.DemoController.class).isEmpty());
+  assertTrue(context.getBeansOfType(DevelopmentPaymentController.class).isEmpty());
+  assertTrue(context.getBeansOfType(DevelopmentReservationPaymentController.class).isEmpty());
+ }
  @Autowired AccountRepository accounts;@Autowired StoreRepository stores;@Autowired CatalogItemRepository items;@Autowired OrderRepository orders;@Autowired PaymentRepository payments;@Autowired ReservationSlotRepository slots;@Autowired OrderService orderService;@Autowired ReservationController bookings;@Autowired PlatformTransactionManager manager;
  record Fixture(UUID customer,UUID store,UUID item){}
  Fixture fixture(boolean service){return new TransactionTemplate(manager).execute(status->{String tag=UUID.randomUUID().toString();Account owner=new Account("owner-"+tag+"@example.test","QA Owner","encoded");owner.setRole(AccountRole.MERCHANT);accounts.save(owner);Account customer=new Account("customer-"+tag+"@example.test","QA Customer","encoded");customer.setCpfOnce("52998224725");customer.updateProfile("QA Customer","11900000000","Rua QA",null,"Centro","Nantes","SP","19645000");

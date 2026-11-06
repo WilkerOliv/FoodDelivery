@@ -35,3 +35,7 @@ Localização opcional no mapa e modalidades de atendimento: [configuração, co
 ### Funcionamento da loja e reservas
 
 [Regras de turnos, pausas, exceções e tratamento das reservas afetadas](Documentacao/Funcionamento_e_reservas.md), incluindo contratos, segurança e testes locais.
+
+[Fidelidade da homologação](Documentacao/Fidelidade_da_homologacao.md): regras compartilhadas, diferenças dos simuladores e critérios de validação antes da operação real.
+
+Relatório da continuação manual: [Validação manual complementar — 06/11/2026](Documentacao/Validacao_manual_complementar_2026-11-06.md), com o defeito do aceite de entrega, correção e limites do que ainda precisa ser repetido após o deploy.

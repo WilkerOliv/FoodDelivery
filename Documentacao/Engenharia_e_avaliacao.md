@@ -1,6 +1,6 @@
 # Engenharia e avaliação do projeto
 
-Referência: código local de 04/11/2026. Leia a matriz de validação para distinguir execução comprovada, análise estática e dependências externas.
+Referência: código conferido em 06/11/2026. Leia a matriz de validação para distinguir execução comprovada, análise estática e dependências externas.
 
 ## 1. Estrutura e motivo das decisões
 
@@ -44,7 +44,9 @@ CPF identifica cadastros operacionais/clientes, mas não autentica a pessoa nem 
 
 Recuperação guarda hash do código, propósito, canal, validade, tentativas e consumo. Não devolve o código na API comum. Reenvio tem intervalo mínimo. O telefone só fica verificado após código válido; mudar o número ou corrigir o e-mail administrativamente remove os códigos pendentes de verificação e recuperação, para evitar reaproveitamento do código destinado ao contato anterior. As alterações do perfil usam bloqueio da conta.
 
-**Limites:** não há MFA administrativo, prova documental/KYC ou detecção distribuída de fraude. A limitação de login/cadastro/recuperação é local ao processo e baseada no endereço remoto; múltiplas réplicas e proxies exigem projeto próprio de contadores compartilhados e origens confiáveis. Não confiar livremente em `X-Forwarded-For`.
+O MFA administrativo TOTP está implementado: configuração com senha, chave cifrada, confirmação, códigos de recuperação com hash, controle de repetição e revogação de sessões ao ativar/desativar. Sua ativação operacional e guarda dos códigos continuam sob responsabilidade do administrador.
+
+**Limites:** não há prova documental/KYC ou detecção distribuída de fraude. A limitação de autenticação usa identificador normalizado com hash e orçamento adicional por peer; operações sensíveis usam identidade JWT validada. Os contadores continuam locais ao processo; múltiplas réplicas e proxies exigem contadores compartilhados e política de origens confiáveis. Não confiar livremente em `X-Forwarded-For`.
 
 ## 4. Catálogo, cidades e publicação
 
@@ -66,7 +68,7 @@ Na reserva, o cliente escolhe profissional ou primeiro disponível. O intervalo 
 
 O expediente admite até seis turnos por dia, pausas, 24 horas e exceções datadas. Alterações com impacto exigem prévia e decisão: manter reservas e avisar ou cancelar, liberar slots e solicitar estorno quando aplicável. Atendimentos iniciados são preservados. Reservas futuras independem da abertura no instante da compra. Veja [Funcionamento e reservas](Funcionamento_e_reservas.md).
 
-**Limites reais:** disponibilidade individual semanal do profissional e capacidade maior que um por recurso não são modeladas. O seletor atual é data/hora nativo, não uma grade que lista somente horários livres. O conflito pode exigir escolher outro horário.
+A disponibilidade semanal e as exceções do profissional estão implementadas com consulta prévia de impacto. A grade lista horários livres combinando expediente da loja, disponibilidade do profissional, duração do serviço, antecedência e ocupação. O cliente escolhe uma pessoa ou o primeiro disponível. A consulta não segura o horário: a API revalida no momento da confirmação. Capacidade maior que um no mesmo recurso não é modelada; profissionais diferentes são recursos separados.
 
 ## 6. Compras, estoque e cancelamentos
 
@@ -86,7 +88,7 @@ O responsável avança de atribuída para coletada, em trânsito e entregue. O s
 
 Tarefas encerradas omitem endereço e observação na resposta ao entregador. O histórico de conversa pode continuar contendo texto digitado pelos participantes, inclusive informações pessoais que eles próprios escreveram; a ocultação do campo de endereço não apaga esse histórico. É necessário definir retenção e política de acesso antes de operação pública em escala.
 
-O valor do pedido não é remuneração da entrega. A interface o informa explicitamente. Não existe cálculo de comissão/ganho por corrida e saque Pix do entregador implementado. A aba financeira explica essa situação e não inventa saldo disponível.
+O valor do pedido não é remuneração da entrega. A administração define um valor fixo por entrega, congelado na tarefa; concluir a entrega gera crédito único. A aba financeira mostra acumulado, reservado, pago e disponível. A solicitação exige senha, CPF válido, código de verificação e chave idempotente, reserva saldo e depende de aprovação administrativa. O pagamento é feito externamente e seu comprovante é registrado pela administração; a plataforma não inicia uma transferência Pix. Entregas antigas sem valor registrado não geram remuneração retroativa inventada.
 
 ## 8. Dinheiro e integrações
 
@@ -94,7 +96,7 @@ Mercado Pago usa conexão de conta, checkout, webhook, consulta e estorno. Token
 
 Pagamentos tardios de operações canceladas iniciam estorno em vez de ressuscitar a compra. Estornos têm chave persistida para repetição, tentativas e estado de revisão. Expiração de checkout e repetição de estorno são jobs agendados. O administrador tem acompanhamento de casos em revisão.
 
-**Ainda depende de homologação:** OAuth, sandbox do fornecedor, assinatura/URL pública de webhook, recusas reais, reenvio, atraso, saldo insuficiente, chargeback, indisponibilidade e credenciais por estabelecimento. Simulador não substitui isso. A plataforma não implementa razão contábil de dupla entrada, conciliação de extrato/liquidação ou transferências Pix de saldo ao entregador.
+**Ainda depende de homologação:** OAuth, sandbox do fornecedor, assinatura/URL pública de webhook, recusas reais, reenvio, atraso, saldo insuficiente, chargeback, indisponibilidade e credenciais por estabelecimento. Simulador não substitui isso. Existe conciliação por pagamento: consulta o provedor e confere identificador, referência externa, valor e moeda antes de atualizar estados; divergências ficam para revisão e a operação é auditada. Na homologação retorna SIMULATED sem consultar o provedor. Isso não é conciliação de extrato/liquidação nem razão contábil de dupla entrada, e não executa transferências Pix ao entregador.
 
 SMTP e WhatsApp Cloud têm configuração, mas dependem de credenciais e serviços externos. ViaCEP e geocodificação pública podem falhar ou limitar tráfego. A seleção de uma cidade não deve inventar um CEP único: muitas cidades têm vários CEPs; o ponto/endereço precisa ser revisado. Localização depende de consentimento do navegador e não é prova antifraude. Coordenadas do cliente são manipuláveis e podem estar desatualizadas. A política de pagamento posterior usa a cidade persistida da conta; não promete presença física comprovada.
 
@@ -110,7 +112,7 @@ Conversas de pedido/reserva/entrega conferem participação, não apenas papel. 
 
 ADMIN gerencia cidades, categorias adicionais, acessos, suspensão, aprovação, comissão, dados da loja, perfis e atendimento. A seção “Definições” substitui “Minha conta” somente para esse papel. O editor administrativo da loja usa DOM e valores textuais, valida dados e registra evento.
 
-Poder administrativo não significa editar diretamente qualquer campo de estoque, cobrança ou estado para um valor arbitrário: isso poderia quebrar integridade financeira. Mudanças precisam de operação com regras e trilha. Tampouco deve ser possível ler senhas antigas ou receber tokens privados no navegador. O painel atual de integrações não equivale a um cofre completo de credenciais editável pelo administrador; configuração privada continua no servidor.
+Poder administrativo não significa editar diretamente qualquer campo de estoque, cobrança ou estado para um valor arbitrário: isso poderia quebrar integridade financeira. Mudanças precisam de operação com regras e trilha. Tampouco deve ser possível ler senhas antigas ou receber tokens privados no navegador. O painel permite editar uma lista explícita de configurações de SMTP, WhatsApp e Mercado Pago com reautenticação. Valores são cifrados com AES-GCM e contexto autenticado, e o status retorna presença sem revelar segredos existentes. Chaves mestras e opções fora da lista continuam sob gestão privada do servidor. Presença de configuração não comprova funcionamento do provedor; gravações reais permanecem bloqueadas na demonstração.
 
 A aprovação de solicitação bloqueia primeiro a conta e depois a solicitação, evita sobrescrever perfis em aprovações simultâneas e recusa decisões repetidas. A leitura inicial do titular é uma projeção de UUID, evitando carregar um estado mutável antigo antes do bloqueio.
 
@@ -129,7 +131,7 @@ Os componentes compartilhados definem foco visível, área de toque mínima para
 | Área | Proteção atual | Risco que permanece / próxima ação |
 |---|---|---|
 | Autorização | Papel + titularidade/participação em operações privadas | Ampliar matriz HTTP a cada nova rota, incluindo abuso de campo e concorrência. |
-| Autenticação | BCrypt, JWT validado contra conta, versão de credencial | MFA ADMIN e limitação compartilhada antes de múltiplas réplicas. |
+| Autenticação | BCrypt, JWT validado contra conta, versão de credencial | Ativação operacional do MFA e limitação compartilhada antes de múltiplas réplicas. |
 | CSRF/CORS | Origem obrigatória nas mutações com cookie e lista explícita | Revalidar no domínio/proxy final; TLS e cookie Secure. |
 | XSS | Escape de dados nas telas; editor DOM | Templates HTML grandes exigem revisão de cada interpolação; teste de payload não prova ausência de todos os sinks. |
 | Entrada HTTP | Bean Validation, limites de texto/lista e 400 para payload/UUID inválidos | Testar limites de tamanho no proxy e upload; orçamento de recursos sob carga. |
@@ -152,7 +154,7 @@ Scripts de backup usam dump PostgreSQL e checksum, com confirmação explícita 
 Prioridades antes de cobrar publicamente:
 
 1. Homologar pagamentos/estornos e reconciliação com o provedor, usando contas de teste e webhook público controlado.
-2. Definir remuneração de entrega, registro de valores devidos e provedor de repasse antes de habilitar qualquer saque.
+2. Homologar a rotina operacional de pagamento externo dos repasses, conferência de titular e comprovante; a remuneração fixa e o fluxo de aprovação já existem, mas não comprovam transferência real.
 3. Executar testes de integração PostgreSQL concorrentes e ensaio de recuperação de banco/arquivos, com RPO/RTO definidos.
 4. Publicar em HTTPS, cookie Secure, origens finais e proxy configurado; validar limites, logs, alertas e segredos.
 5. Executar varredura de dependências/segurança, análise independente de autorização e testes de carga.

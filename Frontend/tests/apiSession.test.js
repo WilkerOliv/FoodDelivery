@@ -56,3 +56,18 @@ test('invalid retry header is not rendered as an instruction', async () => {
   const { api } = await import(`../src/api.js?retry-invalid=${Date.now()}`);
   await assert.rejects(api('/auth/login'), error => error.message === 'Muitas tentativas.');
 });
+
+test('uncertain server failure does not promise preservation or suggest blindly repeating a mutation', async () => {
+  globalThis.fetch = async () => ({ ok: false, status: 503,
+    headers: { get: () => 'text/html' }, json: async () => { throw new Error('not JSON'); } });
+  const { api } = await import('../src/api.js?uncertain-server');
+  await assert.rejects(api('/orders', { method: 'POST' }), error =>
+    /Consulte o andamento/.test(error.message) && !/preservados/.test(error.message));
+});
+
+test('network failure gives user-facing guidance without claiming whether a mutation committed', async () => {
+  globalThis.fetch = async () => { throw new TypeError('connection lost'); };
+  const { api } = await import('../src/api.js?uncertain-network');
+  await assert.rejects(api('/orders', { method: 'POST' }), error =>
+    /consulte o andamento/.test(error.message) && !/backend|banco/.test(error.message));
+});

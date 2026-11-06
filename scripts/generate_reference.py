@@ -47,6 +47,8 @@ CONTEXT={
  'postalCode':'Consulta de CEP com alternativa local de homologação. Falhas de conexão precisam permitir correção manual e não bloquear toda a navegação.',
  'storeCovers':'Envio e moderação de capas. A imagem é normalizada para 1200 × 600, com enquadramento sem distorção. A API valida tamanho e conteúdo; apenas ADMIN publica, com prévias privadas e preservação da capa aprovada enquanto há análise.',
  'demoInbox':'Caixa de mensagens fictícias. Exige administração na API e existe para conferir avisos sem entregar mensagem a pessoas reais.',
+ 'supportComposer':'Controles compartilhados de resposta ao atendimento. Rótulo explícito identifica o destino, ajuda descreve limites e não solicitar senhas. Conteúdo enviado continua sujeito à autorização e validação da API.',
+ 'deliveryBindings':'Ligação dos botões de aceite de oferta com o identificador data-accept-delivery renderizado na tela. O teste reproduz o clique sem um atributo data-id genérico; a API valida novamente disponibilidade e entregador.',
 }
 
 def walk(node):

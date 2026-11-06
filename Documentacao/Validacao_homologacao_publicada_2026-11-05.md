@@ -108,3 +108,7 @@ Conferências manuais na publicação atual:
 - A saída do aplicativo permitiu trocar de conta sem repetir o acesso de avaliador e sem reabrir a caixa nativa.
 
 Esta etapa encerra a pendência de compatibilidade da entrada externa; não equivale a executar novamente cada operação de negócio pela interface. As cinco jornadas HTTP e suas 197 requisições continuam documentadas separadamente, assim como os testes do gateway. Evidências da publicação: `Evidencias_homologacao_publicada_2026-11-05/admin-publicado-acesso-confirmado.jpg` e `entregador-publicado-acesso-confirmado.jpg`. Ao terminar, a conta de teste do aplicativo foi desconectada; o acesso de avaliador continua limitado pela expiração já documentada.
+
+## Continuação da revisão — 06/11/2026
+
+A revisão complementar está em [Fidelidade da homologação](Fidelidade_da_homologacao.md) e no relatório de [jornadas manuais complementares](Validacao_manual_complementar_2026-11-06.md). A suíte Java foi repetida: 130 testes regulares aprovados, mais três testes com PostgreSQL real. O frontend passou em 57 testes, com sintaxe válida em 25 módulos. O gateway passou em 21 testes e a detecção de capacidade de segurança em três. As referências atuais incluem 25 módulos JavaScript e 897 funções explícitas; os números anteriores neste documento identificam a versão daquela etapa.

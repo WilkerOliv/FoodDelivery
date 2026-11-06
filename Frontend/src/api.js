@@ -11,7 +11,7 @@ export async function api(path, options = {}) {
   try {
     response = await fetch(`${API_BASE}${path}`, { ...options, headers, credentials: 'include' });
   } catch {
-    throw new Error('Não conseguimos falar com o servidor. Confira se o banco e o backend estão iniciados e tente novamente.');
+    throw new Error('A conexão com o site foi interrompida. Confira sua conexão e consulte o andamento da operação antes de tentar novamente.');
   }
   if (response.status === 401 && !['/auth/login', '/auth/register', '/auth/logout', '/account/me'].includes(path)) {
     localStorage.removeItem('pronto_account');
@@ -41,7 +41,7 @@ function friendlyStatus(status) {
   if (status === 403) return 'Esta área não está disponível para o seu perfil.';
   if (status === 404) return 'Não encontramos esse registro. Atualize a página e tente novamente.';
   if (status === 409) return 'Essa ação entrou em conflito com uma atualização recente. Recarregue e tente de novo.';
-  if (status >= 500) return 'Tivemos um problema no servidor. Seus dados foram preservados; tente novamente em instantes.';
+  if (status >= 500) return 'Não foi possível confirmar o resultado agora. Consulte o andamento da operação antes de tentar novamente.';
   return 'Não foi possível concluir agora. Tente novamente.';
 }
 

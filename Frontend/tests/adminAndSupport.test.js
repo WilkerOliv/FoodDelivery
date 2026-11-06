@@ -1,3 +1,5 @@
+import { renderSupportReplyFields } from '../src/supportComposer.js';
+import { bindCourierOfferActions } from '../src/deliveryBindings.js';
 import { bindCatalogActions } from '../src/catalogBindings.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -248,4 +250,33 @@ class MapForm {
   assert.equal(submitted, true);
   assert.equal(prevented, true);
   assert.equal(edited, 'item-42');
+});
+
+test('customer support reply has an explicit visible label and input limits', () => {
+  const html = renderSupportReplyFields(false);
+  assert.match(html, /<label for="support-reply-body">Mensagem para o atendimento<\/label>/);
+  assert.match(html, /<textarea id="support-reply-body" name="body" maxlength="2000" required aria-describedby="support-reply-help"/);
+  assert.match(html, /id="support-reply-help"/);
+  assert.match(html, /Não envie senhas nem códigos/);
+});
+
+test('administrator support reply names the customer destination', () => {
+  const html = renderSupportReplyFields(true);
+  assert.match(html, /Resposta ao cliente/);
+  assert.match(html, /Escreva uma resposta para o cliente/);
+  assert.match(html, /type="submit">Enviar resposta/);
+});
+
+test('accepting an offer reads its delivery attribute instead of a missing generic id', () => {
+  const handlers = [];
+  const buttons = ['delivery-42', 'delivery-84'].map(acceptDelivery => ({
+    dataset: { acceptDelivery },
+    addEventListener: (event, handler) => { assert.equal(event, 'click'); handlers.push(handler); },
+  }));
+  const accepted = [];
+  bindCourierOfferActions({ querySelectorAll: selector => {
+    assert.equal(selector, '[data-accept-delivery]'); return buttons;
+  } }, id => accepted.push(id));
+  handlers.forEach(click => click());
+  assert.deepEqual(accepted, ['delivery-42', 'delivery-84']);
 });
