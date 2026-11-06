@@ -2,17 +2,33 @@ package br.com.fooddelivery.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.ReadListener;
+import jakarta.servlet.ServletInputStream;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.ByteArrayInputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HexFormat;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-/** Per-process throttling for public authentication endpoints; proxy headers are deliberately not trusted. */
+/** Account-scoped throttling with a coarse peer budget; forwarding headers are never trusted. */
 public final class AuthenticationRateLimitFilter extends OncePerRequestFilter {
     private static final int MAX_BUCKETS = 50_000;
+    private static final int MAX_AUTH_BODY_BYTES = 8192;
+    private static final ObjectMapper JSON = new ObjectMapper();
     private final Map<String, Window> windows = new LinkedHashMap<>();
     private long requests;
 
@@ -25,8 +41,42 @@ public final class AuthenticationRateLimitFilter extends OncePerRequestFilter {
             return;
         }
 
-        String remoteAddress = request.getRemoteAddr();
-        long retryAfter = acquire(remoteAddress + ':' + limit.key(), limit.maxAttempts(), limit.windowMillis(), System.currentTimeMillis());
+        String remoteAddress = String.valueOf(request.getRemoteAddr());
+        String subject = null;
+        HttpServletRequest forwarded = request;
+        if (request.getRequestURI().startsWith("/api/v1/auth/")) {
+            byte[] body = request.getInputStream().readNBytes(MAX_AUTH_BODY_BYTES + 1);
+            if (body.length > MAX_AUTH_BODY_BYTES) {
+                response.sendError(413, "Requisição de autenticação muito grande.");
+                return;
+            }
+            forwarded = new ReplayBodyRequest(request, body);
+            try {
+                var json = JSON.readTree(body);
+                var email = json == null ? null : json.get("email");
+                if (email != null && email.isTextual()) {
+                    String normalized = email.textValue().trim().toLowerCase(Locale.ROOT);
+                    if (!normalized.isBlank() && normalized.length() <= 254) subject = "account:" + digest(normalized);
+                }
+            } catch (IOException invalidJson) {
+                // The controller still receives the original bytes and returns the validation error.
+            }
+        } else {
+            var authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication instanceof JwtAuthenticationToken jwt && jwt.isAuthenticated()) {
+                subject = "actor:" + digest(jwt.getToken().getSubject());
+            }
+        }
+        String key = limit.key() + ':' + (subject == null ? "peer:" + remoteAddress : subject);
+        Permit primary = acquire(key, limit.maxAttempts(), limit.windowMillis(), System.currentTimeMillis());
+        long retryAfter = primary.retryAfter();
+        Permit coarse = null;
+        if (retryAfter == 0 && subject != null && request.getRequestURI().startsWith("/api/v1/auth/")) {
+            String coarseKey = limit.key() + ":coarse-peer:" + remoteAddress;
+            coarse = acquire(coarseKey, limit.maxAttempts() * 10, limit.windowMillis(), System.currentTimeMillis());
+            retryAfter = coarse.retryAfter();
+            if (retryAfter > 0) release(primary);
+        }
         if (retryAfter > 0) {
             response.setStatus(429);
             response.setHeader("Retry-After", Long.toString(retryAfter));
@@ -35,21 +85,41 @@ public final class AuthenticationRateLimitFilter extends OncePerRequestFilter {
             response.getWriter().write("{\"message\":\"Muitas tentativas. Aguarde antes de tentar novamente.\"}");
             return;
         }
-        chain.doFilter(request, response);
+        chain.doFilter(forwarded, response);
+        // Correct sign-ins must not exhaust a shared gateway/NAT budget.
+        if (request.getRequestURI().equals("/api/v1/auth/login") && response.getStatus() >= 200 && response.getStatus() < 300) {
+            release(primary);
+            if (coarse != null) release(coarse);
+        }
     }
 
-    private synchronized long acquire(String key, int maxAttempts, long windowMillis, long now) {
+    private static String digest(String value) {
+        try {
+            return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(value.getBytes(StandardCharsets.UTF_8)));
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new IllegalStateException("SHA-256 indisponível.", impossible);
+        }
+    }
+
+    private synchronized void release(Permit permit) {
+        // The original window may have expired while authentication was running.
+        // Never subtract a successful old request from a replacement window.
+        if (permit.window() != null && permit.window().count > 0) permit.window().count--;
+    }
+
+    private synchronized Permit acquire(String key, int maxAttempts, long windowMillis, long now) {
         requests++;
         if (requests % 256 == 0 || windows.size() >= MAX_BUCKETS) evictExpired(now);
         Window current = windows.get(key);
         if (current == null || now - current.startedAt >= windowMillis) {
             if (current == null && windows.size() >= MAX_BUCKETS) windows.remove(windows.keySet().iterator().next());
-            windows.put(key, new Window(now, 1));
-            return 0;
+            Window created = new Window(now, 1);
+            windows.put(key, created);
+            return new Permit(0, created);
         }
-        if (current.count >= maxAttempts) return Math.max(1, (current.startedAt + windowMillis - now + 999) / 1000);
+        if (current.count >= maxAttempts) return new Permit(Math.max(1, (current.startedAt + windowMillis - now + 999) / 1000), null);
         current.count++;
-        return 0;
+        return new Permit(0, current);
     }
 
     private void evictExpired(long now) {
@@ -58,8 +128,11 @@ public final class AuthenticationRateLimitFilter extends OncePerRequestFilter {
     }
 
     private static Limit limitFor(String method, String path) {
-        if (!"POST".equalsIgnoreCase(method)) return null;
+        boolean mutation = "POST".equalsIgnoreCase(method) || "PUT".equalsIgnoreCase(method) || "DELETE".equalsIgnoreCase(method);
+        if (!mutation) return null;
+        if(path.equals("/api/v1/admin/integration-settings"))return new Limit("integration-reauth",20,15*60*1000L);
         if(path.equals("/api/v1/account/whatsapp-link")||path.startsWith("/api/v1/admin/mfa")||path.startsWith("/api/v1/courier/payout")||path.startsWith("/api/v1/admin/courier-finance"))return new Limit("finance-reauth",20,15*60*1000L);
+        if (!"POST".equalsIgnoreCase(method)) return null;
         if ("/api/v1/auth/login".equals(path)) return new Limit("login", 10, 15 * 60 * 1000L);
         if ("/api/v1/auth/password-recovery".equals(path)
                 || "/api/v1/auth/password-recovery/reset".equals(path)) return new Limit("recovery", 5, 60 * 60 * 1000L);
@@ -69,9 +142,28 @@ public final class AuthenticationRateLimitFilter extends OncePerRequestFilter {
     }
 
     private record Limit(String key, int maxAttempts, long windowMillis) {}
+    private record Permit(long retryAfter, Window window) {}
     private static final class Window {
         private final long startedAt;
         private int count;
         private Window(long startedAt, int count) { this.startedAt = startedAt; this.count = count; }
+    }
+
+    private static final class ReplayBodyRequest extends HttpServletRequestWrapper {
+        private final byte[] body;
+        private ReplayBodyRequest(HttpServletRequest request, byte[] body) { super(request); this.body = body; }
+        @Override public ServletInputStream getInputStream() {
+            ByteArrayInputStream input = new ByteArrayInputStream(body);
+            return new ServletInputStream() {
+                @Override public int read() { return input.read(); }
+                @Override public int read(byte[] target, int offset, int length) { return input.read(target, offset, length); }
+                @Override public boolean isFinished() { return input.available() == 0; }
+                @Override public boolean isReady() { return true; }
+                @Override public void setReadListener(ReadListener listener) { throw new UnsupportedOperationException("Leitura assíncrona não disponível nesta requisição."); }
+            };
+        }
+        @Override public BufferedReader getReader() {
+            return new BufferedReader(new InputStreamReader(getInputStream(), StandardCharsets.UTF_8));
+        }
     }
 }

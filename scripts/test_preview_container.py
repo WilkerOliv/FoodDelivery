@@ -69,7 +69,18 @@ def main():
                 assert response.status == 200, (role, response.status)
             with request('/api/v1/auth/logout', {}, cookie, request_origin='https://untrusted.example.test') as response:
                 assert response.status == 403
-        print(f'PASS: contêiner com 512 MiB e {options.cpus} CPU; início em {startup_seconds}s; saúde 503→200, gateway, API, quatro perfis, cookie protegido e bloqueio de origem.')
+        # Reproduce the shared-gateway failure: more than ten valid sign-ins must work.
+        for _ in range(12):
+            with request('/api/v1/auth/login', {'email': 'cliente@example.test', 'password': 'DemoLocal!2026#Teste'}) as response:
+                assert response.status == 200, response.status
+        for _ in range(10):
+            with request('/api/v1/auth/login', {'email': 'inexistente@example.test', 'password': 'IncorrectPassword123!'}) as response:
+                assert response.status == 401, response.status
+        with request('/api/v1/auth/login', {'email': 'inexistente@example.test', 'password': 'IncorrectPassword123!'}) as response:
+            assert response.status == 429
+        with request('/api/v1/auth/login', {'email': 'admin@example.test', 'password': 'DemoLocal!2026#Teste'}) as response:
+            assert response.status == 200, response.status
+        print(f'PASS: contêiner com 512 MiB e {options.cpus} CPU; início em {startup_seconds}s; saúde 503→200, gateway, API, quatro perfis, cookie protegido, bloqueio de origem, logins válidos repetidos e limitação isolada de falhas.')
     finally:
         subprocess.run(['docker', 'rm', '-f', '-v', container], check=True, stdout=subprocess.DEVNULL)
 

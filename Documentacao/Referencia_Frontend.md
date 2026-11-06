@@ -1,6 +1,6 @@
 # Referência completa de funções — frontend JavaScript
 
-Gerada em 05/11/2026 a partir da árvore sintática do código final. Inclui funções explícitas, métodos privados, construtores e callbacks. Não é uma certificação de segurança: use junto da análise de engenharia e da matriz de testes. Cobertura estrutural: **18 arquivos e 811 funções explícitas**. Hash agregado: `52aaf6fe439f288046d4cf8c97d599f87d3bfaa7af347539d2081eeb7f377401`.
+Gerada em 05/11/2026 a partir da árvore sintática do código final. Inclui funções explícitas, métodos privados, construtores e callbacks. Não é uma certificação de segurança: use junto da análise de engenharia e da matriz de testes. Cobertura estrutural: **23 arquivos e 895 funções explícitas**. Hash agregado: `104104c0baf39fb792f63e2d455c74f6caf7df460dda72b90673c96fb9112fd6`.
 
 Cada seção identifica localização, assinatura, regras locais, chamadas e efeitos observáveis. Getters implícitos de `record`, métodos herdados de bibliotecas e APIs nativas são descritos por seus contratos, não reproduzidos como código do projeto.
 
@@ -467,15 +467,325 @@ Executa a etapa `store Approval Id` neste módulo. O contrato concreto está na 
 
 **Decisão de engenharia:** Separação e normalização das seções administrativas. Filtros e contagens devem refletir os dados autorizados retornados pela API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
+## Frontend/src/adminSecurity.js
+
+Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas.
+
+Fonte: [adminSecurity.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js) · SHA-256 `29b9483dac7cc75bd42571f644fdeb1e8972b54fbdab79b7e4df7ec7da161537`
+
+### esc — linha 2
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:2)
+
+```javascript
+v=>
+```
+
+Executa a etapa `esc` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `String`.
+
+**Decisão de engenharia:** Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@2:47 — linha 2
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:2)
+
+```javascript
+c=>
+```
+
+Executa a etapa `callback@2:47` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisão de engenharia:** Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### mountPrivateIntegrations — linha 5
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:5)
+
+```javascript
+async function mountPrivateIntegrations(root)
+```
+
+Executa a etapa `mount Private Integrations` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `api`; `Object.keys`; `root.querySelector`; `groups[select.value].map`; `esc`; `draw`; `event.preventDefault`; `form.querySelector`; `form.elements[key].value.trim`; `[...form.querySelectorAll`; `form.querySelectorAll`; `JSON.stringify`; `load`.
+
+**Decisões condicionais examinadas:**
+- `(!root.isConnected)`
+- `!data.encryptionReady`
+- `data.encryptionReady`
+- `data.overrides[key]`
+- `(button.disabled)`
+- `(value)`
+- `(root.isConnected)`
+
+**Saída declarada:**
+- `return;`
+- `return;`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async function load(){try{const data=await api('/admin/integration-settings');if(!root.isConnected)return;root.innerHTML=`<section class="panel"><h3>Configurar integrações</h3><p>Os novos valores são cifrados no servidor e não são devolvidos ao navegador. Campos vazios preservam o valor existente. Mudanças passam a valer nas próximas operações.</p>${!data.encryptionReady?'<div class="alert-strip warn">Configure PRIVATE_CONFIG_ENCRYPTION_KEY no servidor antes de salvar. Não altere uma chave mestra existente sem planejar a rotação dos dados cifrados.</div>':''}<form class="form-grid"><label class="field">Integração<select name="group">${Object.keys(groups).map(g=>`<option>${g}</option>`).join('')}</select></label><div class="span-2" data-private-fields></div>${password}<p class="span-2" role="status"></p><button class="btn" type="submit" ${data.encryptionReady?'':'disabled'}>Salvar configuração protegida</button></form><small>Chaves mestras, domínio, URL pública de webhook e banco continuam na configuração privada do servidor. Remover uma substituição volta a usar o valor do ambiente, se houver. A presença de campos não comprova que o provedor foi homologado.</small></section>`;
+const form=root.querySelector('form'),select=form.elements.group,fields=root.querySelector('[data-private-fields]');function draw(){fields.innerHTML=groups[select.value].map(key=>`<div class="private-setting-row"><label class="field">${esc(key)} <small>${data.overrides[key]?'Substituição cifrada cadastrada':'Usando ambiente do servidor ou não configurado'}</small><input type="password" name="${esc(key)}" autocomplete="new-password" maxlength="8192" placeholder="Novo valor (opcional)"/></label><label class="check-row"><input type="checkbox" data-remove-key="${esc(key)}"/>Remover substituição cadastrada</label></div>`).join('');}select.onchange=draw;draw();
+form.onsubmit=async event=>{event.preventDefault();const button=form.querySelector('[type="submit"]');if(button.disabled)return;button.disabled=true;try{const values={};for(const key of groups[select.value]){const value=form.elements[key].value.trim();if(value)values[key]=value;}const remove=[...form.querySelectorAll('[data-remove-key]:checked')].map(c=>c.dataset.removeKey);await api('/admin/integration-settings',{method:'PUT',body:JSON.stringify({password:form.elements.password.value,values,remove})});await load();root.querySelector('[role="status"]').textContent='Configuração salva. Valide a conexão e a entrega no provedor antes de usar em produção.';}catch(error){form.querySelector('[role="status"]').textContent=error.message;button.disabled=false;}};
+}catch(error){if(root.isConnected){root.textContent='Não foi possível consultar as configurações: '+error.message;}}}await load();
+```
+
+**Decisão de engenharia:** Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### load — linha 6
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:6)
+
+```javascript
+async function load()
+```
+
+Executa a etapa `load` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `api`; `Object.keys`; `root.querySelector`; `groups[select.value].map`; `esc`; `draw`; `event.preventDefault`; `form.querySelector`; `form.elements[key].value.trim`; `[...form.querySelectorAll`; `form.querySelectorAll`; `JSON.stringify`; `load`.
+
+**Decisões condicionais examinadas:**
+- `(!root.isConnected)`
+- `!data.encryptionReady`
+- `data.encryptionReady`
+- `data.overrides[key]`
+- `(button.disabled)`
+- `(value)`
+- `(root.isConnected)`
+
+**Saída declarada:**
+- `return;`
+- `return;`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async function load(){try{const data=await api('/admin/integration-settings');if(!root.isConnected)return;root.innerHTML=`<section class="panel"><h3>Configurar integrações</h3><p>Os novos valores são cifrados no servidor e não são devolvidos ao navegador. Campos vazios preservam o valor existente. Mudanças passam a valer nas próximas operações.</p>${!data.encryptionReady?'<div class="alert-strip warn">Configure PRIVATE_CONFIG_ENCRYPTION_KEY no servidor antes de salvar. Não altere uma chave mestra existente sem planejar a rotação dos dados cifrados.</div>':''}<form class="form-grid"><label class="field">Integração<select name="group">${Object.keys(groups).map(g=>`<option>${g}</option>`).join('')}</select></label><div class="span-2" data-private-fields></div>${password}<p class="span-2" role="status"></p><button class="btn" type="submit" ${data.encryptionReady?'':'disabled'}>Salvar configuração protegida</button></form><small>Chaves mestras, domínio, URL pública de webhook e banco continuam na configuração privada do servidor. Remover uma substituição volta a usar o valor do ambiente, se houver. A presença de campos não comprova que o provedor foi homologado.</small></section>`;
+const form=root.querySelector('form'),select=form.elements.group,fields=root.querySelector('[data-private-fields]');function draw(){fields.innerHTML=groups[select.value].map(key=>`<div class="private-setting-row"><label class="field">${esc(key)} <small>${data.overrides[key]?'Substituição cifrada cadastrada':'Usando ambiente do servidor ou não configurado'}</small><input type="password" name="${esc(key)}" autocomplete="new-password" maxlength="8192" placeholder="Novo valor (opcional)"/></label><label class="check-row"><input type="checkbox" data-remove-key="${esc(key)}"/>Remover substituição cadastrada</label></div>`).join('');}select.onchange=draw;draw();
+form.onsubmit=async event=>{event.preventDefault();const button=form.querySelector('[type="submit"]');if(button.disabled)return;button.disabled=true;try{const values={};for(const key of groups[select.value]){const value=form.elements[key].value.trim();if(value)values[key]=value;}const remove=[...form.querySelectorAll('[data-remove-key]:checked')].map(c=>c.dataset.removeKey);await api('/admin/integration-settings',{method:'PUT',body:JSON.stringify({password:form.elements.password.value,values,remove})});await load();root.querySelector('[role="status"]').textContent='Configuração salva. Valide a conexão e a entrega no provedor antes de usar em produção.';}catch(error){form.querySelector('[role="status"]').textContent=error.message;button.disabled=false;}};
+}catch(error){if(root.isConnected){root.textContent='Não foi possível consultar as configurações: '+error.message;}}}
+```
+
+**Decisão de engenharia:** Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@6:683 — linha 6
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:6)
+
+```javascript
+g=>
+```
+
+Executa a etapa `callback@6:683` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisão de engenharia:** Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### draw — linha 7
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:7)
+
+```javascript
+function draw()
+```
+
+Executa a etapa `draw` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `groups[select.value].map`; `esc`.
+
+**Decisões condicionais examinadas:**
+- `data.overrides[key]`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+function draw(){fields.innerHTML=groups[select.value].map(key=>`<div class="private-setting-row"><label class="field">${esc(key)} <small>${data.overrides[key]?'Substituição cifrada cadastrada':'Usando ambiente do servidor ou não configurado'}</small><input type="password" name="${esc(key)}" autocomplete="new-password" maxlength="8192" placeholder="Novo valor (opcional)"/></label><label class="check-row"><input type="checkbox" data-remove-key="${esc(key)}"/>Remover substituição cadastrada</label></div>`).join('');}
+```
+
+**Decisão de engenharia:** Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@7:176 — linha 7
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:7)
+
+```javascript
+key=>
+```
+
+Executa a etapa `callback@7:176` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `esc`.
+
+**Decisões condicionais examinadas:**
+- `data.overrides[key]`
+
+**Decisão de engenharia:** Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@8:16 — linha 8
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:8)
+
+```javascript
+async event=>
+```
+
+Executa a etapa `callback@8:16` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `event.preventDefault`; `form.querySelector`; `form.elements[key].value.trim`; `[...form.querySelectorAll`; `form.querySelectorAll`; `api`; `JSON.stringify`; `load`; `root.querySelector`.
+
+**Decisões condicionais examinadas:**
+- `(button.disabled)`
+- `(value)`
+
+**Saída declarada:**
+- `return;`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async event=>{event.preventDefault();const button=form.querySelector('[type="submit"]');if(button.disabled)return;button.disabled=true;try{const values={};for(const key of groups[select.value]){const value=form.elements[key].value.trim();if(value)values[key]=value;}const remove=[...form.querySelectorAll('[data-remove-key]:checked')].map(c=>c.dataset.removeKey);await api('/admin/integration-settings',{method:'PUT',body:JSON.stringify({password:form.elements.password.value,values,remove})});await load();root.querySelector('[role="status"]').textContent='Configuração salva. Valide a conexão e a entrega no provedor antes de usar em produção.';}catch(error){form.querySelector('[role="status"]').textContent=error.message;button.disabled=false;}}
+```
+
+**Decisão de engenharia:** Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@8:355 — linha 8
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:8)
+
+```javascript
+c=>
+```
+
+Executa a etapa `callback@8:355` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisão de engenharia:** Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### mountAdminMfa — linha 11
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:11)
+
+```javascript
+async function mountAdminMfa(root,{onSessionRevoked=()=>{}}={})
+```
+
+Executa a etapa `mount Admin Mfa` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `api`; `root.querySelector`; `form.querySelector`; `event.preventDefault`; `JSON.stringify`; `form.elements.code.value.trim`; `onSessionRevoked`; `esc`; `result.recoveryCodes.join`; `load`.
+
+**Decisões condicionais examinadas:**
+- `(!root.isConnected)`
+- `status.enabled`
+- `status.encryptionReady`
+- `(button.disabled)`
+- `(status.enabled)`
+- `(!pending)`
+- `(root.isConnected)`
+
+**Saída declarada:**
+- `return;`
+- `return;`
+- `return;`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async function load(){try{const status=await api('/admin/mfa');if(!root.isConnected)return;root.innerHTML=`<section class="panel"><h3>Segundo fator do administrador</h3><p>Use um aplicativo autenticador compatível com TOTP. A chave fica cifrada no servidor. Guarde os códigos de recuperação fora do site.</p><p><strong>${status.enabled?'Ativado':'Não ativado'}</strong>${status.enabled?' · '+status.remainingRecoveryCodes+' códigos de recuperação restantes':''}</p><form class="form-grid">${password}${status.enabled?'<label class="field">Código do autenticador ou de recuperação<input name="code" required autocomplete="one-time-code" maxlength="32"/></label>':''}<div class="span-2" data-enrollment></div><p class="span-2" role="alert"></p><button class="btn" type="submit" ${status.encryptionReady?'':'disabled'}>${status.enabled?'Desativar segundo fator':'Preparar autenticador'}</button></form>${status.encryptionReady?'':'<p>É necessário configurar PRIVATE_CONFIG_ENCRYPTION_KEY no servidor.</p>'}</section>`;
+if(status.enabled){await api('/admin/mfa/disable',{method:'POST',body:JSON.stringify({password,code:form.elements.code.value.trim()})});await api('/auth/logout',{method:'POST'});onSessionRevoked();return;}
+if(!pending){const enrollment=await api('/admin/mfa/begin',{method:'POST',body:JSON.stringify({password})});const fields=form.querySelector('[data-enrollment]');fields.innerHTML=`<p>Adicione manualmente uma conta TOTP no autenticador. Não compartilhe esta chave:</p><p class="mfa-secret"><code>${esc(enrollment.secret)}</code></p><p>Nome: FoodDelivery · 6 dígitos · 30 segundos · SHA-1</p><label class="field">Código gerado no autenticador<input name="code" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" required/></label>`;pending=true;button.textContent='Confirmar e ativar';}
+else{const result=await api('/admin/mfa/enable',{method:'POST',body:JSON.stringify({password,code:form.elements.code.value.trim()})});root.innerHTML='<section class="panel"><h3>Segundo fator ativado</h3><p>Guarde os oito códigos abaixo. Cada um só pode ser usado uma vez e eles não serão exibidos novamente.</p><pre class="mfa-recovery"></pre><button class="btn">Guardei os códigos · entrar novamente</button></section>';root.querySelector('pre').textContent=result.recoveryCodes.join('\n');await api('/auth/logout',{method:'POST'});root.querySelector('button').onclick=onSessionRevoked;}
+}catch(error){form.querySelector('[role="alert"]').textContent=error.message;}finally{button.disabled=false;}};
+}catch(error){if(root.isConnected)root.textContent='Não foi possível consultar o segundo fator: '+error.message;}}await load();
+```
+
+**Decisão de engenharia:** Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@11:60 — linha 11
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:11)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@11:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisão de engenharia:** Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### load — linha 13
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:13)
+
+```javascript
+async function load()
+```
+
+Executa a etapa `load` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `api`; `root.querySelector`; `form.querySelector`; `event.preventDefault`; `JSON.stringify`; `form.elements.code.value.trim`; `onSessionRevoked`; `esc`; `result.recoveryCodes.join`.
+
+**Decisões condicionais examinadas:**
+- `(!root.isConnected)`
+- `status.enabled`
+- `status.encryptionReady`
+- `(button.disabled)`
+- `(status.enabled)`
+- `(!pending)`
+- `(root.isConnected)`
+
+**Saída declarada:**
+- `return;`
+- `return;`
+- `return;`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async function load(){try{const status=await api('/admin/mfa');if(!root.isConnected)return;root.innerHTML=`<section class="panel"><h3>Segundo fator do administrador</h3><p>Use um aplicativo autenticador compatível com TOTP. A chave fica cifrada no servidor. Guarde os códigos de recuperação fora do site.</p><p><strong>${status.enabled?'Ativado':'Não ativado'}</strong>${status.enabled?' · '+status.remainingRecoveryCodes+' códigos de recuperação restantes':''}</p><form class="form-grid">${password}${status.enabled?'<label class="field">Código do autenticador ou de recuperação<input name="code" required autocomplete="one-time-code" maxlength="32"/></label>':''}<div class="span-2" data-enrollment></div><p class="span-2" role="alert"></p><button class="btn" type="submit" ${status.encryptionReady?'':'disabled'}>${status.enabled?'Desativar segundo fator':'Preparar autenticador'}</button></form>${status.encryptionReady?'':'<p>É necessário configurar PRIVATE_CONFIG_ENCRYPTION_KEY no servidor.</p>'}</section>`;
+if(status.enabled){await api('/admin/mfa/disable',{method:'POST',body:JSON.stringify({password,code:form.elements.code.value.trim()})});await api('/auth/logout',{method:'POST'});onSessionRevoked();return;}
+if(!pending){const enrollment=await api('/admin/mfa/begin',{method:'POST',body:JSON.stringify({password})});const fields=form.querySelector('[data-enrollment]');fields.innerHTML=`<p>Adicione manualmente uma conta TOTP no autenticador. Não compartilhe esta chave:</p><p class="mfa-secret"><code>${esc(enrollment.secret)}</code></p><p>Nome: FoodDelivery · 6 dígitos · 30 segundos · SHA-1</p><label class="field">Código gerado no autenticador<input name="code" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" required/></label>`;pending=true;button.textContent='Confirmar e ativar';}
+else{const result=await api('/admin/mfa/enable',{method:'POST',body:JSON.stringify({password,code:form.elements.code.value.trim()})});root.innerHTML='<section class="panel"><h3>Segundo fator ativado</h3><p>Guarde os oito códigos abaixo. Cada um só pode ser usado uma vez e eles não serão exibidos novamente.</p><pre class="mfa-recovery"></pre><button class="btn">Guardei os códigos · entrar novamente</button></section>';root.querySelector('pre').textContent=result.recoveryCodes.join('\n');await api('/auth/logout',{method:'POST'});root.querySelector('button').onclick=onSessionRevoked;}
+}catch(error){form.querySelector('[role="alert"]').textContent=error.message;}finally{button.disabled=false;}};
+}catch(error){if(root.isConnected)root.textContent='Não foi possível consultar o segundo fator: '+error.message;}}
+```
+
+**Decisão de engenharia:** Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@14:99 — linha 14
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:14)
+
+```javascript
+async event=>
+```
+
+Executa a etapa `callback@14:99` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `event.preventDefault`; `api`; `JSON.stringify`; `form.elements.code.value.trim`; `onSessionRevoked`; `form.querySelector`; `esc`; `root.querySelector`; `result.recoveryCodes.join`.
+
+**Decisões condicionais examinadas:**
+- `(button.disabled)`
+- `(status.enabled)`
+- `(!pending)`
+
+**Saída declarada:**
+- `return;`
+- `return;`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+if(status.enabled){await api('/admin/mfa/disable',{method:'POST',body:JSON.stringify({password,code:form.elements.code.value.trim()})});await api('/auth/logout',{method:'POST'});onSessionRevoked();return;}
+if(!pending){const enrollment=await api('/admin/mfa/begin',{method:'POST',body:JSON.stringify({password})});const fields=form.querySelector('[data-enrollment]');fields.innerHTML=`<p>Adicione manualmente uma conta TOTP no autenticador. Não compartilhe esta chave:</p><p class="mfa-secret"><code>${esc(enrollment.secret)}</code></p><p>Nome: FoodDelivery · 6 dígitos · 30 segundos · SHA-1</p><label class="field">Código gerado no autenticador<input name="code" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" required/></label>`;pending=true;button.textContent='Confirmar e ativar';}
+else{const result=await api('/admin/mfa/enable',{method:'POST',body:JSON.stringify({password,code:form.elements.code.value.trim()})});root.innerHTML='<section class="panel"><h3>Segundo fator ativado</h3><p>Guarde os oito códigos abaixo. Cada um só pode ser usado uma vez e eles não serão exibidos novamente.</p><pre class="mfa-recovery"></pre><button class="btn">Guardei os códigos · entrar novamente</button></section>';root.querySelector('pre').textContent=result.recoveryCodes.join('\n');await api('/auth/logout',{method:'POST'});root.querySelector('button').onclick=onSessionRevoked;}
+}catch(error){form.querySelector('[role="alert"]').textContent=error.message;}finally{button.disabled=false;}}
+```
+
+**Decisão de engenharia:** Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
 ## Frontend/src/adminStoreEditor.js
 
 Editor administrativo criado com elementos DOM e valores textuais. Evita interpolar dados de usuário em atributos HTML; a API valida novamente cada alteração.
 
-Fonte: [adminStoreEditor.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js) · SHA-256 `1ad966f69cb0ea3b6cb8074be77f05378c2ed946657fc743fab3b8d1c5865fe2`
+Fonte: [adminStoreEditor.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js) · SHA-256 `226d99cca6e0ae93e54e30db01693928ba80071232375107935c87a6b4e5fe2a`
 
-### editStoreDialog — linha 9
+### editStoreDialog — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:9)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:10)
 
 ```javascript
 function editStoreDialog(store,categories,{onSaved,onError,onHoursSaved=()=>{}})
@@ -483,7 +793,7 @@ function editStoreDialog(store,categories,{onSaved,onError,onHoursSaved=()=>{}})
 
 Executa a etapa `edit Store Dialog` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `document.createElement`; `overlay.querySelector`; `formatCnpjMask`; `formatCurrencyValue`; `label.append`; `document.createTextNode`; `input.append`; `String`; `['name','category','address','city','state','timezone'].includes`; `input.addEventListener`; `form.append`; `form.insertAdjacentHTML`; `storeMapFields`; `fulfillmentFields`; `overlay.remove`; `event.preventDefault`; `parseCurrencyDecimal`; `data.get`; `Number.isFinite`; `Object.fromEntries`; `['name','description','address','category','city','state','cnpj','timezone'].map`; `payload.state.toUpperCase`; `payload.cnpj.replace`; `Math.round`; `Object.assign`; `coordinatesFromForm`; `fulfillmentPayload`; `api`; `encodeURIComponent`; `JSON.stringify`; `onSaved`; `onError`; `hours.querySelector`; `mountOperatingHours`; `renderHours`; `onHoursSaved`; `document.body.append`; `mountLocationPicker`; `form.querySelector`.
+**Colaborações:** `document.createElement`; `overlay.querySelector`; `formatCnpjMask`; `formatCurrencyValue`; `label.append`; `document.createTextNode`; `input.append`; `String`; `['name','category','address','city','state','timezone'].includes`; `input.addEventListener`; `form.append`; `form.insertAdjacentHTML`; `storeMapFields`; `fulfillmentFields`; `overlay.remove`; `event.preventDefault`; `parseCurrencyDecimal`; `data.get`; `Number.isFinite`; `Object.fromEntries`; `['name','description','address','category','city','state','cnpj','timezone'].map`; `payload.state.toUpperCase`; `payload.cnpj.replace`; `Math.round`; `Object.assign`; `coordinatesFromForm`; `fulfillmentPayload`; `api`; `encodeURIComponent`; `JSON.stringify`; `onSaved`; `onError`; `hours.querySelector`; `mountOperatingHours`; `renderHours`; `onHoursSaved`; `document.body.append`; `mountBookingPolicy`; `mountAdminProfessionalHours`; `mountLocationPicker`; `form.querySelector`.
 
 **Rejeições locais:**
 - `throw new Error('Informe uma taxa entre R$ 0,00 e R$ 1.000,00.');`
@@ -518,55 +828,55 @@ hoursButton.onclick=async()=>{hoursButton.disabled=true;try{const config=await a
 
 **Decisão de engenharia:** Editor administrativo criado com elementos DOM e valores textuais. Evita interpolar dados de usuário em atributos HTML; a API valida novamente cada alteração. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@9:80 — linha 9
+### callback@10:80 — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:9)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:10)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@9:80` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@10:80` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Editor administrativo criado com elementos DOM e valores textuais. Evita interpolar dados de usuário em atributos HTML; a API valida novamente cada alteração. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@21:53 — linha 21
+### callback@22:53 — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:21)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:22)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@21:53` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@22:53` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `formatCnpjMask`.
 
 **Decisão de engenharia:** Editor administrativo criado com elementos DOM e valores textuais. Evita interpolar dados de usuário em atributos HTML; a API valida novamente cada alteração. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@26:50 — linha 26
+### callback@27:50 — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:26)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:27)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@26:50` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@27:50` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `overlay.remove`.
 
 **Decisão de engenharia:** Editor administrativo criado com elementos DOM e valores textuais. Evita interpolar dados de usuário em atributos HTML; a API valida novamente cada alteração. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@27:19 — linha 27
+### callback@28:19 — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:27)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:28)
 
 ```javascript
 event=>
 ```
 
-Executa a etapa `callback@27:19` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@28:19` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `overlay.remove`.
 
@@ -575,15 +885,15 @@ Executa a etapa `callback@27:19` neste módulo. O contrato concreto está na ass
 
 **Decisão de engenharia:** Editor administrativo criado com elementos DOM e valores textuais. Evita interpolar dados de usuário em atributos HTML; a API valida novamente cada alteração. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@28:17 — linha 28
+### callback@29:17 — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:28)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:29)
 
 ```javascript
 async event=>
 ```
 
-Executa a etapa `callback@28:17` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@29:17` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `event.preventDefault`; `parseCurrencyDecimal`; `data.get`; `Number.isFinite`; `Object.fromEntries`; `['name','description','address','category','city','state','cnpj','timezone'].map`; `String`; `payload.state.toUpperCase`; `payload.cnpj.replace`; `Math.round`; `Object.assign`; `coordinatesFromForm`; `fulfillmentPayload`; `api`; `encodeURIComponent`; `JSON.stringify`; `overlay.remove`; `onSaved`; `onError`.
 
@@ -604,23 +914,23 @@ const updated=await api(`/admin/stores/${encodeURIComponent(store.id)}/profile`,
 
 **Decisão de engenharia:** Editor administrativo criado com elementos DOM e valores textuais. Evita interpolar dados de usuário em atributos HTML; a API valida novamente cada alteração. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@31:121 — linha 31
+### callback@32:121 — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:31)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:32)
 
 ```javascript
 key=>
 ```
 
-Executa a etapa `callback@31:121` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@32:121` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`; `data.get`.
 
 **Decisão de engenharia:** Editor administrativo criado com elementos DOM e valores textuais. Evita interpolar dados de usuário em atributos HTML; a API valida novamente cada alteração. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderHours — linha 38
+### renderHours — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:38)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:39)
 
 ```javascript
 config=>
@@ -632,29 +942,29 @@ Executa a etapa `render Hours` neste módulo. O contrato concreto está na assin
 
 **Decisão de engenharia:** Editor administrativo criado com elementos DOM e valores textuais. Evita interpolar dados de usuário em atributos HTML; a API valida novamente cada alteração. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@38:122 — linha 38
+### callback@39:122 — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:38)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:39)
 
 ```javascript
 (configuration,summary)=>
 ```
 
-Executa a etapa `callback@38:122` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@39:122` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `renderHours`; `onHoursSaved`.
 
 **Decisão de engenharia:** Editor administrativo criado com elementos DOM e valores textuais. Evita interpolar dados de usuário em atributos HTML; a API valida novamente cada alteração. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@39:23 — linha 39
+### callback@40:23 — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:39)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:40)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@39:23` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@40:23` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `api`; `renderHours`; `onError`.
 
@@ -675,7 +985,7 @@ async()=>{hoursButton.disabled=true;try{const config=await api(hoursPath);if(!ov
 
 Transporte HTTP e sessão. Cookies não ficam acessíveis ao JavaScript; mensagens de falha precisam distinguir autorização, validação e indisponibilidade.
 
-Fonte: [api.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js) · SHA-256 `54f9243ea9d97d59362824f26b99cd1c8cf5ca5cec24af0cd095adbcb3d669cb`
+Fonte: [api.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js) · SHA-256 `b4e054651bbefa462d84a5eadacbdd6771d2fb22d54ba88c86dcf3b5bd766d67`
 
 ### apiAssetUrl — linha 3
 
@@ -702,7 +1012,7 @@ async function api(path, options = {})
 
 Executa a etapa `api` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `fetch`; `['/auth/login', '/auth/register', '/auth/logout', '/account/me'].includes`; `localStorage.removeItem`; `window.dispatchEvent`; `response.json`; `friendlyStatus`; `response.headers.get`; `type.includes`.
+**Colaborações:** `fetch`; `['/auth/login', '/auth/register', '/auth/logout', '/account/me'].includes`; `localStorage.removeItem`; `window.dispatchEvent`; `response.json`; `friendlyStatus`; `response.headers.get`; `/^\d{1,6}$/.test`; `Math.ceil`; `Number`; `type.includes`.
 
 **Rejeições locais:**
 - `throw new Error('Não conseguimos falar com o servidor. Confira se o banco e o backend estão iniciados e tente novamente.');`
@@ -711,6 +1021,10 @@ Executa a etapa `api` neste módulo. O contrato concreto está na assinatura, no
 **Decisões condicionais examinadas:**
 - `(response.status === 401 && !['/auth/login', '/auth/register', '/auth/logout', '/account/me'].includes(path))`
 - `(!response.ok)`
+- `(response.status === 429)`
+- `(retry && /^\d{1,6}$/.test(retry))`
+- `(minutes > 0 && minutes <= 1440)`
+- `minutes === 1`
 - `(response.status === 204)`
 - `type.includes('application/json')`
 
@@ -725,9 +1039,9 @@ localStorage.removeItem('pronto_account');
 
 **Decisão de engenharia:** Transporte HTTP e sessão. Cookies não ficam acessíveis ao JavaScript; mensagens de falha precisam distinguir autorização, validação e indisponibilidade. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### friendlyStatus — linha 31
+### friendlyStatus — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js:31)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js:38)
 
 ```javascript
 function friendlyStatus(status)
@@ -754,9 +1068,9 @@ Executa a etapa `friendly Status` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Transporte HTTP e sessão. Cookies não ficam acessíveis ao JavaScript; mensagens de falha precisam distinguir autorização, validação e indisponibilidade. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### money — linha 41
+### money — linha 48
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js:41)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js:48)
 
 ```javascript
 (cents = 0) =>
@@ -768,9 +1082,9 @@ Executa a etapa `money` neste módulo. O contrato concreto está na assinatura, 
 
 **Decisão de engenharia:** Transporte HTTP e sessão. Cookies não ficam acessíveis ao JavaScript; mensagens de falha precisam distinguir autorização, validação e indisponibilidade. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### shortDate — linha 42
+### shortDate — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js:42)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js:49)
 
 ```javascript
 (date) =>
@@ -781,6 +1095,399 @@ Executa a etapa `short Date` neste módulo. O contrato concreto está na assinat
 **Colaborações:** `new Intl.DateTimeFormat`.
 
 **Decisão de engenharia:** Transporte HTTP e sessão. Cookies não ficam acessíveis ao JavaScript; mensagens de falha precisam distinguir autorização, validação e indisponibilidade. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+## Frontend/src/bookingAvailability.js
+
+Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário.
+
+Fonte: [bookingAvailability.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js) · SHA-256 `3cb85969fdb2a3a704056acef367809c48c6aab97445b34281cf770a375b80ef`
+
+### esc — linha 4
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:4)
+
+```javascript
+v=>
+```
+
+Executa a etapa `esc` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `String`.
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@4:47 — linha 4
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:4)
+
+```javascript
+c=>
+```
+
+Executa a etapa `callback@4:47` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### mountAvailableSlots — linha 5
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:5)
+
+```javascript
+function mountAvailableSlots(root,store,item,form)
+```
+
+Executa a etapa `mount Available Slots` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `localDateTimeMinimum`; `root.querySelector`; `controller?.abort`; `params.set`; `api`; `encodeURIComponent`; `document.createElement`; `button.setAttribute`; `grid.querySelectorAll`; `b.classList.remove`; `b.setAttribute`; `button.classList.add`; `grid.append`; `professional?.addEventListener`; `load`.
+
+**Decisões condicionais examinadas:**
+- `(professional?.value)`
+- `(!root.isConnected||current!==generation)`
+- `result.slots.length`
+- `policy.automaticCancellationNoticeMinutes<0`
+
+**Saída declarada:**
+- `return;`
+- `return;`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+const zone=store.timezone||'America/Sao_Paulo',today=localDateTimeMinimum(zone,0).slice(0,10);root.innerHTML=`<input type="hidden" name="startsAt"/><label class="field">Dia do atendimento<input data-booking-date type="date" value="${today}" min="${today}" required/></label><p role="status">Buscando horários livres…</p><div class="booking-slot-grid" role="group" aria-label="Horários disponíveis"></div><p class="booking-policy-caption"></p>`;
+async function load(){const current=++generation;controller?.abort();controller=new AbortController();hidden.value='';root.querySelector('.booking-slot-grid').replaceChildren();root.querySelector('[role="status"]').textContent='Buscando horários livres…';try{const params=new URLSearchParams({serviceItemId:item.id,date:date.value});if(professional?.value)params.set('professionalId',professional.value);const result=await api(`/stores/${encodeURIComponent(store.id)}/availability?${params}`,{signal:controller.signal});if(!root.isConnected||current!==generation)return;const grid=root.querySelector('.booking-slot-grid');for(const slot of result.slots){const button=document.createElement('button');button.type='button';button.className='btn outline booking-slot';button.textContent=slot.label;button.setAttribute('aria-pressed','false');button.onclick=()=>{hidden.value=slot.localStartsAt;for(const b of grid.querySelectorAll('button')){b.classList.remove('selected');b.setAttribute('aria-pressed','false');}button.classList.add('selected');button.setAttribute('aria-pressed','true');root.querySelector('[role="status"]').textContent=`Horário escolhido: ${slot.label}. A disponibilidade será conferida novamente ao confirmar.`;};grid.append(button);}root.querySelector('[role="status"]').textContent=result.slots.length?'Escolha um dos horários disponíveis.':'Não há horários livres nesta data para esta opção. Escolha outro dia ou profissional.';const policy=result.policy;root.querySelector('.booking-policy-caption').textContent=`Fuso: ${result.timezone}. Duração: ${result.durationMinutes} minutos. Antecedência mínima: ${policy.noticeMinutes} minutos. `+(policy.automaticCancellationNoticeMinutes<0?'Cancelamentos de reservas confirmadas são analisados pela loja.':`Cancelamento automático até ${policy.automaticCancellationNoticeMinutes} minutos antes; depois disso, a loja analisa a solicitação.`);}catch(error){if(!root.isConnected||current!==generation)return;root.querySelector('[role="status"]').textContent=error.message;}}
+date.onchange=load;professional?.addEventListener('change',load);load();
+```
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### load — linha 8
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:8)
+
+```javascript
+async function load()
+```
+
+Executa a etapa `load` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `controller?.abort`; `root.querySelector`; `params.set`; `api`; `encodeURIComponent`; `document.createElement`; `button.setAttribute`; `grid.querySelectorAll`; `b.classList.remove`; `b.setAttribute`; `button.classList.add`; `grid.append`.
+
+**Decisões condicionais examinadas:**
+- `(professional?.value)`
+- `(!root.isConnected||current!==generation)`
+- `result.slots.length`
+- `policy.automaticCancellationNoticeMinutes<0`
+
+**Saída declarada:**
+- `return;`
+- `return;`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async function load(){const current=++generation;controller?.abort();controller=new AbortController();hidden.value='';root.querySelector('.booking-slot-grid').replaceChildren();root.querySelector('[role="status"]').textContent='Buscando horários livres…';try{const params=new URLSearchParams({serviceItemId:item.id,date:date.value});if(professional?.value)params.set('professionalId',professional.value);const result=await api(`/stores/${encodeURIComponent(store.id)}/availability?${params}`,{signal:controller.signal});if(!root.isConnected||current!==generation)return;const grid=root.querySelector('.booking-slot-grid');for(const slot of result.slots){const button=document.createElement('button');button.type='button';button.className='btn outline booking-slot';button.textContent=slot.label;button.setAttribute('aria-pressed','false');button.onclick=()=>{hidden.value=slot.localStartsAt;for(const b of grid.querySelectorAll('button')){b.classList.remove('selected');b.setAttribute('aria-pressed','false');}button.classList.add('selected');button.setAttribute('aria-pressed','true');root.querySelector('[role="status"]').textContent=`Horário escolhido: ${slot.label}. A disponibilidade será conferida novamente ao confirmar.`;};grid.append(button);}root.querySelector('[role="status"]').textContent=result.slots.length?'Escolha um dos horários disponíveis.':'Não há horários livres nesta data para esta opção. Escolha outro dia ou profissional.';const policy=result.policy;root.querySelector('.booking-policy-caption').textContent=`Fuso: ${result.timezone}. Duração: ${result.durationMinutes} minutos. Antecedência mínima: ${policy.noticeMinutes} minutos. `+(policy.automaticCancellationNoticeMinutes<0?'Cancelamentos de reservas confirmadas são analisados pela loja.':`Cancelamento automático até ${policy.automaticCancellationNoticeMinutes} minutos antes; depois disso, a loja analisa a solicitação.`);}catch(error){if(!root.isConnected||current!==generation)return;root.querySelector('[role="status"]').textContent=error.message;}}
+```
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@8:859 — linha 8
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:8)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@8:859` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `grid.querySelectorAll`; `b.classList.remove`; `b.setAttribute`; `button.classList.add`; `button.setAttribute`; `root.querySelector`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+()=>{hidden.value=slot.localStartsAt;for(const b of grid.querySelectorAll('button')){b.classList.remove('selected');b.setAttribute('aria-pressed','false');}button.classList.add('selected');button.setAttribute('aria-pressed','true');root.querySelector('[role="status"]').textContent=`Horário escolhido: ${slot.label}. A disponibilidade será conferida novamente ao confirmar.`;}
+```
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### mountBookingPolicy — linha 11
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:11)
+
+```javascript
+async function mountBookingPolicy(root,store,{admin=false}={})
+```
+
+Executa a etapa `mount Booking Policy` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `encodeURIComponent`; `api`; `[5,10,15,20,30,60].map`; `root.querySelector`; `event.preventDefault`; `form.querySelector`; `JSON.stringify`; `Number`.
+
+**Decisões condicionais examinadas:**
+- `admin`
+- `(!root.isConnected)`
+- `policy.stepMinutes===n`
+- `(root.isConnected)`
+
+**Saída declarada:**
+- `return;`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+try{const policy=await api(path);if(!root.isConnected)return;root.innerHTML=`<section class="panel"><h3>Regras da agenda</h3><p>Os horários disponíveis respeitam o expediente da loja e do profissional. A capacidade é de um atendimento por profissional por vez.</p><form class="form-grid"><label class="field">Antecedência mínima para reservar (minutos)<input name="notice" type="number" min="0" max="10080" value="${policy.noticeMinutes}" required/></label><label class="field">Intervalo da grade<select name="step">${[5,10,15,20,30,60].map(n=>`<option value="${n}" ${policy.stepMinutes===n?'selected':''}>${n} minutos</option>`).join('')}</select></label><label class="field span-2">Antecedência para cancelamento automático (minutos)<input name="cancel" type="number" min="-1" max="10080" value="${policy.automaticCancellationNoticeMinutes}" required/><small>-1: toda solicitação precisa de análise. 0: automático antes do início. Ex.: 120 permite cancelar automaticamente até duas horas antes. Fora dessa regra, o cliente ainda pode pedir análise à loja.</small></label><p role="status" class="span-2"></p><button class="btn" type="submit">Salvar regras da agenda</button></form></section>`;const form=root.querySelector('form');form.onsubmit=async event=>{event.preventDefault();const button=form.querySelector('button');button.disabled=true;try{await api(path,{method:'PUT',body:JSON.stringify({noticeMinutes:Number(form.elements.notice.value),stepMinutes:Number(form.elements.step.value),automaticCancellationNoticeMinutes:Number(form.elements.cancel.value)})});form.querySelector('[role="status"]').textContent='Regras da agenda salvas. Os horários já combinados não foram alterados.';}catch(error){form.querySelector('[role="status"]').textContent=error.message;}finally{button.disabled=false;}};}catch(error){if(root.isConnected)root.textContent='Não foi possível carregar as regras da agenda: '+error.message;}
+```
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@13:548 — linha 13
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:13)
+
+```javascript
+n=>
+```
+
+Executa a etapa `callback@13:548` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisões condicionais examinadas:**
+- `policy.stepMinutes===n`
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@13:1263 — linha 13
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:13)
+
+```javascript
+async event=>
+```
+
+Executa a etapa `callback@13:1263` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `event.preventDefault`; `form.querySelector`; `api`; `JSON.stringify`; `Number`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async event=>{event.preventDefault();const button=form.querySelector('button');button.disabled=true;try{await api(path,{method:'PUT',body:JSON.stringify({noticeMinutes:Number(form.elements.notice.value),stepMinutes:Number(form.elements.step.value),automaticCancellationNoticeMinutes:Number(form.elements.cancel.value)})});form.querySelector('[role="status"]').textContent='Regras da agenda salvas. Os horários já combinados não foram alterados.';}catch(error){form.querySelector('[role="status"]').textContent=error.message;}finally{button.disabled=false;}}
+```
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### openProfessionalHours — linha 15
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:15)
+
+```javascript
+async function openProfessionalHours(store,person,{admin=false,onError=()=>{}}={})
+```
+
+Executa a etapa `open Professional Hours` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `encodeURIComponent`; `api`; `document.createElement`; `esc`; `overlay.querySelector`; `overlay.remove`; `document.body.append`; `mountOperatingHours`; `render`; `onError`.
+
+**Decisões condicionais examinadas:**
+- `admin`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+try{const config=await api(path);const overlay=document.createElement('div');overlay.className='modal-backdrop';overlay.innerHTML=`<section class="modal professional-hours-modal"><div class="modal-head"><h2>Disponibilidade de ${esc(person.name)}</h2><button class="close-button" type="button" aria-label="Fechar">×</button></div><p>A disponibilidade individual restringe os horários abertos da loja. As duas regras precisam permitir o atendimento inteiro.</p><div data-professional-schedule></div></section>`;overlay.querySelector('button').onclick=()=>overlay.remove();document.body.append(overlay);const target=overlay.querySelector('[data-professional-schedule]');const render=configuration=>mountOperatingHours(target,store,{configuration,basePath:path,onError,onSaved:configuration=>render(configuration)});render(config);}catch(error){onError(error);}
+```
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@15:79 — linha 15
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:15)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@15:79` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@17:553 — linha 17
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:17)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@17:553` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `overlay.remove`.
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### render — linha 17
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:17)
+
+```javascript
+configuration=>
+```
+
+Executa a etapa `render` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `mountOperatingHours`; `render`.
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@17:777 — linha 17
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:17)
+
+```javascript
+configuration=>
+```
+
+Executa a etapa `callback@17:777` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `render`.
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### mountAdminProfessionalHours — linha 19
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:19)
+
+```javascript
+async function mountAdminProfessionalHours(root,store)
+```
+
+Executa a etapa `mount Admin Professional Hours` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `api`; `encodeURIComponent`; `root.insertAdjacentHTML`; `document.createElement`; `openProfessionalHours`; `root.querySelector`; `root.append`.
+
+**Decisões condicionais examinadas:**
+- `(!root.isConnected)`
+- `(!people.length)`
+- `person.active`
+- `(root.isConnected)`
+
+**Saída declarada:**
+- `return;`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async function mountAdminProfessionalHours(root,store){try{const people=await api(`/admin/stores/${encodeURIComponent(store.id)}/professionals`);if(!root.isConnected)return;root.innerHTML='<h3>Disponibilidade por profissional</h3>';if(!people.length)root.insertAdjacentHTML('beforeend','<p>Nenhum profissional cadastrado nesta loja.</p>');for(const person of people){const button=document.createElement('button');button.type='button';button.className='btn outline';button.textContent=person.name+(person.active?'':' (inativo)');button.onclick=()=>openProfessionalHours(store,person,{admin:true,onError:error=>{root.querySelector('[role="status"]').textContent=error.message;}});root.append(button);}root.insertAdjacentHTML('beforeend','<p role="status"></p>');}catch(error){if(root.isConnected)root.textContent=error.message;}}
+```
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@19:551 — linha 19
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:19)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@19:551` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `openProfessionalHours`; `root.querySelector`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+()=>openProfessionalHours(store,person,{admin:true,onError:error=>{root.querySelector('[role="status"]').textContent=error.message;}})
+```
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@19:610 — linha 19
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:19)
+
+```javascript
+error=>
+```
+
+Executa a etapa `callback@19:610` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `root.querySelector`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+error=>{root.querySelector('[role="status"]').textContent=error.message;}
+```
+
+**Decisão de engenharia:** Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+## Frontend/src/catalogBindings.js
+
+Ligação explícita dos eventos do catálogo após renderizar a página. O envio cancela a navegação nativa e a edição recebe o identificador do item; o teste usa elementos simulados e a revisão manual confirma a persistência.
+
+Fonte: [catalogBindings.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogBindings.js) · SHA-256 `079efbbb10207c3f3593d70400e4b10ec5be74b8423b6605dbbc714f6540d9da`
+
+### bindCatalogActions — linha 2
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogBindings.js:2)
+
+```javascript
+function bindCatalogActions(root, { create, edit })
+```
+
+Executa a etapa `bind Catalog Actions` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `root.querySelectorAll`; `form.addEventListener`; `button.addEventListener`; `edit`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+root.querySelectorAll('[data-create-item]').forEach(form => form.addEventListener('submit', create));
+root.querySelectorAll('[data-item-edit]').forEach(button => button.addEventListener('click', () => edit(button.dataset.itemEdit)));
+```
+
+**Decisão de engenharia:** Ligação explícita dos eventos do catálogo após renderizar a página. O envio cancela a navegação nativa e a edição recebe o identificador do item; o teste usa elementos simulados e a revisão manual confirma a persistência. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@3:55 — linha 3
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogBindings.js:3)
+
+```javascript
+form =>
+```
+
+Executa a etapa `callback@3:55` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `form.addEventListener`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+form => form.addEventListener('submit', create)
+```
+
+**Decisão de engenharia:** Ligação explícita dos eventos do catálogo após renderizar a página. O envio cancela a navegação nativa e a edição recebe o identificador do item; o teste usa elementos simulados e a revisão manual confirma a persistência. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@4:53 — linha 4
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogBindings.js:4)
+
+```javascript
+button =>
+```
+
+Executa a etapa `callback@4:53` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `button.addEventListener`; `edit`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+button => button.addEventListener('click', () => edit(button.dataset.itemEdit))
+```
+
+**Decisão de engenharia:** Ligação explícita dos eventos do catálogo após renderizar a página. O envio cancela a navegação nativa e a edição recebe o identificador do item; o teste usa elementos simulados e a revisão manual confirma a persistência. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@4:96 — linha 4
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogBindings.js:4)
+
+```javascript
+() =>
+```
+
+Executa a etapa `callback@4:96` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `edit`.
+
+**Decisão de engenharia:** Ligação explícita dos eventos do catálogo após renderizar a página. O envio cancela a navegação nativa e a edição recebe o identificador do item; o teste usa elementos simulados e a revisão manual confirma a persistência. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
 ## Frontend/src/catalogPolicy.js
 
@@ -922,6 +1629,730 @@ Executa a etapa `catalog Item Icon` neste módulo. O contrato concreto está na 
 - `return serviceItem ? '🗓️' : '📦';`
 
 **Decisão de engenharia:** Regras visuais de catálogo, região e pagamento posterior. A política definitiva é aplicada na API, pois a cidade selecionada no navegador é manipulável. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+## Frontend/src/courierFinance.js
+
+Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária.
+
+Fonte: [courierFinance.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js) · SHA-256 `a84ab2b81ff9db6d94e23b184dae812c9324c33cf3b7e0f4734758b671ad2f74`
+
+### esc — linha 3
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:3)
+
+```javascript
+v=>
+```
+
+Executa a etapa `esc` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `String`.
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@3:47 — linha 3
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:3)
+
+```javascript
+c=>
+```
+
+Executa a etapa `callback@3:47` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### money — linha 4
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:4)
+
+```javascript
+v=>
+```
+
+Executa a etapa `money` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `new Intl.NumberFormat`.
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### value — linha 6
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:6)
+
+```javascript
+function value(form,name)
+```
+
+Executa a etapa `value` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `String`; `new FormData`.
+
+**Saída declarada:**
+- `return String(new FormData(form).get(name)||'').trim();`
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### amount — linha 7
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:7)
+
+```javascript
+function amount(form)
+```
+
+Executa a etapa `amount` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `parseCurrencyDecimal`; `value`; `Number.isFinite`; `Math.round`.
+
+**Rejeições locais:**
+- `throw new Error('Informe um valor positivo.');`
+
+**Decisões condicionais examinadas:**
+- `(!Number.isFinite(parsed)||parsed<=0)`
+
+**Saída declarada:**
+- `return Math.round(parsed*100);`
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### mask — linha 8
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:8)
+
+```javascript
+function mask(root)
+```
+
+Executa a etapa `mask` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `root.querySelectorAll`; `formatCurrencyMask`.
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@8:92 — linha 8
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:8)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@8:92` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `formatCurrencyMask`.
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### payout — linha 9
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:9)
+
+```javascript
+function payout(p,admin)
+```
+
+Executa a etapa `payout` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `esc`; `money`; `new Date`.
+
+**Decisões condicionais examinadas:**
+- `admin`
+- `p.note`
+- `p.externalReference`
+- `admin&&p.status==='REQUESTED'`
+- `admin&&p.status==='APPROVED'`
+- `!admin&&p.status==='REQUESTED'`
+
+**Saída declarada:**
+- `return \`<article class="payout-card"><div><strong>${admin?esc(p.courierName)+' · ':''}${money(p.amountCents)}</strong><p>${esc(statuses[p.status]||p.status)}</p><small>Pix CPF ${esc(p.destinationMasked)} · ${new Date(p.createdAt).toLocaleString('pt-BR')}</small>${p.note?\`<p>Motivo: ${esc(p.note)}</p>\`:''}${p.externalReference?\`<p>Comprovante: ${esc(p.externalReference)}</p>\`:''}</div><div class="action-row">${admin&&p.status==='REQUESTED'?\`<button class="btn" data-decide="${esc(p.id)}" data-approved="true">Analisar e aprovar</button><button class="btn danger" data-decide="${esc(p.id)}" data-approved="false">Recusar</button>\`:''}${admin&&p.status==='APPROVED'?\`<button class="btn" data-paid="${esc(p.id)}">Registrar pagamento externo</button>\`:''}${!admin&&p.status==='REQUESTED'?\`<button class="btn outline" data-cancel-payout="${esc(p.id)}">Desistir da solicitação</button>\`:''}</div></article>\`;`
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### dialog — linha 10
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:10)
+
+```javascript
+function dialog(title,fields,onSubmit)
+```
+
+Executa a etapa `dialog` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `document.createElement`; `esc`; `overlay.querySelector`; `overlay.remove`; `e.preventDefault`; `form.querySelector`; `onSubmit`; `document.body.append`.
+
+**Decisões condicionais examinadas:**
+- `(button.disabled)`
+
+**Saída declarada:**
+- `return;`
+- `return overlay;`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+function dialog(title,fields,onSubmit){const overlay=document.createElement('div');overlay.className='modal-backdrop';overlay.innerHTML=`<section class="modal"><div class="modal-head"><h2>${esc(title)}</h2><button class="close-button" aria-label="Fechar" type="button">×</button></div><form class="form-grid">${fields}<p class="finance-feedback span-2" role="alert"></p><div class="action-row span-2"><button class="btn" type="submit">Confirmar</button><button class="btn outline" type="button" data-back>Voltar</button></div></form></section>`;overlay.querySelector('.close-button').onclick=()=>overlay.remove();overlay.querySelector('[data-back]').onclick=()=>overlay.remove();overlay.querySelector('form').onsubmit=async e=>{e.preventDefault();const form=e.currentTarget,button=form.querySelector('[type="submit"]');if(button.disabled)return;button.disabled=true;try{await onSubmit(form,overlay);}catch(error){form.querySelector('[role="alert"]').textContent=error.message;}finally{button.disabled=false;}};document.body.append(overlay);return overlay;}
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@10:594 — linha 10
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:10)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@10:594` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `overlay.remove`.
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@10:660 — linha 10
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:10)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@10:660` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `overlay.remove`.
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@10:720 — linha 10
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:10)
+
+```javascript
+async e=>
+```
+
+Executa a etapa `callback@10:720` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `e.preventDefault`; `form.querySelector`; `onSubmit`.
+
+**Decisões condicionais examinadas:**
+- `(button.disabled)`
+
+**Saída declarada:**
+- `return;`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async e=>{e.preventDefault();const form=e.currentTarget,button=form.querySelector('[type="submit"]');if(button.disabled)return;button.disabled=true;try{await onSubmit(form,overlay);}catch(error){form.querySelector('[role="alert"]').textContent=error.message;}finally{button.disabled=false;}}
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### mountCourierFinance — linha 12
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:12)
+
+```javascript
+async function mountCourierFinance(root,{admin=false,onError=()=>{}}={})
+```
+
+Executa a etapa `mount Courier Finance` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `crypto.randomUUID`; `api`; `render`; `root.querySelector`; `onError`; `money`; `history.map`; `payout`; `[['Acumulado',data.summary.earnedCents],['Em análise ou aprovado',data.summary.reservedCents],['Pagamento registrado',data.summary.paidCents],['Disponível para solicitar',data.summary.availableCents]].map`; `data.earnings.content.map`; `esc`; `e.deliveryId.slice`; `new Date`; `root.insertAdjacentHTML`; `mask`; `load`; `run`; `JSON.stringify`; `amount`; `value`; `request.querySelector`; `root.querySelectorAll`; `dialog`; `overlay.remove`; `info.remove`; `event.preventDefault`; `form.querySelector`; `action`; `document.createElement`; `form.append`.
+
+**Decisões condicionais examinadas:**
+- `admin`
+- `(!root.isConnected)`
+- `(root.isConnected)`
+- `data.policy.configured`
+- `data.summary.availableCents<1`
+- `page<1`
+- `data.payouts.last`
+- `(policy)`
+- `(request)`
+- `(e.target.isConnected)`
+- `approved`
+- `(result.pixKey)`
+- `(button.disabled)`
+- `(!feedback)`
+
+**Saída declarada:**
+- `return;`
+- `return;`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async function load(){root.innerHTML='<p role="status">Consultando o financeiro…</p>';try{const data=await api(admin?`/admin/courier-finance?page=${page}`:`/courier/finance?page=${page}`);if(!root.isConnected)return;render(data);}catch(error){if(root.isConnected){root.innerHTML='<section class="panel"><h2>Não foi possível carregar o financeiro</h2><p role="alert"></p><button class="btn outline">Tentar novamente</button></section>';root.querySelector('p').textContent=error.message;root.querySelector('button').onclick=load;}onError(error);}}
+function render(data){const history=data.payouts.content||[];root.innerHTML=admin?`<section class="panel"><h2>Remuneração dos entregadores</h2><p>Valor fixo de cada nova oferta. A taxa cobrada do cliente é independente. A plataforma é responsável por financiar os repasses.</p><p><strong>${data.policy.configured?money(data.policy.amountCents)+' por entrega':'Ainda não configurada'}</strong></p><form data-policy class="form-grid"><label class="field">Valor por entrega<input name="amount" data-money inputmode="numeric" placeholder="R$ 0,00" required/></label>${password}<button class="btn" type="submit">Salvar remuneração</button></form></section><section class="panel"><h2>Solicitações de repasse</h2><p>Aprovar reserva o valor para pagamento manual. Só registre como pago após realizar a transferência e conferir o comprovante. O site não executa Pix.</p>${history.map(p=>payout(p,true)).join('')||'<p>Nenhuma solicitação nesta página.</p>'}</section>`:`<div class="finance-summary">${[['Acumulado',data.summary.earnedCents],['Em análise ou aprovado',data.summary.reservedCents],['Pagamento registrado',data.summary.paidCents],['Disponível para solicitar',data.summary.availableCents]].map(([label,v])=>`<section class="panel"><span>${label}</span><h2>${money(v)}</h2></section>`).join('')}</div><section class="panel"><h2>Solicitar repasse</h2><p>O pagamento será feito pela administração à chave Pix CPF da sua conta. Confira se essa chave está cadastrada no seu banco. A solicitação exige sua senha e um código enviado ao e-mail da conta.</p><form data-request class="form-grid"><label class="field">Valor do repasse<input name="amount" data-money inputmode="numeric" placeholder="R$ 0,00" required/></label>${password}<button class="btn outline" type="button" data-code>Enviar código por e-mail</button><label class="field">Código do e-mail<input name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" required/></label><button class="btn" type="submit" ${data.summary.availableCents<1?'disabled':''}>Solicitar repasse</button><p class="finance-feedback span-2" role="status"></p></form></section><section class="panel"><h2>Repasses</h2>${history.map(p=>payout(p,false)).join('')||'<p>Nenhuma solicitação nesta página.</p>'}</section><section class="panel"><h2>Ganhos por entrega</h2>${data.earnings.content.map(e=>`<p>Entrega ${esc(e.deliveryId.slice(0,8).toUpperCase())} · ${money(e.amountCents)} · ${new Date(e.createdAt).toLocaleString('pt-BR')}</p>`).join('')||'<p>A remuneração aparece ao concluir uma entrega com valor definido. Entregas antigas sem valor não recebem créditos retroativos automáticos.</p>'}</section>`;
+const policy=root.querySelector('[data-policy]');if(policy)policy.onsubmit=e=>run(e,async form=>{await api('/admin/courier-finance/policy',{method:'POST',body:JSON.stringify({amountCents:amount(form),password:value(form,'password')})});await load();});
+const request=root.querySelector('[data-request]');if(request){request.onsubmit=e=>run(e,async form=>{await api('/courier/payouts',{method:'POST',body:JSON.stringify({amountCents:amount(form),requestKey:key,password:value(form,'password'),code:value(form,'code')})});key=crypto.randomUUID();await load();});root.querySelector('[data-code]').onclick=async e=>{e.currentTarget.disabled=true;try{await api('/courier/payout-code',{method:'POST',body:JSON.stringify({password:value(request,'password')})});request.querySelector('[role="status"]').textContent='Código enviado. Confira seu e-mail, inclusive a pasta de spam.';}catch(error){request.querySelector('[role="status"]').textContent=error.message;}finally{if(e.target.isConnected)e.target.disabled=false;}};}
+root.querySelectorAll('[data-cancel-payout]').forEach(button=>button.onclick=async()=>{button.disabled=true;try{await api(`/courier/payouts/${button.dataset.cancelPayout}/cancel`,{method:'POST'});await load();}catch(error){button.disabled=false;onError(error);}});
+root.querySelectorAll('[data-decide]').forEach(button=>button.onclick=()=>{const approved=button.dataset.approved==='true';dialog(approved?'Aprovar repasse':'Recusar repasse',`<p class="span-2">Confira titular e valor. A aprovação não transfere dinheiro.</p><label class="field span-2">Motivo ${approved?'(opcional)':''}<textarea name="note" maxlength="300" ${approved?'':'required'}></textarea></label>${password}`,async(form,overlay)=>{const result=await api(`/admin/courier-finance/payouts/${button.dataset.decide}/decision`,{method:'POST',body:JSON.stringify({approved,note:value(form,'note')||null,password:value(form,'password')})});overlay.remove();await load();if(result.pixKey)dialog('Dados para pagamento manual',`<p class="span-2">Chave Pix CPF: <strong>${esc(result.pixKey)}</strong></p><p class="span-2">${esc(result.instruction)}</p>`,async(_,info)=>info.remove());});});
+root.querySelectorAll('[data-paid]').forEach(button=>button.onclick=()=>dialog('Confirmar transferência realizada',`<p class="span-2">Esta ação registra uma transferência já realizada fora do site. Não realiza Pix nem verifica o banco automaticamente.</p><label class="field span-2">Referência do comprovante<input name="reference" minlength="6" maxlength="120" required/></label>${password}`,async(form,overlay)=>{await api(`/admin/courier-finance/payouts/${button.dataset.paid}/paid`,{method:'POST',body:JSON.stringify({externalReference:value(form,'reference'),password:value(form,'password')})});overlay.remove();await load();}));
+async function run(event,action){event.preventDefault();const form=event.currentTarget,button=form.querySelector('[type="submit"]');if(button.disabled)return;button.disabled=true;try{await action(form);}catch(error){let feedback=form.querySelector('[role="status"]');if(!feedback){feedback=document.createElement('p');feedback.role='alert';form.append(feedback);}feedback.textContent=error.message;onError(error);}finally{button.disabled=false;}}
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@12:69 — linha 12
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:12)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@12:69` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### load — linha 14
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:14)
+
+```javascript
+async function load()
+```
+
+Executa a etapa `load` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `api`; `render`; `root.querySelector`; `onError`.
+
+**Decisões condicionais examinadas:**
+- `admin`
+- `(!root.isConnected)`
+- `(root.isConnected)`
+
+**Saída declarada:**
+- `return;`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async function load(){root.innerHTML='<p role="status">Consultando o financeiro…</p>';try{const data=await api(admin?`/admin/courier-finance?page=${page}`:`/courier/finance?page=${page}`);if(!root.isConnected)return;render(data);}catch(error){if(root.isConnected){root.innerHTML='<section class="panel"><h2>Não foi possível carregar o financeiro</h2><p role="alert"></p><button class="btn outline">Tentar novamente</button></section>';root.querySelector('p').textContent=error.message;root.querySelector('button').onclick=load;}onError(error);}}
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### render — linha 15
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:15)
+
+```javascript
+function render(data)
+```
+
+Executa a etapa `render` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `money`; `history.map`; `payout`; `[['Acumulado',data.summary.earnedCents],['Em análise ou aprovado',data.summary.reservedCents],['Pagamento registrado',data.summary.paidCents],['Disponível para solicitar',data.summary.availableCents]].map`; `data.earnings.content.map`; `esc`; `e.deliveryId.slice`; `new Date`; `root.insertAdjacentHTML`; `mask`; `root.querySelector`; `load`; `run`; `api`; `JSON.stringify`; `amount`; `value`; `crypto.randomUUID`; `request.querySelector`; `root.querySelectorAll`; `onError`; `dialog`; `overlay.remove`; `info.remove`.
+
+**Decisões condicionais examinadas:**
+- `admin`
+- `data.policy.configured`
+- `data.summary.availableCents<1`
+- `page<1`
+- `data.payouts.last`
+- `(policy)`
+- `(request)`
+- `(e.target.isConnected)`
+- `approved`
+- `(result.pixKey)`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+function render(data){const history=data.payouts.content||[];root.innerHTML=admin?`<section class="panel"><h2>Remuneração dos entregadores</h2><p>Valor fixo de cada nova oferta. A taxa cobrada do cliente é independente. A plataforma é responsável por financiar os repasses.</p><p><strong>${data.policy.configured?money(data.policy.amountCents)+' por entrega':'Ainda não configurada'}</strong></p><form data-policy class="form-grid"><label class="field">Valor por entrega<input name="amount" data-money inputmode="numeric" placeholder="R$ 0,00" required/></label>${password}<button class="btn" type="submit">Salvar remuneração</button></form></section><section class="panel"><h2>Solicitações de repasse</h2><p>Aprovar reserva o valor para pagamento manual. Só registre como pago após realizar a transferência e conferir o comprovante. O site não executa Pix.</p>${history.map(p=>payout(p,true)).join('')||'<p>Nenhuma solicitação nesta página.</p>'}</section>`:`<div class="finance-summary">${[['Acumulado',data.summary.earnedCents],['Em análise ou aprovado',data.summary.reservedCents],['Pagamento registrado',data.summary.paidCents],['Disponível para solicitar',data.summary.availableCents]].map(([label,v])=>`<section class="panel"><span>${label}</span><h2>${money(v)}</h2></section>`).join('')}</div><section class="panel"><h2>Solicitar repasse</h2><p>O pagamento será feito pela administração à chave Pix CPF da sua conta. Confira se essa chave está cadastrada no seu banco. A solicitação exige sua senha e um código enviado ao e-mail da conta.</p><form data-request class="form-grid"><label class="field">Valor do repasse<input name="amount" data-money inputmode="numeric" placeholder="R$ 0,00" required/></label>${password}<button class="btn outline" type="button" data-code>Enviar código por e-mail</button><label class="field">Código do e-mail<input name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" required/></label><button class="btn" type="submit" ${data.summary.availableCents<1?'disabled':''}>Solicitar repasse</button><p class="finance-feedback span-2" role="status"></p></form></section><section class="panel"><h2>Repasses</h2>${history.map(p=>payout(p,false)).join('')||'<p>Nenhuma solicitação nesta página.</p>'}</section><section class="panel"><h2>Ganhos por entrega</h2>${data.earnings.content.map(e=>`<p>Entrega ${esc(e.deliveryId.slice(0,8).toUpperCase())} · ${money(e.amountCents)} · ${new Date(e.createdAt).toLocaleString('pt-BR')}</p>`).join('')||'<p>A remuneração aparece ao concluir uma entrega com valor definido. Entregas antigas sem valor não recebem créditos retroativos automáticos.</p>'}</section>`;
+const policy=root.querySelector('[data-policy]');if(policy)policy.onsubmit=e=>run(e,async form=>{await api('/admin/courier-finance/policy',{method:'POST',body:JSON.stringify({amountCents:amount(form),password:value(form,'password')})});await load();});
+const request=root.querySelector('[data-request]');if(request){request.onsubmit=e=>run(e,async form=>{await api('/courier/payouts',{method:'POST',body:JSON.stringify({amountCents:amount(form),requestKey:key,password:value(form,'password'),code:value(form,'code')})});key=crypto.randomUUID();await load();});root.querySelector('[data-code]').onclick=async e=>{e.currentTarget.disabled=true;try{await api('/courier/payout-code',{method:'POST',body:JSON.stringify({password:value(request,'password')})});request.querySelector('[role="status"]').textContent='Código enviado. Confira seu e-mail, inclusive a pasta de spam.';}catch(error){request.querySelector('[role="status"]').textContent=error.message;}finally{if(e.target.isConnected)e.target.disabled=false;}};}
+root.querySelectorAll('[data-cancel-payout]').forEach(button=>button.onclick=async()=>{button.disabled=true;try{await api(`/courier/payouts/${button.dataset.cancelPayout}/cancel`,{method:'POST'});await load();}catch(error){button.disabled=false;onError(error);}});
+root.querySelectorAll('[data-decide]').forEach(button=>button.onclick=()=>{const approved=button.dataset.approved==='true';dialog(approved?'Aprovar repasse':'Recusar repasse',`<p class="span-2">Confira titular e valor. A aprovação não transfere dinheiro.</p><label class="field span-2">Motivo ${approved?'(opcional)':''}<textarea name="note" maxlength="300" ${approved?'':'required'}></textarea></label>${password}`,async(form,overlay)=>{const result=await api(`/admin/courier-finance/payouts/${button.dataset.decide}/decision`,{method:'POST',body:JSON.stringify({approved,note:value(form,'note')||null,password:value(form,'password')})});overlay.remove();await load();if(result.pixKey)dialog('Dados para pagamento manual',`<p class="span-2">Chave Pix CPF: <strong>${esc(result.pixKey)}</strong></p><p class="span-2">${esc(result.instruction)}</p>`,async(_,info)=>info.remove());});});
+root.querySelectorAll('[data-paid]').forEach(button=>button.onclick=()=>dialog('Confirmar transferência realizada',`<p class="span-2">Esta ação registra uma transferência já realizada fora do site. Não realiza Pix nem verifica o banco automaticamente.</p><label class="field span-2">Referência do comprovante<input name="reference" minlength="6" maxlength="120" required/></label>${password}`,async(form,overlay)=>{await api(`/admin/courier-finance/payouts/${button.dataset.paid}/paid`,{method:'POST',body:JSON.stringify({externalReference:value(form,'reference'),password:value(form,'password')})});overlay.remove();await load();}));
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@15:891 — linha 15
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:15)
+
+```javascript
+p=>
+```
+
+Executa a etapa `callback@15:891` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `payout`.
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@15:1217 — linha 15
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:15)
+
+```javascript
+([label,v])=>
+```
+
+Executa a etapa `callback@15:1217` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `money`.
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@15:2231 — linha 15
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:15)
+
+```javascript
+p=>
+```
+
+Executa a etapa `callback@15:2231` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `payout`.
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@15:2395 — linha 15
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:15)
+
+```javascript
+e=>
+```
+
+Executa a etapa `callback@15:2395` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `esc`; `e.deliveryId.slice`; `money`; `new Date`.
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@17:44 — linha 17
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:17)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@17:44` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `load`.
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@17:107 — linha 17
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:17)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@17:107` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `load`.
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@18:77 — linha 18
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:18)
+
+```javascript
+e=>
+```
+
+Executa a etapa `callback@18:77` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `run`; `api`; `JSON.stringify`; `amount`; `value`; `load`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+e=>run(e,async form=>{await api('/admin/courier-finance/policy',{method:'POST',body:JSON.stringify({amountCents:amount(form),password:value(form,'password')})});await load();})
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@18:86 — linha 18
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:18)
+
+```javascript
+async form=>
+```
+
+Executa a etapa `callback@18:86` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `api`; `JSON.stringify`; `amount`; `value`; `load`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async form=>{await api('/admin/courier-finance/policy',{method:'POST',body:JSON.stringify({amountCents:amount(form),password:value(form,'password')})});await load();}
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@19:82 — linha 19
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:19)
+
+```javascript
+e=>
+```
+
+Executa a etapa `callback@19:82` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `run`; `api`; `JSON.stringify`; `amount`; `value`; `crypto.randomUUID`; `load`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+e=>run(e,async form=>{await api('/courier/payouts',{method:'POST',body:JSON.stringify({amountCents:amount(form),requestKey:key,password:value(form,'password'),code:value(form,'code')})});key=crypto.randomUUID();await load();})
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@19:91 — linha 19
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:19)
+
+```javascript
+async form=>
+```
+
+Executa a etapa `callback@19:91` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `api`; `JSON.stringify`; `amount`; `value`; `crypto.randomUUID`; `load`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async form=>{await api('/courier/payouts',{method:'POST',body:JSON.stringify({amountCents:amount(form),requestKey:key,password:value(form,'password'),code:value(form,'code')})});key=crypto.randomUUID();await load();}
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@19:351 — linha 19
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:19)
+
+```javascript
+async e=>
+```
+
+Executa a etapa `callback@19:351` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `api`; `JSON.stringify`; `value`; `request.querySelector`.
+
+**Decisões condicionais examinadas:**
+- `(e.target.isConnected)`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async e=>{e.currentTarget.disabled=true;try{await api('/courier/payout-code',{method:'POST',body:JSON.stringify({password:value(request,'password')})});request.querySelector('[role="status"]').textContent='Código enviado. Confira seu e-mail, inclusive a pasta de spam.';}catch(error){request.querySelector('[role="status"]').textContent=error.message;}finally{if(e.target.isConnected)e.target.disabled=false;}}
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@20:56 — linha 20
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:20)
+
+```javascript
+button=>
+```
+
+Executa a etapa `callback@20:56` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `api`; `load`; `onError`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+button=>button.onclick=async()=>{button.disabled=true;try{await api(`/courier/payouts/${button.dataset.cancelPayout}/cancel`,{method:'POST'});await load();}catch(error){button.disabled=false;onError(error);}}
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@20:79 — linha 20
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:20)
+
+```javascript
+async()=>
+```
+
+Executa a etapa `callback@20:79` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `api`; `load`; `onError`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async()=>{button.disabled=true;try{await api(`/courier/payouts/${button.dataset.cancelPayout}/cancel`,{method:'POST'});await load();}catch(error){button.disabled=false;onError(error);}}
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@21:49 — linha 21
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:21)
+
+```javascript
+button=>
+```
+
+Executa a etapa `callback@21:49` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `dialog`; `api`; `JSON.stringify`; `value`; `overlay.remove`; `load`; `esc`; `info.remove`.
+
+**Decisões condicionais examinadas:**
+- `approved`
+- `(result.pixKey)`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+button=>button.onclick=()=>{const approved=button.dataset.approved==='true';dialog(approved?'Aprovar repasse':'Recusar repasse',`<p class="span-2">Confira titular e valor. A aprovação não transfere dinheiro.</p><label class="field span-2">Motivo ${approved?'(opcional)':''}<textarea name="note" maxlength="300" ${approved?'':'required'}></textarea></label>${password}`,async(form,overlay)=>{const result=await api(`/admin/courier-finance/payouts/${button.dataset.decide}/decision`,{method:'POST',body:JSON.stringify({approved,note:value(form,'note')||null,password:value(form,'password')})});overlay.remove();await load();if(result.pixKey)dialog('Dados para pagamento manual',`<p class="span-2">Chave Pix CPF: <strong>${esc(result.pixKey)}</strong></p><p class="span-2">${esc(result.instruction)}</p>`,async(_,info)=>info.remove());});}
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@21:72 — linha 21
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:21)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@21:72` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `dialog`; `api`; `JSON.stringify`; `value`; `overlay.remove`; `load`; `esc`; `info.remove`.
+
+**Decisões condicionais examinadas:**
+- `approved`
+- `(result.pixKey)`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+()=>{const approved=button.dataset.approved==='true';dialog(approved?'Aprovar repasse':'Recusar repasse',`<p class="span-2">Confira titular e valor. A aprovação não transfere dinheiro.</p><label class="field span-2">Motivo ${approved?'(opcional)':''}<textarea name="note" maxlength="300" ${approved?'':'required'}></textarea></label>${password}`,async(form,overlay)=>{const result=await api(`/admin/courier-finance/payouts/${button.dataset.decide}/decision`,{method:'POST',body:JSON.stringify({approved,note:value(form,'note')||null,password:value(form,'password')})});overlay.remove();await load();if(result.pixKey)dialog('Dados para pagamento manual',`<p class="span-2">Chave Pix CPF: <strong>${esc(result.pixKey)}</strong></p><p class="span-2">${esc(result.instruction)}</p>`,async(_,info)=>info.remove());});}
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@21:421 — linha 21
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:21)
+
+```javascript
+async(form,overlay)=>
+```
+
+Executa a etapa `callback@21:421` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `api`; `JSON.stringify`; `value`; `overlay.remove`; `load`; `dialog`; `esc`; `info.remove`.
+
+**Decisões condicionais examinadas:**
+- `(result.pixKey)`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async(form,overlay)=>{const result=await api(`/admin/courier-finance/payouts/${button.dataset.decide}/decision`,{method:'POST',body:JSON.stringify({approved,note:value(form,'note')||null,password:value(form,'password')})});overlay.remove();await load();if(result.pixKey)dialog('Dados para pagamento manual',`<p class="span-2">Chave Pix CPF: <strong>${esc(result.pixKey)}</strong></p><p class="span-2">${esc(result.instruction)}</p>`,async(_,info)=>info.remove());}
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@21:854 — linha 21
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:21)
+
+```javascript
+async(_,info)=>
+```
+
+Executa a etapa `callback@21:854` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `info.remove`.
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@22:47 — linha 22
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:22)
+
+```javascript
+button=>
+```
+
+Executa a etapa `callback@22:47` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `dialog`; `api`; `JSON.stringify`; `value`; `overlay.remove`; `load`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+button=>button.onclick=()=>dialog('Confirmar transferência realizada',`<p class="span-2">Esta ação registra uma transferência já realizada fora do site. Não realiza Pix nem verifica o banco automaticamente.</p><label class="field span-2">Referência do comprovante<input name="reference" minlength="6" maxlength="120" required/></label>${password}`,async(form,overlay)=>{await api(`/admin/courier-finance/payouts/${button.dataset.paid}/paid`,{method:'POST',body:JSON.stringify({externalReference:value(form,'reference'),password:value(form,'password')})});overlay.remove();await load();})
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@22:70 — linha 22
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:22)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@22:70` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `dialog`; `api`; `JSON.stringify`; `value`; `overlay.remove`; `load`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+()=>dialog('Confirmar transferência realizada',`<p class="span-2">Esta ação registra uma transferência já realizada fora do site. Não realiza Pix nem verifica o banco automaticamente.</p><label class="field span-2">Referência do comprovante<input name="reference" minlength="6" maxlength="120" required/></label>${password}`,async(form,overlay)=>{await api(`/admin/courier-finance/payouts/${button.dataset.paid}/paid`,{method:'POST',body:JSON.stringify({externalReference:value(form,'reference'),password:value(form,'password')})});overlay.remove();await load();})
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@22:402 — linha 22
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:22)
+
+```javascript
+async(form,overlay)=>
+```
+
+Executa a etapa `callback@22:402` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `api`; `JSON.stringify`; `value`; `overlay.remove`; `load`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async(form,overlay)=>{await api(`/admin/courier-finance/payouts/${button.dataset.paid}/paid`,{method:'POST',body:JSON.stringify({externalReference:value(form,'reference'),password:value(form,'password')})});overlay.remove();await load();}
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### run — linha 24
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:24)
+
+```javascript
+async function run(event,action)
+```
+
+Executa a etapa `run` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `event.preventDefault`; `form.querySelector`; `action`; `document.createElement`; `form.append`; `onError`.
+
+**Decisões condicionais examinadas:**
+- `(button.disabled)`
+- `(!feedback)`
+
+**Saída declarada:**
+- `return;`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+async function run(event,action){event.preventDefault();const form=event.currentTarget,button=form.querySelector('[type="submit"]');if(button.disabled)return;button.disabled=true;try{await action(form);}catch(error){let feedback=form.querySelector('[role="status"]');if(!feedback){feedback=document.createElement('p');feedback.role='alert';form.append(feedback);}feedback.textContent=error.message;onError(error);}finally{button.disabled=false;}}
+```
+
+**Decisão de engenharia:** Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
 ## Frontend/src/demoInbox.js
 
@@ -1094,11 +2525,11 @@ Executa a etapa `parse Currency Decimal` neste módulo. O contrato concreto est�
 
 Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea.
 
-Fonte: [main.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js) · SHA-256 `3c7217c98fdee1613560223ead67c5840a8af73c8b2457583e02cc9e9590ebe4`
+Fonte: [main.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js) · SHA-256 `43c6787515dd852c5a5d27c3a318e22eac7f06dff2b444211bdf5474e6c217dd`
 
-### $ — linha 19
+### $ — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:19)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:24)
 
 ```javascript
 (selector, root = document) =>
@@ -1110,9 +2541,9 @@ Executa a etapa `$` neste módulo. O contrato concreto está na assinatura, nos 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### statusClass — linha 32
+### statusClass — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:32)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:37)
 
 ```javascript
 s =>
@@ -1129,9 +2560,9 @@ Executa a etapa `status Class` neste módulo. O contrato concreto está na assin
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### esc — linha 33
+### esc — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:33)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:38)
 
 ```javascript
 value =>
@@ -1143,21 +2574,21 @@ Executa a etapa `esc` neste módulo. O contrato concreto está na assinatura, no
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@33:62 — linha 33
+### callback@38:62 — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:33)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:38)
 
 ```javascript
 c =>
 ```
 
-Executa a etapa `callback@33:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@38:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### icon — linha 34
+### icon — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:34)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:39)
 
 ```javascript
 function icon(name,size=18)
@@ -1170,15 +2601,15 @@ Executa a etapa `icon` neste módulo. O contrato concreto está na assinatura, n
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@39:23 — linha 39
+### callback@44:23 — linha 44
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:39)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:44)
 
 ```javascript
 () =>
 ```
 
-Executa a etapa `callback@39:23` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@44:23` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `JSON.parse`; `localStorage.getItem`; `localStorage.setItem`; `JSON.stringify`.
 
@@ -1198,9 +2629,9 @@ localStorage.setItem('pronto_account',JSON.stringify(hint));
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### persistAccountHint — linha 48
+### persistAccountHint — linha 53
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:48)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:53)
 
 ```javascript
 function persistAccountHint(account)
@@ -1224,15 +2655,15 @@ localStorage.setItem('pronto_account', JSON.stringify(hint));
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@53:24 — linha 53
+### callback@58:24 — linha 58
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:53)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:58)
 
 ```javascript
 () =>
 ```
 
-Executa a etapa `callback@53:24` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@58:24` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `JSON.parse`; `localStorage.getItem`.
 
@@ -1247,9 +2678,9 @@ Executa a etapa `callback@53:24` neste módulo. O contrato concreto está na ass
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### knownPage — linha 54
+### knownPage — linha 59
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:54)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:59)
 
 ```javascript
 page =>
@@ -1261,9 +2692,9 @@ Executa a etapa `known Page` neste módulo. O contrato concreto está na assinat
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### notificationKey — linha 55
+### notificationKey — linha 60
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:55)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:60)
 
 ```javascript
 accountId =>
@@ -1273,9 +2704,9 @@ Executa a etapa `notification Key` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### readLocalNotifications — linha 56
+### readLocalNotifications — linha 61
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:56)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:61)
 
 ```javascript
 () =>
@@ -1285,9 +2716,9 @@ Executa a etapa `read Local Notifications` neste módulo. O contrato concreto es
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### notify — linha 80
+### notify — linha 85
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:80)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:85)
 
 ```javascript
 function notify(title, message, kind = 'success', persist = false)
@@ -1320,81 +2751,81 @@ toast.querySelector('.toast-dismiss').addEventListener('click',()=>toast.remove(
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@87:104 — linha 87
+### callback@92:104 — linha 92
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:87)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:92)
 
 ```javascript
 n =>
 ```
 
-Executa a etapa `callback@87:104` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@92:104` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@92:52 — linha 92
+### callback@97:52 — linha 97
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:92)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:97)
 
 ```javascript
 item=>
 ```
 
-Executa a etapa `callback@92:52` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@97:52` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@99:68 — linha 99
+### callback@104:68 — linha 104
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:99)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:104)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@99:68` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@104:68` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `toast.remove`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@102:16 — linha 102
+### callback@107:16 — linha 107
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:102)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:107)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@102:16` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@107:16` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `toast.classList.add`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@103:16 — linha 103
+### callback@108:16 — linha 108
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:103)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:108)
 
 ```javascript
 () =>
 ```
 
-Executa a etapa `callback@103:16` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@108:16` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `toast.remove`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@107:44 — linha 107
+### callback@112:44 — linha 112
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:107)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:112)
 
 ```javascript
 () =>
 ```
 
-Executa a etapa `callback@107:44` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@112:44` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `resetChatState`; `stopNotificationPolling`; `stopCourierLocation`; `localStorage.removeItem`; `readLocalNotifications`; `notify`; `render`.
 
@@ -1405,9 +2836,9 @@ localStorage.removeItem('pronto_account');
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### role — linha 130
+### role — linha 135
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:130)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:135)
 
 ```javascript
 () =>
@@ -1430,9 +2861,9 @@ Executa a etapa `role` neste módulo. O contrato concreto está na assinatura, n
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### canShop — linha 135
+### canShop — linha 140
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:135)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:140)
 
 ```javascript
 () =>
@@ -1444,9 +2875,9 @@ Executa a etapa `can Shop` neste módulo. O contrato concreto está na assinatur
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### initials — linha 136
+### initials — linha 141
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:136)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:141)
 
 ```javascript
 name =>
@@ -1458,21 +2889,21 @@ Executa a etapa `initials` neste módulo. O contrato concreto está na assinatur
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@136:79 — linha 136
+### callback@141:79 — linha 141
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:136)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:141)
 
 ```javascript
 n =>
 ```
 
-Executa a etapa `callback@136:79` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@141:79` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### fullAddress — linha 137
+### fullAddress — linha 142
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:137)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:142)
 
 ```javascript
 account =>
@@ -1484,9 +2915,9 @@ Executa a etapa `full Address` neste módulo. O contrato concreto está na assin
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### displayName — linha 138
+### displayName — linha 143
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:138)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:143)
 
 ```javascript
 () =>
@@ -1498,9 +2929,9 @@ Executa a etapa `display Name` neste módulo. O contrato concreto está na assin
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### formatStatus — linha 139
+### formatStatus — linha 144
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:139)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:144)
 
 ```javascript
 s =>
@@ -1512,9 +2943,9 @@ Executa a etapa `format Status` neste módulo. O contrato concreto está na assi
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### pill — linha 140
+### pill — linha 145
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:140)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:145)
 
 ```javascript
 s =>
@@ -1526,9 +2957,9 @@ Executa a etapa `pill` neste módulo. O contrato concreto está na assinatura, n
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### refundNotice — linha 141
+### refundNotice — linha 146
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:141)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:146)
 
 ```javascript
 status =>
@@ -1544,9 +2975,9 @@ Executa a etapa `refund Notice` neste módulo. O contrato concreto está na assi
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### applyPublicCategories — linha 143
+### applyPublicCategories — linha 148
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:143)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:148)
 
 ```javascript
 function applyPublicCategories(categories)
@@ -1564,33 +2995,33 @@ Executa a etapa `apply Public Categories` neste módulo. O contrato concreto est
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@143:169 — linha 143
+### callback@148:169 — linha 148
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:143)
-
-```javascript
-category=>
-```
-
-Executa a etapa `callback@143:169` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@143:214 — linha 143
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:143)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:148)
 
 ```javascript
 category=>
 ```
 
-Executa a etapa `callback@143:214` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@148:169` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### boot — linha 145
+### callback@148:214 — linha 148
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:145)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:148)
+
+```javascript
+category=>
+```
+
+Executa a etapa `callback@148:214` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### boot — linha 150
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:150)
 
 ```javascript
 async function boot()
@@ -1626,15 +3057,15 @@ if(mpResult==='connected'||mpResult==='error'){notify(mpResult==='connected'?'Co
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@146:400 — linha 146
+### callback@151:400 — linha 151
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:146)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:151)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@146:400` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@151:400` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `document.body.style.setProperty`.
 
@@ -1645,33 +3076,33 @@ Executa a etapa `callback@146:400` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@162:436 — linha 162
+### callback@167:436 — linha 167
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:162)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:167)
 
 ```javascript
 ([page])=>
 ```
 
-Executa a etapa `callback@162:436` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@167:436` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@162:735 — linha 162
+### callback@167:735 — linha 167
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:162)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:167)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@162:735` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@167:735` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### loadCurrentPage — linha 166
+### loadCurrentPage — linha 171
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:166)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:171)
 
 ```javascript
 async function loadCurrentPage()
@@ -1729,49 +3160,49 @@ const store=activeMerchantStore(); state.paymentConnection=store?await api(`/mer
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@180:37 — linha 180
+### callback@185:37 — linha 185
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:180)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:185)
 
 ```javascript
 result=>
 ```
 
-Executa a etapa `callback@180:37` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@185:37` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@191:32 — linha 191
+### callback@196:32 — linha 196
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:191)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:196)
 
 ```javascript
 s=>
 ```
 
-Executa a etapa `callback@191:32` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@196:32` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@203:35 — linha 203
+### callback@208:35 — linha 208
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:203)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:208)
 
 ```javascript
 s=>
 ```
 
-Executa a etapa `callback@203:35` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@208:35` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### loadAdminData — linha 211
+### loadAdminData — linha 216
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:211)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:216)
 
 ```javascript
 async function loadAdminData()
@@ -1788,29 +3219,29 @@ Executa a etapa `load Admin Data` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@213:51 — linha 213
+### callback@218:51 — linha 218
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:213)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:218)
 
 ```javascript
 ([,url])=>
 ```
 
-Executa a etapa `callback@213:51` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@218:51` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `api`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@214:35 — linha 214
+### callback@219:35 — linha 219
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:214)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:219)
 
 ```javascript
 (result,index)=>
 ```
 
-Executa a etapa `callback@214:35` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@219:35` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `failed.push`.
 
@@ -1819,9 +3250,9 @@ Executa a etapa `callback@214:35` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### loadNotifications — linha 218
+### loadNotifications — linha 223
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:218)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:223)
 
 ```javascript
 async function loadNotifications()
@@ -1838,33 +3269,33 @@ const remote = await api('/account/notifications');
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@221:50 — linha 221
+### callback@226:50 — linha 226
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:221)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:226)
 
 ```javascript
 n =>
 ```
 
-Executa a etapa `callback@221:50` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@226:50` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@222:11 — linha 222
+### callback@227:11 — linha 227
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:222)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:227)
 
 ```javascript
 (a,b)=>
 ```
 
-Executa a etapa `callback@222:11` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@227:11` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### addressText — linha 225
+### addressText — linha 230
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:225)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:230)
 
 ```javascript
 address =>
@@ -1879,9 +3310,9 @@ Executa a etapa `address Text` neste módulo. O contrato concreto está na assin
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### loadAddresses — linha 228
+### loadAddresses — linha 233
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:228)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:233)
 
 ```javascript
 async function loadAddresses()
@@ -1902,21 +3333,21 @@ const imported = await api('/account/addresses', {method:'POST', body:JSON.strin
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@235:52 — linha 235
+### callback@240:52 — linha 240
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:235)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:240)
 
 ```javascript
 a=>
 ```
 
-Executa a etapa `callback@235:52` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@240:52` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### startNotificationPolling — linha 239
+### startNotificationPolling — linha 244
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:239)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:244)
 
 ```javascript
 function startNotificationPolling()
@@ -1928,9 +3359,9 @@ Executa a etapa `start Notification Polling` neste módulo. O contrato concreto 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### stopNotificationPolling — linha 244
+### stopNotificationPolling — linha 249
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:244)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:249)
 
 ```javascript
 function stopNotificationPolling()
@@ -1945,9 +3376,9 @@ Executa a etapa `stop Notification Polling` neste módulo. O contrato concreto e
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### isTypingInPage — linha 249
+### isTypingInPage — linha 254
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:249)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:254)
 
 ```javascript
 function isTypingInPage()
@@ -1962,9 +3393,9 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### refreshNotifications — linha 251
+### refreshNotifications — linha 256
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:251)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:256)
 
 ```javascript
 async function refreshNotifications()
@@ -1993,87 +3424,87 @@ try { state.orders = await api('/orders/mine'); if(!isTypingInPage())renderPage(
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@257:57 — linha 257
+### callback@262:57 — linha 262
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:257)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:262)
 
 ```javascript
 n =>
 ```
 
-Executa a etapa `callback@257:57` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@262:57` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@257:89 — linha 257
+### callback@262:89 — linha 262
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:257)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:262)
 
 ```javascript
 n =>
 ```
 
-Executa a etapa `callback@257:89` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@262:89` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@258:33 — linha 258
+### callback@263:33 — linha 263
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:258)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:263)
 
 ```javascript
 n =>
 ```
 
-Executa a etapa `callback@258:33` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@263:33` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `existing.has`; `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@259:87 — linha 259
+### callback@264:87 — linha 264
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:259)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:264)
 
 ```javascript
 n =>
 ```
 
-Executa a etapa `callback@259:87` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@264:87` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@260:13 — linha 260
+### callback@265:13 — linha 265
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:260)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:265)
 
 ```javascript
 (a,b)=>
 ```
 
-Executa a etapa `callback@260:13` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@265:13` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@261:40 — linha 261
+### callback@266:40 — linha 266
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:261)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:266)
 
 ```javascript
 n =>
 ```
 
-Executa a etapa `callback@261:40` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@266:40` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `notify`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### handlePaymentReturn — linha 269
+### handlePaymentReturn — linha 274
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:269)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:274)
 
 ```javascript
 async function handlePaymentReturn(paymentId,result,providerPaymentId)
@@ -2098,23 +3529,23 @@ const url=new URL(location.href);for(const key of ['mp','app_payment_id','paymen
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@272:90 — linha 272
+### callback@277:90 — linha 277
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:272)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:277)
 
 ```javascript
 resolve=>
 ```
 
-Executa a etapa `callback@272:90` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@277:90` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `setTimeout`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### loadStores — linha 280
+### loadStores — linha 285
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:280)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:285)
 
 ```javascript
 async function loadStores()
@@ -2134,9 +3565,9 @@ state.stores = await api(`/stores${query}`);
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### filterStores — linha 287
+### filterStores — linha 292
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:287)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:292)
 
 ```javascript
 function filterStores()
@@ -2151,15 +3582,15 @@ Executa a etapa `filter Stores` neste módulo. O contrato concreto está na assi
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@289:46 — linha 289
+### callback@294:46 — linha 294
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:289)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:294)
 
 ```javascript
 store =>
 ```
 
-Executa a etapa `callback@289:46` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@294:46` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `categoryMatches`; ``${store.name} ${store.description || ''} ${store.category || ''} ${store.city||''} ${store.state||''}`.toLocaleLowerCase`.
 
@@ -2168,9 +3599,9 @@ Executa a etapa `callback@289:46` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### isCustomerOutsideStoreCity — linha 296
+### isCustomerOutsideStoreCity — linha 301
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:296)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:301)
 
 ```javascript
 function isCustomerOutsideStoreCity(store)
@@ -2185,9 +3616,9 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### render — linha 298
+### render — linha 303
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:298)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:303)
 
 ```javascript
 function render()
@@ -2207,9 +3638,9 @@ Executa a etapa `render` neste módulo. O contrato concreto está na assinatura,
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderAuth — linha 308
+### renderAuth — linha 313
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:308)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:313)
 
 ```javascript
 function renderAuth()
@@ -2248,15 +3679,15 @@ $('[data-about-modal]')?.addEventListener('keydown',event=>{if(event.key==='Esca
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@340:57 — linha 340
+### callback@346:57 — linha 346
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:340)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:346)
 
 ```javascript
 button =>
 ```
 
-Executa a etapa `callback@340:57` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@346:57` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `renderAuth`.
 
@@ -2267,81 +3698,81 @@ button => button.addEventListener('click', () => { state.authMode = button.datas
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@340:100 — linha 340
+### callback@346:100 — linha 346
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:340)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:346)
 
 ```javascript
 () =>
 ```
 
-Executa a etapa `callback@340:100` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@346:100` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `renderAuth`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@341:57 — linha 341
+### callback@347:57 — linha 347
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:341)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:347)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@341:57` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@347:57` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `$`; `renderAuth`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@342:60 — linha 342
+### callback@348:60 — linha 348
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:342)
-
-```javascript
-event=>
-```
-
-Executa a etapa `callback@342:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@343:54 — linha 343
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:343)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:348)
 
 ```javascript
 event=>
 ```
 
-Executa a etapa `callback@343:54` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@348:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@344:55 — linha 344
+### callback@349:54 — linha 349
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:344)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:349)
+
+```javascript
+event=>
+```
+
+Executa a etapa `callback@349:54` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@350:55 — linha 350
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:350)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@344:55` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@350:55` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `renderAuth`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@345:56 — linha 345
+### callback@351:56 — linha 351
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:345)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:351)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@345:56` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@351:56` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `$`; `modal.querySelector`.
 
@@ -2352,29 +3783,29 @@ button=>button.addEventListener('click',()=>{const modal=$('[data-about-modal]')
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@345:96 — linha 345
+### callback@351:96 — linha 351
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:345)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:351)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@345:96` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@351:96` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `$`; `modal.querySelector`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@346:59 — linha 346
+### callback@352:59 — linha 352
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:346)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:352)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@346:59` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@352:59` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `$`.
 
@@ -2385,53 +3816,53 @@ button=>button.addEventListener('click',()=>{$('[data-about-modal]').hidden=true
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@346:99 — linha 346
+### callback@352:99 — linha 352
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:346)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:352)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@346:99` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@352:99` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `$`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@347:53 — linha 347
+### callback@353:53 — linha 353
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:347)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:353)
 
 ```javascript
 event=>
 ```
 
-Executa a etapa `callback@347:53` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@353:53` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisões condicionais examinadas:**
 - `(event.target===event.currentTarget)`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@348:55 — linha 348
+### callback@354:55 — linha 354
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:348)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:354)
 
 ```javascript
 event=>
 ```
 
-Executa a etapa `callback@348:55` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@354:55` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisões condicionais examinadas:**
 - `(event.key==='Escape')`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### submitRecovery — linha 351
+### submitRecovery — linha 357
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:351)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:357)
 
 ```javascript
 async function submitRecovery(event)
@@ -2457,9 +3888,9 @@ await api('/auth/password-recovery/reset',{method:'POST',body:JSON.stringify({em
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### submitAuth — linha 371
+### submitAuth — linha 377
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:371)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:377)
 
 ```javascript
 async function submitAuth(event)
@@ -2484,27 +3915,27 @@ Executa a etapa `submit Auth` neste módulo. O contrato concreto está na assina
 **Efeitos identificados no corpo (inclui callbacks internos):**
 ```javascript
 await api('/auth/register', { method:'POST', body:JSON.stringify({ name:String(form.get('name')).trim(), email, password, cpf:String(form.get('cpf')).replace(/\D/g,'') }) });
-const response = await api('/auth/login', { method:'POST', body:JSON.stringify({ email, password }) });
+const response = await api('/auth/login', { method:'POST', body:JSON.stringify({ email, password,code:$('#auth-mfa-code')?.value.trim()||null }) });
 if(!state.mustChangePassword){state.profile = await api('/account/me');state.account = state.profile;persistAccountHint(state.account);}
 ```
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@393:67 — linha 393
+### callback@399:67 — linha 399
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:393)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:399)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@393:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@399:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderShell — linha 399
+### renderShell — linha 405
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:399)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:405)
 
 ```javascript
 function renderShell()
@@ -2548,27 +3979,27 @@ $('[data-help]')?.addEventListener('click',openSupportCenter);
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@400:69 — linha 400
+### callback@406:69 — linha 406
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:400)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:406)
 
 ```javascript
 ([page])=>
 ```
 
-Executa a etapa `callback@400:69` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@406:69` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@406:84 — linha 406
+### callback@412:84 — linha 412
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:406)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:412)
 
 ```javascript
 ([page,iconName,label])=>
 ```
 
-Executa a etapa `callback@406:84` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@412:84` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `icon`; `state.notifications.some`.
 
@@ -2578,27 +4009,27 @@ Executa a etapa `callback@406:84` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@406:294 — linha 406
+### callback@412:294 — linha 412
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:406)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:412)
 
 ```javascript
 n=>
 ```
 
-Executa a etapa `callback@406:294` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@412:294` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@410:174 — linha 410
+### callback@416:174 — linha 416
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:410)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:416)
 
 ```javascript
 ([page,iconName,label])=>
 ```
 
-Executa a etapa `callback@410:174` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@416:174` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `icon`; `state.notifications.some`.
 
@@ -2608,51 +4039,51 @@ Executa a etapa `callback@410:174` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@410:428 — linha 410
+### callback@416:428 — linha 416
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:410)
-
-```javascript
-n=>
-```
-
-Executa a etapa `callback@410:428` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@415:156 — linha 415
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:415)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:416)
 
 ```javascript
 n=>
 ```
 
-Executa a etapa `callback@415:156` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@416:428` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@415:285 — linha 415
+### callback@421:156 — linha 421
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:415)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:421)
+
+```javascript
+n=>
+```
+
+Executa a etapa `callback@421:156` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@421:285 — linha 421
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:421)
 
 ```javascript
 (n,i)=>
 ```
 
-Executa a etapa `callback@415:285` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@421:285` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@418:47 — linha 418
+### callback@424:47 — linha 424
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:418)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:424)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@418:47` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@424:47` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `window.matchMedia`; `render`; `$`; `String`; `app.querySelector`.
 
@@ -2667,57 +4098,57 @@ else {state.sidebarCollapsed=!state.sidebarCollapsed;$('#mobile-menu').setAttrib
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@422:48 — linha 422
+### callback@428:48 — linha 428
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:422)
-
-```javascript
-()=>
-```
-
-Executa a etapa `callback@422:48` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `render`.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@423:53 — linha 423
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:423)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:428)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@423:53` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@428:48` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `render`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@424:45 — linha 424
+### callback@429:53 — linha 429
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:424)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:429)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@424:45` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@429:53` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `render`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@425:49 — linha 425
+### callback@430:45 — linha 430
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:425)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:430)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@430:45` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `render`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@431:49 — linha 431
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:431)
 
 ```javascript
 event=>
 ```
 
-Executa a etapa `callback@425:49` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@431:49` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `canShop`; `filterStores`; `renderPage`.
 
@@ -2726,9 +4157,9 @@ Executa a etapa `callback@425:49` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### navigate — linha 430
+### navigate — linha 436
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:430)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:436)
 
 ```javascript
 async function navigate(page)
@@ -2756,83 +4187,83 @@ localStorage.setItem(notificationKey(state.account.id),JSON.stringify(state.noti
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@433:31 — linha 433
+### callback@439:31 — linha 439
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:433)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:439)
 
 ```javascript
 ([allowed])=>
 ```
 
-Executa a etapa `callback@433:31` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@439:31` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@440:45 — linha 440
+### callback@446:45 — linha 446
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:440)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:446)
 
 ```javascript
 n=>
 ```
 
-Executa a etapa `callback@440:45` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@446:45` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@441:34 — linha 441
+### callback@447:34 — linha 447
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:441)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:447)
 
 ```javascript
 n=>
 ```
 
-Executa a etapa `callback@441:34` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@447:34` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `api`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@441:103 — linha 441
+### callback@447:103 — linha 447
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:441)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:447)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@441:103` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@447:103` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@442:49 — linha 442
+### callback@448:49 — linha 448
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:442)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:448)
 
 ```javascript
 n=>
 ```
 
-Executa a etapa `callback@442:49` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@448:49` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@443:102 — linha 443
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:443)
-
-```javascript
-n=>
-```
-
-Executa a etapa `callback@443:102` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### renderPage — linha 449
+### callback@449:102 — linha 449
 
 [Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:449)
+
+```javascript
+n=>
+```
+
+Executa a etapa `callback@449:102` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### renderPage — linha 455
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:455)
 
 ```javascript
 function renderPage()
@@ -2855,9 +4286,9 @@ content.innerHTML=fn();
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### openLocationPicker — linha 457
+### openLocationPicker — linha 463
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:457)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:463)
 
 ```javascript
 async function openLocationPicker()
@@ -2906,29 +4337,29 @@ try{await initializeLocationMap(modal);const active=state.browseLocation||{city:
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@463:56 — linha 463
+### callback@469:56 — linha 469
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:463)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:469)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@463:56` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@469:56` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `modal.remove`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@463:109 — linha 463
+### callback@469:109 — linha 469
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:463)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:469)
 
 ```javascript
 e=>
 ```
 
-Executa a etapa `callback@463:109` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@469:109` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `modal.remove`.
 
@@ -2937,15 +4368,15 @@ Executa a etapa `callback@463:109` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@464:56 — linha 464
+### callback@470:56 — linha 470
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:464)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:470)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@464:56` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@470:56` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `localStorage.removeItem`; `modal.remove`; `canShop`; `['home','categories','categoryStores'].includes`; `loadStores`; `render`.
 
@@ -2959,41 +4390,41 @@ async()=>{state.browseLocation=null;localStorage.removeItem('fooddelivery_locati
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@464:272 — linha 464
+### callback@470:272 — linha 470
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:464)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:470)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@464:272` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@470:272` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@465:58 — linha 465
+### callback@471:58 — linha 471
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:465)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:471)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@465:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@471:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `selectBrowseLocation`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@466:58 — linha 466
+### callback@472:58 — linha 472
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:466)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:472)
 
 ```javascript
 async e=>
 ```
 
-Executa a etapa `callback@466:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@472:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `e.preventDefault`; `String`; `new FormData`; `modal.querySelector`; `searchBrazilPlaces`; `renderLocationResults`; `esc`.
 
@@ -3010,29 +4441,29 @@ async e=>{e.preventDefault();const query=String(new FormData(e.currentTarget).ge
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@467:54 — linha 467
+### callback@473:54 — linha 473
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:467)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:473)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@467:54` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@473:54` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `detectCurrentCity`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@468:55 — linha 468
+### callback@474:55 — linha 474
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:468)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:474)
 
 ```javascript
 async e=>
 ```
 
-Executa a etapa `callback@468:55` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@474:55` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `e.preventDefault`; `modal.querySelector`; `input.value.replace`; `postalCodeResponse`; `AbortSignal.timeout`; `response.json`; `String`; `[data.logradouro,data.bairro].filter`; `searchBrazilPlaces`; `places.find`; `chooseLocationPoint`; `cep.slice`.
 
@@ -3061,93 +4492,93 @@ async e=>{e.preventDefault();const input=e.currentTarget.elements.postalCode,fee
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@468:994 — linha 468
+### callback@474:994 — linha 474
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:468)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:474)
 
 ```javascript
 item=>
 ```
 
-Executa a etapa `callback@468:994` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@474:994` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@470:101 — linha 470
+### callback@476:101 — linha 476
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:470)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:476)
 
 ```javascript
 c=>
 ```
 
-Executa a etapa `callback@470:101` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@476:101` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `c.city.toLowerCase`; `state.account.city.toLowerCase`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@471:169 — linha 471
+### callback@477:169 — linha 477
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:471)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:477)
 
 ```javascript
 c=>
 ```
 
-Executa a etapa `callback@471:169` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@477:169` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `icon`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@472:48 — linha 472
+### callback@478:48 — linha 478
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:472)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:478)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@472:48` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@478:48` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `selectDirectoryCity`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@472:61 — linha 472
+### callback@478:61 — linha 478
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:472)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:478)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@472:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@478:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `selectDirectoryCity`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@473:172 — linha 473
+### callback@479:172 — linha 479
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:473)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:479)
 
 ```javascript
 c=>
 ```
 
-Executa a etapa `callback@473:172` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@479:172` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `c.city.toLowerCase`; `active.city.toLowerCase`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### initializeLocationMap — linha 475
+### initializeLocationMap — linha 481
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:475)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:481)
 
 ```javascript
 async function initializeLocationMap(modal)
@@ -3170,15 +4601,15 @@ async function initializeLocationMap(modal){const L=await loadLeaflet(),box=moda
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@475:622 — linha 475
+### callback@481:622 — linha 481
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:475)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:481)
 
 ```javascript
 async event=>
 ```
 
-Executa a etapa `callback@475:622` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@481:622` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `modal.querySelector`; `reverseBrazilPlace`; `chooseLocationPoint`; `esc`.
 
@@ -3189,23 +4620,23 @@ async event=>{const result=modal.querySelector('[data-location-results]');result
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@475:1115 — linha 475
+### callback@481:1115 — linha 481
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:475)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:481)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@475:1115` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@481:1115` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `locationMap?.invalidateSize`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### waitForGeocodeSlot — linha 476
+### waitForGeocodeSlot — linha 482
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:476)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:482)
 
 ```javascript
 async function waitForGeocodeSlot()
@@ -3220,23 +4651,23 @@ Executa a etapa `wait For Geocode Slot` neste módulo. O contrato concreto está
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@476:125 — linha 476
+### callback@482:125 — linha 482
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:476)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:482)
 
 ```javascript
 resolve=>
 ```
 
-Executa a etapa `callback@476:125` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@482:125` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `setTimeout`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### geocodeJson — linha 477
+### geocodeJson — linha 483
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:477)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:483)
 
 ```javascript
 async function geocodeJson(path)
@@ -3261,9 +4692,9 @@ async function geocodeJson(path){const cacheKey=path;if(locationGeocodeCache.has
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### searchBrazilPlaces — linha 478
+### searchBrazilPlaces — linha 484
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:478)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:484)
 
 ```javascript
 async function searchBrazilPlaces(query)
@@ -3281,35 +4712,35 @@ Executa a etapa `search Brazil Places` neste módulo. O contrato concreto está 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@478:149 — linha 478
+### callback@484:149 — linha 484
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:478)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:484)
 
 ```javascript
 record=>
 ```
 
-Executa a etapa `callback@478:149` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@484:149` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `placeFromGeocode`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@478:190 — linha 478
+### callback@484:190 — linha 484
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:478)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:484)
 
 ```javascript
 place=>
 ```
 
-Executa a etapa `callback@478:190` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@484:190` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### selectDirectoryCity — linha 479
+### selectDirectoryCity — linha 485
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:479)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:485)
 
 ```javascript
 async function selectDirectoryCity(modal,city)
@@ -3321,9 +4752,9 @@ Executa a etapa `select Directory City` neste módulo. O contrato concreto está
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### placeFromGeocode — linha 480
+### placeFromGeocode — linha 486
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:480)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:486)
 
 ```javascript
 function placeFromGeocode(record)
@@ -3338,9 +4769,9 @@ Executa a etapa `place From Geocode` neste módulo. O contrato concreto está na
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### reverseBrazilPlace — linha 481
+### reverseBrazilPlace — linha 487
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:481)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:487)
 
 ```javascript
 async function reverseBrazilPlace(latitude,longitude)
@@ -3361,9 +4792,9 @@ Executa a etapa `reverse Brazil Place` neste módulo. O contrato concreto está 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### chooseLocationPoint — linha 482
+### chooseLocationPoint — linha 488
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:482)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:488)
 
 ```javascript
 async function chooseLocationPoint(modal,place)
@@ -3394,9 +4825,9 @@ async function chooseLocationPoint(modal,place){if(!place?.city||!place?.state)r
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderLocationResults — linha 483
+### renderLocationResults — linha 489
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:483)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:489)
 
 ```javascript
 function renderLocationResults(modal,places)
@@ -3420,15 +4851,15 @@ function renderLocationResults(modal,places){const box=modal.querySelector('[dat
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@483:299 — linha 483
+### callback@489:299 — linha 489
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:483)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:489)
 
 ```javascript
 (place,index)=>
 ```
 
-Executa a etapa `callback@483:299` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@489:299` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `icon`; `esc`.
 
@@ -3437,37 +4868,37 @@ Executa a etapa `callback@483:299` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@483:666 — linha 483
+### callback@489:666 — linha 489
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:483)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:489)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@483:666` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@489:666` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `chooseLocationPoint`; `Number`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@483:689 — linha 483
+### callback@489:689 — linha 489
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:483)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:489)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@483:689` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@489:689` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `chooseLocationPoint`; `Number`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### detectCurrentCity — linha 484
+### detectCurrentCity — linha 490
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:484)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:490)
 
 ```javascript
 async function detectCurrentCity(modal)
@@ -3492,15 +4923,15 @@ async function detectCurrentCity(modal){const button=modal.querySelector('[data-
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@484:530 — linha 484
+### callback@490:530 — linha 490
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:484)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:490)
 
 ```javascript
 async position=>
 ```
 
-Executa a etapa `callback@484:530` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@490:530` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `reverseBrazilPlace`; `chooseLocationPoint`; `esc`; `icon`.
 
@@ -3511,15 +4942,15 @@ async position=>{try{const {latitude,longitude}=position.coords,place=await reve
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@484:958 — linha 484
+### callback@490:958 — linha 490
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:484)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:490)
 
 ```javascript
 error=>
 ```
 
-Executa a etapa `callback@484:958` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@490:958` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `icon`.
 
@@ -3534,9 +4965,9 @@ error=>{const message=error.code===1?'Permita a localização no navegador ou es
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### selectBrowseLocation — linha 485
+### selectBrowseLocation — linha 491
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:485)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:491)
 
 ```javascript
 async function selectBrowseLocation(location,modal)
@@ -3560,21 +4991,21 @@ async function selectBrowseLocation(location,modal){if(!location?.city||!locatio
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@485:540 — linha 485
+### callback@491:540 — linha 491
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:485)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:491)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@485:540` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@491:540` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### openSupportCenter — linha 487
+### openSupportCenter — linha 493
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:487)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:493)
 
 ```javascript
 async function openSupportCenter()
@@ -3598,15 +5029,15 @@ const modal=document.createElement('div');modal.id='support-modal';modal.classNa
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@489:275 — linha 489
+### callback@495:275 — linha 495
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:489)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:495)
 
 ```javascript
 e=>
 ```
 
-Executa a etapa `callback@489:275` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@495:275` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `modal.remove`.
 
@@ -3615,9 +5046,9 @@ Executa a etapa `callback@489:275` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### loadSupportTicketList — linha 491
+### loadSupportTicketList — linha 497
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:491)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:497)
 
 ```javascript
 async function loadSupportTicketList()
@@ -3634,9 +5065,9 @@ async function loadSupportTicketList(){try{state.supportAdminView=false;state.su
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderSupportModal — linha 492
+### renderSupportModal — linha 498
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:492)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:498)
 
 ```javascript
 function renderSupportModal()
@@ -3663,15 +5094,15 @@ root.querySelector('[data-close-support]').onclick=()=>$('#support-modal')?.remo
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@494:1566 — linha 494
+### callback@500:1566 — linha 500
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:494)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:500)
 
 ```javascript
 t=>
 ```
 
-Executa a etapa `callback@494:1566` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@500:1566` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `shortDate`; `pill`.
 
@@ -3682,57 +5113,57 @@ t=>`<button class="support-ticket-row" type="button" data-user-ticket="${esc(t.i
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@495:54 — linha 495
+### callback@501:54 — linha 501
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:495)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:501)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@495:54` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@501:54` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `$`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@495:231 — linha 495
+### callback@501:231 — linha 501
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:495)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:501)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@495:231` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@501:231` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `openTicket`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@495:244 — linha 495
+### callback@501:244 — linha 501
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:495)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:501)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@495:244` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@501:244` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `openTicket`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@495:355 — linha 495
+### callback@501:355 — linha 501
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:495)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:501)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@495:355` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@501:355` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `returnToAdminTickets`; `loadSupportTicketList`.
 
@@ -3741,9 +5172,9 @@ Executa a etapa `callback@495:355` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### returnToAdminTickets — linha 497
+### returnToAdminTickets — linha 503
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:497)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:503)
 
 ```javascript
 async function returnToAdminTickets()
@@ -3760,9 +5191,9 @@ async function returnToAdminTickets(){state.adminTickets=await api('/admin/suppo
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### ticketConversationHtml — linha 498
+### ticketConversationHtml — linha 504
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:498)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:504)
 
 ```javascript
 function ticketConversationHtml(detail,isAdmin)
@@ -3787,15 +5218,15 @@ function ticketConversationHtml(detail,isAdmin){const t=detail.ticket;const tick
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@498:478 — linha 498
+### callback@504:478 — linha 504
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:498)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:504)
 
 ```javascript
 m=>
 ```
 
-Executa a etapa `callback@498:478` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@504:478` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `shortDate`.
 
@@ -3809,9 +5240,9 @@ m=>`<article class="ticket-message ${m.senderRole==='ADMIN'?'staff':''}"><div><s
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### openTicket — linha 499
+### openTicket — linha 505
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:499)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:505)
 
 ```javascript
 async function openTicket(id,isAdmin)
@@ -3836,15 +5267,15 @@ async function openTicket(id,isAdmin){try{if(!$('#support-modal')){const dialog=
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@499:353 — linha 499
+### callback@505:353 — linha 505
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:499)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:505)
 
 ```javascript
 e=>
 ```
 
-Executa a etapa `callback@499:353` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@505:353` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `dialog.remove`.
 
@@ -3853,43 +5284,43 @@ Executa a etapa `callback@499:353` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@499:828 — linha 499
+### callback@505:828 — linha 505
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:499)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:505)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@499:828` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@505:828` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `$`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@499:1656 — linha 499
+### callback@505:1656 — linha 505
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:499)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:505)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@499:1656` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@505:1656` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `$`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@499:1764 — linha 499
+### callback@505:1764 — linha 505
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:499)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:505)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@499:1764` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@505:1764` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `returnToAdminTickets`; `loadSupportTicketList`.
 
@@ -3898,9 +5329,9 @@ Executa a etapa `callback@499:1764` neste módulo. O contrato concreto está na 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### createSupportTicket — linha 500
+### createSupportTicket — linha 506
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:500)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:506)
 
 ```javascript
 async function createSupportTicket(event)
@@ -3917,9 +5348,9 @@ async function createSupportTicket(event){event.preventDefault();const form=even
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### sendTicketMessage — linha 501
+### sendTicketMessage — linha 507
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:501)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:507)
 
 ```javascript
 async function sendTicketMessage(event)
@@ -3943,9 +5374,9 @@ async function sendTicketMessage(event){event.preventDefault();const form=event.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### updateTicketStatus — linha 502
+### updateTicketStatus — linha 508
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:502)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:508)
 
 ```javascript
 async function updateTicketStatus(id,status)
@@ -3965,9 +5396,9 @@ async function updateTicketStatus(id,status){try{await api(`/admin/support-ticke
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderHome — linha 504
+### renderHome — linha 510
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:504)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:510)
 
 ```javascript
 function renderHome()
@@ -3992,157 +5423,157 @@ Executa a etapa `render Home` neste módulo. O contrato concreto está na assina
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@506:56 — linha 506
+### callback@512:56 — linha 512
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:506)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:512)
 
 ```javascript
 category=>
 ```
 
-Executa a etapa `callback@506:56` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@512:56` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `state.filteredStores.filter`; `categoryMatches`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@506:112 — linha 506
+### callback@512:112 — linha 512
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:506)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:512)
 
 ```javascript
 store=>
 ```
 
-Executa a etapa `callback@506:112` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@512:112` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `categoryMatches`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@506:171 — linha 506
+### callback@512:171 — linha 512
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:506)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:512)
 
 ```javascript
 section=>
 ```
 
-Executa a etapa `callback@506:171` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@512:171` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@507:45 — linha 507
+### callback@513:45 — linha 513
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:507)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:513)
 
 ```javascript
 (name,order)=>
 ```
 
-Executa a etapa `callback@507:45` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@513:45` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `state.stores.filter`; `categoryMatches`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@507:132 — linha 507
+### callback@513:132 — linha 513
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:507)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:513)
 
 ```javascript
 store=>
 ```
 
-Executa a etapa `callback@507:132` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@513:132` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `categoryMatches`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@507:200 — linha 507
+### callback@513:200 — linha 513
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:507)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:513)
 
 ```javascript
 item=>
 ```
 
-Executa a etapa `callback@507:200` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@513:200` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@507:232 — linha 507
+### callback@513:232 — linha 513
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:507)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:513)
 
 ```javascript
 (a,b)=>
 ```
 
-Executa a etapa `callback@507:232` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@513:232` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@509:29 — linha 509
+### callback@515:29 — linha 515
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:509)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:515)
 
 ```javascript
 section=>
 ```
 
-Executa a etapa `callback@509:29` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@515:29` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `section.stores.slice`; `storeCard`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@509:335 — linha 509
+### callback@515:335 — linha 515
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:509)
-
-```javascript
-(store,index)=>
-```
-
-Executa a etapa `callback@509:335` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `storeCard`.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@510:87 — linha 510
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:510)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:515)
 
 ```javascript
 (store,index)=>
 ```
 
-Executa a etapa `callback@510:87` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@515:335` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `storeCard`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@514:95 — linha 514
+### callback@516:87 — linha 516
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:514)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:516)
+
+```javascript
+(store,index)=>
+```
+
+Executa a etapa `callback@516:87` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `storeCard`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@520:95 — linha 520
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:520)
 
 ```javascript
 (item,index)=>
 ```
 
-Executa a etapa `callback@514:95` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@520:95` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `categoryTile`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### categoryTile — linha 520
+### categoryTile — linha 526
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:520)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:526)
 
 ```javascript
 function categoryTile(item,index=0)
@@ -4160,23 +5591,23 @@ Executa a etapa `category Tile` neste módulo. O contrato concreto está na assi
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@521:36 — linha 521
+### callback@527:36 — linha 527
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:521)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:527)
 
 ```javascript
 store=>
 ```
 
-Executa a etapa `callback@521:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@527:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `categoryMatches`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderAllCategories — linha 525
+### renderAllCategories — linha 531
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:525)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:531)
 
 ```javascript
 function renderAllCategories()
@@ -4191,51 +5622,51 @@ Executa a etapa `render All Categories` neste módulo. O contrato concreto está
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@526:49 — linha 526
+### callback@532:49 — linha 532
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:526)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:532)
 
 ```javascript
 (name,index)=>
 ```
 
-Executa a etapa `callback@526:49` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@532:49` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `state.stores.filter`; `categoryMatches`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@526:136 — linha 526
+### callback@532:136 — linha 532
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:526)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:532)
 
 ```javascript
 store=>
 ```
 
-Executa a etapa `callback@526:136` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@532:136` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `categoryMatches`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@527:349 — linha 527
+### callback@533:349 — linha 533
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:527)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:533)
 
 ```javascript
 (item,index)=>
 ```
 
-Executa a etapa `callback@527:349` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@533:349` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `categoryTile`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderCategoryStores — linha 530
+### renderCategoryStores — linha 536
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:530)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:536)
 
 ```javascript
 function renderCategoryStores()
@@ -4256,37 +5687,37 @@ Executa a etapa `render Category Stores` neste módulo. O contrato concreto est�
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@532:36 — linha 532
+### callback@538:36 — linha 538
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:532)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:538)
 
 ```javascript
 store=>
 ```
 
-Executa a etapa `callback@532:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@538:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `categoryMatches`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@533:595 — linha 533
+### callback@539:595 — linha 539
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:533)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:539)
 
 ```javascript
 (store,index)=>
 ```
 
-Executa a etapa `callback@533:595` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@539:595` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `storeCard`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### storeCard — linha 536
+### storeCard — linha 542
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:536)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:542)
 
 ```javascript
 function storeCard(store,index=0)
@@ -4304,9 +5735,9 @@ Executa a etapa `store Card` neste módulo. O contrato concreto está na assinat
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### emptyState — linha 543
+### emptyState — linha 549
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:543)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:549)
 
 ```javascript
 function emptyState(icon,title,message,button,label)
@@ -4324,9 +5755,9 @@ Executa a etapa `empty State` neste módulo. O contrato concreto está na assina
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### bindPage — linha 545
+### bindPage — linha 551
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:545)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:551)
 
 ```javascript
 function bindPage()
@@ -4334,7 +5765,7 @@ function bindPage()
 
 Executa a etapa `bind Page` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `cleanupStoreMaps`; `document.querySelectorAll`; `mountLocationPicker`; `$`; `mountStoreDirectoryMap`; `state.stores.filter`; `categoryMatches`; `formatCpfMask`; `formatCnpjMask`; `input.addEventListener`; `input.select`; `formatter`; `b.addEventListener`; `navigate`; `openStore`; `card.addEventListener`; `e.preventDefault`; `open`; `runAction`; `f.addEventListener`; `form.addEventListener`; `button.addEventListener`; `toggleServiceCity`; `deleteStoreCategory`; `openAdminStoreEditor`; `loadAddresses`; `renderPage`; `loadAdminAuditEvents`; `openTicket`; `updateTicketStatus`; `switchRole`; `reviewPlatformRequest`; `resubmitStore`; `mountOperatingHours`; `activeMerchantStore`; `notify`; `setCatalogItemActive`; `setProfessionalActive`; `select.addEventListener`; `syncCatalogItemFields`; `syncCatalogItemRisk`; `reviewOperatorApplication`; `setOperatorActive`; `setAccountActive`; `openAdminAccountEditor`; `setAccountRole`; `resetAccountPassword`; `api`; `mountStoreCover`; `mountCoverReview`; `updateOrder`; `offerDelivery`; `updateReservation`; `approveStore`; `storeApprovalId`; `setStoreActive`; `acceptDelivery`; `updateDelivery`; `shareCourierLocation`; `render`; `document.createElement`; `decline.addEventListener`; `simulatePayment`; `pay.after`; `role`; `window.scrollTo`; `openChat`; `area.addEventListener`; `closeChat`.
+**Colaborações:** `bindCatalogActions`; `cleanupStoreMaps`; `document.querySelectorAll`; `mountBookingPolicy`; `activeMerchantStore`; `mountAdminMfa`; `renderAuth`; `mountCourierFinance`; `notify`; `mountLocationPicker`; `$`; `mountStoreDirectoryMap`; `state.stores.filter`; `categoryMatches`; `formatCpfMask`; `formatCnpjMask`; `input.addEventListener`; `input.select`; `formatter`; `b.addEventListener`; `navigate`; `openStore`; `card.addEventListener`; `e.preventDefault`; `open`; `runAction`; `f.addEventListener`; `form.addEventListener`; `button.addEventListener`; `toggleServiceCity`; `deleteStoreCategory`; `openAdminStoreEditor`; `loadAddresses`; `renderPage`; `loadAdminAuditEvents`; `openTicket`; `updateTicketStatus`; `switchRole`; `reviewPlatformRequest`; `resubmitStore`; `mountOperatingHours`; `setCatalogItemActive`; `state.merchantProfessionals.find`; `String`; `openProfessionalHours`; `setProfessionalActive`; `select.addEventListener`; `syncCatalogItemFields`; `syncCatalogItemRisk`; `reviewOperatorApplication`; `setOperatorActive`; `setAccountActive`; `openAdminAccountEditor`; `setAccountRole`; `resetAccountPassword`; `api`; `mountStoreCover`; `mountCoverReview`; `updateOrder`; `offerDelivery`; `updateReservation`; `approveStore`; `storeApprovalId`; `setStoreActive`; `acceptDelivery`; `updateDelivery`; `shareCourierLocation`; `render`; `document.createElement`; `decline.addEventListener`; `simulatePayment`; `pay.after`; `role`; `window.scrollTo`; `openChat`; `area.addEventListener`; `closeChat`.
 
 **Decisões condicionais examinadas:**
 - `($('[data-store-directory-map]'))`
@@ -4348,6 +5779,7 @@ Executa a etapa `bind Page` neste módulo. O contrato concreto está na assinatu
 - `(state.adminDefinitionSection==='audit')`
 - `($('[data-operating-hours]'))`
 - `summary?.notified`
+- `(person)`
 - `($('[data-store-cover]'))`
 - `($('[data-cover-review]'))`
 - `approved`
@@ -4398,6 +5830,7 @@ $('[data-merchant-store-select]')?.addEventListener('change',selectMerchantStore
 document.querySelectorAll('[data-item-deactivate]').forEach(button=>button.addEventListener('click',()=>setCatalogItemActive(button.dataset.itemDeactivate,false)));
 document.querySelectorAll('[data-item-activate]').forEach(button=>button.addEventListener('click',()=>setCatalogItemActive(button.dataset.itemActivate,true)));
 document.querySelectorAll('[data-professional-create]').forEach(form=>form.addEventListener('submit',createProfessional));
+document.querySelectorAll('[data-professional-hours]').forEach(button=>button.addEventListener('click',()=>{const person=state.merchantProfessionals.find(p=>String(p.id)===button.dataset.professionalHours);if(person)openProfessionalHours(activeMerchantStore(),person,{onError:error=>notify('Agenda do profissional',error.message,'error')});}));
 document.querySelectorAll('[data-professional-active]').forEach(button=>button.addEventListener('click',()=>setProfessionalActive(button.dataset.professionalActive,button.dataset.active==='true')));
 document.querySelectorAll('[data-item-kind]').forEach(select=>select.addEventListener('change',()=>syncCatalogItemFields(select.form)));
 document.querySelectorAll('[data-pay-after-service]').forEach(select=>select.addEventListener('change',()=>syncCatalogItemRisk(select.form)));
@@ -4437,43 +5870,113 @@ document.querySelectorAll('[data-close-chat]').forEach(button=>button.addEventLi
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@547:64 — linha 547
+### callback@554:62 — linha 554
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:547)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:554)
 
 ```javascript
 root=>
 ```
 
-Executa a etapa `callback@547:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@554:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `mountBookingPolicy`; `activeMerchantStore`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@556:57 — linha 556
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:556)
+
+```javascript
+root=>
+```
+
+Executa a etapa `callback@556:57` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `mountAdminMfa`; `renderAuth`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@556:100 — linha 556
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:556)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@556:100` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `renderAuth`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@557:63 — linha 557
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:557)
+
+```javascript
+root=>
+```
+
+Executa a etapa `callback@557:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `mountCourierFinance`; `notify`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@557:147 — linha 557
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:557)
+
+```javascript
+error=>
+```
+
+Executa a etapa `callback@557:147` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `notify`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@558:64 — linha 558
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:558)
+
+```javascript
+root=>
+```
+
+Executa a etapa `callback@558:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `mountLocationPicker`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@548:143 — linha 548
+### callback@559:143 — linha 559
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:548)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:559)
 
 ```javascript
 s=>
 ```
 
-Executa a etapa `callback@548:143` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@559:143` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `categoryMatches`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@550:52 — linha 550
+### callback@561:52 — linha 561
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:550)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:561)
 
 ```javascript
 input=>
 ```
 
-Executa a etapa `callback@550:52` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@561:52` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `formatCpfMask`; `formatCnpjMask`; `input.addEventListener`; `input.select`; `formatter`.
 
@@ -4494,15 +5997,15 @@ input.addEventListener('input',()=>{input.value=formatter(input.value);});
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@555:36 — linha 555
+### callback@566:36 — linha 566
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:555)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:566)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@555:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@566:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `input.select`.
 
@@ -4511,29 +6014,29 @@ Executa a etapa `callback@555:36` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@556:36 — linha 556
+### callback@567:36 — linha 567
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:556)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:567)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@556:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@567:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `formatter`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@558:63 — linha 558
+### callback@569:63 — linha 569
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:558)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:569)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@558:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@569:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `$`; `navigate`.
 
@@ -4544,15 +6047,15 @@ b=>b.addEventListener('click',()=>{state.category=b.dataset.categorySelect;state
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@558:93 — linha 558
+### callback@569:93 — linha 569
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:558)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:569)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@558:93` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@569:93` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `$`; `navigate`.
 
@@ -4563,15 +6066,15 @@ Executa a etapa `callback@558:93` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@559:56 — linha 559
+### callback@570:56 — linha 570
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:559)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:570)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@559:56` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@570:56` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `$`; `navigate`.
 
@@ -4582,15 +6085,15 @@ b=>b.addEventListener('click',()=>{state.category=b.dataset.category;state.searc
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@559:86 — linha 559
+### callback@570:86 — linha 570
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:559)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:570)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@559:86` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@570:86` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `$`; `navigate`.
 
@@ -4601,29 +6104,29 @@ Executa a etapa `callback@559:86` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@560:64 — linha 560
+### callback@571:64 — linha 571
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:560)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:571)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@560:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@571:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `navigate`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@561:53 — linha 561
+### callback@572:53 — linha 572
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:561)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:572)
 
 ```javascript
 card=>
 ```
 
-Executa a etapa `callback@561:53` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@572:53` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `openStore`; `card.addEventListener`; `e.preventDefault`; `open`.
 
@@ -4637,9 +6140,9 @@ card=>{const open=()=>openStore(card.dataset.store);card.addEventListener('click
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### open — linha 561
+### open — linha 572
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:561)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:572)
 
 ```javascript
 ()=>
@@ -4651,15 +6154,15 @@ Executa a etapa `open` neste módulo. O contrato concreto está na assinatura, n
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@561:173 — linha 561
+### callback@572:173 — linha 572
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:561)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:572)
 
 ```javascript
 e=>
 ```
 
-Executa a etapa `callback@561:173` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@572:173` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `e.preventDefault`; `open`.
 
@@ -4668,15 +6171,15 @@ Executa a etapa `callback@561:173` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@562:54 — linha 562
+### callback@573:54 — linha 573
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:562)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:573)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@562:54` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@573:54` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `runAction`.
 
@@ -4687,29 +6190,29 @@ b=>b.addEventListener('click',()=>runAction(b.dataset.action))
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@562:84 — linha 562
+### callback@573:84 — linha 573
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:562)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:573)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@562:84` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@573:84` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `runAction`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@563:56 — linha 563
+### callback@574:56 — linha 574
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:563)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:574)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@563:56` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@574:56` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`.
 
@@ -4720,15 +6223,15 @@ b=>b.addEventListener('click',checkout)
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@564:60 — linha 564
+### callback@575:60 — linha 575
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:564)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:575)
 
 ```javascript
 f=>
 ```
 
-Executa a etapa `callback@564:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@575:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `f.addEventListener`.
 
@@ -4739,15 +6242,15 @@ f=>f.addEventListener('submit',saveProfile)
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@568:67 — linha 568
+### callback@579:67 — linha 579
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:568)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:579)
 
 ```javascript
 form=>
 ```
 
-Executa a etapa `callback@568:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@579:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `form.addEventListener`.
 
@@ -4758,15 +6261,15 @@ form=>form.addEventListener('submit',updateServiceCity)
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@569:67 — linha 569
+### callback@580:67 — linha 580
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:569)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:580)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@569:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@580:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `toggleServiceCity`.
 
@@ -4777,29 +6280,29 @@ button=>button.addEventListener('click',()=>toggleServiceCity(button.dataset.ser
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@569:107 — linha 569
+### callback@580:107 — linha 580
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:569)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:580)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@569:107` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@580:107` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `toggleServiceCity`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@570:69 — linha 570
+### callback@581:69 — linha 581
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:570)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:581)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@570:69` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@581:69` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `deleteStoreCategory`.
 
@@ -4810,29 +6313,29 @@ button=>button.addEventListener('click',()=>deleteStoreCategory(button.dataset.s
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@570:109 — linha 570
+### callback@581:109 — linha 581
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:570)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:581)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@570:109` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@581:109` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `deleteStoreCategory`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@572:64 — linha 572
+### callback@583:64 — linha 583
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:572)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:583)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@572:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@583:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `openAdminStoreEditor`.
 
@@ -4843,29 +6346,29 @@ button=>button.addEventListener('click',()=>openAdminStoreEditor(button.dataset.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@572:104 — linha 572
+### callback@583:104 — linha 583
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:572)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:583)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@572:104` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@583:104` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `openAdminStoreEditor`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@573:63 — linha 573
+### callback@584:63 — linha 584
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:573)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:584)
 
 ```javascript
 f=>
 ```
 
-Executa a etapa `callback@573:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@584:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `f.addEventListener`.
 
@@ -4876,15 +6379,15 @@ f=>f.addEventListener('submit',changePassword)
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@576:63 — linha 576
+### callback@587:63 — linha 587
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:576)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:587)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@576:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@587:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `loadAddresses`; `renderPage`.
 
@@ -4898,15 +6401,15 @@ b=>b.addEventListener('click',async()=>{state.accountSection=b.dataset.accountSe
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@576:93 — linha 576
+### callback@587:93 — linha 587
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:576)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:587)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@576:93` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@587:93` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `loadAddresses`; `renderPage`.
 
@@ -4915,15 +6418,15 @@ Executa a etapa `callback@576:93` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@577:72 — linha 577
+### callback@588:72 — linha 588
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:577)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:588)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@577:72` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@588:72` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `loadAdminAuditEvents`; `renderPage`.
 
@@ -4937,15 +6440,15 @@ button=>button.addEventListener('click',async()=>{state.adminDefinitionSection=b
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@577:112 — linha 577
+### callback@588:112 — linha 588
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:577)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:588)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@577:112` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@588:112` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `loadAdminAuditEvents`; `renderPage`.
 
@@ -4954,15 +6457,15 @@ Executa a etapa `callback@577:112` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@578:59 — linha 578
+### callback@589:59 — linha 589
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:578)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:589)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@578:59` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@589:59` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `openTicket`.
 
@@ -4973,29 +6476,29 @@ b=>b.addEventListener('click',()=>openTicket(b.dataset.ticketOpen,b.dataset.tick
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@578:89 — linha 578
+### callback@589:89 — linha 589
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:578)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:589)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@578:89` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@589:89` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `openTicket`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@579:61 — linha 579
+### callback@590:61 — linha 590
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:579)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:590)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@579:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@590:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `updateTicketStatus`.
 
@@ -5006,29 +6509,29 @@ b=>b.addEventListener('click',()=>updateTicketStatus(b.dataset.ticketStatus,b.da
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@579:91 — linha 579
+### callback@590:91 — linha 590
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:579)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:590)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@579:91` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@590:91` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `updateTicketStatus`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@580:62 — linha 580
+### callback@591:62 — linha 591
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:580)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:591)
 
 ```javascript
 f=>
 ```
 
-Executa a etapa `callback@580:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@591:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `f.addEventListener`.
 
@@ -5039,15 +6542,15 @@ f=>f.addEventListener('submit',sendTicketMessage)
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@581:61 — linha 581
+### callback@592:61 — linha 592
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:581)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:592)
 
 ```javascript
 f=>
 ```
 
-Executa a etapa `callback@581:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@592:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `f.addEventListener`.
 
@@ -5058,15 +6561,15 @@ f=>f.addEventListener('submit',createSupportTicket)
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@582:60 — linha 582
+### callback@593:60 — linha 593
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:582)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:593)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@582:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@593:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`.
 
@@ -5077,15 +6580,15 @@ b=>b.addEventListener('click',loadSupportTicketList)
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@583:59 — linha 583
+### callback@594:59 — linha 594
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:583)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:594)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@583:59` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@594:59` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `switchRole`.
 
@@ -5096,29 +6599,29 @@ b=>b.addEventListener('click',()=>switchRole(b.dataset.switchRole))
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@583:89 — linha 583
+### callback@594:89 — linha 594
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:583)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:594)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@583:89` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@594:89` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `switchRole`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@584:64 — linha 584
+### callback@595:64 — linha 595
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:584)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:595)
 
 ```javascript
 f=>
 ```
 
-Executa a etapa `callback@584:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@595:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `f.addEventListener`.
 
@@ -5129,15 +6632,15 @@ f=>f.addEventListener('submit',requestOperatorAccess)
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@585:60 — linha 585
+### callback@596:60 — linha 596
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:585)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:596)
 
 ```javascript
 f=>
 ```
 
-Executa a etapa `callback@585:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@596:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `f.addEventListener`.
 
@@ -5148,15 +6651,15 @@ f=>f.addEventListener('submit',requestCityAccess)
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@586:63 — linha 586
+### callback@597:63 — linha 597
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:586)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:597)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@586:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@597:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `reviewPlatformRequest`.
 
@@ -5167,317 +6670,17 @@ b=>b.addEventListener('click',()=>reviewPlatformRequest(b.dataset.platformReview
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@586:93 — linha 586
+### callback@597:93 — linha 597
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:586)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:597)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@586:93` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@597:93` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `reviewPlatformRequest`.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@587:60 — linha 587
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:587)
-
-```javascript
-f=>
-```
-
-Executa a etapa `callback@587:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `f.addEventListener`.
-
-**Efeitos identificados no corpo (inclui callbacks internos):**
-```javascript
-f=>f.addEventListener('submit',createStore)
-```
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@588:62 — linha 588
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:588)
-
-```javascript
-b=>
-```
-
-Executa a etapa `callback@588:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `b.addEventListener`; `resubmitStore`.
-
-**Efeitos identificados no corpo (inclui callbacks internos):**
-```javascript
-b=>b.addEventListener('click',()=>resubmitStore(b.dataset.resubmitStore))
-```
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@588:92 — linha 588
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:588)
-
-```javascript
-()=>
-```
-
-Executa a etapa `callback@588:92` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `resubmitStore`.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@590:147 — linha 590
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:590)
-
-```javascript
-(config,summary)=>
-```
-
-Executa a etapa `callback@590:147` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `notify`; `renderPage`.
-
-**Decisões condicionais examinadas:**
-- `summary?.notified`
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@590:428 — linha 590
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:590)
-
-```javascript
-error=>
-```
-
-Executa a etapa `callback@590:428` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `notify`.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@591:63 — linha 591
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:591)
-
-```javascript
-button=>
-```
-
-Executa a etapa `callback@591:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `button.addEventListener`; `setCatalogItemActive`.
-
-**Efeitos identificados no corpo (inclui callbacks internos):**
-```javascript
-button=>button.addEventListener('click',()=>setCatalogItemActive(button.dataset.itemDeactivate,false))
-```
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@591:103 — linha 591
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:591)
-
-```javascript
-()=>
-```
-
-Executa a etapa `callback@591:103` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `setCatalogItemActive`.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@592:61 — linha 592
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:592)
-
-```javascript
-button=>
-```
-
-Executa a etapa `callback@592:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `button.addEventListener`; `setCatalogItemActive`.
-
-**Efeitos identificados no corpo (inclui callbacks internos):**
-```javascript
-button=>button.addEventListener('click',()=>setCatalogItemActive(button.dataset.itemActivate,true))
-```
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@592:101 — linha 592
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:592)
-
-```javascript
-()=>
-```
-
-Executa a etapa `callback@592:101` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `setCatalogItemActive`.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@593:67 — linha 593
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:593)
-
-```javascript
-form=>
-```
-
-Executa a etapa `callback@593:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `form.addEventListener`.
-
-**Efeitos identificados no corpo (inclui callbacks internos):**
-```javascript
-form=>form.addEventListener('submit',createProfessional)
-```
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@594:67 — linha 594
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:594)
-
-```javascript
-button=>
-```
-
-Executa a etapa `callback@594:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `button.addEventListener`; `setProfessionalActive`.
-
-**Efeitos identificados no corpo (inclui callbacks internos):**
-```javascript
-button=>button.addEventListener('click',()=>setProfessionalActive(button.dataset.professionalActive,button.dataset.active==='true'))
-```
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@594:107 — linha 594
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:594)
-
-```javascript
-()=>
-```
-
-Executa a etapa `callback@594:107` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `setProfessionalActive`.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@595:57 — linha 595
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:595)
-
-```javascript
-select=>
-```
-
-Executa a etapa `callback@595:57` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `select.addEventListener`; `syncCatalogItemFields`.
-
-**Efeitos identificados no corpo (inclui callbacks internos):**
-```javascript
-select=>select.addEventListener('change',()=>syncCatalogItemFields(select.form))
-```
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@595:98 — linha 595
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:595)
-
-```javascript
-()=>
-```
-
-Executa a etapa `callback@595:98` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `syncCatalogItemFields`.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@596:65 — linha 596
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:596)
-
-```javascript
-select=>
-```
-
-Executa a etapa `callback@596:65` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `select.addEventListener`; `syncCatalogItemRisk`.
-
-**Efeitos identificados no corpo (inclui callbacks internos):**
-```javascript
-select=>select.addEventListener('change',()=>syncCatalogItemRisk(select.form))
-```
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@596:106 — linha 596
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:596)
-
-```javascript
-()=>
-```
-
-Executa a etapa `callback@596:106` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `syncCatalogItemRisk`.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@597:60 — linha 597
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:597)
-
-```javascript
-button=>
-```
-
-Executa a etapa `callback@597:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `button.addEventListener`; `renderPage`.
-
-**Efeitos identificados no corpo (inclui callbacks internos):**
-```javascript
-button=>button.addEventListener('click',()=>{state.adminStoreFilter=button.dataset.storeFilter;renderPage();})
-```
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@597:100 — linha 597
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:597)
-
-```javascript
-()=>
-```
-
-Executa a etapa `callback@597:100` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `renderPage`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
@@ -5495,20 +6698,387 @@ Executa a etapa `callback@598:60` neste módulo. O contrato concreto está na as
 
 **Efeitos identificados no corpo (inclui callbacks internos):**
 ```javascript
-f=>f.addEventListener('submit',updateStore)
+f=>f.addEventListener('submit',createStore)
 ```
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@599:63 — linha 599
+### callback@599:62 — linha 599
 
 [Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:599)
+
+```javascript
+b=>
+```
+
+Executa a etapa `callback@599:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `b.addEventListener`; `resubmitStore`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+b=>b.addEventListener('click',()=>resubmitStore(b.dataset.resubmitStore))
+```
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@599:92 — linha 599
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:599)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@599:92` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `resubmitStore`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@601:147 — linha 601
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:601)
+
+```javascript
+(config,summary)=>
+```
+
+Executa a etapa `callback@601:147` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `notify`; `renderPage`.
+
+**Decisões condicionais examinadas:**
+- `summary?.notified`
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@601:428 — linha 601
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:601)
+
+```javascript
+error=>
+```
+
+Executa a etapa `callback@601:428` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `notify`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@602:63 — linha 602
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:602)
+
+```javascript
+button=>
+```
+
+Executa a etapa `callback@602:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `button.addEventListener`; `setCatalogItemActive`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+button=>button.addEventListener('click',()=>setCatalogItemActive(button.dataset.itemDeactivate,false))
+```
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@602:103 — linha 602
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:602)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@602:103` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `setCatalogItemActive`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@603:61 — linha 603
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:603)
+
+```javascript
+button=>
+```
+
+Executa a etapa `callback@603:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `button.addEventListener`; `setCatalogItemActive`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+button=>button.addEventListener('click',()=>setCatalogItemActive(button.dataset.itemActivate,true))
+```
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@603:101 — linha 603
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:603)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@603:101` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `setCatalogItemActive`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@604:67 — linha 604
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:604)
+
+```javascript
+form=>
+```
+
+Executa a etapa `callback@604:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `form.addEventListener`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+form=>form.addEventListener('submit',createProfessional)
+```
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@605:66 — linha 605
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:605)
+
+```javascript
+button=>
+```
+
+Executa a etapa `callback@605:66` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `button.addEventListener`; `state.merchantProfessionals.find`; `String`; `openProfessionalHours`; `activeMerchantStore`; `notify`.
+
+**Decisões condicionais examinadas:**
+- `(person)`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+button=>button.addEventListener('click',()=>{const person=state.merchantProfessionals.find(p=>String(p.id)===button.dataset.professionalHours);if(person)openProfessionalHours(activeMerchantStore(),person,{onError:error=>notify('Agenda do profissional',error.message,'error')});})
+```
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@605:106 — linha 605
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:605)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@605:106` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `state.merchantProfessionals.find`; `String`; `openProfessionalHours`; `activeMerchantStore`; `notify`.
+
+**Decisões condicionais examinadas:**
+- `(person)`
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@605:157 — linha 605
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:605)
+
+```javascript
+p=>
+```
+
+Executa a etapa `callback@605:157` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `String`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@605:279 — linha 605
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:605)
+
+```javascript
+error=>
+```
+
+Executa a etapa `callback@605:279` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `notify`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@606:67 — linha 606
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:606)
+
+```javascript
+button=>
+```
+
+Executa a etapa `callback@606:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `button.addEventListener`; `setProfessionalActive`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+button=>button.addEventListener('click',()=>setProfessionalActive(button.dataset.professionalActive,button.dataset.active==='true'))
+```
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@606:107 — linha 606
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:606)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@606:107` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `setProfessionalActive`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@607:57 — linha 607
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:607)
+
+```javascript
+select=>
+```
+
+Executa a etapa `callback@607:57` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `select.addEventListener`; `syncCatalogItemFields`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+select=>select.addEventListener('change',()=>syncCatalogItemFields(select.form))
+```
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@607:98 — linha 607
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:607)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@607:98` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `syncCatalogItemFields`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@608:65 — linha 608
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:608)
+
+```javascript
+select=>
+```
+
+Executa a etapa `callback@608:65` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `select.addEventListener`; `syncCatalogItemRisk`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+select=>select.addEventListener('change',()=>syncCatalogItemRisk(select.form))
+```
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@608:106 — linha 608
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:608)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@608:106` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `syncCatalogItemRisk`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@609:60 — linha 609
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:609)
+
+```javascript
+button=>
+```
+
+Executa a etapa `callback@609:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `button.addEventListener`; `renderPage`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+button=>button.addEventListener('click',()=>{state.adminStoreFilter=button.dataset.storeFilter;renderPage();})
+```
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@609:100 — linha 609
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:609)
+
+```javascript
+()=>
+```
+
+Executa a etapa `callback@609:100` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `renderPage`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@610:60 — linha 610
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:610)
 
 ```javascript
 f=>
 ```
 
-Executa a etapa `callback@599:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@610:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `f.addEventListener`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```javascript
+f=>f.addEventListener('submit',updateStore)
+```
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@611:63 — linha 611
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:611)
+
+```javascript
+f=>
+```
+
+Executa a etapa `callback@611:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `f.addEventListener`.
 
@@ -5519,15 +7089,15 @@ f=>f.addEventListener('submit',createOperator)
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@600:68 — linha 600
+### callback@612:68 — linha 612
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:600)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:612)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@600:68` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@612:68` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `reviewOperatorApplication`.
 
@@ -5538,29 +7108,29 @@ b=>b.addEventListener('click',()=>reviewOperatorApplication(b.dataset.operatorAp
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@600:98 — linha 600
+### callback@612:98 — linha 612
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:600)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:612)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@600:98` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@612:98` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `reviewOperatorApplication`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@601:63 — linha 601
+### callback@613:63 — linha 613
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:601)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:613)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@601:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@613:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `setOperatorActive`.
 
@@ -5571,29 +7141,29 @@ b=>b.addEventListener('click',()=>setOperatorActive(b.dataset.operatorActive,b.d
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@601:93 — linha 601
+### callback@613:93 — linha 613
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:601)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:613)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@601:93` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@613:93` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `setOperatorActive`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@602:62 — linha 602
+### callback@614:62 — linha 614
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:602)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:614)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@602:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@614:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `setAccountActive`.
 
@@ -5604,29 +7174,29 @@ b=>b.addEventListener('click',()=>setAccountActive(b.dataset.accountActive,b.dat
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@602:92 — linha 602
+### callback@614:92 — linha 614
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:602)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:614)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@602:92` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@614:92` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `setAccountActive`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@603:66 — linha 603
+### callback@615:66 — linha 615
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:603)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:615)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@603:66` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@615:66` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `openAdminAccountEditor`.
 
@@ -5637,29 +7207,29 @@ b=>b.addEventListener('click',()=>openAdminAccountEditor(b.dataset.adminEditAcco
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@603:96 — linha 603
+### callback@615:96 — linha 615
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:603)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:615)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@603:96` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@615:96` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `openAdminAccountEditor`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@604:60 — linha 604
+### callback@616:60 — linha 616
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:604)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:616)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@604:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@616:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `setAccountRole`.
 
@@ -5670,29 +7240,29 @@ b=>b.addEventListener('click',()=>setAccountRole(b.dataset.accountRole,b.dataset
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@604:90 — linha 604
+### callback@616:90 — linha 616
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:604)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:616)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@604:90` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@616:90` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `setAccountRole`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@605:62 — linha 605
+### callback@617:62 — linha 617
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:605)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:617)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@605:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@617:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `resetAccountPassword`.
 
@@ -5703,43 +7273,43 @@ b=>b.addEventListener('click',()=>resetAccountPassword(b.dataset.resetPassword,b
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@605:92 — linha 605
+### callback@617:92 — linha 617
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:605)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:617)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@605:92` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@617:92` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `resetAccountPassword`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@606:63 — linha 606
+### callback@618:63 — linha 618
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:606)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:618)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@606:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@618:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `renderPage`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@607:62 — linha 607
+### callback@619:62 — linha 619
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:607)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:619)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@607:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@619:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `api`; `renderPage`; `notify`.
 
@@ -5750,57 +7320,57 @@ async()=>{try{state.adminIntegrations=await api('/admin/integrations');renderPag
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@608:55 — linha 608
+### callback@620:55 — linha 620
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:608)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:620)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@608:55` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@620:55` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `loadAdminAuditEvents`; `renderPage`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@609:101 — linha 609
+### callback@621:101 — linha 621
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:609)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:621)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@609:101` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@621:101` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `notify`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@609:209 — linha 609
+### callback@621:209 — linha 621
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:609)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:621)
 
 ```javascript
 e=>
 ```
 
-Executa a etapa `callback@609:209` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@621:209` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `notify`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@610:82 — linha 610
+### callback@622:82 — linha 622
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:610)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:622)
 
 ```javascript
 approved=>
 ```
 
-Executa a etapa `callback@610:82` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@622:82` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `notify`.
 
@@ -5809,15 +7379,15 @@ Executa a etapa `callback@610:82` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@611:60 — linha 611
+### callback@623:60 — linha 623
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:611)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:623)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@611:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@623:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `updateOrder`.
 
@@ -5828,29 +7398,29 @@ b=>b.addEventListener('click',()=>updateOrder(b.dataset.id,b.dataset.orderStatus
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@611:90 — linha 611
+### callback@623:90 — linha 623
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:611)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:623)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@611:90` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@623:90` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `updateOrder`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@612:62 — linha 612
+### callback@624:62 — linha 624
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:612)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:624)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@612:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@624:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `offerDelivery`.
 
@@ -5861,29 +7431,29 @@ b=>b.addEventListener('click',()=>offerDelivery(b.dataset.offerDelivery))
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@612:92 — linha 612
+### callback@624:92 — linha 624
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:612)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:624)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@612:92` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@624:92` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `offerDelivery`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@613:66 — linha 613
+### callback@625:66 — linha 625
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:613)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:625)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@613:66` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@625:66` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `updateReservation`.
 
@@ -5894,29 +7464,29 @@ b=>b.addEventListener('click',()=>updateReservation(b.dataset.id,b.dataset.reser
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@613:96 — linha 613
+### callback@625:96 — linha 625
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:613)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:625)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@613:96` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@625:96` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `updateReservation`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@614:61 — linha 614
+### callback@626:61 — linha 626
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:614)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:626)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@614:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@626:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `approveStore`; `storeApprovalId`.
 
@@ -5927,29 +7497,29 @@ b=>b.addEventListener('click',()=>approveStore(storeApprovalId(b)))
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@614:91 — linha 614
+### callback@626:91 — linha 626
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:614)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:626)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@614:91` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@626:91` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `approveStore`; `storeApprovalId`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@615:60 — linha 615
+### callback@627:60 — linha 627
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:615)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:627)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@615:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@627:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `setStoreActive`.
 
@@ -5960,29 +7530,29 @@ b=>b.addEventListener('click',()=>setStoreActive(b.dataset.storeActive,b.dataset
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@615:90 — linha 615
+### callback@627:90 — linha 627
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:615)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:627)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@615:90` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@627:90` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `setStoreActive`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@616:63 — linha 616
+### callback@628:63 — linha 628
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:616)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:628)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@616:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@628:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `acceptDelivery`.
 
@@ -5993,29 +7563,29 @@ b=>b.addEventListener('click',()=>acceptDelivery(b.dataset.id))
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@616:93 — linha 616
+### callback@628:93 — linha 628
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:616)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:628)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@616:93` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@628:93` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `acceptDelivery`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@617:63 — linha 617
+### callback@629:63 — linha 629
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:617)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:629)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@617:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@629:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `updateDelivery`.
 
@@ -6026,29 +7596,29 @@ b=>b.addEventListener('click',()=>updateDelivery(b.dataset.id,b.dataset.delivery
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@617:93 — linha 617
+### callback@629:93 — linha 629
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:617)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:629)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@617:93` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@629:93` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `updateDelivery`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@618:62 — linha 618
+### callback@630:62 — linha 630
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:618)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:630)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@618:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@630:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `shareCourierLocation`.
 
@@ -6059,29 +7629,29 @@ b=>b.addEventListener('click',()=>shareCourierLocation(b.dataset.shareLocation))
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@618:92 — linha 618
+### callback@630:92 — linha 630
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:618)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:630)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@618:92` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@630:92` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `shareCourierLocation`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@619:60 — linha 619
+### callback@631:60 — linha 631
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:619)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:631)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@619:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@631:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `openStore`.
 
@@ -6092,71 +7662,71 @@ b=>b.addEventListener('click',()=>openStore(b.dataset.reopenStore))
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@619:90 — linha 619
+### callback@631:90 — linha 631
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:619)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:631)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@619:90` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@631:90` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `openStore`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@620:45 — linha 620
+### callback@632:45 — linha 632
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:620)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:632)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@620:45` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@632:45` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `render`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@621:55 — linha 621
+### callback@633:55 — linha 633
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:621)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:633)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@621:55` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@633:55` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `$`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@623:330 — linha 623
+### callback@635:330 — linha 635
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:623)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:635)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@623:330` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@635:330` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `simulatePayment`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@624:55 — linha 624
+### callback@636:55 — linha 636
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:624)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:636)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@624:55` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@636:55` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `role`; `renderPage`; `window.scrollTo`.
 
@@ -6171,15 +7741,15 @@ button=>button.addEventListener('click',()=>{
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@624:95 — linha 624
+### callback@636:95 — linha 636
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:624)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:636)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@624:95` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@636:95` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `role`; `renderPage`; `window.scrollTo`.
 
@@ -6189,15 +7759,15 @@ Executa a etapa `callback@624:95` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@630:66 — linha 630
+### callback@642:66 — linha 642
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:630)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:642)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@630:66` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@642:66` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `renderPage`.
 
@@ -6208,29 +7778,29 @@ button=>button.addEventListener('click',()=>{
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@630:106 — linha 630
+### callback@642:106 — linha 642
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:630)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:642)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@630:106` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@642:106` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `renderPage`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@633:60 — linha 633
+### callback@645:60 — linha 645
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:633)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:645)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@633:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@645:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `renderPage`.
 
@@ -6244,15 +7814,15 @@ button=>button.addEventListener('click',()=>{
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@633:100 — linha 633
+### callback@645:100 — linha 645
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:633)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:645)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@633:100` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@645:100` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `renderPage`.
 
@@ -6261,15 +7831,15 @@ Executa a etapa `callback@633:100` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@637:62 — linha 637
+### callback@649:62 — linha 649
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:637)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:649)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@637:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@649:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `openChat`.
 
@@ -6280,29 +7850,29 @@ button=>button.addEventListener('click',()=>openChat(button.dataset.openChatType
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@637:102 — linha 637
+### callback@649:102 — linha 649
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:637)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:649)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@637:102` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@649:102` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `openChat`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@638:57 — linha 638
+### callback@650:57 — linha 650
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:638)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:650)
 
 ```javascript
 form=>
 ```
 
-Executa a etapa `callback@638:57` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@650:57` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `form.addEventListener`.
 
@@ -6313,15 +7883,15 @@ form=>form.addEventListener('submit',sendChatMessage)
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@639:58 — linha 639
+### callback@651:58 — linha 651
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:639)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:651)
 
 ```javascript
 area=>
 ```
 
-Executa a etapa `callback@639:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@651:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `area.addEventListener`.
 
@@ -6332,27 +7902,27 @@ area=>area.addEventListener('input',()=>{state.chatDrafts[area.dataset.chatDraft
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@639:94 — linha 639
+### callback@651:94 — linha 651
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:639)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:651)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@639:94` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@651:94` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@640:58 — linha 640
+### callback@652:58 — linha 652
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:640)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:652)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@640:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@652:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `closeChat`.
 
@@ -6363,23 +7933,23 @@ button=>button.addEventListener('click',()=>closeChat(button.dataset.closeChat))
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@640:98 — linha 640
+### callback@652:98 — linha 652
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:640)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:652)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@640:98` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@652:98` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `closeChat`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### runAction — linha 643
+### runAction — linha 655
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:643)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:655)
 
 ```javascript
 async function runAction(action)
@@ -6397,9 +7967,9 @@ Executa a etapa `run Action` neste módulo. O contrato concreto está na assinat
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### openStore — linha 649
+### openStore — linha 661
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:649)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:661)
 
 ```javascript
 async function openStore(id)
@@ -6411,35 +7981,35 @@ Executa a etapa `open Store` neste módulo. O contrato concreto está na assinat
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@650:47 — linha 650
+### callback@662:47 — linha 662
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:650)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:662)
 
 ```javascript
 s=>
 ```
 
-Executa a etapa `callback@650:47` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@662:47` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@650:271 — linha 650
+### callback@662:271 — linha 662
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:650)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:662)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@650:271` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@662:271` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### currentStoreOpen — linha 654
+### currentStoreOpen — linha 666
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:654)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:666)
 
 ```javascript
 function currentStoreOpen(store, schedule=state.storeHours)
@@ -6454,9 +8024,9 @@ Executa a etapa `current Store Open` neste módulo. O contrato concreto está na
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### operatingHoursPanel — linha 655
+### operatingHoursPanel — linha 667
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:655)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:667)
 
 ```javascript
 function operatingHoursPanel()
@@ -6465,13 +8035,13 @@ function operatingHoursPanel()
 Executa a etapa `operating Hours Panel` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Saída declarada:**
-- `return '<section class="panel operating-hours-panel" data-operating-hours></section>';`
+- `return '<section class="panel operating-hours-panel" data-operating-hours></section><div data-booking-policy></div>';`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderStoreModal — linha 657
+### renderStoreModal — linha 669
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:657)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:669)
 
 ```javascript
 function renderStoreModal()
@@ -6511,15 +8081,15 @@ modal.querySelectorAll('[data-reserve]').forEach(b=>b.addEventListener('click',(
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@667:78 — linha 667
+### callback@679:78 — linha 679
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:667)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:679)
 
 ```javascript
 (item,i)=>
 ```
 
-Executa a etapa `callback@667:78` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@679:78` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `catalogItemIcon`; `esc`; `money`.
 
@@ -6534,29 +8104,29 @@ Executa a etapa `callback@667:78` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@671:58 — linha 671
+### callback@683:58 — linha 683
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:671)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:683)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@671:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@683:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `modal.remove`; `cleanupStoreMaps`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@672:34 — linha 672
+### callback@684:34 — linha 684
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:672)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:684)
 
 ```javascript
 e=>
 ```
 
-Executa a etapa `callback@672:34` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@684:34` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `modal.remove`; `cleanupStoreMaps`.
 
@@ -6565,15 +8135,15 @@ Executa a etapa `callback@672:34` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@673:53 — linha 673
+### callback@685:53 — linha 685
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:673)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:685)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@673:53` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@685:53` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `addToCart`.
 
@@ -6584,29 +8154,29 @@ b=>b.addEventListener('click',()=>addToCart(b.dataset.addItem))
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@673:83 — linha 673
+### callback@685:83 — linha 685
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:673)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:685)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@673:83` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@685:83` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `addToCart`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@674:52 — linha 674
+### callback@686:52 — linha 686
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:674)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:686)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@674:52` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@686:52` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `showReserveForm`.
 
@@ -6617,23 +8187,23 @@ b=>b.addEventListener('click',()=>showReserveForm(b.dataset.reserve))
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@674:82 — linha 674
+### callback@686:82 — linha 686
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:674)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:686)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@674:82` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@686:82` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `showReserveForm`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### addToCart — linha 677
+### addToCart — linha 689
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:677)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:689)
 
 ```javascript
 function addToCart(itemId)
@@ -6662,37 +8232,37 @@ Executa a etapa `add To Cart` neste módulo. O contrato concreto está na assina
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@678:36 — linha 678
+### callback@690:36 — linha 690
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:678)
-
-```javascript
-i=>
-```
-
-Executa a etapa `callback@678:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `String`.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@683:30 — linha 683
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:683)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:690)
 
 ```javascript
 i=>
 ```
 
-Executa a etapa `callback@683:30` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@690:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### showReserveForm — linha 689
+### callback@695:30 — linha 695
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:689)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:695)
+
+```javascript
+i=>
+```
+
+Executa a etapa `callback@695:30` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `String`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### showReserveForm — linha 701
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:701)
 
 ```javascript
 function showReserveForm(itemId)
@@ -6700,7 +8270,7 @@ function showReserveForm(itemId)
 
 Executa a etapa `show Reserve Form` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `state.storeItems.find`; `String`; `$`; `notify`; `esc`; `money`; `isCustomerOutsideStoreCity`; `state.storeProfessionals.map`; `localDateTimeMinimum`; `backdrop.remove`; `e.preventDefault`; `fields.get`; `storeScheduleAllowsAppointment`; `navigate`; `api`; `JSON.stringify`; `localDateTimeInZoneToIso`; `render`.
+**Colaborações:** `state.storeItems.find`; `String`; `$`; `notify`; `esc`; `money`; `isCustomerOutsideStoreCity`; `state.storeProfessionals.map`; `backdrop.remove`; `mountAvailableSlots`; `e.preventDefault`; `fields.get`; `storeScheduleAllowsAppointment`; `navigate`; `api`; `JSON.stringify`; `localDateTimeInZoneToIso`; `render`.
 
 **Decisões condicionais examinadas:**
 - `(!item||!backdrop)`
@@ -6725,64 +8295,64 @@ Executa a etapa `show Reserve Form` neste módulo. O contrato concreto está na 
 ```javascript
 modal.innerHTML=`<div class="modal-head"><div><span class="eyebrow">Reserva presencial</span><h2>Escolha um horário</h2><p>${esc(item.name)} · ${money(item.priceCents)}</p></div><button class="close-button" data-close-modal aria-label="Fechar">×</button></div>
 $('[data-close-modal]',modal).addEventListener('click',()=>{state.selectedStore=null;backdrop.remove();});
-$('#reserve-form',modal).addEventListener('submit',async e=>{e.preventDefault();const fields=new FormData(e.currentTarget),local=fields.get('startsAt');if(!local)return;if(!storeScheduleAllowsAppointment(state.storeHours,local,item.appointmentDurationMinutes||30,state.selectedStore.timezone||'America/Sao_Paulo')){notify('Atendimento fora do expediente','O serviço inteiro precisa caber em um turno, sem atravessar pausas ou o fechamento.','info');return;}if(!state.profile?.cpf||!state.profile?.phone){notify('Complete seu cadastro','CPF e telefone são necessários para confirmar a reserva.','info');state.accountSection='profile';state.selectedStore=null;backdrop.remove();navigate('account');return;}try{const created=await api('/reservations',{method:'POST',body:JSON.stringify({storeId:state.selectedStore.id,serviceItemId:item.id,startsAt:localDateTimeInZoneToIso(local,state.selectedStore.timezone||'America/Sao_Paulo'),customerNote:String(fields.get('customerNote')||'').trim()||null,professionalId:String(fields.get('professionalId')||'')||null})});state.selectedStore=null;backdrop.remove();if(created.paymentId){state.checkout={type:'RESERVATION',paymentId:created.paymentId,reservation:created.reservation};state.page='checkout';render();}else{state.page='reservations';state.reservations=[created.reservation,...(state.reservations||[])];render();notify('Reserva confirmada','O pagamento será feito diretamente à loja após o atendimento.');}}catch(error){notify('Não foi possível iniciar a reserva',error.message,'error');}});
+$('#reserve-form',modal).addEventListener('submit',async e=>{e.preventDefault();const fields=new FormData(e.currentTarget),local=fields.get('startsAt');if(!local){notify('Escolha um horário','Selecione um dos horários livres antes de continuar.','info');return;}if(!storeScheduleAllowsAppointment(state.storeHours,local,item.appointmentDurationMinutes||30,state.selectedStore.timezone||'America/Sao_Paulo')){notify('Atendimento fora do expediente','O serviço inteiro precisa caber em um turno, sem atravessar pausas ou o fechamento.','info');return;}if(!state.profile?.cpf||!state.profile?.phone){notify('Complete seu cadastro','CPF e telefone são necessários para confirmar a reserva.','info');state.accountSection='profile';state.selectedStore=null;backdrop.remove();navigate('account');return;}try{const created=await api('/reservations',{method:'POST',body:JSON.stringify({storeId:state.selectedStore.id,serviceItemId:item.id,startsAt:localDateTimeInZoneToIso(local,state.selectedStore.timezone||'America/Sao_Paulo'),customerNote:String(fields.get('customerNote')||'').trim()||null,professionalId:String(fields.get('professionalId')||'')||null})});state.selectedStore=null;backdrop.remove();if(created.paymentId){state.checkout={type:'RESERVATION',paymentId:created.paymentId,reservation:created.reservation};state.page='checkout';render();}else{state.page='reservations';state.reservations=[created.reservation,...(state.reservations||[])];render();notify('Reserva confirmada','O pagamento será feito diretamente à loja após o atendimento.');}}catch(error){notify('Não foi possível iniciar a reserva',error.message,'error');}});
 ```
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@690:36 — linha 690
+### callback@702:36 — linha 702
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:690)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:702)
 
 ```javascript
 i=>
 ```
 
-Executa a etapa `callback@690:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@702:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@695:270 — linha 695
+### callback@707:270 — linha 707
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:695)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:707)
 
 ```javascript
 person=>
 ```
 
-Executa a etapa `callback@695:270` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@707:270` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@696:58 — linha 696
+### callback@708:58 — linha 708
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:696)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:708)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@696:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@708:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `backdrop.remove`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@697:54 — linha 697
+### callback@710:54 — linha 710
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:697)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:710)
 
 ```javascript
 async e=>
 ```
 
-Executa a etapa `callback@697:54` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@710:54` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `e.preventDefault`; `fields.get`; `storeScheduleAllowsAppointment`; `notify`; `backdrop.remove`; `navigate`; `api`; `JSON.stringify`; `localDateTimeInZoneToIso`; `String`; `render`.
+**Colaborações:** `e.preventDefault`; `fields.get`; `notify`; `storeScheduleAllowsAppointment`; `backdrop.remove`; `navigate`; `api`; `JSON.stringify`; `localDateTimeInZoneToIso`; `String`; `render`.
 
 **Decisões condicionais examinadas:**
 - `(!local)`
@@ -6797,14 +8367,14 @@ Executa a etapa `callback@697:54` neste módulo. O contrato concreto está na as
 
 **Efeitos identificados no corpo (inclui callbacks internos):**
 ```javascript
-async e=>{e.preventDefault();const fields=new FormData(e.currentTarget),local=fields.get('startsAt');if(!local)return;if(!storeScheduleAllowsAppointment(state.storeHours,local,item.appointmentDurationMinutes||30,state.selectedStore.timezone||'America/Sao_Paulo')){notify('Atendimento fora do expediente','O serviço inteiro precisa caber em um turno, sem atravessar pausas ou o fechamento.','info');return;}if(!state.profile?.cpf||!state.profile?.phone){notify('Complete seu cadastro','CPF e telefone são necessários para confirmar a reserva.','info');state.accountSection='profile';state.selectedStore=null;backdrop.remove();navigate('account');return;}try{const created=await api('/reservations',{method:'POST',body:JSON.stringify({storeId:state.selectedStore.id,serviceItemId:item.id,startsAt:localDateTimeInZoneToIso(local,state.selectedStore.timezone||'America/Sao_Paulo'),customerNote:String(fields.get('customerNote')||'').trim()||null,professionalId:String(fields.get('professionalId')||'')||null})});state.selectedStore=null;backdrop.remove();if(created.paymentId){state.checkout={type:'RESERVATION',paymentId:created.paymentId,reservation:created.reservation};state.page='checkout';render();}else{state.page='reservations';state.reservations=[created.reservation,...(state.reservations||[])];render();notify('Reserva confirmada','O pagamento será feito diretamente à loja após o atendimento.');}}catch(error){notify('Não foi possível iniciar a reserva',error.message,'error');}}
+async e=>{e.preventDefault();const fields=new FormData(e.currentTarget),local=fields.get('startsAt');if(!local){notify('Escolha um horário','Selecione um dos horários livres antes de continuar.','info');return;}if(!storeScheduleAllowsAppointment(state.storeHours,local,item.appointmentDurationMinutes||30,state.selectedStore.timezone||'America/Sao_Paulo')){notify('Atendimento fora do expediente','O serviço inteiro precisa caber em um turno, sem atravessar pausas ou o fechamento.','info');return;}if(!state.profile?.cpf||!state.profile?.phone){notify('Complete seu cadastro','CPF e telefone são necessários para confirmar a reserva.','info');state.accountSection='profile';state.selectedStore=null;backdrop.remove();navigate('account');return;}try{const created=await api('/reservations',{method:'POST',body:JSON.stringify({storeId:state.selectedStore.id,serviceItemId:item.id,startsAt:localDateTimeInZoneToIso(local,state.selectedStore.timezone||'America/Sao_Paulo'),customerNote:String(fields.get('customerNote')||'').trim()||null,professionalId:String(fields.get('professionalId')||'')||null})});state.selectedStore=null;backdrop.remove();if(created.paymentId){state.checkout={type:'RESERVATION',paymentId:created.paymentId,reservation:created.reservation};state.page='checkout';render();}else{state.page='reservations';state.reservations=[created.reservation,...(state.reservations||[])];render();notify('Reserva confirmada','O pagamento será feito diretamente à loja após o atendimento.');}}catch(error){notify('Não foi possível iniciar a reserva',error.message,'error');}}
 ```
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderCartDrawer — linha 700
+### renderCartDrawer — linha 713
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:700)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:713)
 
 ```javascript
 function renderCartDrawer()
@@ -6860,41 +8430,41 @@ $('[data-address-form]',backdrop)?.addEventListener('submit',saveCheckoutAddress
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@704:36 — linha 704
+### callback@717:36 — linha 717
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:704)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:717)
 
 ```javascript
 (sum,line)=>
 ```
 
-Executa a etapa `callback@704:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@717:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@708:105 — linha 708
+### callback@721:105 — linha 721
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:708)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:721)
 
 ```javascript
 line=>
 ```
 
-Executa a etapa `callback@708:105` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@721:105` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `money`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@711:54 — linha 711
+### callback@724:54 — linha 724
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:711)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:724)
 
 ```javascript
 a=>
 ```
 
-Executa a etapa `callback@711:54` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@724:54` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`; `esc`; `addressText`.
 
@@ -6904,15 +8474,15 @@ Executa a etapa `callback@711:54` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@722:37 — linha 722
+### callback@735:37 — linha 735
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:722)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:735)
 
 ```javascript
 e=>
 ```
 
-Executa a etapa `callback@722:37` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@735:37` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `closeCart`.
 
@@ -6921,15 +8491,15 @@ Executa a etapa `callback@722:37` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@723:51 — linha 723
+### callback@736:51 — linha 736
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:723)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:736)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@723:51` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@736:51` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `state.cart.find`; `String`; `Number`; `notify`; `state.cart.filter`; `render`.
 
@@ -6949,15 +8519,15 @@ b=>b.addEventListener('click',()=>{const item=state.cart.find(i=>String(i.id)===
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@723:81 — linha 723
+### callback@736:81 — linha 736
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:723)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:736)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@723:81` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@736:81` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `state.cart.find`; `String`; `Number`; `notify`; `state.cart.filter`; `render`.
 
@@ -6972,41 +8542,41 @@ Executa a etapa `callback@723:81` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@723:113 — linha 723
+### callback@736:113 — linha 736
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:723)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:736)
 
 ```javascript
 i=>
 ```
 
-Executa a etapa `callback@723:113` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@736:113` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@723:414 — linha 723
+### callback@736:414 — linha 736
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:723)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:736)
 
 ```javascript
 i=>
 ```
 
-Executa a etapa `callback@723:414` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@736:414` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@724:57 — linha 724
+### callback@737:57 — linha 737
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:724)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:737)
 
 ```javascript
 b=>
 ```
 
-Executa a etapa `callback@724:57` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@737:57` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `b.addEventListener`; `render`.
 
@@ -7017,43 +8587,43 @@ b=>b.addEventListener('click',()=>{state.cartMode=b.dataset.cartMode;render();})
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@724:87 — linha 724
+### callback@737:87 — linha 737
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:724)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:737)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@724:87` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@737:87` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `render`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@727:65 — linha 727
+### callback@740:65 — linha 740
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:727)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:740)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@727:65` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@740:65` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `navigate`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@728:66 — linha 728
+### callback@741:66 — linha 741
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:728)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:741)
 
 ```javascript
 radio=>
 ```
 
-Executa a etapa `callback@728:66` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@741:66` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `radio.addEventListener`; `render`.
 
@@ -7064,83 +8634,83 @@ radio=>radio.addEventListener('change',()=>{state.selectedAddressId=radio.value;
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@728:105 — linha 728
+### callback@741:105 — linha 741
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:728)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:741)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@728:105` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@741:105` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `render`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@729:64 — linha 729
+### callback@742:64 — linha 742
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:729)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:742)
 
 ```javascript
 event=>
 ```
 
-Executa a etapa `callback@729:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@742:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@730:62 — linha 730
+### callback@743:62 — linha 743
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:730)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:743)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@730:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@743:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `render`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@731:65 — linha 731
+### callback@744:65 — linha 744
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:731)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:744)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@731:65` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@744:65` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `render`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@732:61 — linha 732
+### callback@745:61 — linha 745
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:732)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:745)
 
 ```javascript
 e=>
 ```
 
-Executa a etapa `callback@732:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@745:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `lookupCep`; `e.currentTarget.closest`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@733:53 — linha 733
+### callback@746:53 — linha 746
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:733)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:746)
 
 ```javascript
 e=>
 ```
 
-Executa a etapa `callback@733:53` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@746:53` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `e.target.value.replace`; `lookupCep`; `e.target.closest`.
 
@@ -7149,9 +8719,9 @@ Executa a etapa `callback@733:53` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### closeCart — linha 737
+### closeCart — linha 750
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:737)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:750)
 
 ```javascript
 function closeCart()
@@ -7163,9 +8733,9 @@ Executa a etapa `close Cart` neste módulo. O contrato concreto está na assinat
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### checkout — linha 739
+### checkout — linha 752
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:739)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:752)
 
 ```javascript
 async function checkout()
@@ -7196,35 +8766,35 @@ const response=await api('/orders',{method:'POST',body:JSON.stringify({storeId:s
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@743:39 — linha 743
+### callback@756:39 — linha 756
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:743)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:756)
 
 ```javascript
 a=>
 ```
 
-Executa a etapa `callback@743:39` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@756:39` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@747:260 — linha 747
+### callback@760:260 — linha 760
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:747)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:760)
 
 ```javascript
 line=>
 ```
 
-Executa a etapa `callback@747:260` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@760:260` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### saveCheckoutAddress — linha 752
+### saveCheckoutAddress — linha 765
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:752)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:765)
 
 ```javascript
 async function saveCheckoutAddress(event)
@@ -7243,9 +8813,9 @@ state.profile=await api('/account/me');state.account=state.profile;persistAccoun
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### lookupCep — linha 762
+### lookupCep — linha 775
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:762)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:775)
 
 ```javascript
 async function lookupCep(form)
@@ -7281,9 +8851,9 @@ finally {delete form.dataset.cepLookup;if(button){button.disabled=false;button.t
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### fill — linha 772
+### fill — linha 785
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:772)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:785)
 
 ```javascript
 (name,value)=>
@@ -7298,9 +8868,9 @@ Executa a etapa `fill` neste módulo. O contrato concreto está na assinatura, n
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderCheckout — linha 779
+### renderCheckout — linha 792
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:779)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:792)
 
 ```javascript
 function renderCheckout()
@@ -7326,23 +8896,23 @@ Executa a etapa `render Checkout` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@788:399 — linha 788
+### callback@801:399 — linha 801
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:788)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:801)
 
 ```javascript
 line=>
 ```
 
-Executa a etapa `callback@788:399` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@801:399` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `money`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### approvePayment — linha 793
+### approvePayment — linha 806
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:793)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:806)
 
 ```javascript
 async function approvePayment()
@@ -7367,9 +8937,9 @@ try{const checkout=await api(`/payments/${state.checkout.paymentId}/checkout`,{m
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### simulatePayment — linha 801
+### simulatePayment — linha 814
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:801)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:814)
 
 ```javascript
 async function simulatePayment(outcome)
@@ -7394,9 +8964,9 @@ try{await api(`/demo/payments/${encodeURIComponent(state.checkout.paymentId)}/${
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderOrders — linha 811
+### renderOrders — linha 824
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:811)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:824)
 
 ```javascript
 function renderOrders()
@@ -7426,15 +8996,15 @@ Executa a etapa `render Orders` neste módulo. O contrato concreto está na assi
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@814:32 — linha 814
+### callback@827:32 — linha 827
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:814)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:827)
 
 ```javascript
 order=>
 ```
 
-Executa a etapa `callback@814:32` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@827:32` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `String`; `shortDate`; `pill`; `trackingMessage`; `Number`; `order.lines.map`; `money`; `encodeURIComponent`; `['AWAITING_ACCEPTANCE','ACCEPTED','PREPARING','READY'].includes`; `chatPanel`; `refundNotice`.
 
@@ -7454,23 +9024,23 @@ Executa a etapa `callback@814:32` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@816:50 — linha 816
+### callback@829:50 — linha 829
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:816)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:829)
 
 ```javascript
 line=>
 ```
 
-Executa a etapa `callback@816:50` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@829:50` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### trackingMessage — linha 820
+### trackingMessage — linha 833
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:820)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:833)
 
 ```javascript
 function trackingMessage(order)
@@ -7489,9 +9059,9 @@ Executa a etapa `tracking Message` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderReservations — linha 827
+### renderReservations — linha 840
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:827)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:840)
 
 ```javascript
 function renderReservations()
@@ -7499,10 +9069,10 @@ function renderReservations()
 
 Executa a etapa `render Reservations` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `list.map`; `esc`; `dateTimeInZone`; `pill`; `money`; `String`; `chatPanel`; `refundNotice`; `emptyState`.
+**Colaborações:** `groupCustomerReservations`; `groups.map`; `esc`; `group.items.map`; `dateTimeInZone`; `pill`; `money`; `String`; `chatPanel`; `refundNotice`; `emptyState`.
 
 **Decisões condicionais examinadas:**
-- `list.length`
+- `groups.length`
 - `r.professionalName`
 - `r.operatingHoursNotice`
 - `r.status==='CANCELLED'`
@@ -7514,19 +9084,44 @@ Executa a etapa `render Reservations` neste módulo. O contrato concreto está n
 - `r.status==='CONFIRMED'&&r.cancellationRequestStatus!=='REQUESTED'`
 
 **Saída declarada:**
-- `return \`<div class="page-head"><div><span class="eyebrow">Um tempo reservado para você</span><h1>Minhas reservas</h1><p>Seus próximos momentos e atendimentos.</p></div><button class="btn light" data-page="home">Descobrir serviços</button></div> ${list.length?list.map(r=>\`<article class="order-card" data-reservation-card="${esc(r.id)}"><div class="order-card-top"><div><h3>${esc(r.serviceName)}</h3><p>${esc(r.store.name)} · ${dateTimeInZone(r.startsAt,r.store.timezone||'America/Sao_Paulo')}${r.professionalName?\` · Profissional: ${esc(r.professionalName)}\`:''}</p></div>${pill(r.status)}</div>${r.operatingHoursNotice?\`<div class="alert-strip ${r.status==='CANCELLED'?'warn':'info'}"><span>◷</span><span>${esc(r.operatingHoursNotice)}</span></div>\`:''}${r.cancellationRequestStatus==='REQUESTED'?'<div class="alert-strip warn"><span>◷</span><span>A loja ainda não respondeu ao seu pedido de cancelamento.</span></div>':''}${r.customerNote?\`<div class="customer-note"><strong>Comentário enviado à loja</strong><p>${esc(r.customerNote)}</p></div>\`:''}${r.payAfterService?'<div class="alert-strip info"><span>R$</span><span>Pagamento combinado diretamente com a loja após o atendimento.</span></div>':''}<div class="order-bottom"><span>${money(r.amountCents)}</span><span>Reserva ${esc(String(r.id).slice(0,8).toUpperCase())}</span></div><div class="action-row">${r.status!=='PENDING_PAYMENT'?\`<button class="btn outline small" data-open-chat-type="reservations" data-open-chat-id="${esc(r.id)}">Mensagens com a loja</button>\`:''}${r.status==='PENDING_PAYMENT'&&r.paymentId?'<button class="btn small" data-resume-reservation="'+esc(r.id)+'">Continuar pagamento</button><button class="btn outline small" data-cancel-reservation="'+esc(r.id)+'">Cancelar reserva</button>':''}${r.status==='CONFIRMED'&&r.cancellationRequestStatus!=='REQUESTED'?\`<button class="btn outline small" data-request-reservation-cancellation="${esc(r.id)}">Solicitar cancelamento</button>\`:''}</div>${chatPanel('reservations',r.id)}${refundNotice(r.paymentStatus)}</article>\`).join(''):emptyState('🗓️','Ainda não há reservas','Escolha um serviço perto de você e marque um horário que combine com a sua agenda.','Explorar serviços','go-home')}\`;`
+- `return \`<div class="page-head"><div><span class="eyebrow">Um tempo reservado para você</span><h1>Minhas reservas</h1><p>Seus próximos momentos e atendimentos.</p></div><button class="btn light" data-page="home">Descobrir serviços</button></div> ${groups.length?groups.map(group=>\`<section class="reservation-group"><h2>${esc(group.title)}</h2>${group.items.map(r=>\`<article class="order-card" data-reservation-card="${esc(r.id)}"><div class="order-card-top"><div><h3>${esc(r.serviceName)}</h3><p>${esc(r.store.name)} · ${dateTimeInZone(r.startsAt,r.store.timezone||'America/Sao_Paulo')}${r.professionalName?\` · Profissional: ${esc(r.professionalName)}\`:''}</p></div>${pill(r.status)}</div>${r.operatingHoursNotice?\`<div class="alert-strip ${r.status==='CANCELLED'?'warn':'info'}"><span>◷</span><span>${esc(r.operatingHoursNotice)}</span></div>\`:''}${r.cancellationRequestStatus==='REQUESTED'?'<div class="alert-strip warn"><span>◷</span><span>A loja ainda não respondeu ao seu pedido de cancelamento.</span></div>':''}${r.customerNote?\`<div class="customer-note"><strong>Comentário enviado à loja</strong><p>${esc(r.customerNote)}</p></div>\`:''}${r.payAfterService?'<div class="alert-strip info"><span>R$</span><span>Pagamento combinado diretamente com a loja após o atendimento.</span></div>':''}<div class="order-bottom"><span>${money(r.amountCents)}</span><span>Reserva ${esc(String(r.id).slice(0,8).toUpperCase())}</span></div><div class="action-row">${r.status!=='PENDING_PAYMENT'?\`<button class="btn outline small" data-open-chat-type="reservations" data-open-chat-id="${esc(r.id)}">Mensagens com a loja</button>\`:''}${r.status==='PENDING_PAYMENT'&&r.paymentId?'<button class="btn small" data-resume-reservation="'+esc(r.id)+'">Continuar pagamento</button><button class="btn outline small" data-cancel-reservation="'+esc(r.id)+'">Cancelar reserva</button>':''}${r.status==='CONFIRMED'&&r.cancellationRequestStatus!=='REQUESTED'?\`<button class="btn outline small" data-request-reservation-cancellation="${esc(r.id)}">Solicitar cancelamento</button>\`:''}</div>${chatPanel('reservations',r.id)}${refundNotice(r.paymentStatus)}</article>\`).join('')}</section>\`).join(''):emptyState('🗓️','Ainda não há reservas','Escolha um serviço perto de você e marque um horário que combine com a sua agenda.','Explorar serviços','go-home')}\`;`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@830:28 — linha 830
+### callback@843:32 — linha 843
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:830)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:843)
+
+```javascript
+group=>
+```
+
+Executa a etapa `callback@843:32` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `esc`; `group.items.map`; `dateTimeInZone`; `pill`; `money`; `String`; `chatPanel`; `refundNotice`.
+
+**Decisões condicionais examinadas:**
+- `r.professionalName`
+- `r.operatingHoursNotice`
+- `r.status==='CANCELLED'`
+- `r.cancellationRequestStatus==='REQUESTED'`
+- `r.customerNote`
+- `r.payAfterService`
+- `r.status!=='PENDING_PAYMENT'`
+- `r.status==='PENDING_PAYMENT'&&r.paymentId`
+- `r.status==='CONFIRMED'&&r.cancellationRequestStatus!=='REQUESTED'`
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@843:121 — linha 843
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:843)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@830:28` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@843:121` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `dateTimeInZone`; `pill`; `money`; `String`; `chatPanel`; `refundNotice`.
 
@@ -7543,9 +9138,9 @@ Executa a etapa `callback@830:28` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### chatKey — linha 833
+### chatKey — linha 846
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:833)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:846)
 
 ```javascript
 function chatKey(type,id)
@@ -7558,9 +9153,9 @@ Executa a etapa `chat Key` neste módulo. O contrato concreto está na assinatur
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### chatMessagesHtml — linha 834
+### chatMessagesHtml — linha 847
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:834)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:847)
 
 ```javascript
 function chatMessagesHtml(thread)
@@ -7584,15 +9179,15 @@ function chatMessagesHtml(thread){return thread.messages.length?thread.messages.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@834:85 — linha 834
+### callback@847:85 — linha 847
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:834)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:847)
 
 ```javascript
 m=>
 ```
 
-Executa a etapa `callback@834:85` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@847:85` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`; `esc`; `shortDate`.
 
@@ -7606,9 +9201,9 @@ m=>`<article class="chat-message ${String(m.senderId)===String(state.account?.id
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### stopChat — linha 835
+### stopChat — linha 848
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:835)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:848)
 
 ```javascript
 function stopChat()
@@ -7623,9 +9218,9 @@ Executa a etapa `stop Chat` neste módulo. O contrato concreto está na assinatu
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### resetChatState — linha 836
+### resetChatState — linha 849
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:836)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:849)
 
 ```javascript
 function resetChatState()
@@ -7637,9 +9232,9 @@ Executa a etapa `reset Chat State` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### applyChatUpdate — linha 837
+### applyChatUpdate — linha 850
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:837)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:850)
 
 ```javascript
 function applyChatUpdate(key,next)
@@ -7665,9 +9260,9 @@ box.innerHTML=chatMessagesHtml(next);
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### chatPanel — linha 846
+### chatPanel — linha 859
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:846)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:859)
 
 ```javascript
 function chatPanel(type,id)
@@ -7691,9 +9286,9 @@ Executa a etapa `chat Panel` neste módulo. O contrato concreto está na assinat
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### openChat — linha 848
+### openChat — linha 861
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:848)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:861)
 
 ```javascript
 async function openChat(type,id)
@@ -7713,23 +9308,23 @@ async function openChat(type,id){const key=chatKey(type,id);stopChat();state.ope
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@848:322 — linha 848
+### callback@861:322 — linha 861
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:848)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:861)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@848:322` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@861:322` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `refreshOpenChat`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### refreshOpenChat — linha 849
+### refreshOpenChat — linha 862
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:849)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:862)
 
 ```javascript
 async function refreshOpenChat(key)
@@ -7753,9 +9348,9 @@ async function refreshOpenChat(key){if(state.openChat!==key||document.visibility
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### closeChat — linha 850
+### closeChat — linha 863
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:850)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:863)
 
 ```javascript
 function closeChat(key)
@@ -7773,9 +9368,9 @@ Executa a etapa `close Chat` neste módulo. O contrato concreto está na assinat
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### sendChatMessage — linha 851
+### sendChatMessage — linha 864
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:851)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:864)
 
 ```javascript
 async function sendChatMessage(event)
@@ -7799,9 +9394,9 @@ async function sendChatMessage(event){event.preventDefault();const form=event.cu
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderAdminDefinitions — linha 853
+### renderAdminDefinitions — linha 866
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:853)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:866)
 
 ```javascript
 function renderAdminDefinitions()
@@ -7837,27 +9432,27 @@ Executa a etapa `render Admin Definitions` neste módulo. O contrato concreto es
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@857:733 — linha 857
+### callback@870:733 — linha 870
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:857)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:870)
 
 ```javascript
 uf=>
 ```
 
-Executa a etapa `callback@857:733` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@870:733` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@857:1517 — linha 857
+### callback@870:1517 — linha 870
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:857)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:870)
 
 ```javascript
 city=>
 ```
 
-Executa a etapa `callback@857:1517` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@870:1517` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SE','SP','TO'].map`.
 
@@ -7867,118 +9462,118 @@ Executa a etapa `callback@857:1517` neste módulo. O contrato concreto está na 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@857:2048 — linha 857
+### callback@870:2048 — linha 870
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:857)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:870)
 
 ```javascript
 uf=>
 ```
 
-Executa a etapa `callback@857:2048` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@870:2048` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisões condicionais examinadas:**
 - `city.state===uf`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@858:59 — linha 858
+### callback@871:59 — linha 871
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:858)
-
-```javascript
-category=>
-```
-
-Executa a etapa `callback@858:59` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@858:121 — linha 858
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:858)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:871)
 
 ```javascript
 category=>
 ```
 
-Executa a etapa `callback@858:121` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@871:59` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@858:178 — linha 858
+### callback@871:121 — linha 871
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:858)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:871)
+
+```javascript
+category=>
+```
+
+Executa a etapa `callback@871:121` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@871:178 — linha 871
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:871)
 
 ```javascript
 name=>
 ```
 
-Executa a etapa `callback@858:178` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@871:178` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@859:60 — linha 859
+### callback@872:60 — linha 872
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:859)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:872)
 
 ```javascript
 category=>
 ```
 
-Executa a etapa `callback@859:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@872:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@860:982 — linha 860
+### callback@873:982 — linha 873
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:860)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:873)
 
 ```javascript
 ([emoji,label])=>
 ```
 
-Executa a etapa `callback@860:982` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@873:982` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@860:1685 — linha 860
+### callback@873:1685 — linha 873
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:860)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:873)
 
 ```javascript
 category=>
 ```
 
-Executa a etapa `callback@860:1685` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@873:1685` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@860:2258 — linha 860
+### callback@873:2258 — linha 873
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:860)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:873)
 
 ```javascript
 category=>
 ```
 
-Executa a etapa `callback@860:2258` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@873:2258` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@861:495 — linha 861
+### callback@874:495 — linha 874
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:861)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:874)
 
 ```javascript
 item=>
 ```
 
-Executa a etapa `callback@861:495` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@874:495` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `icon`; `esc`; `['VIACEP','MAPAS','STORE_IMAGES'].includes`.
 
@@ -7992,15 +9587,15 @@ Executa a etapa `callback@861:495` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@863:460 — linha 863
+### callback@876:460 — linha 876
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:863)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:876)
 
 ```javascript
 event=>
 ```
 
-Executa a etapa `callback@863:460` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@876:460` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `icon`; `esc`; `String`; `shortDate`.
 
@@ -8012,24 +9607,24 @@ Executa a etapa `callback@863:460` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@866:316 — linha 866
+### callback@879:316 — linha 879
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:866)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:879)
 
 ```javascript
 ([id,label])=>
 ```
 
-Executa a etapa `callback@866:316` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@879:316` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisões condicionais examinadas:**
 - `selected===id`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### loadAdminAuditEvents — linha 869
+### loadAdminAuditEvents — linha 882
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:869)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:882)
 
 ```javascript
 async function loadAdminAuditEvents()
@@ -8046,9 +9641,9 @@ async function loadAdminAuditEvents(){try{const result=await api('/admin/audit-e
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### openAdminStoreEditor — linha 871
+### openAdminStoreEditor — linha 884
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:871)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:884)
 
 ```javascript
 function openAdminStoreEditor(id)
@@ -8067,41 +9662,41 @@ Executa a etapa `open Admin Store Editor` neste módulo. O contrato concreto est
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@871:70 — linha 871
+### callback@884:70 — linha 884
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:871)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:884)
 
 ```javascript
 item=>
 ```
 
-Executa a etapa `callback@871:70` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@884:70` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@871:168 — linha 871
+### callback@884:168 — linha 884
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:871)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:884)
 
 ```javascript
 name=>
 ```
 
-Executa a etapa `callback@871:168` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@884:168` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@871:199 — linha 871
+### callback@884:199 — linha 884
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:871)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:884)
 
 ```javascript
 async updated=>
 ```
 
-Executa a etapa `callback@871:199` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@884:199` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `state.adminStores.map`; `notify`; `renderPage`.
 
@@ -8110,52 +9705,52 @@ Executa a etapa `callback@871:199` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@871:255 — linha 871
+### callback@884:255 — linha 884
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:871)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:884)
 
 ```javascript
 item=>
 ```
 
-Executa a etapa `callback@871:255` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@884:255` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisões condicionais examinadas:**
 - `item.id===updated.id`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@871:421 — linha 871
+### callback@884:421 — linha 884
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:871)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:884)
 
 ```javascript
 summary=>
 ```
 
-Executa a etapa `callback@871:421` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@884:421` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `notify`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@871:591 — linha 871
+### callback@884:591 — linha 884
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:871)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:884)
 
 ```javascript
 error=>
 ```
 
-Executa a etapa `callback@871:591` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@884:591` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `notify`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderAccount — linha 873
+### renderAccount — linha 886
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:873)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:886)
 
 ```javascript
 function renderAccount()
@@ -8194,56 +9789,56 @@ Executa a etapa `render Account` neste módulo. O contrato concreto está na ass
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@877:30 — linha 877
+### callback@890:30 — linha 890
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:877)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:890)
 
 ```javascript
 ([key])=>
 ```
 
-Executa a etapa `callback@877:30` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@890:30` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `roles.includes`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@877:93 — linha 877
+### callback@890:93 — linha 890
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:877)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:890)
 
 ```javascript
 ([key])=>
 ```
 
-Executa a etapa `callback@877:93` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@890:93` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@887:436 — linha 887
+### callback@900:436 — linha 900
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:887)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:900)
 
 ```javascript
 uf=>
 ```
 
-Executa a etapa `callback@887:436` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@900:436` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisões condicionais examinadas:**
 - `profile.state===uf`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@889:349 — linha 889
+### callback@902:349 — linha 902
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:889)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:902)
 
 ```javascript
 a=>
 ```
 
-Executa a etapa `callback@889:349` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@902:349` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `addressText`.
 
@@ -8252,39 +9847,39 @@ Executa a etapa `callback@889:349` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@892:58 — linha 892
+### callback@905:58 — linha 905
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:892)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:905)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@892:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@905:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@892:111 — linha 892
+### callback@905:111 — linha 905
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:892)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:905)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@892:111` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@905:111` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@893:246 — linha 893
+### callback@906:246 — linha 906
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:893)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:906)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@893:246` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@906:246` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `role`; `esc`.
 
@@ -8293,57 +9888,57 @@ Executa a etapa `callback@893:246` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@893:523 — linha 893
+### callback@906:523 — linha 906
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:893)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:906)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@893:523` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@906:523` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `registered.includes`; `pendingRoles.includes`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@893:724 — linha 893
+### callback@906:724 — linha 906
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:893)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:906)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@893:724` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@906:724` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `registered.includes`; `pendingRoles.includes`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@893:783 — linha 893
+### callback@906:783 — linha 906
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:893)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:906)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@893:783` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@906:783` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@895:142 — linha 895
+### callback@908:142 — linha 908
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:895)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:908)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@895:142` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@908:142` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `pill`.
 
@@ -8356,24 +9951,24 @@ Executa a etapa `callback@895:142` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@897:393 — linha 897
+### callback@910:393 — linha 910
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:897)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:910)
 
 ```javascript
 ([id,label])=>
 ```
 
-Executa a etapa `callback@897:393` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@910:393` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisões condicionais examinadas:**
 - `selected===id`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### requestOperatorAccess — linha 900
+### requestOperatorAccess — linha 913
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:900)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:913)
 
 ```javascript
 async function requestOperatorAccess(event)
@@ -8390,9 +9985,9 @@ async function requestOperatorAccess(event){event.preventDefault();const roleNam
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### requestCityAccess — linha 901
+### requestCityAccess — linha 914
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:901)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:914)
 
 ```javascript
 async function requestCityAccess(event)
@@ -8409,9 +10004,9 @@ async function requestCityAccess(event){event.preventDefault();const form=new Fo
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### refreshCitiesAfterSave — linha 903
+### refreshCitiesAfterSave — linha 916
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:903)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:916)
 
 ```javascript
 async function refreshCitiesAfterSave(saved)
@@ -8435,37 +10030,37 @@ async function refreshCitiesAfterSave(saved){try{state.adminServiceCities=await 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@903:170 — linha 903
+### callback@916:170 — linha 916
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:903)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:916)
 
 ```javascript
 city=>
 ```
 
-Executa a etapa `callback@903:170` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@916:170` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@903:278 — linha 903
+### callback@916:278 — linha 916
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:903)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:916)
 
 ```javascript
 (a,b)=>
 ```
 
-Executa a etapa `callback@903:278` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@916:278` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `a.city.localeCompare`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### createServiceCity — linha 904
+### createServiceCity — linha 917
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:904)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:917)
 
 ```javascript
 async function createServiceCity(event)
@@ -8485,9 +10080,9 @@ async function createServiceCity(event){event.preventDefault();const formElement
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### refreshStoreCategories — linha 905
+### refreshStoreCategories — linha 918
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:905)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:918)
 
 ```javascript
 async function refreshStoreCategories()
@@ -8506,21 +10101,21 @@ Executa a etapa `refresh Store Categories` neste módulo. O contrato concreto es
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@905:314 — linha 905
+### callback@918:314 — linha 918
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:905)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:918)
 
 ```javascript
 result=>
 ```
 
-Executa a etapa `callback@905:314` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@918:314` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### createStoreCategory — linha 906
+### createStoreCategory — linha 919
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:906)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:919)
 
 ```javascript
 async function createStoreCategory(event)
@@ -8541,23 +10136,23 @@ async function createStoreCategory(event){event.preventDefault();const formEleme
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@906:425 — linha 906
+### callback@919:425 — linha 919
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:906)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:919)
 
 ```javascript
 category=>
 ```
 
-Executa a etapa `callback@906:425` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@919:425` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### deleteStoreCategory — linha 907
+### deleteStoreCategory — linha 920
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:907)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:920)
 
 ```javascript
 async function deleteStoreCategory(id)
@@ -8583,37 +10178,37 @@ async function deleteStoreCategory(id){const category=state.adminStoreCategories
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@907:87 — linha 907
+### callback@920:87 — linha 920
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:907)
-
-```javascript
-item=>
-```
-
-Executa a etapa `callback@907:87` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `String`.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@907:414 — linha 907
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:907)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:920)
 
 ```javascript
 item=>
 ```
 
-Executa a etapa `callback@907:414` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@920:87` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### updateServiceCity — linha 908
+### callback@920:414 — linha 920
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:908)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:920)
+
+```javascript
+item=>
+```
+
+Executa a etapa `callback@920:414` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `String`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### updateServiceCity — linha 921
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:921)
 
 ```javascript
 async function updateServiceCity(event)
@@ -8637,23 +10232,23 @@ async function updateServiceCity(event){event.preventDefault();const form=event.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@908:157 — linha 908
+### callback@921:157 — linha 921
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:908)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:921)
 
 ```javascript
 city=>
 ```
 
-Executa a etapa `callback@908:157` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@921:157` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### toggleServiceCity — linha 909
+### toggleServiceCity — linha 922
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:909)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:922)
 
 ```javascript
 async function toggleServiceCity(id,enabled)
@@ -8678,23 +10273,23 @@ async function toggleServiceCity(id,enabled){const city=state.adminServiceCities
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@909:87 — linha 909
+### callback@922:87 — linha 922
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:909)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:922)
 
 ```javascript
 item=>
 ```
 
-Executa a etapa `callback@909:87` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@922:87` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### saveAdminProfile — linha 910
+### saveAdminProfile — linha 923
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:910)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:923)
 
 ```javascript
 async function saveAdminProfile(event)
@@ -8714,9 +10309,9 @@ async function saveAdminProfile(event){event.preventDefault();const payload=admi
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### openAdminAccountEditor — linha 912
+### openAdminAccountEditor — linha 925
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:912)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:925)
 
 ```javascript
 function openAdminAccountEditor(id)
@@ -8743,29 +10338,29 @@ function openAdminAccountEditor(id){const account=state.adminAccounts.find(item=
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@912:76 — linha 912
+### callback@925:76 — linha 925
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:912)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:925)
 
 ```javascript
 item=>
 ```
 
-Executa a etapa `callback@912:76` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@925:76` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@912:3020 — linha 912
+### callback@925:3020 — linha 925
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:912)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:925)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@912:3020` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@925:3020` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `modal.remove`.
 
@@ -8776,29 +10371,29 @@ button=>button.addEventListener('click',()=>modal.remove())
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@912:3060 — linha 912
+### callback@925:3060 — linha 925
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:912)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:925)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@912:3060` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@925:3060` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `modal.remove`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@912:3112 — linha 912
+### callback@925:3112 — linha 925
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:912)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:925)
 
 ```javascript
 event=>
 ```
 
-Executa a etapa `callback@912:3112` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@925:3112` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `modal.remove`.
 
@@ -8807,15 +10402,15 @@ Executa a etapa `callback@912:3112` neste módulo. O contrato concreto está na 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@912:3307 — linha 912
+### callback@925:3307 — linha 925
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:912)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:925)
 
 ```javascript
 input=>
 ```
 
-Executa a etapa `callback@912:3307` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@925:3307` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `input.addEventListener`; `formatCpfMask`.
 
@@ -8826,29 +10421,29 @@ input=>input.addEventListener('input',()=>input.value=formatCpfMask(input.value)
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@912:3345 — linha 912
+### callback@925:3345 — linha 925
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:912)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:925)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@912:3345` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@925:3345` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `formatCpfMask`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@912:3435 — linha 912
+### callback@925:3435 — linha 925
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:912)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:925)
 
 ```javascript
 input=>
 ```
 
-Executa a etapa `callback@912:3435` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@925:3435` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `input.addEventListener`; `input.value.replace`.
 
@@ -8859,23 +10454,23 @@ input=>input.addEventListener('input',()=>input.value=input.value.replace(/\D/g,
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@912:3473 — linha 912
+### callback@925:3473 — linha 925
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:912)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:925)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@912:3473` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@925:3473` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `input.value.replace`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### saveAdminAccount — linha 913
+### saveAdminAccount — linha 926
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:913)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:926)
 
 ```javascript
 async function saveAdminAccount(event)
@@ -8892,23 +10487,23 @@ async function saveAdminAccount(event){event.preventDefault();const form=event.c
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@913:207 — linha 913
+### callback@926:207 — linha 926
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:913)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:926)
 
 ```javascript
 item=>
 ```
 
-Executa a etapa `callback@913:207` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@926:207` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### saveProfile — linha 915
+### saveProfile — linha 928
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:915)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:928)
 
 ```javascript
 async function saveProfile(event)
@@ -8930,47 +10525,47 @@ try{state.profile=await api('/account/profile',{method:'PUT',body:JSON.stringify
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@917:207 — linha 917
+### callback@930:207 — linha 930
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:917)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:930)
 
 ```javascript
 k=>
 ```
 
-Executa a etapa `callback@917:207` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@930:207` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`; `form.get`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@917:579 — linha 917
+### callback@930:579 — linha 930
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:917)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:930)
 
 ```javascript
 a=>
 ```
 
-Executa a etapa `callback@917:579` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@930:579` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@917:1177 — linha 917
+### callback@930:1177 — linha 930
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:917)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:930)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@917:1177` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@930:1177` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### changePassword — linha 921
+### changePassword — linha 934
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:921)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:934)
 
 ```javascript
 async function changePassword(event)
@@ -8993,9 +10588,9 @@ async function changePassword(event){event.preventDefault();const form=new FormD
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### requestPhoneVerification — linha 923
+### requestPhoneVerification — linha 936
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:923)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:936)
 
 ```javascript
 async function requestPhoneVerification()
@@ -9012,9 +10607,9 @@ async function requestPhoneVerification(){try{await api('/account/phone-verifica
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### confirmPhoneVerification — linha 924
+### confirmPhoneVerification — linha 937
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:924)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:937)
 
 ```javascript
 async function confirmPhoneVerification(event)
@@ -9031,9 +10626,9 @@ async function confirmPhoneVerification(event){event.preventDefault();const code
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### switchRole — linha 926
+### switchRole — linha 939
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:926)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:939)
 
 ```javascript
 async function switchRole(nextRole)
@@ -9054,9 +10649,9 @@ Executa a etapa `switch Role` neste módulo. O contrato concreto está na assina
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderNotifications — linha 928
+### renderNotifications — linha 941
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:928)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:941)
 
 ```javascript
 function renderNotifications()
@@ -9078,15 +10673,15 @@ Executa a etapa `render Notifications` neste módulo. O contrato concreto está 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@931:62 — linha 931
+### callback@944:62 — linha 944
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:931)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:944)
 
 ```javascript
 n=>
 ```
 
-Executa a etapa `callback@931:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@944:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `['error','warn','warning'].includes`; `shortDate`.
 
@@ -9098,9 +10693,9 @@ Executa a etapa `callback@931:62` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderFinance — linha 934
+### renderFinance — linha 947
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:934)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:947)
 
 ```javascript
 function renderFinance()
@@ -9108,7 +10703,7 @@ function renderFinance()
 
 Executa a etapa `render Finance` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `role`; `activeMerchantStore`; `esc`; `icon`; ``.
+**Colaborações:** `role`; `activeMerchantStore`; `esc`; `icon`.
 
 **Decisões condicionais examinadas:**
 - `(role()==='MERCHANT')`
@@ -9118,25 +10713,13 @@ Executa a etapa `render Finance` neste módulo. O contrato concreto está na ass
 **Saída declarada:**
 - `return \`<div class="page-head"><div><span class="eyebrow">Financeiro da loja</span><h1>Recebimentos</h1><p>Cadastre uma loja para configurar os recebimentos.</p></div></div>\`;`
 - `return \`<div class="page-head"><div><span class="eyebrow">Financeiro · ${esc(store.name)}</span><h1>Recebimentos e saques</h1><p>Os pagamentos online são enviados diretamente à conta Mercado Pago conectada a esta loja.</p></div></div><section class="panel finance-card"><div class="finance-icon">${icon('receipt',24)}</div><div><span class="eyebrow">Conta de recebimento</span><h2>Mercado Pago</h2><p class="store-desc">${state.paymentConnection?.connected?'Conta conectada. Seu saldo, prazos e saques ficam disponíveis no Mercado Pago.':'Conecte sua conta para receber pagamentos online. A conta deve pertencer ao responsável pela loja.'}</p><div class="action-row">${state.paymentConnection?.connected?'<a class="btn" href="https://www.mercadopago.com.br/home" target="_blank" rel="noopener noreferrer">Abrir Mercado Pago ↗</a>':\`<button class="btn" data-connect-mercadopago="${esc(store.id)}">Conectar Mercado Pago</button>\`}</div></div></section><div class="alert-strip info"><span>i</span><span>O FoodDelivery não guarda a senha do Mercado Pago nem inicia saques em seu nome. Confira saldo, tarifas, dados bancários e confirme a retirada dentro do próprio Mercado Pago. Reservas com pagamento após o serviço não passam pelo checkout da plataforma.</span></div>\`;`
-- `return \`<div class="page-head"><div><span class="eyebrow">Financeiro do entregador</span><h1>Ganhos e repasses</h1><p>Acompanhe o status dos repasses da plataforma.</p></div></div><section class="panel finance-card"><div class="finance-icon">${icon('truck',24)}</div><div><span class="eyebrow">Entregas concluídas</span><h2>${delivered}</h2><p class="store-desc">As corridas ainda não têm remuneração nem repasse configurados pelo FoodDelivery. Por isso, esta tela não apresenta saldo fictício nem permite solicitar saque sem valor devido registrado.</p><button class="btn outline" data-help>Falar com atendimento</button></div></section><div class="alert-strip warn"><span>!</span><span>Para habilitar saques automáticos, a plataforma precisa definir a remuneração por entrega, registrar os valores devidos e integrar um provedor de repasses Pix. Até essa configuração, combine qualquer pagamento diretamente com a administração e não informe senhas ou códigos de acesso.</span></div>\`;`
+- `return '<div class="page-head"><div><span class="eyebrow">Financeiro do entregador</span><h1>Ganhos e repasses</h1><p>Valores registrados por entregas concluídas e solicitações à administração.</p></div></div><div data-courier-finance="courier"></div>';`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@940:49 — linha 940
+### openNotificationTarget — linha 957
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:940)
-
-```javascript
-d=>
-```
-
-Executa a etapa `callback@940:49` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### openNotificationTarget — linha 944
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:944)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:957)
 
 ```javascript
 async function openNotificationTarget(target,id)
@@ -9168,35 +10751,35 @@ if(id){const selectors={ORDER:`[data-order-card="${CSS.escape(id)}"]`,RESERVATIO
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@951:45 — linha 951
+### callback@964:45 — linha 964
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:951)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:964)
 
 ```javascript
 ([page])=>
 ```
 
-Executa a etapa `callback@951:45` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@964:45` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@955:388 — linha 955
+### callback@968:388 — linha 968
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:955)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:968)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@955:388` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@968:388` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `card?.classList.remove`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderMerchant — linha 958
+### renderMerchant — linha 971
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:958)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:971)
 
 ```javascript
 function renderMerchant()
@@ -9231,113 +10814,113 @@ if(merchantHeadings[selected]&&headerNode){headerNode.querySelector('h1').textCo
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@964:26 — linha 964
+### callback@977:26 — linha 977
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:964)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:977)
 
 ```javascript
 node=>
 ```
 
-Executa a etapa `callback@964:26` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@977:26` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `node.classList.contains`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@965:28 — linha 965
+### callback@978:28 — linha 978
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:965)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:978)
 
 ```javascript
 node=>
 ```
 
-Executa a etapa `callback@965:28` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@978:28` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `node.classList.contains`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@966:29 — linha 966
+### callback@979:29 — linha 979
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:966)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:979)
 
 ```javascript
 node=>
 ```
 
-Executa a etapa `callback@966:29` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@979:29` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `node.querySelector?.`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@967:29 — linha 967
+### callback@980:29 — linha 980
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:967)
-
-```javascript
-node=>
-```
-
-Executa a etapa `callback@967:29` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `node.classList.contains`.
-
-**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### callback@968:28 — linha 968
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:968)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:980)
 
 ```javascript
 node=>
 ```
 
-Executa a etapa `callback@968:28` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@980:29` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `node.classList.contains`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@975:1138 — linha 975
+### callback@981:28 — linha 981
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:975)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:981)
+
+```javascript
+node=>
+```
+
+Executa a etapa `callback@981:28` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `node.classList.contains`.
+
+**Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@988:1138 — linha 988
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:988)
 
 ```javascript
 o=>
 ```
 
-Executa a etapa `callback@975:1138` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@988:1138` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `['COMPLETED','CANCELLED','REJECTED'].includes`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@976:53 — linha 976
+### callback@989:53 — linha 989
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:976)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:989)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@976:53` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@989:53` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@977:536 — linha 977
+### callback@990:536 — linha 990
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:977)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:990)
 
 ```javascript
 s=>
 ```
 
-Executa a etapa `callback@977:536` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@990:536` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `String`.
 
@@ -9346,24 +10929,24 @@ Executa a etapa `callback@977:536` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@977:762 — linha 977
+### callback@990:762 — linha 990
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:977)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:990)
 
 ```javascript
 ([id,label])=>
 ```
 
-Executa a etapa `callback@977:762` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@990:762` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisões condicionais examinadas:**
 - `selected===id`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### activeMerchantStore — linha 980
+### activeMerchantStore — linha 993
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:980)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:993)
 
 ```javascript
 function activeMerchantStore()
@@ -9378,23 +10961,23 @@ Executa a etapa `active Merchant Store` neste módulo. O contrato concreto está
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@980:60 — linha 980
+### callback@993:60 — linha 993
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:980)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:993)
 
 ```javascript
 s=>
 ```
 
-Executa a etapa `callback@980:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@993:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### selectMerchantStore — linha 981
+### selectMerchantStore — linha 994
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:981)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:994)
 
 ```javascript
 async function selectMerchantStore(event)
@@ -9409,9 +10992,9 @@ Executa a etapa `select Merchant Store` neste módulo. O contrato concreto está
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderMerchantAll — linha 983
+### renderMerchantAll — linha 996
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:983)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:996)
 
 ```javascript
 function renderMerchantAll()
@@ -9440,29 +11023,29 @@ Executa a etapa `render Merchant All` neste módulo. O contrato concreto está n
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@990:234 — linha 990
+### callback@1003:234 — linha 1003
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:990)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1003)
 
 ```javascript
 o=>
 ```
 
-Executa a etapa `callback@990:234` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1003:234` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `['COMPLETED','CANCELLED','REJECTED'].includes`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@991:232 — linha 991
+### callback@1004:232 — linha 1004
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:991)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1004)
 
 ```javascript
 (item,i)=>
 ```
 
-Executa a etapa `callback@991:232` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1004:232` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `catalogItemIcon`; `esc`; `money`.
 
@@ -9473,9 +11056,9 @@ Executa a etapa `callback@991:232` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### storeCategoryOptions — linha 998
+### storeCategoryOptions — linha 1011
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:998)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1011)
 
 ```javascript
 function storeCategoryOptions(selected='')
@@ -9493,15 +11076,15 @@ Executa a etapa `store Category Options` neste módulo. O contrato concreto est�
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@998:80 — linha 998
+### callback@1011:80 — linha 1011
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:998)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1011)
 
 ```javascript
 c=>
 ```
 
-Executa a etapa `callback@998:80` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1011:80` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`.
 
@@ -9510,9 +11093,9 @@ Executa a etapa `callback@998:80` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### storeTimezoneOptions — linha 999
+### storeTimezoneOptions — linha 1012
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:999)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1012)
 
 ```javascript
 function storeTimezoneOptions(selected='America/Sao_Paulo')
@@ -9530,24 +11113,24 @@ Executa a etapa `store Timezone Options` neste módulo. O contrato concreto est�
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@999:246 — linha 999
+### callback@1012:246 — linha 1012
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:999)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1012)
 
 ```javascript
 ([value,label])=>
 ```
 
-Executa a etapa `callback@999:246` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1012:246` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisões condicionais examinadas:**
 - `value===(selected||'America/Sao_Paulo')`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### storeFields — linha 1000
+### storeFields — linha 1013
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1000)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1013)
 
 ```javascript
 function storeFields()
@@ -9562,9 +11145,9 @@ Executa a etapa `store Fields` neste módulo. O contrato concreto está na assin
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderMerchantOrders — linha 1002
+### renderMerchantOrders — linha 1015
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1002)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1015)
 
 ```javascript
 function renderMerchantOrders()
@@ -9585,15 +11168,15 @@ Executa a etapa `render Merchant Orders` neste módulo. O contrato concreto est�
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1005:229 — linha 1005
+### callback@1018:229 — linha 1018
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1005)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1018)
 
 ```javascript
 o=>
 ```
 
-Executa a etapa `callback@1005:229` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1018:229` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `String`; `shortDate`; `o.lines.map`; `chatPanel`; `money`; `pill`; `merchantOrderAction`.
 
@@ -9604,23 +11187,23 @@ Executa a etapa `callback@1005:229` neste módulo. O contrato concreto está na 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1005:464 — linha 1005
+### callback@1018:464 — linha 1018
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1005)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1018)
 
 ```javascript
 i=>
 ```
 
-Executa a etapa `callback@1005:464` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1018:464` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### merchantOrderAction — linha 1008
+### merchantOrderAction — linha 1021
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1008)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1021)
 
 ```javascript
 function merchantOrderAction(order)
@@ -9646,9 +11229,9 @@ Executa a etapa `merchant Order Action` neste módulo. O contrato concreto está
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderMerchantReservations — linha 1017
+### renderMerchantReservations — linha 1030
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1017)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1030)
 
 ```javascript
 function renderMerchantReservations()
@@ -9669,19 +11252,19 @@ Executa a etapa `render Merchant Reservations` neste módulo. O contrato concret
 - `r.customerNote`
 
 **Saída declarada:**
-- `return \`<div class="page-head"><div><span class="eyebrow">Agenda do seu negócio</span><h1>Reservas</h1><p>Organize os próximos atendimentos.</p></div><button class="btn light" data-action="reload-merchant-reservations">↻ Atualizar</button></div> <section class="panel professional-panel"><div class="section-head"><div><h3>Profissionais da agenda</h3><p class="store-desc">Cada profissional atende uma reserva por horário. O cliente pode escolher ou pedir o primeiro disponível.</p></div></div><form class="action-row" data-professional-create><label class="sr-only" for="professional-name">Nome do profissional</label><input id="professional-name" name="name" required maxlength="100" placeholder="Nome do profissional"/><button class="btn small" type="submit">Adicionar profissional</button></form>${state.merchantProfessionals.length?\`<div class="professional-list">${state.merchantProfessionals.map(person=>\`<article class="professional-row"><span class="professional-avatar">${esc(person.name.slice(0,1).toUpperCase())}</span><strong>${esc(person.name)}</strong><span class="status-pill ${person.active?'done':'cancel'}">${person.active?'Ativo':'Inativo'}</span><button class="btn outline small" type="button" data-professional-active="${esc(person.id)}" data-active="${!person.active}">${person.active?'Desativar':'Ativar'}</button></article>\`).join('')}</div>\`:'<p class="store-desc">Adicione os profissionais que atendem nesta loja. O cliente poderá escolher um ou pedir o primeiro disponível.</p>'}</section> ${state.merchantLoadError?\`<div class="alert-strip warn"><span>!</span><span>${esc(state.merchantLoadError)}</span></div>\`:''}${list.length?list.map(r=>\`<article class="order-card" data-reservation-card="${esc(r.id)}"><div class="order-card-top"><div><h3>${esc(r.serviceName)}</h3><p>${dateTimeInZone(r.startsAt,r.store.timezone||'America/Sao_Paulo')} · Reserva ${esc(String(r.id).slice(0,8).toUpperCase())}${r.professionalName?\` · ${esc(r.professionalName)}\`:''}</p></div>${pill(r.status)}</div>${r.operatingHoursNotice?\`<div class="alert-strip info"><span>◷</span><span>${esc(r.operatingHoursNotice)}</span></div>\`:''}${r.payAfterService?'<div class="alert-strip info"><span>R$</span><span>Pagamento será feito diretamente à loja após o atendimento. Não há cobrança pelo site.</span></div>':''}${r.customerNote?\`<div class="customer-note"><strong>Comentário do cliente</strong><p>${esc(r.customerNote)}</p></div>\`:''}<div class="order-bottom"><span>${money(r.amountCents)}</span><span>${reservationActions(r)}</span></div><div class="action-row"><button class="btn outline small" data-open-chat-type="reservations" data-open-chat-id="${esc(r.id)}">Mensagens</button></div>${chatPanel('reservations',r.id)}</article>\`).join(''):emptyState('🗓️','Sua agenda está livre','Reservas confirmadas aparecerão aqui, mesmo quando o pagamento for combinado no local.')}\`;`
+- `return \`<div class="page-head"><div><span class="eyebrow">Agenda do seu negócio</span><h1>Reservas</h1><p>Organize os próximos atendimentos.</p></div><button class="btn light" data-action="reload-merchant-reservations">↻ Atualizar</button></div> <section class="panel professional-panel"><div class="section-head"><div><h3>Profissionais da agenda</h3><p class="store-desc">Cada profissional atende uma reserva por horário. O cliente pode escolher ou pedir o primeiro disponível.</p></div></div><form class="action-row" data-professional-create><label class="sr-only" for="professional-name">Nome do profissional</label><input id="professional-name" name="name" required maxlength="100" placeholder="Nome do profissional"/><button class="btn small" type="submit">Adicionar profissional</button></form>${state.merchantProfessionals.length?\`<div class="professional-list">${state.merchantProfessionals.map(person=>\`<article class="professional-row"><span class="professional-avatar">${esc(person.name.slice(0,1).toUpperCase())}</span><strong>${esc(person.name)}</strong><span class="status-pill ${person.active?'done':'cancel'}">${person.active?'Ativo':'Inativo'}</span><button class="btn outline small" type="button" data-professional-hours="${esc(person.id)}">Disponibilidade</button><button class="btn outline small" type="button" data-professional-active="${esc(person.id)}" data-active="${!person.active}">${person.active?'Desativar':'Ativar'}</button></article>\`).join('')}</div>\`:'<p class="store-desc">Adicione os profissionais que atendem nesta loja. O cliente poderá escolher um ou pedir o primeiro disponível.</p>'}</section> ${state.merchantLoadError?\`<div class="alert-strip warn"><span>!</span><span>${esc(state.merchantLoadError)}</span></div>\`:''}${list.length?list.map(r=>\`<article class="order-card" data-reservation-card="${esc(r.id)}"><div class="order-card-top"><div><h3>${esc(r.serviceName)}</h3><p>${dateTimeInZone(r.startsAt,r.store.timezone||'America/Sao_Paulo')} · Reserva ${esc(String(r.id).slice(0,8).toUpperCase())}${r.professionalName?\` · ${esc(r.professionalName)}\`:''}</p></div>${pill(r.status)}</div>${r.operatingHoursNotice?\`<div class="alert-strip info"><span>◷</span><span>${esc(r.operatingHoursNotice)}</span></div>\`:''}${r.payAfterService?'<div class="alert-strip info"><span>R$</span><span>Pagamento será feito diretamente à loja após o atendimento. Não há cobrança pelo site.</span></div>':''}${r.customerNote?\`<div class="customer-note"><strong>Comentário do cliente</strong><p>${esc(r.customerNote)}</p></div>\`:''}<div class="order-bottom"><span>${money(r.amountCents)}</span><span>${reservationActions(r)}</span></div><div class="action-row"><button class="btn outline small" data-open-chat-type="reservations" data-open-chat-id="${esc(r.id)}">Mensagens</button></div>${chatPanel('reservations',r.id)}</article>\`).join(''):emptyState('🗓️','Sua agenda está livre','Reservas confirmadas aparecerão aqui, mesmo quando o pagamento for combinado no local.')}\`;`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1020:664 — linha 1020
+### callback@1033:664 — linha 1033
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1020)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1033)
 
 ```javascript
 person=>
 ```
 
-Executa a etapa `callback@1020:664` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1033:664` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `person.name.slice`.
 
@@ -9690,15 +11273,15 @@ Executa a etapa `callback@1020:664` neste módulo. O contrato concreto está na 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1021:154 — linha 1021
+### callback@1034:154 — linha 1034
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1021)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1034)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@1021:154` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1034:154` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `dateTimeInZone`; `String`; `pill`; `money`; `reservationActions`; `chatPanel`.
 
@@ -9710,9 +11293,9 @@ Executa a etapa `callback@1021:154` neste módulo. O contrato concreto está na 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### reservationActions — linha 1024
+### reservationActions — linha 1037
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1024)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1037)
 
 ```javascript
 function reservationActions(r)
@@ -9736,9 +11319,9 @@ Executa a etapa `reservation Actions` neste módulo. O contrato concreto está n
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderCourier — linha 1026
+### renderCourier — linha 1039
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1026)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1039)
 
 ```javascript
 function renderCourier()
@@ -9750,44 +11333,50 @@ Executa a etapa `render Courier` neste módulo. O contrato concreto está na ass
 
 **Decisões condicionais examinadas:**
 - `state.offers.length`
+- `o.courierFeeCents==null`
 - `state.deliveries.length`
+- `d.courierFeeCents==null`
 - `['DELIVERED','CANCELLED'].includes(d.status)`
 - `d.customerNote`
 - `d.status==='ASSIGNED'`
 - `d.status==='PICKED_UP'||d.status==='IN_TRANSIT'||d.status==='DELIVERED'`
 
 **Saída declarada:**
-- `return \`<div class="page-head"><div><span class="eyebrow">Área do entregador</span><h1>Suas entregas</h1><p>Escolha uma oferta e acompanhe o trajeto até a conclusão.</p></div><button class="btn light" data-action="reload-courier">↻ Atualizar</button></div> <div class="section-head"><h2>Ofertas disponíveis</h2><span class="store-meta">${state.offers.length} aguardando aceite</span></div> ${state.offers.length?\`<div class="store-grid">${state.offers.map(o=>\`<article class="panel"><span class="eyebrow">Nova entrega</span><h3 style="margin-top:8px">${esc(o.storeName)}</h3><p class="store-desc">Pedido ${esc(String(o.orderId).slice(0,8).toUpperCase())} · valor ${money(o.orderTotalCents)}</p><div class="alert-strip info">⌖ Endereço e dados do cliente ficam visíveis depois que você aceitar.</div><button class="btn block" data-accept-delivery="${esc(o.deliveryId)}">Aceitar entrega</button></article>\`).join('')}</div>\`:emptyState('🚲','Nenhuma oferta por enquanto','Fique de olho. As novas entregas aparecerão nesta tela.')} <div class="section-head"><h2>Entregas e histórico</h2></div> ${state.deliveries.length?state.deliveries.map(d=>\`<article class="order-card" data-delivery-card="${esc(d.deliveryId)}"><div class="order-card-top"><div><h3>${esc(d.storeName)}</h3><p>Valor do pedido: ${money(d.orderTotalCents)} · Não representa remuneração da entrega.</p><p>${['DELIVERED','CANCELLED'].includes(d.status)?'Operação encerrada. Endereço e observação do cliente ficam ocultos.':\`Retirar na loja e entregar em: ${esc(d.deliveryAddress||'Endereço não informado')}\`}</p></div>${pill(d.status)}</div>${d.customerNote?\`<div class="customer-note"><strong>Observação do cliente</strong><p>${esc(d.customerNote)}</p></div>\`:''}<div class="order-bottom"><span>Pedido ${esc(String(d.orderId).slice(0,8).toUpperCase())}</span><span>${courierNext(d)}</span></div>${d.status==='ASSIGNED'?\`<div class="action-row"><button class="btn outline small" data-open-chat-type="deliveries" data-open-chat-id="${esc(d.deliveryId)}">Conversar com cliente</button></div>\`:d.status==='PICKED_UP'||d.status==='IN_TRANSIT'||d.status==='DELIVERED'?\`<div class="action-row"><button class="btn outline small" data-open-chat-type="deliveries" data-open-chat-id="${esc(d.deliveryId)}">Ver histórico do chat</button></div>\`:''}${chatPanel('deliveries',d.deliveryId)}</article>\`).join(''):''}\`;`
+- `return \`<div class="page-head"><div><span class="eyebrow">Área do entregador</span><h1>Suas entregas</h1><p>Escolha uma oferta e acompanhe o trajeto até a conclusão.</p></div><button class="btn light" data-action="reload-courier">↻ Atualizar</button></div> <div class="section-head"><h2>Ofertas disponíveis</h2><span class="store-meta">${state.offers.length} aguardando aceite</span></div> ${state.offers.length?\`<div class="store-grid">${state.offers.map(o=>\`<article class="panel"><span class="eyebrow">Nova entrega</span><h3 style="margin-top:8px">${esc(o.storeName)}</h3><p class="store-desc">Pedido ${esc(String(o.orderId).slice(0,8).toUpperCase())} · valor ${money(o.orderTotalCents)}</p><p><strong>Sua remuneração: ${o.courierFeeCents==null?'será definida antes do aceite':money(o.courierFeeCents)}</strong></p><div class="alert-strip info">⌖ Endereço e dados do cliente ficam visíveis depois que você aceitar.</div><button class="btn block" data-accept-delivery="${esc(o.deliveryId)}">Aceitar entrega</button></article>\`).join('')}</div>\`:emptyState('🚲','Nenhuma oferta por enquanto','Fique de olho. As novas entregas aparecerão nesta tela.')} <div class="section-head"><h2>Entregas e histórico</h2></div> ${state.deliveries.length?state.deliveries.map(d=>\`<article class="order-card" data-delivery-card="${esc(d.deliveryId)}"><div class="order-card-top"><div><h3>${esc(d.storeName)}</h3><p>Valor do pedido: ${money(d.orderTotalCents)} · Não representa remuneração da entrega.</p><p><strong>Remuneração desta entrega: ${d.courierFeeCents==null?'sem valor histórico registrado':money(d.courierFeeCents)}</strong></p><p>${['DELIVERED','CANCELLED'].includes(d.status)?'Operação encerrada. Endereço e observação do cliente ficam ocultos.':\`Retirar na loja e entregar em: ${esc(d.deliveryAddress||'Endereço não informado')}\`}</p></div>${pill(d.status)}</div>${d.customerNote?\`<div class="customer-note"><strong>Observação do cliente</strong><p>${esc(d.customerNote)}</p></div>\`:''}<div class="order-bottom"><span>Pedido ${esc(String(d.orderId).slice(0,8).toUpperCase())}</span><span>${courierNext(d)}</span></div>${d.status==='ASSIGNED'?\`<div class="action-row"><button class="btn outline small" data-open-chat-type="deliveries" data-open-chat-id="${esc(d.deliveryId)}">Conversar com cliente</button></div>\`:d.status==='PICKED_UP'||d.status==='IN_TRANSIT'||d.status==='DELIVERED'?\`<div class="action-row"><button class="btn outline small" data-open-chat-type="deliveries" data-open-chat-id="${esc(d.deliveryId)}">Ver histórico do chat</button></div>\`:''}${chatPanel('deliveries',d.deliveryId)}</article>\`).join(''):''}\`;`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1029:71 — linha 1029
+### callback@1042:71 — linha 1042
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1029)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1042)
 
 ```javascript
 o=>
 ```
 
-Executa a etapa `callback@1029:71` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1042:71` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `String`; `money`.
 
+**Decisões condicionais examinadas:**
+- `o.courierFeeCents==null`
+
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1031:52 — linha 1031
+### callback@1044:52 — linha 1044
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1031)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1044)
 
 ```javascript
 d=>
 ```
 
-Executa a etapa `callback@1031:52` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1044:52` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `money`; `['DELIVERED','CANCELLED'].includes`; `pill`; `String`; `courierNext`; `chatPanel`.
 
 **Decisões condicionais examinadas:**
+- `d.courierFeeCents==null`
 - `['DELIVERED','CANCELLED'].includes(d.status)`
 - `d.customerNote`
 - `d.status==='ASSIGNED'`
@@ -9795,9 +11384,9 @@ Executa a etapa `callback@1031:52` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### courierNext — linha 1034
+### courierNext — linha 1047
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1034)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1047)
 
 ```javascript
 function courierNext(d)
@@ -9817,9 +11406,9 @@ Executa a etapa `courier Next` neste módulo. O contrato concreto está na assin
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderAdmin — linha 1036
+### renderAdmin — linha 1049
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1036)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1049)
 
 ```javascript
 function renderAdmin()
@@ -9827,13 +11416,14 @@ function renderAdmin()
 
 Executa a etapa `render Admin` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `document.createElement`; `renderAdminAll`; `Object.fromEntries`; `adminAreaNames.map`; `[...source.content.querySelectorAll`; `source.content.querySelectorAll`; `state.adminTickets.filter`; `state.adminPlatformRequests.filter`; `state.adminStores.filter`; `source.content.querySelector`; `headerNode.querySelector`; `[['profiles','Perfis operacionais'],['accounts','Contas e segurança'],['create','Criar acesso']].map`; `renderAdminTeamArea`; `renderAdminAreas`; `esc`; `sections.map`.
+**Colaborações:** `document.createElement`; `renderAdminAll`; `Object.fromEntries`; `adminAreaNames.map`; `[...source.content.querySelectorAll`; `source.content.querySelectorAll`; `state.adminTickets.filter`; `state.adminPlatformRequests.filter`; `state.adminStores.filter`; `source.content.querySelector`; `headerNode.querySelector`; `[['profiles','Perfis operacionais'],['accounts','Contas e segurança'],['create','Criar acesso']].map`; `renderAdminAreas`; `renderAdminTeamArea`; `esc`; `sections.map`.
 
 **Decisões condicionais examinadas:**
 - `state.adminTickets.filter(t=>t.status!=='CLOSED').length`
 - `selected==='team'`
 - `(heading&&headerNode)`
 - `state.adminTeamSection===id`
+- `selected==='finance'`
 - `selected==='covers'`
 - `state.adminLoadError`
 - `selected===id`
@@ -9849,137 +11439,137 @@ if(heading&&headerNode){headerNode.querySelector('h1').textContent=heading[0];he
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1038:56 — linha 1038
+### callback@1051:56 — linha 1051
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1038)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1051)
 
 ```javascript
 name=>
 ```
 
-Executa a etapa `callback@1038:56` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1051:56` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `[...source.content.querySelectorAll`; `source.content.querySelectorAll`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1038:140 — linha 1038
+### callback@1051:140 — linha 1051
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1038)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1051)
 
 ```javascript
 node=>
 ```
 
-Executa a etapa `callback@1038:140` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1051:140` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1040:95 — linha 1040
+### callback@1053:95 — linha 1053
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1040)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1053)
 
 ```javascript
 t=>
 ```
 
-Executa a etapa `callback@1040:95` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1053:95` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1040:159 — linha 1040
+### callback@1053:159 — linha 1053
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1040)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1053)
 
 ```javascript
 t=>
 ```
 
-Executa a etapa `callback@1040:159` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1053:159` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1040:266 — linha 1040
+### callback@1053:266 — linha 1053
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1040)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1053)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@1040:266` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1053:266` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1041:189 — linha 1041
+### callback@1054:189 — linha 1054
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1041)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1054)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@1041:189` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1054:189` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1041:438 — linha 1041
+### callback@1054:438 — linha 1054
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1041)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1054)
 
 ```javascript
 store=>
 ```
 
-Executa a etapa `callback@1041:438` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1054:438` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1041:663 — linha 1041
+### callback@1054:663 — linha 1054
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1041)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1054)
 
 ```javascript
 t=>
 ```
 
-Executa a etapa `callback@1041:663` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1054:663` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1048:214 — linha 1048
+### callback@1061:214 — linha 1061
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1048)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1061)
 
 ```javascript
 ([id,label])=>
 ```
 
-Executa a etapa `callback@1048:214` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1061:214` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisões condicionais examinadas:**
 - `state.adminTeamSection===id`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1051:112 — linha 1051
+### callback@1064:112 — linha 1064
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1051)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1064)
 
 ```javascript
 ([id,label])=>
 ```
 
-Executa a etapa `callback@1051:112` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1064:112` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisões condicionais examinadas:**
 - `selected===id`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### renderAdminAll — linha 1054
+### renderAdminAll — linha 1067
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1054)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1067)
 
 ```javascript
 function renderAdminAll()
@@ -10029,51 +11619,51 @@ Executa a etapa `render Admin All` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1055:48 — linha 1055
+### callback@1068:48 — linha 1068
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1055)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1068)
 
 ```javascript
 store=>
 ```
 
-Executa a etapa `callback@1055:48` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1068:48` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1058:60 — linha 1058
+### callback@1071:60 — linha 1071
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1058)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1071)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@1058:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1071:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1059:49 — linha 1059
+### callback@1072:49 — linha 1072
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1059)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1072)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@1059:49` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1072:49` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1064:52 — linha 1064
+### callback@1077:52 — linha 1077
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1064)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1077)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@1064:52` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1077:52` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `shortDate`; `pill`.
 
@@ -10087,15 +11677,15 @@ Executa a etapa `callback@1064:52` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1065:97 — linha 1065
+### callback@1078:97 — linha 1078
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1065)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1078)
 
 ```javascript
 operator=>
 ```
 
-Executa a etapa `callback@1065:97` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1078:97` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `shortDate`; `pill`.
 
@@ -10104,39 +11694,39 @@ Executa a etapa `callback@1065:97` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1067:165 — linha 1067
+### callback@1080:165 — linha 1080
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1067)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1080)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@1067:165` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1080:165` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1067:232 — linha 1067
+### callback@1080:232 — linha 1080
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1067)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1080)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@1067:232` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1080:232` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1067:261 — linha 1067
+### callback@1080:261 — linha 1080
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1067)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1080)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@1067:261` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1080:261` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `pill`.
 
@@ -10148,15 +11738,15 @@ Executa a etapa `callback@1067:261` neste módulo. O contrato concreto está na 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1069:539 — linha 1069
+### callback@1082:539 — linha 1082
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1069)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1082)
 
 ```javascript
 operator=>
 ```
 
-Executa a etapa `callback@1069:539` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1082:539` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `pill`.
 
@@ -10166,15 +11756,15 @@ Executa a etapa `callback@1069:539` neste módulo. O contrato concreto está na 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1071:58 — linha 1071
+### callback@1084:58 — linha 1084
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1071)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1084)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@1071:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1084:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `String`; `money`; `pill`; `shortDate`.
 
@@ -10186,15 +11776,15 @@ Executa a etapa `callback@1071:58` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1072:448 — linha 1072
+### callback@1085:448 — linha 1085
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1072)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1085)
 
 ```javascript
 ([key,label])=>
 ```
 
-Executa a etapa `callback@1072:448` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1085:448` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `filterAdminStores`.
 
@@ -10204,15 +11794,15 @@ Executa a etapa `callback@1072:448` neste módulo. O contrato concreto está na 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1072:760 — linha 1072
+### callback@1085:760 — linha 1085
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1072)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1085)
 
 ```javascript
 s=>
 ```
 
-Executa a etapa `callback@1072:760` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1085:760` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `pill`; `adminStoreStatus`; `Number`.
 
@@ -10222,15 +11812,15 @@ Executa a etapa `callback@1072:760` neste módulo. O contrato concreto está na 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1073:755 — linha 1073
+### callback@1086:755 — linha 1086
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1073)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1086)
 
 ```javascript
 a=>
 ```
 
-Executa a etapa `callback@1073:755` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1086:755` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; ``; `pill`.
 
@@ -10244,27 +11834,27 @@ Executa a etapa `callback@1073:755` neste módulo. O contrato concreto está na 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1073:935 — linha 1073
+### callback@1086:935 — linha 1086
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1073)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1086)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@1073:935` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1086:935` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1073:1508 — linha 1073
+### callback@1086:1508 — linha 1086
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1073)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1086)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@1073:1508` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1086:1508` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** ``; `esc`.
 
@@ -10276,15 +11866,15 @@ Executa a etapa `callback@1073:1508` neste módulo. O contrato concreto está na
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1074:1131 — linha 1074
+### callback@1087:1131 — linha 1087
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1074)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1087)
 
 ```javascript
 t=>
 ```
 
-Executa a etapa `callback@1074:1131` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1087:1131` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `esc`; `pill`.
 
@@ -10294,9 +11884,9 @@ Executa a etapa `callback@1074:1131` neste módulo. O contrato concreto está na
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### createStore — linha 1077
+### createStore — linha 1090
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1077)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1090)
 
 ```javascript
 async function createStore(event)
@@ -10319,9 +11909,9 @@ async function createStore(event){event.preventDefault();const form=new FormData
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### resubmitStore — linha 1078
+### resubmitStore — linha 1091
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1078)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1091)
 
 ```javascript
 async function resubmitStore(id)
@@ -10338,9 +11928,9 @@ async function resubmitStore(id){try{await api(`/merchant/stores/${id}/resubmit`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### updateStore — linha 1081
+### updateStore — linha 1094
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1081)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1094)
 
 ```javascript
 async function updateStore(event)
@@ -10365,9 +11955,9 @@ async function updateStore(event){event.preventDefault();const form=new FormData
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### syncCatalogItemFields — linha 1083
+### syncCatalogItemFields — linha 1096
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1083)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1096)
 
 ```javascript
 function syncCatalogItemFields(form)
@@ -10390,9 +11980,9 @@ Executa a etapa `sync Catalog Item Fields` neste módulo. O contrato concreto es
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### syncCatalogItemRisk — linha 1084
+### syncCatalogItemRisk — linha 1097
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1084)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1097)
 
 ```javascript
 function syncCatalogItemRisk(form)
@@ -10413,9 +12003,9 @@ Executa a etapa `sync Catalog Item Risk` neste módulo. O contrato concreto est�
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### createItem — linha 1085
+### createItem — linha 1098
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1085)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1098)
 
 ```javascript
 async function createItem(event)
@@ -10445,9 +12035,9 @@ async function createItem(event){event.preventDefault();const store=activeMercha
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### setCatalogItemActive — linha 1087
+### setCatalogItemActive — linha 1100
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1087)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1100)
 
 ```javascript
 async function setCatalogItemActive(id,active)
@@ -10481,29 +12071,29 @@ if(button?.isConnected){button.disabled=false;button.textContent=active?'Reativa
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1090:36 — linha 1090
+### callback@1103:36 — linha 1103
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1090)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1103)
 
 ```javascript
 row=>
 ```
 
-Executa a etapa `callback@1090:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1103:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1092:64 — linha 1092
+### callback@1105:64 — linha 1105
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1092)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1105)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@1092:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1105:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `document.querySelector`; `CSS.escape`; `String`; `api`; `encodeURIComponent`; `JSON.stringify`; `notify`; `renderPage`.
 
@@ -10524,9 +12114,9 @@ if(button?.isConnected){button.disabled=false;button.textContent=active?'Reativa
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### openCatalogItemEditor — linha 1111
+### openCatalogItemEditor — linha 1124
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1111)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1124)
 
 ```javascript
 function openCatalogItemEditor(id)
@@ -10554,29 +12144,29 @@ document.body.append(wrap);wrap.querySelectorAll('[data-close-item]').forEach(bu
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1112:36 — linha 1112
+### callback@1125:36 — linha 1125
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1112)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1125)
 
 ```javascript
 row=>
 ```
 
-Executa a etapa `callback@1112:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1125:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1115:81 — linha 1115
+### callback@1128:81 — linha 1128
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1115)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1128)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@1115:81` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1128:81` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `wrap.remove`.
 
@@ -10587,29 +12177,29 @@ button=>button.addEventListener('click',()=>wrap.remove())
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1115:121 — linha 1115
+### callback@1128:121 — linha 1128
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1115)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1128)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1115:121` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1128:121` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `wrap.remove`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1115:171 — linha 1115
+### callback@1128:171 — linha 1128
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1115)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1128)
 
 ```javascript
 event=>
 ```
 
-Executa a etapa `callback@1115:171` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1128:171` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `wrap.remove`.
 
@@ -10618,51 +12208,51 @@ Executa a etapa `callback@1115:171` neste módulo. O contrato concreto está na 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1115:375 — linha 1115
+### callback@1128:375 — linha 1128
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1115)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1128)
 
 ```javascript
 event=>
 ```
 
-Executa a etapa `callback@1115:375` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1128:375` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `formatCurrencyMask`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1115:510 — linha 1115
+### callback@1128:510 — linha 1128
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1115)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1128)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1115:510` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1128:510` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `syncCatalogItemFields`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1115:616 — linha 1115
+### callback@1128:616 — linha 1128
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1115)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1128)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1115:616` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1128:616` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `syncCatalogItemRisk`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### saveCatalogItem — linha 1117
+### saveCatalogItem — linha 1130
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1117)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1130)
 
 ```javascript
 async function saveCatalogItem(event)
@@ -10694,23 +12284,23 @@ try{await api(`/merchant/items/${item.id}`,{method:'PUT',body:JSON.stringify({na
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1118:84 — linha 1118
+### callback@1131:84 — linha 1131
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1118)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1131)
 
 ```javascript
 row=>
 ```
 
-Executa a etapa `callback@1118:84` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1131:84` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### createProfessional — linha 1126
+### createProfessional — linha 1139
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1126)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1139)
 
 ```javascript
 async function createProfessional(event)
@@ -10733,9 +12323,9 @@ async function createProfessional(event){event.preventDefault();const form=event
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### setProfessionalActive — linha 1127
+### setProfessionalActive — linha 1140
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1127)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1140)
 
 ```javascript
 async function setProfessionalActive(id,active)
@@ -10755,9 +12345,9 @@ async function setProfessionalActive(id,active){try{await api(`/merchant/profess
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### createOperator — linha 1129
+### createOperator — linha 1142
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1129)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1142)
 
 ```javascript
 async function createOperator(event)
@@ -10782,15 +12372,15 @@ async function createOperator(event){event.preventDefault();const element=event.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1129:155 — linha 1129
+### callback@1142:155 — linha 1142
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1129)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1142)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@1129:155` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1142:155` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `element.querySelector`; `api`; `JSON.stringify`; `String`; `form.get`; `element.reset`; `notify`; `loadAdminData`; `renderPage`.
 
@@ -10806,9 +12396,9 @@ async()=>{const form=new FormData(element),submit=element.querySelector('[type="
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### setAccountActive — linha 1131
+### setAccountActive — linha 1144
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1131)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1144)
 
 ```javascript
 async function setAccountActive(id,active)
@@ -10828,9 +12418,9 @@ async function setAccountActive(id,active){try{await api(`/admin/accounts/${id}/
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### setAccountRole — linha 1132
+### setAccountRole — linha 1145
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1132)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1145)
 
 ```javascript
 async function setAccountRole(id,roleName,active)
@@ -10851,9 +12441,9 @@ async function setAccountRole(id,roleName,active){try{await api(`/admin/accounts
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### resetAccountPassword — linha 1133
+### resetAccountPassword — linha 1146
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1133)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1146)
 
 ```javascript
 async function resetAccountPassword(id,name)
@@ -10876,9 +12466,9 @@ async function resetAccountPassword(id,name){if(!window.confirm(`Gerar uma senha
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### reviewPlatformRequest — linha 1135
+### reviewPlatformRequest — linha 1148
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1135)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1148)
 
 ```javascript
 async function reviewPlatformRequest(id,decision)
@@ -10904,15 +12494,15 @@ async function reviewPlatformRequest(id,decision){return runOnce(`admin:review-r
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1135:95 — linha 1135
+### callback@1148:95 — linha 1148
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1135)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1148)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@1135:95` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1148:95` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `document.querySelector`; `CSS.escape`; `String`; `api`; `JSON.stringify`; `notify`; `loadAdminData`; `renderPage`.
 
@@ -10929,9 +12519,9 @@ async()=>{const button=document.querySelector(`[data-platform-review="${CSS.esca
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### reviewOperatorApplication — linha 1137
+### reviewOperatorApplication — linha 1150
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1137)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1150)
 
 ```javascript
 async function reviewOperatorApplication(id,decision)
@@ -10951,9 +12541,9 @@ try{await api(`/admin/operator-applications/${id}/${verb}`,{method:'PATCH'});[st
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### setOperatorActive — linha 1143
+### setOperatorActive — linha 1156
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1143)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1156)
 
 ```javascript
 async function setOperatorActive(id,active)
@@ -10975,23 +12565,23 @@ try{const operator=state.adminOperators.find(account=>String(account.id)===Strin
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1144:48 — linha 1144
+### callback@1157:48 — linha 1157
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1144)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1157)
 
 ```javascript
 account=>
 ```
 
-Executa a etapa `callback@1144:48` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1157:48` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### approveStore — linha 1148
+### approveStore — linha 1161
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1148)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1161)
 
 ```javascript
 async function approveStore(id)
@@ -11016,15 +12606,15 @@ async function approveStore(id){return runOnce(`admin:approve-store:${id}`,async
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1148:76 — linha 1148
+### callback@1161:76 — linha 1161
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1148)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1161)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@1148:76` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1161:76` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `document.querySelector`; `CSS.escape`; `String`; `state.adminPlatformRequests.find`; `api`; `storeApprovalPath`; `JSON.stringify`; `notify`; `loadAdminData`; `renderPage`.
 
@@ -11040,23 +12630,23 @@ async()=>{const button=document.querySelector(`[data-approve-store="${CSS.escape
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1148:292 — linha 1148
+### callback@1161:292 — linha 1161
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1148)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1161)
 
 ```javascript
 r=>
 ```
 
-Executa a etapa `callback@1148:292` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1161:292` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### setStoreActive — linha 1150
+### setStoreActive — linha 1163
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1150)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1163)
 
 ```javascript
 async function setStoreActive(id,active)
@@ -11076,9 +12666,9 @@ async function setStoreActive(id,active){try{await api(`/admin/stores/${id}/acti
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### updateOrder — linha 1152
+### updateOrder — linha 1165
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1152)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1165)
 
 ```javascript
 async function updateOrder(id,status)
@@ -11102,9 +12692,9 @@ async function updateOrder(id,status){if(['CANCELLED','REJECTED'].includes(statu
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### offerDelivery — linha 1154
+### offerDelivery — linha 1167
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1154)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1167)
 
 ```javascript
 async function offerDelivery(id)
@@ -11121,9 +12711,9 @@ async function offerDelivery(id){try{await api(`/merchant/orders/${id}/delivery`
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### updateReservation — linha 1156
+### updateReservation — linha 1169
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1156)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1169)
 
 ```javascript
 async function updateReservation(id,status)
@@ -11147,9 +12737,9 @@ async function updateReservation(id,status){if(status==='CANCELLED'&&!window.con
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### acceptDelivery — linha 1158
+### acceptDelivery — linha 1171
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1158)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1171)
 
 ```javascript
 async function acceptDelivery(id)
@@ -11166,9 +12756,9 @@ async function acceptDelivery(id){try{await api(`/courier/offers/${id}/accept`,{
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### updateDelivery — linha 1160
+### updateDelivery — linha 1173
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1160)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1173)
 
 ```javascript
 async function updateDelivery(id,status)
@@ -11188,9 +12778,9 @@ async function updateDelivery(id,status){try{await api(`/courier/deliveries/${id
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### stopCourierLocation — linha 1162
+### stopCourierLocation — linha 1175
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1162)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1175)
 
 ```javascript
 function stopCourierLocation()
@@ -11205,9 +12795,9 @@ Executa a etapa `stop Courier Location` neste módulo. O contrato concreto está
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### shareCourierLocation — linha 1164
+### shareCourierLocation — linha 1177
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1164)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1177)
 
 ```javascript
 function shareCourierLocation(id)
@@ -11235,15 +12825,15 @@ try{await api(`/courier/deliveries/${encodeURIComponent(id)}/location`,{method:'
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1168:61 — linha 1168
+### callback@1181:61 — linha 1181
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1168)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1181)
 
 ```javascript
 async position=>
 ```
 
-Executa a etapa `callback@1168:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1181:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `Date.now`; `api`; `encodeURIComponent`; `JSON.stringify`; `notify`; `stopCourierLocation`.
 
@@ -11260,15 +12850,15 @@ try{await api(`/courier/deliveries/${encodeURIComponent(id)}/location`,{method:'
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1172:5 — linha 1172
+### callback@1185:5 — linha 1185
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1172)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1185)
 
 ```javascript
 error=>
 ```
 
-Executa a etapa `callback@1172:5` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1185:5` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `stopCourierLocation`; `notify`.
 
@@ -11277,9 +12867,9 @@ Executa a etapa `callback@1172:5` neste módulo. O contrato concreto está na as
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### cancelUnpaidOrder — linha 1176
+### cancelUnpaidOrder — linha 1189
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1176)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1189)
 
 ```javascript
 async function cancelUnpaidOrder(id)
@@ -11302,9 +12892,9 @@ async function cancelUnpaidOrder(id){if(!window.confirm('Cancelar este pedido n�
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### cancelUnpaidReservation — linha 1177
+### cancelUnpaidReservation — linha 1190
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1177)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1190)
 
 ```javascript
 async function cancelUnpaidReservation(id)
@@ -11327,9 +12917,9 @@ async function cancelUnpaidReservation(id){if(!window.confirm('Cancelar esta res
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### requestOrderCancellation — linha 1178
+### requestOrderCancellation — linha 1191
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1178)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1191)
 
 ```javascript
 async function requestOrderCancellation(id)
@@ -11352,9 +12942,9 @@ async function requestOrderCancellation(id){if(!window.confirm('A loja analisar�
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### requestReservationCancellation — linha 1179
+### requestReservationCancellation — linha 1192
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1179)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1192)
 
 ```javascript
 async function requestReservationCancellation(id)
@@ -11366,20 +12956,21 @@ Executa a etapa `request Reservation Cancellation` neste módulo. O contrato con
 
 **Decisões condicionais examinadas:**
 - `(!window.confirm('A loja analisará sua solicitação. Se aceitar, qualquer pagamento feito pelo site será enviado para estorno. Deseja continuar?'))`
+- `response.status==='CANCELLED'`
 
 **Saída declarada:**
 - `return;`
 
 **Efeitos identificados no corpo (inclui callbacks internos):**
 ```javascript
-async function requestReservationCancellation(id){if(!window.confirm('A loja analisará sua solicitação. Se aceitar, qualquer pagamento feito pelo site será enviado para estorno. Deseja continuar?'))return;try{await api(`/reservations/${id}/cancellation-request`,{method:'POST',body:JSON.stringify({note:null})});state.reservations=await api('/reservations/mine');notify('Solicitação enviada','A loja recebeu seu pedido de cancelamento.','success');render();}catch(e){notify('Não foi possível pedir o cancelamento',e.message,'error');}}
+async function requestReservationCancellation(id){if(!window.confirm('A loja analisará sua solicitação. Se aceitar, qualquer pagamento feito pelo site será enviado para estorno. Deseja continuar?'))return;try{const response=await api(`/reservations/${id}/cancellation-request`,{method:'POST',body:JSON.stringify({note:null})});state.reservations=await api('/reservations/mine');notify(response.status==='CANCELLED'?'Reserva cancelada':'Solicitação enviada',response.status==='CANCELLED'?'A política da loja permitiu cancelar e liberar o horário. Acompanhe qualquer estorno no pagamento.':'A loja recebeu seu pedido de cancelamento.','success');render();}catch(e){notify('Não foi possível pedir o cancelamento',e.message,'error');}}
 ```
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### decideOrderCancellation — linha 1180
+### decideOrderCancellation — linha 1193
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1180)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1193)
 
 ```javascript
 async function decideOrderCancellation(id,accepted)
@@ -11403,9 +12994,9 @@ async function decideOrderCancellation(id,accepted){if(accepted&&!window.confirm
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### decideReservationCancellation — linha 1181
+### decideReservationCancellation — linha 1194
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1181)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1194)
 
 ```javascript
 async function decideReservationCancellation(id,accepted)
@@ -11429,9 +13020,9 @@ async function decideReservationCancellation(id,accepted){if(accepted&&!window.c
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### bindPageActions — linha 1183
+### bindPageActions — linha 1196
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1183)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1196)
 
 ```javascript
 async function bindPageActions()
@@ -11476,15 +13067,15 @@ document.querySelectorAll('[data-cep]').forEach(input=>input.addEventListener('b
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1184:73 — linha 1184
+### callback@1197:73 — linha 1197
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1184)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1197)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@1184:73` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1197:73` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `renderPage`.
 
@@ -11495,29 +13086,29 @@ button=>button.addEventListener('click',()=>{state.addressFormOpen=true;renderPa
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1184:113 — linha 1184
+### callback@1197:113 — linha 1197
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1184)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1197)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1184:113` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1197:113` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `renderPage`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1185:76 — linha 1185
+### callback@1198:76 — linha 1198
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1185)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1198)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@1185:76` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1198:76` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `renderPage`.
 
@@ -11528,29 +13119,29 @@ button=>button.addEventListener('click',()=>{state.addressFormOpen=false;renderP
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1185:116 — linha 1185
+### callback@1198:116 — linha 1198
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1185)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1198)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1185:116` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1198:116` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `renderPage`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1186:74 — linha 1186
+### callback@1199:74 — linha 1199
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1186)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1199)
 
 ```javascript
 form=>
 ```
 
-Executa a etapa `callback@1186:74` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1199:74` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `form.addEventListener`.
 
@@ -11561,15 +13152,15 @@ form=>form.addEventListener('submit',saveCheckoutAddress)
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1187:61 — linha 1187
+### callback@1200:61 — linha 1200
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1187)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1200)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@1187:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1200:61` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `api`; `localStorage.removeItem`; `notificationKey`; `render`; `notify`.
 
@@ -11580,15 +13171,15 @@ async()=>{try{await api('/account/notifications',{method:'DELETE'});localStorage
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1188:67 — linha 1188
+### callback@1201:67 — linha 1201
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1188)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1201)
 
 ```javascript
 item=>
 ```
 
-Executa a etapa `callback@1188:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1201:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `openNotificationTarget`; `item.addEventListener`; `event.preventDefault`; `activate`.
 
@@ -11603,9 +13194,9 @@ item.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' ')
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### activate — linha 1189
+### activate — linha 1202
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1189)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1202)
 
 ```javascript
 ()=>
@@ -11617,15 +13208,15 @@ Executa a etapa `activate` neste módulo. O contrato concreto está na assinatur
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1191:37 — linha 1191
+### callback@1204:37 — linha 1204
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1191)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1204)
 
 ```javascript
 event=>
 ```
 
-Executa a etapa `callback@1191:37` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1204:37` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `event.preventDefault`; `activate`.
 
@@ -11634,15 +13225,15 @@ Executa a etapa `callback@1191:37` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1193:73 — linha 1193
+### callback@1206:73 — linha 1206
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1193)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1206)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@1193:73` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1206:73` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `api`; `render`; `notify`.
 
@@ -11653,15 +13244,15 @@ async()=>{try{state.orders=await api('/merchant/orders');render();}catch(e){noti
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1194:79 — linha 1194
+### callback@1207:79 — linha 1207
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1194)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1207)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@1194:79` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1207:79` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `api`; `render`; `notify`.
 
@@ -11672,15 +13263,15 @@ async()=>{try{state.reservations=await api('/merchant/reservations');render();}c
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1195:65 — linha 1195
+### callback@1208:65 — linha 1208
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1195)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1208)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@1195:65` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1208:65` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `api`; `render`; `notify`.
 
@@ -11691,43 +13282,43 @@ async()=>{try{state.offers=await api('/courier/offers');state.deliveries=await a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1196:58 — linha 1196
+### callback@1209:58 — linha 1209
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1196)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1209)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1196:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1209:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `navigate`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1197:64 — linha 1197
+### callback@1210:64 — linha 1210
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1197)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1210)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@1197:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1210:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `loadStores`; `render`; `notify`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1198:64 — linha 1198
+### callback@1211:64 — linha 1211
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1198)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1211)
 
 ```javascript
 form=>
 ```
 
-Executa a etapa `callback@1198:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1211:64` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `form.addEventListener`.
 
@@ -11738,15 +13329,15 @@ form=>form.addEventListener('submit',saveCommission)
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1199:67 — linha 1199
+### callback@1212:67 — linha 1212
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1199)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1212)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@1199:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1212:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`.
 
@@ -11757,15 +13348,15 @@ button=>button.addEventListener('click',connectMercadoPago)
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1200:60 — linha 1200
+### callback@1213:60 — linha 1213
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1200)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1213)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@1200:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1213:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `resumeOrderPayment`.
 
@@ -11776,29 +13367,29 @@ button=>button.addEventListener('click',()=>resumeOrderPayment(button.dataset.re
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1200:100 — linha 1200
+### callback@1213:100 — linha 1213
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1200)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1213)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1200:100` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1213:100` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `resumeOrderPayment`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1201:66 — linha 1201
+### callback@1214:66 — linha 1214
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1201)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1214)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@1201:66` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1214:66` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `resumeReservationPayment`.
 
@@ -11809,29 +13400,29 @@ button=>button.addEventListener('click',()=>resumeReservationPayment(button.data
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1201:106 — linha 1201
+### callback@1214:106 — linha 1214
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1201)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1214)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1201:106` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1214:106` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `resumeReservationPayment`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1202:60 — linha 1202
+### callback@1215:60 — linha 1215
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1202)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1215)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@1202:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1215:60` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `cancelUnpaidOrder`.
 
@@ -11842,29 +13433,29 @@ button=>button.addEventListener('click',()=>cancelUnpaidOrder(button.dataset.can
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1202:100 — linha 1202
+### callback@1215:100 — linha 1215
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1202)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1215)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1202:100` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1215:100` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `cancelUnpaidOrder`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1203:66 — linha 1203
+### callback@1216:66 — linha 1216
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1203)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1216)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@1203:66` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1216:66` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `cancelUnpaidReservation`.
 
@@ -11875,29 +13466,29 @@ button=>button.addEventListener('click',()=>cancelUnpaidReservation(button.datas
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1203:106 — linha 1203
+### callback@1216:106 — linha 1216
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1203)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1216)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1203:106` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1216:106` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `cancelUnpaidReservation`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1204:74 — linha 1204
+### callback@1217:74 — linha 1217
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1204)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1217)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@1204:74` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1217:74` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `requestOrderCancellation`.
 
@@ -11908,29 +13499,29 @@ button=>button.addEventListener('click',()=>requestOrderCancellation(button.data
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1204:114 — linha 1204
+### callback@1217:114 — linha 1217
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1204)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1217)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1204:114` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1217:114` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `requestOrderCancellation`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1205:80 — linha 1205
+### callback@1218:80 — linha 1218
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1205)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1218)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@1205:80` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1218:80` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `requestReservationCancellation`.
 
@@ -11941,29 +13532,29 @@ button=>button.addEventListener('click',()=>requestReservationCancellation(butto
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1205:120 — linha 1205
+### callback@1218:120 — linha 1218
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1205)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1218)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1205:120` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1218:120` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `requestReservationCancellation`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1206:75 — linha 1206
+### callback@1219:75 — linha 1219
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1206)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1219)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@1206:75` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1219:75` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `decideOrderCancellation`.
 
@@ -11974,29 +13565,29 @@ button=>button.addEventListener('click',()=>decideOrderCancellation(button.datas
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1206:115 — linha 1206
+### callback@1219:115 — linha 1219
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1206)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1219)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1206:115` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1219:115` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `decideOrderCancellation`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1207:81 — linha 1207
+### callback@1220:81 — linha 1220
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1207)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1220)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@1207:81` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1220:81` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `decideReservationCancellation`.
 
@@ -12007,29 +13598,29 @@ button=>button.addEventListener('click',()=>decideReservationCancellation(button
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1207:121 — linha 1207
+### callback@1220:121 — linha 1220
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1207)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1220)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1207:121` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1220:121` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `decideReservationCancellation`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1208:63 — linha 1208
+### callback@1221:63 — linha 1221
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1208)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1221)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@1208:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1221:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `setDefaultAddress`.
 
@@ -12040,29 +13631,29 @@ button=>button.addEventListener('click',()=>setDefaultAddress(button.dataset.def
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1208:103 — linha 1208
+### callback@1221:103 — linha 1221
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1208)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1221)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1208:103` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1221:103` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `setDefaultAddress`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1209:62 — linha 1209
+### callback@1222:62 — linha 1222
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1209)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1222)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@1209:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1222:62` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `deleteAddress`.
 
@@ -12073,15 +13664,15 @@ button=>button.addEventListener('click',()=>deleteAddress(button.dataset.deleteA
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1209:102 — linha 1209
+### callback@1222:102 — linha 1222
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1209)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1222)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1209:102` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1222:102` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `deleteAddress`.
 
@@ -12092,15 +13683,15 @@ Executa a etapa `callback@1209:102` neste módulo. O contrato concreto está na 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1210:58 — linha 1210
+### callback@1223:58 — linha 1223
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1210)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1223)
 
 ```javascript
 button=>
 ```
 
-Executa a etapa `callback@1210:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1223:58` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `button.addEventListener`; `lookupCep`; `button.closest`.
 
@@ -12111,29 +13702,29 @@ button=>button.addEventListener('click',()=>lookupCep(button.closest('form')))
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1210:98 — linha 1210
+### callback@1223:98 — linha 1223
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1210)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1223)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1210:98` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1223:98` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `lookupCep`; `button.closest`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1211:51 — linha 1211
+### callback@1224:51 — linha 1224
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1211)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1224)
 
 ```javascript
 input=>
 ```
 
-Executa a etapa `callback@1211:51` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1224:51` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `input.addEventListener`; `input.value.replace`; `lookupCep`; `input.closest`.
 
@@ -12147,15 +13738,15 @@ input=>input.addEventListener('blur',()=>{if(input.value.replace(/\D/g,'').lengt
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1211:88 — linha 1211
+### callback@1224:88 — linha 1224
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1211)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1224)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1211:88` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1224:88` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `input.value.replace`; `lookupCep`; `input.closest`.
 
@@ -12164,9 +13755,9 @@ Executa a etapa `callback@1211:88` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### setDefaultAddress — linha 1214
+### setDefaultAddress — linha 1227
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1214)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1227)
 
 ```javascript
 async function setDefaultAddress(id)
@@ -12183,9 +13774,9 @@ try { await api(`/account/addresses/${id}/default`,{method:'PATCH'});await loadA
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### deleteAddress — linha 1219
+### deleteAddress — linha 1232
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1219)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1232)
 
 ```javascript
 async function deleteAddress(id)
@@ -12208,9 +13799,9 @@ try { await api(`/account/addresses/${id}`,{method:'DELETE'});await loadAddresse
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### saveCommission — linha 1225
+### saveCommission — linha 1238
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1225)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1238)
 
 ```javascript
 async function saveCommission(event)
@@ -12233,9 +13824,9 @@ async function saveCommission(event){event.preventDefault();const id=event.curre
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### connectMercadoPago — linha 1227
+### connectMercadoPago — linha 1240
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1227)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1240)
 
 ```javascript
 async function connectMercadoPago(event)
@@ -12252,9 +13843,9 @@ async function connectMercadoPago(event){const button=event.currentTarget;button
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### resumeOrderPayment — linha 1229
+### resumeOrderPayment — linha 1242
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1229)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1242)
 
 ```javascript
 function resumeOrderPayment(id)
@@ -12272,23 +13863,23 @@ Executa a etapa `resume Order Payment` neste módulo. O contrato concreto está 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1229:63 — linha 1229
+### callback@1242:63 — linha 1242
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1229)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1242)
 
 ```javascript
 item=>
 ```
 
-Executa a etapa `callback@1229:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1242:63` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### resumeReservationPayment — linha 1230
+### resumeReservationPayment — linha 1243
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1230)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1243)
 
 ```javascript
 function resumeReservationPayment(id)
@@ -12306,23 +13897,23 @@ Executa a etapa `resume Reservation Payment` neste módulo. O contrato concreto 
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1230:81 — linha 1230
+### callback@1243:81 — linha 1243
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1230)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1243)
 
 ```javascript
 item=>
 ```
 
-Executa a etapa `callback@1230:81` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1243:81` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `String`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### bindEvents — linha 1232
+### bindEvents — linha 1245
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1232)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1245)
 
 ```javascript
 function bindEvents()
@@ -12349,15 +13940,15 @@ document.addEventListener('keydown',event=>{
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1233:33 — linha 1233
+### callback@1246:33 — linha 1246
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1233)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1246)
 
 ```javascript
 event =>
 ```
 
-Executa a etapa `callback@1233:33` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1246:33` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `document.querySelectorAll`; `menu.contains`; `event.target.closest`; `event.preventDefault`; `showLogoutConfirmation`; `navigate`.
 
@@ -12371,15 +13962,15 @@ Executa a etapa `callback@1233:33` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1234:67 — linha 1234
+### callback@1247:67 — linha 1247
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1234)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1247)
 
 ```javascript
 menu=>
 ```
 
-Executa a etapa `callback@1234:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1247:67` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `menu.contains`.
 
@@ -12388,15 +13979,15 @@ Executa a etapa `callback@1234:67` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1238:39 — linha 1238
+### callback@1251:39 — linha 1251
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1238)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1251)
 
 ```javascript
 event=>
 ```
 
-Executa a etapa `callback@1238:39` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1251:39` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `document.querySelectorAll`; `menu.querySelector`.
 
@@ -12405,29 +13996,29 @@ Executa a etapa `callback@1238:39` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1239:91 — linha 1239
+### callback@1252:91 — linha 1252
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1239)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1252)
 
 ```javascript
 menu=>
 ```
 
-Executa a etapa `callback@1239:91` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1252:91` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `menu.querySelector`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1243:36 — linha 1243
+### callback@1256:36 — linha 1256
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1243)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1256)
 
 ```javascript
 async()=>
 ```
 
-Executa a etapa `callback@1243:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1256:36` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `location.hash.slice`; `knownPage`; `navByRole[role`; `role`; `['categories','categoryStores'].includes`; `canShop`; `stopChat`; `loadCurrentPage`; `render`.
 
@@ -12437,21 +14028,21 @@ Executa a etapa `callback@1243:36` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1243:125 — linha 1243
+### callback@1256:125 — linha 1256
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1243)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1256)
 
 ```javascript
 ([allowed])=>
 ```
 
-Executa a etapa `callback@1243:125` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1256:125` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### showLogoutConfirmation — linha 1245
+### showLogoutConfirmation — linha 1258
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1245)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1258)
 
 ```javascript
 function showLogoutConfirmation()
@@ -12474,29 +14065,29 @@ dialog.querySelector('[data-confirm-logout]').addEventListener('click',()=>{dial
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1250:73 — linha 1250
+### callback@1263:73 — linha 1263
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1250)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1263)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1250:73` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1263:73` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `dialog.remove`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1251:35 — linha 1251
+### callback@1264:35 — linha 1264
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1251)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1264)
 
 ```javascript
 event=>
 ```
 
-Executa a etapa `callback@1251:35` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1264:35` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `dialog.remove`.
 
@@ -12505,23 +14096,23 @@ Executa a etapa `callback@1251:35` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1252:74 — linha 1252
+### callback@1265:74 — linha 1265
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1252)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1265)
 
 ```javascript
 ()=>
 ```
 
-Executa a etapa `callback@1252:74` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1265:74` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `dialog.remove`; `performLogout`.
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### performLogout — linha 1255
+### performLogout — linha 1268
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1255)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1268)
 
 ```javascript
 async function performLogout()
@@ -12545,15 +14136,15 @@ resetChatState();stopNotificationPolling();stopCourierLocation();localStorage.re
 
 **Decisão de engenharia:** Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### callback@1265:14 — linha 1265
+### callback@1278:14 — linha 1278
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1265)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1278)
 
 ```javascript
 function()
 ```
 
-Executa a etapa `callback@1265:14` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+Executa a etapa `callback@1278:14` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Colaborações:** `el.matches?.`; `originalRenderPage`; `bindPageActions`; `document.getElementById`; `next.focus`; `next.setSelectionRange`.
 
@@ -12674,6 +14265,112 @@ async()=>
 Executa a etapa `callback@4:24` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
 **Decisão de engenharia:** Consulta de CEP com alternativa local de homologação. Falhas de conexão precisam permitir correção manual e não bloquear toda a navegação. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+## Frontend/src/reservationList.js
+
+Agrupamento imutável das reservas do cliente. Atendimentos em curso aparecem antes das próximas reservas, ordenadas por proximidade; registros encerrados ou vencidos ficam no histórico. A ordenação não altera estados de domínio.
+
+Fonte: [reservationList.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/reservationList.js) · SHA-256 `d35f62853cee3520df215e6c68397415c549ee291cc4c40c0171e370882e9de2`
+
+### start — linha 2
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/reservationList.js:2)
+
+```javascript
+reservation =>
+```
+
+Executa a etapa `start` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `Date.parse`; `Number.isFinite`.
+
+**Decisões condicionais examinadas:**
+- `Number.isFinite(value)`
+
+**Saída declarada:**
+- `return Number.isFinite(value) ? value : null;`
+
+**Decisão de engenharia:** Agrupamento imutável das reservas do cliente. Atendimentos em curso aparecem antes das próximas reservas, ordenadas por proximidade; registros encerrados ou vencidos ficam no histórico. A ordenação não altera estados de domínio. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### chronological — linha 6
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/reservationList.js:6)
+
+```javascript
+(a, b) =>
+```
+
+Executa a etapa `chronological` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `start`.
+
+**Decisões condicionais examinadas:**
+- `(left === null || right === null)`
+- `left === right`
+- `left === null`
+
+**Saída declarada:**
+- `return left === right ? 0 : left === null ? 1 : -1;`
+- `return left - right;`
+
+**Decisão de engenharia:** Agrupamento imutável das reservas do cliente. Atendimentos em curso aparecem antes das próximas reservas, ordenadas por proximidade; registros encerrados ou vencidos ficam no histórico. A ordenação não altera estados de domínio. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### groupCustomerReservations — linha 12
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/reservationList.js:12)
+
+```javascript
+function groupCustomerReservations(reservations, now = Date.now())
+```
+
+Executa a etapa `group Customer Reservations` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `start`; `futureStatuses.has`; `groups[index].items.push`; `groups[0].items.sort`; `groups[1].items.sort`; `groups[2].items.sort`; `chronological`; `groups.filter`.
+
+**Decisões condicionais examinadas:**
+- `reservation.status === 'IN_SERVICE'`
+- `futureStatuses.has(reservation.status) && at !== null && at >= now`
+- `(start(a) === null || start(b) === null)`
+
+**Saída declarada:**
+- `return chronological(a, b);`
+- `return chronological(b, a);`
+- `return groups.filter(group => group.items.length);`
+
+**Decisão de engenharia:** Agrupamento imutável das reservas do cliente. Atendimentos em curso aparecem antes das próximas reservas, ordenadas por proximidade; registros encerrados ou vencidos ficam no histórico. A ordenação não altera estados de domínio. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@26:24 — linha 26
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/reservationList.js:26)
+
+```javascript
+(a, b) =>
+```
+
+Executa a etapa `callback@26:24` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `start`; `chronological`.
+
+**Decisões condicionais examinadas:**
+- `(start(a) === null || start(b) === null)`
+
+**Saída declarada:**
+- `return chronological(a, b);`
+- `return chronological(b, a);`
+
+**Decisão de engenharia:** Agrupamento imutável das reservas do cliente. Atendimentos em curso aparecem antes das próximas reservas, ordenadas por proximidade; registros encerrados ou vencidos ficam no histórico. A ordenação não altera estados de domínio. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### callback@30:24 — linha 30
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/reservationList.js:30)
+
+```javascript
+group =>
+```
+
+Executa a etapa `callback@30:24` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisão de engenharia:** Agrupamento imutável das reservas do cliente. Atendimentos em curso aparecem antes das próximas reservas, ordenadas por proximidade; registros encerrados ou vencidos ficam no histórico. A ordenação não altera estados de domínio. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
 ## Frontend/src/storeCovers.js
 

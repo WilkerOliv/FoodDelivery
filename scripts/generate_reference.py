@@ -14,6 +14,9 @@ CONTEXT={
  'reservations':'Agenda e capacidade. A loja é bloqueada durante a criação; o profissional e o intervalo inteiro determinam conflitos. Datas são interpretadas no fuso da loja.',
  'payments':'Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.',
  'delivery':'Entrega. Somente o entregador responsável acessa a tarefa. O pedido precisa estar pronto; a conclusão da entrega conclui o pedido e a visualização final omite endereço e observação.',
+ 'finance':'Remuneração e repasses do entregador. O valor por entrega é definido pela administração e congelado na tarefa. Crédito único, saldo sob bloqueio, reautenticação, código de verificação, idempotência e aprovação protegem o registro; nenhuma transferência externa é presumida.',
+ 'settings':'Configuração privada. Uma lista permitida restringe alterações, novos segredos são cifrados com AES-GCM e contexto autenticado, e a API informa presença sem devolver credenciais. Chaves mestras permanecem no servidor.',
+ 'whatsapp':'Automação por comandos. Vínculo com telefone verificado, assinatura do webhook, deduplicação, carrinho cifrado, confirmação explícita e fila de respostas separam mensagens de confirmação financeira. O bot não declara pagamento por mensagem.',
  'admin':'Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.',
  'platform':'Cobertura e solicitações. A conta permanece única; aprovação vincula acesso/cidade/loja sem pedir novo cadastro dos mesmos dados.',
  'communication':'Conversa operacional. Participantes autorizados são determinados pelo pedido/reserva; conhecer um identificador não concede acesso.',
@@ -25,9 +28,14 @@ CONTEXT={
  'api':'Transporte HTTP e sessão. Cookies não ficam acessíveis ao JavaScript; mensagens de falha precisam distinguir autorização, validação e indisponibilidade.',
  'accessibility':'Acessibilidade dinâmica. Associa rótulos, identifica diálogos, contém Tab, aceita Escape e devolve foco. Não substitui validação com leitor de tela e pessoas reais.',
  'adminStoreEditor':'Editor administrativo criado com elementos DOM e valores textuais. Evita interpolar dados de usuário em atributos HTML; a API valida novamente cada alteração.',
+ 'adminSecurity':'Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas.',
+ 'courierFinance':'Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária.',
+ 'bookingAvailability':'Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário.',
  'storeHours':'Editor compartilhado de turnos semanais e exceções. Consulta prévia, exige decisão sobre reservas afetadas e trata desistência, concorrência e avisos. A configuração pública não revela observações internas.',
  'storeTime':'Regras puras de fuso e horário para feedback imediato. A API valida novamente antes de comprar/reservar. Madrugada pertence à abertura do dia anterior.',
  'inputMasks':'Apresentação e interpretação de CPF, CNPJ, CEP, telefone e dinheiro. Máscara melhora digitação; não prova identidade e não substitui validação no servidor.',
+ 'catalogBindings':'Ligação explícita dos eventos do catálogo após renderizar a página. O envio cancela a navegação nativa e a edição recebe o identificador do item; o teste usa elementos simulados e a revisão manual confirma a persistência.',
+ 'reservationList':'Agrupamento imutável das reservas do cliente. Atendimentos em curso aparecem antes das próximas reservas, ordenadas por proximidade; registros encerrados ou vencidos ficam no histórico. A ordenação não altera estados de domínio.',
  'catalogPolicy':'Regras visuais de catálogo, região e pagamento posterior. A política definitiva é aplicada na API, pois a cidade selecionada no navegador é manipulável.',
  'storeMaps':'Mapas de lojas. Seleção opcional, marcador arrastável, busca explícita, popups textuais e lista alternativa. Somente pontos publicados entram no mapa; ausência de coordenadas não oculta a loja da lista.',
  'storeOptions':'Modalidades de entrega, retirada e agendamento presencial. Bandeiras são informativas; a API rejeita modalidades desativadas e exige ao menos uma opção.',
@@ -138,7 +146,8 @@ for path in sorted((ROOT/'Backend/src/main/java').rglob('*.java')):
         inventory += [f'### {path.stem}','']
         for line,name,cls,head in routes:inventory += [f'- [{name}]({path}:{line})',f'  - Classe: `{cls}`',f'  - Método: `{head}`']
         inventory.append('')
-inventory += ['## Migrações e razão da separação','', 'Flyway executa a sequência V1–V26. V9 tem variantes H2/PostgreSQL para diferenças de mecanismo. O perfil escolhe uma variante, nunca as duas. Os demais scripts são comuns. Hibernate valida o resultado; não é proprietário do esquema.','', '| Versão / arquivo | DDL e finalidade identificável |','|---|---|']
+latest_migration=max(int(re.search(r'V(\d+)',p.name)[1]) for p in (ROOT/'Backend/src/main/resources/db').rglob('V*.sql'))
+inventory += ['## Migrações e razão da separação','', f'Flyway executa a sequência V1–V{latest_migration}. V9 tem variantes H2/PostgreSQL para diferenças de mecanismo. O perfil escolhe uma variante, nunca as duas. Os demais scripts são comuns. Hibernate valida o resultado; não é proprietário do esquema.','', '| Versão / arquivo | DDL e finalidade identificável |','|---|---|']
 for path in sorted((ROOT/'Backend/src/main/resources/db').rglob('*.sql'),key=lambda p:(int(re.search(r'V(\d+)',p.name)[1]),str(p))):
     statements=[compact(s) for s in path.read_text().split(';') if s.strip()]
     tables=sorted(set(re.findall(r'(?:TABLE(?: IF NOT EXISTS)?|INDEX[^;]*? ON)\s+([a-z_]+)',path.read_text(),re.I)))

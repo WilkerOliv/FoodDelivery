@@ -1,3 +1,4 @@
+import { bindCatalogActions } from '../src/catalogBindings.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { runOnce } from '../src/actionGuard.js';
@@ -9,6 +10,34 @@ import { coordinatesFromForm, storeMapUrl } from '../src/storeLocation.js';
 import { adminAreaNames, adminStoreStatus, filterAdminStores, renderAdminAreas, renderAdminTeamArea, storeApprovalId, storeApprovalPath, supportDetailPath, supportMessagePath } from '../src/adminSections.js';
 import { adminProfilePayload, applyAdminProfileResponse } from '../src/adminProfile.js';
 import { postalCodeResponse } from '../src/postalCode.js';
+import { groupCustomerReservations } from '../src/reservationList.js';
+
+test('customer sees current service, nearest future bookings, then history', () => {
+  const now = Date.parse('2026-11-05T18:00:00Z');
+  const records = [
+    {id:'distant',status:'CONFIRMED',startsAt:'2027-01-01T12:00:00Z'},
+    {id:'cancelled',status:'CANCELLED',startsAt:'2026-11-07T12:00:00Z'},
+    {id:'nearest',status:'CONFIRMED',startsAt:'2026-11-06T12:00:00Z'},
+    {id:'current',status:'IN_SERVICE',startsAt:'2026-11-05T17:50:00Z'},
+    {id:'past',status:'COMPLETED',startsAt:'2026-10-01T12:00:00Z'},
+  ];
+  const groups=groupCustomerReservations(records,now);
+  assert.deepEqual(groups.map(g=>g.title),['Em atendimento','Próximas reservas','Histórico']);
+  assert.deepEqual(groups[1].items.map(r=>r.id),['nearest','distant']);
+  assert.deepEqual(groups[2].items.map(r=>r.id),['cancelled','past']);
+  assert.equal(records[0].id,'distant');
+});
+
+test('overdue and invalid dates remain in history without hiding future bookings', () => {
+  const groups=groupCustomerReservations([
+    {id:'invalid',status:'CONFIRMED',startsAt:'invalid'},
+    {id:'overdue',status:'CONFIRMED',startsAt:'2026-11-05T17:00:00Z'},
+    {id:'pending',status:'PENDING_PAYMENT',startsAt:'2026-11-05T19:00:00Z'},
+  ],Date.parse('2026-11-05T18:00:00Z'));
+  assert.equal(groups[0].items[0].id,'pending');
+  assert.deepEqual(groups[1].items.map(r=>r.id),['overdue','invalid']);
+  assert.deepEqual(groupCustomerReservations([]),[]);
+});
 
 test('demo postal codes never call the external provider and reject unknown fixtures',async()=>{
   const oldDemo=globalThis.FOODDELIVERY_DEMO,oldFetch=globalThis.fetch;
@@ -205,3 +234,18 @@ class MapForm {
   constructor(values) { this.values = values; }
   get(name) { return this.values[name]; }
 }
+
+ test('catalog forms submit through the application and editing opens the selected item', () => {
+  const listeners = {};
+  const form = { addEventListener: (event, handler) => { listeners.submit = handler; } };
+  const button = { dataset: { itemEdit: 'item-42' }, addEventListener: (event, handler) => { listeners.click = handler; } };
+  let submitted = false, edited;
+  const create = event => { event.preventDefault(); submitted = true; };
+  bindCatalogActions({ querySelectorAll: selector => selector === '[data-create-item]' ? [form] : [button] }, { create, edit: id => { edited = id; } });
+  let prevented = false;
+  listeners.submit({ preventDefault: () => { prevented = true; } });
+  listeners.click();
+  assert.equal(submitted, true);
+  assert.equal(prevented, true);
+  assert.equal(edited, 'item-42');
+});

@@ -152,7 +152,7 @@ public class SecurityConfig {
                                 "camera=(), microphone=(), geolocation=(self)")))
                 .authenticationProvider(provider)
                 .addFilterBefore(new SessionOriginFilter(configuredOrigins,cookieName), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new AuthenticationRateLimitFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(new AuthenticationRateLimitFilter(), org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/api/v1/demo/status").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/logout", "/api/v1/auth/operator-applications", "/api/v1/auth/password-recovery", "/api/v1/auth/password-recovery/reset").permitAll()

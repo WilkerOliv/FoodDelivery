@@ -1,0 +1,1222 @@
+{
+  "environment": "https://fooddelivery-homologacao.onrender.com",
+  "mode": "homologacao",
+  "method": "HTTP API; não é teste visual",
+  "suites": [
+    {
+      "suite": "test_homologacao",
+      "status": "PASS",
+      "seconds": 35.32,
+      "calls": 33
+    },
+    {
+      "suite": "test_jornadas",
+      "status": "PASS",
+      "seconds": 32.14,
+      "calls": 48
+    },
+    {
+      "suite": "test_courier_finance",
+      "status": "PASS",
+      "seconds": 26.23,
+      "calls": 32
+    },
+    {
+      "suite": "test_store_location_modes",
+      "status": "PASS",
+      "seconds": 15.41,
+      "calls": 25
+    },
+    {
+      "suite": "test_store_hours",
+      "status": "PASS",
+      "seconds": 46.44,
+      "calls": 54
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "path": "/demo/status",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/demo/messages",
+      "status": 401,
+      "expected": 401
+    },
+    {
+      "method": "GET",
+      "path": "/demo/messages",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "POST",
+      "path": "/demo/payments/2dd319d3-5e54-4a79-bc2f-179d09b60a49/approve",
+      "status": 404,
+      "expected": 404
+    },
+    {
+      "method": "GET",
+      "path": "/stores?city=Nantes&state=SP",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/stores/b7802f1f-0c71-45ec-8eea-1ecd283064fc/items",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/orders",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "GET",
+      "path": "/admin/accounts",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/auth/register",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/demo/payments/92265742-a057-42a7-89ce-100d4e40eb27/approve",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "POST",
+      "path": "/demo/payments/92265742-a057-42a7-89ce-100d4e40eb27/approve",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "POST",
+      "path": "/payments/92265742-a057-42a7-89ce-100d4e40eb27/checkout",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "POST",
+      "path": "/demo/payments/92265742-a057-42a7-89ce-100d4e40eb27/decline",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/demo/payments/92265742-a057-42a7-89ce-100d4e40eb27/approve",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/demo/payments/92265742-a057-42a7-89ce-100d4e40eb27/approve",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/merchant/orders",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/stores/bb65adaa-7736-4655-b419-e4b51af69d2c/items",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/reservations",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "POST",
+      "path": "/demo/payments/6f9c5b39-0353-4ce4-937a-4f01f6abc78e/approve",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/auth/password-recovery",
+      "status": 202,
+      "expected": 202
+    },
+    {
+      "method": "GET",
+      "path": "/demo/messages",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/account/phone-verification",
+      "status": 202,
+      "expected": 202
+    },
+    {
+      "method": "GET",
+      "path": "/demo/messages",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/merchant/stores/mine",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/stores/b7802f1f-0c71-45ec-8eea-1ecd283064fc/cover",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "PATCH",
+      "path": "/admin/store-covers/dddcefdc-c6f8-4ee8-a54d-b821b287e8da/review",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/geography/search?query=Nantes",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/orders/23c78575-153d-432a-9a64-51b191e23667/cancellation-request",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/merchant/orders/23c78575-153d-432a-9a64-51b191e23667/cancellation-request",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/payments/92265742-a057-42a7-89ce-100d4e40eb27",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/payments/92265742-a057-42a7-89ce-100d4e40eb27",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/payments/92265742-a057-42a7-89ce-100d4e40eb27",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/payments/92265742-a057-42a7-89ce-100d4e40eb27",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/admin/courier-finance/policy",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/merchant/stores/mine",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/stores/b7802f1f-0c71-45ec-8eea-1ecd283064fc/items",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/items/d43d8fe2-d405-4f31-9e2d-c87b74c25fb5",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/items/d43d8fe2-d405-4f31-9e2d-c87b74c25fb5",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "DELETE",
+      "path": "/merchant/items/d43d8fe2-d405-4f31-9e2d-c87b74c25fb5",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "DELETE",
+      "path": "/merchant/items/d43d8fe2-d405-4f31-9e2d-c87b74c25fb5",
+      "status": 204,
+      "expected": 204
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/items/d43d8fe2-d405-4f31-9e2d-c87b74c25fb5",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/account/addresses",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "DELETE",
+      "path": "/account/addresses/b014a434-8932-4456-acde-54a488cea62a",
+      "status": 404,
+      "expected": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/account/addresses/b014a434-8932-4456-acde-54a488cea62a",
+      "status": 204,
+      "expected": 204
+    },
+    {
+      "method": "POST",
+      "path": "/support/tickets",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "GET",
+      "path": "/support/tickets/7a2362d7-5fcd-4311-9f66-1b98a0dd1d25",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "POST",
+      "path": "/admin/support-tickets/7a2362d7-5fcd-4311-9f66-1b98a0dd1d25/messages",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/admin/support-tickets/7a2362d7-5fcd-4311-9f66-1b98a0dd1d25/status",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/support/tickets/7a2362d7-5fcd-4311-9f66-1b98a0dd1d25",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/support/tickets/7a2362d7-5fcd-4311-9f66-1b98a0dd1d25/messages",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/admin/support-tickets/7a2362d7-5fcd-4311-9f66-1b98a0dd1d25",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/admin/store-categories",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/store-categories/c011a235-760c-4f62-afd4-0a3631e6bfef",
+      "status": 204,
+      "expected": 204
+    },
+    {
+      "method": "POST",
+      "path": "/admin/service-cities",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "PUT",
+      "path": "/admin/service-cities/2c41f986-dab0-4736-a735-b94b9aa0043f",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/account/platform-requests/cities",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "PATCH",
+      "path": "/admin/platform-requests/632677c9-8c29-42dd-a699-3f08d213ae33/review",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/admin/platform-requests/632677c9-8c29-42dd-a699-3f08d213ae33/review",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "PUT",
+      "path": "/admin/stores/b7802f1f-0c71-45ec-8eea-1ecd283064fc/profile",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/admin/accounts",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "GET",
+      "path": "/admin/accounts",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "GET",
+      "path": "/admin/accounts",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "POST",
+      "path": "/orders",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "POST",
+      "path": "/demo/payments/a5f2361b-1135-4f54-826c-19e3033e855d/approve",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/merchant/orders/d9cdd8d8-aa55-469d-983a-8a05ffbc0e15/status",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/merchant/orders/d9cdd8d8-aa55-469d-983a-8a05ffbc0e15/status",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/merchant/orders/d9cdd8d8-aa55-469d-983a-8a05ffbc0e15/status",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/orders/d9cdd8d8-aa55-469d-983a-8a05ffbc0e15/delivery",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/orders/d9cdd8d8-aa55-469d-983a-8a05ffbc0e15/delivery",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "POST",
+      "path": "/courier/offers/3027dfa8-360d-4dbc-aa2d-fa269433fa48/accept",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/deliveries/3027dfa8-360d-4dbc-aa2d-fa269433fa48/messages",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "POST",
+      "path": "/deliveries/3027dfa8-360d-4dbc-aa2d-fa269433fa48/messages",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "PATCH",
+      "path": "/courier/deliveries/3027dfa8-360d-4dbc-aa2d-fa269433fa48",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/orders/d9cdd8d8-aa55-469d-983a-8a05ffbc0e15/cancellation-request",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "PATCH",
+      "path": "/courier/deliveries/3027dfa8-360d-4dbc-aa2d-fa269433fa48",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/courier/deliveries/3027dfa8-360d-4dbc-aa2d-fa269433fa48/location",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/courier/deliveries/3027dfa8-360d-4dbc-aa2d-fa269433fa48",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/orders/mine",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/support/tickets/not-a-uuid",
+      "status": 400,
+      "expected": 400
+    },
+    {
+      "method": "GET",
+      "path": "/account/notifications",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/account/notifications/a741e203-cd78-4bcf-8c7e-018b576b65de/read",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/admin/courier-finance",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "GET",
+      "path": "/courier/finance",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "POST",
+      "path": "/admin/courier-finance/policy",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/courier/finance",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/merchant/stores/mine",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/stores/b7802f1f-0c71-45ec-8eea-1ecd283064fc/items",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "POST",
+      "path": "/orders",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "POST",
+      "path": "/demo/payments/aa0acf74-13bd-4792-a315-1a6332b4c412/approve",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/merchant/orders/83242f10-ea3f-456a-b263-bb8451b3b9d4/status",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/merchant/orders/83242f10-ea3f-456a-b263-bb8451b3b9d4/status",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/merchant/orders/83242f10-ea3f-456a-b263-bb8451b3b9d4/status",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/orders/83242f10-ea3f-456a-b263-bb8451b3b9d4/delivery",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "POST",
+      "path": "/admin/courier-finance/policy",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/courier/offers/813a9c27-d280-4ffb-815a-e4cba40e3bcd/accept",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/courier/deliveries/813a9c27-d280-4ffb-815a-e4cba40e3bcd",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/courier/deliveries/813a9c27-d280-4ffb-815a-e4cba40e3bcd",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/courier/deliveries/813a9c27-d280-4ffb-815a-e4cba40e3bcd",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/courier/deliveries/813a9c27-d280-4ffb-815a-e4cba40e3bcd",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "GET",
+      "path": "/courier/finance",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/courier/payout-code",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "POST",
+      "path": "/courier/payout-code",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/demo/messages",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/courier/payouts",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "POST",
+      "path": "/courier/payouts",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/courier/payouts",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/courier/payouts",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "POST",
+      "path": "/admin/courier-finance/payouts/985cc7ff-0d1b-4ffb-81eb-413df889757d/paid",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "POST",
+      "path": "/admin/courier-finance/payouts/985cc7ff-0d1b-4ffb-81eb-413df889757d/decision",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/courier/payouts/985cc7ff-0d1b-4ffb-81eb-413df889757d/cancel",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "POST",
+      "path": "/admin/courier-finance/payouts/985cc7ff-0d1b-4ffb-81eb-413df889757d/paid",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/admin/courier-finance/payouts/985cc7ff-0d1b-4ffb-81eb-413df889757d/paid",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/courier/finance",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/merchant/stores/mine",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/stores",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "GET",
+      "path": "/stores",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/admin/platform-requests",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/admin/platform-requests/4ace7130-1307-42a7-b0be-40c8532bf080/review",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/admin/stores/4a43069d-e8bd-4117-85eb-1b8dd5f4761e/profile",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/stores",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/b7802f1f-0c71-45ec-8eea-1ecd283064fc",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/b7802f1f-0c71-45ec-8eea-1ecd283064fc",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/b7802f1f-0c71-45ec-8eea-1ecd283064fc",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/b7802f1f-0c71-45ec-8eea-1ecd283064fc",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/stores?city=Nantes&state=SP",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/stores/b7802f1f-0c71-45ec-8eea-1ecd283064fc/items",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/orders",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "POST",
+      "path": "/orders",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "POST",
+      "path": "/orders/4c6f9021-a23f-4b5a-95a6-ed98578c2fb5/cancel",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/b7802f1f-0c71-45ec-8eea-1ecd283064fc",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/stores?city=Nantes&state=SP",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/orders",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "GET",
+      "path": "/stores/bb65adaa-7736-4655-b419-e4b51af69d2c/items",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/bb65adaa-7736-4655-b419-e4b51af69d2c",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/reservations",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/b7802f1f-0c71-45ec-8eea-1ecd283064fc",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/bb65adaa-7736-4655-b419-e4b51af69d2c",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/admin/stores/4a43069d-e8bd-4117-85eb-1b8dd5f4761e/active",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/stores",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "GET",
+      "path": "/admin/platform-requests",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/admin/platform-requests/6004e814-e5d2-4809-8265-d29c221231cb/review",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/items",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/items",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours/preview",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours/preview",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/admin/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "GET",
+      "path": "/admin/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/admin/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours/preview",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/admin/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/reservations",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "POST",
+      "path": "/reservations",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "POST",
+      "path": "/reservations",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "POST",
+      "path": "/reservations",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "POST",
+      "path": "/reservations",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "PUT",
+      "path": "/admin/stores/8a02cb65-1953-40c6-beeb-d2214728986d/profile",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "POST",
+      "path": "/demo/payments/a41e76a2-abf8-4696-ac95-3fe7c79c8c24/approve",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours/preview",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours/preview",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/reservations/mine",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours/preview",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/reservations",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours/preview",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours/preview",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "method": "GET",
+      "path": "/reservations/mine",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/payments/a41e76a2-abf8-4696-ac95-3fe7c79c8c24",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/demo/payments/00c6f135-8c0b-4122-b6cf-966e75d6a64d/approve",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/reservations/mine",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/payments/00c6f135-8c0b-4122-b6cf-966e75d6a64d",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/account/notifications",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours/preview",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/merchant/stores/8a02cb65-1953-40c6-beeb-d2214728986d/hours",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/reservations",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "method": "POST",
+      "path": "/reservations/71b9cf39-588c-4cc0-bbff-0e213af769cc/cancel",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/payments/00c6f135-8c0b-4122-b6cf-966e75d6a64d",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/payments/00c6f135-8c0b-4122-b6cf-966e75d6a64d",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/payments/00c6f135-8c0b-4122-b6cf-966e75d6a64d",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/payments/00c6f135-8c0b-4122-b6cf-966e75d6a64d",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/payments/00c6f135-8c0b-4122-b6cf-966e75d6a64d",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/payments/00c6f135-8c0b-4122-b6cf-966e75d6a64d",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/payments/00c6f135-8c0b-4122-b6cf-966e75d6a64d",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/payments/00c6f135-8c0b-4122-b6cf-966e75d6a64d",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/payments/a41e76a2-abf8-4696-ac95-3fe7c79c8c24",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/admin/stores/8a02cb65-1953-40c6-beeb-d2214728986d/active",
+      "status": 200,
+      "expected": 200
+    }
+  ],
+  "secretsSaved": false
+}

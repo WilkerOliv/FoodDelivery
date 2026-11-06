@@ -22,6 +22,8 @@ O ambiente é isolado e não movimenta dinheiro. Não substituir homologação d
 
 [Inicialização, nova publicação e verificações de segurança no GitHub](Documentacao/Publicacao_e_verificacoes_de_seguranca.md), com os limites de CodeQL em repositórios privados e a análise gratuita disponível.
 
+[Validação da homologação publicada](Documentacao/Validacao_homologacao_publicada_2026-11-05.md): evidências, correção do limite de login compartilhado pelo gateway e etapas que ainda precisam de verificação externa e visual.
+
 ## Desenvolvimento e validação
 
 Configuração normal: [backend e operação](Backend/README.md). Validação e comandos reproduzíveis: [matriz de testes](Documentacao/Validacao_2026-11-04.md). O teste de esquema usa chave exclusiva de teste; produção exige segredo próprio.

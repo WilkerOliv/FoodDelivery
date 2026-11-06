@@ -115,7 +115,6 @@ class PreviewHandler(frontend.FrontendHandler):
     do_DELETE = mutate
 
     def end_headers(self):
-        self.send_header('Cache-Control', 'no-store')
         self.send_header('X-Robots-Tag', 'noindex, nofollow, noarchive')
         super().end_headers()
 

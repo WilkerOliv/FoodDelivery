@@ -54,7 +54,7 @@ class FrontendHandler(SimpleHTTPRequestHandler):
             connection.request(self.command,self.path,body=data,headers=headers)
             result=connection.getresponse()
             body=result.read();self.send_response(result.status)
-            for key in ('Content-Type','Set-Cookie','Cache-Control'):
+            for key in ('Content-Type','Set-Cookie','Cache-Control','Retry-After'):
                 for value in result.headers.get_all(key,[]): self.send_header(key,value)
             self.end_headers();self.wfile.write(body)
         except (OSError,http.client.HTTPException):
@@ -63,6 +63,7 @@ class FrontendHandler(SimpleHTTPRequestHandler):
             connection.close()
 
     def end_headers(self):
+        self.send_header("Cache-Control", "no-store")
         self.send_header("Content-Security-Policy", CONTENT_SECURITY_POLICY)
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("Referrer-Policy", "strict-origin-when-cross-origin")

@@ -20,7 +20,14 @@ export async function api(path, options = {}) {
   if (!response.ok) {
     let body = {};
     try { body = await response.json(); } catch { /* resposta sem JSON */ }
-    const message = body.error || body.message || friendlyStatus(response.status);
+    let message = body.error || body.message || friendlyStatus(response.status);
+    if (response.status === 429) {
+      const retry = response.headers.get('Retry-After');
+      if (retry && /^\d{1,6}$/.test(retry)) {
+        const minutes = Math.ceil(Number(retry) / 60);
+        if (minutes > 0 && minutes <= 1440) message += ` Tente novamente em cerca de ${minutes} ${minutes === 1 ? 'minuto' : 'minutos'}.`;
+      }
+    }
     throw new Error(message);
   }
   if (response.status === 204) return null;

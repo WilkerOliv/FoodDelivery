@@ -161,6 +161,25 @@ class FixedProxyTest(unittest.TestCase):
         connection.close.assert_called_once()
         self.assertEqual(handler.wfile.getvalue(), b'redirect')
 
+    def test_proxy_preserves_retry_information(self):
+        handler = Mock()
+        handler.path = '/api/v1/auth/login'
+        handler.command = 'POST'
+        handler.headers = {'Content-Length': '0'}
+        handler.rfile = io.BytesIO()
+        handler.wfile = io.BytesIO()
+        response = Mock()
+        response.status = 429
+        response.read.return_value = b'{"message":"Muitas tentativas"}'
+        response.headers = Message()
+        response.headers['Retry-After'] = '120'
+        connection = Mock()
+        connection.getresponse.return_value = response
+        with patch.object(preview.frontend, 'DEMO', True), patch.object(preview.frontend.http.client, 'HTTPConnection', return_value=connection):
+            preview.frontend.FrontendHandler.proxy(handler)
+        handler.send_response.assert_called_once_with(429)
+        handler.send_header.assert_any_call('Retry-After', '120')
+
 
 if __name__ == '__main__':
     unittest.main()

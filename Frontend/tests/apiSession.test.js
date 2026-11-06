@@ -37,3 +37,22 @@ test('published site uses its HTTPS origin without a development API port',async
   let called;globalThis.fetch=async url=>{called=url;return {ok:true,status:200,headers:{get:()=> 'application/json'},json:async()=>({})};};
   const {api}=await import(`../src/api.js?production=${Date.now()}`);await api('/stores');assert.equal(called,'https://lojas.example.test/api/v1/stores');
 });
+
+test('rate limit explains the waiting time without expiring the session', async () => {
+  let expired = false;
+  globalThis.window = { dispatchEvent: () => { expired = true; } };
+  globalThis.fetch = async () => ({ ok: false, status: 429,
+    headers: { get: name => name === 'Retry-After' ? '121' : 'application/json' },
+    json: async () => ({ message: 'Muitas tentativas.' }) });
+  const { api } = await import(`../src/api.js?retry-test=${Date.now()}`);
+  await assert.rejects(api('/auth/login'), /Muitas tentativas.*3 minutos/);
+  assert.equal(expired, false);
+});
+
+test('invalid retry header is not rendered as an instruction', async () => {
+  globalThis.fetch = async () => ({ ok: false, status: 429,
+    headers: { get: name => name === 'Retry-After' ? '<script>alert(1)</script>' : 'application/json' },
+    json: async () => ({ message: 'Muitas tentativas.' }) });
+  const { api } = await import(`../src/api.js?retry-invalid=${Date.now()}`);
+  await assert.rejects(api('/auth/login'), error => error.message === 'Muitas tentativas.');
+});
