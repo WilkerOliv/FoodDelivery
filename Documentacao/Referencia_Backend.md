@@ -1,6 +1,6 @@
 # Referência completa de funções — backend Java
 
-Gerada em 05/11/2026 a partir da árvore sintática do código final. Inclui funções explícitas, métodos privados, construtores e callbacks. Não é uma certificação de segurança: use junto da análise de engenharia e da matriz de testes. Cobertura estrutural: **143 arquivos e 1128 funções explícitas**. Hash agregado: `388bb46fb172a3d991b3abcf396b349b541e02d031ba9aa34c56cab86a84b2a5`.
+Gerada a partir da árvore sintática do código final. Inclui funções explícitas, métodos privados, construtores e callbacks. Não é uma certificação de segurança: use junto da análise de engenharia e da matriz de testes. Cobertura estrutural: **143 arquivos e 1128 funções explícitas**. Hash agregado: `388bb46fb172a3d991b3abcf396b349b541e02d031ba9aa34c56cab86a84b2a5`.
 
 Cada seção identifica localização, assinatura, regras locais, chamadas e efeitos observáveis. Getters implícitos de `record`, métodos herdados de bibliotecas e APIs nativas são descritos por seus contratos, não reproduzidos como código do projeto.
 

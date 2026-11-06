@@ -1,6 +1,6 @@
 # Inventário de interface, HTTP e migrações
 
-Data: 05/11/2026. Inventário estático; uma linha aqui não significa que a ação foi executada em todas as combinações. Consulte a matriz de validação.
+Inventário estático da árvore de código documentada; uma linha aqui não significa que a ação foi executada em todas as combinações. Consulte a matriz de validação.
 
 ## Atributos de interação do frontend
 

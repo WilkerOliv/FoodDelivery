@@ -65,7 +65,7 @@ def describe(name,kind):
 def generate(language,files,filename):
     parser=Parser(Language((tree_sitter_java if language=='java' else tree_sitter_javascript).language()))
     title='backend Java' if language=='java' else 'frontend JavaScript'
-    out=[f'# Referência completa de funções — {title}', '', 'Gerada em 05/11/2026 a partir da árvore sintática do código final. Inclui funções explícitas, métodos privados, construtores e callbacks. Não é uma certificação de segurança: use junto da análise de engenharia e da matriz de testes.', '', 'Cada seção identifica localização, assinatura, regras locais, chamadas e efeitos observáveis. Getters implícitos de `record`, métodos herdados de bibliotecas e APIs nativas são descritos por seus contratos, não reproduzidos como código do projeto.', '', 'Regeneração: criar ambiente Python isolado, instalar `scripts/reference-requirements.txt` e executar `python scripts/generate_reference.py` na raiz.', '']
+    out=[f'# Referência completa de funções — {title}', '', 'Gerada a partir da árvore sintática do código final. Inclui funções explícitas, métodos privados, construtores e callbacks. Não é uma certificação de segurança: use junto da análise de engenharia e da matriz de testes.', '', 'Cada seção identifica localização, assinatura, regras locais, chamadas e efeitos observáveis. Getters implícitos de `record`, métodos herdados de bibliotecas e APIs nativas são descritos por seus contratos, não reproduzidos como código do projeto.', '', 'Regeneração: criar ambiente Python isolado, instalar `scripts/reference-requirements.txt` e executar `python scripts/generate_reference.py` na raiz.', '']
     count=0
     digest=hashlib.sha256()
     for path in files:
@@ -121,7 +121,7 @@ def generate(language,files,filename):
 generate('java',sorted((ROOT/'Backend/src/main/java').rglob('*.java')),'Referencia_Backend.md')
 generate('javascript',sorted((ROOT/'Frontend/src').glob('*.js')),'Referencia_Frontend.md')
 
-inventory=['# Inventário de interface, HTTP e migrações','', 'Data: 05/11/2026. Inventário estático; uma linha aqui não significa que a ação foi executada em todas as combinações. Consulte a matriz de validação.','', '## Atributos de interação do frontend','', 'Os atributos `data-*` conectam botões, formulários e estados aos handlers documentados na referência. Alguns são seletores de apresentação, não ações. Valores dinâmicos são escapados no template e revalidados no servidor.','', '| Atributo | Primeira ocorrência |','|---|---|']
+inventory=['# Inventário de interface, HTTP e migrações','', 'Inventário estático da árvore de código documentada; uma linha aqui não significa que a ação foi executada em todas as combinações. Consulte a matriz de validação.','', '## Atributos de interação do frontend','', 'Os atributos `data-*` conectam botões, formulários e estados aos handlers documentados na referência. Alguns são seletores de apresentação, não ações. Valores dinâmicos são escapados no template e revalidados no servidor.','', '| Atributo | Primeira ocorrência |','|---|---|']
 attrs={}
 for path in sorted((ROOT/'Frontend').rglob('*.js')):
     if 'node_modules' in path.parts:continue

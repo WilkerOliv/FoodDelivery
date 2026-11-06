@@ -1,6 +1,6 @@
 # Referência completa de funções — frontend JavaScript
 
-Gerada em 05/11/2026 a partir da árvore sintática do código final. Inclui funções explícitas, métodos privados, construtores e callbacks. Não é uma certificação de segurança: use junto da análise de engenharia e da matriz de testes. Cobertura estrutural: **23 arquivos e 895 funções explícitas**. Hash agregado: `104104c0baf39fb792f63e2d455c74f6caf7df460dda72b90673c96fb9112fd6`.
+Gerada a partir da árvore sintática do código final. Inclui funções explícitas, métodos privados, construtores e callbacks. Não é uma certificação de segurança: use junto da análise de engenharia e da matriz de testes. Cobertura estrutural: **23 arquivos e 895 funções explícitas**. Hash agregado: `104104c0baf39fb792f63e2d455c74f6caf7df460dda72b90673c96fb9112fd6`.
 
 Cada seção identifica localização, assinatura, regras locais, chamadas e efeitos observáveis. Getters implícitos de `record`, métodos herdados de bibliotecas e APIs nativas são descritos por seus contratos, não reproduzidos como código do projeto.
 
