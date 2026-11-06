@@ -38,4 +38,4 @@ Localização opcional no mapa e modalidades de atendimento: [configuração, co
 
 [Fidelidade da homologação](Documentacao/Fidelidade_da_homologacao.md): regras compartilhadas, diferenças dos simuladores e critérios de validação antes da operação real.
 
-Relatório da continuação manual: [Validação manual complementar — 06/11/2026](Documentacao/Validacao_manual_complementar_2026-11-06.md), com o defeito do aceite de entrega, correção e limites do que ainda precisa ser repetido após o deploy.
+Relatório da continuação manual: [Validação manual complementar — 06/11/2026](Documentacao/Validacao_manual_complementar_2026-11-06.md), com o defeito do aceite de entrega, a correção e a repetição manual concluída após o deploy de `4c55b8a`, além dos limites da evidência.

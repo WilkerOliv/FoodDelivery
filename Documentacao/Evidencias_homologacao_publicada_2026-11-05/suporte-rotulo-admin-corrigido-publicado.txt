@@ -1,0 +1,83 @@
+Browser tab: 4, Title: "FoodDelivery — pedidos e reservas perto de você", URL: "https://fooddelivery-homologacao.onrender.com/".
+1 AXWebArea FoodDelivery — pedidos e reservas perto de você, URL: fooddelivery-homologacao.onrender.com/
+	2 container
+		3 text HOMOLOGAÇÃO · Cadastros fictícios · Sem dinheiro ou mensagens reais
+		4 link Description: Abrir caixa de mensagens de teste ↗, Value: fooddelivery-homologacao.onrender.com/demo.html
+	5 container app
+		6 container
+			7 link Description: FoodDelivery Administrador, Value: fooddelivery-homologacao.onrender.com/#
+			8 text MENU PRINCIPAL
+			9 button Visão geral
+			10 button Notificações novo
+				11 text Notificações
+				12 text novo
+			13 button Definições
+			14 text Central de atendimento Acompanhe e responda as solicitações de suporte.
+			15 button Ver chamados →
+			16 text AD admin demonstração Administrador
+			17 button Abrir definições
+		18 container Navegação principal
+			19 button Visão geral
+				20 text Visão geral
+			21 button Notificações
+				22 text Notificações
+			23 button Definições
+				24 text Definições
+		25 container
+			26 button (collapsed) Description: Abrir ou recolher menu, ID: mobile-menu, Secondary Actions: Expand
+			27 button Alterar cidade de entrega
+				28 text LOJAS EM DESTAQUE NA CIDADE
+				29 text Nantes, SP
+			30 search text field (settable) Description: Buscar lojas, produtos ou serviços, ID: global-search
+			31 button Notificações
+			32 button AD, Help: Minha conta
+			33 button Sair da conta
+		34 container page-content
+			35 text ADMINISTRAÇÃO DA PLATAFORMA
+			36 heading Chamados, Value: 1
+				37 text Chamados
+			38 text Responda clientes e acompanhe solicitações de suporte.
+			39 button ↻ Atualizar dados
+			40 container Áreas administrativas
+				41 button Visão geral
+				42 button Chamados · 1
+				43 button Solicitações
+				44 button Lojas
+				45 button Imagens das lojas
+				46 button Equipe
+				47 button Financeiro
+			48 container
+				49 heading Chamados de atendimento, Value: 3
+					50 text Chamados de atendimento
+				51 heading QA 4c55b8a: rótulos do atendimento, Value: 3
+					52 text QA 4c55b8a: rótulos do atendimento
+				53 container
+					54 text cliente demonstração · cliente@example.test
+					55 text Complemento fictício enviado pelo campo com rótulo explícito.
+				56 text ●
+				57 text Aberto
+				58 button Abrir chamado
+				59 button Assumir
+				60 button Encerrar
+	61 container QA 4c55b8a: rótulos do atendimento
+		62 text CENTRAL DE CHAMADOS
+		63 heading QA 4c55b8a: rótulos do atendimento, Value: 2, ID: support-title
+			64 text QA 4c55b8a: rótulos do atendimento
+		65 text Acompanhe as respostas e envie novas mensagens.
+		66 button Fechar
+		67 button ← Chamados
+		68 text ●
+		69 text Aberto Pedido
+		70 container
+			71 text cliente demonstração 6 de nov. de 2026, 19:57 Teste fictício sobre o pedido 29D34FF4. Validar resposta acessível.
+		72 container
+			73 text cliente demonstração 6 de nov. de 2026, 19:57 Complemento fictício enviado pelo campo com rótulo explícito.
+		74 container
+			75 text admin demonstração  Atendimento 6 de nov. de 2026, 20:03 Resposta fictícia: fluxo de entrega concluído na revisão da versão 4c55b8a.
+		76 container
+			77 text Resposta ao cliente
+			78 text entry area (settable) Resposta ao cliente, ID: support-reply-body
+			79 text Até 2.000 caracteres. Não envie senhas nem códigos de verificação.
+			80 button Enviar resposta
+
+The focused UI element is 1 AXWebArea FoodDelivery — pedidos e reservas perto de você, URL: fooddelivery-homologacao.onrender.com/

@@ -112,3 +112,7 @@ Esta etapa encerra a pendência de compatibilidade da entrada externa; não equi
 ## Continuação da revisão — 06/11/2026
 
 A revisão complementar está em [Fidelidade da homologação](Fidelidade_da_homologacao.md) e no relatório de [jornadas manuais complementares](Validacao_manual_complementar_2026-11-06.md). A suíte Java foi repetida: 130 testes regulares aprovados, mais três testes com PostgreSQL real. O frontend passou em 57 testes, com sintaxe válida em 25 módulos. O gateway passou em 21 testes e a detecção de capacidade de segurança em três. As referências atuais incluem 25 módulos JavaScript e 897 funções explícitas; os números anteriores neste documento identificam a versão daquela etapa.
+
+### Confirmação manual após deploy de 4c55b8a
+
+O navegador confirmou a versão dos recursos `20261106-delivery-qa-1`. O novo pedido 29D34FF4 passou por recusa/aprovação simuladas, aceite/preparo da loja, oferta, aceite do entregador, coleta, trajeto e entrega. O crédito interno de R$ 5,00 e a ocultação dos dados no histórico do entregador persistiram após recarregamento. O comprador viu Entregue. Os campos de resposta do suporte foram encontrados pelos novos rótulos em ambos os perfis; envio, encerramento e navegação por notificações foram conferidos. O [relatório complementar](Validacao_manual_complementar_2026-11-06.md) registra os passos e as capturas. A pendência de repetição manual dessa correção está encerrada; provedores reais e demais limites de produção permanecem fora dessa evidência.
