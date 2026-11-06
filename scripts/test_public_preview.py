@@ -1,5 +1,6 @@
 """Focused HTTP checks for the preview gateway; no external accounts or providers."""
 import io
+import re
 from email.message import Message
 import importlib.util
 import os
@@ -9,6 +10,7 @@ import unittest
 from unittest.mock import Mock, patch
 import urllib.error
 import urllib.request
+from urllib.parse import urlencode
 from http.server import ThreadingHTTPServer
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,6 +31,117 @@ class PreviewTest(unittest.TestCase):
         cls.thread = threading.Thread(target=cls.server.serve_forever, daemon=True)
         cls.thread.start()
         cls.url = 'http://127.0.0.1:' + str(cls.server.server_port)
+        cls.server.public_origin = cls.url
+
+    def setUp(self):
+        preview.PreviewHandler.attempts.clear()
+
+    def gate_form(self):
+        with urllib.request.urlopen(urllib.request.Request(self.url + '/', headers={'Accept': 'text/html'})) as response:
+            content = response.read().decode()
+            token = re.search(r'name="challenge" value="([^"]+)"', content).group(1)
+            cookie = next(value.split(';')[0] for value in response.headers.get_all('Set-Cookie') if value.startswith(preview.PreviewHandler.challenge_cookie + '='))
+            return content, token, cookie, response.headers
+
+    def submit_gate(self, token, cookie, password='x' * 32, origin=None):
+        class NoRedirect(urllib.request.HTTPRedirectHandler):
+            def redirect_request(self, *args):
+                return None
+        data = urlencode({'username': 'avaliador', 'password': password, 'challenge': token}).encode()
+        request = urllib.request.Request(self.url + '/_preview/login', data=data, headers={
+            'Content-Type': 'application/x-www-form-urlencoded', 'Cookie': cookie,
+            'Origin': self.url if origin is None else origin})
+        try:
+            return urllib.request.build_opener(NoRedirect()).open(request)
+        except urllib.error.HTTPError as error:
+            return error
+
+    def test_browser_receives_stable_form_without_basic_dialog(self):
+        content, token, cookie, headers = self.gate_form()
+        self.assertIn('Usuário de acesso', content)
+        self.assertIn('Senha de acesso', content)
+        self.assertNotIn('WWW-Authenticate', headers)
+        self.assertNotIn('x' * 32, content)
+        self.assertTrue(preview.PreviewHandler.valid_token(token, 'csrf', 600))
+        for attribute in ('Secure', 'HttpOnly', 'SameSite=Strict', 'Path=/'):
+            self.assertIn(attribute, headers['Set-Cookie'])
+
+    def test_expired_browser_api_session_does_not_open_native_auth_dialog(self):
+        with self.request('/api/v1/demo/messages') as response:
+            self.assertEqual(response.status, 401)
+            self.assertNotIn('WWW-Authenticate', response.headers)
+            self.assertIn('Atualize a página', response.read().decode())
+
+    def test_gate_login_issues_signed_cookie_and_does_not_disclose_password(self):
+        _, token, cookie, _ = self.gate_form()
+        with self.submit_gate(token, cookie) as response:
+            self.assertEqual(response.status, 303)
+            self.assertEqual(response.headers['Location'], '/')
+            signed = next(value.split(';')[0] for value in response.headers.get_all('Set-Cookie') if value.startswith(preview.PreviewHandler.gate_cookie + '='))
+            self.assertNotIn('x' * 32, signed)
+        with urllib.request.urlopen(urllib.request.Request(self.url + '/runtime-config.js', headers={'Cookie': signed})) as response:
+            self.assertEqual(response.status, 200)
+            self.assertIn(b'FOODDELIVERY_DEMO=true', response.read())
+
+    def test_wrong_gate_password_does_not_issue_session(self):
+        _, token, cookie, _ = self.gate_form()
+        with self.submit_gate(token, cookie, password='wrong') as response:
+            self.assertEqual(response.status, 403)
+            self.assertNotIn('WWW-Authenticate', response.headers)
+            self.assertFalse(any(value.startswith(preview.PreviewHandler.gate_cookie + '=') for value in response.headers.get_all('Set-Cookie', [])))
+            self.assertIn('incorretos', response.read().decode())
+
+    def test_gate_rejects_cross_origin_and_missing_challenge(self):
+        _, token, cookie, _ = self.gate_form()
+        with self.submit_gate(token, cookie, origin='https://outside.example') as response:
+            self.assertEqual(response.status, 403)
+        with self.submit_gate('', cookie) as response:
+            self.assertEqual(response.status, 403)
+        with self.submit_gate(token, '') as response:
+            self.assertEqual(response.status, 403)
+
+    def test_session_tampering_expiration_and_restart_are_rejected(self):
+        token = preview.PreviewHandler.signed_token('gate')
+        self.assertTrue(preview.PreviewHandler.valid_token(token, 'gate', 28800))
+        self.assertFalse(preview.PreviewHandler.valid_token(token + '0', 'gate', 28800))
+        self.assertFalse(preview.PreviewHandler.valid_token(token[:-1] + 'é', 'gate', 28800))
+        self.assertFalse(preview.PreviewHandler.valid_token(token, 'csrf', 600))
+        with patch.object(preview.time, 'time', return_value=int(token.split('.')[1]) + 28801):
+            self.assertFalse(preview.PreviewHandler.valid_token(token, 'gate', 28800))
+        with patch.object(preview.PreviewHandler, 'session_key', b'new-instance-key'):
+            self.assertFalse(preview.PreviewHandler.valid_token(token, 'gate', 28800))
+        with self.assertRaises(urllib.error.HTTPError) as result:
+            urllib.request.urlopen(urllib.request.Request(self.url + '/runtime-config.js', headers={'Cookie': preview.PreviewHandler.gate_cookie + '=forged'}))
+        self.assertEqual(result.exception.code, 401)
+
+    def test_gate_failed_attempts_are_limited(self):
+        for _ in range(10):
+            _, token, cookie, _ = self.gate_form()
+            with self.submit_gate(token, cookie, password='wrong') as response:
+                self.assertEqual(response.status, 403)
+        _, token, cookie, _ = self.gate_form()
+        with self.submit_gate(token, cookie) as response:
+            self.assertEqual(response.status, 429)
+            self.assertGreater(int(response.headers['Retry-After']), 0)
+
+    def test_basic_clients_cannot_bypass_gate_failed_attempt_budget(self):
+        for _ in range(10):
+            request = urllib.request.Request(self.url + '/runtime-config.js', headers={'Authorization': 'Basic invalid'})
+            with self.assertRaises(urllib.error.HTTPError) as result:
+                urllib.request.urlopen(request)
+            self.assertEqual(result.exception.code, 401)
+        _, token, cookie, _ = self.gate_form()
+        with self.submit_gate(token, cookie) as response:
+            self.assertEqual(response.status, 429)
+
+    def test_gate_rejects_oversized_and_unexpected_body_types(self):
+        for data, content_type, expected in ((b'x' * 4097, 'application/x-www-form-urlencoded', 413),
+                                              (b'{}', 'application/json', 415)):
+            request = urllib.request.Request(self.url + '/_preview/login', data=data,
+                headers={'Origin': self.url, 'Content-Type': content_type})
+            with self.assertRaises(urllib.error.HTTPError) as result:
+                urllib.request.urlopen(request)
+            self.assertEqual(result.exception.code, expected)
 
     @classmethod
     def tearDownClass(cls):
@@ -50,6 +163,7 @@ class PreviewTest(unittest.TestCase):
         for path in ('/', '/demo.html', '/api/v1/demo/messages', '/runtime-config.js'):
             with self.request(path) as response:
                 self.assertEqual(response.status, 401)
+                self.assertNotIn('WWW-Authenticate', response.headers)
 
     def test_static_and_demo_flag(self):
         with self.request('/', True) as response:

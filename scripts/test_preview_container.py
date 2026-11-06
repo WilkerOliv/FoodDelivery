@@ -2,11 +2,13 @@
 import argparse
 import base64
 import json
+import re
 import secrets
 import subprocess
 import time
 import urllib.error
 import urllib.request
+from urllib.parse import urlencode
 
 
 def main():
@@ -25,8 +27,10 @@ def main():
         port = mapping['NetworkSettings']['Ports']['10000/tcp'][0]['HostPort']
         base = 'http://127.0.0.1:' + port
         authorization = 'Basic ' + base64.b64encode(('avaliador:' + password).encode()).decode()
-        def request(path, body=None, cookie=None, authenticated=True, request_origin=origin):
+        def request(path, body=None, cookie=None, authenticated=True, request_origin=origin, accept=None):
             headers = {'Origin': request_origin, 'Content-Type': 'application/json'}
+            if accept:
+                headers['Accept'] = accept
             if authenticated:
                 headers['Authorization'] = authorization
             if cookie:
@@ -56,6 +60,28 @@ def main():
         with request('/', authenticated=False) as response:
             assert response.status == 401
         with request('/') as response:
+            assert response.status == 200
+        with request('/', authenticated=False, accept='text/html') as response:
+            assert response.status == 200
+            assert response.headers.get('WWW-Authenticate') is None
+            form = response.read().decode()
+            challenge = re.search(r'name="challenge" value="([^"]+)"', form).group(1)
+            csrf_cookie = next(value.split(';')[0] for value in response.headers.get_all('Set-Cookie') if value.startswith('__Host-fooddelivery_preview_csrf='))
+        class NoRedirect(urllib.request.HTTPRedirectHandler):
+            def redirect_request(self, *args):
+                return None
+        login = urllib.request.Request(base + '/_preview/login',
+            data=urlencode({'username': 'avaliador', 'password': password, 'challenge': challenge}).encode(),
+            headers={'Origin': origin, 'Cookie': csrf_cookie, 'Content-Type': 'application/x-www-form-urlencoded'})
+        try:
+            response = urllib.request.build_opener(NoRedirect()).open(login, timeout=10)
+        except urllib.error.HTTPError as error:
+            response = error
+        with response:
+            assert response.status == 303
+            session_cookie = next(value for value in response.headers.get_all('Set-Cookie') if value.startswith('__Host-fooddelivery_preview='))
+            assert all(flag in session_cookie for flag in ('Secure', 'HttpOnly', 'SameSite=Strict', 'Path=/'))
+        with request('/runtime-config.js', authenticated=False, cookie=session_cookie.split(';')[0]) as response:
             assert response.status == 200
         with request('/api/v1/demo/status') as response:
             assert json.load(response)['ready'] is True

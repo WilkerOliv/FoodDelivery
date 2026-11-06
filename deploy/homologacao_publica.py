@@ -2,6 +2,8 @@
 """Temporary HTTPS preview behind a shared access password; never loads production .env."""
 import base64
 import hmac
+import hashlib
+import html
 import http.client
 import importlib.util
 import json
@@ -13,7 +15,8 @@ import subprocess
 import tempfile
 import threading
 import time
-from urllib.parse import unquote, urlsplit
+from http.cookies import SimpleCookie, CookieError
+from urllib.parse import unquote, urlsplit, parse_qs
 from http.server import ThreadingHTTPServer
 
 ROOT = Path(__file__).resolve().parent
@@ -33,6 +36,118 @@ def access_token(username, password):
 
 class PreviewHandler(frontend.FrontendHandler):
     expected_authorization = ''
+    session_key = secrets.token_bytes(32)
+    gate_cookie = '__Host-fooddelivery_preview'
+    challenge_cookie = '__Host-fooddelivery_preview_csrf'
+    attempts = {}
+    attempts_lock = threading.Lock()
+
+    @classmethod
+    def signed_token(cls, purpose):
+        payload = f'{purpose}.{int(time.time())}.{secrets.token_hex(16)}'
+        signature = hmac.new(cls.session_key, payload.encode(), hashlib.sha256).hexdigest()
+        return payload + '.' + signature
+
+    @classmethod
+    def valid_token(cls, token, purpose, lifetime):
+        if not token or len(token) > 180:
+            return False
+        try:
+            kind, issued, nonce, signature = token.split('.')
+            age = time.time() - int(issued)
+        except (ValueError, TypeError):
+            return False
+        expected = hmac.new(cls.session_key, f'{kind}.{issued}.{nonce}'.encode(), hashlib.sha256).hexdigest()
+        return kind == purpose and 0 <= age < lifetime and hmac.compare_digest(signature.encode(), expected.encode())
+
+    def cookie_value(self, name):
+        try:
+            cookies = SimpleCookie(self.headers.get('Cookie', ''))
+            return cookies[name].value if name in cookies else ''
+        except CookieError:
+            return ''
+
+    def cookie_header(self, name, value, age):
+        self.send_header('Set-Cookie', f'{name}={value}; Path=/; Max-Age={age}; Secure; HttpOnly; SameSite=Strict')
+
+    def login_page(self, message='', status=200):
+        challenge = self.signed_token('csrf')
+        body = ('''<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Acesso à homologação · FoodDelivery</title><link rel="stylesheet" href="/_preview/access.css">
+<main><span class="badge">AMBIENTE DE TESTES</span><h1>Conheça o FoodDelivery</h1>
+<p>Entre com o acesso de avaliador para explorar a demonstração. Os cadastros são fictícios e nenhum pagamento ou mensagem real será enviado.</p>
+''' + (f'<p class="error" role="alert">{html.escape(message)}</p>' if message else '') + '''
+<form method="post" action="/_preview/login"><input type="hidden" name="challenge" value="''' + challenge + '''">
+<label for="gate-user">Usuário de acesso</label><input id="gate-user" name="username" autocomplete="username" required maxlength="100" autofocus>
+<label for="gate-password">Senha de acesso</label><input id="gate-password" name="password" type="password" autocomplete="current-password" required maxlength="512">
+<button type="submit">Acessar demonstração →</button></form><small>Depois desta entrada, escolha sua conta de teste no site. Este acesso é temporário e não substitui o login de cliente, vendedor, entregador ou administrador.</small></main></html>''').encode()
+        self.send_response(status)
+        self.send_header('Content-Type', 'text/html; charset=utf-8')
+        self.cookie_header(self.challenge_cookie, challenge, 600)
+        self.end_headers()
+        self.wfile.write(body)
+
+    def check_gate_credentials(self, candidate):
+        # Both browser forms and Basic clients share the failed-attempt budget.
+        now = time.monotonic()
+        peer = self.client_address[0]
+        with self.attempts_lock:
+            for key in list(self.attempts):
+                if now - self.attempts[key][0] >= 900:
+                    del self.attempts[key]
+            if peer not in self.attempts and len(self.attempts) >= 1024:
+                self.send_response(429)
+                self.send_header('Retry-After', '900')
+                self.end_headers()
+                return None
+            started, count = self.attempts.get(peer, (now, 0))
+            if count >= 10:
+                self.send_response(429)
+                self.send_header('Retry-After', str(max(1, int(900 - (now - started)))))
+                self.end_headers()
+                self.wfile.write('Muitas tentativas. Aguarde antes de tentar novamente.'.encode())
+                return None
+            self.attempts[peer] = (started, count + 1)
+        valid = bool(self.expected_authorization) and hmac.compare_digest(candidate.encode(), self.expected_authorization.encode())
+        if valid:
+            with self.attempts_lock:
+                self.attempts.pop(peer, None)
+        return valid
+
+    def login(self):
+        if self.headers.get('Origin') != self.server.public_origin:
+            return self.send_error(403, 'Origem de acesso invalida')
+        if self.headers.get('Transfer-Encoding'):
+            return self.send_error(400)
+        try:
+            length = int(self.headers.get('Content-Length', '0'))
+        except ValueError:
+            return self.send_error(400)
+        if length <= 0 or length > 4096:
+            return self.send_error(413)
+        if self.headers.get_content_type() != 'application/x-www-form-urlencoded':
+            return self.send_error(415)
+        try:
+            fields = parse_qs(self.rfile.read(length).decode('utf-8'), max_num_fields=3, strict_parsing=True)
+        except (ValueError, UnicodeError):
+            return self.send_error(400)
+        if any(len(values) != 1 for values in fields.values()):
+            return self.send_error(400)
+        challenge = fields.get('challenge', [''])[0]
+        if not self.valid_token(challenge, 'csrf', 600) or not hmac.compare_digest(challenge.encode(), self.cookie_value(self.challenge_cookie).encode()):
+            return self.login_page('A página expirou. Digite o acesso novamente.', 403)
+        username, password = fields.get('username', [''])[0], fields.get('password', [''])[0]
+        candidate = 'Basic ' + base64.b64encode(f'{username}:{password}'.encode()).decode()
+        valid = self.check_gate_credentials(candidate)
+        if valid is None:
+            return
+        if not valid:
+            return self.login_page('Usuário ou senha de acesso incorretos.', 403)
+        self.send_response(303)
+        self.send_header('Location', '/')
+        self.cookie_header(self.gate_cookie, self.signed_token('gate'), 28800)
+        self.cookie_header(self.challenge_cookie, '', 0)
+        self.end_headers()
 
     def is_ready(self):
         return self.server.api_ready.is_set()
@@ -55,6 +170,12 @@ class PreviewHandler(frontend.FrontendHandler):
             self.send_response(200)
             self.end_headers()
             self.wfile.write(b'ok')
+            return
+        if self.path == '/_preview/access.css':
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/css; charset=utf-8')
+            self.end_headers()
+            self.wfile.write(b'*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f8f5f1;color:#27221f;font:17px/1.55 system-ui,sans-serif;padding:24px}main{width:100%;max-width:520px;padding:32px;background:white;border:1px solid #e5dcd5;border-radius:24px;box-shadow:0 18px 60px #45230e12}h1{font-size:clamp(26px,6vw,34px);line-height:1.2;margin:18px 0}p,small{color:#62564d}.badge{font-size:12px;letter-spacing:.1em;font-weight:750;color:#9c3000}form{display:grid;gap:10px;margin:24px 0}label{font-weight:650}input,button{font:inherit;width:100%;min-width:0;min-height:50px;border-radius:12px;padding:12px 14px}input{border:1px solid #b9a99d;margin-bottom:8px}button{border:0;background:#ac3200;color:#fff;font-weight:700;cursor:pointer}input:focus-visible,button:focus-visible{outline:3px solid #175a9d;outline-offset:3px}.error{padding:12px;background:#fff0eb;border-left:4px solid #ad2600;border-radius:8px;color:#8c2100}small{display:block;font-size:14px}@media(max-width:400px){body{padding:12px}main{padding:22px}}')
             return
         if not self.authorized():
             return
@@ -81,14 +202,32 @@ class PreviewHandler(frontend.FrontendHandler):
         super().do_GET()
 
     def authorized(self):
-        if hmac.compare_digest(self.headers.get('Authorization', '').encode(), self.expected_authorization.encode()):
+        if self.valid_token(self.cookie_value(self.gate_cookie), 'gate', 28800):
             return True
+        authorization = self.headers.get('Authorization', '')
+        if authorization:
+            valid = self.check_gate_credentials(authorization)
+            if valid is None:
+                return False
+            if valid:
+                return True
+        if self.command == 'GET' and 'text/html' in self.headers.get('Accept', '') and not urlsplit(self.path).path.startswith('/api/'):
+            self.login_page()
+            return False
         self.send_response(401)
-        self.send_header('WWW-Authenticate', 'Basic realm="FoodDelivery - somente testes", charset="UTF-8"')
+        api_request = urlsplit(self.path).path.startswith('/api/')
+        if api_request:
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+        # Basic remains accepted preemptively by HTTP test clients. Never ask the
+        # browser to open a native challenge, including for favicon/subresources.
         self.end_headers()
+        if api_request:
+            self.wfile.write(json.dumps({'message': 'O acesso à homologação expirou. Atualize a página para entrar novamente.'}, ensure_ascii=False).encode())
         return False
 
     def mutate(self):
+        if self.command == 'POST' and self.path == '/_preview/login':
+            return self.login()
         if not self.authorized():
             return
         if not self.is_ready():
@@ -116,6 +255,7 @@ class PreviewHandler(frontend.FrontendHandler):
 
     def end_headers(self):
         self.send_header('X-Robots-Tag', 'noindex, nofollow, noarchive')
+        self.send_header('X-Frame-Options', 'DENY')
         super().end_headers()
 
     def setup(self):
@@ -173,6 +313,7 @@ def main():
         os.chdir(FRONTEND)
         server = ThreadingHTTPServer(('0.0.0.0', int(os.environ.get('PORT', '10000'))), PreviewHandler)
         server.api_ready = threading.Event()
+        server.public_origin = origin
         server_thread = threading.Thread(target=server.serve_forever, daemon=True)
         server_thread.start()
         print('Porta pública aberta; aguardando a API. /healthz retorna 503 durante a inicialização.', flush=True)

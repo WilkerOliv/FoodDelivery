@@ -40,7 +40,7 @@ O Blueprint não habilita atualização automática: após revisar novas altera�
 ## 4. Abrir a demonstração
 
 1. Abra a URL HTTPS exibida pelo Render, com formato `https://nome-do-servico.onrender.com`.
-2. O navegador pedirá uma primeira autenticação:
+2. O site exibirá a página **Acesso à homologação** (sem a caixa de autenticação do navegador). Preencha:
    - usuário: `avaliador`;
    - senha: no painel do serviço, abra **Environment** e revele `DEMO_ACCESS_PASSWORD`.
 3. Guarde essa senha em local privado. Ela é diferente da senha das contas de teste e é gerada pelo Render. Não a coloque no repositório.
@@ -55,7 +55,7 @@ O Blueprint não habilita atualização automática: após revisar novas altera�
 
 Senha das contas fictícias: `DemoLocal!2026#Teste`. Essa senha conhecida só é aceitável neste ambiente isolado atrás da primeira autenticação. Compartilhe a senha de acesso externo apenas com avaliadores de confiança: eles têm acesso aos dados fictícios e às contas da demonstração.
 
-Para trocar de perfil, use **Sair** dentro do site. Para encerrar também a autenticação externa, feche a sessão privada do navegador. Para revogar o acesso compartilhado, altere `DEMO_ACCESS_PASSWORD` (mínimo 24 caracteres) no Render e reinicie/publice novamente.
+Para trocar de perfil, use **Sair** dentro do site. O acesso externo usa um cookie protegido por até oito horas; reiniciar o serviço invalida todas essas sessões. Para encerrar imediatamente o acesso externo neste computador, apague os dados deste site no navegador ou use uma janela privada e feche-a ao terminar. Para revogar o acesso compartilhado, altere `DEMO_ACCESS_PASSWORD` (mínimo 24 caracteres) no Render e reinicie/publice novamente.
 
 ## 5. Conferência após a publicação
 
@@ -81,7 +81,7 @@ Os arquivos e testes locais do gateway estão no repositório. A publicação ex
 
 Validação local realizada em 05/11/2026:
 
-- `python3 scripts/test_public_preview.py`: onze testes aprovados, cobrindo autenticação, arquivos privados, diretórios, flag de demonstração, bloqueio de configuração real, rejeição de senha fraca, saúde durante a inicialização, espera acima de 180 segundos, falha do processo e limite de espera e proxy restrito a loopback.
+- `python3 scripts/test_public_preview.py`: 21 testes aprovados, cobrindo autenticação, arquivos privados, diretórios, flag de demonstração, bloqueio de configuração real, rejeição de senha fraca, saúde durante a inicialização, espera acima de 180 segundos, falha do processo e limite de espera e proxy restrito a loopback.
 - `docker build -f deploy/Dockerfile.homologacao -t fooddelivery-preview:qa .`: pacote compilado com sucesso.
 - `python3 scripts/test_preview_container.py`: pacote iniciado com 512 MiB e uma CPU; página, API, login dos quatro perfis, cookie Secure/HttpOnly e bloqueio de origem não autorizada conferidos por HTTP. O contêiner de teste e seus dados foram removidos ao terminar.
 
@@ -93,3 +93,18 @@ Referências verificadas em 05/11/2026:
 
 - https://render.com/docs/free — limites, suspensão, filesystem temporário e bloqueio de SMTP no plano gratuito.
 - https://render.com/docs/blueprint-spec — estrutura e variáveis geradas do Blueprint.
+
+## Entrada compatível com o navegador integrado
+
+A entrada externa agora é um formulário servido pelo próprio gateway, sem JavaScript e sem recursos de terceiros. A senha é enviada por POST à mesma origem HTTPS; não é inserida no endereço, nos logs ou no armazenamento do frontend. O usuário padrão continua `avaliador`, configurável por `DEMO_ACCESS_USER`. Depois da entrada externa aparece o login normal das contas fictícias do aplicativo.
+
+- `login_page`: emite um desafio assinado de dez minutos e seu cookie HttpOnly. O formulário tem rótulos, foco visível, campos adaptáveis à largura e aviso claro de simulação. Pedidos HTML não recebem o desafio Basic que desaparece no navegador integrado.
+- `login`: exige a origem HTTPS configurada no serviço, formulário do mesmo site e desafio que corresponda ao cookie; limita o corpo a 4 KiB e rejeita campos repetidos/tipos inesperados. Compara a credencial em tempo constante.
+- `signed_token` / `valid_token`: assinam propósito, instante e nonce com HMAC-SHA256 e chave aleatória exclusiva do processo. Token expirado, adulterado, de outro propósito ou de uma instância anterior é recusado. A senha não faz parte do cookie.
+- `authorized`: aceita a sessão externa válida ou o acesso Basic dos roteiros HTTP. A sessão não concede um papel no aplicativo: as regras de cliente, vendedor, entregador e administrador continuam no Java.
+- `check_gate_credentials`: formulário e clientes Basic compartilham o limite de dez falhas por peer em quinze minutos, com armazenamento em memória limitado. Cabeçalhos de IP fornecidos pelo cliente não são confiados. Atrás de proxy, esse orçamento pode ser compartilhado; esta proteção não é distribuída entre instâncias.
+- Cookies de acesso e desafio usam prefixo `__Host-`, `Secure`, `HttpOnly`, `SameSite=Strict`, caminho `/` e nenhum Domain. O acesso expira em oito horas e a sessão é substituída a cada login. Respostas usam `no-store`, `noindex` e `X-Frame-Options: DENY`.
+
+Saúde e o estilo da página de entrada são públicos, sem dados de negócio. API, caixa de mensagens fictícias e arquivos do aplicativo permanecem protegidos. Nenhuma resposta do gateway envia `WWW-Authenticate`, inclusive arquivos secundários como favicon, para não reabrir a caixa nativa. Na API, a expiração retorna 401 com orientação para atualizar a página. Requisições de ferramentas sem preferência por HTML continuam recebendo 401 quando não autenticadas; os roteiros existentes permanecem compatíveis. O HTML público de entrada não significa que a demonstração ficou aberta.
+
+Testes adicionais exercitam autenticação pelo formulário, cookie assinado, credencial incorreta, origem indevida, desafio ausente, expiração, adulteração, reinício, tamanho/tipo do corpo e limite compartilhado com Basic. O contêiner também executa a entrada por formulário e acessa um recurso protegido com o cookie resultante. A conferência manual local confirmou que o botão leva ao login do aplicativo sem abrir a caixa nativa.

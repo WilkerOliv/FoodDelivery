@@ -1,0 +1,11 @@
+SUITE: test_homologacao
+APROVADO: quatro perfis, cookie isolado, inbox restrita, bloqueio de checkout real, pagamento aprovado/recusado/repetido, pedido na loja, reserva paga, códigos EMAIL/WHATSAPP, upload de capa com aprovação e cancelamento com estorno local.
+SUITE: test_jornadas
+APROVADO: catálogo CRUD/tipo, endereço privado, suporte/resposta/reabertura, categoria personalizada, cidade, edição administrativa, matriz de papéis, delivery completo, chat, localização, bloqueio de cancelamento após coleta, remoção de endereço do entregador e entrada inválida.
+SUITE: test_courier_finance
+APROVADO: remuneração congelada, crédito único, saldo, senha, OTP, idempotência, aprovação administrativa, destino protegido e registro de transferência fictícia.
+SUITE: test_store_location_modes
+APROVADO: coordenadas opcionais, remoção do ponto, vitrine pública, titularidade, modalidade obrigatória, delivery/retirada/agendamento bloqueados e pedido permitido cancelado sem pagamento.
+SUITE: test_store_hours
+APROVADO: múltiplos turnos, pausa e fechamento, reserva futura com loja fechada hoje, privacidade, prévia obrigatória, preservação, slots, cancelamento, aviso único, confirmação desatualizada, pagamento tardio e estorno simulado.
+PASS: cinco jornadas na árvore atual com banco em memória isolado.

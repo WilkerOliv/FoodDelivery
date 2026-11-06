@@ -37,7 +37,7 @@ O contador continua local ao processo. Reiniciar a instância o reinicia; vária
 |---|---|
 | Backend completo | 130 testes, sem falhas ou erros |
 | JavaScript | Sintaxe válida em 23 módulos; 52 testes aprovados |
-| Gateway e inicialização | 12 testes aprovados, incluindo preservação de `Retry-After` |
+| Gateway e inicialização | 21 testes aprovados, incluindo formulário protegido, sessão externa e preservação de `Retry-After` |
 | Detecção de capacidade de segurança | 3 testes aprovados |
 | Análise estática Semgrep CE | 192 regras, 206 arquivos, nenhum achado nas regras executadas |
 | Pacote Docker, 512 MiB | Quatro perfis, cookie Secure/HttpOnly, bloqueio de origem, logins corretos repetidos e limitação isolada de falhas aprovados por HTTP |
@@ -79,8 +79,18 @@ As jornadas existentes abrangem catálogo/tipo/remoção, pedidos, pagamento sim
 
 Depois do envio do commit para `main`, abra o serviço **fooddelivery-homologacao → Manual Deploy → Deploy latest commit**. A publicação apaga os dados fictícios anteriores. Aguarde **Live** antes de repetir o roteiro. Isso mantém a proteção externa e aplica a correção do limite de login.
 
-Pendente nesta etapa: confirmar o comportamento do novo limite de login na próxima implantação. A revisão visual da publicação permanece bloqueada pela autenticação HTTP Basic no navegador de testes; a cópia local permite avaliação independente da interface. Nenhum pagamento, mensagem ou repasse real foi executado.
+O pacote atualizado já foi publicado e as cinco jornadas passaram novamente em 06/11, em 197 requisições. O arquivo `resultado-api-publicacao-atualizada.json` registra esse resultado. As cinco jornadas também passaram na árvore corrente com banco em memória isolado; a repetição inicial no banco persistente foi interrompida por uma loja que testes anteriores haviam deixado sem retirada, sem alterar esses dados de exploração. O registro independente está em `resultado-jornadas-isoladas.txt`.
+
+Pendente após essa validação: publicar a correção adicional da página de entrada descrita abaixo. A revisão visual da publicação permanece bloqueada pela autenticação HTTP Basic no navegador de testes; a cópia local permite avaliação independente da interface. Nenhum pagamento, mensagem ou repasse real foi executado.
 
 ## Documentação estrutural atualizada
 
 As referências foram regeneradas a partir do código final: 143 arquivos Java com 1.128 funções, 23 módulos JavaScript com 895 funções e inventário de 209 atributos de interface. Cada referência inclui caminho e resumo estrutural; a análise não transforma testes amostrais em garantia de ausência de vulnerabilidades. A revisão do código corrente preserva a necessidade de limites distribuídos em produção, validação real de provedores e testes de acessibilidade com usuários.
+
+## Correção adicional: caixa de acesso desaparece no navegador integrado
+
+Após a publicação, o usuário confirmou que a caixa Basic aparecia e sumia em menos de um segundo. A entrada HTML do gateway foi substituída por uma página própria; a autenticação externa continua obrigatória. A implementação, expiração, prevenção de CSRF, limite compartilhado entre formulário/Basic e testes estão explicados em `Publicacao_gratuita_de_homologacao.md`. Nenhuma credencial real foi registrada na documentação ou na captura.
+
+A revisão manual local confirmou: formulário estável, campos editáveis, envio com credencial fictícia e chegada ao login normal do site. A largura efetivamente observada nessa conferência foi de 1280 px sem transbordamento. O navegador não aplicou a nova tentativa de largura menor; não se declara uma segunda prova móvel para esse formulário. Evidência: `acesso-homologacao-local.jpg`.
+
+O resultado dos 21 testes e do pacote atualizado não altera o significado das 197 requisições anteriores: elas validam a publicação anterior à entrada HTML. Esta alteração adicional precisa de outro **Deploy latest commit** para ser conferida remotamente.
