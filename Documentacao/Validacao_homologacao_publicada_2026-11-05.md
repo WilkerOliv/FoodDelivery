@@ -8,7 +8,7 @@ Esta revisão distingue três tipos de evidência:
 
 - **Publicação externa:** acesso HTTP ao serviço implantado.
 - **Pacote local:** execução da mesma configuração Docker de homologação, com limite de memória e dados fictícios próprios. A execução final de 06/11 iniciou em 39,3 segundos com 512 MiB e 1 CPU.
-- **Interface visual:** somente pode ser confirmada por interação real no navegador. O navegador integrado bloqueou o desafio HTTP Basic nesta sessão; a leitura da API não é apresentada como teste visual.
+- **Interface visual:** somente pode ser confirmada por interação real no navegador. O desafio HTTP Basic inicialmente impediu a entrada pelo navegador integrado. Após publicar a página própria de acesso, a entrada externa e os painéis dos quatro perfis foram conferidos na publicação; veja o encerramento abaixo. A leitura da API não é apresentada como teste visual.
 
 ## Problema reproduzido e correção
 
@@ -81,7 +81,7 @@ Depois do envio do commit para `main`, abra o serviço **fooddelivery-homologaca
 
 O pacote atualizado já foi publicado e as cinco jornadas passaram novamente em 06/11, em 197 requisições. O arquivo `resultado-api-publicacao-atualizada.json` registra esse resultado. As cinco jornadas também passaram na árvore corrente com banco em memória isolado; a repetição inicial no banco persistente foi interrompida por uma loja que testes anteriores haviam deixado sem retirada, sem alterar esses dados de exploração. O registro independente está em `resultado-jornadas-isoladas.txt`.
 
-Pendente após essa validação: publicar a correção adicional da página de entrada descrita abaixo. A revisão visual da publicação permanece bloqueada pela autenticação HTTP Basic no navegador de testes; a cópia local permite avaliação independente da interface. Nenhum pagamento, mensagem ou repasse real foi executado.
+A correção adicional da página de entrada foi publicada e conferida no navegador integrado em 06/11, conforme o encerramento abaixo. Nenhum pagamento, mensagem ou repasse real foi executado.
 
 ## Documentação estrutural atualizada
 
@@ -93,4 +93,18 @@ Após a publicação, o usuário confirmou que a caixa Basic aparecia e sumia em
 
 A revisão manual local confirmou: formulário estável, campos editáveis, envio com credencial fictícia e chegada ao login normal do site. A largura efetivamente observada nessa conferência foi de 1280 px sem transbordamento. O navegador não aplicou a nova tentativa de largura menor; não se declara uma segunda prova móvel para esse formulário. Evidência: `acesso-homologacao-local.jpg`.
 
-O resultado dos 21 testes e do pacote atualizado não altera o significado das 197 requisições anteriores: elas validam a publicação anterior à entrada HTML. Esta alteração adicional precisa de outro **Deploy latest commit** para ser conferida remotamente.
+O resultado dos 21 testes e do pacote atualizado não altera o significado das 197 requisições anteriores: elas validam a publicação anterior à entrada HTML. A alteração adicional do commit `df707c5` foi depois publicada e recebeu a conferência manual descrita abaixo.
+
+## Encerramento da validação do acesso publicado — 06/11/2026
+
+Após o usuário confirmar o novo deploy, o navegador integrado exibiu a página própria **Acesso à homologação**. Os dois campos permaneceram disponíveis para preenchimento. A entrada de avaliador levou ao login do aplicativo, sem a caixa Basic que desaparecia. A senha externa não foi registrada neste documento nem nas capturas.
+
+Conferências manuais na publicação atual:
+
+- Administrador: login, carregamento do painel, restauração das duas sessões após atualizar a página, navegação para Definições e leitura das cidades cadastradas.
+- Cliente: login e carregamento da vitrine com Mercado Demonstração e Barbearia Demonstração.
+- Vendedor: login, painel da loja, catálogo e abertura do editor com nome, descrição, preço, tipo e estoque; editor fechado sem salvar mudanças.
+- Entregador: login e carregamento da área de entregas.
+- A saída do aplicativo permitiu trocar de conta sem repetir o acesso de avaliador e sem reabrir a caixa nativa.
+
+Esta etapa encerra a pendência de compatibilidade da entrada externa; não equivale a executar novamente cada operação de negócio pela interface. As cinco jornadas HTTP e suas 197 requisições continuam documentadas separadamente, assim como os testes do gateway. Evidências da publicação: `Evidencias_homologacao_publicada_2026-11-05/admin-publicado-acesso-confirmado.jpg` e `entregador-publicado-acesso-confirmado.jpg`. Ao terminar, a conta de teste do aplicativo foi desconectada; o acesso de avaliador continua limitado pela expiração já documentada.
