@@ -24,6 +24,8 @@ CONTEXT={
  'notifications':'Avisos privados. A conta destinatária limita leitura e alterações; destinos internos tipados relacionam o aviso à operação.',
  'config':'Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria.',
  'location':'Busca e geocodificação. Provedores podem falhar, não conceder CEP ou retornar uma região ambígua; o usuário precisa revisar a cidade. Homologação usa coordenadas fictícias.',
+ 'pageLoading':'Controle de carregamento por contexto e revisão. Aborta consultas anteriores, ignora respostas obsoletas e distingue falha de lista vazia. Repetição consulta dados; não repete mutações.',
+ 'pageData':'Consultas de página produzem um patch separado do estado global. Busca por loja/cidade, carga parcial explícita e rejeição de catálogo indisponível preservam a coerência da tela.',
  'main':'Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea.',
  'api':'Transporte HTTP e sessão. Cookies não ficam acessíveis ao JavaScript; mensagens de falha precisam distinguir autorização, validação e indisponibilidade.',
  'accessibility':'Acessibilidade dinâmica. Associa rótulos, identifica diálogos, contém Tab, aceita Escape e devolve foco. Não substitui validação com leitor de tela e pessoas reais.',

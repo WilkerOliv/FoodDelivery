@@ -1,6 +1,6 @@
 # Arquitetura e operação do FoodDelivery
 
-Atualizado em 1 de novembro de 2026.
+Atualizado em 7 de novembro de 2026.
 
 ## Arquitetura existente
 
@@ -31,10 +31,10 @@ O vendedor pode guardar latitude e longitude opcionais. A API rejeita coordenada
 
 O link não publica nem verifica uma empresa no Google Maps. A criação/edição de um Perfil da Empresa exige que o comerciante conecte e autorize a própria conta Google, que a API esteja habilitada e que o proprietário conclua verificações exigidas pelo Google. Essa integração não está implementada nem homologada.
 
-## Segurança e trilha administrativa (01/11/2026)
+## Segurança e trilha administrativa
 
 - Rotas sem correspondência explícita exigem JWT autenticado; requisições anônimas são negadas por padrão. Rotas públicas continuam declaradas explicitamente. A troca obrigatória de senha limita a sessão às rotas explicitamente autorizadas para esse fluxo.
-- Login, cadastro e recuperação de senha têm limitação de tentativas por endereço remoto: 10 logins em 15 minutos; 5 tentativas de recuperação por hora; 10 cadastros por hora. O filtro não confia em `X-Forwarded-For`.
+- Login e recuperação limitam identificadores normalizados com hash e um orçamento adicional por peer; operações sensíveis usam identidade JWT validada. Cadastro também possui limitação. O filtro não confia livremente em `X-Forwarded-For`. As janelas e limites ficam em `AuthRateLimitFilter`.
 - A limitação é local ao processo e não substitui um gateway/WAF nem armazenamento compartilhado. Atrás de proxy, pode agrupar usuários no endereço do proxy; configurar endereços confiáveis requer definir e testar a topologia antes de passar a confiar em cabeçalhos encaminhados. Para múltiplas réplicas, mover contadores para Redis ou serviço equivalente.
 - V23 mantém eventos de ações administrativas sensíveis e uma consulta autenticada de administrador em `GET /api/v1/admin/audit-events`. Resumos não devem conter credenciais, CPF ou tokens. A trilha cobre mutações administrativas instrumentadas no controlador atual; ainda não é completa para todo o sistema, nem imutável contra acesso direto ao banco. Restringir permissões SQL, definir retenção/exportação e acrescentar eventos de autenticação, pagamentos, suporte e mudanças feitas fora desse controlador antes de tratá-la como trilha de conformidade.
 - Os testes H2 verificam migrações, autorização anônima/autenticada, limitação por origem e formato dos eventos. Isso não equivale a teste de invasão, auditoria independente ou validação de PostgreSQL em produção.
@@ -61,7 +61,7 @@ cd ../Backend
 JWT_SECRET='<chave de teste com pelo menos 256 bits>' mvn test
 ```
 
-O workflow `.github/workflows/quality.yml` executa as verificações de sintaxe/testes do frontend e os testes Spring com as migrações H2. O conjunto não faz chamada real a Mercado Pago, SMTP, WhatsApp Cloud, Google Maps ou ViaCEP e não substitui homologação no PostgreSQL real, navegador e dispositivos móveis.
+O workflow `.github/workflows/quality.yml` executa sintaxe/testes do frontend, testes Spring com migrações H2 e o job `PostgreSQL concurrency and restore`. Este último executa `scripts/test_postgres.py` contra PostgreSQL 17 descartável: disputa de estoque, conflito de agenda, isolamento do simulador e dump/restauração em outro banco com conferência de contagens. A execução local passou; a execução remota do novo job deve ser acompanhada após o push. O conjunto não faz chamada real a Mercado Pago, SMTP, WhatsApp Cloud, Google Maps ou ViaCEP, nem substitui testes em dispositivos físicos ou recuperação completa de produção.
 
 **Validação local adicional em 01/11/2026:** foi criado e verificado um dump do PostgreSQL local antes da inicialização da API; a API iniciou no perfil PostgreSQL, Flyway registrou a versão 23, `/actuator/health` retornou `UP`, a rota pública de categorias retornou HTTP 200, `/api/v1/admin/audit-events` sem sessão retornou HTTP 401 e o frontend retornou HTTP 200. A aplicação permaneceu ativa após essa verificação. Isso valida esta instalação local; não representa homologação de integrações externas nem ambiente de produção.
 
@@ -69,11 +69,11 @@ O workflow `.github/workflows/quality.yml` executa as verificações de sintaxe/
 
 - **Mercado Pago:** testar OAuth de vendedor, pagamento aprovado/recusado/expirado, webhook público HTTPS, estorno confirmado, saldo insuficiente e casos que requerem revisão. As credenciais e permissões variam por conta.
 - **SMTP/WhatsApp:** validar entrega efetiva. WhatsApp necessita de template aprovado e número de produção autorizado.
-- **Saque de entregador:** não existe carteira, tarifa ou saldo devido configurado; por segurança a interface não permite inventar nem solicitar valores sem origem. Ainda precisa definir remuneração e provedor de repasse.
-- **Google Maps:** link externo por endereço/coordenada existe; publicação automática no Perfil da Empresa e planejamento de rotas não existem.
+- **Repasse de entregador:** remuneração fixa definida pelo administrador, congelada por entrega, crédito único na conclusão, saldo reservado e solicitação com senha/código/idempotência estão implementados. Administração aprova e registra pagamento feito externamente. A plataforma não executa transferência Pix; titularidade, pagamento externo e comprovante precisam de homologação operacional.
+- **Mapas:** seleção opcional de ponto e mapa público de lojas estão implementados, com lista alternativa. O link Google Maps existe; publicação automática no Perfil da Empresa e planejamento de rotas não existem.
 - **Logística:** taxa fixa por loja; sem zonas, cálculo de quilometragem, ETA ou despacho otimizado.
-- **Agenda:** um intervalo por dia da semana e exceção por data; sem pausas múltiplas, capacidade por categoria/equipe, disponibilidade recorrente diferente por profissional ou política configurável de cancelamento.
-- **Segurança/operação:** MFA, limitador de tentativas distribuído e consciente de proxy, cobertura completa e proteção contra alteração da trilha, monitoramento/alertas e backup automático externo ainda precisam de projeto e configuração operacional.
+- **Agenda:** múltiplos turnos, pausas, exceções por data, disponibilidade por profissional, prévia de impacto e grade de horários livres estão implementados. Capacidade maior que um por recurso e política comercial/legal completa de cancelamento não estão modeladas.
+- **Segurança/operação:** MFA TOTP administrativo está implementado e depende de ativação e guarda dos códigos pelo administrador. Limitador distribuído, topologia de proxy validada, cobertura completa e proteção contra alteração da trilha, monitoramento/alertas e rotina externa de backup continuam dependências operacionais.
 - **Disponibilidade:** Docker local fornece PostgreSQL para desenvolvimento, mas não define sozinho HTTPS, publicação do frontend/API, armazenamento compartilhado de imagens, rotação de segredos ou recuperação de produção.
 
 ## Backups e continuidade
@@ -92,3 +92,7 @@ Os scripts `Backend/scripts/backup-db.sh` e `restore-db.sh` dão uma base manual
 ## Expediente e alterações concorrentes
 
 A rotina semanal admite múltiplos turnos e exceções datadas. A alteração bloqueia loja e reservas futuras, verifica revisão da prévia e exige decisão explícita sobre compromissos afetados. Cancelamentos, slots, avisos internos e solicitação de estorno são transacionais; o estorno externo segue o processamento idempotente já existente. Mudança de fuso com compromissos ativos é impedida. Veja [Funcionamento e reservas](Funcionamento_e_reservas.md), incluindo compatibilidade dos JSONs, V26 e limitações de rollback.
+
+## Concorrência no navegador
+
+`pageData.js` consulta dados sem alterar o estado compartilhado. `pageLoading.js` publica apenas o resultado da navegação vigente e aborta a consulta anterior. A chave considera sessão, papel, página, loja e cidade. `api.js` rejeita respostas de uma sessão anterior, inclusive um 401 atrasado. Isso evita misturar painéis ao trocar de conta ou loja, mas não substitui autorização no servidor nem desfaz uma mutação já recebida pela API. A inicialização libera o formulário após consultar a sessão, evitando perda de foco na digitação. Consulte [Carregamento e recuperação](Carregamento_e_recuperacao.md).

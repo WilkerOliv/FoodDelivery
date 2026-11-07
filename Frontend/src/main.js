@@ -1,3 +1,5 @@
+import { createPageLoader, pageLoadFeedback } from './pageLoading.js';
+import { fetchPageData, fetchAdminData, fetchStoreListings, notificationRecords } from './pageData.js';
 import { renderSupportReplyFields } from './supportComposer.js';
 import { bindCourierOfferActions } from './deliveryBindings.js';
 import { bindCatalogActions } from './catalogBindings.js';
@@ -5,7 +7,7 @@ import {mountAvailableSlots,mountBookingPolicy,openProfessionalHours} from './bo
 import {mountPrivateIntegrations,mountAdminMfa} from './adminSecurity.js';
 import {groupCustomerReservations} from './reservationList.js';
 import {mountCourierFinance} from './courierFinance.js';
-import { api, apiAssetUrl, money, shortDate } from './api.js';
+import { api, apiAssetUrl, money, shortDate, invalidateApiSession } from './api.js';
 import { postalCodeResponse } from './postalCode.js';
 import { initializeAccessibility } from './accessibility.js';
 import { editStoreDialog } from './adminStoreEditor.js';
@@ -63,6 +65,7 @@ const notificationKey = accountId => `fooddelivery_notifications:${accountId || 
 const readLocalNotifications = () => [];
 let notificationPollHandle = null;
 const state = {
+  booting: true, sessionEpoch: 0, pageLoad: { phase: 'idle' },
   account: null, activeRole: savedAccount?.activeRole || savedAccount?.role || null, mustChangePassword: false, adminTemporaryPassword: '',
   page: 'home', authMode: 'login', recoveryMode: false, recoveryStep: 'request', recoveryEmail: '', recoveryChannel: 'EMAIL', phoneVerificationSent: false, loading: false, mobileMenu: false, sidebarCollapsed: false,
   merchantSection: 'overview', merchantStoreId: '', adminSection: 'overview', adminTeamSection: 'profiles', accountSection: 'profile', adminDefinitionSection: 'cities',
@@ -78,6 +81,21 @@ const state = {
   paymentStarting: false,
   locationWatchId: null, sharingDeliveryId: '', lastLocationSentAt: 0, trackingMapOrderId: '',
 };
+function pageContext() {
+  const context = { page: state.page, role: role(), ownStores: [...state.ownStores],
+    merchantStoreId: state.merchantStoreId, browseLocation: state.browseLocation ? { ...state.browseLocation } : null,
+    city: state.account?.city || '', state: state.account?.state || '' };
+  context.key = JSON.stringify([state.sessionEpoch, state.account?.id || '', context.role, context.page,
+    context.merchantStoreId, context.browseLocation?.city || context.city, context.browseLocation?.state || context.state]);
+  return context;
+}
+const pageLoader = createPageLoader({
+  getContext: pageContext,
+  load: (context, options) => fetchPageData(context, { api, ...options }),
+  commit: result => { Object.assign(state, result.data); if (Object.hasOwn(result.data, 'stores')) filterStores(); },
+  onStatus: status => { state.pageLoad = status; if (status.phase === 'loading') render(); else if (status.phase !== 'idle') renderPage(); },
+});
+function invalidatePageLoads() { state.sessionEpoch += 1; invalidateApiSession(); pageLoader.invalidate(); }
 let locationMap = null;
 let locationMarker = null;
 let locationSelected = null;
@@ -112,6 +130,7 @@ function notify(title, message, kind = 'success', persist = false) {
 }
 
 window.addEventListener('session-expired', () => {
+  invalidatePageLoads();
   resetChatState();
   stopNotificationPolling();
   stopCourierLocation();
@@ -150,6 +169,7 @@ const categoryOptions = ['Todas','Restaurantes','Mercados','Conveniências','Lan
 function applyPublicCategories(categories){if(!Array.isArray(categories)||!categories.length)return;categoryOptions.splice(1,categoryOptions.length-1,...categories.map(category=>category.name));categories.forEach(category=>{categoryEmoji[category.name]=category.emoji;});}
 
 async function boot() {
+  try {
   if(globalThis.FOODDELIVERY_DEMO){const notice=document.createElement('aside');notice.className='demo-environment-banner';notice.innerHTML='HOMOLOGAÇÃO · Cadastros fictícios · Sem dinheiro ou mensagens reais <a href="/demo.html" target="_blank" rel="noopener">Abrir caixa de mensagens de teste ↗</a>';document.body.classList.add('demo-mode');document.body.prepend(notice);new ResizeObserver(()=>document.body.style.setProperty('--demo-banner-height',`${notice.offsetHeight}px`)).observe(notice);}
   const initialPage=location.hash.slice(1);
   if(knownPage(initialPage)) state.page=initialPage;
@@ -167,66 +187,35 @@ async function boot() {
     if(mpResult==='connected'||mpResult==='error'){notify(mpResult==='connected'?'Conta Mercado Pago conectada':'Não foi possível conectar o Mercado Pago',mpResult==='connected'?'Esta loja já pode receber pagamentos pelo checkout.':'A autorização foi cancelada ou expirou. Tente conectar novamente.',mpResult==='connected'?'success':'error');const url=new URL(location.href);url.searchParams.delete('mp');history.replaceState({page:'merchant'},'',url.pathname+url.search+'#merchant');}
   } catch { state.account=null;state.profile=null;state.mustChangePassword=false;persistAccountHint(null); }
   if (state.account) { const params=new URLSearchParams(location.search),paymentReturn=params.get('mp'),paymentId=params.get('app_payment_id'),providerPaymentId=params.get('collection_id')||params.get('payment_id');if(paymentId&&['success','pending','failure'].includes(paymentReturn))await handlePaymentReturn(paymentId,paymentReturn,providerPaymentId);if(state.mustChangePassword)state.page='account';else if(!navByRole[role()].some(([page])=>page===state.page)&&!(['categories','categoryStores'].includes(state.page)&&canShop()))state.page=role()==='CUSTOMER'?'home':role()==='MERCHANT'?'merchant':role()==='COURIER'?'courier':'admin';state.notifications = readLocalNotifications(state.account.id); await loadNotifications().catch(()=>{}); startNotificationPolling(); if(state.account.grantedRoles?.includes('CUSTOMER'))await loadAddresses(); await loadCurrentPage(); }
-  render();
+  } catch {
+    state.account = null; state.profile = null; persistAccountHint(null);
+    notify('Não foi possível recuperar sua sessão', 'Entre novamente para continuar.', 'info');
+  } finally {
+    state.booting = false;
+    render();
+  }
 }
 
-async function loadCurrentPage() {
+async function loadCurrentPage() { return pageLoader.run(); }
+
+async function loadAdminData() {
+  const context = pageContext();
   try {
-    if (state.page === 'home') await loadStores();
-    if (state.page === 'categories' || state.page === 'categoryStores') await loadStores();
-    if (state.page === 'orders') state.orders = await api('/orders/mine');
-    if (state.page === 'reservations') state.reservations = await api('/reservations/mine');
-    if (state.page === 'notifications') await loadNotifications();
-    if (state.page === 'account') {
-      if(role()==='ADMIN'){
-        const results=await Promise.allSettled([api('/admin/service-cities'),api('/admin/integrations'),api('/admin/store-categories'),api('/admin/audit-events?page=0&size=50')]);
-        if(results[0].status==='fulfilled')state.adminServiceCities=results[0].value;
-        if(results[1].status==='fulfilled')state.adminIntegrations=results[1].value;
-        if(results[2].status==='fulfilled')state.adminStoreCategories=results[2].value;
-        if(results[3].status==='fulfilled')state.adminAuditEvents=results[3].value.content||[];
-        const failed=results.filter(result=>result.status==='rejected').length;
-        if(failed)notify('Definições parcialmente carregadas','Confira se o backend foi atualizado para esta versão.','error');
-      } else state.platformRequests=await api('/account/platform-requests');
-    }
-    if (state.page === 'merchant') {
-      state.merchantLoadError='';
-      const base=await Promise.allSettled([api('/merchant/stores/mine'),api('/account/platform-requests'),api('/merchant/orders')]);
-      const messages=[];
-      if(base[0].status==='fulfilled')state.ownStores=base[0].value;else messages.push('lojas');
-      if(base[1].status==='fulfilled')state.platformRequests=base[1].value;else messages.push('solicitações');
-      if(base[2].status==='fulfilled')state.orders=base[2].value;else messages.push('pedidos');
-      if(!state.ownStores.some(s=>String(s.id)===String(state.merchantStoreId)))state.merchantStoreId=state.ownStores[0]?.id||'';
-      const active=activeMerchantStore();
-      if(active){const extras=await Promise.allSettled([api(`/merchant/stores/${active.id}/items`),api(`/merchant/stores/${active.id}/mercadopago/status`),api(`/merchant/stores/${active.id}/hours`)]);if(extras[0].status==='fulfilled')state.storeItems=extras[0].value;else{state.storeItems=[];messages.push('catálogo');}if(extras[1].status==='fulfilled')state.paymentConnection=extras[1].value;else{state.paymentConnection=null;messages.push('pagamentos');}if(extras[2].status==='fulfilled')state.merchantHours=extras[2].value;else{state.merchantHours=null;messages.push('horários');}}
-      else {state.storeItems=[];state.paymentConnection=null;state.merchantHours=null;}
-      state.merchantLoadError=messages.length?`Não foi possível carregar ${messages.join(', ')}. O restante do painel continua disponível.`:'';
-    }
-    if (state.page === 'merchantOrders') state.orders = await api('/merchant/orders');
-    if (state.page === 'merchantReservations') { const store=activeMerchantStore(); [state.reservations,state.merchantProfessionals]=await Promise.all([api('/merchant/reservations'),store?api(`/merchant/stores/${store.id}/professionals`):Promise.resolve([])]); }
-    if (state.page === 'courier') { state.offers = await api('/courier/offers'); state.deliveries = await api('/courier/deliveries'); }
-    if (state.page === 'finance') {
-      if (role()==='MERCHANT') {
-        if (!state.ownStores.length) state.ownStores=await api('/merchant/stores/mine');
-        if (!state.ownStores.some(s=>String(s.id)===String(state.merchantStoreId))) state.merchantStoreId=state.ownStores[0]?.id||'';
-        const store=activeMerchantStore(); state.paymentConnection=store?await api(`/merchant/stores/${store.id}/mercadopago/status`):null;
-      } else if (role()==='COURIER') state.deliveries=await api('/courier/deliveries');
-    }
-    if (state.page === 'admin') await loadAdminData();
-  } catch (error) { if(state.page==='admin')state.adminLoadError=error.message||'Verifique se o servidor está iniciado.'; notify('Não foi possível carregar esta área', error.message, 'error'); }
-}
-
-async function loadAdminData(){
-  const jobs=[['adminStores','/admin/stores'],['adminRefunds','/admin/refunds'],['adminOperators','/admin/operators'],['adminApplications','/admin/operator-applications'],['adminPlatformRequests','/admin/platform-requests'],['adminAccounts','/admin/accounts'],['adminTickets','/admin/support-tickets']];
-  const results=await Promise.allSettled(jobs.map(([,url])=>api(url)));
-  const failed=[];results.forEach((result,index)=>{const [key]=jobs[index];if(result.status==='fulfilled')state[key]=result.value;else failed.push(jobs[index][1]);});
-  state.adminLoadError=failed.length===jobs.length? 'Não foi possível conectar ao FoodDelivery. Inicie o backend e verifique o banco de dados.':failed.length?`Algumas áreas não responderam (${failed.length}). As demais continuam disponíveis.`:'';
+    const data = await fetchAdminData(path => api(path));
+    if (pageContext().key !== context.key) return false;
+    Object.assign(state, data);
+    return true;
+  } catch {
+    if (pageContext().key === context.key) state.adminLoadError = 'Não foi possível atualizar a administração. Confira sua conexão e tente novamente.';
+    return false;
+  }
 }
 
 async function loadNotifications() {
-  const local = readLocalNotifications(state.account?.id);
+  const accountId = state.account?.id, epoch = state.sessionEpoch;
   const remote = await api('/account/notifications');
-  state.notifications = [...local, ...remote.map(n => ({...n, date:n.createdAt, read:!!n.readAt, localOnly:false}))]
-    .sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,100);
+  if (state.account?.id !== accountId || state.sessionEpoch !== epoch) return;
+  state.notifications = notificationRecords(remote);
 }
 
 const addressText = address => [address.addressLine, address.addressComplement, address.neighborhood,
@@ -257,10 +246,10 @@ function isTypingInPage(){const el=document.activeElement;return !!el&&el.matche
 
 async function refreshNotifications() {
   if (!state.account || document.visibilityState !== 'visible') return;
-  const accountId = state.account.id;
+  const accountId = state.account.id, epoch = state.sessionEpoch;
   try {
     const remote = await api('/account/notifications');
-    if (!state.account || String(state.account.id) !== String(accountId)) return;
+    if (!state.account || String(state.account.id) !== String(accountId) || state.sessionEpoch !== epoch) return;
     const existing = new Set(state.notifications.filter(n => n.localOnly === false).map(n => String(n.id)));
     const fresh = remote.filter(n => !existing.has(String(n.id)));
     state.notifications = [...readLocalNotifications(state.account.id), ...remote.map(n => ({...n, date:n.createdAt, read:!!n.readAt, localOnly:false}))]
@@ -268,8 +257,14 @@ async function refreshNotifications() {
     fresh.slice(0,3).reverse().forEach(n => notify(n.title, n.message, n.kind || 'info', false));
     if (state.page === 'notifications' && fresh.length) renderPage();
   } catch { /* a próxima rodada tenta novamente sem interromper a tela */ }
-  if (state.page === 'orders') {
-    try { state.orders = await api('/orders/mine'); if(!isTypingInPage())renderPage(); } catch { /* o próximo ciclo atualiza o acompanhamento */ }
+  if (state.page === 'orders' && state.pageLoad.phase !== 'loading') {
+    const key = pageContext().key, revision = pageLoader.revision;
+    try {
+      const orders = await api('/orders/mine');
+      if (pageContext().key !== key || pageLoader.revision !== revision) return;
+      state.orders = orders;
+      if (!isTypingInPage()) renderPage();
+    } catch { /* o próximo ciclo atualiza o acompanhamento */ }
   }
 }
 
@@ -285,10 +280,12 @@ async function handlePaymentReturn(paymentId,result,providerPaymentId){
 }
 
 async function loadStores() {
-  const city=String(state.browseLocation?.city||state.account?.city||'').trim(),stateCode=String(state.browseLocation?.state||state.account?.state||'').trim();
-  const query=city?`?city=${encodeURIComponent(city)}&state=${encodeURIComponent(stateCode)}`:'';
-  state.stores = await api(`/stores${query}`);
+  const context = pageContext();
+  const stores = await fetchStoreListings(context, path => api(path));
+  if (pageContext().key !== context.key) return false;
+  state.stores = stores;
   filterStores();
+  return true;
 }
 
 function filterStores() {
@@ -303,6 +300,7 @@ function filterStores() {
 function isCustomerOutsideStoreCity(store){return customerOutsideStoreCity(state.profile||state.account,store);}
 
 function render() {
+  if (state.booting) { app.innerHTML = '<div class="boot-screen" role="status" aria-live="polite"><div class="brand-mark" aria-hidden="true">FD</div><p>Preparando seu acesso…</p></div>'; return; }
   $('#cart-backdrop')?.remove();
   $('#store-modal')?.remove();
   if (!state.account) { renderAuth(); return; }
@@ -390,6 +388,7 @@ async function submitAuth(event) {
       return;
     }
     const response = await api('/auth/login', { method:'POST', body:JSON.stringify({ email, password,code:$('#auth-mfa-code')?.value.trim()||null }) });
+    invalidatePageLoads();
     state.account = response.account;
     persistAccountHint(state.account);
     state.activeRole=state.account.role;
@@ -442,11 +441,13 @@ async function navigate(page) {
   if(state.page!==page)stopChat();
   state.page=page;state.mobileMenu=false;state.cartOpen=false;state.selectedStore=null;
   if(location.hash!==`#${page}`)history.pushState({page},'',`#${page}`);
-  render();
-  await loadCurrentPage();
+  const applied = await loadCurrentPage();
+  if (!applied || state.page !== page || !state.account) return;
+  const contextKey = pageContext().key;
   if(page==='notifications'){
     const unread=state.notifications.filter(n=>!n.read&&!n.localOnly);
     await Promise.all(unread.map(n=>api(`/account/notifications/${n.id}/read`,{method:'PATCH'}).catch(()=>{})));
+    if (pageContext().key !== contextKey) return;
     state.notifications=state.notifications.map(n=>({...n,read:true}));
     localStorage.setItem(notificationKey(state.account.id),JSON.stringify(state.notifications.filter(n=>n.localOnly!==false).slice(0,40)));
   }
@@ -456,9 +457,17 @@ async function navigate(page) {
 
 function renderPage() {
   const content=$('#page-content');if(!content)return;
+  const status = state.pageLoad.key === pageContext().key ? state.pageLoad : { phase: 'idle' };
+  content.setAttribute('aria-busy', String(status.phase === 'loading'));
+  const feedback = pageLoadFeedback(status, state.page === 'account' && role() === 'ADMIN' ? 'Definições' : pageNames[state.page] || 'FoodDelivery');
+  if (['loading', 'error'].includes(status.phase)) {
+    content.innerHTML = feedback;
+    content.querySelector('[data-retry-page]')?.addEventListener('click', () => loadCurrentPage());
+    return;
+  }
   const pages={home:renderHome,categories:renderAllCategories,categoryStores:renderCategoryStores,orders:renderOrders,reservations:renderReservations,account:renderAccount,notifications:renderNotifications,merchant:renderMerchant,merchantOrders:renderMerchantOrders,merchantReservations:renderMerchantReservations,courier:renderCourier,finance:renderFinance,admin:renderAdmin,checkout:renderCheckout};
   const fn=pages[state.page]||renderHome;
-  content.innerHTML=fn();
+  content.innerHTML=feedback+fn();
   bindPage();
 }
 
@@ -555,7 +564,7 @@ function bindPage() {
   cleanupStoreMaps();
   document.querySelectorAll('[data-booking-policy]').forEach(root=>mountBookingPolicy(root,activeMerchantStore()));
   document.querySelectorAll('[data-private-integrations]').forEach(mountPrivateIntegrations);
-  document.querySelectorAll('[data-admin-mfa]').forEach(root=>mountAdminMfa(root,{onSessionRevoked:()=>{state.account=null;state.profile=null;renderAuth();}}));
+  document.querySelectorAll('[data-admin-mfa]').forEach(root=>mountAdminMfa(root,{onSessionRevoked:()=>{invalidatePageLoads();state.account=null;state.profile=null;renderAuth();}}));
   document.querySelectorAll('[data-courier-finance]').forEach(root=>mountCourierFinance(root,{admin:root.dataset.courierFinance==='admin',onError:error=>notify('Financeiro',error.message,'error')}));
   document.querySelectorAll('[data-store-map-picker]').forEach(root=>mountLocationPicker(root));
   if($('[data-store-directory-map]'))mountStoreDirectoryMap($('[data-store-directory-map]'),state.page==='categoryStores'?state.stores.filter(s=>categoryMatches(s.category,state.category)):state.filteredStores,{onOpen:openStore});
@@ -655,9 +664,9 @@ function bindPage() {
 }
 
 async function runAction(action) {
-  if(action==='refresh-stores'){try{await loadStores();renderPage();}catch(e){notify('Não conseguimos atualizar',e.message,'error');}}
+  if(action==='refresh-stores')await loadCurrentPage();
   if(action==='choose-city')openLocationPicker();
-  if(action==='reload-admin'){await loadAdminData();renderPage();if(state.adminLoadError)notify('Atualização parcial',state.adminLoadError,'error');else notify('Dados atualizados','As informações administrativas estão atualizadas.','success');}
+  if(action==='reload-admin')await loadCurrentPage();
 }
 
 async function openStore(id) {
@@ -938,7 +947,7 @@ async function changePassword(event){event.preventDefault();const form=new FormD
 async function requestPhoneVerification(){try{await api('/account/phone-verification',{method:'POST'});state.phoneVerificationSent=true;notify('Código solicitado','Se o WhatsApp estiver configurado, você receberá um código no telefone cadastrado.');renderPage();}catch(error){notify('Não foi possível solicitar o código',error.message,'error');}}
 async function confirmPhoneVerification(event){event.preventDefault();const code=String(new FormData(event.currentTarget).get('code')||'').trim();try{await api('/account/phone-verification/confirm',{method:'POST',body:JSON.stringify({code})});state.profile={...state.profile,phoneVerified:true};state.account={...state.account,phoneVerified:true};state.phoneVerificationSent=false;persistAccountHint(state.account);notify('Telefone confirmado','A recuperação por WhatsApp está habilitada para esta conta.');renderPage();}catch(error){notify('Código não confirmado',error.message,'error');}}
 
-async function switchRole(nextRole){if(!(state.account?.grantedRoles||[]).includes(nextRole))return;stopChat();state.activeRole=nextRole;state.account={...state.account,activeRole:nextRole};persistAccountHint(state.account);state.page=nextRole==='ADMIN'?'admin':nextRole==='MERCHANT'?'merchant':nextRole==='COURIER'?'courier':'home';await loadCurrentPage();render();}
+async function switchRole(nextRole){if(!(state.account?.grantedRoles||[]).includes(nextRole))return;invalidatePageLoads();stopChat();state.activeRole=nextRole;state.account={...state.account,activeRole:nextRole};persistAccountHint(state.account);state.page=nextRole==='ADMIN'?'admin':nextRole==='MERCHANT'?'merchant':nextRole==='COURIER'?'courier':'home';await loadCurrentPage();render();}
 
 function renderNotifications() {
   const list=state.notifications;
@@ -993,7 +1002,11 @@ function renderMerchant() {
 }
 
 function activeMerchantStore(){return state.ownStores.find(s=>String(s.id)===String(state.merchantStoreId))||state.ownStores[0]||null;}
-async function selectMerchantStore(event){state.merchantStoreId=event.target.value;const store=activeMerchantStore();try{[state.storeItems,state.paymentConnection,state.merchantProfessionals,state.merchantHours]=store?await Promise.all([api(`/merchant/stores/${store.id}/items`),api(`/merchant/stores/${store.id}/mercadopago/status`),api(`/merchant/stores/${store.id}/professionals`),api(`/merchant/stores/${store.id}/hours`)]):[[],null,[],null];renderPage();}catch(e){notify('Não foi possível abrir esta loja',e.message,'error');}}
+async function selectMerchantStore(event) {
+  state.merchantStoreId = event.target.value;
+  await loadCurrentPage();
+}
+
 
 function renderMerchantAll() {
   const store=activeMerchantStore();
@@ -1205,11 +1218,11 @@ async function bindPageActions(){
     item.addEventListener('click',activate);
     item.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
   });
-  $('[data-action="reload-merchant-orders"]')?.addEventListener('click',async()=>{try{state.orders=await api('/merchant/orders');render();}catch(e){notify('Não foi possível atualizar',e.message,'error');}});
-  $('[data-action="reload-merchant-reservations"]')?.addEventListener('click',async()=>{try{state.reservations=await api('/merchant/reservations');render();}catch(e){notify('Não foi possível atualizar',e.message,'error');}});
-  $('[data-action="reload-courier"]')?.addEventListener('click',async()=>{try{state.offers=await api('/courier/offers');state.deliveries=await api('/courier/deliveries');render();}catch(e){notify('Não foi possível atualizar',e.message,'error');}});
+  $('[data-action="reload-merchant-orders"]')?.addEventListener('click', () => loadCurrentPage());
+  $('[data-action="reload-merchant-reservations"]')?.addEventListener('click', () => loadCurrentPage());
+  $('[data-action="reload-courier"]')?.addEventListener('click', () => loadCurrentPage());
   $('[data-action="go-home"]')?.addEventListener('click',()=>navigate('home'));
-  $('[data-action="reload-stores"]')?.addEventListener('click',async()=>{try{await loadStores();render();}catch(e){notify('Não foi possível atualizar',e.message,'error');}});
+  $('[data-action="reload-stores"]')?.addEventListener('click', () => loadCurrentPage());
   document.querySelectorAll('[data-store-commission]').forEach(form=>form.addEventListener('submit',saveCommission));
   document.querySelectorAll('[data-connect-mercadopago]').forEach(button=>button.addEventListener('click',connectMercadoPago));
   document.querySelectorAll('[data-resume-order]').forEach(button=>button.addEventListener('click',()=>resumeOrderPayment(button.dataset.resumeOrder)));
@@ -1268,6 +1281,7 @@ function showLogoutConfirmation(){
 }
 
 async function performLogout(){
+  invalidatePageLoads();
   try { await api('/auth/logout',{method:'POST'}); }
   catch(error) { notify('Não foi possível encerrar a sessão',error.message,'error'); return; }
   resetChatState();stopNotificationPolling();stopCourierLocation();localStorage.removeItem('pronto_account');state.account=null;state.profile=null;state.cart=[];state.addresses=[];state.selectedAddressId='';state.addressFormOpen=false;state.orders=[];state.reservations=[];state.deliveries=[];state.offers=[];state.ownStores=[];state.checkout=null;state.selectedStore=null;state.storeItems=[];state.paymentConnection=null;state.notifications=readLocalNotifications(null);state.authMode='login';state.page='home';if(location.hash)history.replaceState({page:'home'},'',location.pathname+location.search);render();notify('Você saiu da conta','Até a próxima!','info',false);

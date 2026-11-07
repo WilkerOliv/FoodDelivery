@@ -644,3 +644,9 @@ body.dialog-open{overflow:hidden;}
 
 .ticket-compose .support-reply-field { flex: 1; min-width: 0; margin: 0; }
 .ticket-compose .support-reply-field textarea { width: 100%; }
+
+.page-load-feedback { min-height: 240px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 12px; }
+.page-load-feedback h1 { margin: 0; font-size: clamp(1.5rem, 4vw, 2rem); }
+.page-load-feedback h2 { margin: 0; font-size: 1.125rem; }
+.page-load-feedback p { margin: 0; max-width: 50ch; line-height: 1.6; }
+.page-load-feedback .btn { margin-top: 8px; }

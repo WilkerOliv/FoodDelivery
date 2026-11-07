@@ -5,14 +5,26 @@ export const apiAssetUrl = (path) => path ? new URL(path, API_BASE).href : '';
 // Remove tokens issued by older builds; browser sessions now live in HttpOnly cookies.
 try { localStorage.removeItem('pronto_token'); } catch { /* storage can be disabled */ }
 
+let sessionScope = 0;
+export function invalidateApiSession() { sessionScope += 1; }
+
 export async function api(path, options = {}) {
+  const requestScope = sessionScope;
+  const ensureCurrent = () => {
+    options.signal?.throwIfAborted();
+    if (requestScope !== sessionScope) throw new DOMException('A sessão mudou. Consulte a operação na conta correspondente para confirmar o resultado.', 'AbortError');
+  };
+  ensureCurrent();
   const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
   let response;
   try {
     response = await fetch(`${API_BASE}${path}`, { ...options, headers, credentials: 'include' });
-  } catch {
+  } catch (error) {
+    ensureCurrent();
+    if (error?.name === 'AbortError') throw error;
     throw new Error('A conexão com o site foi interrompida. Confira sua conexão e consulte o andamento da operação antes de tentar novamente.');
   }
+  ensureCurrent();
   if (response.status === 401 && !['/auth/login', '/auth/register', '/auth/logout', '/account/me'].includes(path)) {
     localStorage.removeItem('pronto_account');
     window.dispatchEvent(new CustomEvent('session-expired'));
@@ -20,6 +32,7 @@ export async function api(path, options = {}) {
   if (!response.ok) {
     let body = {};
     try { body = await response.json(); } catch { /* resposta sem JSON */ }
+    ensureCurrent();
     let message = body.error || body.message || friendlyStatus(response.status);
     if (response.status === 429) {
       const retry = response.headers.get('Retry-After');
@@ -32,7 +45,9 @@ export async function api(path, options = {}) {
   }
   if (response.status === 204) return null;
   const type = response.headers.get('content-type') || '';
-  return type.includes('application/json') ? response.json() : null;
+  const result = type.includes('application/json') ? await response.json() : null;
+  ensureCurrent();
+  return result;
 }
 
 function friendlyStatus(status) {

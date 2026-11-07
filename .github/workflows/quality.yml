@@ -46,3 +46,20 @@ jobs:
       - name: Run frontend tests
         working-directory: Frontend
         run: npm test
+
+  postgres:
+    name: PostgreSQL concurrency and restore
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Test isolated PostgreSQL, simulator isolation and dump restore
+        run: python3 scripts/test_postgres.py

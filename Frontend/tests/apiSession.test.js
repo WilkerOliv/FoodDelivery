@@ -71,3 +71,36 @@ test('network failure gives user-facing guidance without claiming whether a muta
   await assert.rejects(api('/orders', { method: 'POST' }), error =>
     /consulte o andamento/.test(error.message) && !/backend|banco/.test(error.message));
 });
+
+test('an already cancelled screen request is not sent or reported as a connection failure', async () => {
+  const controller = new AbortController(); controller.abort();
+  let called = false;
+  globalThis.fetch = async () => { called = true; };
+  const { api } = await import('../src/api.js?aborted-screen');
+  await assert.rejects(api('/orders/mine', { signal: controller.signal }), { name: 'AbortError' });
+  assert.equal(called, false);
+});
+
+test('an old 401 response cannot expire a newer browser session', async () => {
+  let finish, expired = false;
+  globalThis.window = { dispatchEvent: () => { expired = true; } };
+  globalThis.fetch = () => new Promise(resolve => { finish = resolve; });
+  const { api, invalidateApiSession } = await import('../src/api.js?old-session-401');
+  const pending = api('/orders/mine');
+  invalidateApiSession();
+  finish({ ok: false, status: 401, headers: { get: () => 'application/json' }, json: async () => ({}) });
+  await assert.rejects(pending, { name: 'AbortError' });
+  assert.equal(expired, false);
+});
+
+test('private JSON finishing after a session change is not returned to the caller', async () => {
+  let finishBody, bodyStarted;
+  const reading = new Promise(resolve => { bodyStarted = resolve; });
+  globalThis.fetch = async () => ({ ok: true, status: 200, headers: { get: () => 'application/json' },
+    json: () => { bodyStarted(); return new Promise(resolve => { finishBody = resolve; }); } });
+  const { api, invalidateApiSession } = await import('../src/api.js?old-private-json');
+  const pending = api('/orders/mine');
+  await reading;
+  invalidateApiSession(); finishBody([{ id: 'previous-account-order' }]);
+  await assert.rejects(pending, { name: 'AbortError' });
+});

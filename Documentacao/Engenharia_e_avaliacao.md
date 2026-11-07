@@ -1,6 +1,6 @@
 # Engenharia e avaliação do projeto
 
-Referência: código conferido em 06/11/2026. Leia a matriz de validação para distinguir execução comprovada, análise estática e dependências externas.
+Referência: código conferido em 07/11/2026. Leia a matriz de validação para distinguir execução comprovada, análise estática e dependências externas.
 
 ## 1. Estrutura e motivo das decisões
 
@@ -8,7 +8,7 @@ O backend é um monólito modular Java 21/Spring Boot. Identidade, catálogo, pe
 
 Essa estrutura é adequada ao porte atual: pedidos, estoque e pagamentos precisam compartilhar transações, e um serviço único reduz falhas de rede e complexidade de operação. Dividir agora em microsserviços exigiria mensageria, conciliação distribuída e observabilidade sem benefício demonstrado por medição. O aprimoramento recomendado é manter os módulos e extrair serviços de aplicação de controladores grandes conforme os próximos casos forem alterados, com testes de contrato.
 
-O frontend usa módulos JavaScript e renderização de templates. É simples de iniciar e não exige uma cadeia de build para cada mudança. Regras reutilizáveis de máscaras, horários, sessão, categorias, navegação, localização e administração ficam em arquivos próprios. O custo atual está no `main.js`: contém muitas telas, estado e ligações de eventos. Uma migração total para outro framework durante uma correção geral acrescentaria risco. A direção de manutenção é extrair uma tela por vez, manter contratos da API e testes de jornadas. Não se deve tratar uma biblioteca visual como garantia de qualidade.
+O frontend usa módulos JavaScript e renderização de templates. É simples de iniciar e não exige uma cadeia de build para cada mudança. Regras reutilizáveis de máscaras, horários, sessão, categorias, navegação, localização e administração ficam em arquivos próprios. `pageData.js` separa a consulta dos dados da sua aplicação ao estado e `pageLoading.js` controla carregamento, falha, repetição de consulta e descarte de respostas obsoletas. A chave de contexto inclui sessão, papel, página, loja e cidade. O custo atual está no `main.js`: contém muitas telas, estado e ligações de eventos. Uma migração total para outro framework durante uma correção geral acrescentaria risco. A direção de manutenção é extrair uma tela por vez, manter contratos da API e testes de jornadas. Não se deve tratar uma biblioteca visual como garantia de qualidade.
 
 JPA está com `open-in-view=false`: relações necessárias à resposta precisam ser lidas dentro da transação, evitando consultas ocultas durante serialização. DTOs delimitam os dados públicos. Entidades ainda retornadas diretamente precisam continuar sem expor relações/segredos; padronizar todas as respostas com DTO é uma melhoria de manutenção, não uma prova de vulnerabilidade por si só.
 
@@ -155,7 +155,7 @@ Prioridades antes de cobrar publicamente:
 
 1. Homologar pagamentos/estornos e reconciliação com o provedor, usando contas de teste e webhook público controlado.
 2. Homologar a rotina operacional de pagamento externo dos repasses, conferência de titular e comprovante; a remuneração fixa e o fluxo de aprovação já existem, mas não comprovam transferência real.
-3. Executar testes de integração PostgreSQL concorrentes e ensaio de recuperação de banco/arquivos, com RPO/RTO definidos.
+3. Manter os testes PostgreSQL concorrentes e o ensaio de dump/restauração descartável já executados. Completar recuperação conjunta de banco, arquivos e chaves com destino externo, retenção e RPO/RTO definidos.
 4. Publicar em HTTPS, cookie Secure, origens finais e proxy configurado; validar limites, logs, alertas e segredos.
 5. Executar varredura de dependências/segurança, análise independente de autorização e testes de carga.
 6. Completar trilha administrativa, política de retenção, termos e privacidade com regras operacionais efetivamente adotadas.
