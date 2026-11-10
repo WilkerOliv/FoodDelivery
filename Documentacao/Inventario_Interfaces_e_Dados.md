@@ -869,7 +869,7 @@ Flyway executa a sequência V1–V31. V9 tem variantes H2/PostgreSQL para difere
 | `scripts/dev.py` | Supervisor local; identifica serviços existentes para não iniciar cópias. Seis testes unitários cobrem sondagem/reutilização. |
 | `scripts/homologacao.py` | Supervisor isolado; não lê `.env`, gera chave própria, valida portas e inicia fixtures. SO_REUSEADDR permite reinício após fechamento sem compartilhar listener ocupado. |
 | `Frontend/scripts/start.py` | Servidor local de arquivos e proxy exclusivo de demonstração; não é servidor de borda para produção. |
-| `Backend/scripts/backup-db.sh` | Dump e checksum. Arquivos privados; teste de restauração independente ainda necessário. |
+| `Backend/scripts/backup-db.sh` | Dump e checksum. Ensaio PostgreSQL descartável coberto por test_postgres.py; recuperação completa de produção permanece pendente. |
 | `Backend/scripts/restore-db.sh` | Confere checksum e confirmação de banco; é destrutivo no destino escolhido. Não foi executado no banco real. |
 | `scripts/test_homologacao.py` | Contratos da simulação, cinco logins por execução; não rodar repetidamente junto de outros logins sem considerar rate limit. |
 | `scripts/test_jornadas.py` | CRUD, autorização, suporte, administração e sequência completa de entrega em fixtures. |

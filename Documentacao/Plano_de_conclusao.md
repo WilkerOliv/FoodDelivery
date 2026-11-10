@@ -1,6 +1,6 @@
 # Plano de conclusão e limites para lançamento
 
-Atualizado em 07/11/2026. Este quadro distingue implementação, execução demonstrada e operação externa. “Implementado” não significa homologado para cobrar clientes reais.
+Atualizado em 10/11/2026. Este quadro distingue implementação, execução demonstrada e operação externa. “Implementado” não significa homologado para cobrar clientes reais.
 
 ## Etapas internas já entregues
 
@@ -16,13 +16,20 @@ Atualizado em 07/11/2026. Este quadro distingue implementação, execução demo
 
 ## Próximos blocos, na ordem
 
-1. **Aceite da versão publicada:** publicar o commit aprovado e repetir uma checagem curta dos fluxos alterados no Render. O deploy manual anterior não contém alterações locais ainda não enviadas. Conferir versão, não apenas o indicador Live.
+1. **Aceite da versão publicada:** o usuário confirmou o deploy Live em 10/11. A consulta pública a `/healthz` respondeu `ok` nesta revisão. Isso comprova resposta do gateway, não o commit servido nem todas as jornadas; ainda é necessário conferir a versão autenticada e repetir os fluxos alterados. O código de referência desta revisão é `3c456d7`.
 2. **Integrações de teste:** Mercado Pago sandbox com OAuth, webhook público assinado, recusa/atraso/duplicidade e estorno confirmado. SMTP e WhatsApp exigem conta/configuração e teste de entrega; simulador não atesta o fornecedor. Nenhuma cobrança real é necessária para o sandbox.
 3. **Persistência e recuperação completas:** provisionar PostgreSQL persistente e armazenamento de capas, guardar chaves fora do repositório, cópia externa criptografada com retenção, ensaio conjunto e RPO/RTO medidos. H2 de demonstração no Render pode ser reiniciado/perdido e não é banco de produção.
 4. **Operação segura:** ativar MFA, confirmar cookies Secure/origens/proxy finais, monitoramento com alertas acionáveis, rotação e procedimento de incidente. Contadores de abuso são locais; múltiplas réplicas exigem mecanismo compartilhado.
 5. **Manutenção e desempenho:** extrair gradualmente telas do `main.js`, paginar consultas/listas e medir carga/consultas antes de otimizações. A separação do carregamento desta etapa é uma melhoria parcial, não a conclusão da arquitetura inteira.
 6. **Aceite com usuários:** aparelhos físicos, teclado, zoom/leitor de tela e tarefas acompanhadas com pessoas de pouca familiaridade digital. Verificação de largura no navegador não substitui esses testes.
 7. **Regras operacionais e privacidade:** política de cancelamento, retenção/exclusão de mensagens e dados, conferência de repasses, atendimento e revisão dos textos legais conforme o negócio real.
+
+## O que não está incluído na implementação atual
+
+- Transferência Pix automática de repasses: a administração registra o pagamento feito externamente.
+- Publicação automática da empresa no Google Maps: o ponto no mapa do site não cria um Perfil da Empresa.
+- Aplicativos nativos, roteirização/ETA e capacidade simultânea maior que um por recurso de agenda. São evoluções de produto, não promessas do ambiente atual.
+- Geração de capas por IA: foi substituída, por solicitação do proprietário, por upload com moderação. Não é uma pendência.
 
 ## Critérios para chamar de pronto
 

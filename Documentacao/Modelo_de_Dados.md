@@ -107,10 +107,10 @@ Cancelamento/recusa pela loja de pedido ou reserva já pago gera pedido de estor
 
 ## Limites conhecidos
 
-- A agenda bloqueia o intervalo completo do serviço e impede sobreposição por profissional/recurso. Ainda não há capacidade maior que um por recurso, grade de intervalos configurável ou disponibilidade semanal individual de cada profissional.
+- A agenda bloqueia o intervalo completo do serviço e impede sobreposição por profissional/recurso. A disponibilidade semanal individual e as exceções por profissional estão modeladas; a grade consulta horários livres. Não há capacidade maior que um por recurso.
 - `order_lines.catalog_item_id` e `reservations.catalog_item_id` preservam o identificador do item como snapshot, sem FK que impediria removê-lo do catálogo.
 - O estorno automático precisa de homologação com credenciais reais/de teste do Mercado Pago. Em Marketplace Split 1:1, saldo insuficiente na conta do vendedor pode exigir ação manual no provedor.
-- Conciliação contábil/liquidação, chargebacks e saque Pix iniciado pela plataforma ainda não fazem parte do modelo implementado. Cancelamentos pós-pagamento iniciados pelo cliente seguem solicitação com decisão da loja.
+- Há conciliação de estados de pagamentos; isso não equivale a conciliação contábil de liquidação. Chargebacks e transferência Pix iniciada pela plataforma não estão implementados. Cancelamentos pós-pagamento iniciados pelo cliente seguem solicitação com decisão da loja.
 - Capas são gravadas em armazenamento de arquivos configurável; o banco mantém somente `stores.cover_image_url`.
 
 ## Moderação de capas — V24
@@ -124,3 +124,13 @@ Três booleanos persistidos (`delivery_enabled`, `pickup_enabled`, `in_person_en
 ## Expediente e reservas — V26
 
 O JSON semanal aceita listas de até seis turnos por dia e lê objetos legados. `reservations` acrescenta `operating_hours_override`, `operating_hours_notice` e `operating_hours_changed_at`, com índice para futuras reservas ativas. A exceção permite manter o compromisso após alteração de expediente; não é parâmetro aceito na criação pelo cliente. Prévia, locks, avisos e cancelamento são descritos em [Funcionamento e reservas](Funcionamento_e_reservas.md).
+
+## Financeiro, configuração e agenda — V27 a V31
+
+- **V27:** `courier_compensation` define tarifa; `delivery_tasks.courier_fee_cents` congela a remuneração. `courier_earnings` exige entrega única; `courier_payouts` registra solicitação idempotente por entregador, decisão, referência externa única e versão otimista. Não executa transferência bancária.
+- **V28:** `payment_reconciliations` registra comparação de estado com o provedor, ator e resultado; não é um livro contábil de liquidação.
+- **V29:** `private_settings` guarda valores cifrados; `administrator_mfa` guarda segredo cifrado, códigos de recuperação com hash, contador e bloqueio. A chave de criptografia fica fora do banco.
+- **V30:** profissionais possuem rotina semanal e exceções. A loja configura antecedência, passo da grade e política de cancelamento automático.
+- **V31:** vínculo de WhatsApp por identificador protegido e versão de credencial, estado de conversa cifrado, eventos deduplicados por mensagem e fila de respostas. Sua persistência não comprova entrega pela Meta.
+
+As migrações anteriores continuam necessárias para criar e atualizar bancos. Não são arquivos obsoletos a excluir.

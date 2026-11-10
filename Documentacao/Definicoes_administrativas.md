@@ -6,7 +6,7 @@ Esta área é exclusiva do perfil `ADMIN`. O item **Minha conta** passa a se cha
 
 - **Cidades:** cadastrar cidade, UF e CEP de referência; editar ou suspender e reativar cidades. Suspender preserva o cadastro e o histórico, mas remove a cidade da lista de cobertura ativa. Uma cidade ativa pode ser escolhida por clientes e usada para descoberta de lojas.
 - **Categorias:** criar novas seções de comércio ou serviço, com nome e ícone, para que apareçam nas buscas e no cadastro de lojas. As categorias padrão do sistema ficam protegidas e não podem ser alteradas ou excluídas. Seções criadas pela administração podem ser excluídas quando nenhuma loja as utiliza; isso evita deixar lojas com uma categoria órfã.
-- **Integrações:** mostra quais configurações do backend estão presentes para SMTP, WhatsApp Cloud, capas por upload, Mercado Pago, ViaCEP e mapas. A tela mostra nomes de variáveis e estado de configuração, nunca valores secretos.
+- **Integrações:** informa presença das configurações e permite salvar ou remover as configurações privadas autorizadas de SMTP, WhatsApp e Mercado Pago mediante confirmação da senha. Valores já salvos não são devolvidos à tela. Capas, ViaCEP e mapas possuem requisitos próprios, sem geração de imagens por IA.
 - **Perfil do administrador:** nome, e-mail, telefone e CPF opcional.
 
 O painel de **Administração** continua separado para pedidos operacionais: solicitações, lojas, equipe/contas, financeiro e chamados. Em **Equipe > Contas e segurança**, a opção **Editar dados** permite ao administrador corrigir nome, e-mail, CPF, telefone e endereço, além de redefinir a senha de qualquer conta administrativa. A redefinição revoga os tokens anteriores e exige troca da senha temporária. Confirme a identidade antes de alterar dados cadastrais. O CPF continua obrigatório para clientes e perfis profissionais, e não é chave primária. Somente contas `ADMIN` podem ficar sem CPF.
@@ -23,6 +23,8 @@ Todas as rotas exigem JWT válido com papel `ADMIN`.
 | `GET /api/v1/admin/store-categories` | Lista categorias padrão protegidas e categorias adicionais criadas pela administração. |
 | `POST /api/v1/admin/store-categories` | Cria uma categoria personalizada (`name`, `emoji`), disponível imediatamente para vendedores e clientes. |
 | `DELETE /api/v1/admin/store-categories/{id}` | Exclui categoria personalizada sem lojas vinculadas. Categorias padrão não têm identificador de exclusão. |
+| `GET /api/v1/admin/integration-settings` | Informa presença de substituições e disponibilidade da chave privada. |
+| `PUT /api/v1/admin/integration-settings` | Salva `values` ou remove chaves de `remove`, com confirmação por `password`. |
 | `GET /api/v1/admin/integrations` | Informa presença das configurações sem revelar segredos. |
 | `PUT /api/v1/admin/accounts/{id}/profile` | Corrige dados pessoais de uma conta; CPF omitido preserva o atual. `clearCpf: true` só pode remover CPF da conta administrativa. |
 
@@ -30,7 +32,9 @@ As cidades têm identificador UUID próprio e restrição única por cidade/UF n
 
 ## Credenciais das integrações
 
-As chaves ficam em `Backend/.env` durante o desenvolvimento local ou em um gerenciador de segredos no servidor. **Não são gravadas pelo navegador nem armazenadas na tabela de contas.** Após editar variáveis no ambiente, reinicie a API e use **Definições > Integrações > Atualizar status**.
+A lista permitida em `IntegrationSettings.KEYS` pode ser atualizada pela administração. A API exige papel ADMIN e confirmação da senha, valida os valores e registra a ação sem segredos. As substituições são cifradas com AES-GCM em `private_settings`; a chave `PRIVATE_CONFIG_ENCRYPTION_KEY` (32 bytes em Base64) permanece no ambiente privado do servidor. O painel envia somente os valores novos e recebe indicadores de presença, nunca os segredos existentes. Remover uma substituição faz voltar ao valor do ambiente, quando houver.
+
+JWT, chaves de criptografia, URLs de implantação e armazenamento não pertencem a esse formulário: devem ser configurados no servidor. Mudanças de variáveis de ambiente exigem reinício. Não perder nem trocar a chave privada sem um procedimento de migração: ela também protege outros dados do sistema.
 
 | Serviço | Variáveis principais | Observação |
 |---|---|---|
@@ -41,7 +45,7 @@ As chaves ficam em `Backend/.env` durante o desenvolvimento local ou em um geren
 | ViaCEP | Sem chave | Serviço público consultado pela interface; o painel apenas identifica que não requer segredo. |
 | Mapas | Sem chave no mapa incorporado atual | O mapa requer internet; não é um serviço de rastreamento ou geocodificação homologado. |
 
-O estado **Campos presentes** significa que os valores locais necessários estão preenchidos. Não significa que credenciais foram autenticadas nem que e-mail, WhatsApp, pagamento, CEP ou mapa foram testados de ponta a ponta. Use credenciais de teste primeiro; não cole segredos no chamado ou no chat. A configuração pela tela de administração não foi implementada: gravar e reiniciar segredos através de uma página web exigiria um cofre de segredos e um processo operacional seguro, então este painel informa o caminho suportado sem expor chaves.
+O estado **Campos presentes** significa que os valores locais necessários estão preenchidos. Não significa que credenciais foram autenticadas nem que e-mail, WhatsApp, pagamento, CEP ou mapa foram testados de ponta a ponta. Use credenciais de teste primeiro; não cole segredos no chamado ou no chat. A edição pela tela não concede permissão para qualquer variável do servidor; a lista permitida e a confirmação de identidade são verificadas também na API.
 
 ## CPF do administrador
 

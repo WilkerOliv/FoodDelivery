@@ -1,11 +1,12 @@
 # Documentação da revisão do FoodDelivery
 
-Atualização: 07/11/2026. Esta coleção descreve o código que está no projeto. Não é um histórico de versões.
+Atualização: 10/11/2026. Os guias descrevem o código atual; relatórios de validação datados registram somente o escopo executado naquela data. Planos antigos e descrições substituídas foram retirados; seu histórico permanece no Git.
 
 ## Por onde começar
 
 | Documento | Conteúdo e público |
 |---|---|
+| [Definições administrativas](Definicoes_administrativas.md) | Cidades, categorias, perfil, configurações protegidas e limites de acesso. |
 | [Plano de conclusão](Plano_de_conclusao.md) | Situação atual, evidências e dependências para lançamento. |
 | [Carregamento e recuperação](Carregamento_e_recuperacao.md) | Regras de concorrência no navegador, recuperação de consulta e testes locais de 07/11. |
 | [Engenharia e avaliação](Engenharia_e_avaliacao.md) | Decisões, fluxos completos, segurança, concorrência, vantagens, limites e prioridades. |

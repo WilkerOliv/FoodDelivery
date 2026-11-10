@@ -61,9 +61,8 @@ cd ../Backend
 JWT_SECRET='<chave de teste com pelo menos 256 bits>' mvn test
 ```
 
-O workflow `.github/workflows/quality.yml` executa sintaxe/testes do frontend, testes Spring com migrações H2 e o job `PostgreSQL concurrency and restore`. Este último executa `scripts/test_postgres.py` contra PostgreSQL 17 descartável: disputa de estoque, conflito de agenda, isolamento do simulador e dump/restauração em outro banco com conferência de contagens. A execução local passou; a execução remota do novo job deve ser acompanhada após o push. O conjunto não faz chamada real a Mercado Pago, SMTP, WhatsApp Cloud, Google Maps ou ViaCEP, nem substitui testes em dispositivos físicos ou recuperação completa de produção.
+O workflow `.github/workflows/quality.yml` executa sintaxe/testes do frontend, testes Spring com migrações H2 e o job `PostgreSQL concurrency and restore`. Este último executa `scripts/test_postgres.py` contra PostgreSQL 17 descartável: disputa de estoque, conflito de agenda, isolamento do simulador e dump/restauração em outro banco com conferência de contagens. A execução local passou e o job remoto passou no workflow de qualidade do commit `3c456d7` (execução `42335443672`). O conjunto não faz chamada real a Mercado Pago, SMTP, WhatsApp Cloud, Google Maps ou ViaCEP, nem substitui testes em dispositivos físicos ou recuperação completa de produção.
 
-**Validação local adicional em 01/11/2026:** foi criado e verificado um dump do PostgreSQL local antes da inicialização da API; a API iniciou no perfil PostgreSQL, Flyway registrou a versão 23, `/actuator/health` retornou `UP`, a rota pública de categorias retornou HTTP 200, `/api/v1/admin/audit-events` sem sessão retornou HTTP 401 e o frontend retornou HTTP 200. A aplicação permaneceu ativa após essa verificação. Isso valida esta instalação local; não representa homologação de integrações externas nem ambiente de produção.
 
 ## Configurações externas e limites que continuam
 

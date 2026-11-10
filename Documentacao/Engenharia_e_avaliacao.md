@@ -143,7 +143,7 @@ Os componentes compartilhados definem foco visível, área de toque mínima para
 
 `ApiExceptionHandler` converte erros de domínio e concorrência em respostas controladas; entrada JSON/UUID inválida retorna 400. Não devolver stack trace ao cliente. Logs precisam de identificador de correlação sem senha, documento, código ou token.
 
-Scripts de backup usam dump PostgreSQL e checksum, com confirmação explícita de banco no restore. Eles não comprovam recuperação enquanto um ensaio de restauração em banco descartável não for executado. Também é necessário guardar arquivos de capa, configuração segura e chaves de criptografia de tokens; dump sozinho não recupera tudo. Não foi restaurado o banco real nesta revisão.
+Scripts de backup usam dump PostgreSQL e checksum, com confirmação explícita de banco no restore. O ensaio PostgreSQL descartável foi executado localmente e na CI; ele não comprova recuperação completa de produção. Também é necessário guardar arquivos de capa, configuração segura e chaves de criptografia de tokens; dump sozinho não recupera tudo. Não foi restaurado o banco real nesta revisão.
 
 ## 13. Avaliação crítica e ordem de entrega
 

@@ -1,6 +1,6 @@
 # Guia de atividades e comportamento esperado
 
-Data: 04/11/2026. Consulte a referência técnica para assinaturas e a matriz para os cenários realmente testados.
+Atualizado em 10/11/2026. Consulte a referência técnica para assinaturas e a matriz para os cenários realmente testados.
 
 ## Entrada e conta
 
@@ -60,7 +60,7 @@ Não confundir escolher uma cidade no mapa com comprovar presença física. Não
 5. Para imprevisto, use “Fechar hoje” ou escolha uma data e salve exceção de dia fechado/horário especial.
 6. Se houver reservas afetadas, revise a prévia e escolha manter e avisar, ou cancelar e avisar. O cancelamento libera a agenda e solicita estorno de pagamentos aprovados; atendimentos em andamento são preservados.
 
-Cada dia aceita até seis turnos, pausas e a opção 24 horas. A rotina individual por profissional ainda não é modelada. Consulte [Funcionamento e reservas](Funcionamento_e_reservas.md) para regras e testes.
+Cada dia aceita até seis turnos, pausas e a opção 24 horas. A agenda permite rotina e exceções por profissional, com prévia de impacto. Os horários oferecidos precisam atender também ao expediente da loja. Consulte [Funcionamento e reservas](Funcionamento_e_reservas.md) para regras e testes.
 
 ## Vendedor: operação
 
@@ -77,7 +77,7 @@ Cada dia aceita até seis turnos, pausas e a opção 24 horas. A rotina individu
 3. Marque coletado, inicie trajeto e marque entregue somente na etapa correspondente. Não é possível pular a sequência.
 4. Compartilhamento de localização só funciona durante o trajeto e mediante permissão. O sistema limpa as coordenadas ao encerrar.
 5. Ao concluir, pedido e entrega ficam concluídos; a resposta do histórico deixa de expor endereço/observação.
-6. Valor do pedido não representa remuneração da corrida. “Financeiro” informa a ausência de remuneração/repasse automatizado; não existe saque Pix funcional escondido atrás dessa tela.
+6. Valor do pedido não representa remuneração da corrida. “Financeiro” mostra créditos únicos por entrega concluída, calculados pela tarifa fixa definida pelo administrador. A solicitação de repasse exige saldo disponível, senha, código de verificação e CPF; a administração aprova e registra o pagamento externo. Não há transferência Pix automática pelo site.
 7. Ocorrência após coleta exige atendimento. Não cancelar por um caminho que devolva estoque de mercadoria já em trânsito.
 
 ## Administrador
@@ -90,7 +90,7 @@ Cada dia aceita até seis turnos, pausas e a opção 24 horas. A rotina individu
 - “Equipe” separa perfis operacionais, contas/segurança e criação de acesso. Suspensão profissional não deve ser confundida com suspensão de toda a conta.
 - “Financeiro” acompanha estornos que exigem atenção. Não marca dinheiro ficticiamente como entregue ao banco do cliente.
 - “Definições > Cidades” cria, edita e suspende cobertura. “Categorias” cria seções adicionais e exclui as próprias sem lojas vinculadas; as categorias nativas são preservadas.
-- “Integrações” informa configuração de serviços. Chaves não devem ser exibidas ao navegador; a configuração privada do servidor não é um formulário universal de credenciais.
+- “Integrações” informa configuração de serviços e permite atualizar os campos autorizados, confirmando a senha. Segredos já gravados não são devolvidos à tela; chaves de criptografia permanecem no servidor. Consulte [Definições administrativas](Definicoes_administrativas.md).
 - “Perfil do administrador” permite atualizar dados e remover explicitamente CPF. CPF não é necessário para administrar.
 - Auditoria registra ações instrumentadas. Não serve para alterar retroativamente fatos financeiros nem para consultar senhas de usuários.
 

@@ -118,7 +118,7 @@ A aba **Definições > Auditoria** consome `GET /api/v1/admin/audit-events?page=
 
 Ative `SPRING_PROFILES_ACTIVE=prod` e forneça `DATABASE_URL`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`, `JWT_SECRET` (chave Base64 de pelo menos 256 bits), `APP_ADMIN_EMAIL` e `APP_ADMIN_PASSWORD`. O Flyway aplica migrações comuns de `src/main/resources/db/migration-common` e a migração PostgreSQL específica de `migration-postgres`; o Hibernate valida o esquema sem alterá-lo.
 
-`JWT_SECRET` é obrigatória em todos os perfis: gere uma chave aleatória (`openssl rand -base64 32`) e mantenha-a em segredo. Para backup PostgreSQL, `scripts/backup-db.sh` gera e valida um dump com SHA-256. `scripts/restore-db.sh` verifica o hash e só restaura quando `RESTORE_CONFIRM_DATABASE` coincide com o nome do banco; a restauração substitui objetos existentes. Veja `Documentacao/Funcionamento_do_Projeto.md` para os passos e limitações.
+`JWT_SECRET` é obrigatória em todos os perfis: gere uma chave aleatória (`openssl rand -base64 32`) e mantenha-a em segredo. Para backup PostgreSQL, `scripts/backup-db.sh` gera e valida um dump com SHA-256. `scripts/restore-db.sh` verifica o hash e só restaura quando `RESTORE_CONFIRM_DATABASE` coincide com o nome do banco; a restauração substitui objetos existentes. Veja `Documentacao/Engenharia_e_avaliacao.md` para os passos e limitações.
 
 ## Limites desta entrega
 
@@ -126,7 +126,7 @@ MFA administrativo TOTP está implementado e precisa ser ativado pelo administra
 
 ## Modelo de dados
 
-O esquema inicial está em `src/main/resources/db/migration-common/V1__initial_schema.sql`; as migrações V20 a V24 adicionam duração de serviço e intervalos de reserva, pedidos de cancelamento do cliente, coordenadas opcionais de loja auditoria administrativa e moderação de capas. Flyway aplica as migrações comuns no PostgreSQL e no H2 usado nos testes. Valores monetários ficam em centavos e instantes são armazenados em UTC. A criação de reserva bloqueia a linha da loja durante a validação de disponibilidade e a gravação; a chave única por recurso/horário é uma proteção adicional contra duplicidade exata. Veja `Documentacao/Funcionamento_do_Projeto.md` e `Documentacao/Arquitetura_e_operacao.md`.
+O esquema inicial está em `src/main/resources/db/migration-common/V1__initial_schema.sql`; as migrações V20 a V24 adicionam duração de serviço e intervalos de reserva, pedidos de cancelamento do cliente, coordenadas opcionais de loja auditoria administrativa e moderação de capas. Flyway aplica as migrações comuns no PostgreSQL e no H2 usado nos testes. Valores monetários ficam em centavos e instantes são armazenados em UTC. A criação de reserva bloqueia a linha da loja durante a validação de disponibilidade e a gravação; a chave única por recurso/horário é uma proteção adicional contra duplicidade exata. Veja `Documentacao/Engenharia_e_avaliacao.md` e `Documentacao/Arquitetura_e_operacao.md`.
 
 ## Expediente e impacto na agenda
 
