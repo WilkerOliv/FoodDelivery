@@ -77,7 +77,7 @@ O workflow `.github/workflows/quality.yml` executa sintaxe/testes do frontend, t
 
 ## Backups e continuidade
 
-Os scripts `Backend/scripts/backup-db.sh` e `restore-db.sh` dão uma base manual para dump, hash e restauração confirmada. Isso protege contra erro humano em uma operação local, mas não comprova backup fora do equipamento, retenção, criptografia, rotina automática ou tempo de recuperação. Antes de produção, definir responsáveis, periodicidade, retenção, cópia externa criptografada e fazer teste de restauração em ambiente isolado. Não restaurar em produção como teste.
+Os scripts `Backend/scripts/backup-db.sh` e `restore-db.sh` geram dump privado com hash portátil e restauram em transação única, mediante confirmação do banco. O ensaio PostgreSQL de 11/11 validou também rollback após falha SQL. [Procedimentos, conta restrita e limites](Recuperacao_e_banco_de_producao.md). Isso protege contra erro humano em uma operação local, mas não comprova backup fora do equipamento, retenção, criptografia, rotina automática ou tempo de recuperação. Antes de produção, definir responsáveis, periodicidade, retenção, cópia externa criptografada e fazer teste de restauração em ambiente isolado. Não restaurar em produção como teste.
 
 ## Manutenção recomendada
 

@@ -1,6 +1,6 @@
 # Documentação da revisão do FoodDelivery
 
-Atualização: 10/11/2026. Os guias descrevem o código atual; relatórios de validação datados registram somente o escopo executado naquela data. Planos antigos e descrições substituídas foram retirados; seu histórico permanece no Git.
+Atualização: 11/11/2026. Os guias descrevem o código atual; relatórios de validação datados registram somente o escopo executado naquela data. Planos antigos e descrições substituídas foram retirados; seu histórico permanece no Git.
 
 ## Por onde começar
 
@@ -20,6 +20,7 @@ Atualização: 10/11/2026. Os guias descrevem o código atual; relatórios de va
 | [Testes e evidências](Validacao_2026-11-04.md) | O que foi de fato executado, resultado, evidência visual e o que não está comprovado. |
 | [Modelo de dados](Modelo_de_Dados.md) | Entidades, relações, integridade e versões de migração. |
 | [Ambiente sem dados reais](Homologacao_sem_dados_reais.md) | Inicialização isolada, contas fictícias, mensagens e simulação de pagamento. |
+| [Banco e recuperação](Recuperacao_e_banco_de_producao.md) | Conta PostgreSQL restrita, backups portáteis, restauração transacional e ensaio de falha. |
 | [Arquitetura e operação](Arquitetura_e_operacao.md) | Operação, deploy, backup e limites operacionais. |
 
 ## Como interpretar a cobertura

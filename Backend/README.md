@@ -118,7 +118,7 @@ A aba **Definições > Auditoria** consome `GET /api/v1/admin/audit-events?page=
 
 Ative `SPRING_PROFILES_ACTIVE=prod` e forneça `DATABASE_URL`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`, `JWT_SECRET` (chave Base64 de pelo menos 256 bits), `APP_ADMIN_EMAIL` e `APP_ADMIN_PASSWORD`. O Flyway aplica migrações comuns de `src/main/resources/db/migration-common` e a migração PostgreSQL específica de `migration-postgres`; o Hibernate valida o esquema sem alterá-lo.
 
-`JWT_SECRET` é obrigatória em todos os perfis: gere uma chave aleatória (`openssl rand -base64 32`) e mantenha-a em segredo. Para backup PostgreSQL, `scripts/backup-db.sh` gera e valida um dump com SHA-256. `scripts/restore-db.sh` verifica o hash e só restaura quando `RESTORE_CONFIRM_DATABASE` coincide com o nome do banco; a restauração substitui objetos existentes. Veja `Documentacao/Engenharia_e_avaliacao.md` para os passos e limitações.
+`JWT_SECRET` é obrigatória em todos os perfis: gere uma chave aleatória (`openssl rand -base64 32`) e mantenha-a em segredo. Para backup PostgreSQL, `scripts/backup-db.sh` gera e valida um dump com SHA-256. `scripts/restore-db.sh` verifica o hash do arquivo fornecido e usa transação única; só restaura quando `RESTORE_CONFIRM_DATABASE` coincide com o nome do banco; a restauração substitui objetos existentes. Veja `Documentacao/Engenharia_e_avaliacao.md` para os passos e limitações.
 
 ## Limites desta entrega
 
@@ -131,3 +131,5 @@ O esquema inicial está em `src/main/resources/db/migration-common/V1__initial_s
 ## Expediente e impacto na agenda
 
 Até seis turnos por dia, pausas, 24 horas e exceções datadas. Vendedor e administrador usam prévia antes de confirmar alterações com impacto. A V26 guarda a exceção individual e o aviso de reservas preservadas/canceladas. Veja [regras, contratos, segurança e testes](../Documentacao/Funcionamento_e_reservas.md).
+
+Banco de produção com conta restrita e recuperação portátil: [procedimento e ensaios](../Documentacao/Recuperacao_e_banco_de_producao.md).
