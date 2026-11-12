@@ -1,6 +1,14 @@
 # Engenharia e avaliação do projeto
 
-Referência: código conferido em 07/11/2026. Leia a matriz de validação para distinguir execução comprovada, análise estática e dependências externas.
+Referência desta avaliação: 12/11/2026, código `7e968fb`. Inspeção de código, configuração, documentação e resultados existentes de CI. Não foram repetidos todos os testes manuais nesta avaliação. O proprietário confirmou que ainda não existe banco em produção. O último deploy conferido no Render, em 11/11, foi `3c456d7`; as mudanças posteriores tratam documentação e infraestrutura de recuperação.
+
+## Parecer atual
+
+O projeto possui fluxos implementados e evidências de integração suficientes para continuar homologação controlada. Ainda não está demonstrada a prontidão para operação comercial: persistência de produção, integrações reais, recuperação completa e operação monitorada continuam pendentes. A demonstração usa regras da aplicação, mas substitui fornecedores e dados; sucesso nela não comprova liquidação financeira ou entrega de mensagens externas.
+
+As verificações do commit `7e968fb` passaram: [qualidade](https://github.com/WilkerOliv/FoodDelivery/actions/runs/43030143642) e [segurança disponível](https://github.com/WilkerOliv/FoodDelivery/actions/runs/43030143589). Nesta execução, CodeQL e dependency-review foram ignorados; SBOM é inventário de dependências, não prova de ausência de vulnerabilidades. Semgrep aprovado também não substitui auditoria independente.
+
+O desenho de monólito modular e as regras transacionais devem ser preservados. As melhorias prioritárias são pontuais no código e completas na operação, sem reescrever o sistema inteiro ou adicionar frameworks sem necessidade demonstrada.
 
 ## 1. Estrutura e motivo das decisões
 
@@ -135,7 +143,7 @@ Os componentes compartilhados definem foco visível, área de toque mínima para
 | CSRF/CORS | Origem obrigatória nas mutações com cookie e lista explícita | Revalidar no domínio/proxy final; TLS e cookie Secure. |
 | XSS | Escape de dados nas telas; editor DOM | Templates HTML grandes exigem revisão de cada interpolação; teste de payload não prova ausência de todos os sinks. |
 | Entrada HTTP | Bean Validation, limites de texto/lista e 400 para payload/UUID inválidos | Testar limites de tamanho no proxy e upload; orçamento de recursos sob carga. |
-| Concorrência | Locks de conta/loja/pedido e versões de entidades | H2 não demonstra comportamento completo de locks/deadlocks PostgreSQL. |
+| Concorrência | Locks de conta/loja/pedido e versões de entidades | Há ensaio PostgreSQL real para cenários específicos; ampliar conflitos/deadlocks e carga além dos casos cobertos. |
 | Recuperação | Expiração, idempotência, retries, rollback de banco | Backup de banco + arquivos, restauração isolada, RPO/RTO e alerta real. |
 | Segredos | Variáveis privadas, tokens cifrados, ausência de JWT no storage JS | Cofre/rotação, permissões de serviço, proteção de backups e logs. |
 | Privacidade | Acesso privado e ocultação de endereço de entrega encerrada | Retenção, exclusão/anonimização e histórico de mensagens precisam de política operacional. |
@@ -167,3 +175,49 @@ Não há base técnica para afirmar “sem margem de erro” ou segurança perfe
 ## Capa do comércio e aprovação
 
 A capa é enviada pelo vendedor, sem geração por IA ou chave externa. O navegador normaliza foto/logo para 1200 × 600 (2:1), preservando proporção. A API confere o PNG, tamanho e dimensões e o recodifica. Uma solicitação privada aguarda decisão ADMIN; somente aprovação altera a referência pública. Recusa requer motivo; novo envio substitui a pendência anterior. Locks na loja e na solicitação impedem aprovar silenciosamente uma versão já substituída. O limite de dez envios/loja/hora usa o banco e a mesma trava da operação. Detalhes, contratos, preservação de capas antigas e obrigações de armazenamento: [Capas das lojas](Capas_das_lojas.md).
+
+
+## 14. Achados atuais e respectivas correções
+
+Esta seção registra **correções recomendadas**, não alterações já executadas nesta avaliação. P1 bloqueia a abertura comercial ou exige decisão antes dela; P2 deve ser resolvido na estabilização ou antes de crescer; P3 é melhoria evolutiva.
+
+### P2 — resposta atrasada ao abrir conversa altera o chat atual
+
+**Local:** `Frontend/src/main.js`, `openChat`, linha 872 no commit avaliado. O método aplica resultado, troca o intervalo de atualização e trata erro sem verificar se a abertura ainda é vigente. `api.js` invalida por sessão, mas abrir outra conversa na mesma sessão não muda essa geração.
+
+**Sequência:** abrir A, abrir B antes de A responder, B concluir, A concluir depois. A remove o intervalo de B e instala um intervalo associado a A. `refreshOpenChat(A)` retorna por B ser a conversa ativa, deixando B sem atualização periódica. Se A falhar, o catch pode limpar `state.openChat` de B. É um achado de análise estática; não foi reproduzido no navegador nesta rodada. Não há evidência aqui de acesso a mensagens de outro usuário.
+
+**Correção:** contador de geração por abertura, cancelamento da requisição anterior e validação da geração após cada await, incluindo catch/finalização. Fechar ou navegar deve invalidar a geração. Comparar apenas o ID não basta para abrir A, B e A novamente. Adicionar testes com respostas invertidas, falha atrasada e fechamento antes da resposta.
+
+### P2 — listas administrativas e suporte sem paginação
+
+**Locais:** `AdminController.operators`, `allAccounts` e listagem de lojas usam `findAll`; `SupportTicketRepository.findAllByOrderByUpdatedAtDesc` retorna lista completa. O filtro de profissionais ocorre após carregar as contas.
+
+**Impacto:** com muitos registros, cresce consumo de memória, custo de consulta, tamanho da resposta e tempo de renderização. Isso é risco de escala identificado, não medição de lentidão atual nem falha de autorização.
+
+**Correção:** filtro no SQL, paginação com ordenação estável, tamanho máximo validado e interface de busca/próxima página. Cobrir autorização e navegação entre páginas; medir consultas/tempo antes e depois.
+
+### P2 — polling e responsabilidades concentradas
+
+`main.js` tem 1.301 linhas e aproximadamente 252 kB de fonte, com várias funções em linhas muito extensas. Conversas consultam a cada 5 segundos e notificações a cada 30. O chat deixa de consultar quando a página está invisível, mas ainda precisa impedir sobreposição de consultas lentas e descartar respostas antigas de cada abertura.
+
+**Correção:** extrair primeiro o ciclo de vida do chat e os renderizadores administrativos. Fazer agendamento da próxima consulta após terminar a anterior, com recuo após falha e atualização ao recuperar foco. Avaliar eventos do servidor somente se as medições justificarem. Não presumir que tamanho do arquivo sozinho representa lentidão para o usuário.
+
+### Matriz de conclusão
+
+| Prioridade | Pendência / consequência | Correção e critério de conclusão |
+|---|---|---|
+| P1 | Não existe banco de produção; demonstração perde dados em reinícios | Provisionar banco novo e armazenamento persistente de capas. Reiniciar/republicar e comprovar preservação. Não há migração de banco existente a executar. |
+| P1 | Pagamentos/estornos ainda sem homologação completa do fornecedor | Testar OAuth, assinatura, duplicidade, atraso, recusa e estorno no sandbox; conciliar valores e estados com o provedor. |
+| P1 | Recuperação depende apenas de ensaios de banco descartável | Implantar cópia externa cifrada de banco e capas, proteção separada de chaves, retenção e recuperação conjunta com tempo medido. |
+| P1 | Segurança operacional ainda não ativada em ambiente comercial | Ativar MFA no administrador real, guardar recuperação, configurar domínio/origens/cookies, monitoramento e alerta; ensaiar incidente. |
+| P1/P2 | Recuperação de conta e automações dependem de canais externos | Homologar SMTP como canal de recuperação; só anunciar WhatsApp depois de validar templates, vínculo, pedidos e entrega real. WhatsApp pode ficar desabilitado no lançamento. |
+| P2 | Resposta antiga de chat pode interromper conversa atual | Geração por abertura + cancelamento + testes de respostas invertidas, conforme achado acima. |
+| P2 | Listas completas tornam operação mais cara com volume | Paginação e filtros no servidor, limite de página e medição de consultas. |
+| P2 | Limitação de tentativas em memória por processo | Validar topologia de proxy e orçamento por usuário; antes de múltiplas réplicas, usar contador compartilhado. Não confiar em cabeçalho de IP arbitrário. |
+| P2 | Trilha de auditoria e retenção de mensagens incompletas | Definir eventos/retencão, restringir acesso e implementar expurgo/anonimização compatível com obrigações de histórico. Testar que não destrói evidência financeira. |
+| P2 | Acessibilidade e uso por pessoas pouco experientes parcialmente avaliados | Testar teclado, zoom 200%, leitor de tela, aparelhos físicos e tarefas acompanhadas; registrar falhas e repetir após corrigir. |
+| P2 | Conta SQL da aplicação ainda é dona do seu esquema | A configuração atual já retira superprivilégios. Como endurecimento adicional, separar credencial de migração da credencial de execução, com teste de permissões necessárias. |
+| P2/P3 | Cobertura de análise de dependências não é completa | Manter Semgrep e acrescentar análise de vulnerabilidades de dependências efetivamente executada, sem depender apenas do SBOM ou de jobs ignorados. |
+
+Repasse Pix automático, cadastro automático no Google Maps e aplicativo nativo não estão implementados. A geração de capas por IA foi retirada por decisão do proprietário e não é uma pendência. Corrigir um defeito não exige reintroduzir funções removidas.

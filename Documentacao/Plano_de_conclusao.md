@@ -1,6 +1,6 @@
 # Plano de conclusão e limites para lançamento
 
-Atualizado em 11/11/2026. Este quadro distingue implementação, execução demonstrada e operação externa. “Implementado” não significa homologado para cobrar clientes reais.
+Atualizado em 12/11/2026. Este quadro distingue implementação, execução demonstrada e operação externa. “Implementado” não significa homologado para cobrar clientes reais.
 
 ## Etapas internas já entregues
 
@@ -18,7 +18,7 @@ Atualizado em 11/11/2026. Este quadro distingue implementação, execução demo
 
 1. **Aceite da versão publicada:** conferido no painel Render em 11/11: último commit publicado `3c456d7`, estado Live. Entrada de avaliador, login administrativo, carregamento de Definições e CPF opcional foram conferidos pelo navegador. As demais jornadas publicadas continuam com o escopo das evidências anteriores; esta checagem não repete todos os fluxos.
 2. **Integrações de teste:** Mercado Pago sandbox com OAuth, webhook público assinado, recusa/atraso/duplicidade e estorno confirmado. SMTP e WhatsApp exigem conta/configuração e teste de entrega; simulador não atesta o fornecedor. Nenhuma cobrança real é necessária para o sandbox.
-3. **Persistência e recuperação completas:** provisionar PostgreSQL persistente e armazenamento de capas, guardar chaves fora do repositório, cópia externa criptografada com retenção, ensaio conjunto e RPO/RTO medidos. H2 de demonstração no Render pode ser reiniciado/perdido e não é banco de produção.
+3. **Persistência e recuperação completas:** o proprietário confirmou que não existe banco em produção; provisionar PostgreSQL persistente e armazenamento de capas, guardar chaves fora do repositório, cópia externa criptografada com retenção, ensaio conjunto e RPO/RTO medidos. H2 de demonstração no Render pode ser reiniciado/perdido e não é banco de produção.
 4. **Operação segura:** ativar MFA, confirmar cookies Secure/origens/proxy finais, monitoramento com alertas acionáveis, rotação e procedimento de incidente. Contadores de abuso são locais; múltiplas réplicas exigem mecanismo compartilhado.
 5. **Manutenção e desempenho:** extrair gradualmente telas do `main.js`, paginar consultas/listas e medir carga/consultas antes de otimizações. A separação do carregamento desta etapa é uma melhoria parcial, não a conclusão da arquitetura inteira.
 6. **Aceite com usuários:** aparelhos físicos, teclado, zoom/leitor de tela e tarefas acompanhadas com pessoas de pouca familiaridade digital. Verificação de largura no navegador não substitui esses testes.
@@ -42,3 +42,5 @@ Atualizado em 11/11/2026. Este quadro distingue implementação, execução demo
 Relatórios datados preservam o escopo histórico dos testes. A referência gerada inventaria funções; não executa todas as combinações de uso.
 
 Procedimentos e limites atuais: [Banco e recuperação](Recuperacao_e_banco_de_producao.md).
+
+Avaliação atual e correções recomendadas: [Engenharia — achados e matriz](Engenharia_e_avaliacao.md#14-achados-atuais-e-respectivas-correções). O achado de concorrência ao abrir chats ainda está pendente de correção.
