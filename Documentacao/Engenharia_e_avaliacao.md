@@ -2,6 +2,8 @@
 
 Referência desta avaliação: 12/11/2026, código `7e968fb`. Inspeção de código, configuração, documentação e resultados existentes de CI. Não foram repetidos todos os testes manuais nesta avaliação. O proprietário confirmou que ainda não existe banco em produção. O último deploy conferido no Render, em 11/11, foi `3c456d7`; as mudanças posteriores tratam documentação e infraestrutura de recuperação.
 
+Atualização de implementação em 13/11/2026: chat e quatro listas administrativas corrigidos e testados localmente; veja a seção 14 e o documento específico. A publicação desta alteração ainda precisa ser conferida.
+
 ## Parecer atual
 
 O projeto possui fluxos implementados e evidências de integração suficientes para continuar homologação controlada. Ainda não está demonstrada a prontidão para operação comercial: persistência de produção, integrações reais, recuperação completa e operação monitorada continuam pendentes. A demonstração usa regras da aplicação, mas substitui fornecedores e dados; sucesso nela não comprova liquidação financeira ou entrega de mensagens externas.
@@ -181,27 +183,17 @@ A capa é enviada pelo vendedor, sem geração por IA ou chave externa. O navega
 
 Esta seção registra **correções recomendadas**, não alterações já executadas nesta avaliação. P1 bloqueia a abertura comercial ou exige decisão antes dela; P2 deve ser resolvido na estabilização ou antes de crescer; P3 é melhoria evolutiva.
 
-### P2 — resposta atrasada ao abrir conversa altera o chat atual
+### Chat e quatro listas administrativas — corrigidos localmente em 13/11/2026
 
-**Local:** `Frontend/src/main.js`, `openChat`, linha 872 no commit avaliado. O método aplica resultado, troca o intervalo de atualização e trata erro sem verificar se a abertura ainda é vigente. `api.js` invalida por sessão, mas abrir outra conversa na mesma sessão não muda essa geração.
+O ciclo de vida do chat foi extraído para `chatSession.js`, com identidade por abertura, cancelamento, descarte de respostas antigas e atualização periódica sem sobreposição. Os testes incluem respostas invertidas, falhas atrasadas, fechamento e reabertura do mesmo ID.
 
-**Sequência:** abrir A, abrir B antes de A responder, B concluir, A concluir depois. A remove o intervalo de B e instala um intervalo associado a A. `refreshOpenChat(A)` retorna por B ser a conversa ativa, deixando B sem atualização periódica. Se A falhar, o catch pode limpar `state.openChat` de B. É um achado de análise estática; não foi reproduzido no navegador nesta rodada. Não há evidência aqui de acesso a mensagens de outro usuário.
+Contas, operadores, lojas e chamados administrativos usam consultas paginadas no banco, ordenação estável e limite máximo de 50. A interface usa 25 registros por página e contagens globais separadas. Os filtros de situação das lojas e de papéis profissionais são aplicados antes da paginação.
 
-**Correção:** contador de geração por abertura, cancelamento da requisição anterior e validação da geração após cada await, incluindo catch/finalização. Fechar ou navegar deve invalidar a geração. Comparar apenas o ID não basta para abrir A, B e A novamente. Adicionar testes com respostas invertidas, falha atrasada e fechamento antes da resposta.
+Funcionamento, contrato, compatibilidade dos endpoints antigos e evidências: [Chat e listas administrativas](Chat_e_listas_administrativas.md).
 
-### P2 — listas administrativas e suporte sem paginação
+### Responsabilidades concentradas e escala — melhoria parcial
 
-**Locais:** `AdminController.operators`, `allAccounts` e listagem de lojas usam `findAll`; `SupportTicketRepository.findAllByOrderByUpdatedAtDesc` retorna lista completa. O filtro de profissionais ocorre após carregar as contas.
-
-**Impacto:** com muitos registros, cresce consumo de memória, custo de consulta, tamanho da resposta e tempo de renderização. Isso é risco de escala identificado, não medição de lentidão atual nem falha de autorização.
-
-**Correção:** filtro no SQL, paginação com ordenação estável, tamanho máximo validado e interface de busca/próxima página. Cobrir autorização e navegação entre páginas; medir consultas/tempo antes e depois.
-
-### P2 — polling e responsabilidades concentradas
-
-`main.js` tem 1.301 linhas e aproximadamente 252 kB de fonte, com várias funções em linhas muito extensas. Conversas consultam a cada 5 segundos e notificações a cada 30. O chat deixa de consultar quando a página está invisível, mas ainda precisa impedir sobreposição de consultas lentas e descartar respostas antigas de cada abertura.
-
-**Correção:** extrair primeiro o ciclo de vida do chat e os renderizadores administrativos. Fazer agendamento da próxima consulta após terminar a anterior, com recuo após falha e atualização ao recuperar foco. Avaliar eventos do servidor somente se as medições justificarem. Não presumir que tamanho do arquivo sozinho representa lentidão para o usuário.
+O frontend central ainda concentra muitos renderizadores e ações. Chat e paginação agora têm módulos próprios; outros domínios continuam exigindo avaliação de volume, paginação e extração gradual. Notificações mantêm polling. Não foi realizado benchmark de carga nesta rodada nem se afirma conclusão de toda a arquitetura.
 
 ### Matriz de conclusão
 
@@ -212,8 +204,8 @@ Esta seção registra **correções recomendadas**, não alterações já execut
 | P1 | Recuperação depende apenas de ensaios de banco descartável | Implantar cópia externa cifrada de banco e capas, proteção separada de chaves, retenção e recuperação conjunta com tempo medido. |
 | P1 | Segurança operacional ainda não ativada em ambiente comercial | Ativar MFA no administrador real, guardar recuperação, configurar domínio/origens/cookies, monitoramento e alerta; ensaiar incidente. |
 | P1/P2 | Recuperação de conta e automações dependem de canais externos | Homologar SMTP como canal de recuperação; só anunciar WhatsApp depois de validar templates, vínculo, pedidos e entrega real. WhatsApp pode ficar desabilitado no lançamento. |
-| P2 | Resposta antiga de chat pode interromper conversa atual | Geração por abertura + cancelamento + testes de respostas invertidas, conforme achado acima. |
-| P2 | Listas completas tornam operação mais cara com volume | Paginação e filtros no servidor, limite de página e medição de consultas. |
+| Corrigido localmente | Concorrência de aberturas do chat | Identidade por abertura, cancelamento e testes automatizados aprovados. |
+| Parcialmente resolvido | Listas completas com volume | Quatro listas administrativas paginadas; demais domínios e medição de carga permanecem pendentes. |
 | P2 | Limitação de tentativas em memória por processo | Validar topologia de proxy e orçamento por usuário; antes de múltiplas réplicas, usar contador compartilhado. Não confiar em cabeçalho de IP arbitrário. |
 | P2 | Trilha de auditoria e retenção de mensagens incompletas | Definir eventos/retencão, restringir acesso e implementar expurgo/anonimização compatível com obrigações de histórico. Testar que não destrói evidência financeira. |
 | P2 | Acessibilidade e uso por pessoas pouco experientes parcialmente avaliados | Testar teclado, zoom 200%, leitor de tela, aparelhos físicos e tarefas acompanhadas; registrar falhas e repetir após corrigir. |

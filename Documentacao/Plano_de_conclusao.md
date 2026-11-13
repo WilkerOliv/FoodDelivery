@@ -43,4 +43,4 @@ Relatórios datados preservam o escopo histórico dos testes. A referência gera
 
 Procedimentos e limites atuais: [Banco e recuperação](Recuperacao_e_banco_de_producao.md).
 
-Avaliação atual e correções recomendadas: [Engenharia — achados e matriz](Engenharia_e_avaliacao.md#14-achados-atuais-e-respectivas-correções). O achado de concorrência ao abrir chats ainda está pendente de correção.
+Avaliação atual e correções recomendadas: [Engenharia — achados e matriz](Engenharia_e_avaliacao.md#14-achados-atuais-e-respectivas-correções). O achado de concorrência ao abrir chats foi corrigido e testado localmente em 13/11/2026, junto à paginação de contas, operadores, lojas e chamados. Veja [implementação e evidências](Chat_e_listas_administrativas.md). A publicação precisa ser validada separadamente.

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SupportTicketRepository extends JpaRepository<SupportTicket, UUID> {
     List<SupportTicket> findByAccountIdOrderByUpdatedAtDesc(UUID accountId);
-    List<SupportTicket> findAllByOrderByUpdatedAtDesc();
+    long countByStatusNot(SupportTicketStatus status);
 }

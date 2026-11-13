@@ -1,3 +1,4 @@
+import { adminLists, fetchAdminList } from './adminPagination.js';
 /** Fetch screen data into a detached patch, never into shared application state. */
 export async function fetchPageData(context, { api, signal }) {
   const get = path => api(path, { signal });
@@ -52,7 +53,7 @@ export async function fetchPageData(context, { api, signal }) {
     data.paymentConnection = store ? await get(`/merchant/stores/${store.id}/mercadopago/status`) : null;
   } else if (page === 'finance' && role === 'COURIER') data.deliveries = await get('/courier/deliveries');
   else if (page === 'admin') {
-    Object.assign(data, await fetchAdminData(get));
+    Object.assign(data, await fetchAdminData(get, context.adminPages, context.adminStoreFilter));
     warning = data.adminLoadError;
   }
   return { data, warning };
@@ -69,15 +70,20 @@ async function collect(jobs, get, data) {
   return failed;
 }
 
-export async function fetchAdminData(get) {
-  const jobs = [['adminStores', '/admin/stores'], ['adminRefunds', '/admin/refunds'],
-    ['adminOperators', '/admin/operators'], ['adminApplications', '/admin/operator-applications'],
-    ['adminPlatformRequests', '/admin/platform-requests'], ['adminAccounts', '/admin/accounts'],
-    ['adminTickets', '/admin/support-tickets']];
-  const data = {};
-  const failed = await collect(jobs, get, data);
-  if (failed === jobs.length) throw new Error('Administration unavailable');
-  jobs.forEach(([key]) => { data[key] ||= []; });
+export async function fetchAdminData(get, pages = {}, status = 'ALL') {
+  const jobs = [['adminRefunds', '/admin/refunds'], ['adminApplications', '/admin/operator-applications'],
+    ['adminPlatformRequests', '/admin/platform-requests'], ['adminSummary', '/admin/list-summary']];
+  const data = { adminPageMeta: {} };
+  let failed = await collect(jobs, get, data);
+  const keys = Object.keys(adminLists);
+  const results = await Promise.allSettled(keys.map(key => fetchAdminList(key, get, pages, status)));
+  results.forEach((result, index) => {
+    const key = keys[index];
+    if (result.status === 'fulfilled') { data[key] = result.value.content; data.adminPageMeta[key] = result.value; }
+    else { data[key] = []; failed += 1; }
+  });
+  if (failed === jobs.length + keys.length) throw new Error('Administration unavailable');
+  jobs.forEach(([key]) => { data[key] ||= key === 'adminSummary' ? {} : []; });
   data.adminLoadError = failed ? 'Algumas áreas não responderam. As demais continuam disponíveis.' : '';
   return data;
 }

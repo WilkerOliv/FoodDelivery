@@ -11,6 +11,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface AccountRepository extends JpaRepository<Account, UUID> {
+    @Query("select a from Account a where a.grantedRoleCodes like '%MERCHANT%' or a.grantedRoleCodes like '%COURIER%'")
+    org.springframework.data.domain.Page<Account> findOperators(org.springframework.data.domain.Pageable pageable);
+    @Query("select count(a) from Account a where a.grantedRoleCodes like '%MERCHANT%' or a.grantedRoleCodes like '%COURIER%'")
+    long countOperators();
     Optional<Account> findByEmailIgnoreCase(String email);
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select a from Account a where lower(a.email) = lower(:email)")

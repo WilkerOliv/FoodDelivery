@@ -1,0 +1,8 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { fetchAdminList, adminPagination } from '../src/adminPagination.js';
+import { fetchAdminData } from '../src/pageData.js';
+test('store filter applies on the server and preserves the requested page',async()=>{let url;const result=await fetchAdminList('adminStores',async path=>{url=path;return {content:[],number:2,totalPages:4};},{adminStores:2},'CONFIRMED');assert.match(url,/page=2&size=25&status=CONFIRMED/);assert.equal(result.number,2);});
+test('removing the last page returns to a valid page',async()=>{const paths=[];const result=await fetchAdminList('adminAccounts',async path=>{paths.push(path);return paths.length===1?{content:[],number:2,totalPages:2}:{content:['last'],number:1,totalPages:2};},{adminAccounts:2});assert.match(paths[1],/page=1/);assert.deepEqual(result.content,['last']);});
+test('page navigation is explicit including empty and unavailable lists',()=>{assert.match(adminPagination('adminAccounts',{number:0,totalPages:0,totalElements:0}),/Página 1 de 1/);assert.equal((adminPagination('adminAccounts',{number:0,totalPages:1,totalElements:3}).match(/disabled/g)||[]).length,2);assert.match(adminPagination('adminAccounts'),/indisponível/);});
+test('dashboard uses server totals instead of page lengths',async()=>{const result=await fetchAdminData(async path=>path.includes('/page?')?{content:[{id:1}],number:0,totalPages:3,totalElements:60}:path.includes('summary')?{stores:60}:[]);assert.equal(result.adminStores.length,1);assert.equal(result.adminSummary.stores,60);assert.equal(result.adminPageMeta.adminStores.totalElements,60);});

@@ -223,13 +223,39 @@ public class AdminController {
 
     @GetMapping("/operators")
     public List<OperatorView> operators() {
-        return accounts.findAll().stream().filter(a -> a.getRegisteredRoles().stream().anyMatch(r -> r==AccountRole.MERCHANT||r==AccountRole.COURIER))
-                .map(AdminController::operatorView).toList();
+        return operatorPage(0, 50).content();
     }
 
     @GetMapping("/accounts")
     public List<AdminAccountView> allAccounts() {
-        return accounts.findAll().stream().map(AdminController::adminAccountView).toList();
+        return accountPage(0, 50).content();
+    }
+
+    @GetMapping("/operators/page")
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public AdminPage<OperatorView> operatorPage(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="25") int size) {
+        return AdminPage.from(accounts.findOperators(AdminPage.request(page, size, "name")).map(AdminController::operatorView));
+    }
+
+    @GetMapping("/accounts/page")
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public AdminPage<AdminAccountView> accountPage(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="25") int size) {
+        return AdminPage.from(accounts.findAll(AdminPage.request(page, size, "name")).map(AdminController::adminAccountView));
+    }
+
+    @GetMapping("/stores/page")
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public AdminPage<AdminStoreView> storePage(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="25") int size,
+            @RequestParam(defaultValue="ALL") String status) {
+        var request = AdminPage.request(page, size, "name");
+        var result = switch (status) {
+            case "ALL" -> stores.findAll(request);
+            case "PENDING_REVIEW" -> stores.findByActiveAndApproved(true, false, request);
+            case "CONFIRMED" -> stores.findByActiveAndApproved(true, true, request);
+            case "STORE_SUSPENDED" -> stores.findByActiveFalse(request);
+            default -> throw new IllegalArgumentException("Filtro de lojas inválido.");
+        };
+        return AdminPage.from(result.map(AdminController::adminStoreView));
     }
 
     @PatchMapping("/accounts/{id}/active")
@@ -337,7 +363,7 @@ public class AdminController {
     @GetMapping("/stores")
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<AdminStoreView> stores() {
-        return stores.findAll().stream().map(AdminController::adminStoreView).toList();
+        return storePage(0, 50, "ALL").content();
     }
     private static AdminStoreView adminStoreView(Store store){return new AdminStoreView(store.getId(), store.getName(),
                 store.getDescription(), store.getCategory(), store.getAddress(), store.getCity(), store.getState(), store.getCnpj(), store.isActive(), store.isApproved(),

@@ -650,3 +650,7 @@ body.dialog-open{overflow:hidden;}
 .page-load-feedback h2 { margin: 0; font-size: 1.125rem; }
 .page-load-feedback p { margin: 0; max-width: 50ch; line-height: 1.6; }
 .page-load-feedback .btn { margin-top: 8px; }
+
+.admin-pagination { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-top:20px; padding-top:16px; border-top:1px solid #e5ddd7; }
+.admin-pagination .action-row { flex-wrap:wrap; }
+.admin-pagination button:disabled { opacity:.5; cursor:default; }

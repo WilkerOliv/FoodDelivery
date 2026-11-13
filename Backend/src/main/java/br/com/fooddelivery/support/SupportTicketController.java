@@ -70,7 +70,18 @@ public class SupportTicketController {
     @GetMapping("/admin/support-tickets")
     @PreAuthorize("hasRole('ADMIN')")
     @Transactional(readOnly=true)
-    public List<TicketView> all() { return tickets.findAllByOrderByUpdatedAtDesc().stream().map(this::view).toList(); }
+    public List<TicketView> all() { return page(0, 50).content(); }
+
+    @GetMapping("/admin/support-tickets/page")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Transactional(readOnly=true)
+    public br.com.fooddelivery.admin.AdminPage<TicketView> page(@RequestParam(defaultValue="0") int page,
+            @RequestParam(defaultValue="25") int size) {
+        var request = br.com.fooddelivery.admin.AdminPage.request(page, size, "updatedAt");
+        request = org.springframework.data.domain.PageRequest.of(request.getPageNumber(), request.getPageSize(),
+            org.springframework.data.domain.Sort.by(org.springframework.data.domain.Sort.Order.desc("updatedAt"), org.springframework.data.domain.Sort.Order.asc("id")));
+        return br.com.fooddelivery.admin.AdminPage.from(tickets.findAll(request).map(this::view));
+    }
 
     @GetMapping("/admin/support-tickets/{id}")
     @PreAuthorize("hasRole('ADMIN')")
