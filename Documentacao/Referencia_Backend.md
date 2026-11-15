@@ -1,6 +1,6 @@
 # Referência completa de funções — backend Java
 
-Gerada a partir da árvore sintática do código final. Inclui funções explícitas, métodos privados, construtores e callbacks. Não é uma certificação de segurança: use junto da análise de engenharia e da matriz de testes. Cobertura estrutural: **143 arquivos e 1128 funções explícitas**. Hash agregado: `388bb46fb172a3d991b3abcf396b349b541e02d031ba9aa34c56cab86a84b2a5`.
+Gerada a partir da árvore sintática do código final. Inclui funções explícitas, métodos privados, construtores e callbacks. Não é uma certificação de segurança: use junto da análise de engenharia e da matriz de testes. Cobertura estrutural: **153 arquivos e 1167 funções explícitas**. Hash agregado: `dffa63057059db96d9134ce02135cc5839aad931138184ac4faac03e8b9f83e6`.
 
 Cada seção identifica localização, assinatura, regras locais, chamadas e efeitos observáveis. Getters implícitos de `record`, métodos herdados de bibliotecas e APIs nativas são descritos por seus contratos, não reproduzidos como código do projeto.
 
@@ -236,7 +236,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
 
-Fonte: [AdminAuditService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java) · SHA-256 `53c8ecbc5e9b10841ee480896cebb1c0bee6d8153bb5e688430dca9309a6c0ef`
+Fonte: [AdminAuditService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java) · SHA-256 `75a902333d50762d9352b150757f2183113bafa5893e0400f6c7a055ed832a2c`
 
 ### AdminAuditService — linha 12
 
@@ -250,9 +250,29 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### record — linha 14
+### recordCurrent — linha 14
 
 [Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java:14)
+
+```java
+@Transactional public void recordCurrent(String action, String targetType, Object targetId, String summary)
+```
+
+Executa a etapa `record Current` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `org.springframework.security.core.context.SecurityContextHolder.getContext`; `authentication.getPrincipal`; `record`; `UUID.fromString`; `jwt.getSubject`.
+
+**Rejeições locais:**
+- `throw new IllegalStateException("Não foi possível identificar o administrador da alteração.");`
+
+**Decisões condicionais examinadas:**
+- `(authentication == null || !(authentication.getPrincipal() instanceof org.springframework.security.oauth2.jwt.Jwt jwt))`
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### record — linha 22
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java:22)
 
 ```java
 @Transactional public void record(UUID actorId, String action, String targetType, Object targetId, String summary)
@@ -272,9 +292,9 @@ events.save(new AdminAuditEvent(actorId, action, targetType,
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### latest — linha 20
+### latest — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java:20)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java:28)
 
 ```java
 @Transactional(readOnly = true) public Page<AdminAuditEvent> latest(int page, int size)
@@ -289,11 +309,114 @@ Executa a etapa `latest` neste módulo. O contrato concreto está na assinatura,
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
+## Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java
+
+Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
+
+Fonte: [AdminCategoryController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java) · SHA-256 `0e2cfd4bc103512c716d510883fda3a50daf3eedebac4591f4d43bc9647f0522`
+
+**Contrato de dados/estados:**
+```java
+public record StoreCategoryRequest(@NotBlank @Size(max=60) String name,
+                                       @NotBlank @Size(max=16) String emoji)
+```
+Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
+
+**Contrato de dados/estados:**
+```java
+public record AdminStoreCategoryView(UUID id, String name, String emoji, boolean builtIn)
+```
+Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
+
+### AdminCategoryController — linha 22
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java:22)
+
+```java
+public AdminCategoryController(StoreCategoryRepository storeCategories, StoreRepository stores, AdminAuditService auditService)
+```
+
+Constrói a instância e recebe suas dependências/dados iniciais; a construção não deve substituir autorização da operação.
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### storeCategories — linha 27
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java:27)
+
+```java
+@GetMapping("/store-categories") @org.springframework.transaction.annotation.Transactional(readOnly = true) public List<AdminStoreCategoryView> storeCategories()
+```
+
+Executa a etapa `store Categories` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `StoreCategories.ALL.stream`; `category.name`; `category.emoji`; `storeCategories.findAllByOrderByNameAsc`; `category.getId`; `category.getName`; `category.getEmoji`; `java.util.stream.Stream.concat`; `builtIns.stream`; `custom.stream`.
+
+**Saída declarada:**
+- `return java.util.stream.Stream.concat(builtIns.stream(), custom.stream()).toList();`
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### createStoreCategory — linha 37
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java:37)
+
+```java
+@PostMapping("/store-categories") @ResponseStatus(HttpStatus.CREATED) @org.springframework.transaction.annotation.Transactional public AdminStoreCategoryView createStoreCategory(@Valid @RequestBody StoreCategoryRequest request)
+```
+
+Executa a etapa `create Store Category` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `request.name`; `StoreCategories.isSupported`; `request.emoji`; `storeCategories.findBySlugIgnoreCase`; `category.getSlug`; `storeCategories.save`; `auditService.recordCurrent`; `saved.getId`; `saved.getName`; `saved.getEmoji`.
+
+**Rejeições locais:**
+- `throw new IllegalArgumentException("Essa categoria já existe e não pode ser duplicada.");`
+- `throw new IllegalArgumentException("Já existe uma categoria com esse nome ou uma forma equivalente.");`
+
+**Decisões condicionais examinadas:**
+- `(StoreCategories.isSupported(name))`
+- `(storeCategories.findBySlugIgnoreCase(category.getSlug()).isPresent())`
+
+**Saída declarada:**
+- `return new AdminStoreCategoryView(saved.getId(), saved.getName(), saved.getEmoji(), false);`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```java
+StoreCategory saved = storeCategories.save(category);
+```
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### deleteStoreCategory — linha 52
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java:52)
+
+```java
+@DeleteMapping("/store-categories/{id}") @org.springframework.transaction.annotation.Transactional @ResponseStatus(HttpStatus.NO_CONTENT) public void deleteStoreCategory(@PathVariable UUID id)
+```
+
+Executa a etapa `delete Store Category` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `storeCategories.findById`; `stores.countByCategoryIgnoreCase`; `category.getName`; `storeCategories.delete`; `auditService.recordCurrent`.
+
+**Rejeições locais:**
+- `throw new IllegalArgumentException("Esta seção está vinculada a " + storesUsingCategory + " loja(s). Altere a categoria dessas lojas antes de excluí-la.");`
+
+**Decisões condicionais examinadas:**
+- `(storesUsingCategory > 0)`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```java
+storeCategories.delete(category);
+```
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
 ## Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java
 
 Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
 
-Fonte: [AdminController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java) · SHA-256 `39584cdbd671e80779a86d1befdf58b1e26ffbcb57c1d11bdee1baa6fbdf676e`
+Fonte: [AdminController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java) · SHA-256 `efa22e1cdfab4491f1c9918796e34cf2917a3fcf4aca59d1127052e7d4acb25f`
 
 **Contrato de dados/estados:**
 ```java
@@ -306,19 +429,6 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 **Contrato de dados/estados:**
 ```java
 public record Approval(boolean approved)
-```
-Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
-
-**Contrato de dados/estados:**
-```java
-public record StoreCategoryRequest(@NotBlank @Size(max=60) String name,
-                                       @NotBlank @Size(max=16) String emoji)
-```
-Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
-
-**Contrato de dados/estados:**
-```java
-public record AdminStoreCategoryView(UUID id, String name, String emoji, boolean builtIn)
 ```
 Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
 
@@ -366,25 +476,6 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 **Contrato de dados/estados:**
 ```java
-public record ServiceCityRequest(@NotBlank @Size(max=100) String city,
-                                     @NotBlank @jakarta.validation.constraints.Pattern(regexp="[A-Za-z]
-```
-Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
-
-**Contrato de dados/estados:**
-```java
-public record ServiceCityView(UUID id, String city, String state, String postalCode, boolean enabled)
-```
-Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
-
-**Contrato de dados/estados:**
-```java
-public record IntegrationView(String id, String name, boolean configured, String status, String configuration)
-```
-Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
-
-**Contrato de dados/estados:**
-```java
 public record AdminAuditView(UUID id, UUID actorId, String action, String targetType, String targetId, String summary, java.time.Instant createdAt)
 ```
 Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
@@ -399,236 +490,21 @@ public record AdminProfileUpdate(@NotBlank @Size(max=120) String name, @Email @N
 ```
 Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
 
-### AdminController — linha 54
+### AdminController — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:54)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:38)
 
 ```java
-public AdminController(AccountRepository accounts, StoreRepository stores, PasswordEncoder encoder, NotificationService notifications, ServiceCityRepository serviceCities, StoreCategoryRepository storeCategories, AdminAuditService auditService, br.com.fooddelivery.identity.PasswordRecoveryService recovery, br.com.fooddelivery.catalog.StoreHoursChangeService hoursChanges)
+public AdminController(AccountRepository accounts, StoreRepository stores, PasswordEncoder encoder, NotificationService notifications, StoreCategoryRepository storeCategories, AdminAuditService auditService, br.com.fooddelivery.identity.PasswordRecoveryService recovery, br.com.fooddelivery.catalog.StoreHoursChangeService hoursChanges)
 ```
 
 Constrói a instância e recebe suas dependências/dados iniciais; a construção não deve substituir autorização da operação.
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### storeCategories — linha 65
+### updateAccountProfile — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:65)
-
-```java
-@GetMapping("/store-categories") @org.springframework.transaction.annotation.Transactional(readOnly = true) public List<AdminStoreCategoryView> storeCategories()
-```
-
-Executa a etapa `store Categories` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `StoreCategories.ALL.stream`; `category.name`; `category.emoji`; `storeCategories.findAllByOrderByNameAsc`; `category.getId`; `category.getName`; `category.getEmoji`; `java.util.stream.Stream.concat`; `builtIns.stream`; `custom.stream`.
-
-**Saída declarada:**
-- `return java.util.stream.Stream.concat(builtIns.stream(), custom.stream()).toList();`
-
-**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### createStoreCategory — linha 75
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:75)
-
-```java
-@PostMapping("/store-categories") @ResponseStatus(HttpStatus.CREATED) @org.springframework.transaction.annotation.Transactional public AdminStoreCategoryView createStoreCategory(@Valid @RequestBody StoreCategoryRequest request)
-```
-
-Executa a etapa `create Store Category` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `request.name`; `StoreCategories.isSupported`; `request.emoji`; `storeCategories.findBySlugIgnoreCase`; `category.getSlug`; `storeCategories.save`; `audit`; `saved.getId`; `saved.getName`; `saved.getEmoji`.
-
-**Rejeições locais:**
-- `throw new IllegalArgumentException("Essa categoria já existe e não pode ser duplicada.");`
-- `throw new IllegalArgumentException("Já existe uma categoria com esse nome ou uma forma equivalente.");`
-
-**Decisões condicionais examinadas:**
-- `(StoreCategories.isSupported(name))`
-- `(storeCategories.findBySlugIgnoreCase(category.getSlug()).isPresent())`
-
-**Saída declarada:**
-- `return new AdminStoreCategoryView(saved.getId(), saved.getName(), saved.getEmoji(), false);`
-
-**Efeitos identificados no corpo (inclui callbacks internos):**
-```java
-StoreCategory saved = storeCategories.save(category);
-```
-
-**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### deleteStoreCategory — linha 90
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:90)
-
-```java
-@DeleteMapping("/store-categories/{id}") @org.springframework.transaction.annotation.Transactional @ResponseStatus(HttpStatus.NO_CONTENT) public void deleteStoreCategory(@PathVariable UUID id)
-```
-
-Executa a etapa `delete Store Category` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `storeCategories.findById`; `stores.countByCategoryIgnoreCase`; `category.getName`; `storeCategories.delete`; `audit`.
-
-**Rejeições locais:**
-- `throw new IllegalArgumentException("Esta seção está vinculada a " + storesUsingCategory + " loja(s). Altere a categoria dessas lojas antes de excluí-la.");`
-
-**Decisões condicionais examinadas:**
-- `(storesUsingCategory > 0)`
-
-**Efeitos identificados no corpo (inclui callbacks internos):**
-```java
-storeCategories.delete(category);
-```
-
-**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### serviceCities — linha 102
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:102)
-
-```java
-@GetMapping("/service-cities") public List<ServiceCityView> serviceCities()
-```
-
-Executa a etapa `service Cities` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `serviceCities.findAllByOrderByCityAscStateAsc`.
-
-**Saída declarada:**
-- `return serviceCities.findAllByOrderByCityAscStateAsc().stream().map(ServiceCityView::of).toList();`
-
-**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### createServiceCity — linha 107
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:107)
-
-```java
-@PostMapping("/service-cities") @ResponseStatus(HttpStatus.CREATED) @org.springframework.transaction.annotation.Transactional public ServiceCityView createServiceCity(@Valid @RequestBody ServiceCityRequest request)
-```
-
-Executa a etapa `create Service City` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `request.city`; `request.state`; `serviceCities.findByCityIgnoreCaseAndStateIgnoreCase`; `serviceCities.save`; `request.postalCode`; `audit`; `saved.getId`; `ServiceCityView.of`.
-
-**Rejeições locais:**
-- `throw new IllegalArgumentException("Esta cidade já está cadastrada. Reative ou edite o cadastro existente.");`
-
-**Decisões condicionais examinadas:**
-- `(serviceCities.findByCityIgnoreCaseAndStateIgnoreCase(city, state).isPresent())`
-
-**Saída declarada:**
-- `return ServiceCityView.of(saved);`
-
-**Efeitos identificados no corpo (inclui callbacks internos):**
-```java
-ServiceCity saved = serviceCities.save(new ServiceCity(city, state, request.postalCode()));
-```
-
-**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### updateServiceCity — linha 120
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:120)
-
-```java
-@PutMapping("/service-cities/{id}") @org.springframework.transaction.annotation.Transactional public ServiceCityView updateServiceCity(@PathVariable UUID id, @Valid @RequestBody ServiceCityRequest request)
-```
-
-Executa a etapa `update Service City` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `serviceCities.findById`; `request.city`; `request.state`; `serviceCities.findByCityIgnoreCaseAndStateIgnoreCase`; `existing.getId`; `city.update`; `request.postalCode`; `request.enabled`; `serviceCities.save`; `audit`; `ServiceCityView.of`.
-
-**Rejeições locais:**
-- `throw new IllegalArgumentException("Já existe um cadastro para esta cidade e estado.");`
-
-**Saída declarada:**
-- `return ServiceCityView.of(saved);`
-
-**Efeitos identificados no corpo (inclui callbacks internos):**
-```java
-city.update(name, state, request.postalCode(), request.enabled());
-ServiceCity saved = serviceCities.save(city);
-```
-
-**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### setting — linha 136
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:136)
-
-```java
-private String setting(String key,String fallback)
-```
-
-Executa a etapa `setting` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `privateSettings.value`.
-
-**Decisões condicionais examinadas:**
-- `privateSettings==null`
-
-**Saída declarada:**
-- `return privateSettings==null?fallback:privateSettings.value(key,fallback);`
-
-**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### integrations — linha 138
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:138)
-
-```java
-@GetMapping("/integrations") public List<IntegrationView> integrations()
-```
-
-Executa a etapa `integrations` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `List.of`; `integration`; `ready`; `setting`; `Boolean.parseBoolean`; `Boolean.toString`.
-
-**Saída declarada:**
-- `return List.of( integration("SMTP", "E-mail de recuperação e avisos", ready(setting("SMTP_HOST",smtpHost), setting("SMTP_USERNAME",smtpUsername), setting("SMTP_PASSWORD",smtpPassword)), "SMTP_HOST, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD, RECOVERY_EMAIL_FROM"), integration("WHATSAPP", "WhatsApp Cloud para códigos e avisos", Boolean.parseBoolean(setting("WHATSAPP_CLOUD_ENABLED",Boolean.toString(whatsappEnabled))) && ready(setting("WHATSAPP_PHONE_NUMBER_ID",whatsappPhoneId),setting("WHATSAPP_ACCESS_TOKEN",whatsappToken)), "WHATSAPP_CLOUD_ENABLED, WHATSAPP_PHONE_NUMBER_ID, WHATSAPP_ACCESS_TOKEN, WHATSAPP_OTP_TEMPLATE"), new IntegrationView("STORE_IMAGES", "Capas enviadas pelo vendedor", true, "Upload local com aprovação administrativa", "Sem chave ou API de IA; PNG/JPG ajustado para 1.200 × 600 pixels"), integration("MERCADOPAGO", "Checkout, pagamentos e webhooks", ready(setting("MP_CLIENT_ID",mercadoPagoClientId),setting("MP_CLIENT_SECRET",mercadoPagoClientSecret),mercadoPagoEncryptionKey,setting("MP_WEBHOOK_SECRET",mercadoPagoWebhookSecret),mercadoPagoNotificationUrl), "MP_CLIENT_ID, MP_CLIENT_SECRET, MP_TOKEN_ENCRYPTION_KEY, MP_WEBHOOK_SECRET, MP_NOTIFICATION_BASE_URL"), integration("VIACEP", "Consulta pública de CEP", true, "Integração pública; não exige chave"), integration("MAPAS", "Mapa e localização das cidades", true, "Mapa incorporado; requer conexão com a internet") );`
-
-**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### ready — linha 150
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:150)
-
-```java
-private static boolean ready(String... values)
-```
-
-Executa a etapa `ready` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Colaborações:** `java.util.Arrays.stream`; `value.isBlank`.
-
-**Saída declarada:**
-- `return java.util.Arrays.stream(values).allMatch(value -> value != null && !value.isBlank());`
-
-**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### integration — linha 151
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:151)
-
-```java
-private static IntegrationView integration(String id, String name, boolean ready, String variables)
-```
-
-Executa a etapa `integration` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
-
-**Decisões condicionais examinadas:**
-- `ready`
-
-**Saída declarada:**
-- `return new IntegrationView(id, name, ready, ready ? "Configurada (conexão não homologada)" : "Configuração incompleta", variables);`
-
-**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
-
-### updateAccountProfile — linha 155
-
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:155)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:50)
 
 ```java
 @PutMapping("/accounts/{id}/profile") @org.springframework.transaction.annotation.Transactional public AdminAccountView updateAccountProfile(@PathVariable UUID id, @Valid @RequestBody AdminProfileUpdate request)
@@ -666,9 +542,9 @@ Account saved = accounts.save(account);
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### clean — linha 184
+### clean — linha 79
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:184)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:79)
 
 ```java
 private static String clean(String value)
@@ -686,9 +562,9 @@ Executa a etapa `clean` neste módulo. O contrato concreto está na assinatura, 
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### phoneDigits — linha 185
+### phoneDigits — linha 80
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:185)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:80)
 
 ```java
 private static String phoneDigits(String value)
@@ -706,9 +582,9 @@ Executa a etapa `phone Digits` neste módulo. O contrato concreto está na assin
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### updateStoreProfile — linha 187
+### updateStoreProfile — linha 82
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:187)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:82)
 
 ```java
 @PutMapping("/stores/{id}/profile") @org.springframework.transaction.annotation.Transactional public AdminStoreView updateStoreProfile(@PathVariable UUID id,@Valid @RequestBody br.com.fooddelivery.catalog.CatalogController.StoreRequest request)
@@ -737,9 +613,9 @@ stores.save(store);
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### createOperator — linha 202
+### createOperator — linha 97
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:202)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:97)
 
 ```java
 @PostMapping("/operators") @ResponseStatus(HttpStatus.CREATED) @org.springframework.transaction.annotation.Transactional public Account createOperator(@Valid @RequestBody OperatorRequest request)
@@ -776,9 +652,9 @@ Account saved=accounts.save(account);
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### operators — linha 224
+### operators — linha 119
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:224)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:119)
 
 ```java
 @GetMapping("/operators") public List<OperatorView> operators()
@@ -786,16 +662,16 @@ Account saved=accounts.save(account);
 
 Executa a etapa `operators` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `accounts.findAll`; `a.getRegisteredRoles`.
+**Colaborações:** `operatorPage`.
 
 **Saída declarada:**
-- `return accounts.findAll().stream().filter(a -> a.getRegisteredRoles().stream().anyMatch(r -> r==AccountRole.MERCHANT||r==AccountRole.COURIER)) .map(AdminController::operatorView).toList();`
+- `return operatorPage(0, 50).content();`
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### allAccounts — linha 230
+### allAccounts — linha 124
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:230)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:124)
 
 ```java
 @GetMapping("/accounts") public List<AdminAccountView> allAccounts()
@@ -803,16 +679,70 @@ Executa a etapa `operators` neste módulo. O contrato concreto está na assinatu
 
 Executa a etapa `all Accounts` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `accounts.findAll`.
+**Colaborações:** `accountPage`.
 
 **Saída declarada:**
-- `return accounts.findAll().stream().map(AdminController::adminAccountView).toList();`
+- `return accountPage(0, 50).content();`
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### setAccountActive — linha 235
+### operatorPage — linha 129
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:235)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:129)
+
+```java
+@GetMapping("/operators/page") @org.springframework.transaction.annotation.Transactional(readOnly = true) public AdminPage<OperatorView> operatorPage(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="25") int size)
+```
+
+Executa a etapa `operator Page` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `AdminPage.from`; `accounts.findOperators`; `AdminPage.request`.
+
+**Saída declarada:**
+- `return AdminPage.from(accounts.findOperators(AdminPage.request(page, size, "name")).map(AdminController::operatorView));`
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### accountPage — linha 135
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:135)
+
+```java
+@GetMapping("/accounts/page") @org.springframework.transaction.annotation.Transactional(readOnly = true) public AdminPage<AdminAccountView> accountPage(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="25") int size)
+```
+
+Executa a etapa `account Page` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `AdminPage.from`; `accounts.findAll`; `AdminPage.request`.
+
+**Saída declarada:**
+- `return AdminPage.from(accounts.findAll(AdminPage.request(page, size, "name")).map(AdminController::adminAccountView));`
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### storePage — linha 141
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:141)
+
+```java
+@GetMapping("/stores/page") @org.springframework.transaction.annotation.Transactional(readOnly = true) public AdminPage<AdminStoreView> storePage(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="25") int size, @RequestParam(defaultValue="ALL") String status)
+```
+
+Executa a etapa `store Page` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `AdminPage.request`; `stores.findAll`; `stores.findByActiveAndApproved`; `stores.findByActiveFalse`; `AdminPage.from`; `result.map`.
+
+**Rejeições locais:**
+- `throw new IllegalArgumentException("Filtro de lojas inválido.");`
+
+**Saída declarada:**
+- `return AdminPage.from(result.map(AdminController::adminStoreView));`
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### setAccountActive — linha 156
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:156)
 
 ```java
 @PatchMapping("/accounts/{id}/active") @org.springframework.transaction.annotation.Transactional public AdminAccountView setAccountActive(@PathVariable UUID id, @RequestBody AccountActivity request)
@@ -842,9 +772,9 @@ ownedStores.forEach(store -> { store.setActive(false); store.setApproved(false);
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### setRoleActive — linha 251
+### setRoleActive — linha 172
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:251)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:172)
 
 ```java
 @PatchMapping("/accounts/{id}/roles/{role}") @org.springframework.transaction.annotation.Transactional public AdminAccountView setRoleActive(@PathVariable UUID id, @PathVariable AccountRole role, @RequestBody AccountActivity request)
@@ -874,9 +804,9 @@ ownedStores.forEach(store -> { store.setActive(false); store.setApproved(false);
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### resetPassword — linha 267
+### resetPassword — linha 188
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:267)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:188)
 
 ```java
 @PostMapping("/accounts/{id}/password-reset") @org.springframework.transaction.annotation.Transactional public Map<String, Object> resetPassword(@PathVariable UUID id)
@@ -896,9 +826,9 @@ accounts.save(account);
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### pendingApplications — linha 279
+### pendingApplications — linha 200
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:279)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:200)
 
 ```java
 @GetMapping("/operator-applications") public List<OperatorView> pendingApplications()
@@ -913,9 +843,9 @@ Executa a etapa `pending Applications` neste módulo. O contrato concreto está 
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### approveApplication — linha 284
+### approveApplication — linha 205
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:284)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:205)
 
 ```java
 @PatchMapping("/operator-applications/{id}/approve") @org.springframework.transaction.annotation.Transactional public OperatorView approveApplication(@PathVariable UUID id)
@@ -939,9 +869,9 @@ notifications.send(saved, "Acesso aprovado", "Seu acesso de "+(saved.getRole()==
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### rejectApplication — linha 295
+### rejectApplication — linha 216
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:295)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:216)
 
 ```java
 @PatchMapping("/operator-applications/{id}/reject") @org.springframework.transaction.annotation.Transactional public OperatorView rejectApplication(@PathVariable UUID id)
@@ -962,9 +892,9 @@ notifications.send(saved, "Solicitação analisada", "Sua solicitação de acess
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### deactivate — linha 306
+### deactivate — linha 227
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:306)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:227)
 
 ```java
 @PatchMapping("/operators/{id}/deactivate") @org.springframework.transaction.annotation.Transactional public Map<String, String> deactivate(@PathVariable UUID id)
@@ -993,9 +923,9 @@ ownedStores.forEach(store -> { store.setActive(false); store.setApproved(false);
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### activate — linha 324
+### activate — linha 245
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:324)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:245)
 
 ```java
 @PatchMapping("/operators/{id}/activate") @org.springframework.transaction.annotation.Transactional public Map<String, String> activate(@PathVariable UUID id)
@@ -1022,9 +952,9 @@ accounts.save(account);
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### stores — linha 337
+### stores — linha 258
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:337)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:258)
 
 ```java
 @GetMapping("/stores") @org.springframework.transaction.annotation.Transactional(readOnly = true) public List<AdminStoreView> stores()
@@ -1032,16 +962,16 @@ accounts.save(account);
 
 Executa a etapa `stores` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `stores.findAll`.
+**Colaborações:** `storePage`.
 
 **Saída declarada:**
-- `return stores.findAll().stream().map(AdminController::adminStoreView).toList();`
+- `return storePage(0, 50, "ALL").content();`
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### adminStoreView — linha 342
+### adminStoreView — linha 263
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:342)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:263)
 
 ```java
 private static AdminStoreView adminStoreView(Store store)
@@ -1056,9 +986,9 @@ Executa a etapa `admin Store View` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### approveStore — linha 348
+### approveStore — linha 269
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:348)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:269)
 
 ```java
 @PatchMapping("/stores/{id}/approval") @org.springframework.transaction.annotation.Transactional public Store approveStore(@PathVariable UUID id, @RequestBody Approval request)
@@ -1088,9 +1018,9 @@ Store saved=stores.save(store);
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### setStoreActive — linha 361
+### setStoreActive — linha 282
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:361)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:282)
 
 ```java
 @PatchMapping("/stores/{id}/active") @org.springframework.transaction.annotation.Transactional public Store setStoreActive(@PathVariable UUID id, @RequestBody StoreActivity request)
@@ -1116,9 +1046,9 @@ Store saved=stores.save(store);
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### setCommission — linha 372
+### setCommission — linha 293
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:372)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:293)
 
 ```java
 @PatchMapping("/stores/{id}/commission") @org.springframework.transaction.annotation.Transactional public Map<String, Object> setCommission(@PathVariable UUID id, @Valid @RequestBody Commission request)
@@ -1139,9 +1069,9 @@ stores.save(store);
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### auditEvents — linha 382
+### auditEvents — linha 303
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:382)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:303)
 
 ```java
 @GetMapping("/audit-events") @org.springframework.transaction.annotation.Transactional(readOnly = true) public org.springframework.data.domain.Page<AdminAuditView> auditEvents( @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "50") int size)
@@ -1156,9 +1086,9 @@ Executa a etapa `audit Events` neste módulo. O contrato concreto está na assin
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### audit — linha 390
+### audit — linha 311
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:390)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:311)
 
 ```java
 private void audit(String action, String targetType, Object targetId, String summary)
@@ -1166,19 +1096,13 @@ private void audit(String action, String targetType, Object targetId, String sum
 
 Executa a etapa `audit` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `org.springframework.security.core.context.SecurityContextHolder.getContext`; `authentication.getPrincipal`; `auditService.record`; `UUID.fromString`; `jwt.getSubject`.
-
-**Rejeições locais:**
-- `throw new IllegalStateException("Não foi possível identificar o administrador da alteração.");`
-
-**Decisões condicionais examinadas:**
-- `(authentication == null || !(authentication.getPrincipal() instanceof org.springframework.security.oauth2.jwt.Jwt jwt))`
+**Colaborações:** `auditService.recordCurrent`.
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### operatorView — linha 397
+### operatorView — linha 315
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:397)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:315)
 
 ```java
 private static OperatorView operatorView(Account account)
@@ -1196,9 +1120,9 @@ Executa a etapa `operator View` neste módulo. O contrato concreto está na assi
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### adminAccountView — linha 403
+### adminAccountView — linha 321
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:403)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:321)
 
 ```java
 private static AdminAccountView adminAccountView(Account account)
@@ -1216,9 +1140,9 @@ Executa a etapa `admin Account View` neste módulo. O contrato concreto está na
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### OperatorRequest — linha 414
+### OperatorRequest — linha 332
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:414)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:332)
 
 ```java
 public OperatorRequest
@@ -1234,9 +1158,111 @@ Executa a etapa `Operator Request` neste módulo. O contrato concreto está na a
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### of — linha 440
+## Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:440)
+Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
+
+Fonte: [AdminCoverageController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java) · SHA-256 `8a3cf0ade3f90410844eca0ee3d7bbc46625fbcf5830f91c83459229a28bceb6`
+
+**Contrato de dados/estados:**
+```java
+public record ServiceCityRequest(@NotBlank @Size(max=100) String city,
+                                     @NotBlank @jakarta.validation.constraints.Pattern(regexp="[A-Za-z]
+```
+Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
+
+**Contrato de dados/estados:**
+```java
+public record ServiceCityView(UUID id, String city, String state, String postalCode, boolean enabled)
+```
+Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
+
+### AdminCoverageController — linha 20
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java:20)
+
+```java
+public AdminCoverageController(ServiceCityRepository serviceCities, AdminAuditService auditService)
+```
+
+Constrói a instância e recebe suas dependências/dados iniciais; a construção não deve substituir autorização da operação.
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### serviceCities — linha 24
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java:24)
+
+```java
+@GetMapping("/service-cities") public List<ServiceCityView> serviceCities()
+```
+
+Executa a etapa `service Cities` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `serviceCities.findAllByOrderByCityAscStateAsc`.
+
+**Saída declarada:**
+- `return serviceCities.findAllByOrderByCityAscStateAsc().stream().map(ServiceCityView::of).toList();`
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### createServiceCity — linha 29
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java:29)
+
+```java
+@PostMapping("/service-cities") @ResponseStatus(HttpStatus.CREATED) @org.springframework.transaction.annotation.Transactional public ServiceCityView createServiceCity(@Valid @RequestBody ServiceCityRequest request)
+```
+
+Executa a etapa `create Service City` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `request.city`; `request.state`; `serviceCities.findByCityIgnoreCaseAndStateIgnoreCase`; `serviceCities.save`; `request.postalCode`; `auditService.recordCurrent`; `saved.getId`; `ServiceCityView.of`.
+
+**Rejeições locais:**
+- `throw new IllegalArgumentException("Esta cidade já está cadastrada. Reative ou edite o cadastro existente.");`
+
+**Decisões condicionais examinadas:**
+- `(serviceCities.findByCityIgnoreCaseAndStateIgnoreCase(city, state).isPresent())`
+
+**Saída declarada:**
+- `return ServiceCityView.of(saved);`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```java
+ServiceCity saved = serviceCities.save(new ServiceCity(city, state, request.postalCode()));
+```
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### updateServiceCity — linha 42
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java:42)
+
+```java
+@PutMapping("/service-cities/{id}") @org.springframework.transaction.annotation.Transactional public ServiceCityView updateServiceCity(@PathVariable UUID id, @Valid @RequestBody ServiceCityRequest request)
+```
+
+Executa a etapa `update Service City` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `serviceCities.findById`; `request.city`; `request.state`; `serviceCities.findByCityIgnoreCaseAndStateIgnoreCase`; `existing.getId`; `city.update`; `request.postalCode`; `request.enabled`; `serviceCities.save`; `auditService.recordCurrent`; `ServiceCityView.of`.
+
+**Rejeições locais:**
+- `throw new IllegalArgumentException("Já existe um cadastro para esta cidade e estado.");`
+
+**Saída declarada:**
+- `return ServiceCityView.of(saved);`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```java
+city.update(name, state, request.postalCode(), request.enabled());
+ServiceCity saved = serviceCities.save(city);
+```
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### of — linha 63
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java:63)
 
 ```java
 static ServiceCityView of(ServiceCity city)
@@ -1248,6 +1274,125 @@ Executa a etapa `of` neste módulo. O contrato concreto está na assinatura, nos
 
 **Saída declarada:**
 - `return new ServiceCityView(city.getId(), city.getCity(), city.getState(), city.getPostalCode(), city.isEnabled());`
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+## Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java
+
+Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
+
+Fonte: [AdminIntegrationStatusController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java) · SHA-256 `92fd6e1fc3960eff151769a32a321c0c3e057ee1df4b8a5a7125b535ed876d00`
+
+**Contrato de dados/estados:**
+```java
+public record IntegrationView(String id, String name, boolean configured, String status, String configuration)
+```
+Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
+
+### setting — linha 25
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java:25)
+
+```java
+private String setting(String key,String fallback)
+```
+
+Executa a etapa `setting` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `privateSettings.value`.
+
+**Decisões condicionais examinadas:**
+- `privateSettings==null`
+
+**Saída declarada:**
+- `return privateSettings==null?fallback:privateSettings.value(key,fallback);`
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### integrations — linha 26
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java:26)
+
+```java
+@GetMapping("/integrations") public List<IntegrationView> integrations()
+```
+
+Executa a etapa `integrations` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `List.of`; `integration`; `ready`; `setting`; `Boolean.parseBoolean`; `Boolean.toString`.
+
+**Saída declarada:**
+- `return List.of( integration("SMTP", "E-mail de recuperação e avisos", ready(setting("SMTP_HOST",smtpHost), setting("SMTP_USERNAME",smtpUsername), setting("SMTP_PASSWORD",smtpPassword)), "SMTP_HOST, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD, RECOVERY_EMAIL_FROM"), integration("WHATSAPP", "WhatsApp Cloud para códigos e avisos", Boolean.parseBoolean(setting("WHATSAPP_CLOUD_ENABLED",Boolean.toString(whatsappEnabled))) && ready(setting("WHATSAPP_PHONE_NUMBER_ID",whatsappPhoneId),setting("WHATSAPP_ACCESS_TOKEN",whatsappToken)), "WHATSAPP_CLOUD_ENABLED, WHATSAPP_PHONE_NUMBER_ID, WHATSAPP_ACCESS_TOKEN, WHATSAPP_OTP_TEMPLATE"), new IntegrationView("STORE_IMAGES", "Capas enviadas pelo vendedor", true, "Upload com aprovação administrativa", "Sem API de IA; armazenamento definido no servidor; PNG/JPG ajustado para 1.200 × 600 pixels"), integration("MERCADOPAGO", "Checkout, pagamentos e webhooks", ready(setting("MP_CLIENT_ID",mercadoPagoClientId),setting("MP_CLIENT_SECRET",mercadoPagoClientSecret),mercadoPagoEncryptionKey,setting("MP_WEBHOOK_SECRET",mercadoPagoWebhookSecret),mercadoPagoNotificationUrl), "MP_CLIENT_ID, MP_CLIENT_SECRET, MP_TOKEN_ENCRYPTION_KEY, MP_WEBHOOK_SECRET, MP_NOTIFICATION_BASE_URL"), integration("VIACEP", "Consulta pública de CEP", true, "Integração pública; não exige chave"), integration("MAPAS", "Mapa e localização das cidades", true, "Mapa incorporado; requer conexão com a internet") );`
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### ready — linha 38
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java:38)
+
+```java
+private static boolean ready(String... values)
+```
+
+Executa a etapa `ready` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `java.util.Arrays.stream`; `value.isBlank`.
+
+**Saída declarada:**
+- `return java.util.Arrays.stream(values).allMatch(value -> value != null && !value.isBlank());`
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### integration — linha 40
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java:40)
+
+```java
+private static IntegrationView integration(String id, String name, boolean ready, String variables)
+```
+
+Executa a etapa `integration` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Decisões condicionais examinadas:**
+- `ready`
+
+**Saída declarada:**
+- `return new IntegrationView(id, name, ready, ready ? "Configurada (conexão não homologada)" : "Configuração incompleta", variables);`
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+## Backend/src/main/java/br/com/fooddelivery/admin/AdminListSummaryController.java
+
+Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
+
+Fonte: [AdminListSummaryController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminListSummaryController.java) · SHA-256 `4d467d3e38b3fec90d1ad2266e004740e0c05797efbebd4e1def5e8c11a72ebf`
+
+### AdminListSummaryController — linha 19
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminListSummaryController.java:19)
+
+```java
+public AdminListSummaryController(StoreRepository stores, AccountRepository accounts, SupportTicketRepository tickets)
+```
+
+Constrói a instância e recebe suas dependências/dados iniciais; a construção não deve substituir autorização da operação.
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### summary — linha 22
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminListSummaryController.java:22)
+
+```java
+@GetMapping @Transactional(readOnly=true) public Map<String, Long> summary()
+```
+
+Executa a etapa `summary` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `Map.of`; `stores.count`; `stores.countByActiveAndApproved`; `stores.countByActiveFalse`; `accounts.count`; `accounts.countOperators`; `tickets.countByStatusNot`.
+
+**Saída declarada:**
+- `return Map.of("stores", stores.count(), "pendingStores", stores.countByActiveAndApproved(true,false), "approvedStores", stores.countByActiveAndApproved(true,true), "suspendedStores", stores.countByActiveFalse(), "accounts", accounts.count(), "operators", accounts.countOperators(), "openTickets", tickets.countByStatusNot(SupportTicketStatus.CLOSED));`
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
@@ -1369,6 +1514,58 @@ Executa a etapa `disable` neste módulo. O contrato concreto está na assinatura
 
 **Saída declarada:**
 - `return Map.of("message","Segundo fator desativado. Entre novamente.");`
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+## Backend/src/main/java/br/com/fooddelivery/admin/AdminPage.java
+
+Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
+
+Fonte: [AdminPage.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminPage.java) · SHA-256 `45859ea5f12a36f8fdc280b8d52312e4ec563467da61f1ac7c1adb186bbdafc2`
+
+**Contrato de dados/estados:**
+```java
+public record AdminPage<T>(List<T> content, int number, int size, long totalElements, int totalPages)
+```
+Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
+
+### request — linha 10
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminPage.java:10)
+
+```java
+public static PageRequest request(int page, int size, String field)
+```
+
+Executa a etapa `request` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `PageRequest.of`; `Sort.by`.
+
+**Rejeições locais:**
+- `throw new IllegalArgumentException("Página inválida. Solicite entre 1 e 50 registros por página.");`
+
+**Decisões condicionais examinadas:**
+- `(page < 0 || page > 100000 || size < 1 || size > 50)`
+
+**Saída declarada:**
+- `return PageRequest.of(page, size, Sort.by(field).ascending().and(Sort.by("id")));`
+
+**Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### from — linha 15
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminPage.java:15)
+
+```java
+public static <T> AdminPage<T> from(Page<T> page)
+```
+
+Executa a etapa `from` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `page.getContent`; `page.getNumber`; `page.getSize`; `page.getTotalElements`; `page.getTotalPages`.
+
+**Saída declarada:**
+- `return new AdminPage<>(page.getContent(), page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());`
 
 **Decisão de engenharia:** Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
@@ -3959,7 +4156,7 @@ Executa a etapa `set Operating Hours` neste módulo. O contrato concreto está n
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [StoreAssetController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java) · SHA-256 `b5801f5c5c8acf3efc797ad2088f58e868a50f0f4923c1792fd98e702420324a`
+Fonte: [StoreAssetController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java) · SHA-256 `3794eb1846e540660e43488e264080ff2ad36e01d1ff838ce0ed0735c8a780dd`
 
 **Contrato de dados/estados:**
 ```java
@@ -3985,23 +4182,21 @@ public record CoverView(UUID id,UUID storeId,String storeName,String ownerName,S
 ```
 Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
 
-### StoreAssetController — linha 33
+### StoreAssetController — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:33)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:31)
 
 ```java
-public StoreAssetController(StoreRepository stores,StoreCoverSubmissionRepository submissions, AdminAuditService audit,NotificationService notifications, @Value("${app.media.store-assets-dir:./data/store-assets}") String directory)
+public StoreAssetController(StoreRepository stores,StoreCoverSubmissionRepository submissions, AdminAuditService audit,NotificationService notifications, StoreImageStorage storage)
 ```
 
 Constrói a instância e recebe suas dependências/dados iniciais; a construção não deve substituir autorização da operação.
 
-**Colaborações:** `Path.of`.
-
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### submit — linha 40
+### submit — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:40)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:38)
 
 ```java
 @PostMapping("/merchant/stores/{id}/cover") @PreAuthorize("hasRole('MERCHANT')") @ResponseStatus(HttpStatus.CREATED) @Transactional public CoverView submit(@PathVariable UUID id,@Valid @RequestBody CoverRequest request,Authentication auth)
@@ -4009,7 +4204,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 Executa a etapa `submit` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `stores.findByIdForUpdate`; `requireOwner`; `submissions.countByStoreIdAndCreatedAtAfter`; `Instant.now`; `sanitize`; `request.dataUrl`; `UUID.randomUUID`; `Files.createDirectories`; `Files.write`; `directory.resolve`; `TransactionSynchronizationManager.isSynchronizationActive`; `TransactionSynchronizationManager.registerSynchronization`; `Files.deleteIfExists`; `submissions.findByStoreIdAndStatus`; `view`; `submissions.save`.
+**Colaborações:** `stores.findByIdForUpdate`; `requireOwner`; `submissions.countByStoreIdAndCreatedAtAfter`; `Instant.now`; `sanitize`; `request.dataUrl`; `UUID.randomUUID`; `storage.put`; `TransactionSynchronizationManager.isSynchronizationActive`; `TransactionSynchronizationManager.registerSynchronization`; `storage.delete`; `submissions.findByStoreIdAndStatus`; `view`; `submissions.save`.
 
 **Rejeições locais:**
 - `throw new org.springframework.web.server.ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS,"Limite de 10 envios por hora para esta loja. Tente mais tarde.");`
@@ -4025,15 +4220,15 @@ Executa a etapa `submit` neste módulo. O contrato concreto está na assinatura,
 
 **Efeitos identificados no corpo (inclui callbacks internos):**
 ```java
-@Override public void afterCompletion(int status){if(status!=STATUS_COMMITTED)try{Files.deleteIfExists(directory.resolve(name));}catch(IOException ignored){}}
+@Override public void afterCompletion(int status){if(status!=STATUS_COMMITTED)try{storage.delete(name);}catch(IOException ignored){}}
 return view(submissions.save(new StoreCoverSubmission(store,name)));
 ```
 
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### afterCompletion — linha 51
+### afterCompletion — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:51)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:49)
 
 ```java
 @Override public void afterCompletion(int status)
@@ -4041,21 +4236,21 @@ return view(submissions.save(new StoreCoverSubmission(store,name)));
 
 Executa a etapa `after Completion` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `Files.deleteIfExists`; `directory.resolve`.
+**Colaborações:** `storage.delete`.
 
 **Decisões condicionais examinadas:**
 - `(status!=STATUS_COMMITTED)`
 
 **Efeitos identificados no corpo (inclui callbacks internos):**
 ```java
-@Override public void afterCompletion(int status){if(status!=STATUS_COMMITTED)try{Files.deleteIfExists(directory.resolve(name));}catch(IOException ignored){}}
+@Override public void afterCompletion(int status){if(status!=STATUS_COMMITTED)try{storage.delete(name);}catch(IOException ignored){}}
 ```
 
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### mine — linha 57
+### mine — linha 55
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:57)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:55)
 
 ```java
 @GetMapping("/merchant/stores/{id}/cover-submission") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true) public CoverState mine(@PathVariable UUID id,Authentication auth)
@@ -4073,12 +4268,12 @@ Executa a etapa `mine` neste módulo. O contrato concreto está na assinatura, n
 
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### ownPublishedImage — linha 63
+### ownPublishedImage — linha 61
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:63)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:61)
 
 ```java
-@GetMapping("/merchant/stores/{id}/published-cover") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true) public ResponseEntity<FileSystemResource> ownPublishedImage(@PathVariable UUID id,Authentication auth)
+@GetMapping("/merchant/stores/{id}/published-cover") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true) public ResponseEntity<byte[]> ownPublishedImage(@PathVariable UUID id,Authentication auth)
 ```
 
 Executa a etapa `own Published Image` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
@@ -4093,9 +4288,9 @@ Executa a etapa `own Published Image` neste módulo. O contrato concreto está n
 
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### pending — linha 70
+### pending — linha 68
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:70)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:68)
 
 ```java
 @GetMapping("/admin/store-covers") @PreAuthorize("hasRole('ADMIN')") @Transactional(readOnly=true) public List<CoverView> pending()
@@ -4110,9 +4305,9 @@ Executa a etapa `pending` neste módulo. O contrato concreto está na assinatura
 
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### review — linha 73
+### review — linha 71
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:73)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:71)
 
 ```java
 @PatchMapping("/admin/store-covers/{id}/review") @PreAuthorize("hasRole('ADMIN')") @Transactional public CoverView review(@PathVariable UUID id,@Valid @RequestBody ReviewRequest request,Authentication auth)
@@ -4120,13 +4315,14 @@ Executa a etapa `pending` neste módulo. O contrato concreto está na assinatura
 
 Executa a etapa `review` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `submissions.findStoreId`; `stores.findByIdForUpdate`; `submissions.findByIdForUpdate`; `Files.isRegularFile`; `directory.resolve`; `submission.getFileName`; `submission.review`; `request.approved`; `request.note`; `subject`; `store.setCoverImageUrl`; `audit.record`; `notifications.sendLinked`; `store.getOwner`; `store.getName`; `submission.getReviewNote`; `view`.
+**Colaborações:** `submissions.findStoreId`; `stores.findByIdForUpdate`; `submissions.findByIdForUpdate`; `storage.read`; `submission.getFileName`; `submission.review`; `request.approved`; `request.note`; `subject`; `store.setCoverImageUrl`; `audit.record`; `notifications.sendLinked`; `store.getOwner`; `store.getName`; `submission.getReviewNote`; `view`.
 
 **Rejeições locais:**
 - `throw new IllegalStateException("Arquivo indisponível. Solicite um novo envio ao vendedor.");`
+- `throw new IllegalStateException("Não foi possível consultar a imagem. Tente novamente.");`
 
 **Decisões condicionais examinadas:**
-- `(!Files.isRegularFile(directory.resolve(submission.getFileName())))`
+- `(storage.read(submission.getFileName()).isEmpty())`
 - `(request.approved())`
 - `request.approved()`
 
@@ -4141,12 +4337,12 @@ notifications.sendLinked(store.getOwner(),request.approved()?"Capa aprovada":"Re
 
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### privateImage — linha 88
+### privateImage — linha 87
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:88)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:87)
 
 ```java
-@GetMapping("/store-cover-submissions/{id}/image") @Transactional(readOnly=true) public ResponseEntity<FileSystemResource> privateImage(@PathVariable UUID id,Authentication auth)
+@GetMapping("/store-cover-submissions/{id}/image") @Transactional(readOnly=true) public ResponseEntity<byte[]> privateImage(@PathVariable UUID id,Authentication auth)
 ```
 
 Executa a etapa `private Image` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
@@ -4161,12 +4357,12 @@ Executa a etapa `private Image` neste módulo. O contrato concreto está na assi
 
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### readCover — linha 95
+### readCover — linha 94
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:95)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:94)
 
 ```java
-@GetMapping("/store-assets/{fileName}") @Transactional(readOnly=true) public ResponseEntity<FileSystemResource> readCover(@PathVariable String fileName)
+@GetMapping("/store-assets/{fileName}") @Transactional(readOnly=true) public ResponseEntity<byte[]> readCover(@PathVariable String fileName)
 ```
 
 Executa a etapa `read Cover` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
@@ -4182,33 +4378,36 @@ Executa a etapa `read Cover` neste módulo. O contrato concreto está na assinat
 
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### file — linha 101
+### file — linha 100
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:101)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:100)
 
 ```java
-private ResponseEntity<FileSystemResource> file(String name,boolean confidential)
+private ResponseEntity<byte[]> file(String name,boolean confidential)
 ```
 
 Executa a etapa `file` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `validName`; `ResponseEntity.notFound`; `directory.resolve`; `path.startsWith`; `Files.isRegularFile`; `ResponseEntity.ok`; `CacheControl.noStore`; `CacheControl.noCache`.
+**Colaborações:** `validName`; `ResponseEntity.notFound`; `storage.read`; `image.isEmpty`; `ResponseEntity.ok`; `CacheControl.noStore`; `CacheControl.noCache`; `image.get`.
+
+**Rejeições locais:**
+- `throw new IllegalStateException("Imagem temporariamente indisponível. Tente novamente.");`
 
 **Decisões condicionais examinadas:**
 - `(!validName(name))`
-- `(!path.startsWith(directory)||!Files.isRegularFile(path))`
+- `(image.isEmpty())`
 - `confidential`
 
 **Saída declarada:**
 - `return ResponseEntity.notFound().build();`
 - `return ResponseEntity.notFound().build();`
-- `return ResponseEntity.ok().cacheControl(confidential?CacheControl.noStore():CacheControl.noCache()) .header("X-Content-Type-Options","nosniff").contentType(MediaType.IMAGE_PNG).body(new FileSystemResource(path));`
+- `return ResponseEntity.ok().cacheControl(confidential?CacheControl.noStore():CacheControl.noCache()) .header("X-Content-Type-Options","nosniff").contentType(MediaType.IMAGE_PNG).body(image.get());`
 
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### validName — linha 108
+### validName — linha 109
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:108)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:109)
 
 ```java
 private static boolean validName(String name)
@@ -4223,9 +4422,9 @@ Executa a etapa `valid Name` neste módulo. O contrato concreto está na assinat
 
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### subject — linha 109
+### subject — linha 110
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:109)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:110)
 
 ```java
 private static UUID subject(Authentication auth)
@@ -4240,9 +4439,9 @@ Executa a etapa `subject` neste módulo. O contrato concreto está na assinatura
 
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### requireOwner — linha 110
+### requireOwner — linha 111
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:110)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:111)
 
 ```java
 private static void requireOwner(Store store,Authentication auth)
@@ -4260,9 +4459,9 @@ Executa a etapa `require Owner` neste módulo. O contrato concreto está na assi
 
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### view — linha 111
+### view — linha 112
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:111)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:112)
 
 ```java
 private CoverView view(StoreCoverSubmission submission)
@@ -4277,9 +4476,9 @@ Executa a etapa `view` neste módulo. O contrato concreto está na assinatura, n
 
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### sanitize — linha 113
+### sanitize — linha 114
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:113)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:114)
 
 ```java
 static byte[] sanitize(String dataUrl)
@@ -6010,7 +6209,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [StoreRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java) · SHA-256 `48066d6530314c7dff0bd9898844484f28cc8456ced8741cbb9323b8dbeeb858`
+Fonte: [StoreRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java) · SHA-256 `83b1e69a9165dc6329845010092f3e76c203d9b4bd162c052849546f6380fc5c`
 
 ### findByIdForUpdate — linha 7
 
@@ -6054,9 +6253,65 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### countByCategoryIgnoreCase — linha 12
+### findByActiveAndApproved — linha 12
 
 [Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:12)
+
+```java
+org.springframework.data.domain.Page<Store> findByActiveAndApproved(boolean active, boolean approved, org.springframework.data.domain.Pageable pageable);
+```
+
+Consulta persistência pelo critério declarado; confira predicado, ordenação e bloqueio abaixo. Retorno vazio não deve conceder acesso.
+
+Implementação fornecida pelo Spring Data/contrato da interface. O nome derivado ou `@Query` determina o SQL; `@Lock`/`@Modifying` determina bloqueio ou mutação.
+
+**Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### findByActiveFalse — linha 13
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:13)
+
+```java
+org.springframework.data.domain.Page<Store> findByActiveFalse(org.springframework.data.domain.Pageable pageable);
+```
+
+Consulta persistência pelo critério declarado; confira predicado, ordenação e bloqueio abaixo. Retorno vazio não deve conceder acesso.
+
+Implementação fornecida pelo Spring Data/contrato da interface. O nome derivado ou `@Query` determina o SQL; `@Lock`/`@Modifying` determina bloqueio ou mutação.
+
+**Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### countByActiveAndApproved — linha 14
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:14)
+
+```java
+long countByActiveAndApproved(boolean active, boolean approved);
+```
+
+Consulta persistência pelo critério declarado; confira predicado, ordenação e bloqueio abaixo. Retorno vazio não deve conceder acesso.
+
+Implementação fornecida pelo Spring Data/contrato da interface. O nome derivado ou `@Query` determina o SQL; `@Lock`/`@Modifying` determina bloqueio ou mutação.
+
+**Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### countByActiveFalse — linha 15
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:15)
+
+```java
+long countByActiveFalse();
+```
+
+Consulta persistência pelo critério declarado; confira predicado, ordenação e bloqueio abaixo. Retorno vazio não deve conceder acesso.
+
+Implementação fornecida pelo Spring Data/contrato da interface. O nome derivado ou `@Query` determina o SQL; `@Lock`/`@Modifying` determina bloqueio ou mutação.
+
+**Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### countByCategoryIgnoreCase — linha 16
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:16)
 
 ```java
 long countByCategoryIgnoreCase(String category);
@@ -6068,9 +6323,9 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 **Decisão de engenharia:** Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### findByCoverImageUrl — linha 13
+### findByCoverImageUrl — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:13)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:17)
 
 ```java
 Optional<Store> findByCoverImageUrl(String coverImageUrl);
@@ -10351,11 +10606,39 @@ Executa a etapa `update Address` neste módulo. O contrato concreto está na ass
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [AccountRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java) · SHA-256 `4c218e797c8130cf31daed6bdb72e6025fc3f2f63541e5b3b2d033b15a62a34a`
+Fonte: [AccountRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java) · SHA-256 `818595c78ea1b04a9708ed0389ba1ee0f7ce3b9f2c9bda59652a19387c2e9e3e`
 
-### findByEmailIgnoreCase — linha 14
+### findOperators — linha 14
 
 [Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:14)
+
+```java
+@Query("select a from Account a where a.grantedRoleCodes like '%MERCHANT%' or a.grantedRoleCodes like '%COURIER%'") org.springframework.data.domain.Page<Account> findOperators(org.springframework.data.domain.Pageable pageable);
+```
+
+Consulta persistência pelo critério declarado; confira predicado, ordenação e bloqueio abaixo. Retorno vazio não deve conceder acesso.
+
+Implementação fornecida pelo Spring Data/contrato da interface. O nome derivado ou `@Query` determina o SQL; `@Lock`/`@Modifying` determina bloqueio ou mutação.
+
+**Decisão de engenharia:** Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### countOperators — linha 16
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:16)
+
+```java
+@Query("select count(a) from Account a where a.grantedRoleCodes like '%MERCHANT%' or a.grantedRoleCodes like '%COURIER%'") long countOperators();
+```
+
+Consulta persistência pelo critério declarado; confira predicado, ordenação e bloqueio abaixo. Retorno vazio não deve conceder acesso.
+
+Implementação fornecida pelo Spring Data/contrato da interface. O nome derivado ou `@Query` determina o SQL; `@Lock`/`@Modifying` determina bloqueio ou mutação.
+
+**Decisão de engenharia:** Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### findByEmailIgnoreCase — linha 18
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:18)
 
 ```java
 Optional<Account> findByEmailIgnoreCase(String email);
@@ -10367,9 +10650,9 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 **Decisão de engenharia:** Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### findByEmailForUpdate — linha 15
+### findByEmailForUpdate — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:15)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:19)
 
 ```java
 @Lock(LockModeType.PESSIMISTIC_WRITE) @Query("select a from Account a where lower(a.email) = lower(:email)") Optional<Account> findByEmailForUpdate(@Param("email") String email);
@@ -10381,9 +10664,9 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 **Decisão de engenharia:** Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### existsByEmailIgnoreCase — linha 18
+### existsByEmailIgnoreCase — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:18)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:22)
 
 ```java
 boolean existsByEmailIgnoreCase(String email);
@@ -10395,9 +10678,9 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 **Decisão de engenharia:** Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### existsByEmailIgnoreCaseAndIdNot — linha 19
+### existsByEmailIgnoreCaseAndIdNot — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:19)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:23)
 
 ```java
 boolean existsByEmailIgnoreCaseAndIdNot(String email, UUID id);
@@ -10409,9 +10692,9 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 **Decisão de engenharia:** Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### existsByCpf — linha 20
+### existsByCpf — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:20)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:24)
 
 ```java
 boolean existsByCpf(String cpf);
@@ -10423,9 +10706,9 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 **Decisão de engenharia:** Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### findByCpf — linha 21
+### findByCpf — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:21)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:25)
 
 ```java
 Optional<Account> findByCpf(String cpf);
@@ -10437,9 +10720,9 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 **Decisão de engenharia:** Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### findByRoleIn — linha 22
+### findByRoleIn — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:22)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:26)
 
 ```java
 List<Account> findByRoleIn(Collection<AccountRole> roles);
@@ -10451,9 +10734,9 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 **Decisão de engenharia:** Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### findByOperatorApplicationStatus — linha 23
+### findByOperatorApplicationStatus — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:23)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:27)
 
 ```java
 List<Account> findByOperatorApplicationStatus(String status);
@@ -10465,9 +10748,9 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 **Decisão de engenharia:** Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### findByIdForUpdate — linha 24
+### findByIdForUpdate — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:24)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:28)
 
 ```java
 @Lock(LockModeType.PESSIMISTIC_WRITE) @Query("select a from Account a where a.id = :id") Optional<Account> findByIdForUpdate(@Param("id") UUID id);
@@ -13055,6 +13338,442 @@ Executa a etapa `lookup` neste módulo. O contrato concreto está na assinatura,
 - `return body;`
 
 **Decisão de engenharia:** Busca e geocodificação. Provedores podem falhar, não conceder CEP ou retornar uma região ambígua; o usuário precisa revisar a cidade. Homologação usa coordenadas fictícias. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+## Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java
+
+Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado.
+
+Fonte: [LimitedImageSubscriber.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java) · SHA-256 `13d6d62637c869f50d2ab6677f84377b80325a5213d3d639daf27106e7dab4df`
+
+### getBody — linha 18
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java:18)
+
+```java
+@Override public CompletionStage<byte[]> getBody()
+```
+
+Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado pode compor a resposta pública.
+
+**Saída declarada:**
+- `return result;`
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### onSubscribe — linha 19
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java:19)
+
+```java
+@Override public void onSubscribe(Flow.Subscription subscription)
+```
+
+Executa a etapa `on Subscribe` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `subscription.request`.
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### onNext — linha 23
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java:23)
+
+```java
+@Override public void onNext(List<ByteBuffer> buffers)
+```
+
+Executa a etapa `on Next` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `buffer.remaining`; `bytes.size`; `subscription.cancel`; `result.completeExceptionally`; `buffer.get`; `bytes.writeBytes`; `subscription.request`.
+
+**Decisões condicionais examinadas:**
+- `(buffer.remaining() > StoreImageStorage.MAX_BYTES - bytes.size())`
+
+**Saída declarada:**
+- `return;`
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### onError — linha 36
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java:36)
+
+```java
+@Override public void onError(Throwable error)
+```
+
+Executa a etapa `on Error` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `result.completeExceptionally`.
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### onComplete — linha 37
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java:37)
+
+```java
+@Override public void onComplete()
+```
+
+Executa a etapa `on Complete` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `result.complete`; `bytes.toByteArray`.
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+## Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java
+
+Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado.
+
+Fonte: [LocalStoreImageStorage.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java) · SHA-256 `8f9dabd683bf42ea11ce9b0b9ec245e2289d8ed3200bdb49bd318bf6b04a198a`
+
+### LocalStoreImageStorage — linha 9
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java:9)
+
+```java
+public LocalStoreImageStorage(String directory)
+```
+
+Constrói a instância e recebe suas dependências/dados iniciais; a construção não deve substituir autorização da operação.
+
+**Colaborações:** `Path.of`.
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### path — linha 10
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java:10)
+
+```java
+private Path path(String name)
+```
+
+Executa a etapa `path` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `StoreImageStorage.validateName`; `directory.resolve`.
+
+**Saída declarada:**
+- `return directory.resolve(name);`
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### put — linha 11
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java:11)
+
+```java
+public void put(String name, byte[] image) throws IOException
+```
+
+Executa a etapa `put` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `path`; `Files.createDirectories`; `Files.write`.
+
+**Rejeições locais:**
+- `throw new IOException("Imagem acima do limite.");`
+
+**Decisões condicionais examinadas:**
+- `(image.length>MAX_BYTES)`
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### read — linha 16
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java:16)
+
+```java
+public Optional<byte[]> read(String name) throws IOException
+```
+
+Executa a etapa `read` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `path`; `Files.isRegularFile`; `Optional.empty`; `Files.newInputStream`; `input.readNBytes`; `Optional.of`.
+
+**Rejeições locais:**
+- `throw new IOException("Imagem acima do limite.");`
+
+**Decisões condicionais examinadas:**
+- `(!Files.isRegularFile(path,LinkOption.NOFOLLOW_LINKS))`
+- `(image.length>MAX_BYTES)`
+
+**Saída declarada:**
+- `return Optional.empty();`
+- `return Optional.of(image);`
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### delete — linha 25
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java:25)
+
+```java
+public void delete(String name) throws IOException
+```
+
+Executa a etapa `delete` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `Files.deleteIfExists`; `path`.
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```java
+public void delete(String name) throws IOException { Files.deleteIfExists(path(name)); }
+```
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+## Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java
+
+Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado.
+
+Fonte: [StoreImageStorage.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java) · SHA-256 `79751a5c9da8ce1810fdb17300ff758853378cc0f8c301382f2ccc0571cc149a`
+
+### put — linha 9
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java:9)
+
+```java
+void put(String name, byte[] image) throws IOException;
+```
+
+Executa a etapa `put` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+Implementação fornecida pelo Spring Data/contrato da interface. O nome derivado ou `@Query` determina o SQL; `@Lock`/`@Modifying` determina bloqueio ou mutação.
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### read — linha 10
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java:10)
+
+```java
+Optional<byte[]> read(String name) throws IOException;
+```
+
+Executa a etapa `read` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+Implementação fornecida pelo Spring Data/contrato da interface. O nome derivado ou `@Query` determina o SQL; `@Lock`/`@Modifying` determina bloqueio ou mutação.
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### delete — linha 11
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java:11)
+
+```java
+void delete(String name) throws IOException;
+```
+
+Executa a etapa `delete` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+Implementação fornecida pelo Spring Data/contrato da interface. O nome derivado ou `@Query` determina o SQL; `@Lock`/`@Modifying` determina bloqueio ou mutação.
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### validateName — linha 12
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java:12)
+
+```java
+static void validateName(String name)
+```
+
+Executa a etapa `validate Name` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `name.matches`.
+
+**Rejeições locais:**
+- `throw new IllegalArgumentException("Nome de imagem inválido.");`
+
+**Decisões condicionais examinadas:**
+- `(name == null || !name.matches("cover-[0-9a-fA-F-]{36}\\.png"))`
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+## Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorageConfiguration.java
+
+Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado.
+
+Fonte: [StoreImageStorageConfiguration.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorageConfiguration.java) · SHA-256 `0b5cab75b69bede725b3b0a613fd4e3a6d463dab70fd44233eb9409dc061ce80`
+
+### storeImageStorage — linha 8
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorageConfiguration.java:8)
+
+```java
+@Bean StoreImageStorage storeImageStorage(Environment env)
+```
+
+Executa a etapa `store Image Storage` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `env.getProperty`; `env.matchesProfiles`; `provider.equals`; `env.getRequiredProperty`.
+
+**Rejeições locais:**
+- `throw new IllegalStateException("Demonstração e testes locais não podem usar armazenamento externo.");`
+- `throw new IllegalStateException("Provedor de imagens não reconhecido.");`
+
+**Decisões condicionais examinadas:**
+- `(env.matchesProfiles("homologacao","dev-h2")&&!provider.equals("local"))`
+
+**Saída declarada:**
+- `return switch(provider) { case "local" -> new LocalStoreImageStorage(env.getProperty("app.media.store-assets-dir","./data/store-assets")); case "supabase" -> new SupabaseStoreImageStorage(env.getRequiredProperty("app.media.supabase.url"), env.getProperty("app.media.supabase.bucket","store-covers"),env.getRequiredProperty("app.media.supabase.key")); default -> throw new IllegalStateException("Provedor de imagens não reconhecido."); };`
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+## Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java
+
+Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado.
+
+Fonte: [SupabaseStoreImageStorage.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java) · SHA-256 `a2f0408afd16d5242ee9b4c7a8aff29e6fa4c79d17ada2aed76b974f65f87c5b`
+
+### SupabaseStoreImageStorage — linha 14
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java:14)
+
+```java
+public SupabaseStoreImageStorage(String projectUrl,String bucket,String key)
+```
+
+Constrói a instância e recebe suas dependências/dados iniciais; a construção não deve substituir autorização da operação.
+
+**Colaborações:** `HttpClient.newBuilder`; `Duration.ofSeconds`.
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### SupabaseStoreImageStorage — linha 18
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java:18)
+
+```java
+SupabaseStoreImageStorage(String projectUrl,String bucket,String key,HttpClient client)
+```
+
+Constrói a instância e recebe suas dependências/dados iniciais; a construção não deve substituir autorização da operação.
+
+**Colaborações:** `URI.create`; `"https".equals`; `project.getScheme`; `project.getHost`; `project.getPort`; `project.getUserInfo`; `project.getQuery`; `project.getFragment`; `project.getPath`; `bucket.matches`; `key.isBlank`.
+
+**Rejeições locais:**
+- `throw new IllegalArgumentException("Informe a URL HTTPS do projeto Supabase.");`
+- `throw new IllegalArgumentException("Configure o bucket e a chave privada do armazenamento.");`
+
+**Decisões condicionais examinadas:**
+- `(!"https".equals(project.getScheme())||project.getHost()==null||!project.getHost().matches("[a-z0-9-]+\\.supabase\\.co") ||project.getPort()!=-1||project.getUserInfo()!=null||project.getQuery()!=null||project.getFragment()!=null ||!(project.getPath().isEmpty()||project.getPath().equals("/")))`
+- `(!bucket.matches("[a-z0-9][a-z0-9-]{0,62}")||key==null||key.isBlank())`
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### request — linha 28
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java:28)
+
+```java
+private HttpRequest.Builder request(String name)
+```
+
+Executa a etapa `request` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `StoreImageStorage.validateName`; `HttpRequest.newBuilder`; `base.resolve`; `Duration.ofSeconds`.
+
+**Saída declarada:**
+- `return HttpRequest.newBuilder(base.resolve(name)).timeout(Duration.ofSeconds(20)) .header("Authorization","Bearer "+key).header("apikey",key);`
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### send — linha 33
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java:33)
+
+```java
+private HttpResponse<byte[]> send(HttpRequest request) throws IOException
+```
+
+Executa a etapa `send` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `client.sendAsync`; `pending.get`; `pending.cancel`; `Thread.currentThread`.
+
+**Rejeições locais:**
+- `throw new IOException("Armazenamento interrompido.");`
+- `throw new IOException("Armazenamento indisponível.");`
+
+**Saída declarada:**
+- `return pending.get(20, java.util.concurrent.TimeUnit.SECONDS);`
+
+**Efeitos identificados no corpo (inclui callbacks internos):**
+```java
+var pending = client.sendAsync(request, info -> new LimitedImageSubscriber());
+```
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### put — linha 47
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java:47)
+
+```java
+public void put(String name,byte[] image) throws IOException
+```
+
+Executa a etapa `put` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `send`; `request`; `HttpRequest.BodyPublishers.ofByteArray`; `response.statusCode`.
+
+**Rejeições locais:**
+- `throw new IOException("Imagem acima do limite.");`
+- `throw new IOException("Armazenamento recusou o envio.");`
+
+**Decisões condicionais examinadas:**
+- `(image.length>MAX_BYTES)`
+- `(response.statusCode()<200||response.statusCode()>=300)`
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### read — linha 53
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java:53)
+
+```java
+public Optional<byte[]> read(String name) throws IOException
+```
+
+Executa a etapa `read` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `send`; `request`; `URI.create`; `base.toString`; `response.statusCode`; `Optional.empty`; `response.body`; `Optional.of`.
+
+**Rejeições locais:**
+- `throw new IOException("Armazenamento indisponível.");`
+- `throw new IOException("Imagem acima do limite.");`
+
+**Decisões condicionais examinadas:**
+- `(response.statusCode()==404)`
+- `(response.statusCode()!=200)`
+- `(image.length>MAX_BYTES)`
+
+**Saída declarada:**
+- `return Optional.empty();`
+- `return Optional.of(image);`
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### delete — linha 61
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java:61)
+
+```java
+public void delete(String name) throws IOException
+```
+
+Executa a etapa `delete` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `send`; `request`; `URI.create`; `base.toString`; `HttpRequest.BodyPublishers.ofString`; `response.statusCode`.
+
+**Rejeições locais:**
+- `throw new IOException("Não foi possível remover a imagem.");`
+
+**Decisões condicionais examinadas:**
+- `(response.statusCode()!=404&&(response.statusCode()<200||response.statusCode()>=300))`
+
+**Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
 ## Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java
 
@@ -20235,7 +20954,7 @@ public void touch(){this.updatedAt=Instant.now();}
 
 Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável.
 
-Fonte: [SupportTicketController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java) · SHA-256 `d4b7845bbe939bc71a2df0abc5bc0ba27cb06bcc5562e492507827d81f981130`
+Fonte: [SupportTicketController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java) · SHA-256 `8a1a7da5bec18968006da9eb695226d84e0d815e5f4e7bb8834a30adba8175d5`
 
 **Contrato de dados/estados:**
 ```java
@@ -20385,16 +21104,33 @@ messages.save(new SupportTicketMessage(ticket,account(subject(auth)),request.bod
 
 Executa a etapa `all` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `tickets.findAllByOrderByUpdatedAtDesc`.
+**Colaborações:** `page`.
 
 **Saída declarada:**
-- `return tickets.findAllByOrderByUpdatedAtDesc().stream().map(this::view).toList();`
+- `return page(0, 50).content();`
 
 **Decisão de engenharia:** Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### adminDetail — linha 75
+### page — linha 75
 
 [Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:75)
+
+```java
+@GetMapping("/admin/support-tickets/page") @PreAuthorize("hasRole('ADMIN')") @Transactional(readOnly=true) public br.com.fooddelivery.admin.AdminPage<TicketView> page(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="25") int size)
+```
+
+Executa a etapa `page` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `br.com.fooddelivery.admin.AdminPage.request`; `org.springframework.data.domain.PageRequest.of`; `request.getPageNumber`; `request.getPageSize`; `org.springframework.data.domain.Sort.by`; `org.springframework.data.domain.Sort.Order.desc`; `org.springframework.data.domain.Sort.Order.asc`; `br.com.fooddelivery.admin.AdminPage.from`; `tickets.findAll`.
+
+**Saída declarada:**
+- `return br.com.fooddelivery.admin.AdminPage.from(tickets.findAll(request).map(this::view));`
+
+**Decisão de engenharia:** Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### adminDetail — linha 86
+
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:86)
 
 ```java
 @GetMapping("/admin/support-tickets/{id}") @PreAuthorize("hasRole('ADMIN')") @Transactional(readOnly=true) public TicketDetail adminDetail(@PathVariable UUID id)
@@ -20409,9 +21145,9 @@ Executa a etapa `admin Detail` neste módulo. O contrato concreto está na assin
 
 **Decisão de engenharia:** Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### adminReply — linha 80
+### adminReply — linha 91
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:80)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:91)
 
 ```java
 @PostMapping("/admin/support-tickets/{id}/messages") @PreAuthorize("hasRole('ADMIN')") @Transactional public TicketDetail adminReply(@PathVariable UUID id,@Valid @RequestBody MessageRequest request,Authentication auth)
@@ -20438,9 +21174,9 @@ notifications.sendUnreadOnceLinked(ticket.getAccount(),"Resposta do atendimento"
 
 **Decisão de engenharia:** Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### updateStatus — linha 91
+### updateStatus — linha 102
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:91)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:102)
 
 ```java
 @PatchMapping("/admin/support-tickets/{id}/status") @PreAuthorize("hasRole('ADMIN')") @Transactional public TicketView updateStatus(@PathVariable UUID id,@Valid @RequestBody StatusRequest request)
@@ -20460,9 +21196,9 @@ SupportTicket ticket=ticket(id); ticket.setStatus(request.status());
 
 **Decisão de engenharia:** Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### owned — linha 99
+### owned — linha 110
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:99)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:110)
 
 ```java
 private SupportTicket owned(UUID id,UUID owner)
@@ -20483,9 +21219,9 @@ Executa a etapa `owned` neste módulo. O contrato concreto está na assinatura, 
 
 **Decisão de engenharia:** Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### ticket — linha 100
+### ticket — linha 111
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:100)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:111)
 
 ```java
 private SupportTicket ticket(UUID id)
@@ -20500,9 +21236,9 @@ Executa a etapa `ticket` neste módulo. O contrato concreto está na assinatura,
 
 **Decisão de engenharia:** Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### account — linha 101
+### account — linha 112
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:101)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:112)
 
 ```java
 private Account account(UUID id)
@@ -20517,9 +21253,9 @@ Executa a etapa `account` neste módulo. O contrato concreto está na assinatura
 
 **Decisão de engenharia:** Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### subject — linha 102
+### subject — linha 113
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:102)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:113)
 
 ```java
 private UUID subject(Authentication auth)
@@ -20534,9 +21270,9 @@ Executa a etapa `subject` neste módulo. O contrato concreto está na assinatura
 
 **Decisão de engenharia:** Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### notifyAdmins — linha 103
+### notifyAdmins — linha 114
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:103)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:114)
 
 ```java
 private void notifyAdmins(SupportTicket ticket)
@@ -20553,9 +21289,9 @@ private void notifyAdmins(SupportTicket ticket){accounts.findByRoleIn(List.of(Ac
 
 **Decisão de engenharia:** Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### view — linha 104
+### view — linha 115
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:104)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:115)
 
 ```java
 private TicketView view(SupportTicket ticket)
@@ -20573,9 +21309,9 @@ Executa a etapa `view` neste módulo. O contrato concreto está na assinatura, n
 
 **Decisão de engenharia:** Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### detail — linha 108
+### detail — linha 119
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:108)
+[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:119)
 
 ```java
 private TicketDetail detail(SupportTicket ticket)
@@ -20738,7 +21474,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável.
 
-Fonte: [SupportTicketRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketRepository.java) · SHA-256 `1569641dcd53f88ecdd399753462538fa9e81baf3339ed44e82f6488e164b734`
+Fonte: [SupportTicketRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketRepository.java) · SHA-256 `2eca4ef50a9c7925a9f63248ef55919617330b952f607c09449c9f8acab5ef04`
 
 ### findByAccountIdOrderByUpdatedAtDesc — linha 8
 
@@ -20754,12 +21490,12 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 **Decisão de engenharia:** Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### findAllByOrderByUpdatedAtDesc — linha 9
+### countByStatusNot — linha 9
 
 [Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketRepository.java:9)
 
 ```java
-List<SupportTicket> findAllByOrderByUpdatedAtDesc();
+long countByStatusNot(SupportTicketStatus status);
 ```
 
 Consulta persistência pelo critério declarado; confira predicado, ordenação e bloqueio abaixo. Retorno vazio não deve conceder acesso.

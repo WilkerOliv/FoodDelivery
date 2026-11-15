@@ -44,6 +44,9 @@ def main():
         deadline = started + 600
         saw_startup = False
         while time.monotonic() < deadline:
+            running = subprocess.check_output(['docker', 'inspect', '--format', '{{.State.Running}}', container], text=True).strip()
+            if running != 'true':
+                raise RuntimeError('O container encerrou antes da saúde ficar disponível; examine os logs da imagem.')
             try:
                 with request('/healthz', authenticated=False) as response:
                     if response.status == 200:

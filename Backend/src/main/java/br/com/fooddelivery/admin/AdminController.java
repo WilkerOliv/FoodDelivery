@@ -2,15 +2,12 @@ package br.com.fooddelivery.admin;
 
 import br.com.fooddelivery.catalog.Store;
 import br.com.fooddelivery.catalog.StoreCategories;
-import br.com.fooddelivery.catalog.StoreCategory;
 import br.com.fooddelivery.catalog.StoreCategoryRepository;
 import br.com.fooddelivery.catalog.StoreRepository;
 import br.com.fooddelivery.identity.Account;
 import br.com.fooddelivery.identity.AccountRepository;
 import br.com.fooddelivery.identity.AccountRole;
 import br.com.fooddelivery.notifications.NotificationService;
-import br.com.fooddelivery.platform.ServiceCity;
-import br.com.fooddelivery.platform.ServiceCityRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
@@ -24,7 +21,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Value;
 
 @RestController
 @RequestMapping("/api/v1/admin")
@@ -35,122 +31,21 @@ public class AdminController {
     private final StoreRepository stores;
     private final PasswordEncoder encoder;
     private final NotificationService notifications;
-    private final ServiceCityRepository serviceCities;
     private final StoreCategoryRepository storeCategories;
     private final AdminAuditService auditService;
     private final br.com.fooddelivery.catalog.StoreHoursChangeService hoursChanges;
-    @Value("${spring.mail.host:}") private String smtpHost;
-    @Value("${spring.mail.username:}") private String smtpUsername;
-    @Value("${spring.mail.password:}") private String smtpPassword;
-    @Value("${app.recovery.whatsapp.enabled:false}") private boolean whatsappEnabled;
-    @Value("${app.recovery.whatsapp.phone-number-id:}") private String whatsappPhoneId;
-    @Value("${app.recovery.whatsapp.access-token:}") private String whatsappToken;
-    @Value("${app.payment.mercadopago.client-id:}") private String mercadoPagoClientId;
-    @Value("${app.payment.mercadopago.client-secret:}") private String mercadoPagoClientSecret;
-    @Value("${app.payment.mercadopago.token-encryption-key:}") private String mercadoPagoEncryptionKey;
-    @Value("${app.payment.mercadopago.webhook-secret:}") private String mercadoPagoWebhookSecret;
-    @Value("${app.payment.mercadopago.notification-base-url:}") private String mercadoPagoNotificationUrl;
 
-    public AdminController(AccountRepository accounts, StoreRepository stores, PasswordEncoder encoder, NotificationService notifications, ServiceCityRepository serviceCities, StoreCategoryRepository storeCategories, AdminAuditService auditService, br.com.fooddelivery.identity.PasswordRecoveryService recovery, br.com.fooddelivery.catalog.StoreHoursChangeService hoursChanges) {
+    public AdminController(AccountRepository accounts, StoreRepository stores, PasswordEncoder encoder, NotificationService notifications, StoreCategoryRepository storeCategories, AdminAuditService auditService, br.com.fooddelivery.identity.PasswordRecoveryService recovery, br.com.fooddelivery.catalog.StoreHoursChangeService hoursChanges) {
         this.recovery = recovery;this.hoursChanges=hoursChanges;
         this.accounts = accounts;
         this.stores = stores;
         this.encoder = encoder;
         this.notifications = notifications;
-        this.serviceCities = serviceCities;
         this.storeCategories = storeCategories;
         this.auditService = auditService;
     }
 
-    @GetMapping("/store-categories")
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
-    public List<AdminStoreCategoryView> storeCategories() {
-        List<AdminStoreCategoryView> builtIns = StoreCategories.ALL.stream()
-                .map(category -> new AdminStoreCategoryView(null, category.name(), category.emoji(), true)).toList();
-        List<AdminStoreCategoryView> custom = storeCategories.findAllByOrderByNameAsc().stream()
-                .map(category -> new AdminStoreCategoryView(category.getId(), category.getName(), category.getEmoji(), false)).toList();
-        return java.util.stream.Stream.concat(builtIns.stream(), custom.stream()).toList();
-    }
-
-    @PostMapping("/store-categories")
-    @ResponseStatus(HttpStatus.CREATED)
-    @org.springframework.transaction.annotation.Transactional
-    public AdminStoreCategoryView createStoreCategory(@Valid @RequestBody StoreCategoryRequest request) {
-        String name = request.name().trim();
-        if (StoreCategories.isSupported(name))
-            throw new IllegalArgumentException("Essa categoria já existe e não pode ser duplicada.");
-        StoreCategory category = new StoreCategory(name, request.emoji());
-        if (storeCategories.findBySlugIgnoreCase(category.getSlug()).isPresent())
-            throw new IllegalArgumentException("Já existe uma categoria com esse nome ou uma forma equivalente.");
-        StoreCategory saved = storeCategories.save(category);
-        audit("CATEGORY_CREATED", "STORE_CATEGORY", saved.getId(), "Seção personalizada criada.");
-        return new AdminStoreCategoryView(saved.getId(), saved.getName(), saved.getEmoji(), false);
-    }
-
-    @DeleteMapping("/store-categories/{id}")
-    @org.springframework.transaction.annotation.Transactional
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteStoreCategory(@PathVariable UUID id) {
-        StoreCategory category = storeCategories.findById(id).orElseThrow();
-        long storesUsingCategory = stores.countByCategoryIgnoreCase(category.getName());
-        if (storesUsingCategory > 0)
-            throw new IllegalArgumentException("Esta seção está vinculada a " + storesUsingCategory + " loja(s). Altere a categoria dessas lojas antes de excluí-la.");
-        storeCategories.delete(category);
-        audit("CATEGORY_DELETED", "STORE_CATEGORY", id, "Seção personalizada excluída.");
-    }
-
-    @GetMapping("/service-cities")
-    public List<ServiceCityView> serviceCities() {
-        return serviceCities.findAllByOrderByCityAscStateAsc().stream().map(ServiceCityView::of).toList();
-    }
-
-    @PostMapping("/service-cities")
-    @ResponseStatus(HttpStatus.CREATED)
-    @org.springframework.transaction.annotation.Transactional
-    public ServiceCityView createServiceCity(@Valid @RequestBody ServiceCityRequest request) {
-        String city = request.city().trim();
-        String state = request.state().trim().toUpperCase(Locale.ROOT);
-        if (serviceCities.findByCityIgnoreCaseAndStateIgnoreCase(city, state).isPresent())
-            throw new IllegalArgumentException("Esta cidade já está cadastrada. Reative ou edite o cadastro existente.");
-        ServiceCity saved = serviceCities.save(new ServiceCity(city, state, request.postalCode()));
-        audit("CITY_CREATED", "SERVICE_CITY", saved.getId(), "Cidade adicionada à cobertura.");
-        return ServiceCityView.of(saved);
-    }
-
-    @PutMapping("/service-cities/{id}")
-    @org.springframework.transaction.annotation.Transactional
-    public ServiceCityView updateServiceCity(@PathVariable UUID id, @Valid @RequestBody ServiceCityRequest request) {
-        ServiceCity city = serviceCities.findById(id).orElseThrow();
-        String name = request.city().trim();
-        String state = request.state().trim().toUpperCase(Locale.ROOT);
-        serviceCities.findByCityIgnoreCaseAndStateIgnoreCase(name, state)
-                .filter(existing -> !existing.getId().equals(id))
-                .ifPresent(existing -> { throw new IllegalArgumentException("Já existe um cadastro para esta cidade e estado."); });
-        city.update(name, state, request.postalCode(), request.enabled());
-        ServiceCity saved = serviceCities.save(city);
-        audit("CITY_UPDATED", "SERVICE_CITY", id, "Cidade ou estado de cobertura atualizado.");
-        return ServiceCityView.of(saved);
-    }
-
-    @org.springframework.beans.factory.annotation.Autowired private br.com.fooddelivery.settings.IntegrationSettings privateSettings;
-    private String setting(String key,String fallback){return privateSettings==null?fallback:privateSettings.value(key,fallback);}
     /** Returns readiness only; secret values are never returned to the browser. */
-    @GetMapping("/integrations")
-    public List<IntegrationView> integrations() {
-        return List.of(
-                integration("SMTP", "E-mail de recuperação e avisos", ready(setting("SMTP_HOST",smtpHost), setting("SMTP_USERNAME",smtpUsername), setting("SMTP_PASSWORD",smtpPassword)), "SMTP_HOST, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD, RECOVERY_EMAIL_FROM"),
-                integration("WHATSAPP", "WhatsApp Cloud para códigos e avisos", Boolean.parseBoolean(setting("WHATSAPP_CLOUD_ENABLED",Boolean.toString(whatsappEnabled))) && ready(setting("WHATSAPP_PHONE_NUMBER_ID",whatsappPhoneId),setting("WHATSAPP_ACCESS_TOKEN",whatsappToken)), "WHATSAPP_CLOUD_ENABLED, WHATSAPP_PHONE_NUMBER_ID, WHATSAPP_ACCESS_TOKEN, WHATSAPP_OTP_TEMPLATE"),
-                new IntegrationView("STORE_IMAGES", "Capas enviadas pelo vendedor", true, "Upload local com aprovação administrativa", "Sem chave ou API de IA; PNG/JPG ajustado para 1.200 × 600 pixels"),
-                integration("MERCADOPAGO", "Checkout, pagamentos e webhooks", ready(setting("MP_CLIENT_ID",mercadoPagoClientId),setting("MP_CLIENT_SECRET",mercadoPagoClientSecret),mercadoPagoEncryptionKey,setting("MP_WEBHOOK_SECRET",mercadoPagoWebhookSecret),mercadoPagoNotificationUrl), "MP_CLIENT_ID, MP_CLIENT_SECRET, MP_TOKEN_ENCRYPTION_KEY, MP_WEBHOOK_SECRET, MP_NOTIFICATION_BASE_URL"),
-                integration("VIACEP", "Consulta pública de CEP", true, "Integração pública; não exige chave"),
-                integration("MAPAS", "Mapa e localização das cidades", true, "Mapa incorporado; requer conexão com a internet")
-        );
-    }
-
-    private static boolean ready(String... values) { return java.util.Arrays.stream(values).allMatch(value -> value != null && !value.isBlank()); }
-    private static IntegrationView integration(String id, String name, boolean ready, String variables) {
-        return new IntegrationView(id, name, ready, ready ? "Configurada (conexão não homologada)" : "Configuração incompleta", variables);
-    }
 
     @PutMapping("/accounts/{id}/profile")
     @org.springframework.transaction.annotation.Transactional
@@ -414,10 +309,7 @@ public class AdminController {
     }
 
     private void audit(String action, String targetType, Object targetId, String summary) {
-        var authentication = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || !(authentication.getPrincipal() instanceof org.springframework.security.oauth2.jwt.Jwt jwt))
-            throw new IllegalStateException("Não foi possível identificar o administrador da alteração.");
-        auditService.record(UUID.fromString(jwt.getSubject()), action, targetType, targetId, summary);
+        auditService.recordCurrent(action, targetType, targetId, summary);
     }
 
     private static OperatorView operatorView(Account account) {
@@ -443,9 +335,7 @@ public class AdminController {
         }
     }
     public record Approval(boolean approved) {}
-    public record StoreCategoryRequest(@NotBlank @Size(max=60) String name,
-                                       @NotBlank @Size(max=16) String emoji) {}
-    public record AdminStoreCategoryView(UUID id, String name, String emoji, boolean builtIn) {}
+
     public record StoreActivity(boolean active) {}
     public record AccountActivity(boolean active) {}
     public record Commission(@NotNull @DecimalMin("0.00") @DecimalMax("50.00") BigDecimal percent) {}
@@ -458,14 +348,7 @@ public class AdminController {
     public record AdminStoreView(UUID id, String name, String description, String category, String address, String city, String state, String cnpj,
                                  boolean active, boolean approved, String ownerName, String ownerEmail,
                                  double commissionPercent, long deliveryFeeCents, String coverImageUrl,String timezone,Double latitude,Double longitude,boolean deliveryEnabled,boolean pickupEnabled,boolean inPersonEnabled) {}
-    public record ServiceCityRequest(@NotBlank @Size(max=100) String city,
-                                     @NotBlank @jakarta.validation.constraints.Pattern(regexp="[A-Za-z]{2}") String state,
-                                     @jakarta.validation.constraints.Pattern(regexp="^$|\\d{5}-?\\d{3}") String postalCode,
-                                     boolean enabled) {}
-    public record ServiceCityView(UUID id, String city, String state, String postalCode, boolean enabled) {
-        static ServiceCityView of(ServiceCity city) { return new ServiceCityView(city.getId(), city.getCity(), city.getState(), city.getPostalCode(), city.isEnabled()); }
-    }
-    public record IntegrationView(String id, String name, boolean configured, String status, String configuration) {}
+
     public record AdminAuditView(UUID id, UUID actorId, String action, String targetType, String targetId, String summary, java.time.Instant createdAt) {}
     public record AdminProfileUpdate(@NotBlank @Size(max=120) String name, @Email @NotBlank @Size(max=254) String email,
                                      @Size(max=30) String phone, @Size(max=14) String cpf,

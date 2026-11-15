@@ -1,0 +1,4 @@
+FROM caddy:2-alpine
+COPY deploy/Caddyfile /etc/caddy/Caddyfile
+COPY Frontend/index.html Frontend/styles.css Frontend/theme.css Frontend/favicon.ico Frontend/favicon.svg /srv/
+COPY Frontend/src /srv/src

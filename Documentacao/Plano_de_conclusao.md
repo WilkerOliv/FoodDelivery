@@ -1,6 +1,6 @@
 # Plano de conclusão e limites para lançamento
 
-Atualizado em 12/11/2026. Este quadro distingue implementação, execução demonstrada e operação externa. “Implementado” não significa homologado para cobrar clientes reais.
+Atualizado em 14/11/2026. Este quadro distingue implementação, execução demonstrada e operação externa. “Implementado” não significa homologado para cobrar clientes reais.
 
 ## Etapas internas já entregues
 
@@ -18,9 +18,9 @@ Atualizado em 12/11/2026. Este quadro distingue implementação, execução demo
 
 1. **Aceite da versão publicada:** conferido no painel Render em 11/11: último commit publicado `3c456d7`, estado Live. Entrada de avaliador, login administrativo, carregamento de Definições e CPF opcional foram conferidos pelo navegador. As demais jornadas publicadas continuam com o escopo das evidências anteriores; esta checagem não repete todos os fluxos.
 2. **Integrações de teste:** Mercado Pago sandbox com OAuth, webhook público assinado, recusa/atraso/duplicidade e estorno confirmado. SMTP e WhatsApp exigem conta/configuração e teste de entrega; simulador não atesta o fornecedor. Nenhuma cobrança real é necessária para o sandbox.
-3. **Persistência e recuperação completas:** o proprietário confirmou que não existe banco em produção; provisionar PostgreSQL persistente e armazenamento de capas, guardar chaves fora do repositório, cópia externa criptografada com retenção, ensaio conjunto e RPO/RTO medidos. H2 de demonstração no Render pode ser reiniciado/perdido e não é banco de produção.
+3. **Persistência e recuperação completas:** o proprietário confirmou que não existe banco em produção; provisionar PostgreSQL persistente e armazenamento de capas, guardar chaves fora do repositório, cópia externa criptografada com retenção, ensaio conjunto e RPO/RTO medidos. H2 de demonstração no Render pode ser reiniciado/perdido e não é banco de produção. O adaptador de bucket privado e schema PostgreSQL estão preparados; [cadastro/configuração gratuita](Persistencia_gratuita.md) aguardam criação da conta e validação externa.
 4. **Operação segura:** ativar MFA, confirmar cookies Secure/origens/proxy finais, monitoramento com alertas acionáveis, rotação e procedimento de incidente. Contadores de abuso são locais; múltiplas réplicas exigem mecanismo compartilhado.
-5. **Manutenção e desempenho:** extrair gradualmente telas do `main.js`, paginar consultas/listas e medir carga/consultas antes de otimizações. A separação do carregamento desta etapa é uma melhoria parcial, não a conclusão da arquitetura inteira.
+5. **Manutenção e desempenho:** telas e ações principais extraídas de `main.js`, listas administrativas paginadas e imports recursivos verificados. Permanecem funções extensas de renderização e estado compartilhado; medir carga/consultas antes de novas otimizações. Veja [modularização e validação](Modularizacao_e_validacao_2026-11-14.md).
 6. **Aceite com usuários:** aparelhos físicos, teclado, zoom/leitor de tela e tarefas acompanhadas com pessoas de pouca familiaridade digital. Verificação de largura no navegador não substitui esses testes.
 7. **Regras operacionais e privacidade:** política de cancelamento, retenção/exclusão de mensagens e dados, conferência de repasses, atendimento e revisão dos textos legais conforme o negócio real.
 

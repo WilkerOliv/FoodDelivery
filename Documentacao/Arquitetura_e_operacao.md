@@ -95,3 +95,7 @@ A rotina semanal admite múltiplos turnos e exceções datadas. A alteração bl
 ## Concorrência no navegador
 
 `pageData.js` consulta dados sem alterar o estado compartilhado. `pageLoading.js` publica apenas o resultado da navegação vigente e aborta a consulta anterior. A chave considera sessão, papel, página, loja e cidade. `api.js` rejeita respostas de uma sessão anterior, inclusive um 401 atrasado. Isso evita misturar painéis ao trocar de conta ou loja, mas não substitui autorização no servidor nem desfaz uma mutação já recebida pela API. A inicialização libera o formulário após consultar a sessão, evitando perda de foco na digitação. Consulte [Carregamento e recuperação](Carregamento_e_recuperacao.md).
+
+## Módulos e armazenamento atualizados em 14/11/2026
+
+As telas/ações principais agora são compostas a partir de `Frontend/src/views` e `Frontend/src/features`. O estado de conta é limpo por `sessionState.js` ao sair, expirar ou revogar a sessão. Cidades, categorias e status de integrações possuem controladores administrativos próprios. As capas utilizam a interface `StoreImageStorage`, com disco local ou bucket Supabase privado. Consulte [decisões e testes](Modularizacao_e_validacao_2026-11-14.md) e [configuração gratuita](Persistencia_gratuita.md).

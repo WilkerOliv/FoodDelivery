@@ -1,0 +1,11 @@
+Validação local — 14/11/2026
+Backend: 142 testes; erros 0; falhas 0.
+PostgreSQL descartável: 3 testes + migração/schema privado + dump/restauração + rollback após falha.
+Frontend: 90 testes; 42 módulos com imports válidos e sem ciclos.
+Python: 39 testes aprovados.
+Jornadas HTTP: catálogo, papéis, suporte, cidades/categorias, entrega/chat/localização.
+Homologação HTTP: pagamentos e mensagens simulados, capas, reserva e estorno fictício.
+Docker web: construção e ausência de arquivos de desenvolvimento na raiz pública.
+Visual local: administrador, vendedor, cliente e entregador; layout sem overflow horizontal nas larguras observadas; logs de erro JavaScript vazios ao finalizar.
+Não homologado externamente: Supabase, Mercado Pago real/sandbox externo, SMTP/WhatsApp.
+Container de homologação: PASS em 19,5 s com 512 MiB/1 CPU; saúde/gateway/API/quatro perfis/cookies/origem/rate limit.

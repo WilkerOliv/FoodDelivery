@@ -12,6 +12,14 @@ public class AdminAuditService {
     public AdminAuditService(AdminAuditRepository events) { this.events = events; }
 
     @Transactional
+    public void recordCurrent(String action, String targetType, Object targetId, String summary) {
+        var authentication = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !(authentication.getPrincipal() instanceof org.springframework.security.oauth2.jwt.Jwt jwt))
+            throw new IllegalStateException("Não foi possível identificar o administrador da alteração.");
+        record(UUID.fromString(jwt.getSubject()), action, targetType, targetId, summary);
+    }
+
+    @Transactional
     public void record(UUID actorId, String action, String targetType, Object targetId, String summary) {
         events.save(new AdminAuditEvent(actorId, action, targetType,
                 targetId == null ? null : targetId.toString(), summary));

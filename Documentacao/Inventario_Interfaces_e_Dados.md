@@ -8,111 +8,112 @@ Os atributos `data-*` conectam botões, formulários e estados aos handlers docu
 
 | Atributo | Primeira ocorrência |
 |---|---|
-| `data-about-modal` | [main.js:343](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:343) |
-| `data-about-us` | [main.js:318](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:318) |
+| `data-about-modal` | [authViews.js:33](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:33) |
+| `data-about-us` | [authViews.js:8](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:8) |
 | `data-accept-delivery` | [deliveryBindings.js:3](/home/wilker/Projetos/FoodDelivery/Frontend/src/deliveryBindings.js:3) |
-| `data-accepted` | [main.js:1037](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1037) |
-| `data-account-active` | [main.js:625](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:625) |
-| `data-account-role` | [main.js:627](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:627) |
-| `data-account-section` | [main.js:598](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:598) |
-| `data-action` | [main.js:560](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:560) |
-| `data-active` | [main.js:1048](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1048) |
-| `data-add-address` | [main.js:734](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:734) |
-| `data-add-item` | [main.js:690](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:690) |
+| `data-accepted` | [main.js:819](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:819) |
+| `data-account-active` | [main.js:570](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:570) |
+| `data-account-role` | [main.js:572](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:572) |
+| `data-account-section` | [main.js:537](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:537) |
+| `data-action` | [shoppingViews.js:49](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:49) |
+| `data-active` | [adminViews.js:41](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:41) |
+| `data-add-address` | [shoppingViews.js:33](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:33) |
+| `data-add-item` | [shoppingViews.js:13](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:13) |
 | `data-add-shift` | [storeHours.js:20](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:20) |
-| `data-address-form` | [main.js:736](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:736) |
-| `data-admin-account-edit` | [main.js:593](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:593) |
-| `data-admin-area` | [main.js:1066](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1066) |
-| `data-admin-definition-section` | [main.js:599](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:599) |
-| `data-admin-edit-account` | [main.js:626](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:626) |
-| `data-admin-edit-store` | [main.js:594](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:594) |
+| `data-address-form` | [shoppingViews.js:35](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:35) |
+| `data-admin-account-edit` | [adminActions.js:23](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:23) |
+| `data-admin-area` | [adminViews.js:6](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:6) |
+| `data-admin-definition-section` | [main.js:538](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:538) |
+| `data-admin-edit-account` | [main.js:571](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:571) |
+| `data-admin-edit-store` | [main.js:533](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:533) |
 | `data-admin-hours` | [adminStoreEditor.js:37](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:37) |
-| `data-admin-mfa` | [main.js:567](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:567) |
-| `data-admin-profile-save` | [main.js:587](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:587) |
-| `data-admin-team-section` | [main.js:653](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:653) |
-| `data-admin-ticket` | [main.js:515](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:515) |
-| `data-approve-store` | [main.js:637](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:637) |
+| `data-admin-mfa` | [main.js:506](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:506) |
+| `data-admin-page` | [adminPagination.js:21](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminPagination.js:21) |
+| `data-admin-profile-save` | [main.js:526](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:526) |
+| `data-admin-team-section` | [main.js:598](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:598) |
+| `data-admin-ticket` | [supportActions.js:18](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:18) |
+| `data-approve-store` | [adminActions.js:48](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:48) |
 | `data-approved` | [courierFinance.js:9](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:9) |
-| `data-auth-mode` | [main.js:333](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:333) |
-| `data-available-slots` | [main.js:718](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:718) |
+| `data-auth-mode` | [authViews.js:23](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:23) |
+| `data-available-slots` | [shoppingViews.js:66](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:66) |
 | `data-back` | [courierFinance.js:10](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:10) |
 | `data-booking-date` | [bookingAvailability.js:6](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:6) |
-| `data-booking-policy` | [main.js:565](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:565) |
-| `data-cancel-address` | [main.js:736](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:736) |
-| `data-cancel-logout` | [main.js:1276](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1276) |
-| `data-cancel-order` | [main.js:841](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:841) |
+| `data-booking-policy` | [main.js:504](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:504) |
+| `data-cancel-address` | [shoppingViews.js:35](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:35) |
+| `data-cancel-logout` | [main.js:986](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:986) |
+| `data-cancel-order` | [main.js:947](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:947) |
 | `data-cancel-payout` | [courierFinance.js:9](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:9) |
-| `data-cancel-reservation` | [main.js:854](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:854) |
-| `data-cart-mode` | [main.js:733](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:733) |
-| `data-catalog-item-update` | [main.js:1142](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1142) |
-| `data-category` | [main.js:526](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:526) |
-| `data-category-select` | [main.js:539](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:539) |
-| `data-cep` | [main.js:736](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:736) |
-| `data-cep-feedback` | [main.js:477](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:477) |
-| `data-chat-draft` | [main.js:662](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:662) |
-| `data-chat-form` | [main.js:661](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:661) |
-| `data-chat-id` | [main.js:870](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:870) |
-| `data-chat-panel` | [main.js:863](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:863) |
-| `data-chat-type` | [main.js:870](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:870) |
-| `data-checkout` | [main.js:585](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:585) |
-| `data-checkout-note` | [main.js:738](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:738) |
-| `data-checkout-pay` | [main.js:645](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:645) |
-| `data-city` | [main.js:488](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:488) |
-| `data-city-count` | [main.js:477](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:477) |
-| `data-city-list` | [main.js:477](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:477) |
-| `data-city-request` | [main.js:607](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:607) |
-| `data-clear-notifications` | [main.js:954](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:954) |
+| `data-cancel-reservation` | [main.js:948](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:948) |
+| `data-cart-mode` | [shoppingViews.js:32](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:32) |
+| `data-catalog-item-update` | [main.js:866](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:866) |
+| `data-category` | [main.js:520](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:520) |
+| `data-category-select` | [main.js:519](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:519) |
+| `data-cep` | [adminActions.js:23](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:23) |
+| `data-cep-feedback` | [main.js:443](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:443) |
+| `data-chat-draft` | [main.js:607](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:607) |
+| `data-chat-form` | [main.js:606](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:606) |
+| `data-chat-id` | [main.js:731](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:731) |
+| `data-chat-panel` | [main.js:724](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:724) |
+| `data-chat-type` | [main.js:731](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:731) |
+| `data-checkout` | [shoppingViews.js:40](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:40) |
+| `data-checkout-note` | [shoppingViews.js:37](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:37) |
+| `data-checkout-pay` | [main.js:590](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:590) |
+| `data-city` | [main.js:454](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:454) |
+| `data-city-count` | [main.js:443](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:443) |
+| `data-city-list` | [main.js:443](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:443) |
+| `data-city-request` | [main.js:546](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:546) |
+| `data-clear-notifications` | [main.js:932](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:932) |
 | `data-close` | [storeHours.js:14](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:14) |
-| `data-close-about` | [main.js:343](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:343) |
+| `data-close-about` | [authViews.js:33](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:33) |
 | `data-close-admin-edit` | [accessibility.js:33](/home/wilker/Projetos/FoodDelivery/Frontend/src/accessibility.js:33) |
 | `data-close-cart` | [accessibility.js:33](/home/wilker/Projetos/FoodDelivery/Frontend/src/accessibility.js:33) |
 | `data-close-catalog-edit` | [accessibility.js:33](/home/wilker/Projetos/FoodDelivery/Frontend/src/accessibility.js:33) |
-| `data-close-chat` | [main.js:663](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:663) |
-| `data-close-item` | [main.js:1142](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1142) |
-| `data-close-location` | [main.js:477](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:477) |
+| `data-close-chat` | [main.js:608](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:608) |
+| `data-close-item` | [main.js:866](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:866) |
+| `data-close-location` | [main.js:443](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:443) |
 | `data-close-modal` | [accessibility.js:33](/home/wilker/Projetos/FoodDelivery/Frontend/src/accessibility.js:33) |
 | `data-close-support` | [accessibility.js:33](/home/wilker/Projetos/FoodDelivery/Frontend/src/accessibility.js:33) |
 | `data-close-today` | [storeHours.js:38](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:38) |
 | `data-code` | [courierFinance.js:15](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:15) |
-| `data-confirm-logout` | [main.js:1276](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1276) |
-| `data-connect-mercadopago` | [main.js:962](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:962) |
-| `data-courier-finance` | [main.js:568](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:568) |
-| `data-cover-review` | [main.js:633](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:633) |
+| `data-confirm-logout` | [main.js:986](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:986) |
+| `data-connect-mercadopago` | [main.js:944](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:944) |
+| `data-courier-finance` | [main.js:507](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:507) |
+| `data-cover-review` | [main.js:578](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:578) |
 | `data-create-item` | [catalogBindings.js:3](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogBindings.js:3) |
-| `data-create-operator` | [main.js:622](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:622) |
-| `data-create-store` | [main.js:609](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:609) |
+| `data-create-operator` | [main.js:567](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:567) |
+| `data-create-store` | [main.js:548](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:548) |
 | `data-decide` | [courierFinance.js:9](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:9) |
-| `data-decision` | [main.js:1092](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1092) |
-| `data-default-address` | [main.js:913](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:913) |
-| `data-delete-address` | [main.js:913](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:913) |
-| `data-delivery-card` | [main.js:838](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:838) |
-| `data-delivery-status` | [main.js:640](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:640) |
+| `data-decision` | [main.js:887](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:887) |
+| `data-default-address` | [main.js:953](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:953) |
+| `data-delete-address` | [main.js:954](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:954) |
+| `data-delivery-card` | [main.js:795](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:795) |
+| `data-delivery-status` | [main.js:585](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:585) |
 | `data-dismiss` | [storeHours.js:30](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:30) |
-| `data-dismiss-temp-password` | [main.js:629](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:629) |
-| `data-enabled` | [main.js:881](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:881) |
+| `data-dismiss-temp-password` | [main.js:574](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:574) |
+| `data-enabled` | [adminViews.js:50](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:50) |
 | `data-enrollment` | [adminSecurity.js:13](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:13) |
 | `data-exception-editor` | [storeHours.js:38](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:38) |
-| `data-forgot-password` | [main.js:341](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:341) |
-| `data-help` | [main.js:414](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:414) |
-| `data-id` | [main.js:732](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:732) |
-| `data-item-` | [main.js:1121](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1121) |
-| `data-item-activate` | [main.js:614](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:614) |
-| `data-item-deactivate` | [main.js:613](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:613) |
+| `data-forgot-password` | [authViews.js:31](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:31) |
+| `data-help` | [main.js:380](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:380) |
+| `data-id` | [shoppingViews.js:31](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:31) |
+| `data-item-` | [main.js:845](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:845) |
+| `data-item-activate` | [main.js:553](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:553) |
+| `data-item-deactivate` | [main.js:552](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:552) |
 | `data-item-edit` | [catalogBindings.js:4](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogBindings.js:4) |
-| `data-item-kind` | [main.js:618](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:618) |
-| `data-location-cep` | [main.js:477](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:477) |
-| `data-location-clear` | [main.js:477](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:477) |
-| `data-location-confirm` | [main.js:477](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:477) |
-| `data-location-gps` | [main.js:477](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:477) |
-| `data-location-map` | [main.js:477](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:477) |
-| `data-location-picker` | [main.js:420](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:420) |
-| `data-location-result` | [main.js:500](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:500) |
-| `data-location-results` | [main.js:477](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:477) |
-| `data-location-search` | [main.js:477](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:477) |
-| `data-location-selection` | [main.js:477](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:477) |
-| `data-location-selection-label` | [main.js:477](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:477) |
-| `data-logout` | [main.js:422](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:422) |
-| `data-lookup-cep` | [main.js:736](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:736) |
+| `data-item-kind` | [main.js:557](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:557) |
+| `data-location-cep` | [main.js:443](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:443) |
+| `data-location-clear` | [main.js:443](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:443) |
+| `data-location-confirm` | [main.js:443](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:443) |
+| `data-location-gps` | [main.js:443](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:443) |
+| `data-location-map` | [main.js:443](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:443) |
+| `data-location-picker` | [main.js:386](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:386) |
+| `data-location-result` | [main.js:466](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:466) |
+| `data-location-results` | [main.js:443](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:443) |
+| `data-location-search` | [main.js:443](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:443) |
+| `data-location-selection` | [main.js:443](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:443) |
+| `data-location-selection-label` | [main.js:443](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:443) |
+| `data-logout` | [main.js:388](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:388) |
+| `data-lookup-cep` | [shoppingViews.js:35](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:35) |
 | `data-map-canvas` | [storeMaps.js:33](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:33) |
 | `data-map-clear` | [storeMaps.js:33](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:33) |
 | `data-map-content` | [storeMaps.js:33](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:33) |
@@ -120,186 +121,210 @@ Os atributos `data-*` conectam botões, formulários e estados aos handlers docu
 | `data-map-results` | [storeMaps.js:33](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:33) |
 | `data-map-search` | [storeMaps.js:33](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:33) |
 | `data-map-toggle` | [storeMaps.js:33](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:33) |
-| `data-mask` | [main.js:335](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:335) |
-| `data-merchant-store-select` | [main.js:611](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:611) |
-| `data-mobile-more` | [main.js:417](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:417) |
+| `data-mask` | [adminActions.js:23](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:23) |
+| `data-merchant-store-select` | [main.js:550](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:550) |
+| `data-mobile-more` | [main.js:383](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:383) |
 | `data-money` | [courierFinance.js:8](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:8) |
-| `data-name` | [main.js:1101](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1101) |
+| `data-name` | [adminViews.js:42](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:42) |
 | `data-next` | [courierFinance.js:16](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:16) |
-| `data-no-show-warning` | [main.js:1020](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1020) |
-| `data-notification-target` | [main.js:955](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:955) |
-| `data-offer-delivery` | [main.js:635](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:635) |
+| `data-no-show-warning` | [main.js:836](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:836) |
+| `data-notification-target` | [main.js:933](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:933) |
+| `data-offer-delivery` | [main.js:580](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:580) |
 | `data-open` | [storeHours.js:14](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:14) |
-| `data-open-chat-id` | [main.js:841](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:841) |
-| `data-open-chat-type` | [main.js:660](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:660) |
-| `data-operating-hours` | [main.js:612](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:612) |
+| `data-open-chat-id` | [courierViews.js:8](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/courierViews.js:8) |
+| `data-open-chat-type` | [main.js:605](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:605) |
+| `data-operating-hours` | [main.js:551](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:551) |
 | `data-operating-hours-editor` | [storeHours.js:38](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:38) |
-| `data-operator-active` | [main.js:624](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:624) |
-| `data-operator-application` | [main.js:623](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:623) |
-| `data-operator-request` | [main.js:606](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:606) |
-| `data-order-cancellation-decision` | [main.js:1037](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1037) |
-| `data-order-card` | [main.js:838](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:838) |
-| `data-order-status` | [main.js:634](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:634) |
-| `data-page` | [main.js:412](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:412) |
+| `data-operator-active` | [main.js:569](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:569) |
+| `data-operator-application` | [main.js:568](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:568) |
+| `data-operator-request` | [main.js:545](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:545) |
+| `data-order-cancellation-decision` | [main.js:951](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:951) |
+| `data-order-card` | [main.js:795](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:795) |
+| `data-order-status` | [main.js:579](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:579) |
+| `data-page` | [adminPagination.js:21](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminPagination.js:21) |
 | `data-paid` | [courierFinance.js:9](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:9) |
-| `data-password-change` | [main.js:595](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:595) |
-| `data-pay-after-service` | [main.js:619](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:619) |
-| `data-phone-verify-confirm` | [main.js:597](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:597) |
-| `data-phone-verify-request` | [main.js:596](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:596) |
-| `data-platform-review` | [main.js:608](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:608) |
+| `data-password-change` | [main.js:534](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:534) |
+| `data-pay-after-service` | [main.js:558](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:558) |
+| `data-phone-verify-confirm` | [main.js:536](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:536) |
+| `data-phone-verify-request` | [main.js:535](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:535) |
+| `data-platform-review` | [main.js:547](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:547) |
 | `data-policy` | [courierFinance.js:15](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:15) |
 | `data-prev` | [courierFinance.js:16](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:16) |
 | `data-private-fields` | [adminSecurity.js:6](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:6) |
-| `data-private-integrations` | [main.js:566](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:566) |
-| `data-professional-active` | [main.js:617](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:617) |
-| `data-professional-create` | [main.js:615](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:615) |
-| `data-professional-hours` | [main.js:616](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:616) |
+| `data-private-integrations` | [main.js:505](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:505) |
+| `data-professional-active` | [main.js:556](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:556) |
+| `data-professional-create` | [main.js:554](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:554) |
+| `data-professional-hours` | [main.js:555](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:555) |
 | `data-professional-schedule` | [bookingAvailability.js:17](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:17) |
-| `data-profile-save` | [main.js:586](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:586) |
-| `data-profile-store-map` | [main.js:685](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:685) |
-| `data-qty` | [main.js:732](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:732) |
-| `data-recovery-back` | [main.js:331](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:331) |
-| `data-recovery-channel` | [main.js:348](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:348) |
+| `data-profile-save` | [main.js:525](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:525) |
+| `data-profile-store-map` | [shoppingViews.js:8](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:8) |
+| `data-qty` | [shoppingViews.js:31](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:31) |
+| `data-recovery-back` | [authViews.js:21](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:21) |
+| `data-recovery-channel` | [authViews.js:38](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:38) |
 | `data-refresh` | [courierFinance.js:16](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:16) |
-| `data-refresh-audit` | [main.js:631](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:631) |
-| `data-refresh-integrations` | [main.js:630](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:630) |
+| `data-refresh-audit` | [main.js:576](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:576) |
+| `data-refresh-integrations` | [main.js:575](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:575) |
 | `data-remove-key` | [adminSecurity.js:7](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:7) |
 | `data-remove-shift` | [storeHours.js:14](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:14) |
-| `data-reopen-store` | [main.js:642](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:642) |
+| `data-reopen-store` | [main.js:587](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:587) |
 | `data-request` | [courierFinance.js:15](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:15) |
-| `data-request-order-cancellation` | [main.js:841](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:841) |
-| `data-request-reservation-cancellation` | [main.js:854](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:854) |
-| `data-reservation-cancellation-decision` | [main.js:1052](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1052) |
-| `data-reservation-card` | [main.js:854](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:854) |
-| `data-reservation-status` | [main.js:636](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:636) |
-| `data-reserve` | [main.js:690](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:690) |
-| `data-reset-password` | [main.js:628](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:628) |
-| `data-resubmit-store` | [main.js:610](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:610) |
-| `data-resume-order` | [main.js:841](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:841) |
-| `data-resume-reservation` | [main.js:854](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:854) |
-| `data-retry-page` | [main.js:465](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:465) |
-| `data-risk-ack-field` | [main.js:1020](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1020) |
-| `data-role` | [main.js:1101](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1101) |
+| `data-request-order-cancellation` | [main.js:949](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:949) |
+| `data-request-reservation-cancellation` | [main.js:950](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:950) |
+| `data-reservation-cancellation-decision` | [main.js:819](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:819) |
+| `data-reservation-card` | [main.js:795](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:795) |
+| `data-reservation-status` | [main.js:581](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:581) |
+| `data-reserve` | [shoppingViews.js:13](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:13) |
+| `data-reset-password` | [main.js:573](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:573) |
+| `data-resubmit-store` | [main.js:549](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:549) |
+| `data-resume-order` | [main.js:945](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:945) |
+| `data-resume-reservation` | [main.js:946](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:946) |
+| `data-retry-page` | [main.js:431](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:431) |
+| `data-risk-ack-field` | [main.js:836](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:836) |
+| `data-role` | [adminViews.js:42](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:42) |
 | `data-save-exception` | [storeHours.js:38](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:38) |
-| `data-scroll-stores` | [main.js:529](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:529) |
-| `data-section` | [main.js:647](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:647) |
-| `data-service-city-create` | [main.js:588](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:588) |
-| `data-service-city-toggle` | [main.js:591](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:591) |
-| `data-service-city-update` | [main.js:590](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:590) |
-| `data-service-duration-field` | [main.js:1020](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1020) |
-| `data-service-payment-field` | [main.js:1020](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1020) |
-| `data-share-location` | [main.js:641](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:641) |
+| `data-scroll-stores` | [main.js:589](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:589) |
+| `data-section` | [main.js:592](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:592) |
+| `data-service-city-create` | [main.js:527](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:527) |
+| `data-service-city-toggle` | [main.js:530](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:530) |
+| `data-service-city-update` | [main.js:529](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:529) |
+| `data-service-duration-field` | [main.js:835](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:835) |
+| `data-service-payment-field` | [main.js:835](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:835) |
+| `data-share-location` | [main.js:586](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:586) |
 | `data-shift` | [storeHours.js:18](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:18) |
 | `data-shifts` | [storeHours.js:20](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:20) |
-| `data-status` | [main.js:1102](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1102) |
-| `data-stock-field` | [main.js:1020](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1020) |
-| `data-store` | [main.js:557](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:557) |
-| `data-store-active` | [main.js:638](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:638) |
-| `data-store-category-create` | [main.js:589](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:589) |
-| `data-store-category-delete` | [main.js:592](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:592) |
-| `data-store-commission` | [main.js:1100](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1100) |
-| `data-store-cover` | [main.js:632](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:632) |
-| `data-store-directory-map` | [main.js:532](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:532) |
-| `data-store-filter` | [main.js:620](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:620) |
+| `data-status` | [adminViews.js:43](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:43) |
+| `data-stock-field` | [main.js:835](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:835) |
+| `data-store` | [main.js:522](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:522) |
+| `data-store-active` | [main.js:583](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:583) |
+| `data-store-category-create` | [main.js:528](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:528) |
+| `data-store-category-delete` | [main.js:531](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:531) |
+| `data-store-commission` | [main.js:943](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:943) |
+| `data-store-cover` | [main.js:577](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:577) |
+| `data-store-directory-map` | [main.js:509](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:509) |
+| `data-store-filter` | [main.js:565](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:565) |
 | `data-store-map-picker` | [adminStoreEditor.js:42](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:42) |
-| `data-support-list` | [main.js:604](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:604) |
-| `data-switch-role` | [main.js:605](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:605) |
-| `data-table` | [main.js:1033](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1033) |
-| `data-target-id` | [main.js:955](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:955) |
-| `data-ticket-admin` | [main.js:1102](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1102) |
-| `data-ticket-back` | [main.js:512](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:512) |
-| `data-ticket-compose` | [main.js:512](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:512) |
-| `data-ticket-create` | [main.js:511](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:511) |
-| `data-ticket-id` | [main.js:515](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:515) |
-| `data-ticket-open` | [main.js:600](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:600) |
-| `data-ticket-status` | [main.js:601](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:601) |
-| `data-tracking-map` | [main.js:656](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:656) |
-| `data-uf` | [main.js:488](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:488) |
-| `data-update-store` | [main.js:621](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:621) |
-| `data-user-ticket` | [main.js:511](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:511) |
+| `data-support-list` | [main.js:543](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:543) |
+| `data-switch-role` | [main.js:544](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:544) |
+| `data-table` | [merchantViews.js:49](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:49) |
+| `data-target-id` | [accountViews.js:33](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:33) |
+| `data-ticket-admin` | [adminViews.js:43](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:43) |
+| `data-ticket-back` | [supportActions.js:13](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:13) |
+| `data-ticket-compose` | [supportActions.js:13](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:13) |
+| `data-ticket-create` | [supportActions.js:12](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:12) |
+| `data-ticket-id` | [supportActions.js:18](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:18) |
+| `data-ticket-open` | [main.js:539](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:539) |
+| `data-ticket-status` | [main.js:540](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:540) |
+| `data-tracking-map` | [main.js:601](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:601) |
+| `data-uf` | [main.js:454](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:454) |
+| `data-update-store` | [main.js:566](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:566) |
+| `data-user-ticket` | [supportActions.js:12](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:12) |
 | `data-whole-day` | [storeHours.js:20](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:20) |
 
 ## Contratos HTTP declarados
 
 A rota efetiva combina o prefixo da classe e o sufixo do método. `SecurityConfig` decide acesso público/autenticado; `@PreAuthorize` e as verificações de titularidade no corpo restringem a operação. Uma anotação ausente não significa acesso público.
 
+### AdminCategoryController
+
+- [storeCategories](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java:27)
+  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminCategoryController`
+  - Método: `@GetMapping("/store-categories") @org.springframework.transaction.annotation.Transactional(readOnly = true) public List<AdminStoreCategoryView> storeCategories()`
+- [createStoreCategory](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java:37)
+  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminCategoryController`
+  - Método: `@PostMapping("/store-categories") @ResponseStatus(HttpStatus.CREATED) @org.springframework.transaction.annotation.Transactional public AdminStoreCategoryView createStoreCategory(@Valid @RequestBody StoreCategoryRequest request)`
+- [deleteStoreCategory](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java:52)
+  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminCategoryController`
+  - Método: `@DeleteMapping("/store-categories/{id}") @org.springframework.transaction.annotation.Transactional @ResponseStatus(HttpStatus.NO_CONTENT) public void deleteStoreCategory(@PathVariable UUID id)`
+
 ### AdminController
 
-- [storeCategories](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:65)
-  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
-  - Método: `@GetMapping("/store-categories") @org.springframework.transaction.annotation.Transactional(readOnly = true) public List<AdminStoreCategoryView> storeCategories()`
-- [createStoreCategory](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:75)
-  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
-  - Método: `@PostMapping("/store-categories") @ResponseStatus(HttpStatus.CREATED) @org.springframework.transaction.annotation.Transactional public AdminStoreCategoryView createStoreCategory(@Valid @RequestBody StoreCategoryRequest request)`
-- [deleteStoreCategory](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:90)
-  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
-  - Método: `@DeleteMapping("/store-categories/{id}") @org.springframework.transaction.annotation.Transactional @ResponseStatus(HttpStatus.NO_CONTENT) public void deleteStoreCategory(@PathVariable UUID id)`
-- [serviceCities](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:102)
-  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
-  - Método: `@GetMapping("/service-cities") public List<ServiceCityView> serviceCities()`
-- [createServiceCity](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:107)
-  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
-  - Método: `@PostMapping("/service-cities") @ResponseStatus(HttpStatus.CREATED) @org.springframework.transaction.annotation.Transactional public ServiceCityView createServiceCity(@Valid @RequestBody ServiceCityRequest request)`
-- [updateServiceCity](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:120)
-  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
-  - Método: `@PutMapping("/service-cities/{id}") @org.springframework.transaction.annotation.Transactional public ServiceCityView updateServiceCity(@PathVariable UUID id, @Valid @RequestBody ServiceCityRequest request)`
-- [integrations](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:138)
-  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
-  - Método: `@GetMapping("/integrations") public List<IntegrationView> integrations()`
-- [updateAccountProfile](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:155)
+- [updateAccountProfile](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:50)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@PutMapping("/accounts/{id}/profile") @org.springframework.transaction.annotation.Transactional public AdminAccountView updateAccountProfile(@PathVariable UUID id, @Valid @RequestBody AdminProfileUpdate request)`
-- [updateStoreProfile](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:187)
+- [updateStoreProfile](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:82)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@PutMapping("/stores/{id}/profile") @org.springframework.transaction.annotation.Transactional public AdminStoreView updateStoreProfile(@PathVariable UUID id,@Valid @RequestBody br.com.fooddelivery.catalog.CatalogController.StoreRequest request)`
-- [createOperator](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:202)
+- [createOperator](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:97)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@PostMapping("/operators") @ResponseStatus(HttpStatus.CREATED) @org.springframework.transaction.annotation.Transactional public Account createOperator(@Valid @RequestBody OperatorRequest request)`
-- [operators](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:224)
+- [operators](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:119)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@GetMapping("/operators") public List<OperatorView> operators()`
-- [allAccounts](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:230)
+- [allAccounts](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:124)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@GetMapping("/accounts") public List<AdminAccountView> allAccounts()`
-- [setAccountActive](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:235)
+- [operatorPage](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:129)
+  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
+  - Método: `@GetMapping("/operators/page") @org.springframework.transaction.annotation.Transactional(readOnly = true) public AdminPage<OperatorView> operatorPage(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="25") int size)`
+- [accountPage](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:135)
+  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
+  - Método: `@GetMapping("/accounts/page") @org.springframework.transaction.annotation.Transactional(readOnly = true) public AdminPage<AdminAccountView> accountPage(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="25") int size)`
+- [storePage](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:141)
+  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
+  - Método: `@GetMapping("/stores/page") @org.springframework.transaction.annotation.Transactional(readOnly = true) public AdminPage<AdminStoreView> storePage(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="25") int size, @RequestParam(defaultValue="ALL") String status)`
+- [setAccountActive](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:156)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@PatchMapping("/accounts/{id}/active") @org.springframework.transaction.annotation.Transactional public AdminAccountView setAccountActive(@PathVariable UUID id, @RequestBody AccountActivity request)`
-- [setRoleActive](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:251)
+- [setRoleActive](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:172)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@PatchMapping("/accounts/{id}/roles/{role}") @org.springframework.transaction.annotation.Transactional public AdminAccountView setRoleActive(@PathVariable UUID id, @PathVariable AccountRole role, @RequestBody AccountActivity request)`
-- [resetPassword](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:267)
+- [resetPassword](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:188)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@PostMapping("/accounts/{id}/password-reset") @org.springframework.transaction.annotation.Transactional public Map<String, Object> resetPassword(@PathVariable UUID id)`
-- [pendingApplications](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:279)
+- [pendingApplications](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:200)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@GetMapping("/operator-applications") public List<OperatorView> pendingApplications()`
-- [approveApplication](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:284)
+- [approveApplication](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:205)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@PatchMapping("/operator-applications/{id}/approve") @org.springframework.transaction.annotation.Transactional public OperatorView approveApplication(@PathVariable UUID id)`
-- [rejectApplication](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:295)
+- [rejectApplication](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:216)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@PatchMapping("/operator-applications/{id}/reject") @org.springframework.transaction.annotation.Transactional public OperatorView rejectApplication(@PathVariable UUID id)`
-- [deactivate](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:306)
+- [deactivate](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:227)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@PatchMapping("/operators/{id}/deactivate") @org.springframework.transaction.annotation.Transactional public Map<String, String> deactivate(@PathVariable UUID id)`
-- [activate](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:324)
+- [activate](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:245)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@PatchMapping("/operators/{id}/activate") @org.springframework.transaction.annotation.Transactional public Map<String, String> activate(@PathVariable UUID id)`
-- [stores](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:337)
+- [stores](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:258)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@GetMapping("/stores") @org.springframework.transaction.annotation.Transactional(readOnly = true) public List<AdminStoreView> stores()`
-- [approveStore](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:348)
+- [approveStore](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:269)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@PatchMapping("/stores/{id}/approval") @org.springframework.transaction.annotation.Transactional public Store approveStore(@PathVariable UUID id, @RequestBody Approval request)`
-- [setStoreActive](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:361)
+- [setStoreActive](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:282)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@PatchMapping("/stores/{id}/active") @org.springframework.transaction.annotation.Transactional public Store setStoreActive(@PathVariable UUID id, @RequestBody StoreActivity request)`
-- [setCommission](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:372)
+- [setCommission](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:293)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@PatchMapping("/stores/{id}/commission") @org.springframework.transaction.annotation.Transactional public Map<String, Object> setCommission(@PathVariable UUID id, @Valid @RequestBody Commission request)`
-- [auditEvents](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:382)
+- [auditEvents](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:303)
   - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminController`
   - Método: `@GetMapping("/audit-events") @org.springframework.transaction.annotation.Transactional(readOnly = true) public org.springframework.data.domain.Page<AdminAuditView> auditEvents( @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "50") int size)`
+
+### AdminCoverageController
+
+- [serviceCities](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java:24)
+  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminCoverageController`
+  - Método: `@GetMapping("/service-cities") public List<ServiceCityView> serviceCities()`
+- [createServiceCity](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java:29)
+  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminCoverageController`
+  - Método: `@PostMapping("/service-cities") @ResponseStatus(HttpStatus.CREATED) @org.springframework.transaction.annotation.Transactional public ServiceCityView createServiceCity(@Valid @RequestBody ServiceCityRequest request)`
+- [updateServiceCity](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java:42)
+  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminCoverageController`
+  - Método: `@PutMapping("/service-cities/{id}") @org.springframework.transaction.annotation.Transactional public ServiceCityView updateServiceCity(@PathVariable UUID id, @Valid @RequestBody ServiceCityRequest request)`
+
+### AdminIntegrationStatusController
+
+- [integrations](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java:26)
+  - Classe: `@RestController @RequestMapping("/api/v1/admin") @PreAuthorize("hasRole('ADMIN')") public class AdminIntegrationStatusController`
+  - Método: `@GetMapping("/integrations") public List<IntegrationView> integrations()`
+
+### AdminListSummaryController
+
+- [summary](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminListSummaryController.java:22)
+  - Classe: `@RestController @RequestMapping("/api/v1/admin/list-summary") @PreAuthorize("hasRole('ADMIN')") public class AdminListSummaryController`
+  - Método: `@GetMapping @Transactional(readOnly=true) public Map<String, Long> summary()`
 
 ### AdminMfaController
 
@@ -465,27 +490,27 @@ A rota efetiva combina o prefixo da classe e o sufixo do método. `SecurityConfi
 
 ### StoreAssetController
 
-- [submit](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:40)
+- [submit](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:38)
   - Classe: `@RestController @RequestMapping("/api/v1") public class StoreAssetController`
   - Método: `@PostMapping("/merchant/stores/{id}/cover") @PreAuthorize("hasRole('MERCHANT')") @ResponseStatus(HttpStatus.CREATED) @Transactional public CoverView submit(@PathVariable UUID id,@Valid @RequestBody CoverRequest request,Authentication auth)`
-- [mine](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:57)
+- [mine](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:55)
   - Classe: `@RestController @RequestMapping("/api/v1") public class StoreAssetController`
   - Método: `@GetMapping("/merchant/stores/{id}/cover-submission") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true) public CoverState mine(@PathVariable UUID id,Authentication auth)`
-- [ownPublishedImage](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:63)
+- [ownPublishedImage](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:61)
   - Classe: `@RestController @RequestMapping("/api/v1") public class StoreAssetController`
-  - Método: `@GetMapping("/merchant/stores/{id}/published-cover") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true) public ResponseEntity<FileSystemResource> ownPublishedImage(@PathVariable UUID id,Authentication auth)`
-- [pending](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:70)
+  - Método: `@GetMapping("/merchant/stores/{id}/published-cover") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true) public ResponseEntity<byte[]> ownPublishedImage(@PathVariable UUID id,Authentication auth)`
+- [pending](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:68)
   - Classe: `@RestController @RequestMapping("/api/v1") public class StoreAssetController`
   - Método: `@GetMapping("/admin/store-covers") @PreAuthorize("hasRole('ADMIN')") @Transactional(readOnly=true) public List<CoverView> pending()`
-- [review](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:73)
+- [review](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:71)
   - Classe: `@RestController @RequestMapping("/api/v1") public class StoreAssetController`
   - Método: `@PatchMapping("/admin/store-covers/{id}/review") @PreAuthorize("hasRole('ADMIN')") @Transactional public CoverView review(@PathVariable UUID id,@Valid @RequestBody ReviewRequest request,Authentication auth)`
-- [privateImage](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:88)
+- [privateImage](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:87)
   - Classe: `@RestController @RequestMapping("/api/v1") public class StoreAssetController`
-  - Método: `@GetMapping("/store-cover-submissions/{id}/image") @Transactional(readOnly=true) public ResponseEntity<FileSystemResource> privateImage(@PathVariable UUID id,Authentication auth)`
-- [readCover](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:95)
+  - Método: `@GetMapping("/store-cover-submissions/{id}/image") @Transactional(readOnly=true) public ResponseEntity<byte[]> privateImage(@PathVariable UUID id,Authentication auth)`
+- [readCover](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:94)
   - Classe: `@RestController @RequestMapping("/api/v1") public class StoreAssetController`
-  - Método: `@GetMapping("/store-assets/{fileName}") @Transactional(readOnly=true) public ResponseEntity<FileSystemResource> readCover(@PathVariable String fileName)`
+  - Método: `@GetMapping("/store-assets/{fileName}") @Transactional(readOnly=true) public ResponseEntity<byte[]> readCover(@PathVariable String fileName)`
 
 ### OperationMessageController
 
@@ -786,13 +811,16 @@ A rota efetiva combina o prefixo da classe e o sufixo do método. `SecurityConfi
 - [all](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:70)
   - Classe: `@RestController @RequestMapping("/api/v1") public class SupportTicketController`
   - Método: `@GetMapping("/admin/support-tickets") @PreAuthorize("hasRole('ADMIN')") @Transactional(readOnly=true) public List<TicketView> all()`
-- [adminDetail](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:75)
+- [page](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:75)
+  - Classe: `@RestController @RequestMapping("/api/v1") public class SupportTicketController`
+  - Método: `@GetMapping("/admin/support-tickets/page") @PreAuthorize("hasRole('ADMIN')") @Transactional(readOnly=true) public br.com.fooddelivery.admin.AdminPage<TicketView> page(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="25") int size)`
+- [adminDetail](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:86)
   - Classe: `@RestController @RequestMapping("/api/v1") public class SupportTicketController`
   - Método: `@GetMapping("/admin/support-tickets/{id}") @PreAuthorize("hasRole('ADMIN')") @Transactional(readOnly=true) public TicketDetail adminDetail(@PathVariable UUID id)`
-- [adminReply](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:80)
+- [adminReply](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:91)
   - Classe: `@RestController @RequestMapping("/api/v1") public class SupportTicketController`
   - Método: `@PostMapping("/admin/support-tickets/{id}/messages") @PreAuthorize("hasRole('ADMIN')") @Transactional public TicketDetail adminReply(@PathVariable UUID id,@Valid @RequestBody MessageRequest request,Authentication auth)`
-- [updateStatus](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:91)
+- [updateStatus](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:102)
   - Classe: `@RestController @RequestMapping("/api/v1") public class SupportTicketController`
   - Método: `@PatchMapping("/admin/support-tickets/{id}/status") @PreAuthorize("hasRole('ADMIN')") @Transactional public TicketView updateStatus(@PathVariable UUID id,@Valid @RequestBody StatusRequest request)`
 

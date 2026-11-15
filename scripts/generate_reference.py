@@ -78,7 +78,7 @@ def generate(language,files,filename):
         if tree.root_node.has_error: raise RuntimeError(f'Falha de análise: {path}')
         txt=lambda n: data[n.start_byte:n.end_byte].decode()
         rel=path.relative_to(ROOT)
-        context=CONTEXT.get(path.parent.name if language=='java' else path.stem,'Inicialização da aplicação e ligação dos módulos; manter separação entre configuração e regra de negócio.')
+        context=CONTEXT.get(path.parent.name if language=='java' else path.stem, {'views':'Apresentação por domínio com dependências explícitas; os eventos da página são ligados pela composição da aplicação.', 'features':'Ações por domínio com API e navegação injetadas; preservar autorização no servidor e tratar falhas assíncronas.', 'media':'Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado.'}.get(path.parent.name, 'Inicialização da aplicação e ligação dos módulos; manter separação entre configuração e regra de negócio.'))
         out += [f'## {rel}', '',context,'',f'Fonte: [{path.name}]({path}) · SHA-256 `{hashlib.sha256(data).hexdigest()}`','']
         declarations=[n for n in walk(tree.root_node) if n.type in ('record_declaration','enum_declaration')]
         for n in declarations:
@@ -123,7 +123,7 @@ def generate(language,files,filename):
     print(filename,len(files),count)
 
 generate('java',sorted((ROOT/'Backend/src/main/java').rglob('*.java')),'Referencia_Backend.md')
-generate('javascript',sorted((ROOT/'Frontend/src').glob('*.js')),'Referencia_Frontend.md')
+generate('javascript',sorted((ROOT/'Frontend/src').rglob('*.js')),'Referencia_Frontend.md')
 
 inventory=['# Inventário de interface, HTTP e migrações','', 'Inventário estático da árvore de código documentada; uma linha aqui não significa que a ação foi executada em todas as combinações. Consulte a matriz de validação.','', '## Atributos de interação do frontend','', 'Os atributos `data-*` conectam botões, formulários e estados aos handlers documentados na referência. Alguns são seletores de apresentação, não ações. Valores dinâmicos são escapados no template e revalidados no servidor.','', '| Atributo | Primeira ocorrência |','|---|---|']
 attrs={}

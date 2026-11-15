@@ -6,13 +6,11 @@ import br.com.fooddelivery.notifications.NotificationTarget;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import java.io.*;
-import java.nio.file.*;
 import java.time.Instant;
 import java.util.*;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.FileSystemResource;
+import br.com.fooddelivery.media.StoreImageStorage;
 import org.springframework.http.*;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,12 +27,12 @@ public class StoreAssetController {
     private final StoreCoverSubmissionRepository submissions;
     private final AdminAuditService audit;
     private final NotificationService notifications;
-    private final Path directory;
+    private final StoreImageStorage storage;
     public StoreAssetController(StoreRepository stores,StoreCoverSubmissionRepository submissions,
             AdminAuditService audit,NotificationService notifications,
-            @Value("${app.media.store-assets-dir:./data/store-assets}") String directory){
+            StoreImageStorage storage){
         this.stores=stores;this.submissions=submissions;this.audit=audit;this.notifications=notifications;
-        this.directory=Path.of(directory).toAbsolutePath().normalize();
+        this.storage=storage;
     }
 
     @PostMapping("/merchant/stores/{id}/cover") @PreAuthorize("hasRole('MERCHANT')")
@@ -45,10 +43,10 @@ public class StoreAssetController {
             throw new org.springframework.web.server.ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS,"Limite de 10 envios por hora para esta loja. Tente mais tarde.");
         byte[] clean=sanitize(request.dataUrl());
         String name="cover-"+UUID.randomUUID()+".png";
-        try{Files.createDirectories(directory);Files.write(directory.resolve(name),clean,StandardOpenOption.CREATE_NEW);}
+        try{storage.put(name,clean);}
         catch(IOException ex){throw new IllegalStateException("Não foi possível salvar a imagem. Tente novamente.");}
         if(TransactionSynchronizationManager.isSynchronizationActive())TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization(){
-            @Override public void afterCompletion(int status){if(status!=STATUS_COMMITTED)try{Files.deleteIfExists(directory.resolve(name));}catch(IOException ignored){}}
+            @Override public void afterCompletion(int status){if(status!=STATUS_COMMITTED)try{storage.delete(name);}catch(IOException ignored){}}
         });
         submissions.findByStoreIdAndStatus(id,"PENDING").forEach(StoreCoverSubmission::supersede);
         return view(submissions.save(new StoreCoverSubmission(store,name)));
@@ -61,7 +59,7 @@ public class StoreAssetController {
     }
 
     @GetMapping("/merchant/stores/{id}/published-cover") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true)
-    public ResponseEntity<FileSystemResource> ownPublishedImage(@PathVariable UUID id,Authentication auth){
+    public ResponseEntity<byte[]> ownPublishedImage(@PathVariable UUID id,Authentication auth){
         Store store=stores.findById(id).orElseThrow();requireOwner(store,auth);
         String url=store.getCoverImageUrl(),prefix="/api/v1/store-assets/";
         return url!=null&&url.startsWith(prefix)?file(url.substring(prefix.length()),true):ResponseEntity.notFound().build();
@@ -75,7 +73,8 @@ public class StoreAssetController {
         UUID storeId=submissions.findStoreId(id).orElseThrow();
         Store store=stores.findByIdForUpdate(storeId).orElseThrow();
         StoreCoverSubmission submission=submissions.findByIdForUpdate(id).orElseThrow();
-        if(!Files.isRegularFile(directory.resolve(submission.getFileName())))throw new IllegalStateException("Arquivo indisponível. Solicite um novo envio ao vendedor.");
+        try{if(storage.read(submission.getFileName()).isEmpty())throw new IllegalStateException("Arquivo indisponível. Solicite um novo envio ao vendedor.");}
+        catch(IOException error){throw new IllegalStateException("Não foi possível consultar a imagem. Tente novamente.");}
         submission.review(request.approved(),request.note(),subject(auth));
         if(request.approved())store.setCoverImageUrl("/api/v1/store-assets/"+submission.getFileName());
         audit.record(subject(auth),request.approved()?"STORE_COVER_APPROVED":"STORE_COVER_REJECTED","STORE",storeId,"Imagem de capa analisada pela administração.");
@@ -86,24 +85,26 @@ public class StoreAssetController {
     }
 
     @GetMapping("/store-cover-submissions/{id}/image") @Transactional(readOnly=true)
-    public ResponseEntity<FileSystemResource> privateImage(@PathVariable UUID id,Authentication auth){
+    public ResponseEntity<byte[]> privateImage(@PathVariable UUID id,Authentication auth){
         StoreCoverSubmission submission=submissions.findById(id).orElseThrow();
         if(!auth.getAuthorities().stream().anyMatch(a->a.getAuthority().equals("ROLE_ADMIN")))requireOwner(submission.getStore(),auth);
         return file(submission.getFileName(),true);
     }
 
     @GetMapping("/store-assets/{fileName}") @Transactional(readOnly=true)
-    public ResponseEntity<FileSystemResource> readCover(@PathVariable String fileName){
+    public ResponseEntity<byte[]> readCover(@PathVariable String fileName){
         if(!validName(fileName)||stores.findByCoverImageUrl("/api/v1/store-assets/"+fileName).filter(Store::isAvailable).isEmpty())return ResponseEntity.notFound().build();
         return file(fileName,false);
     }
 
-    private ResponseEntity<FileSystemResource> file(String name,boolean confidential){
+    private ResponseEntity<byte[]> file(String name,boolean confidential){
         if(!validName(name))return ResponseEntity.notFound().build();
-        Path path=directory.resolve(name).normalize();
-        if(!path.startsWith(directory)||!Files.isRegularFile(path))return ResponseEntity.notFound().build();
-        return ResponseEntity.ok().cacheControl(confidential?CacheControl.noStore():CacheControl.noCache())
-            .header("X-Content-Type-Options","nosniff").contentType(MediaType.IMAGE_PNG).body(new FileSystemResource(path));
+        try {
+            var image=storage.read(name);
+            if(image.isEmpty())return ResponseEntity.notFound().build();
+            return ResponseEntity.ok().cacheControl(confidential?CacheControl.noStore():CacheControl.noCache())
+                .header("X-Content-Type-Options","nosniff").contentType(MediaType.IMAGE_PNG).body(image.get());
+        } catch(IOException error) { throw new IllegalStateException("Imagem temporariamente indisponível. Tente novamente."); }
     }
     private static boolean validName(String name){return name.matches("cover-[0-9a-fA-F-]{36}\\.png");}
     private static UUID subject(Authentication auth){return UUID.fromString(((Jwt)auth.getPrincipal()).getSubject());}

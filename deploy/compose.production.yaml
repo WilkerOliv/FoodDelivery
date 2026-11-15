@@ -40,13 +40,14 @@ services:
     cap_drop: [ALL]
     security_opt: ['no-new-privileges:true']
   web:
-    image: caddy:2-alpine
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.web
     environment:
       SITE_DOMAIN: ${SITE_DOMAIN}
     ports: ['80:80','443:443','443:443/udp']
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - ../Frontend:/srv:ro
       - tls:/data
       - caddy_config:/config
     depends_on: [api]

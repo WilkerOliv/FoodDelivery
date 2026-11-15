@@ -22,7 +22,7 @@ class StoreCoverTest {
     final UUID ownerId=UUID.randomUUID(),storeId=UUID.randomUUID(),submissionId=UUID.randomUUID();
     final StoreRepository stores=mock(StoreRepository.class);
     final StoreCoverSubmissionRepository submissions=mock(StoreCoverSubmissionRepository.class);
-    StoreAssetController controller(){return new StoreAssetController(stores,submissions,mock(AdminAuditService.class),mock(NotificationService.class),directory.toString());}
+    StoreAssetController controller(){return new StoreAssetController(stores,submissions,mock(AdminAuditService.class),mock(NotificationService.class),new br.com.fooddelivery.media.LocalStoreImageStorage(directory.toString()));}
     JwtAuthenticationToken auth(UUID id){return new JwtAuthenticationToken(Jwt.withTokenValue("test").header("alg","HS256").subject(id.toString()).build());}
     Store store(){var owner=new Account("owner@example.test","Vendedor","hash");owner.setRole(AccountRole.MERCHANT);ReflectionTestUtils.setField(owner,"id",ownerId);var store=new Store(owner,"Loja",null,"Rua A","Mercados");ReflectionTestUtils.setField(store,"id",storeId);store.setApproved(true);store.setCoverImageUrl("/api/v1/store-assets/cover-old.png");return store;}
     static String png(int width,int height)throws Exception{var bytes=new ByteArrayOutputStream();ImageIO.write(new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB),"png",bytes);return "data:image/png;base64,"+Base64.getEncoder().encodeToString(bytes.toByteArray());}

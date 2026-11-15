@@ -41,3 +41,8 @@ Localização opcional no mapa e modalidades de atendimento: [configuração, co
 Relatório da continuação manual: [Validação manual complementar — 06/11/2026](Documentacao/Validacao_manual_complementar_2026-11-06.md), com o defeito do aceite de entrega, a correção e a repetição manual concluída após o deploy de `4c55b8a`, além dos limites da evidência.
 
 Continuação de engenharia: [Carregamento e recuperação — 07/11/2026](Documentacao/Carregamento_e_recuperacao.md), com testes de sessão, falha de rede e conferência dos quatro perfis. [Plano de conclusão](Documentacao/Plano_de_conclusao.md) distingue o que está implementado das dependências para operação real.
+
+### Organização e persistência (14/11/2026)
+
+- [Módulos, limpeza e validação](Documentacao/Modularizacao_e_validacao_2026-11-14.md).
+- [Preparar banco e imagens gratuitos](Documentacao/Persistencia_gratuita.md): requer criação de conta e homologação externa; não transforma o Render de demonstração em produção.

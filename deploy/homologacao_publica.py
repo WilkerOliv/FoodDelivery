@@ -23,7 +23,11 @@ ROOT = Path(__file__).resolve().parent
 FRONTEND = ROOT / 'Frontend'
 if not FRONTEND.exists():  # Source checkout, used by focused tests.
     FRONTEND = ROOT.parent / 'Frontend'
-spec = importlib.util.spec_from_file_location('local_frontend', FRONTEND / 'scripts/start.py')
+# Packaged handler is private, outside the publicly served frontend directory.
+handler_path = ROOT / 'frontend_handler.py'
+if not handler_path.exists():
+    handler_path = FRONTEND / 'scripts/start.py'
+spec = importlib.util.spec_from_file_location('local_frontend', handler_path)
 frontend = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(frontend)
 
