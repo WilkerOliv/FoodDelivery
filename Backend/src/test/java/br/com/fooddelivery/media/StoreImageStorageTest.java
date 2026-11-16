@@ -39,6 +39,17 @@ class StoreImageStorageTest {
         assertEquals("Armazenamento indisponível.",assertThrows(IOException.class,()->storage.read(name)).getMessage());
     }
     @SuppressWarnings("unchecked")
+    @Test void opaqueSecretKeyIsSentOnlyInApiKeyHeader() throws Exception {
+        var client=mock(HttpClient.class);HttpResponse<byte[]> response=mock(HttpResponse.class);
+        when(client.sendAsync(any(HttpRequest.class),any(HttpResponse.BodyHandler.class))).thenReturn(java.util.concurrent.CompletableFuture.completedFuture(response));
+        when(response.statusCode()).thenReturn(200);when(response.body()).thenReturn(new byte[]{1});
+        var storage=new SupabaseStoreImageStorage("https://project.supabase.co","covers","sb_secret_test",client);
+        storage.read(name);
+        var request=ArgumentCaptor.forClass(HttpRequest.class);verify(client).sendAsync(request.capture(),any(HttpResponse.BodyHandler.class));
+        assertEquals("sb_secret_test",request.getValue().headers().firstValue("apikey").orElseThrow());
+        assertTrue(request.getValue().headers().firstValue("Authorization").isEmpty());
+    }
+    @SuppressWarnings("unchecked")
     @Test void oversizedDownloadsAreRejectedAndDeleteUsesBucketEndpoint() throws Exception {
         var client=mock(HttpClient.class);HttpResponse<byte[]> response=mock(HttpResponse.class);
         when(client.sendAsync(any(HttpRequest.class),any(HttpResponse.BodyHandler.class))).thenReturn(java.util.concurrent.CompletableFuture.completedFuture(response));

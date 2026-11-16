@@ -43,7 +43,7 @@ app:
     supabase:
       url: ${SUPABASE_PROJECT_URL:}
       bucket: ${SUPABASE_STORAGE_BUCKET:store-covers}
-      key: ${SUPABASE_SERVICE_ROLE_KEY:}
+      key: ${SUPABASE_SECRET_KEY:${SUPABASE_SERVICE_ROLE_KEY:}}
     store-assets-dir: ${STORE_ASSETS_DIR:./data/store-assets}
   security:
     cookie-secure: ${AUTH_COOKIE_SECURE:false}

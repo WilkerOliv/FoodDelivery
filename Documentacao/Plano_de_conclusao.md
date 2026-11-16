@@ -1,6 +1,6 @@
 # Plano de conclusão e limites para lançamento
 
-Atualizado em 14/11/2026. Este quadro distingue implementação, execução demonstrada e operação externa. “Implementado” não significa homologado para cobrar clientes reais.
+Atualizado em 16/11/2026. Este quadro distingue implementação, execução demonstrada e operação externa. “Implementado” não significa homologado para cobrar clientes reais.
 
 ## Etapas internas já entregues
 
@@ -18,7 +18,7 @@ Atualizado em 14/11/2026. Este quadro distingue implementação, execução demo
 
 1. **Aceite da versão publicada:** conferido no painel Render em 11/11: último commit publicado `3c456d7`, estado Live. Entrada de avaliador, login administrativo, carregamento de Definições e CPF opcional foram conferidos pelo navegador. As demais jornadas publicadas continuam com o escopo das evidências anteriores; esta checagem não repete todos os fluxos.
 2. **Integrações de teste:** Mercado Pago sandbox com OAuth, webhook público assinado, recusa/atraso/duplicidade e estorno confirmado. SMTP e WhatsApp exigem conta/configuração e teste de entrega; simulador não atesta o fornecedor. Nenhuma cobrança real é necessária para o sandbox.
-3. **Persistência e recuperação completas:** o proprietário confirmou que não existe banco em produção; provisionar PostgreSQL persistente e armazenamento de capas, guardar chaves fora do repositório, cópia externa criptografada com retenção, ensaio conjunto e RPO/RTO medidos. H2 de demonstração no Render pode ser reiniciado/perdido e não é banco de produção. O adaptador de bucket privado e schema PostgreSQL estão preparados; [cadastro/configuração gratuita](Persistencia_gratuita.md) aguardam criação da conta e validação externa.
+3. **Persistência e recuperação completas:** Supabase criado, conta SQL limitada e schema privado preparados, bucket privado configurado e envio/leitura de imagem testados no fornecedor. A conexão SQL com TLS e o login administrativo foram confirmados em 16/11; a publicação da imagem persistente está pendente. Na retomada posterior, a rede local recebeu reset durante o handshake TLS, antes da autenticação; a verificação externa após reinício continua pendente. A imagem publicada conferida no Render continua sendo a demonstração (`29973b3`), sem garantia de retenção. Depois da conexão/publicação, concluir cópia externa criptografada com retenção, ensaio conjunto de banco/imagens/chaves e RPO/RTO medidos. Consulte [configuração e evidências](Persistencia_gratuita.md).
 4. **Operação segura:** ativar MFA, confirmar cookies Secure/origens/proxy finais, monitoramento com alertas acionáveis, rotação e procedimento de incidente. Contadores de abuso são locais; múltiplas réplicas exigem mecanismo compartilhado.
 5. **Manutenção e desempenho:** telas e ações principais extraídas de `main.js`, listas administrativas paginadas e imports recursivos verificados. Permanecem funções extensas de renderização e estado compartilhado; medir carga/consultas antes de novas otimizações. Veja [modularização e validação](Modularizacao_e_validacao_2026-11-14.md).
 6. **Aceite com usuários:** aparelhos físicos, teclado, zoom/leitor de tela e tarefas acompanhadas com pessoas de pouca familiaridade digital. Verificação de largura no navegador não substitui esses testes.

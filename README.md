@@ -18,7 +18,7 @@ O ambiente é isolado e não movimenta dinheiro. Não substituir homologação d
 
 ### Homologação gratuita pela internet
 
-[Passo a passo no Render](Documentacao/Publicacao_gratuita_de_homologacao.md): demonstração protegida por senha, endereço HTTPS gratuito, dados fictícios e descartáveis. O Blueprint `render.yaml` usa um único serviço Free. Não serve para operação comercial nem guarda dados após reinícios.
+[Piloto persistente no Render e Supabase](Documentacao/Persistencia_gratuita.md): o Blueprint `render.yaml` prepara um único serviço Free conectado a PostgreSQL e imagens externos, com pagamentos em sandbox. Exige credenciais privadas e validação da publicação; não equivale a operação comercial homologada. A [demonstração descartável](Documentacao/Publicacao_gratuita_de_homologacao.md) continua disponível em um Dockerfile separado.
 
 [Inicialização, nova publicação e verificações de segurança no GitHub](Documentacao/Publicacao_e_verificacoes_de_seguranca.md), com os limites de CodeQL em repositórios privados e a análise gratuita disponível.
 
@@ -45,4 +45,4 @@ Continuação de engenharia: [Carregamento e recuperação — 07/11/2026](Docum
 ### Organização e persistência (14/11/2026)
 
 - [Módulos, limpeza e validação](Documentacao/Modularizacao_e_validacao_2026-11-14.md).
-- [Preparar banco e imagens gratuitos](Documentacao/Persistencia_gratuita.md): requer criação de conta e homologação externa; não transforma o Render de demonstração em produção.
+- [Banco e imagens persistentes](Documentacao/Persistencia_gratuita.md): conta e armazenamento configurados; conexão SQL e publicação pendentes de validação. Alterar variáveis sem publicar a imagem persistente não converte a demonstração.

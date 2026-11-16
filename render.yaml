@@ -1,15 +1,40 @@
-# Demonstração temporária: nenhum serviço pago, banco externo ou disco persistente.
+# Piloto persistente: Render Free + PostgreSQL e Storage externos no Supabase.
+# Credenciais e certificado CA são configurados no ambiente privado do serviço.
 services:
   - type: web
     name: fooddelivery-homologacao
     runtime: docker
     plan: free
-    dockerfilePath: ./deploy/Dockerfile.homologacao
+    dockerfilePath: ./deploy/Dockerfile.persistente
     dockerContext: .
     autoDeployTrigger: "off"
     healthCheckPath: /healthz
     envVars:
-      - key: DEMO_ACCESS_USER
-        value: avaliador
-      - key: DEMO_ACCESS_PASSWORD
-        generateValue: true
+      - key: SPRING_PROFILES_ACTIVE
+        value: postgres
+      - key: DATABASE_SCHEMA
+        value: fooddelivery
+      - key: DATABASE_POOL_SIZE
+        value: "3"
+      - key: STORE_ASSETS_PROVIDER
+        value: supabase
+      - key: SUPABASE_STORAGE_BUCKET
+        value: store-covers
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_USERNAME
+        sync: false
+      - key: DATABASE_PASSWORD
+        sync: false
+      - key: SUPABASE_PROJECT_URL
+        sync: false
+      - key: SUPABASE_SECRET_KEY
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: PRIVATE_CONFIG_ENCRYPTION_KEY
+        sync: false
+      - key: APP_ADMIN_EMAIL
+        sync: false
+      - key: APP_ADMIN_PASSWORD
+        sync: false

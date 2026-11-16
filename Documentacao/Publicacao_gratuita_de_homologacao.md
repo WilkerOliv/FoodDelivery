@@ -1,5 +1,7 @@
 # Publicação gratuita de homologação
 
+Este guia descreve exclusivamente a **demonstração descartável**. O `render.yaml` atual corresponde ao [piloto persistente com Supabase](Persistencia_gratuita.md). Para aquele ambiente, siga o guia de persistência; os dados não devem ser tratados como descartáveis.
+
 ## Finalidade
 
 Uma demonstração privada, acessível por HTTPS em um subdomínio `onrender.com`, para avaliar cliente, vendedor, entregador e administrador. Não exige comprar domínio. O servidor Java e a interface são publicados juntos em um único serviço Docker gratuito, com API na mesma origem. Não há banco externo nem disco pago neste modelo.
@@ -19,7 +21,6 @@ Não envie senha, código de autenticação ou token pelo chat.
 
 O Render precisa receber os arquivos presentes neste checkout:
 
-- `render.yaml`: serviço gratuito e senha de acesso gerada pela plataforma.
 - `deploy/Dockerfile.homologacao`: compilação Java 21 e execução da interface com gateway.
 - `deploy/homologacao_publica.py`: proteção de acesso e inicialização isolada.
 - `.dockerignore`: exclusão de arquivos privados e dados locais do contexto de build.
@@ -28,14 +29,14 @@ Envie para o GitHub a versão revisada do projeto com esses arquivos. Enquanto e
 
 ## 3. Criar o serviço
 
-1. No painel Render, escolha **New → Blueprint**.
+1. No painel Render, escolha **New → Web Service** para uma demonstração separada.
 2. Conecte o repositório e selecione a branch que contém os arquivos novos.
-3. Informe `render.yaml` como caminho do Blueprint, caso seja solicitado.
-4. Confira: **um Web Service**, runtime **Docker**, plano **Free**, sem PostgreSQL e sem disco.
+3. Configure runtime Docker, contexto `.`, Dockerfile `./deploy/Dockerfile.homologacao`, health check `/healthz`, publicação automática desligada e variáveis privadas `DEMO_ACCESS_USER=avaliador` e `DEMO_ACCESS_PASSWORD` com senha aleatória forte. Não reutilize a senha administrativa do site.
+4. Confira: **um Web Service**, plano **Free**, sem PostgreSQL externo e sem disco.
 5. Confirme a criação. Se o nome do serviço já estiver ocupado, escolha outro; o endereço definitivo é o exibido pelo Render.
 6. Aguarde o build e o estado **Live**. O build compila o backend; não é uma comprovação de todos os testes do projeto. A disponibilidade de recursos gratuitos depende da conta e das regras vigentes da plataforma.
 
-O Blueprint não habilita atualização automática: após revisar novas alterações, use **Manual Deploy → Deploy latest commit**. Cada publicação perde os dados da demonstração anterior.
+Com publicação automática desligada, após revisar novas alterações use **Manual Deploy → Deploy latest commit**. Cada publicação perde os dados da demonstração anterior. Não aplique esse procedimento ao piloto persistente existente como forma de restauração.
 
 ## 4. Abrir a demonstração
 

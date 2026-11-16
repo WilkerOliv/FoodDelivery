@@ -27,8 +27,11 @@ public final class SupabaseStoreImageStorage implements StoreImageStorage {
     }
     private HttpRequest.Builder request(String name) {
         StoreImageStorage.validateName(name);
-        return HttpRequest.newBuilder(base.resolve(name)).timeout(Duration.ofSeconds(20))
-            .header("Authorization","Bearer "+key).header("apikey",key);
+        var request=HttpRequest.newBuilder(base.resolve(name)).timeout(Duration.ofSeconds(20))
+            .header("apikey",key);
+        // New secret keys are opaque, not JWTs; only legacy service_role uses Bearer.
+        if(!key.startsWith("sb_secret_"))request.header("Authorization","Bearer "+key);
+        return request;
     }
     private HttpResponse<byte[]> send(HttpRequest request) throws IOException {
         var pending = client.sendAsync(request, info -> new LimitedImageSubscriber());
