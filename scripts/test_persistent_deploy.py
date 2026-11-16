@@ -97,6 +97,7 @@ def container_test():
             else:
                 raise AssertionError('PostgreSQL não iniciou.')
             run('docker', 'run', '-d', '--name', app, '--network', network, '--memory=512m', '--cpus=1',
+                '--cap-drop=ALL', '--security-opt', 'no-new-privileges',  # reproduz as restrições do Render
                 '-p', '127.0.0.1::10000', '--env-file', str(envfile),
                 '-v', f'{folder}/ca.crt:/run/secrets/ca.crt:ro', 'fooddelivery-persistent:qa', stdout=subprocess.DEVNULL)
             created.append(app)

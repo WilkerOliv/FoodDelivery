@@ -11,7 +11,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends python3 \
     && groupadd --gid 10001 fooddelivery \
     && useradd --uid 10001 --gid 10001 --no-create-home fooddelivery
 WORKDIR /app
-COPY --from=proxy /usr/bin/caddy /usr/local/bin/caddy
+# A imagem oficial do Caddy marca o binário com cap_net_bind_service. O Render executa o
+# contêiner sem essa capability e o execve falha com EPERM. O proxy escuta na porta 10000
+# (> 1024), então a capability é desnecessária: recriar o arquivo descarta o xattr.
+COPY --from=proxy /usr/bin/caddy /usr/local/bin/caddy.orig
+RUN cat /usr/local/bin/caddy.orig > /usr/local/bin/caddy \
+    && chmod 0755 /usr/local/bin/caddy \
+    && rm /usr/local/bin/caddy.orig
 COPY --from=build /build/target/food-delivery-api-*.jar /app/api.jar
 COPY Frontend/index.html Frontend/styles.css Frontend/theme.css Frontend/favicon.ico Frontend/favicon.svg /app/web/
 COPY Frontend/src /app/web/src
