@@ -125,6 +125,8 @@ def container_test():
                     time.sleep(1)
                 raise AssertionError('O serviço não ficou pronto.')
             ready()
+            startup_log = run('docker', 'logs', app, capture_output=True)
+            assert 'permission denied' not in (startup_log.stdout + startup_log.stderr).lower()
             with request('/') as response:
                 assert response.status == 200 and 'Content-Security-Policy' in response.headers
             for path in ('/demo.html', '/scripts/start.py', '/package.json', '/actuator/health'):

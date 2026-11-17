@@ -68,6 +68,9 @@ def main():
     try:
         # Proxy needs no database, storage or signing credentials.
         proxy_env = {key: env[key] for key in ('PATH', 'PORT') if key in env}
+        # Its runtime files must stay writable without granting access to /app.
+        proxy_env.update(XDG_CONFIG_HOME='/tmp/fooddelivery-caddy/config',
+                         XDG_DATA_HOME='/tmp/fooddelivery-caddy/data')
         processes.append(subprocess.Popen(['caddy', 'run', '--config', '/app/Caddyfile',
                                           '--adapter', 'caddyfile'], env=proxy_env))
         processes.append(subprocess.Popen(['java', '-Xms64m', '-Xmx256m',
