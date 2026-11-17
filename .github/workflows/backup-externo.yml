@@ -1,0 +1,70 @@
+name: Cópia externa cifrada
+
+# Diária e manual. Só roda no branch padrão. Exige os segredos abaixo; sem eles o job falha cedo.
+#   BACKUP_DB_HOST, BACKUP_DB_PORT, BACKUP_DB_USER, BACKUP_DB_PASSWORD, BACKUP_DB_CA (PEM)
+#   SUPABASE_PROJECT_URL, SUPABASE_SECRET_KEY            (capas no Storage)
+#   BACKUP_AGE_RECIPIENT                                 (chave PÚBLICA age; a privada fica offline)
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backup-externo
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    name: Dump cifrado do schema fooddelivery e das capas
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instalar clientes PostgreSQL 17 e age
+        run: |
+          sudo install -d /usr/share/postgresql-common/pgdg
+          sudo curl --fail --silent --show-error -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc https://www.postgresql.org/media/keys/ACCC4CF8.asc
+          echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list >/dev/null
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client-17 age jq
+      - name: Gerar a cópia cifrada
+        env:
+          BACKUP_DB_HOST: ${{ secrets.BACKUP_DB_HOST }}
+          BACKUP_DB_PORT: ${{ secrets.BACKUP_DB_PORT }}
+          BACKUP_DB_USER: ${{ secrets.BACKUP_DB_USER }}
+          BACKUP_DB_PASSWORD: ${{ secrets.BACKUP_DB_PASSWORD }}
+          BACKUP_DB_CA: ${{ secrets.BACKUP_DB_CA }}
+          SUPABASE_PROJECT_URL: ${{ secrets.SUPABASE_PROJECT_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          BACKUP_AGE_RECIPIENT: ${{ secrets.BACKUP_AGE_RECIPIENT }}
+        run: |
+          set -euo pipefail
+          umask 077
+          for name in BACKUP_DB_HOST BACKUP_DB_PORT BACKUP_DB_USER BACKUP_DB_PASSWORD BACKUP_DB_CA BACKUP_AGE_RECIPIENT; do
+            if [ -z "${!name}" ]; then echo "Segredo ausente: $name" >&2; exit 2; fi
+          done
+          # O arquivo privado é lido como shell: %q impede que o conteúdo dos segredos vire comando.
+          printf '%s\n' "$BACKUP_DB_CA" > "$RUNNER_TEMP/ca.pem"
+          {
+            printf 'DB_HOST=%q\n' "$BACKUP_DB_HOST"
+            printf 'DB_PORT=%q\n' "$BACKUP_DB_PORT"
+            printf 'DATABASE_USERNAME=%q\n' "$BACKUP_DB_USER"
+            printf 'DATABASE_PASSWORD=%q\n' "$BACKUP_DB_PASSWORD"
+            printf 'DATABASE_NAME=postgres\n'
+            printf 'PGSSLMODE=verify-full\n'
+            printf 'PGSSLROOTCERT=%q\n' "$RUNNER_TEMP/ca.pem"
+          } > "$RUNNER_TEMP/private.env"
+          PRIVATE_ENV_FILE="$RUNNER_TEMP/private.env" OFFSITE_DIR="$RUNNER_TEMP/offsite" \
+            bash Backend/scripts/backup-offsite.sh
+          rm -f "$RUNNER_TEMP/private.env" "$RUNNER_TEMP/ca.pem"
+          echo "OFFSITE_DIR=$RUNNER_TEMP/offsite" >> "$GITHUB_ENV"
+      - name: Guardar a cópia cifrada (30 dias)
+        uses: actions/upload-artifact@v4
+        with:
+          name: fooddelivery-copia-cifrada
+          path: ${{ env.OFFSITE_DIR }}
+          if-no-files-found: error
+          retention-days: 30

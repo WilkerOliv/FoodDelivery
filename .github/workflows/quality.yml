@@ -17,6 +17,10 @@ jobs:
         run: python3 scripts/test_public_preview.py
       - name: Test backup failure handling
         run: python3 -m unittest scripts.test_backup_scripts
+      - name: Install age for the offsite backup test
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq age jq
+      - name: Test encrypted offsite backup and restore
+        run: python3 -m unittest scripts.test_offsite_backup
       - name: Test detection of Code Scanning availability
         run: python3 -m unittest discover -s scripts -p test_security_capabilities.py
       - name: Test persistent deployment configuration

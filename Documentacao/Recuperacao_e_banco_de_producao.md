@@ -53,6 +53,40 @@ O dump não inclui arquivos de capa, configurações privadas, chaves de criptog
 
 Destino externo, retenção, cifragem, agendamento e ensaio conjunto de banco/arquivos/chaves **ainda precisam de implantação operacional**. Nenhum backup real foi enviado a um serviço externo nesta revisão.
 
+## Cópia externa cifrada (implementada em 17/11/2026; ainda sem execução real)
+
+`Backend/scripts/backup-offsite.sh` gera um pacote único com o dump do schema privado (`fooddelivery`), as capas do bucket privado e um manifesto, cifrado com [age](https://age-encryption.org). A cópia usa só a chave **pública** (`BACKUP_AGE_RECIPIENT`); a identidade privada fica fora do GitHub e do Render. `Backend/scripts/restore-offsite.sh` verifica o SHA-256, decifra, recusa caminhos inseguros, restaura o banco com `restore-db.sh` (que exige a confirmação do banco de destino) e copia as capas para uma pasta. Ao final imprime o tempo gasto, que serve de RTO do ensaio.
+
+O fluxo `.github/workflows/backup-externo.yml` roda todos os dias às 06:17 UTC e sob demanda, e guarda o pacote cifrado como artefato por 30 dias. Esse é o **RPO máximo teórico de 24 horas**; ele só vale depois do primeiro ensaio. Configure estes segredos do repositório:
+
+| Segredo | Conteúdo |
+|---|---|
+| `BACKUP_DB_HOST`, `BACKUP_DB_PORT` | Endereço do PostgreSQL do Supabase |
+| `BACKUP_DB_USER`, `BACKUP_DB_PASSWORD` | Conta restrita `fooddelivery_app.<projeto>`, a mesma do Render |
+| `BACKUP_DB_CA` | Certificado CA em PEM (conexão `verify-full`) |
+| `SUPABASE_PROJECT_URL`, `SUPABASE_SECRET_KEY` | Para baixar as capas do bucket `store-covers` |
+| `BACKUP_AGE_RECIPIENT` | Chave pública gerada com `age-keygen` |
+
+Gere o par de chaves em uma máquina sua: `age-keygen -o chave-backup.txt`. Guarde `chave-backup.txt` em cofre offline, com uma segunda cópia separada, e coloque só a linha `Public key` no segredo. **Sem essa chave privada, a cópia não pode ser recuperada.**
+
+Limites que continuam valendo:
+- Os artefatos do GitHub são um destino externo ao Render e ao Supabase, mas não são um cofre independente: expiram em 30 dias e dependem da conta do GitHub. Para retenção longa, copie periodicamente para um terceiro destino sob seu controle.
+- `JWT_SECRET`, `PRIVATE_CONFIG_ENCRYPTION_KEY` e as demais chaves **não** entram na cópia. Sem elas, os tokens do Mercado Pago salvos no banco não podem ser lidos. Guarde-as em cofre separado.
+- As capas são copiadas para uma pasta; o envio de volta ao bucket do ambiente restaurado é manual.
+- O dump cobre só o schema `fooddelivery`. Usuários do Supabase Auth e outros schemas não são usados pela aplicação e não entram.
+
+Ensaio de restauração (criar um banco descartável vazio, nunca o de produção):
+
+```sh
+AGE_IDENTITY_FILE=chave-backup.txt \
+PRIVATE_ENV_FILE=/caminho/privado/destino.env \
+RESTORE_CONFIRM_DATABASE=fooddelivery_restore_qa \
+RESTORE_FILES_DIR=./capas-restauradas \
+bash Backend/scripts/restore-offsite.sh fooddelivery-AAAAMMDDTHHMMSSZ-XXXX.tar.age
+```
+
+Evidência desta etapa: `scripts/test_offsite_backup.py` (7 testes, com `age` real e PostgreSQL/Storage simulados) cobre cifragem, ausência de segredos nos registros, schema limitado, ida e volta, adulteração, chave errada, confirmação de banco errada, entradas inválidas e caminhos maliciosos. **Nenhuma cópia real foi gerada nem restaurada**; o RPO/RTO reais continuam sem medição.
+
 ## Evidência de 11/11
 
 - Nove testes isolados de scripts: permissões, backup movido, checksum de outro arquivo, confirmação incorreta, nome de conexão proibido, dump com falha, nomes únicos, checksum múltiplo e falha de restore.
