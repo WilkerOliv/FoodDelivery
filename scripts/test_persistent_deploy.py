@@ -51,6 +51,7 @@ class ConfigurationTests(unittest.TestCase):
             configured = launcher.configuration(env)
             self.assertEqual(configured['MP_SANDBOX'], 'true')
             self.assertEqual(configured['AUTH_COOKIE_SECURE'], 'true')
+            self.assertEqual(configured['APP_SECURITY_CLIENT_ADDRESS_HEADER'], 'X-Fooddelivery-Client-IP')
             for key, value in [('DATABASE_USERNAME', 'postgres'), ('DATABASE_SCHEMA', 'public'),
                     ('DATABASE_PASSWORD', 'short'), ('SPRING_PROFILES_ACTIVE', 'homologacao'),
                     ('JWT_SECRET', 'bad'), ('STORE_ASSETS_PROVIDER', 'local'),
@@ -103,10 +104,11 @@ def container_test():
             created.append(app)
             port = run('docker', 'port', app, '10000/tcp', capture_output=True).stdout.strip().rsplit(':', 1)[1]
             base = 'http://127.0.0.1:' + port
-            def request(path, body=None, cookie=None, origin=env['RENDER_EXTERNAL_URL']):
+            def request(path, body=None, cookie=None, origin=env['RENDER_EXTERNAL_URL'], extra=None):
                 headers = {'Content-Type': 'application/json', 'Origin': origin}
                 if cookie:
                     headers['Cookie'] = cookie
+                headers.update(extra or {})
                 try:
                     return urllib.request.urlopen(urllib.request.Request(base + path,
                         data=json.dumps(body).encode() if body is not None else None, headers=headers), timeout=10)
@@ -143,6 +145,17 @@ def container_test():
                 identity = json.load(response)
             with request('/api/v1/auth/logout', {}, cookie, 'https://attacker.example.test') as response:
                 assert response.status == 403
+            # Visitantes diferentes atrás do proxy não dividem o orçamento coletivo de login.
+            # O X-Forwarded-For forjado à esquerda não pode trocar o bucket: o valor confiável é o da direita.
+            statuses = []
+            for number in range(101):
+                with request('/api/v1/auth/login', {'email': f'inventado{number}@example.test', 'password': 'senha-incorreta-123'},
+                             extra={'X-Forwarded-For': f'203.0.113.{number % 200 + 1}, 198.51.100.20'}) as response:
+                    statuses.append(response.status)
+            assert statuses[-1] == 429 and 429 not in statuses[:-1], statuses
+            with request('/api/v1/auth/login', {'email': 'outra-pessoa@example.test', 'password': 'senha-incorreta-123'},
+                         extra={'X-Forwarded-For': '198.51.100.21'}) as response:
+                assert response.status == 401, response.status
             # Stable signing key and PostgreSQL preserve the account and existing login.
             run('docker', 'restart', app, stdout=subprocess.DEVNULL)
             port = run('docker', 'port', app, '10000/tcp', capture_output=True).stdout.strip().rsplit(':', 1)[1]

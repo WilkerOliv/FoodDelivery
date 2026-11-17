@@ -54,6 +54,7 @@ def configuration(source):
                MP_REDIRECT_URI=origin + '/api/v1/payments/mercadopago/callback',
                MP_NOTIFICATION_BASE_URL=origin,
                SERVER_ADDRESS='127.0.0.1', SERVER_PORT='8181',
+               APP_SECURITY_CLIENT_ADDRESS_HEADER='X-Fooddelivery-Client-IP',
                MANAGEMENT_ENDPOINT_HEALTH_GROUP_READINESS_INCLUDE='readinessState,db',
                MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS='never')
     return env

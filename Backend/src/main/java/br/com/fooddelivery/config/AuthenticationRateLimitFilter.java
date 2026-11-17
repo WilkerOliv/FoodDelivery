@@ -19,18 +19,56 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Pattern;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-/** Account-scoped throttling with a coarse peer budget; forwarding headers are never trusted. */
+/**
+ * Account-scoped throttling with a coarse peer budget. Forwarding headers are never trusted, with one
+ * explicit exception: when a client-address header is configured (the local gateway overwrites it on every
+ * request), it is honoured only for connections coming from the loopback interface and only when it holds
+ * a literal IP address. Without that configuration the peer is always the TCP remote address.
+ */
 public final class AuthenticationRateLimitFilter extends OncePerRequestFilter {
     private static final int MAX_BUCKETS = 50_000;
     private static final int MAX_AUTH_BODY_BYTES = 8192;
     private static final ObjectMapper JSON = new ObjectMapper();
+    private static final Pattern IPV4 = Pattern.compile("(?:(?:25[0-5]|2[0-4]\\d|1?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|1?\\d?\\d)");
+    private static final Pattern IPV6 = Pattern.compile("[0-9a-fA-F:.]{2,45}");
     private final Map<String, Window> windows = new LinkedHashMap<>();
+    private final String clientAddressHeader;
     private long requests;
+
+    public AuthenticationRateLimitFilter() { this(""); }
+
+    public AuthenticationRateLimitFilter(String clientAddressHeader) {
+        this.clientAddressHeader = clientAddressHeader == null ? "" : clientAddressHeader.trim();
+    }
+
+    private String peerAddress(HttpServletRequest request) {
+        String remote = String.valueOf(request.getRemoteAddr());
+        if (clientAddressHeader.isEmpty() || !isLoopback(remote)) return remote;
+        String candidate = request.getHeader(clientAddressHeader);
+        return candidate != null && isLiteralAddress(candidate.trim()) ? candidate.trim().toLowerCase(Locale.ROOT) : remote;
+    }
+
+    private static boolean isLoopback(String address) {
+        return address.equals("::1") || address.equals("0:0:0:0:0:0:0:1") || address.startsWith("127.");
+    }
+
+    /** Syntax-only check: a hostname must never reach a resolver. */
+    private static boolean isLiteralAddress(String value) {
+        if (IPV4.matcher(value).matches()) return true;
+        if (!value.contains(":") || !IPV6.matcher(value).matches()) return false;
+        try {
+            java.net.InetAddress.getByName(value); // a colon forces literal parsing, never a DNS lookup
+            return true;
+        } catch (java.net.UnknownHostException invalid) {
+            return false;
+        }
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -41,7 +79,7 @@ public final class AuthenticationRateLimitFilter extends OncePerRequestFilter {
             return;
         }
 
-        String remoteAddress = String.valueOf(request.getRemoteAddr());
+        String remoteAddress = peerAddress(request);
         String subject = null;
         HttpServletRequest forwarded = request;
         if (request.getRequestURI().startsWith("/api/v1/auth/")) {
