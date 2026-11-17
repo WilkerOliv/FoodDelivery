@@ -2,6 +2,11 @@
 	admin off
 	auto_https off
 	servers {
+		# O balanceador do Render fica em faixa privada e acrescenta o cliente ao fim do X-Forwarded-For.
+		# Em modo estrito, o Caddy lê da direita e ignora valores forjados pelo visitante.
+		trusted_proxies static private_ranges
+		trusted_proxies_strict
+		client_ip_headers X-Forwarded-For
 		timeouts {
 			read_header 10s
 			read_body 30s
@@ -27,10 +32,14 @@
 	}
 	handle /healthz {
 		rewrite * /actuator/health/readiness
-		reverse_proxy 127.0.0.1:8181
+		reverse_proxy 127.0.0.1:8181 {
+			header_up X-Fooddelivery-Client-IP {client_ip}
+		}
 	}
 	handle /api/* {
-		reverse_proxy 127.0.0.1:8181
+		reverse_proxy 127.0.0.1:8181 {
+			header_up X-Fooddelivery-Client-IP {client_ip}
+		}
 	}
 	handle /runtime-config.js {
 		header Content-Type text/javascript

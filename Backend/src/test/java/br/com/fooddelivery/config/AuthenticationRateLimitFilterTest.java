@@ -128,6 +128,46 @@ class AuthenticationRateLimitFilterTest {
         }
     }
 
+    private static final String GATEWAY_HEADER = "X-Fooddelivery-Client-IP";
+
+    private static MockHttpServletResponse loginVia(AuthenticationRateLimitFilter filter, String email, String remote,
+                                                    String gatewayAddress, FilterChain chain) throws Exception {
+        var request = loginRequest(email, remote);
+        if (gatewayAddress != null) request.addHeader(GATEWAY_HEADER, gatewayAddress);
+        var response = new MockHttpServletResponse();
+        filter.doFilter(request, response, chain);
+        return response;
+    }
+
+    @Test void gatewayAddressSeparatesCoarseBudgetsBehindTheLocalProxy() throws Exception {
+        var filter = new AuthenticationRateLimitFilter(GATEWAY_HEADER);
+        FilterChain failure = (request, response) -> ((MockHttpServletResponse) response).setStatus(401);
+        for (int i = 0; i < 100; i++) assertEquals(401, loginVia(filter, "inventado" + i + "@example.test", "127.0.0.1", "203.0.113.5", failure).getStatus());
+        assertEquals(429, loginVia(filter, "inventado-extra@example.test", "127.0.0.1", "203.0.113.5", failure).getStatus());
+        assertEquals(401, loginVia(filter, "outra-pessoa@example.test", "127.0.0.1", "203.0.113.6", failure).getStatus());
+        assertEquals(401, loginVia(filter, "ipv6@example.test", "::1", "2001:db8::7", failure).getStatus());
+    }
+
+    @Test void gatewayHeaderIsIgnoredWhenNotConfiguredOrWhenTheConnectionIsNotLoopback() throws Exception {
+        FilterChain failure = (request, response) -> ((MockHttpServletResponse) response).setStatus(401);
+        var unconfigured = new AuthenticationRateLimitFilter();
+        for (int i = 0; i < 100; i++) loginVia(unconfigured, "a" + i + "@example.test", "127.0.0.1", "203.0.113." + (i % 200), failure);
+        assertEquals(429, loginVia(unconfigured, "z@example.test", "127.0.0.1", "198.51.100.1", failure).getStatus());
+
+        var configured = new AuthenticationRateLimitFilter(GATEWAY_HEADER);
+        for (int i = 0; i < 100; i++) loginVia(configured, "b" + i + "@example.test", "192.0.2.50", "203.0.113." + (i % 200), failure);
+        assertEquals(429, loginVia(configured, "y@example.test", "192.0.2.50", "198.51.100.2", failure).getStatus());
+    }
+
+    @Test void invalidOrHostnameGatewayValuesFallBackToTheTcpPeerWithoutResolution() throws Exception {
+        var filter = new AuthenticationRateLimitFilter(GATEWAY_HEADER);
+        FilterChain failure = (request, response) -> ((MockHttpServletResponse) response).setStatus(401);
+        String[] invalid = {"example.com", "abc", "999.1.1.1", "1.2.3", "203.0.113.5, 10.0.0.1", " ", "::zz", "203.0.113.5:80"};
+        for (int i = 0; i < 100; i++) loginVia(filter, "c" + i + "@example.test", "127.0.0.1", invalid[i % invalid.length], failure);
+        assertEquals(429, loginVia(filter, "x@example.test", "127.0.0.1", "example.net", failure).getStatus());
+        assertEquals(401, loginVia(filter, "w@example.test", "127.0.0.1", "203.0.113.77", failure).getStatus());
+    }
+
     private static void actor(String id) {
         var jwt=Jwt.withTokenValue("test").header("alg","HS256").subject(id).build();
         SecurityContextHolder.getContext().setAuthentication(new JwtAuthenticationToken(jwt,List.of()));

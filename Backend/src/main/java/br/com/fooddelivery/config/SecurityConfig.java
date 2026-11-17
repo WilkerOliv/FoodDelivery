@@ -136,7 +136,8 @@ public class SecurityConfig {
                                             JwtAuthenticationConverter jwtConverter,
                                             AuthenticatedAccessManager authenticatedAccessManager,
                                             @Value("${app.web.allowed-origins}") String configuredOrigins,
-                                            @Value("${app.security.cookie-name:fooddelivery_session}") String cookieName) throws Exception {
+                                            @Value("${app.security.cookie-name:fooddelivery_session}") String cookieName,
+                                            @Value("${app.security.client-address-header:}") String clientAddressHeader) throws Exception {
         return http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource(configuredOrigins)))
                 .csrf(csrf -> csrf.disable())
@@ -152,7 +153,7 @@ public class SecurityConfig {
                                 "camera=(), microphone=(), geolocation=(self)")))
                 .authenticationProvider(provider)
                 .addFilterBefore(new SessionOriginFilter(configuredOrigins,cookieName), UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(new AuthenticationRateLimitFilter(), org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter.class)
+                .addFilterAfter(new AuthenticationRateLimitFilter(clientAddressHeader),org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/api/v1/demo/status").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/logout", "/api/v1/auth/operator-applications", "/api/v1/auth/password-recovery", "/api/v1/auth/password-recovery/reset").permitAll()
