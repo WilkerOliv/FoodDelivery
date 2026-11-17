@@ -1,5 +1,7 @@
 # Ativação da persistência — 16/11/2026
 
+> Registro histórico. A publicação persistente foi confirmada em 17/11; consulte [resultado e limites atuais](Publicacao_persistente_2026-11-17.md).
+
 ## Estado comprovado
 
 - Supabase provisionado, schema `fooddelivery` pertencente a `fooddelivery_app`.
