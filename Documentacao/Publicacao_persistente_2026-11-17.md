@@ -2,7 +2,7 @@
 
 ## Resultado confirmado
 
-A correção da branch `fix/render-caddy-capability` foi revisada, integrada à `main` e publicada no Render. O commit `8c1769f` está Live no serviço `fooddelivery-homologacao`, publicação `dep-dbtsnckipgvc73a1th70`.
+A correção da branch `fix/render-caddy-capability` foi revisada, integrada à `main` e publicada no Render. O commit `8c1769f` ficou Live no serviço `fooddelivery-homologacao`, publicação `dep-dbtsnckipgvc73a1th70`. Hoje o Live é `40209c3`, que inclui essa correção (veja os limites abaixo).
 
 O ambiente publicado usa PostgreSQL e Storage no Supabase, com o modo de demonstração desligado. A conta administrativa previamente criada no banco foi preservada. A barreira adicional de avaliador foi substituída pelo login normal, conforme autorização do proprietário. Isso não habilita cobranças reais: Mercado Pago permanece em sandbox.
 
@@ -32,7 +32,7 @@ O ambiente publicado usa PostgreSQL e Storage no Supabase, com o modo de demonst
 
 ## Limites e próximos testes
 
-1. `4931268` está na main, validado localmente e pelo CI; sua publicação no Render ainda precisa ser confirmada. A versão Live conferida nesta etapa é `8c1769f`.
+1. **Versão publicada (atualizado em 17/11):** o proprietário confirmou no painel do Render que o commit Live é `40209c3`, o último da `main`. Ele inclui `8c1769f` e `4931268`; `40209c3` só altera documentação. O serviço também responde `/healthz` com `UP` e `/runtime-config.js` com `FOODDELIVERY_DEMO=false`. Essa confirmação foi feita por uma pessoa no painel; o ambiente automatizado não vê o commit publicado.
 2. A página de login normal foi observada no navegador. O aceite visual autenticado e a continuidade da sessão após a próxima publicação ainda não foram concluídos: o controle do navegador integrado deixou de responder durante a retomada. O teste de login pela API não substitui essa verificação visual.
 3. O serviço gratuito entrou em repouso e a primeira requisição aguardou a inicialização. Não confundir essa espera com perda do banco; a identidade preservada foi conferida após o retorno.
 4. Upload, moderação e leitura de capa pela aplicação publicada ainda precisam de uma jornada completa. O teste direto do bucket privado em 15/11 não substitui esse fluxo.
