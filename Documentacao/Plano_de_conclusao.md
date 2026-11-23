@@ -1,5 +1,7 @@
 # Plano de conclusão e limites para lançamento
 
+
+Atualização de código e testes de 23/11/2026: [revisão corretiva](Revisao_corretiva_2026-11-23.md). Diferenciar os resultados da branch de revisão da versão publicada.
 Atualizado em 17/11/2026. Este quadro distingue implementação, execução demonstrada e operação externa. “Implementado” não significa homologado para cobrar clientes reais.
 
 ## Etapas internas já entregues

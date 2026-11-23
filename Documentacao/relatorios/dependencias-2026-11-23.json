@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-23",
+  "scanner": "Trivy 0.69.3",
+  "scope": "Maven CycloneDX SBOM, HIGH/CRITICAL",
+  "exit_code": 1,
+  "vulnerabilities": [
+    {
+      "VulnerabilityID": "CVE-2026-47884",
+      "PkgName": "org.springframework:spring-webmvc",
+      "InstalledVersion": "6.2.19",
+      "FixedVersion": "7.0.9",
+      "Severity": "CRITICAL",
+      "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-47884"
+    },
+    {
+      "VulnerabilityID": "CVE-2026-47890",
+      "PkgName": "org.springframework:spring-webmvc",
+      "InstalledVersion": "6.2.19",
+      "FixedVersion": "7.0.9",
+      "Severity": "CRITICAL",
+      "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-47890"
+    }
+  ]
+}

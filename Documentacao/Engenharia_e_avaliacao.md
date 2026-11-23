@@ -1,5 +1,7 @@
 # Engenharia e avaliação do projeto
 
+
+Atualização de código e testes de 23/11/2026: [revisão corretiva](Revisao_corretiva_2026-11-23.md). Diferenciar os resultados da branch de revisão da versão publicada.
 Referência desta avaliação: 12/11/2026, código `7e968fb`. Inspeção de código, configuração, documentação e resultados existentes de CI. Não foram repetidos todos os testes manuais nesta avaliação. O proprietário confirmou que ainda não existe banco em produção. O último deploy conferido no Render, em 11/11, foi `3c456d7`; as mudanças posteriores tratam documentação e infraestrutura de recuperação.
 
 Atualização de implementação em 13/11/2026: chat e quatro listas administrativas corrigidos e testados localmente; veja a seção 14 e o documento específico. A publicação desta alteração ainda precisa ser conferida.
