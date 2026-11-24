@@ -1,0 +1,27 @@
+name: Disponibilidade do piloto
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17,47 * * * *'
+
+permissions: {}
+
+jobs:
+  readiness:
+    if: github.event_name == 'workflow_dispatch' || vars.MONITOR_PILOT == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verificar prontidão pública
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if curl --proto '=https' --fail --silent --show-error --max-time 60 \
+                'https://fooddelivery-homologacao.onrender.com/healthz' | jq -e '.status == "UP"' >/dev/null; then
+              exit 0
+            fi
+            if [ "$attempt" -lt 3 ]; then sleep 10; fi
+          done
+          echo '::error::O piloto não confirmou prontidão após três tentativas.'
+          exit 1

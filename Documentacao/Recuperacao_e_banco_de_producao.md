@@ -1,6 +1,6 @@
 # Banco de produção e recuperação
 
-Revisão de 11/11/2026. Estes procedimentos são para PostgreSQL; a demonstração H2 do Render continua descartável.
+Revisão de 24/11/2026. Estes procedimentos são para PostgreSQL. O piloto persistente usa Supabase; a demonstração H2, quando executada separadamente, continua descartável.
 
 ## Contas separadas
 
@@ -93,3 +93,37 @@ Evidência desta etapa: `scripts/test_offsite_backup.py` (7 testes, com `age` re
 - PostgreSQL 17 descartável: inicialização pelo SQL de produção, conferência dos cinco privilégios desativados, três testes de integração (migrações/concorrência/isolamento), dump pelos scripts reais e restauração após mover os arquivos.
 - Falha SQL provocada por uma view dependente: restore rejeitado, dados anteriores preservados; removido o impedimento, a restauração concluiu e recuperou o snapshot.
 - Nenhum banco existente ou dado real foi restaurado/modificado.
+
+### Separar o pool da API e o Flyway no piloto Supabase existente
+
+Após validar uma restauração em banco isolado, use a conta administrativa no
+psql do projeto e execute o script abaixo no banco que já contém o histórico
+Flyway e a tabela de auditoria. O papel novo nasce sem senha. O script inteiro
+é transacional e falha se o papel já existir.
+
+```text
+\set ON_ERROR_STOP on
+\i deploy/postgres/supabase-runtime-role.sql
+\password fooddelivery_runtime
+```
+
+No Render, copie as credenciais atuais de migração para `SPRING_FLYWAY_USER`
+e `SPRING_FLYWAY_PASSWORD`. Troque `DATABASE_USERNAME` por
+`fooddelivery_runtime` e `DATABASE_PASSWORD` pela senha nova. Preserve o
+sufixo do projeto nos dois usuários quando a conexão usar o pooler. Aplique
+as quatro variáveis na mesma publicação. O Flyway usa a mesma URL TLS do
+datasource. As duas credenciais continuam presentes no processo Java.
+
+Verifique prontidão, login, uma operação de escrita e o registro de auditoria.
+Confira a próxima migração em homologação com as mesmas duas contas.
+O histórico Flyway deve continuar inacessível ao pool da API. Novas tabelas de
+auditoria ou de acesso restrito exigem ajustar as concessões na própria migração.
+Para reverter a troca, restaure o par anterior do datasource e remova as duas
+variáveis do Flyway. Mantenha as credenciais de backup/restauração separadas
+dessa troca, pois a restauração precisa criar objetos.
+
+Ao restaurar em outra instância, provisione antes os papéis PostgreSQL citados
+no dump, inclusive `fooddelivery_runtime` se a cópia for posterior à troca.
+O backup de um banco não inclui a criação dos papéis do cluster. Restaure
+como o proprietário de migração e confira as permissões efetivas do pool
+antes de abrir o tráfego.

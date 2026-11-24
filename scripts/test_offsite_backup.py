@@ -156,6 +156,28 @@ class OffsiteBackupTest(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('inseguros', result.stderr)
 
+    def test_links_and_large_unsafe_archives_are_rejected_before_restore(self):
+        import tarfile
+        import hashlib
+        for kind in ('symlink', 'absolute', 'traversal'):
+            with self.subTest(kind=kind):
+                tar = self.base / (kind + '.tar')
+                with tarfile.open(tar, 'w') as output:
+                    bad = tarfile.TarInfo('/escape' if kind == 'absolute' else '../escape' if kind == 'traversal' else 'link')
+                    if kind == 'symlink':
+                        bad.type = tarfile.SYMTYPE
+                        bad.linkname = '/tmp/escape'
+                    output.addfile(bad)
+                    for index in range(2500):
+                        output.addfile(tarfile.TarInfo('storage/file-' + str(index)))
+                archive = self.base / (kind + '.tar.age')
+                subprocess.run(['age', '--recipient', self.recipient, '--output', str(archive), str(tar)], check=True)
+                Path(str(archive) + '.sha256').write_text(hashlib.sha256(archive.read_bytes()).hexdigest() + '  archive\n')
+                result = self.run_script('restore-offsite.sh', archive)
+                self.assertEqual(result.returncode, 2)
+                self.assertIn('bloqueada', result.stderr)
+                self.assertFalse(self.log.exists() and 'pg_restore' in self.log.read_text())
+
 
 if __name__ == '__main__':
     unittest.main()

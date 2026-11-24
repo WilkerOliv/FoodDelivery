@@ -27,8 +27,16 @@ def configuration(source):
         raise ValueError('Configure PostgreSQL com TLS verify-full e certificado CA legível.')
     if env.get('DATABASE_SCHEMA') != 'fooddelivery':
         raise ValueError('Este piloto exige o schema privado fooddelivery.')
-    if not env.get('DATABASE_USERNAME', '').split('.')[0] == 'fooddelivery_app':
-        raise ValueError('Use a conta restrita fooddelivery_app, não o administrador do banco.')
+    runtime_user = env.get('DATABASE_USERNAME', '')
+    role, _, pooler = runtime_user.partition('.')
+    if role == 'fooddelivery_runtime':
+        owner = 'fooddelivery_app' + ('.' + pooler if pooler else '')
+        if (env.get('SPRING_FLYWAY_USER') != owner
+                or len(env.get('SPRING_FLYWAY_PASSWORD', '')) < 24
+                or env['SPRING_FLYWAY_PASSWORD'] == env.get('DATABASE_PASSWORD')):
+            raise ValueError('Configure a credencial distinta de migração para o Flyway.')
+    elif role != 'fooddelivery_app':
+        raise ValueError('Use uma conta restrita do projeto para o banco.')
     if len(env.get('DATABASE_PASSWORD', '')) < 24:
         raise ValueError('Configure a senha privada do banco com no mínimo 24 caracteres.')
     admin_email = env.get('APP_ADMIN_EMAIL', '').strip()

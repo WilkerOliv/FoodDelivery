@@ -39,11 +39,17 @@ public final class AuthenticationRateLimitFilter extends OncePerRequestFilter {
     private static final Pattern IPV6 = Pattern.compile("[0-9a-fA-F:.]{2,45}");
     private final Map<String, Window> windows = new LinkedHashMap<>();
     private final String clientAddressHeader;
+    private final PostgresRateWindows sharedWindows;
     private long requests;
 
     public AuthenticationRateLimitFilter() { this(""); }
 
     public AuthenticationRateLimitFilter(String clientAddressHeader) {
+        this(clientAddressHeader, null);
+    }
+
+    AuthenticationRateLimitFilter(String clientAddressHeader, PostgresRateWindows sharedWindows) {
+        this.sharedWindows = sharedWindows;
         this.clientAddressHeader = clientAddressHeader == null ? "" : clientAddressHeader.trim();
     }
 
@@ -113,7 +119,7 @@ public final class AuthenticationRateLimitFilter extends OncePerRequestFilter {
             String coarseKey = limit.key() + ":coarse-peer:" + remoteAddress;
             coarse = acquire(coarseKey, limit.maxAttempts() * 10, limit.windowMillis(), System.currentTimeMillis());
             retryAfter = coarse.retryAfter();
-            if (retryAfter > 0) release(primary);
+            if (retryAfter > 0) primary.release().run();
         }
         if (retryAfter > 0) {
             response.setStatus(429);
@@ -126,8 +132,8 @@ public final class AuthenticationRateLimitFilter extends OncePerRequestFilter {
         chain.doFilter(forwarded, response);
         // Correct sign-ins must not exhaust a shared gateway/NAT budget.
         if (request.getRequestURI().equals("/api/v1/auth/login") && response.getStatus() >= 200 && response.getStatus() < 300) {
-            release(primary);
-            if (coarse != null) release(coarse);
+            primary.release().run();
+            if (coarse != null) coarse.release().run();
         }
     }
 
@@ -139,13 +145,18 @@ public final class AuthenticationRateLimitFilter extends OncePerRequestFilter {
         }
     }
 
-    private synchronized void release(Permit permit) {
+    private synchronized void release(Window window) {
         // The original window may have expired while authentication was running.
         // Never subtract a successful old request from a replacement window.
-        if (permit.window() != null && permit.window().count > 0) permit.window().count--;
+        if (window.count > 0) window.count--;
     }
 
-    private synchronized Permit acquire(String key, int maxAttempts, long windowMillis, long now) {
+    private Permit acquire(String key, int maxAttempts, long windowMillis, long now) {
+        if (sharedWindows != null) return sharedWindows.acquire(digest(key), maxAttempts, windowMillis);
+        return acquireLocal(key, maxAttempts, windowMillis, now);
+    }
+
+    private synchronized Permit acquireLocal(String key, int maxAttempts, long windowMillis, long now) {
         requests++;
         if (requests % 256 == 0 || windows.size() >= MAX_BUCKETS) evictExpired(now);
         Window current = windows.get(key);
@@ -153,11 +164,11 @@ public final class AuthenticationRateLimitFilter extends OncePerRequestFilter {
             if (current == null && windows.size() >= MAX_BUCKETS) windows.remove(windows.keySet().iterator().next());
             Window created = new Window(now, 1);
             windows.put(key, created);
-            return new Permit(0, created);
+            return new Permit(0, () -> release(created));
         }
-        if (current.count >= maxAttempts) return new Permit(Math.max(1, (current.startedAt + windowMillis - now + 999) / 1000), null);
+        if (current.count >= maxAttempts) return new Permit(Math.max(1, (current.startedAt + windowMillis - now + 999) / 1000), () -> {});
         current.count++;
-        return new Permit(0, current);
+        return new Permit(0, () -> release(current));
     }
 
     private void evictExpired(long now) {
@@ -180,7 +191,7 @@ public final class AuthenticationRateLimitFilter extends OncePerRequestFilter {
     }
 
     private record Limit(String key, int maxAttempts, long windowMillis) {}
-    private record Permit(long retryAfter, Window window) {}
+    record Permit(long retryAfter, Runnable release) {}
     private static final class Window {
         private final long startedAt;
         private int count;

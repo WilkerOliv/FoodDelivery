@@ -45,6 +45,19 @@ class ConfigurationTests(unittest.TestCase):
                 with self.subTest(fields=tuple(extra)), self.assertRaises(ValueError):
                     launcher.configuration({**env, **extra})
 
+    def test_runtime_role_uses_separate_migrator(self):
+        with tempfile.NamedTemporaryFile() as ca:
+            env = environment(ca.name)
+            env.update(DATABASE_USERNAME='fooddelivery_runtime.project',
+                       SPRING_FLYWAY_USER='fooddelivery_app.project',
+                       SPRING_FLYWAY_PASSWORD=secrets.token_urlsafe(32))
+            launcher.configuration(env)
+            for override in ({'SPRING_FLYWAY_USER': 'fooddelivery_app.other'},
+                             {'SPRING_FLYWAY_PASSWORD': ''},
+                             {'SPRING_FLYWAY_PASSWORD': env['DATABASE_PASSWORD']}):
+                with self.subTest(fields=tuple(override)), self.assertRaises(ValueError):
+                    launcher.configuration({**env, **override})
+
     def test_requires_verified_tls_and_restricted_role(self):
         with tempfile.NamedTemporaryFile() as ca:
             env = environment(ca.name)
@@ -71,7 +84,8 @@ def container_test():
         folder.chmod(0o755)  # postgres must traverse the mounted directory to read its CA.
         env = environment('/run/secrets/ca.crt')
         admin_password = secrets.token_urlsafe(24)
-        env.update(APP_ADMIN_EMAIL='admin@persistent.example.test', APP_ADMIN_PASSWORD=admin_password)
+        env.update(APP_ADMIN_EMAIL='admin@persistent.example.test', APP_ADMIN_PASSWORD=admin_password,
+                   APP_SECURITY_SHARED_RATE_LIMIT='true')
         envfile = folder / 'private.env'
         envfile.write_text(''.join(f'{k}={v}\n' for k, v in env.items()))
         envfile.chmod(0o600)
@@ -97,11 +111,13 @@ def container_test():
                 time.sleep(1)
             else:
                 raise AssertionError('PostgreSQL não iniciou.')
-            run('docker', 'run', '-d', '--name', app, '--network', network, '--memory=512m', '--cpus=1',
-                '--cap-drop=ALL', '--security-opt', 'no-new-privileges',  # reproduz as restrições do Render
-                '-p', '127.0.0.1::10000', '--env-file', str(envfile),
-                '-v', f'{folder}/ca.crt:/run/secrets/ca.crt:ro', 'fooddelivery-persistent:qa', stdout=subprocess.DEVNULL)
-            created.append(app)
+            def start_app():
+                run('docker', 'run', '-d', '--name', app, '--network', network, '--memory=512m', '--cpus=1',
+                    '--cap-drop=ALL', '--security-opt', 'no-new-privileges',  # reproduz as restrições do Render
+                    '-p', '127.0.0.1::10000', '--env-file', str(envfile),
+                    '-v', f'{folder}/ca.crt:/run/secrets/ca.crt:ro', 'fooddelivery-persistent:qa', stdout=subprocess.DEVNULL)
+                created.append(app)
+            start_app()
             port = run('docker', 'port', app, '10000/tcp', capture_output=True).stdout.strip().rsplit(':', 1)[1]
             base = 'http://127.0.0.1:' + port
             def request(path, body=None, cookie=None, origin=env['RENDER_EXTERNAL_URL'], extra=None):
@@ -156,8 +172,27 @@ def container_test():
             with request('/api/v1/auth/login', {'email': 'outra-pessoa@example.test', 'password': 'senha-incorreta-123'},
                          extra={'X-Forwarded-For': '198.51.100.21'}) as response:
                 assert response.status == 401, response.status
-            # Stable signing key and PostgreSQL preserve the account and existing login.
-            run('docker', 'restart', app, stdout=subprocess.DEVNULL)
+            # Upgrade an already migrated database and redeploy with the runtime login.
+            run('docker', 'rm', '-f', app, stdout=subprocess.DEVNULL)
+            created.remove(app)
+            runtime_password = secrets.token_urlsafe(32)
+            provision = (ROOT / 'deploy/postgres/supabase-runtime-role.sql').read_text()
+            run('docker', 'exec', '-i', db, 'psql', '-U', 'postgres', '-v', 'ON_ERROR_STOP=1',
+                input=provision + "\nALTER ROLE fooddelivery_runtime PASSWORD '" + runtime_password + "';",
+                stdout=subprocess.DEVNULL)
+            privileges = run('docker', 'exec', db, 'psql', '-U', 'fooddelivery_runtime', '-d', 'postgres',
+                '-Atc', """SELECT has_schema_privilege(current_user,'fooddelivery','CREATE'),
+                                  has_table_privilege(current_user,'flyway_schema_history','INSERT'),
+                                  has_table_privilege(current_user,'admin_audit_events','DELETE'),
+                                  has_table_privilege(current_user,'admin_audit_events','INSERT'),
+                                  has_table_privilege(current_user,'accounts','UPDATE')""",
+                capture_output=True).stdout.strip()
+            assert privileges == 'f|f|f|t|t', privileges
+            env.update(SPRING_FLYWAY_USER=env['DATABASE_USERNAME'],
+                       SPRING_FLYWAY_PASSWORD=env['DATABASE_PASSWORD'],
+                       DATABASE_USERNAME='fooddelivery_runtime', DATABASE_PASSWORD=runtime_password)
+            envfile.write_text(''.join(f'{k}={v}\n' for k, v in env.items()))
+            start_app()
             port = run('docker', 'port', app, '10000/tcp', capture_output=True).stdout.strip().rsplit(':', 1)[1]
             base = 'http://127.0.0.1:' + port
             ready()
