@@ -34,7 +34,7 @@ import { adminProfilePayload, applyAdminProfileResponse } from './adminProfile.j
 import { adminAreaNames, adminStoreStatus, filterAdminStores, renderAdminAreas, renderAdminTeamArea, storeApprovalId, storeApprovalPath, supportDetailPath, supportMessagePath } from './adminSections.js';
 import { runOnce } from './actionGuard.js';
 import { formatCpfMask, formatCnpjMask, formatCurrencyMask, formatCurrencyValue, parseCurrencyDecimal } from './inputMasks.js';
-import { mobileNavigation } from './mobileNavigation.js';
+import { shellMarkup } from './views/shellView.js';
 import { catalogItemIcon, categoryMatches, customerOutsideStoreCity } from './catalogPolicy.js?v=20261102-category-matcher-1';
 import { dateTimeInZone, localDateTimeInZoneToIso, localDateTimeMinimum, storeOpenAt, storeScheduleAllowsAppointment, storeHoursStatusRelevant } from './storeTime.js?v=20261105-multi-shifts-1';
 import { coordinatesFromForm, storeMapUrl } from './storeLocation.js?v=20261101-map-coordinates-1';
@@ -371,23 +371,10 @@ async function submitAuth(event) {
 
 function renderShell() {
   const links = state.mustChangePassword ? navByRole[role()].filter(([page])=>page==='account') : navByRole[role()] || navByRole.CUSTOMER;
-  const mobileNav=mobileNavigation(links,role());
-  app.innerHTML = `<div class="app-shell ${state.sidebarCollapsed?'sidebar-collapsed':''}">
-    <div class="mobile-nav-backdrop ${state.mobileMenu?'show':''}" id="nav-backdrop"></div>
-    <aside class="sidebar ${state.mobileMenu?'open':''}">
-      <a href="#" class="brand" data-page="${role()==='CUSTOMER'?'home':role()==='MERCHANT'?'merchant':role()==='COURIER'?'courier':'admin'}"><div class="brand-mark">${icon('store',24)}</div><div class="brand-word">FoodDelivery<small class="brand-caption">${esc(roleNames[role()])}</small></div></a>
-      <div class="nav-label">Menu principal</div><nav class="nav-list">${links.map(([page,iconName,label])=>`<button class="nav-item ${state.page===page?'active':''}" data-page="${page}"><span class="nav-icon">${icon(iconName)}</span>${label}${page==='notifications'&&state.notifications.some(n=>!n.read)?'<span class="nav-count">novo</span>':''}</button>`).join('')}</nav>
-      <div class="side-bottom"><div class="help-card"><strong>${role()==='ADMIN'?'Central de atendimento':'Precisa de uma mão?'}</strong><p>${role()==='ADMIN'?'Acompanhe e responda as solicitações de suporte.':'Estamos aqui para ajudar você a aproveitar melhor o FoodDelivery.'}</p><button data-help>${role()==='ADMIN'?'Ver chamados →':'Falar com atendimento →'}</button></div>
-      <div class="profile-mini"><div class="avatar">${esc(initials(state.account.name))}</div><div><strong>${esc(state.account.name)}</strong><small>${esc(roleNames[role()])}</small></div><button class="profile-more" data-page="account" aria-label="Abrir ${role()==='ADMIN'?'definições':'minha conta'}">${role()==='ADMIN'?'Definições':'Minha conta'}</button></div></div>
-    </aside>
-    <nav class="mobile-bottom-nav" aria-label="Navegação principal" style="--mobile-nav-count:${mobileNav.visible.length+(mobileNav.hasMore?1:0)}">${mobileNav.visible.map(([page,iconName,label])=>`<button class="mobile-nav-item ${state.page===page?'active':''}" data-page="${page}" aria-label="${label}" title="${label}"><span>${icon(iconName)}</span><small>${label}</small>${page==='notifications'&&state.notifications.some(n=>!n.read)?'<i class="mobile-nav-dot"></i>':''}</button>`).join('')}${mobileNav.hasMore?`<button class="mobile-nav-item mobile-nav-more ${state.mobileMenu?'active':''}" data-mobile-more aria-expanded="${state.mobileMenu}" aria-label="Mais opções" title="Mais opções"><span>${icon('grid')}</span><small>Menu</small></button>`:''}</nav>
-    <div class="main-column"><header class="topbar">
-      <button class="icon-button mobile-menu" id="mobile-menu" aria-label="${state.mobileMenu?'Fechar menu':'Abrir ou recolher menu'}" aria-expanded="${window.matchMedia('(max-width: 820px)').matches?state.mobileMenu:!state.sidebarCollapsed}">☰</button>
-      <button class="page-location location-button" data-location-picker aria-label="Alterar cidade de entrega"><span class="location-pin">${icon('pin')}</span><span><small>Lojas em destaque na cidade</small><strong>${esc((state.browseLocation?.city||state.account.city) ? `${state.browseLocation?.city||state.account.city}${(state.browseLocation?.state||state.account.state)?`, ${state.browseLocation?.state||state.account.state}`:''}` : 'Escolher minha cidade')} <span aria-hidden="true">⌄</span></strong></span></button>
-      <label class="top-search"><span aria-hidden="true">⌕</span><input id="global-search" type="search" aria-label="Buscar lojas, produtos ou serviços" placeholder="Buscar lojas, pratos ou serviços" value="${esc(state.search)}" /></label>
-      <div class="top-actions"><button class="icon-button" data-page="notifications" aria-label="Notificações">${icon('bell')}${state.notifications.some(n=>!n.read)?'<i class="dot"></i>':''}</button>${canShop()?`<button class="cart-top" id="open-cart">Sacola <b>${state.cart.reduce((n,i)=>n+i.quantity,0)}</b></button>`:''}<button class="top-account" data-page="account" title="Minha conta">${esc(initials(state.account.name))}</button><button class="header-logout" data-logout aria-label="Sair da conta">Sair</button></div>
-    </header><main class="content" id="page-content"></main></div>
-  </div>`;
+  app.innerHTML = shellMarkup({
+    state, links, role: role(), roleLabel: roleNames[role()], canShop: canShop(),
+    compact: window.matchMedia('(max-width: 820px)').matches, esc, icon, initials,
+  });
   $('#mobile-menu')?.addEventListener('click',()=>{
     if(window.matchMedia('(max-width: 820px)').matches){state.mobileMenu=!state.mobileMenu;render();}
     else {state.sidebarCollapsed=!state.sidebarCollapsed;$('#mobile-menu').setAttribute('aria-expanded',String(!state.sidebarCollapsed));$('#mobile-menu').setAttribute('aria-label',state.sidebarCollapsed?'Expandir menu':'Recolher menu');app.querySelector('.app-shell')?.classList.toggle('sidebar-collapsed',state.sidebarCollapsed);}

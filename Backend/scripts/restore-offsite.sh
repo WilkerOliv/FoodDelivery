@@ -24,12 +24,23 @@ work="$(mktemp -d)"
 trap 'rm -rf -- "$work"' EXIT
 age --decrypt --identity "$AGE_IDENTITY_FILE" --output "$work/payload.tar" "$archive"
 # Recusa caminhos absolutos, '..' e tipos que não sejam arquivo/diretório antes de extrair.
-if tar --list --verbose --file "$work/payload.tar" | awk '{print substr($1,1,1)}' | grep -qv '^[-d]$'; then
-  echo 'A cópia contém entradas que não são arquivos comuns; recuperação bloqueada.' >&2
+# Materialize listings: grep -q in a pipe can cause SIGPIPE and mask a match
+# under pipefail. -P preserves absolute names for validation, never extraction.
+if ! tar --absolute-names --list --file "$work/payload.tar" > "$work/names"; then
+  echo 'A cópia contém caminhos inseguros ou um arquivo inválido; recuperação bloqueada.' >&2
   exit 2
 fi
-if tar --list --file "$work/payload.tar" | grep -Eq '(^/|(^|/)\.\.(/|$))'; then
+if grep -Eq '(^/|(^|/)\.\.(/|$))' "$work/names"; then
   echo 'A cópia contém caminhos inseguros; recuperação bloqueada.' >&2
+  exit 2
+fi
+if ! tar --absolute-names --list --verbose --file "$work/payload.tar" > "$work/entries"; then
+  echo 'Não foi possível validar as entradas da cópia; recuperação bloqueada.' >&2
+  exit 2
+fi
+awk '{print substr($1,1,1)}' "$work/entries" > "$work/types"
+if grep -qv '^[-d]$' "$work/types"; then
+  echo 'A cópia contém entradas que não são arquivos comuns; recuperação bloqueada.' >&2
   exit 2
 fi
 mkdir "$work/payload"

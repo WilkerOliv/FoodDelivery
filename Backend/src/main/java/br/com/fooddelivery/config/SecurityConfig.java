@@ -137,6 +137,8 @@ public class SecurityConfig {
                                             AuthenticatedAccessManager authenticatedAccessManager,
                                             @Value("${app.web.allowed-origins}") String configuredOrigins,
                                             @Value("${app.security.cookie-name:fooddelivery_session}") String cookieName,
+                                            org.springframework.jdbc.core.JdbcTemplate jdbc,
+                                            @Value("${app.security.shared-rate-limit:false}") boolean sharedRateLimit,
                                             @Value("${app.security.client-address-header:}") String clientAddressHeader) throws Exception {
         return http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource(configuredOrigins)))
@@ -153,7 +155,8 @@ public class SecurityConfig {
                                 "camera=(), microphone=(), geolocation=(self)")))
                 .authenticationProvider(provider)
                 .addFilterBefore(new SessionOriginFilter(configuredOrigins,cookieName), UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(new AuthenticationRateLimitFilter(clientAddressHeader),org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter.class)
+                .addFilterAfter(new AuthenticationRateLimitFilter(clientAddressHeader,
+                        sharedRateLimit ? new PostgresRateWindows(jdbc) : null),org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/api/v1/demo/status").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/logout", "/api/v1/auth/operator-applications", "/api/v1/auth/password-recovery", "/api/v1/auth/password-recovery/reset").permitAll()

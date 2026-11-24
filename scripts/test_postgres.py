@@ -62,7 +62,7 @@ def main():
                 env['DATABASE_SCHEMA'] = 'fooddelivery'
             env.update(QA_DATABASE_URL=f'jdbc:postgresql://127.0.0.1:{port}/fooddelivery',
                        QA_DATABASE_USERNAME='fooddelivery_app', QA_DATABASE_PASSWORD=password)
-            run('mvn', '-f', str(ROOT/'Backend/pom.xml'), '-Dtest=PostgresConcurrencyIT', 'test', '-q', env=env)
+            run('mvn', '-f', str(ROOT/'Backend/pom.xml'), '-Dtest=PostgresConcurrencyIT,V9MigrationEquivalenceIT,PostgresRateWindowsIT', 'test', '-q', env=env)
             sql('fooddelivery', "create table restore_probe(value text); insert into restore_probe values('snapshot')", 'fooddelivery_app')
             run('docker', 'exec', '--user', f'{os.getuid()}:{os.getgid()}', '-e', 'PRIVATE_ENV_FILE=/drill/private.env', name,
                 'bash', '/project/Backend/scripts/backup-db.sh')
