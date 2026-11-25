@@ -9,7 +9,6 @@ Atualização: 24/11/2026. Os guias descrevem o código atual; relatórios de va
 | Documento | Conteúdo e público |
 |---|---|
 | [Definições administrativas](Definicoes_administrativas.md) | Cidades, categorias, perfil, configurações protegidas e limites de acesso. |
-| [Plano de conclusão](Plano_de_conclusao.md) | Situação atual, evidências e dependências para lançamento. |
 | [Carregamento e recuperação](Carregamento_e_recuperacao.md) | Regras de concorrência no navegador, recuperação de consulta e testes locais de 07/11. |
 | [Engenharia e avaliação](Engenharia_e_avaliacao.md) | Decisões, fluxos completos, segurança, concorrência, vantagens, limites e prioridades. |
 | [Referência de backend](Referencia_Backend.md) | Arquivos Java e seus métodos/construtores explícitos, assinatura, saídas, colaborações e rejeições locais. Contagens na referência gerada. |

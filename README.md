@@ -38,7 +38,7 @@ Localização opcional no mapa e modalidades de atendimento: [configuração, co
 
 [Fidelidade da homologação](Documentacao/Fidelidade_da_homologacao.md): regras compartilhadas, diferenças dos simuladores e critérios de validação antes da operação real.
 
-Continuação de engenharia: [Carregamento e recuperação — 07/11/2026](Documentacao/Carregamento_e_recuperacao.md), com testes de sessão, falha de rede e conferência dos quatro perfis. [Plano de conclusão](Documentacao/Plano_de_conclusao.md) distingue o que está implementado das dependências para operação real.
+Continuação de engenharia: [Carregamento e recuperação — 07/11/2026](Documentacao/Carregamento_e_recuperacao.md), com testes de sessão, falha de rede e conferência dos quatro perfis. A [matriz de aceite](Documentacao/Aceite_2026-11-25.md) distingue o que está implementado das dependências para operação real.
 
 ### Organização e persistência
 
