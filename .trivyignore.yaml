@@ -1,0 +1,14 @@
+# [EXECUTADO] rg -n 'XsltView|ViewResolver|ModelAndView|FragmentsRendering|SseEmitter' Backend/src/main
+# Saída vazia, código 1 em 25/11/2026. Responsável pela revisão: WilkerOliv.
+# [NÃO VERIFICADO] A ausência desses símbolos não exclui configuração dinâmica.
+vulnerabilities:
+  - id: CVE-2026-47884
+    purls:
+      - "pkg:maven/org.springframework/spring-webmvc@6.2.19?type=jar"
+    expired_at: 2026-12-23
+    statement: "Proposta: nenhum uso explícito de views XSLT encontrado. https://spring.io/security/cve-2026-47884/"
+  - id: CVE-2026-47890
+    purls:
+      - "pkg:maven/org.springframework/spring-webmvc@6.2.19?type=jar"
+    expired_at: 2026-12-23
+    statement: "Proposta: nenhum uso explícito de fragmentos de views por SSE encontrado. https://spring.io/security/cve-2026-47890/"
