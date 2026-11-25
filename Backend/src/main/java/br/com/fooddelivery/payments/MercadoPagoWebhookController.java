@@ -44,9 +44,9 @@ public class MercadoPagoWebhookController {
         Payment payment=payments.findWithOperationById(internalPaymentId).orElseThrow(()->rejected(HttpStatus.NOT_FOUND, "Pagamento não encontrado."));
         Order order=payment.getOrder();Reservation reservation=payment.getReservation();
         var store=order!=null?order.getStore():reservation.getStore();
-        String accessToken=marketplaceAccounts.accessTokenForStore(store.getId());
         Map<String,Object> mpPayment;
-        try{mpPayment=http.get().uri("https://api.mercadopago.com/v1/payments/{id}",dataId).header("Authorization","Bearer "+accessToken).retrieve().body(new ParameterizedTypeReference<>(){});}
+        try{String accessToken=marketplaceAccounts.accessTokenForStore(store.getId());
+            mpPayment=http.get().uri("https://api.mercadopago.com/v1/payments/{id}",dataId).header("Authorization","Bearer "+accessToken).retrieve().body(new ParameterizedTypeReference<>(){});}
         catch(RuntimeException error){throw rejected(HttpStatus.BAD_GATEWAY,"Não foi possível validar a notificação com o Mercado Pago.");}
         String mismatch = PaymentReconciliationService.validate(payment, mpPayment, dataId);
         if (mismatch != null) throw rejected(HttpStatus.CONFLICT, mismatch);

@@ -49,6 +49,8 @@ class MercadoPagoWebhookTest {
         }
         exercise("10.00", "456", "approved", "0", false);
         exercise("10.00", "123", "refunded", "5.00", false);
+        exercise("10.00", "123", "approved", "5.00", false);
+        exercise("10.00", "123", "approved", "10.00", false);
         exercise("10.00", "123", "approved", "0", true);
         exercise("10.00", "123", "refunded", "10.00", true);
     }

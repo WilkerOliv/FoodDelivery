@@ -36,10 +36,17 @@ public class PaymentReconciliationService {
  public static String validate(Payment local,Map<String,Object> remote,String id){try{
   if(remote==null||!id.equals(String.valueOf(remote.get("id")))||!local.getId().toString().equals(String.valueOf(remote.get("external_reference"))))return "Identificador ou referência externa divergente. Nenhum estado foi alterado.";
   if(!"BRL".equals(String.valueOf(remote.get("currency_id")))||new BigDecimal(String.valueOf(remote.get("transaction_amount"))).movePointRight(2).longValueExact()!=local.getAmountCents())return "Valor ou moeda divergente. Nenhum estado foi alterado.";
-  if("refunded".equals(remote.get("status"))&&new BigDecimal(String.valueOf(remote.get("transaction_amount_refunded"))).movePointRight(2).longValueExact()!=local.getAmountCents())return "Reembolso integral não comprovado. Encaminhe para revisão.";
+  Object reportedRefund = remote.get("transaction_amount_refunded");
+  if ("refunded".equals(remote.get("status"))) {
+   if (reportedRefund == null || cents(reportedRefund) != local.getAmountCents())
+    return "Reembolso integral não comprovado. Encaminhe para revisão.";
+  } else if (reportedRefund != null && cents(reportedRefund) != 0) {
+   return "Valor devolvido incompatível com o estado informado. Encaminhe para revisão.";
+  }
   if(local.getProviderReference()!=null&&local.getProviderReference().matches("[0-9]{1,30}")&&!id.equals(local.getProviderReference()))return "O registro já está associado a outro pagamento do provedor. Revise antes de alterar.";
   return null;
  }catch(RuntimeException invalid){return "Resposta financeira incompleta ou inválida. Nenhum estado foi alterado.";}}
+ private static long cents(Object amount) { return new BigDecimal(String.valueOf(amount)).movePointRight(2).longValueExact(); }
  private static String safeStatus(Map<String,Object> value){String status=value==null?null:String.valueOf(value.get("status"));return status!=null&&status.matches("[a-z_]{1,40}")?status:null;}
  private PaymentReconciliation record(UUID id,UUID actor,String result,String status,String summary){return transaction.execute(tx->{audit.record(actor,"PAYMENT_RECONCILED","PAYMENT",id,"Conciliação: "+result);return reports.save(new PaymentReconciliation(id,actor,result,status,summary));});}
 }
