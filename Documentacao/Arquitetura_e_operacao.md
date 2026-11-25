@@ -1,6 +1,6 @@
 # Arquitetura e operação do FoodDelivery
 
-Atualizado em 7 de novembro de 2026.
+Consolidado em 24 de novembro de 2026. Consulte a validação para distinguir código desta branch da publicação.
 
 ## Arquitetura existente
 
@@ -34,8 +34,8 @@ O link não publica nem verifica uma empresa no Google Maps. A criação/ediçã
 ## Segurança e trilha administrativa
 
 - Rotas sem correspondência explícita exigem JWT autenticado; requisições anônimas são negadas por padrão. Rotas públicas continuam declaradas explicitamente. A troca obrigatória de senha limita a sessão às rotas explicitamente autorizadas para esse fluxo.
-- Login e recuperação limitam identificadores normalizados com hash e um orçamento adicional por peer; operações sensíveis usam identidade JWT validada. Cadastro também possui limitação. O filtro não confia livremente em `X-Forwarded-For`. No piloto persistente, o Caddy aceita `X-Forwarded-For` somente de faixas privadas, lê o cabeçalho da direita para a esquerda e entrega o resultado em `X-Fooddelivery-Client-IP`, sobrescrevendo qualquer valor do visitante; a API só usa esse cabeçalho em conexões de loopback e quando o valor é um endereço IP literal (`APP_SECURITY_CLIENT_ADDRESS_HEADER`). Se o balanceador do provedor não estiver em faixa privada, o Caddy usa o endereço do balanceador e o comportamento volta a ser o orçamento coletivo anterior. Confirme nos registros após publicar. Os contadores continuam locais ao processo. As janelas e limites ficam em `AuthRateLimitFilter`.
-- A limitação é local ao processo e não substitui um gateway/WAF nem armazenamento compartilhado. Atrás de proxy, pode agrupar usuários no endereço do proxy; configurar endereços confiáveis requer definir e testar a topologia antes de passar a confiar em cabeçalhos encaminhados. Para múltiplas réplicas, mover contadores para Redis ou serviço equivalente.
+- Login e recuperação limitam identificadores normalizados com hash e um orçamento adicional por peer; operações sensíveis usam identidade JWT validada. Cadastro também possui limitação. O filtro não confia livremente em `X-Forwarded-For`. No piloto persistente, o Caddy aceita `X-Forwarded-For` somente de faixas privadas, lê o cabeçalho da direita para a esquerda e entrega o resultado em `X-Fooddelivery-Client-IP`, sobrescrevendo qualquer valor do visitante; a API só usa esse cabeçalho em conexões de loopback e quando o valor é um endereço IP literal (`APP_SECURITY_CLIENT_ADDRESS_HEADER`). Se o balanceador do provedor não estiver em faixa privada, o Caddy usa o endereço do balanceador e o comportamento volta a ser o orçamento coletivo anterior. Confirme nos registros após publicar. Os contadores são locais por padrão; a opção PostgreSQL compartilhada é descrita abaixo. As janelas e limites ficam em `AuthRateLimitFilter`.
+- A limitação usa memória por padrão. Com PostgreSQL e `APP_SECURITY_SHARED_RATE_LIMIT=true` em todas as réplicas, a V32 mantém contadores compartilhados usando o relógio do banco. Falha do banco interrompe a operação protegida. Isso não substitui a validação da topologia do proxy nem um gateway/WAF. Trocar o modo de contagem não preserva as janelas do modo anterior.
 - V23 mantém eventos de ações administrativas sensíveis e uma consulta autenticada de administrador em `GET /api/v1/admin/audit-events`. Resumos não devem conter credenciais, CPF ou tokens. A trilha cobre mutações administrativas instrumentadas no controlador atual; ainda não é completa para todo o sistema, nem imutável contra acesso direto ao banco. Restringir permissões SQL, definir retenção/exportação e acrescentar eventos de autenticação, pagamentos, suporte e mudanças feitas fora desse controlador antes de tratá-la como trilha de conformidade.
 - Os testes H2 verificam migrações, autorização anônima/autenticada, limitação por origem e formato dos eventos. Isso não equivale a teste de invasão, auditoria independente ou validação de PostgreSQL em produção.
 
@@ -72,7 +72,7 @@ O workflow `.github/workflows/quality.yml` executa sintaxe/testes do frontend, t
 - **Mapas:** seleção opcional de ponto e mapa público de lojas estão implementados, com lista alternativa. O link Google Maps existe; publicação automática no Perfil da Empresa e planejamento de rotas não existem.
 - **Logística:** taxa fixa por loja; sem zonas, cálculo de quilometragem, ETA ou despacho otimizado.
 - **Agenda:** múltiplos turnos, pausas, exceções por data, disponibilidade por profissional, prévia de impacto e grade de horários livres estão implementados. Capacidade maior que um por recurso e política comercial/legal completa de cancelamento não estão modeladas.
-- **Segurança/operação:** MFA TOTP administrativo está implementado e depende de ativação e guarda dos códigos pelo administrador. Limitador distribuído, topologia de proxy validada, cobertura completa e proteção contra alteração da trilha, monitoramento/alertas e rotina externa de backup continuam dependências operacionais.
+- **Segurança/operação:** MFA TOTP administrativo está implementado e depende de ativação e guarda dos códigos pelo administrador. Ativação do limitador compartilhado, topologia de proxy validada, cobertura completa e proteção contra alteração da trilha, monitoramento/alertas e rotina externa de backup continuam dependências operacionais.
 - **Disponibilidade:** Docker local fornece PostgreSQL para desenvolvimento, mas não define sozinho HTTPS, publicação do frontend/API, armazenamento compartilhado de imagens, rotação de segredos ou recuperação de produção.
 
 ## Backups e continuidade
@@ -98,4 +98,23 @@ A rotina semanal admite múltiplos turnos e exceções datadas. A alteração bl
 
 ## Módulos e armazenamento atualizados em 14/11/2026
 
-As telas/ações principais agora são compostas a partir de `Frontend/src/views` e `Frontend/src/features`. O estado de conta é limpo por `sessionState.js` ao sair, expirar ou revogar a sessão. Cidades, categorias e status de integrações possuem controladores administrativos próprios. As capas utilizam a interface `StoreImageStorage`, com disco local ou bucket Supabase privado. Consulte [decisões e testes](Modularizacao_e_validacao_2026-11-14.md) e [configuração gratuita](Persistencia_gratuita.md).
+As telas/ações principais agora são compostas a partir de `Frontend/src/views` e `Frontend/src/features`. O estado de conta é limpo por `sessionState.js` ao sair, expirar ou revogar a sessão. Cidades, categorias e status de integrações possuem controladores administrativos próprios. As capas utilizam a interface `StoreImageStorage`, com disco local ou bucket Supabase privado. Consulte [decisões e testes](Validacao_e_estado_atual.md) e [configuração gratuita](Persistencia_gratuita.md).
+
+## Organização dos módulos e limites de armazenamento
+
+As fábricas de telas e ações recebem dependências explicitamente; nenhum módulo
+importa `main.js`. Cabeçalho e navegação ficam em `views/shellView.js`. O verificador
+confere imports recursivos e rejeita ciclos. Separar arquivos melhora a manutenção,
+mas não reduz automaticamente os bytes baixados.
+
+`StoreImageStorage` separa a moderação da infraestrutura. O adaptador Supabase usa
+bucket privado, HTTPS restrito ao domínio configurado, nomes validados, limite de
+5 MB durante o download e prazo de 20 segundos. Chaves ficam no servidor. Falha
+de gravação não cria uma submissão válida; rollback tenta remover o objeto, mas
+falha de compensação pode deixar órfãos. A limpeza de órfãos não é automática.
+
+Os pacotes Docker publicam somente os arquivos web necessários. Testes e
+documentação ficam fora da raiz pública. A demonstração conserva `demo.html`;
+o pacote persistente o exclui. Caddy roda sem privilégios extras, sem a capability
+de porta privilegiada e usa `/tmp/fooddelivery-caddy` para seus temporários.
+Banco e imagens persistentes ficam fora do contêiner.

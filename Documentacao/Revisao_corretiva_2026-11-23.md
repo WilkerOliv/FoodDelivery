@@ -27,7 +27,7 @@ A primeira execução local encontrou 32 alertas HIGH nas dependências da base.
 ## Apontamentos que não justificam exclusão de arquivos
 
 - `Backend/Dockerfile` já usa Java 21 nas duas etapas. É usado pelo `deploy/compose.production.yaml`; removê-lo quebraria esse caminho de instalação.
-- As pastas de evidências de 15 e 16/11 estão locais e não versionadas. A busca nos arquivos rastreados desta base não encontrou referências textuais a esses nomes. Elas não foram publicadas automaticamente: capturas de configuração podem conter dados privados. Não foram apagadas.
+- As capturas locais de configuração de 15 e 16/11, sem referências no código e não versionadas, foram removidas na limpeza autorizada de 24/11. Não foram publicadas: capturas de configuração podem conter dados privados. Os procedimentos atuais permanecem no guia de recuperação e persistência.
 - Geração de capas por IA, Pix automático, cadastro automático no Google Maps e aplicativo nativo não são entregas atuais.
 
 ## Pendências que permanecem

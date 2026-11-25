@@ -1,8 +1,8 @@
 # Plano de conclusão e limites para lançamento
 
 
-Atualização de código e testes de 23/11/2026: [revisão corretiva](Revisao_corretiva_2026-11-23.md). Diferenciar os resultados da branch de revisão da versão publicada.
-Atualizado em 17/11/2026. Este quadro distingue implementação, execução demonstrada e operação externa. “Implementado” não significa homologado para cobrar clientes reais.
+Atualização de código e testes de 24/11/2026: [revisão corretiva](Revisao_corretiva_2026-11-23.md). Diferenciar os resultados da branch de revisão da versão publicada.
+Consolidado em 24/11/2026. Este quadro distingue implementação, execução demonstrada e operação externa. “Implementado” não significa homologado para cobrar clientes reais.
 
 ## Etapas internas já entregues
 
@@ -18,11 +18,11 @@ Atualizado em 17/11/2026. Este quadro distingue implementação, execução demo
 
 ## Próximos blocos, na ordem
 
-1. **Aceite da versão publicada:** `40209c3` (inclui `8c1769f` e `4931268`) confirmado Live no painel do Render em 17/11, com login normal e modo de demonstração desligado. Login administrativo, cookies seguros e proteção das rotas foram conferidos pela API. O aceite visual autenticado da versão persistente e a próxima publicação continuam em verificação. Veja [evidências atuais](Publicacao_persistente_2026-11-17.md).
+1. **Aceite da versão publicada:** `40209c3` (inclui `8c1769f` e `4931268`) confirmado Live no painel do Render em 17/11, com login normal e modo de demonstração desligado. Login administrativo, cookies seguros e proteção das rotas foram conferidos pela API. O aceite visual autenticado da versão persistente e a próxima publicação continuam em verificação. Veja [evidências atuais](Validacao_e_estado_atual.md).
 2. **Integrações de teste:** Mercado Pago sandbox com OAuth, webhook público assinado, recusa/atraso/duplicidade e estorno confirmado. SMTP e WhatsApp exigem conta/configuração e teste de entrega; simulador não atesta o fornecedor. Nenhuma cobrança real é necessária para o sandbox.
-3. **Persistência e recuperação completas:** Render conectado ao Supabase com TLS verificado, conta SQL limitada, schema privado e 31 migrações validadas. A conta administrativa foi preservada entre a validação anterior e a aplicação publicada. Bucket privado configurado e envio/leitura diretos testados no fornecedor. Faltam jornada publicada de capa, confirmação da sessão após nova publicação, cópia externa criptografada com retenção e ensaio conjunto de banco/imagens/chaves com RPO/RTO medidos. Consulte [configuração](Persistencia_gratuita.md) e [evidências atuais](Publicacao_persistente_2026-11-17.md).
-4. **Operação segura:** ativar MFA, confirmar cookies Secure/origens/proxy finais, monitoramento com alertas acionáveis, rotação e procedimento de incidente. Contadores de abuso são locais; múltiplas réplicas exigem mecanismo compartilhado.
-5. **Manutenção e desempenho:** telas e ações principais extraídas de `main.js`, listas administrativas paginadas e imports recursivos verificados. Permanecem funções extensas de renderização e estado compartilhado; medir carga/consultas antes de novas otimizações. Veja [modularização e validação](Modularizacao_e_validacao_2026-11-14.md).
+3. **Persistência e recuperação completas:** Render conectado ao Supabase com TLS verificado, conta SQL limitada, schema privado e 31 migrações validadas. A conta administrativa foi preservada entre a validação anterior e a aplicação publicada. Bucket privado configurado e envio/leitura diretos testados no fornecedor. Faltam jornada publicada de capa, confirmação da sessão após nova publicação, cópia externa criptografada com retenção e ensaio conjunto de banco/imagens/chaves com RPO/RTO medidos. Consulte [configuração](Persistencia_gratuita.md) e [evidências atuais](Validacao_e_estado_atual.md).
+4. **Operação segura:** ativar MFA, confirmar cookies Secure/origens/proxy finais, monitoramento com alertas acionáveis, rotação e procedimento de incidente. Contadores são locais por padrão; esta branch implementa compartilhamento opcional no PostgreSQL. Sua ativação em todas as réplicas e a identificação de visitantes no proxy real precisam de validação operacional.
+5. **Manutenção e desempenho:** telas e ações principais extraídas de `main.js`, listas administrativas paginadas e imports recursivos verificados. Permanecem funções extensas de renderização e estado compartilhado; medir carga/consultas antes de novas otimizações. Veja [arquitetura](Arquitetura_e_operacao.md) e [validação](Validacao_e_estado_atual.md).
 6. **Aceite com usuários:** aparelhos físicos, teclado, zoom/leitor de tela e tarefas acompanhadas com pessoas de pouca familiaridade digital. Verificação de largura no navegador não substitui esses testes.
 7. **Regras operacionais e privacidade:** política de cancelamento, retenção/exclusão de mensagens e dados, conferência de repasses, atendimento e revisão dos textos legais conforme o negócio real.
 
