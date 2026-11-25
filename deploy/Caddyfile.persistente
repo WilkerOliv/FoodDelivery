@@ -36,7 +36,14 @@
 			header_up X-Fooddelivery-Client-IP {client_ip}
 		}
 	}
-	handle /api/* {
+	handle /api/v1/admin/proxy-diagnostic {
+        reverse_proxy 127.0.0.1:8181 {
+            header_up X-Diagnostic-Peer {http.request.remote.host}
+            header_up X-Diagnostic-Chain {http.request.header.X-Forwarded-For}
+            header_up X-Fooddelivery-Client-IP {client_ip}
+        }
+    }
+    handle /api/* {
 		reverse_proxy 127.0.0.1:8181 {
 			header_up X-Fooddelivery-Client-IP {client_ip}
 		}
