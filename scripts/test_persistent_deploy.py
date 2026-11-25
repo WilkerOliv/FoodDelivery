@@ -120,11 +120,13 @@ def container_test():
             sql('postgres', 'CREATE ROLE qa_manager LOGIN CREATEROLE NOSUPERUSER; GRANT CREATE ON DATABASE postgres TO qa_manager;')
             sql('qa_manager', (ROOT / 'deploy/postgres/supabase-private-schema.sql').read_text())
             assert sql('qa_manager', "BEGIN; SET LOCAL ROLE fooddelivery_app; SELECT current_user; ROLLBACK;") == 'fooddelivery_app'
+            extra = folder / 'qa-migrations'
+            extra.mkdir(mode=0o755)
             def start_app():
                 run('docker', 'run', '-d', '--name', app, '--network', network, '--memory=512m', '--cpus=1',
                     '--cap-drop=ALL', '--security-opt', 'no-new-privileges',  # reproduz as restrições do Render
                     '-p', '127.0.0.1::10000', '--env-file', str(envfile),
-                    '-v', f'{folder}/ca.crt:/run/secrets/ca.crt:ro', 'fooddelivery-persistent:qa', stdout=subprocess.DEVNULL)
+                    '-v', f'{extra}:/qa-migrations:ro', '-v', f'{folder}/ca.crt:/run/secrets/ca.crt:ro', 'fooddelivery-persistent:qa', stdout=subprocess.DEVNULL)
                 created.append(app)
             start_app()
             port = run('docker', 'port', app, '10000/tcp', capture_output=True).stdout.strip().rsplit(':', 1)[1]
@@ -200,6 +202,9 @@ def container_test():
                                   has_table_privilege(current_user,'flyway_schema_history','DELETE')""",
                 capture_output=True).stdout.strip()
             assert privileges == 'f|f|f|t|t|f|f|f', privileges
+            # Este arquivo existe somente no contêiner descartável.
+            (extra / 'V9999__qa_migration.sql').write_text('CREATE TABLE qa_migration AS SELECT current_user AS executor;')
+            env['SPRING_FLYWAY_LOCATIONS'] = 'classpath:db/migration-common,classpath:db/migration-postgres,filesystem:/qa-migrations'
             env.update(SPRING_FLYWAY_USER=env['DATABASE_USERNAME'],
                        SPRING_FLYWAY_PASSWORD=env['DATABASE_PASSWORD'],
                        DATABASE_USERNAME='fooddelivery_runtime', DATABASE_PASSWORD=runtime_password)
@@ -208,6 +213,8 @@ def container_test():
             port = run('docker', 'port', app, '10000/tcp', capture_output=True).stdout.strip().rsplit(':', 1)[1]
             base = 'http://127.0.0.1:' + port
             ready()
+            assert sql('fooddelivery_runtime', 'SELECT executor FROM fooddelivery.qa_migration') == 'fooddelivery_app'
+
             with request('/api/v1/account/me', cookie=cookie) as response:
                 assert response.status == 200 and json.load(response)['id'] == identity['id']
             with request('/api/v1/auth/login', {'email': 'admin@example.test', 'password': 'DemoLocal!2026#Teste'}) as response:
