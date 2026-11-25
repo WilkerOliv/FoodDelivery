@@ -17,12 +17,12 @@ class MercadoPagoWebhookTest {
         Instant now = Instant.parse("2026-11-23T12:00:00Z");
         for (int seconds : new int[]{-300, 0, 300}) {
             Instant signed = now.plusSeconds(seconds);
-            assertTrue(MercadoPagoWebhookController.freshTimestamp("" + signed.getEpochSecond(), now));
-            assertTrue(MercadoPagoWebhookController.freshTimestamp("" + signed.toEpochMilli(), now));
+            assertTrue(MercadoPagoWebhookController.freshTimestamp("" + signed.getEpochSecond(), now, 300));
+            assertTrue(MercadoPagoWebhookController.freshTimestamp("" + signed.toEpochMilli(), now, 300));
         }
         for (String value : Arrays.asList(null, "", "invalid", "99999999999999999999",
                 "" + now.minusSeconds(301).getEpochSecond(), "" + now.plusSeconds(301).toEpochMilli())) {
-            assertFalse(MercadoPagoWebhookController.freshTimestamp(value, now));
+            assertFalse(MercadoPagoWebhookController.freshTimestamp(value, now, 300));
         }
     }
 
@@ -50,6 +50,7 @@ class MercadoPagoWebhookTest {
         exercise("10.00", "456", "approved", "0", false);
         exercise("10.00", "123", "refunded", "5.00", false);
         exercise("10.00", "123", "approved", "0", true);
+        exercise("10.00", "123", "refunded", "10.00", true);
     }
 
     private void exercise(String amount, String id, String status, String refunded, boolean accepted) {
@@ -77,7 +78,8 @@ class MercadoPagoWebhookTest {
         var controller = new MercadoPagoWebhookController(repository, service, refunds, accounts, properties, builder.build());
         if (accepted) {
             assertEquals("processed", controller.receive("123", "payment", payment.getId(), null, null).get("status"));
-            verify(service).confirmProvider(payment.getId(), "123");
+            if ("refunded".equals(status)) verify(refunds).providerConfirmedRefund("123");
+            else verify(service).confirmProvider(payment.getId(), "123");
         } else {
             var error = assertThrows(ResponseStatusException.class,
                 () -> controller.receive("123", "payment", payment.getId(), null, null));
