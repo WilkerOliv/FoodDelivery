@@ -59,9 +59,11 @@ Capas anteriormente publicadas são preservadas. A migração não reapresenta a
 
 `STORE_ASSETS_DIR` define o diretório de imagens. O diretório padrão normal é `Backend/data/store-assets`; homologação usa armazenamento separado. A aplicação precisa de permissão de leitura/escrita e o diretório não deve ser exposto por um serviço estático independente. Inclua **banco e imagens no backup** e confira a restauração dos dois. A V24 é aplicada pelo Flyway ao iniciar a API.
 
-Os arquivos recusados, substituídos e as capas antigas são mantidos para histórico, com acesso público bloqueado quando não são vigentes. Não existe expurgo automático. Defina retenção e acompanhe espaço em disco antes de operação prolongada. Uma queda abrupta entre gravar o arquivo e confirmar o banco pode deixar arquivo órfão; isso não o publica. Limpeza operacional deve comparar referências antes de excluir qualquer arquivo. Múltiplas instâncias precisam compartilhar armazenamento ou usar adaptação para armazenamento de objetos; disco efêmero de um contêiner não é suficiente.
+Os arquivos recusados, substituídos e as capas antigas são mantidos para histórico, com acesso público bloqueado quando não são vigentes. Não existe expurgo automático. Defina retenção e acompanhe espaço em disco antes de operação prolongada. Uma queda abrupta entre gravar o arquivo e confirmar o banco pode deixar arquivo órfão; isso não o publica. Limpeza operacional deve comparar referências antes de excluir qualquer arquivo. [LIDO NO CÓDIGO] O servidor oferece os provedores local e Supabase. Para compartilhar as capas entre instâncias, configure o mesmo bucket privado. Os perfis homologacao e dev-h2 exigem armazenamento local. [Seleção do provedor](../Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorageConfiguration.java#L8).
 
-## Testes e evidências
+## Registro histórico de novembro
+
+[NÃO VERIFICADO] Os números abaixo pertencem à avaliação histórica. Consulte a [matriz de aceite](Aceite_2026-11-25.md) para os testes repetidos nesta revisão.
 
 - **Backend:** suíte Maven com 77 testes; nove específicos cobrem validação PNG/proporção, preservação da capa, substituição, titularidade, arquivo privado, cota, prévia do titular com loja indisponível, aprovação única e motivo obrigatório.
 - **Frontend:** 37 testes aprovados, cinco novos para proporção, enquadramento de logo/foto e dimensões inválidas. Sintaxe verificada em 15 módulos.

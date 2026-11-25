@@ -1,6 +1,6 @@
 # Chat e listas administrativas
 
-Implementação e validação local concluídas em 13/11/2026. Esta entrega não provisiona banco de produção nem homologa fornecedores externos.
+[NÃO VERIFICADO] Relato histórico de 13/11/2026. Esta entrega não provisiona banco de produção nem homologa fornecedores externos.
 
 ## Conversas
 

@@ -10,11 +10,11 @@ Regeneração: criar ambiente Python isolado, instalar `scripts/reference-requir
 
 Acessibilidade dinâmica. Associa rótulos, identifica diálogos, contém Tab, aceita Escape e devolve foco. Não substitui validação com leitor de tela e pessoas reais.
 
-Fonte: [accessibility.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/accessibility.js) · SHA-256 `64721a1eb93f1acfcf1dfd267bfa1d2b53b8ff8f0677fb0d9e78265d8a243dac`
+[LIDO NO CÓDIGO] Fonte: [accessibility.js](../Frontend/src/accessibility.js) · SHA-256 `64721a1eb93f1acfcf1dfd267bfa1d2b53b8ff8f0677fb0d9e78265d8a243dac`
 
 ### initializeAccessibility — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/accessibility.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/accessibility.js#L2)
 
 ```javascript
 function initializeAccessibility(root=document)
@@ -61,7 +61,7 @@ root.addEventListener('keydown',event=>{
 
 ### visible — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/accessibility.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/accessibility.js#L6)
 
 ```javascript
 node=>
@@ -75,7 +75,7 @@ Executa a etapa `visible` neste módulo. O contrato concreto está na assinatura
 
 ### controls — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/accessibility.js:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/accessibility.js#L7)
 
 ```javascript
 dialog=>
@@ -89,7 +89,7 @@ Executa a etapa `controls` neste módulo. O contrato concreto está na assinatur
 
 ### synchronize — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/accessibility.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/accessibility.js#L8)
 
 ```javascript
 function synchronize()
@@ -123,7 +123,7 @@ if(heading){if(!heading.id)heading.id=`dialog-title-${++sequence}`;next.setAttri
 
 ### callback@9:45 — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/accessibility.js:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/accessibility.js#L9)
 
 ```javascript
 field=>
@@ -144,7 +144,7 @@ Executa a etapa `callback@9:45` neste módulo. O contrato concreto está na assi
 
 ### callback@30:35 — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/accessibility.js:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/accessibility.js#L30)
 
 ```javascript
 event=>
@@ -173,7 +173,7 @@ Executa a etapa `callback@30:35` neste módulo. O contrato concreto está na ass
 
 ### callback@44:10 — linha 44
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/accessibility.js:44)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/accessibility.js#L44)
 
 ```javascript
 ()=>
@@ -189,11 +189,11 @@ Executa a etapa `callback@44:10` neste módulo. O contrato concreto está na ass
 
 Controle visual de ações assíncronas. Evita repetição acidental de clique; idempotência e concorrência continuam sendo responsabilidade do backend.
 
-Fonte: [actionGuard.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/actionGuard.js) · SHA-256 `e676be6890324eaa1ded5877da60ac1acfae36dd7684140a7f7ff6c18cc61463`
+[LIDO NO CÓDIGO] Fonte: [actionGuard.js](../Frontend/src/actionGuard.js) · SHA-256 `e676be6890324eaa1ded5877da60ac1acfae36dd7684140a7f7ff6c18cc61463`
 
 ### runOnce — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/actionGuard.js:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/actionGuard.js#L4)
 
 ```javascript
 async function runOnce(key, action)
@@ -221,11 +221,11 @@ pendingActions.delete(key);
 
 Inicialização da aplicação e ligação dos módulos; manter separação entre configuração e regra de negócio.
 
-Fonte: [adminPagination.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminPagination.js) · SHA-256 `6923a5a07bdffdd91540153668a2285d6882266d5cc1b8f2ec89f4726f38c60d`
+[LIDO NO CÓDIGO] Fonte: [adminPagination.js](../Frontend/src/adminPagination.js) · SHA-256 `6923a5a07bdffdd91540153668a2285d6882266d5cc1b8f2ec89f4726f38c60d`
 
 ### fetchAdminList — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminPagination.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminPagination.js#L5)
 
 ```javascript
 async function fetchAdminList(key, get, pages = {}, status = 'ALL')
@@ -252,7 +252,7 @@ Executa a etapa `fetch Admin List` neste módulo. O contrato concreto está na a
 
 ### adminPagination — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminPagination.js:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminPagination.js#L18)
 
 ```javascript
 function adminPagination(key, meta)
@@ -278,11 +278,11 @@ Executa a etapa `admin Pagination` neste módulo. O contrato concreto está na a
 
 Edição administrativa de perfil. CPF é opcional e pode ser explicitamente removido; não reter o valor antigo no estado após a resposta.
 
-Fonte: [adminProfile.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminProfile.js) · SHA-256 `197cf297ad9486189b73e115a21cb772f1784a3bfeb7500c19dca0e9d94883d5`
+[LIDO NO CÓDIGO] Fonte: [adminProfile.js](../Frontend/src/adminProfile.js) · SHA-256 `197cf297ad9486189b73e115a21cb772f1784a3bfeb7500c19dca0e9d94883d5`
 
 ### clean — linha 1
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminProfile.js:1)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminProfile.js#L1)
 
 ```javascript
 value =>
@@ -296,7 +296,7 @@ Executa a etapa `clean` neste módulo. O contrato concreto está na assinatura, 
 
 ### adminProfilePayload — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminProfile.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminProfile.js#L3)
 
 ```javascript
 function adminProfilePayload(values, account)
@@ -316,7 +316,7 @@ Executa a etapa `admin Profile Payload` neste módulo. O contrato concreto está
 
 ### applyAdminProfileResponse — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminProfile.js:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminProfile.js#L21)
 
 ```javascript
 function applyAdminProfileResponse(account, response, payload)
@@ -337,11 +337,11 @@ Executa a etapa `apply Admin Profile Response` neste módulo. O contrato concret
 
 Separação e normalização das seções administrativas. Filtros e contagens devem refletir os dados autorizados retornados pela API.
 
-Fonte: [adminSections.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSections.js) · SHA-256 `904e50a385b55fd2e7cecb7e732e45e655e5f47289e106185a733d71acdf43da`
+[LIDO NO CÓDIGO] Fonte: [adminSections.js](../Frontend/src/adminSections.js) · SHA-256 `904e50a385b55fd2e7cecb7e732e45e655e5f47289e106185a733d71acdf43da`
 
 ### renderAdminAreas — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSections.js:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSections.js#L18)
 
 ```javascript
 function renderAdminAreas(content, section)
@@ -358,7 +358,7 @@ Executa a etapa `render Admin Areas` neste módulo. O contrato concreto está na
 
 ### callback@20:10 — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSections.js:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSections.js#L20)
 
 ```javascript
 name =>
@@ -370,7 +370,7 @@ Executa a etapa `callback@20:10` neste módulo. O contrato concreto está na ass
 
 ### renderAdminTeamArea — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSections.js:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSections.js#L24)
 
 ```javascript
 function renderAdminTeamArea(content, subsection)
@@ -387,7 +387,7 @@ Executa a etapa `render Admin Team Area` neste módulo. O contrato concreto est�
 
 ### callback@26:10 — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSections.js:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSections.js#L26)
 
 ```javascript
 name =>
@@ -399,7 +399,7 @@ Executa a etapa `callback@26:10` neste módulo. O contrato concreto está na ass
 
 ### supportDetailPath — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSections.js:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSections.js#L30)
 
 ```javascript
 function supportDetailPath(isAdmin, id)
@@ -419,7 +419,7 @@ Executa a etapa `support Detail Path` neste módulo. O contrato concreto está n
 
 ### supportMessagePath — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSections.js:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSections.js#L35)
 
 ```javascript
 function supportMessagePath(isAdmin, id)
@@ -439,7 +439,7 @@ Executa a etapa `support Message Path` neste módulo. O contrato concreto está 
 
 ### storeApprovalPath — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSections.js:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSections.js#L42)
 
 ```javascript
 function storeApprovalPath(storeId, platformRequestId)
@@ -460,7 +460,7 @@ Executa a etapa `store Approval Path` neste módulo. O contrato concreto está n
 
 ### adminStoreStatus — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSections.js:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSections.js#L47)
 
 ```javascript
 function adminStoreStatus(store)
@@ -480,7 +480,7 @@ Executa a etapa `admin Store Status` neste módulo. O contrato concreto está na
 
 ### filterAdminStores — linha 52
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSections.js:52)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSections.js#L52)
 
 ```javascript
 function filterAdminStores(stores = [], status = 'ALL')
@@ -497,7 +497,7 @@ Executa a etapa `filter Admin Stores` neste módulo. O contrato concreto está n
 
 ### callback@53:24 — linha 53
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSections.js:53)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSections.js#L53)
 
 ```javascript
 store =>
@@ -511,7 +511,7 @@ Executa a etapa `callback@53:24` neste módulo. O contrato concreto está na ass
 
 ### storeApprovalId — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSections.js:56)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSections.js#L56)
 
 ```javascript
 function storeApprovalId(button)
@@ -528,11 +528,11 @@ Executa a etapa `store Approval Id` neste módulo. O contrato concreto está na 
 
 Formulários administrativos para configurações cifradas e segundo fator. Senha e códigos são enviados apenas à API; presença de configuração não comprova autenticação com provedor. Ativação ou remoção de MFA revoga sessões antigas.
 
-Fonte: [adminSecurity.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js) · SHA-256 `29b9483dac7cc75bd42571f644fdeb1e8972b54fbdab79b7e4df7ec7da161537`
+[LIDO NO CÓDIGO] Fonte: [adminSecurity.js](../Frontend/src/adminSecurity.js) · SHA-256 `29b9483dac7cc75bd42571f644fdeb1e8972b54fbdab79b7e4df7ec7da161537`
 
 ### esc — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSecurity.js#L2)
 
 ```javascript
 v=>
@@ -546,7 +546,7 @@ Executa a etapa `esc` neste módulo. O contrato concreto está na assinatura, no
 
 ### callback@2:47 — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSecurity.js#L2)
 
 ```javascript
 c=>
@@ -558,7 +558,7 @@ Executa a etapa `callback@2:47` neste módulo. O contrato concreto está na assi
 
 ### mountPrivateIntegrations — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSecurity.js#L5)
 
 ```javascript
 async function mountPrivateIntegrations(root)
@@ -593,7 +593,7 @@ form.onsubmit=async event=>{event.preventDefault();const button=form.querySelect
 
 ### load — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSecurity.js#L6)
 
 ```javascript
 async function load()
@@ -628,7 +628,7 @@ form.onsubmit=async event=>{event.preventDefault();const button=form.querySelect
 
 ### callback@6:683 — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSecurity.js#L6)
 
 ```javascript
 g=>
@@ -640,7 +640,7 @@ Executa a etapa `callback@6:683` neste módulo. O contrato concreto está na ass
 
 ### draw — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSecurity.js#L7)
 
 ```javascript
 function draw()
@@ -662,7 +662,7 @@ function draw(){fields.innerHTML=groups[select.value].map(key=>`<div class="priv
 
 ### callback@7:176 — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSecurity.js#L7)
 
 ```javascript
 key=>
@@ -679,7 +679,7 @@ Executa a etapa `callback@7:176` neste módulo. O contrato concreto está na ass
 
 ### callback@8:16 — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSecurity.js#L8)
 
 ```javascript
 async event=>
@@ -705,7 +705,7 @@ async event=>{event.preventDefault();const button=form.querySelector('[type="sub
 
 ### callback@8:355 — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSecurity.js#L8)
 
 ```javascript
 c=>
@@ -717,7 +717,7 @@ Executa a etapa `callback@8:355` neste módulo. O contrato concreto está na ass
 
 ### mountAdminMfa — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSecurity.js#L11)
 
 ```javascript
 async function mountAdminMfa(root,{onSessionRevoked=()=>{}}={})
@@ -755,7 +755,7 @@ else{const result=await api('/admin/mfa/enable',{method:'POST',body:JSON.stringi
 
 ### callback@11:60 — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSecurity.js#L11)
 
 ```javascript
 ()=>
@@ -767,7 +767,7 @@ Executa a etapa `callback@11:60` neste módulo. O contrato concreto está na ass
 
 ### load — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSecurity.js#L13)
 
 ```javascript
 async function load()
@@ -805,7 +805,7 @@ else{const result=await api('/admin/mfa/enable',{method:'POST',body:JSON.stringi
 
 ### callback@14:99 — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminSecurity.js:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminSecurity.js#L14)
 
 ```javascript
 async event=>
@@ -838,11 +838,11 @@ else{const result=await api('/admin/mfa/enable',{method:'POST',body:JSON.stringi
 
 Editor administrativo criado com elementos DOM e valores textuais. Evita interpolar dados de usuário em atributos HTML; a API valida novamente cada alteração.
 
-Fonte: [adminStoreEditor.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js) · SHA-256 `226d99cca6e0ae93e54e30db01693928ba80071232375107935c87a6b4e5fe2a`
+[LIDO NO CÓDIGO] Fonte: [adminStoreEditor.js](../Frontend/src/adminStoreEditor.js) · SHA-256 `226d99cca6e0ae93e54e30db01693928ba80071232375107935c87a6b4e5fe2a`
 
 ### editStoreDialog — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminStoreEditor.js#L10)
 
 ```javascript
 function editStoreDialog(store,categories,{onSaved,onError,onHoursSaved=()=>{}})
@@ -887,7 +887,7 @@ hoursButton.onclick=async()=>{hoursButton.disabled=true;try{const config=await a
 
 ### callback@10:80 — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminStoreEditor.js#L10)
 
 ```javascript
 ()=>
@@ -899,7 +899,7 @@ Executa a etapa `callback@10:80` neste módulo. O contrato concreto está na ass
 
 ### callback@22:53 — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminStoreEditor.js#L22)
 
 ```javascript
 ()=>
@@ -913,7 +913,7 @@ Executa a etapa `callback@22:53` neste módulo. O contrato concreto está na ass
 
 ### callback@27:50 — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminStoreEditor.js#L27)
 
 ```javascript
 ()=>
@@ -927,7 +927,7 @@ Executa a etapa `callback@27:50` neste módulo. O contrato concreto está na ass
 
 ### callback@28:19 — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminStoreEditor.js#L28)
 
 ```javascript
 event=>
@@ -944,7 +944,7 @@ Executa a etapa `callback@28:19` neste módulo. O contrato concreto está na ass
 
 ### callback@29:17 — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminStoreEditor.js#L29)
 
 ```javascript
 async event=>
@@ -973,7 +973,7 @@ const updated=await api(`/admin/stores/${encodeURIComponent(store.id)}/profile`,
 
 ### callback@32:121 — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminStoreEditor.js#L32)
 
 ```javascript
 key=>
@@ -987,7 +987,7 @@ Executa a etapa `callback@32:121` neste módulo. O contrato concreto está na as
 
 ### renderHours — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminStoreEditor.js#L39)
 
 ```javascript
 config=>
@@ -1001,7 +1001,7 @@ Executa a etapa `render Hours` neste módulo. O contrato concreto está na assin
 
 ### callback@39:122 — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminStoreEditor.js#L39)
 
 ```javascript
 (configuration,summary)=>
@@ -1015,7 +1015,7 @@ Executa a etapa `callback@39:122` neste módulo. O contrato concreto está na as
 
 ### callback@40:23 — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/adminStoreEditor.js:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/adminStoreEditor.js#L40)
 
 ```javascript
 async()=>
@@ -1042,11 +1042,11 @@ async()=>{hoursButton.disabled=true;try{const config=await api(hoursPath);if(!ov
 
 Transporte HTTP e sessão. Cookies não ficam acessíveis ao JavaScript; mensagens de falha precisam distinguir autorização, validação e indisponibilidade.
 
-Fonte: [api.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js) · SHA-256 `fe87220cf35d05df07d152c1a1630c43da5a868b879c25a15d095e99c1df9259`
+[LIDO NO CÓDIGO] Fonte: [api.js](../Frontend/src/api.js) · SHA-256 `fe87220cf35d05df07d152c1a1630c43da5a868b879c25a15d095e99c1df9259`
 
 ### apiAssetUrl — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/api.js#L3)
 
 ```javascript
 (path) =>
@@ -1061,7 +1061,7 @@ Executa a etapa `api Asset Url` neste módulo. O contrato concreto está na assi
 
 ### invalidateApiSession — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/api.js#L9)
 
 ```javascript
 function invalidateApiSession()
@@ -1073,7 +1073,7 @@ Executa a etapa `invalidate Api Session` neste módulo. O contrato concreto est�
 
 ### api — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/api.js#L11)
 
 ```javascript
 async function api(path, options = {})
@@ -1114,7 +1114,7 @@ localStorage.removeItem('pronto_account');
 
 ### ensureCurrent — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/api.js#L13)
 
 ```javascript
 () =>
@@ -1134,7 +1134,7 @@ Executa a etapa `ensure Current` neste módulo. O contrato concreto está na ass
 
 ### friendlyStatus — linha 53
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js:53)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/api.js#L53)
 
 ```javascript
 function friendlyStatus(status)
@@ -1163,7 +1163,7 @@ Executa a etapa `friendly Status` neste módulo. O contrato concreto está na as
 
 ### money — linha 63
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js:63)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/api.js#L63)
 
 ```javascript
 (cents = 0) =>
@@ -1177,7 +1177,7 @@ Executa a etapa `money` neste módulo. O contrato concreto está na assinatura, 
 
 ### shortDate — linha 64
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/api.js:64)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/api.js#L64)
 
 ```javascript
 (date) =>
@@ -1193,11 +1193,11 @@ Executa a etapa `short Date` neste módulo. O contrato concreto está na assinat
 
 Grade de horários livres, política da agenda e disponibilidade por profissional. Requisições anteriores são abortadas ao mudar a seleção; confirmar exige nova validação na API. A interface não reserva capacidade apenas por selecionar um horário.
 
-Fonte: [bookingAvailability.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js) · SHA-256 `3cb85969fdb2a3a704056acef367809c48c6aab97445b34281cf770a375b80ef`
+[LIDO NO CÓDIGO] Fonte: [bookingAvailability.js](../Frontend/src/bookingAvailability.js) · SHA-256 `3cb85969fdb2a3a704056acef367809c48c6aab97445b34281cf770a375b80ef`
 
 ### esc — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L4)
 
 ```javascript
 v=>
@@ -1211,7 +1211,7 @@ Executa a etapa `esc` neste módulo. O contrato concreto está na assinatura, no
 
 ### callback@4:47 — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L4)
 
 ```javascript
 c=>
@@ -1223,7 +1223,7 @@ Executa a etapa `callback@4:47` neste módulo. O contrato concreto está na assi
 
 ### mountAvailableSlots — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L5)
 
 ```javascript
 function mountAvailableSlots(root,store,item,form)
@@ -1254,7 +1254,7 @@ date.onchange=load;professional?.addEventListener('change',load);load();
 
 ### load — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L8)
 
 ```javascript
 async function load()
@@ -1283,7 +1283,7 @@ async function load(){const current=++generation;controller?.abort();controller=
 
 ### callback@8:859 — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L8)
 
 ```javascript
 ()=>
@@ -1302,7 +1302,7 @@ Executa a etapa `callback@8:859` neste módulo. O contrato concreto está na ass
 
 ### mountBookingPolicy — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L11)
 
 ```javascript
 async function mountBookingPolicy(root,store,{admin=false}={})
@@ -1330,7 +1330,7 @@ try{const policy=await api(path);if(!root.isConnected)return;root.innerHTML=`<se
 
 ### callback@13:548 — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L13)
 
 ```javascript
 n=>
@@ -1345,7 +1345,7 @@ Executa a etapa `callback@13:548` neste módulo. O contrato concreto está na as
 
 ### callback@13:1263 — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L13)
 
 ```javascript
 async event=>
@@ -1364,7 +1364,7 @@ async event=>{event.preventDefault();const button=form.querySelector('button');b
 
 ### openProfessionalHours — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L15)
 
 ```javascript
 async function openProfessionalHours(store,person,{admin=false,onError=()=>{}}={})
@@ -1386,7 +1386,7 @@ try{const config=await api(path);const overlay=document.createElement('div');ove
 
 ### callback@15:79 — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L15)
 
 ```javascript
 ()=>
@@ -1398,7 +1398,7 @@ Executa a etapa `callback@15:79` neste módulo. O contrato concreto está na ass
 
 ### callback@17:553 — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L17)
 
 ```javascript
 ()=>
@@ -1412,7 +1412,7 @@ Executa a etapa `callback@17:553` neste módulo. O contrato concreto está na as
 
 ### render — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L17)
 
 ```javascript
 configuration=>
@@ -1426,7 +1426,7 @@ Executa a etapa `render` neste módulo. O contrato concreto está na assinatura,
 
 ### callback@17:777 — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L17)
 
 ```javascript
 configuration=>
@@ -1440,7 +1440,7 @@ Executa a etapa `callback@17:777` neste módulo. O contrato concreto está na as
 
 ### mountAdminProfessionalHours — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L19)
 
 ```javascript
 async function mountAdminProfessionalHours(root,store)
@@ -1468,7 +1468,7 @@ async function mountAdminProfessionalHours(root,store){try{const people=await ap
 
 ### callback@19:551 — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L19)
 
 ```javascript
 ()=>
@@ -1487,7 +1487,7 @@ Executa a etapa `callback@19:551` neste módulo. O contrato concreto está na as
 
 ### callback@19:610 — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/bookingAvailability.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/bookingAvailability.js#L19)
 
 ```javascript
 error=>
@@ -1508,11 +1508,11 @@ error=>{root.querySelector('[role="status"]').textContent=error.message;}
 
 Ligação explícita dos eventos do catálogo após renderizar a página. O envio cancela a navegação nativa e a edição recebe o identificador do item; o teste usa elementos simulados e a revisão manual confirma a persistência.
 
-Fonte: [catalogBindings.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogBindings.js) · SHA-256 `079efbbb10207c3f3593d70400e4b10ec5be74b8423b6605dbbc714f6540d9da`
+[LIDO NO CÓDIGO] Fonte: [catalogBindings.js](../Frontend/src/catalogBindings.js) · SHA-256 `079efbbb10207c3f3593d70400e4b10ec5be74b8423b6605dbbc714f6540d9da`
 
 ### bindCatalogActions — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogBindings.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/catalogBindings.js#L2)
 
 ```javascript
 function bindCatalogActions(root, { create, edit })
@@ -1532,7 +1532,7 @@ root.querySelectorAll('[data-item-edit]').forEach(button => button.addEventListe
 
 ### callback@3:55 — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogBindings.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/catalogBindings.js#L3)
 
 ```javascript
 form =>
@@ -1551,7 +1551,7 @@ form => form.addEventListener('submit', create)
 
 ### callback@4:53 — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogBindings.js:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/catalogBindings.js#L4)
 
 ```javascript
 button =>
@@ -1570,7 +1570,7 @@ button => button.addEventListener('click', () => edit(button.dataset.itemEdit))
 
 ### callback@4:96 — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogBindings.js:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/catalogBindings.js#L4)
 
 ```javascript
 () =>
@@ -1586,11 +1586,11 @@ Executa a etapa `callback@4:96` neste módulo. O contrato concreto está na assi
 
 Regras visuais de catálogo, região e pagamento posterior. A política definitiva é aplicada na API, pois a cidade selecionada no navegador é manipulável.
 
-Fonte: [catalogPolicy.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogPolicy.js) · SHA-256 `70112de635c254ddfe69bb3eb2d4e2248d7eb13ba12d39de617cb10cbb34471d`
+[LIDO NO CÓDIGO] Fonte: [catalogPolicy.js](../Frontend/src/catalogPolicy.js) · SHA-256 `70112de635c254ddfe69bb3eb2d4e2248d7eb13ba12d39de617cb10cbb34471d`
 
 ### normalizeCity — linha 1
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogPolicy.js:1)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/catalogPolicy.js#L1)
 
 ```javascript
 function normalizeCity(value)
@@ -1607,7 +1607,7 @@ Executa a etapa `normalize City` neste módulo. O contrato concreto está na ass
 
 ### categoryMatches — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogPolicy.js:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/catalogPolicy.js#L18)
 
 ```javascript
 function categoryMatches(storeCategory, selectedCategory)
@@ -1630,7 +1630,7 @@ Executa a etapa `category Matches` neste módulo. O contrato concreto está na a
 
 ### normalize — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogPolicy.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/catalogPolicy.js#L19)
 
 ```javascript
 value =>
@@ -1644,7 +1644,7 @@ Executa a etapa `normalize` neste módulo. O contrato concreto está na assinatu
 
 ### callback@23:58 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogPolicy.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/catalogPolicy.js#L23)
 
 ```javascript
 ([, aliases]) =>
@@ -1658,7 +1658,7 @@ Executa a etapa `callback@23:58` neste módulo. O contrato concreto está na ass
 
 ### callback@23:88 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogPolicy.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/catalogPolicy.js#L23)
 
 ```javascript
 alias =>
@@ -1672,7 +1672,7 @@ Executa a etapa `callback@23:88` neste módulo. O contrato concreto está na ass
 
 ### callback@24:57 — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogPolicy.js:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/catalogPolicy.js#L24)
 
 ```javascript
 alias =>
@@ -1686,7 +1686,7 @@ Executa a etapa `callback@24:57` neste módulo. O contrato concreto está na ass
 
 ### customerOutsideStoreCity — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogPolicy.js:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/catalogPolicy.js#L28)
 
 ```javascript
 function customerOutsideStoreCity(customer, store)
@@ -1707,7 +1707,7 @@ Executa a etapa `customer Outside Store City` neste módulo. O contrato concreto
 
 ### catalogItemIcon — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/catalogPolicy.js:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/catalogPolicy.js#L34)
 
 ```javascript
 function catalogItemIcon(serviceItem)
@@ -1727,11 +1727,11 @@ Executa a etapa `catalog Item Icon` neste módulo. O contrato concreto está na 
 
 Inicialização da aplicação e ligação dos módulos; manter separação entre configuração e regra de negócio.
 
-Fonte: [chatSession.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/chatSession.js) · SHA-256 `47923ada34bbba95a10ca6d15175d233e000883ef434b0cdee6f33e9e1383bd5`
+[LIDO NO CÓDIGO] Fonte: [chatSession.js](../Frontend/src/chatSession.js) · SHA-256 `47923ada34bbba95a10ca6d15175d233e000883ef434b0cdee6f33e9e1383bd5`
 
 ### createChatSession — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/chatSession.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/chatSession.js#L2)
 
 ```javascript
 function createChatSession({ request, onLoad, onUpdate, onError, visible = () => true, schedule = setTimeout, cancel = clearTimeout, delay = 5000 })
@@ -1769,7 +1769,7 @@ session.sending = true;
 
 ### callback@2:83 — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/chatSession.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/chatSession.js#L2)
 
 ```javascript
 () =>
@@ -1781,7 +1781,7 @@ Executa a etapa `callback@2:83` neste módulo. O contrato concreto está na assi
 
 ### stop — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/chatSession.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/chatSession.js#L5)
 
 ```javascript
 function stop()
@@ -1798,7 +1798,7 @@ Executa a etapa `stop` neste módulo. O contrato concreto está na assinatura, n
 
 ### active — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/chatSession.js:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/chatSession.js#L10)
 
 ```javascript
 session =>
@@ -1810,7 +1810,7 @@ Executa a etapa `active` neste módulo. O contrato concreto está na assinatura,
 
 ### queue — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/chatSession.js:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/chatSession.js#L11)
 
 ```javascript
 function queue(session)
@@ -1827,7 +1827,7 @@ Executa a etapa `queue` neste módulo. O contrato concreto está na assinatura, 
 
 ### callback@12:51 — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/chatSession.js:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/chatSession.js#L12)
 
 ```javascript
 () =>
@@ -1841,7 +1841,7 @@ Executa a etapa `callback@12:51` neste módulo. O contrato concreto está na ass
 
 ### refresh — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/chatSession.js:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/chatSession.js#L14)
 
 ```javascript
 async function refresh(session)
@@ -1869,7 +1869,7 @@ if (!visible() || session.sending) { queue(session); return; }
 
 ### open — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/chatSession.js:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/chatSession.js#L24)
 
 ```javascript
 async function open(type, id)
@@ -1890,7 +1890,7 @@ Executa a etapa `open` neste módulo. O contrato concreto está na assinatura, n
 
 ### send — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/chatSession.js:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/chatSession.js#L40)
 
 ```javascript
 async function send(key, body, { onSent, onFailure })
@@ -1920,11 +1920,11 @@ session.sending = true;
 
 Interface de ganhos e repasses. Mostra saldo e histórico, exige senha e código para solicitar, oferece análise administrativa e registra comprovante externo. Estado visual não comprova transferência bancária.
 
-Fonte: [courierFinance.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js) · SHA-256 `a84ab2b81ff9db6d94e23b184dae812c9324c33cf3b7e0f4734758b671ad2f74`
+[LIDO NO CÓDIGO] Fonte: [courierFinance.js](../Frontend/src/courierFinance.js) · SHA-256 `a84ab2b81ff9db6d94e23b184dae812c9324c33cf3b7e0f4734758b671ad2f74`
 
 ### esc — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L3)
 
 ```javascript
 v=>
@@ -1938,7 +1938,7 @@ Executa a etapa `esc` neste módulo. O contrato concreto está na assinatura, no
 
 ### callback@3:47 — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L3)
 
 ```javascript
 c=>
@@ -1950,7 +1950,7 @@ Executa a etapa `callback@3:47` neste módulo. O contrato concreto está na assi
 
 ### money — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L4)
 
 ```javascript
 v=>
@@ -1964,7 +1964,7 @@ Executa a etapa `money` neste módulo. O contrato concreto está na assinatura, 
 
 ### value — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L6)
 
 ```javascript
 function value(form,name)
@@ -1981,7 +1981,7 @@ Executa a etapa `value` neste módulo. O contrato concreto está na assinatura, 
 
 ### amount — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L7)
 
 ```javascript
 function amount(form)
@@ -2004,7 +2004,7 @@ Executa a etapa `amount` neste módulo. O contrato concreto está na assinatura,
 
 ### mask — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L8)
 
 ```javascript
 function mask(root)
@@ -2018,7 +2018,7 @@ Executa a etapa `mask` neste módulo. O contrato concreto está na assinatura, n
 
 ### callback@8:92 — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L8)
 
 ```javascript
 ()=>
@@ -2032,7 +2032,7 @@ Executa a etapa `callback@8:92` neste módulo. O contrato concreto está na assi
 
 ### payout — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L9)
 
 ```javascript
 function payout(p,admin)
@@ -2057,7 +2057,7 @@ Executa a etapa `payout` neste módulo. O contrato concreto está na assinatura,
 
 ### dialog — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L10)
 
 ```javascript
 function dialog(title,fields,onSubmit)
@@ -2083,7 +2083,7 @@ function dialog(title,fields,onSubmit){const overlay=document.createElement('div
 
 ### callback@10:594 — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L10)
 
 ```javascript
 ()=>
@@ -2097,7 +2097,7 @@ Executa a etapa `callback@10:594` neste módulo. O contrato concreto está na as
 
 ### callback@10:660 — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L10)
 
 ```javascript
 ()=>
@@ -2111,7 +2111,7 @@ Executa a etapa `callback@10:660` neste módulo. O contrato concreto está na as
 
 ### callback@10:720 — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L10)
 
 ```javascript
 async e=>
@@ -2136,7 +2136,7 @@ async e=>{e.preventDefault();const form=e.currentTarget,button=form.querySelecto
 
 ### mountCourierFinance — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L12)
 
 ```javascript
 async function mountCourierFinance(root,{admin=false,onError=()=>{}}={})
@@ -2182,7 +2182,7 @@ async function run(event,action){event.preventDefault();const form=event.current
 
 ### callback@12:69 — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L12)
 
 ```javascript
 ()=>
@@ -2194,7 +2194,7 @@ Executa a etapa `callback@12:69` neste módulo. O contrato concreto está na ass
 
 ### load — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L14)
 
 ```javascript
 async function load()
@@ -2221,7 +2221,7 @@ async function load(){root.innerHTML='<p role="status">Consultando o financeiro�
 
 ### render — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L15)
 
 ```javascript
 function render(data)
@@ -2257,7 +2257,7 @@ root.querySelectorAll('[data-paid]').forEach(button=>button.onclick=()=>dialog('
 
 ### callback@15:891 — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L15)
 
 ```javascript
 p=>
@@ -2271,7 +2271,7 @@ Executa a etapa `callback@15:891` neste módulo. O contrato concreto está na as
 
 ### callback@15:1217 — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L15)
 
 ```javascript
 ([label,v])=>
@@ -2285,7 +2285,7 @@ Executa a etapa `callback@15:1217` neste módulo. O contrato concreto está na a
 
 ### callback@15:2231 — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L15)
 
 ```javascript
 p=>
@@ -2299,7 +2299,7 @@ Executa a etapa `callback@15:2231` neste módulo. O contrato concreto está na a
 
 ### callback@15:2395 — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L15)
 
 ```javascript
 e=>
@@ -2313,7 +2313,7 @@ Executa a etapa `callback@15:2395` neste módulo. O contrato concreto está na a
 
 ### callback@17:44 — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L17)
 
 ```javascript
 ()=>
@@ -2327,7 +2327,7 @@ Executa a etapa `callback@17:44` neste módulo. O contrato concreto está na ass
 
 ### callback@17:107 — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L17)
 
 ```javascript
 ()=>
@@ -2341,7 +2341,7 @@ Executa a etapa `callback@17:107` neste módulo. O contrato concreto está na as
 
 ### callback@18:77 — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L18)
 
 ```javascript
 e=>
@@ -2360,7 +2360,7 @@ e=>run(e,async form=>{await api('/admin/courier-finance/policy',{method:'POST',b
 
 ### callback@18:86 — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L18)
 
 ```javascript
 async form=>
@@ -2379,7 +2379,7 @@ async form=>{await api('/admin/courier-finance/policy',{method:'POST',body:JSON.
 
 ### callback@19:82 — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L19)
 
 ```javascript
 e=>
@@ -2398,7 +2398,7 @@ e=>run(e,async form=>{await api('/courier/payouts',{method:'POST',body:JSON.stri
 
 ### callback@19:91 — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L19)
 
 ```javascript
 async form=>
@@ -2417,7 +2417,7 @@ async form=>{await api('/courier/payouts',{method:'POST',body:JSON.stringify({am
 
 ### callback@19:351 — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L19)
 
 ```javascript
 async e=>
@@ -2439,7 +2439,7 @@ async e=>{e.currentTarget.disabled=true;try{await api('/courier/payout-code',{me
 
 ### callback@20:56 — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L20)
 
 ```javascript
 button=>
@@ -2458,7 +2458,7 @@ button=>button.onclick=async()=>{button.disabled=true;try{await api(`/courier/pa
 
 ### callback@20:79 — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L20)
 
 ```javascript
 async()=>
@@ -2477,7 +2477,7 @@ async()=>{button.disabled=true;try{await api(`/courier/payouts/${button.dataset.
 
 ### callback@21:49 — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L21)
 
 ```javascript
 button=>
@@ -2500,7 +2500,7 @@ button=>button.onclick=()=>{const approved=button.dataset.approved==='true';dial
 
 ### callback@21:72 — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L21)
 
 ```javascript
 ()=>
@@ -2523,7 +2523,7 @@ Executa a etapa `callback@21:72` neste módulo. O contrato concreto está na ass
 
 ### callback@21:421 — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L21)
 
 ```javascript
 async(form,overlay)=>
@@ -2545,7 +2545,7 @@ async(form,overlay)=>{const result=await api(`/admin/courier-finance/payouts/${b
 
 ### callback@21:854 — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L21)
 
 ```javascript
 async(_,info)=>
@@ -2559,7 +2559,7 @@ Executa a etapa `callback@21:854` neste módulo. O contrato concreto está na as
 
 ### callback@22:47 — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L22)
 
 ```javascript
 button=>
@@ -2578,7 +2578,7 @@ button=>button.onclick=()=>dialog('Confirmar transferência realizada',`<p class
 
 ### callback@22:70 — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L22)
 
 ```javascript
 ()=>
@@ -2597,7 +2597,7 @@ Executa a etapa `callback@22:70` neste módulo. O contrato concreto está na ass
 
 ### callback@22:402 — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L22)
 
 ```javascript
 async(form,overlay)=>
@@ -2616,7 +2616,7 @@ async(form,overlay)=>{await api(`/admin/courier-finance/payouts/${button.dataset
 
 ### run — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/courierFinance.js:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/courierFinance.js#L24)
 
 ```javascript
 async function run(event,action)
@@ -2644,11 +2644,11 @@ async function run(event,action){event.preventDefault();const form=event.current
 
 Ligação dos botões de aceite de oferta com o identificador data-accept-delivery renderizado na tela. O teste reproduz o clique sem um atributo data-id genérico; a API valida novamente disponibilidade e entregador.
 
-Fonte: [deliveryBindings.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/deliveryBindings.js) · SHA-256 `3aa284d31d848f8584ac5e64268a2125e3a67e46bf975d71f2b60f6db9b01cae`
+[LIDO NO CÓDIGO] Fonte: [deliveryBindings.js](../Frontend/src/deliveryBindings.js) · SHA-256 `3aa284d31d848f8584ac5e64268a2125e3a67e46bf975d71f2b60f6db9b01cae`
 
 ### bindCourierOfferActions — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/deliveryBindings.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/deliveryBindings.js#L2)
 
 ```javascript
 function bindCourierOfferActions(root, accept)
@@ -2667,7 +2667,7 @@ button.addEventListener('click', () => accept(button.dataset.acceptDelivery));
 
 ### callback@3:59 — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/deliveryBindings.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/deliveryBindings.js#L3)
 
 ```javascript
 button =>
@@ -2686,7 +2686,7 @@ button.addEventListener('click', () => accept(button.dataset.acceptDelivery));
 
 ### callback@4:38 — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/deliveryBindings.js:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/deliveryBindings.js#L4)
 
 ```javascript
 () =>
@@ -2702,11 +2702,11 @@ Executa a etapa `callback@4:38` neste módulo. O contrato concreto está na assi
 
 Caixa de mensagens fictícias. Exige administração na API e existe para conferir avisos sem entregar mensagem a pessoas reais.
 
-Fonte: [demoInbox.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/demoInbox.js) · SHA-256 `6ccc2d3ae6e3af63832d1cf684f761ec9a2622ea3c3552701f6e2304ba56363a`
+[LIDO NO CÓDIGO] Fonte: [demoInbox.js](../Frontend/src/demoInbox.js) · SHA-256 `6ccc2d3ae6e3af63832d1cf684f761ec9a2622ea3c3552701f6e2304ba56363a`
 
 ### refresh — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/demoInbox.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/demoInbox.js#L3)
 
 ```javascript
 async function refresh()
@@ -2736,7 +2736,7 @@ status.textContent=messages.length?`${messages.length} mensagem(ns) capturada(s)
 
 ### callback@10:65 — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/demoInbox.js:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/demoInbox.js#L10)
 
 ```javascript
 async event=>
@@ -2757,11 +2757,11 @@ async event=>{event.preventDefault();const form=new FormData(event.currentTarget
 
 Ações por domínio com API e navegação injetadas; preservar autorização no servidor e tratar falhas assíncronas.
 
-Fonte: [accountActions.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/accountActions.js) · SHA-256 `126ba1bd8bc31288644563f33c7d3d772d79a2909469db18bc323a420e3c906d`
+[LIDO NO CÓDIGO] Fonte: [accountActions.js](../Frontend/src/features/accountActions.js) · SHA-256 `126ba1bd8bc31288644563f33c7d3d772d79a2909469db18bc323a420e3c906d`
 
 ### createAccountActions — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/accountActions.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/accountActions.js#L2)
 
 ```javascript
 function createAccountActions({ api, loadAddresses, loadStores, notify, persistAccountHint, render, renderPage, state })
@@ -2799,7 +2799,7 @@ try { await api(`/account/addresses/${id}`,{method:'DELETE'});await loadAddresse
 
 ### requestOperatorAccess — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/accountActions.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/accountActions.js#L3)
 
 ```javascript
 async function requestOperatorAccess(event)
@@ -2818,7 +2818,7 @@ async function requestOperatorAccess(event){event.preventDefault();const roleNam
 
 ### requestCityAccess — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/accountActions.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/accountActions.js#L5)
 
 ```javascript
 async function requestCityAccess(event)
@@ -2837,7 +2837,7 @@ async function requestCityAccess(event){event.preventDefault();const form=new Fo
 
 ### saveProfile — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/accountActions.js:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/accountActions.js#L7)
 
 ```javascript
 async function saveProfile(event)
@@ -2861,7 +2861,7 @@ try{state.profile=await api('/account/profile',{method:'PUT',body:JSON.stringify
 
 ### callback@9:207 — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/accountActions.js:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/accountActions.js#L9)
 
 ```javascript
 k=>
@@ -2875,7 +2875,7 @@ Executa a etapa `callback@9:207` neste módulo. O contrato concreto está na ass
 
 ### callback@9:579 — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/accountActions.js:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/accountActions.js#L9)
 
 ```javascript
 a=>
@@ -2887,7 +2887,7 @@ Executa a etapa `callback@9:579` neste módulo. O contrato concreto está na ass
 
 ### callback@9:1177 — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/accountActions.js:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/accountActions.js#L9)
 
 ```javascript
 ()=>
@@ -2899,7 +2899,7 @@ Executa a etapa `callback@9:1177` neste módulo. O contrato concreto está na as
 
 ### changePassword — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/accountActions.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/accountActions.js#L13)
 
 ```javascript
 async function changePassword(event)
@@ -2924,7 +2924,7 @@ async function changePassword(event){event.preventDefault();const form=new FormD
 
 ### requestPhoneVerification — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/accountActions.js:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/accountActions.js#L15)
 
 ```javascript
 async function requestPhoneVerification()
@@ -2943,7 +2943,7 @@ async function requestPhoneVerification(){try{await api('/account/phone-verifica
 
 ### confirmPhoneVerification — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/accountActions.js:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/accountActions.js#L17)
 
 ```javascript
 async function confirmPhoneVerification(event)
@@ -2962,7 +2962,7 @@ async function confirmPhoneVerification(event){event.preventDefault();const code
 
 ### setDefaultAddress — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/accountActions.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/accountActions.js#L19)
 
 ```javascript
 async function setDefaultAddress(id)
@@ -2981,7 +2981,7 @@ try { await api(`/account/addresses/${id}/default`,{method:'PATCH'});await loadA
 
 ### deleteAddress — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/accountActions.js:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/accountActions.js#L24)
 
 ```javascript
 async function deleteAddress(id)
@@ -3008,11 +3008,11 @@ try { await api(`/account/addresses/${id}`,{method:'DELETE'});await loadAddresse
 
 Ações por domínio com API e navegação injetadas; preservar autorização no servidor e tratar falhas assíncronas.
 
-Fonte: [adminActions.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js) · SHA-256 `e60c471951c92bf9f15162f7151de87ac9471701f49319a58f5edd24347789d1`
+[LIDO NO CÓDIGO] Fonte: [adminActions.js](../Frontend/src/features/adminActions.js) · SHA-256 `e60c471951c92bf9f15162f7151de87ac9471701f49319a58f5edd24347789d1`
 
 ### createAdminActions — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L2)
 
 ```javascript
 function createAdminActions({ $, adminProfilePayload, api, applyAdminProfileResponse, applyPublicCategories, categoryOptions, editStoreDialog, esc, formatCpfMask, loadAdminData, loadAdminList, notify, persistAccountHint, render, renderPage, role, runOnce, state, storeApprovalPath })
@@ -3097,7 +3097,7 @@ async function saveCommission(event){event.preventDefault();const id=event.curre
 
 ### loadAdminAuditEvents — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L3)
 
 ```javascript
 async function loadAdminAuditEvents()
@@ -3116,7 +3116,7 @@ async function loadAdminAuditEvents(){try{const result=await api('/admin/audit-e
 
 ### openAdminStoreEditor — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L5)
 
 ```javascript
 function openAdminStoreEditor(id)
@@ -3137,7 +3137,7 @@ Executa a etapa `open Admin Store Editor` neste módulo. O contrato concreto est
 
 ### callback@5:70 — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L5)
 
 ```javascript
 item=>
@@ -3151,7 +3151,7 @@ Executa a etapa `callback@5:70` neste módulo. O contrato concreto está na assi
 
 ### callback@5:168 — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L5)
 
 ```javascript
 name=>
@@ -3163,7 +3163,7 @@ Executa a etapa `callback@5:168` neste módulo. O contrato concreto está na ass
 
 ### callback@5:199 — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L5)
 
 ```javascript
 async updated=>
@@ -3180,7 +3180,7 @@ Executa a etapa `callback@5:199` neste módulo. O contrato concreto está na ass
 
 ### callback@5:255 — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L5)
 
 ```javascript
 item=>
@@ -3195,7 +3195,7 @@ Executa a etapa `callback@5:255` neste módulo. O contrato concreto está na ass
 
 ### callback@5:421 — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L5)
 
 ```javascript
 summary=>
@@ -3209,7 +3209,7 @@ Executa a etapa `callback@5:421` neste módulo. O contrato concreto está na ass
 
 ### callback@5:591 — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L5)
 
 ```javascript
 error=>
@@ -3223,7 +3223,7 @@ Executa a etapa `callback@5:591` neste módulo. O contrato concreto está na ass
 
 ### refreshCitiesAfterSave — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L7)
 
 ```javascript
 async function refreshCitiesAfterSave(saved)
@@ -3249,7 +3249,7 @@ async function refreshCitiesAfterSave(saved){try{state.adminServiceCities=await 
 
 ### callback@7:170 — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L7)
 
 ```javascript
 city=>
@@ -3263,7 +3263,7 @@ Executa a etapa `callback@7:170` neste módulo. O contrato concreto está na ass
 
 ### callback@7:278 — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L7)
 
 ```javascript
 (a,b)=>
@@ -3277,7 +3277,7 @@ Executa a etapa `callback@7:278` neste módulo. O contrato concreto está na ass
 
 ### createServiceCity — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L9)
 
 ```javascript
 async function createServiceCity(event)
@@ -3299,7 +3299,7 @@ async function createServiceCity(event){event.preventDefault();const formElement
 
 ### refreshStoreCategories — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L11)
 
 ```javascript
 async function refreshStoreCategories()
@@ -3320,7 +3320,7 @@ Executa a etapa `refresh Store Categories` neste módulo. O contrato concreto es
 
 ### callback@11:314 — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L11)
 
 ```javascript
 result=>
@@ -3332,7 +3332,7 @@ Executa a etapa `callback@11:314` neste módulo. O contrato concreto está na as
 
 ### createStoreCategory — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L13)
 
 ```javascript
 async function createStoreCategory(event)
@@ -3355,7 +3355,7 @@ async function createStoreCategory(event){event.preventDefault();const formEleme
 
 ### callback@13:425 — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L13)
 
 ```javascript
 category=>
@@ -3369,7 +3369,7 @@ Executa a etapa `callback@13:425` neste módulo. O contrato concreto está na as
 
 ### deleteStoreCategory — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L15)
 
 ```javascript
 async function deleteStoreCategory(id)
@@ -3397,7 +3397,7 @@ async function deleteStoreCategory(id){const category=state.adminStoreCategories
 
 ### callback@15:87 — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L15)
 
 ```javascript
 item=>
@@ -3411,7 +3411,7 @@ Executa a etapa `callback@15:87` neste módulo. O contrato concreto está na ass
 
 ### callback@15:414 — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L15)
 
 ```javascript
 item=>
@@ -3425,7 +3425,7 @@ Executa a etapa `callback@15:414` neste módulo. O contrato concreto está na as
 
 ### updateServiceCity — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L17)
 
 ```javascript
 async function updateServiceCity(event)
@@ -3451,7 +3451,7 @@ async function updateServiceCity(event){event.preventDefault();const form=event.
 
 ### callback@17:157 — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L17)
 
 ```javascript
 city=>
@@ -3465,7 +3465,7 @@ Executa a etapa `callback@17:157` neste módulo. O contrato concreto está na as
 
 ### toggleServiceCity — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L19)
 
 ```javascript
 async function toggleServiceCity(id,enabled)
@@ -3492,7 +3492,7 @@ async function toggleServiceCity(id,enabled){const city=state.adminServiceCities
 
 ### callback@19:87 — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L19)
 
 ```javascript
 item=>
@@ -3506,7 +3506,7 @@ Executa a etapa `callback@19:87` neste módulo. O contrato concreto está na ass
 
 ### saveAdminProfile — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L21)
 
 ```javascript
 async function saveAdminProfile(event)
@@ -3528,7 +3528,7 @@ async function saveAdminProfile(event){event.preventDefault();const payload=admi
 
 ### openAdminAccountEditor — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L23)
 
 ```javascript
 function openAdminAccountEditor(id)
@@ -3557,7 +3557,7 @@ function openAdminAccountEditor(id){const account=state.adminAccounts.find(item=
 
 ### callback@23:76 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L23)
 
 ```javascript
 item=>
@@ -3571,7 +3571,7 @@ Executa a etapa `callback@23:76` neste módulo. O contrato concreto está na ass
 
 ### callback@23:3020 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L23)
 
 ```javascript
 button=>
@@ -3590,7 +3590,7 @@ button=>button.addEventListener('click',()=>modal.remove())
 
 ### callback@23:3060 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L23)
 
 ```javascript
 ()=>
@@ -3604,7 +3604,7 @@ Executa a etapa `callback@23:3060` neste módulo. O contrato concreto está na a
 
 ### callback@23:3112 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L23)
 
 ```javascript
 event=>
@@ -3621,7 +3621,7 @@ Executa a etapa `callback@23:3112` neste módulo. O contrato concreto está na a
 
 ### callback@23:3307 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L23)
 
 ```javascript
 input=>
@@ -3640,7 +3640,7 @@ input=>input.addEventListener('input',()=>input.value=formatCpfMask(input.value)
 
 ### callback@23:3345 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L23)
 
 ```javascript
 ()=>
@@ -3654,7 +3654,7 @@ Executa a etapa `callback@23:3345` neste módulo. O contrato concreto está na a
 
 ### callback@23:3435 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L23)
 
 ```javascript
 input=>
@@ -3673,7 +3673,7 @@ input=>input.addEventListener('input',()=>input.value=input.value.replace(/\D/g,
 
 ### callback@23:3473 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L23)
 
 ```javascript
 ()=>
@@ -3687,7 +3687,7 @@ Executa a etapa `callback@23:3473` neste módulo. O contrato concreto está na a
 
 ### saveAdminAccount — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L25)
 
 ```javascript
 async function saveAdminAccount(event)
@@ -3706,7 +3706,7 @@ async function saveAdminAccount(event){event.preventDefault();const form=event.c
 
 ### callback@25:207 — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L25)
 
 ```javascript
 item=>
@@ -3720,7 +3720,7 @@ Executa a etapa `callback@25:207` neste módulo. O contrato concreto está na as
 
 ### createOperator — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L27)
 
 ```javascript
 async function createOperator(event)
@@ -3747,7 +3747,7 @@ async function createOperator(event){event.preventDefault();const element=event.
 
 ### callback@27:155 — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L27)
 
 ```javascript
 async()=>
@@ -3771,7 +3771,7 @@ async()=>{const form=new FormData(element),submit=element.querySelector('[type="
 
 ### setAccountActive — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L29)
 
 ```javascript
 async function setAccountActive(id,active)
@@ -3793,7 +3793,7 @@ async function setAccountActive(id,active){try{await api(`/admin/accounts/${id}/
 
 ### setAccountRole — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L31)
 
 ```javascript
 async function setAccountRole(id,roleName,active)
@@ -3816,7 +3816,7 @@ async function setAccountRole(id,roleName,active){try{await api(`/admin/accounts
 
 ### resetAccountPassword — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L33)
 
 ```javascript
 async function resetAccountPassword(id,name)
@@ -3841,7 +3841,7 @@ async function resetAccountPassword(id,name){if(!window.confirm(`Gerar uma senha
 
 ### reviewOperatorApplication — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L35)
 
 ```javascript
 async function reviewOperatorApplication(id,decision)
@@ -3863,7 +3863,7 @@ try{await api(`/admin/operator-applications/${id}/${verb}`,{method:'PATCH'});[st
 
 ### setOperatorActive — linha 41
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:41)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L41)
 
 ```javascript
 async function setOperatorActive(id,active)
@@ -3887,7 +3887,7 @@ try{const operator=state.adminOperators.find(account=>String(account.id)===Strin
 
 ### callback@42:48 — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L42)
 
 ```javascript
 account=>
@@ -3901,7 +3901,7 @@ Executa a etapa `callback@42:48` neste módulo. O contrato concreto está na ass
 
 ### setStoreActive — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L46)
 
 ```javascript
 async function setStoreActive(id,active)
@@ -3923,7 +3923,7 @@ async function setStoreActive(id,active){try{await api(`/admin/stores/${id}/acti
 
 ### approveStore — linha 48
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:48)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L48)
 
 ```javascript
 async function approveStore(id)
@@ -3950,7 +3950,7 @@ async function approveStore(id){return runOnce(`admin:approve-store:${id}`,async
 
 ### callback@48:76 — linha 48
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:48)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L48)
 
 ```javascript
 async()=>
@@ -3974,7 +3974,7 @@ async()=>{const button=document.querySelector(`[data-approve-store="${CSS.escape
 
 ### callback@48:292 — linha 48
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:48)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L48)
 
 ```javascript
 r=>
@@ -3988,7 +3988,7 @@ Executa a etapa `callback@48:292` neste módulo. O contrato concreto está na as
 
 ### saveCommission — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/adminActions.js:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/adminActions.js#L50)
 
 ```javascript
 async function saveCommission(event)
@@ -4015,11 +4015,11 @@ async function saveCommission(event){event.preventDefault();const id=event.curre
 
 Ações por domínio com API e navegação injetadas; preservar autorização no servidor e tratar falhas assíncronas.
 
-Fonte: [orderActions.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js) · SHA-256 `d607a3fdb8dcc372c805630da01279e34fcf638963c1753c8ec301c66d2ee35b`
+[LIDO NO CÓDIGO] Fonte: [orderActions.js](../Frontend/src/features/orderActions.js) · SHA-256 `d607a3fdb8dcc372c805630da01279e34fcf638963c1753c8ec301c66d2ee35b`
 
 ### createOrderActions — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L2)
 
 ```javascript
 function createOrderActions({ api, formatStatus, loadCurrentPage, navigate, notify, render, state, stopCourierLocation })
@@ -4078,7 +4078,7 @@ async function updateDelivery(id,status){try{await api(`/courier/deliveries/${id
 
 ### cancelUnpaidOrder — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L3)
 
 ```javascript
 async function cancelUnpaidOrder(id)
@@ -4103,7 +4103,7 @@ async function cancelUnpaidOrder(id){if(!window.confirm('Cancelar este pedido n�
 
 ### cancelUnpaidReservation — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L5)
 
 ```javascript
 async function cancelUnpaidReservation(id)
@@ -4128,7 +4128,7 @@ async function cancelUnpaidReservation(id){if(!window.confirm('Cancelar esta res
 
 ### requestOrderCancellation — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L7)
 
 ```javascript
 async function requestOrderCancellation(id)
@@ -4153,7 +4153,7 @@ async function requestOrderCancellation(id){if(!window.confirm('A loja analisar�
 
 ### requestReservationCancellation — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L9)
 
 ```javascript
 async function requestReservationCancellation(id)
@@ -4179,7 +4179,7 @@ async function requestReservationCancellation(id){if(!window.confirm('A loja ana
 
 ### decideOrderCancellation — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L11)
 
 ```javascript
 async function decideOrderCancellation(id,accepted)
@@ -4205,7 +4205,7 @@ async function decideOrderCancellation(id,accepted){if(accepted&&!window.confirm
 
 ### decideReservationCancellation — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L13)
 
 ```javascript
 async function decideReservationCancellation(id,accepted)
@@ -4231,7 +4231,7 @@ async function decideReservationCancellation(id,accepted){if(accepted&&!window.c
 
 ### updateOrder — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L15)
 
 ```javascript
 async function updateOrder(id,status)
@@ -4257,7 +4257,7 @@ async function updateOrder(id,status){if(['CANCELLED','REJECTED'].includes(statu
 
 ### updateReservation — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L17)
 
 ```javascript
 async function updateReservation(id,status)
@@ -4283,7 +4283,7 @@ async function updateReservation(id,status){if(status==='CANCELLED'&&!window.con
 
 ### offerDelivery — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L19)
 
 ```javascript
 async function offerDelivery(id)
@@ -4302,7 +4302,7 @@ async function offerDelivery(id){try{await api(`/merchant/orders/${id}/delivery`
 
 ### acceptDelivery — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L21)
 
 ```javascript
 async function acceptDelivery(id)
@@ -4321,7 +4321,7 @@ async function acceptDelivery(id){try{await api(`/courier/offers/${id}/accept`,{
 
 ### updateDelivery — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L23)
 
 ```javascript
 async function updateDelivery(id,status)
@@ -4343,7 +4343,7 @@ async function updateDelivery(id,status){try{await api(`/courier/deliveries/${id
 
 ### resumeOrderPayment — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L25)
 
 ```javascript
 function resumeOrderPayment(id)
@@ -4363,7 +4363,7 @@ Executa a etapa `resume Order Payment` neste módulo. O contrato concreto está 
 
 ### callback@25:63 — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L25)
 
 ```javascript
 item=>
@@ -4377,7 +4377,7 @@ Executa a etapa `callback@25:63` neste módulo. O contrato concreto está na ass
 
 ### resumeReservationPayment — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L27)
 
 ```javascript
 function resumeReservationPayment(id)
@@ -4397,7 +4397,7 @@ Executa a etapa `resume Reservation Payment` neste módulo. O contrato concreto 
 
 ### callback@27:81 — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/orderActions.js:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/orderActions.js#L27)
 
 ```javascript
 item=>
@@ -4413,11 +4413,11 @@ Executa a etapa `callback@27:81` neste módulo. O contrato concreto está na ass
 
 Ações por domínio com API e navegação injetadas; preservar autorização no servidor e tratar falhas assíncronas.
 
-Fonte: [shoppingViews.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js) · SHA-256 `9e6cbde7b434ef4d561da65d27114897e7d9d8e3f21b8b7edb47be209252628c`
+[LIDO NO CÓDIGO] Fonte: [shoppingViews.js](../Frontend/src/features/shoppingViews.js) · SHA-256 `9e6cbde7b434ef4d561da65d27114897e7d9d8e3f21b8b7edb47be209252628c`
 
 ### createShoppingViews — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L2)
 
 ```javascript
 function createShoppingViews({ $, addToCart, addressText, api, apiAssetUrl, catalogItemIcon, checkout, cleanupStoreMaps, closeCart, currentStoreOpen, emptyState, esc, fulfillmentBadges, isCustomerOutsideStoreCity, localDateTimeInZoneToIso, lookupCep, money, mountAvailableSlots, mountStoreDirectoryMap, navigate, notify, render, renderPublicHours, saveCheckoutAddress, state, storeHoursStatusRelevant, storeMapUrl, storeOpenAt, storeScheduleAllowsAppointment })
@@ -4513,7 +4513,7 @@ $('#reserve-form',modal).addEventListener('submit',async e=>{e.preventDefault();
 
 ### renderStoreModal — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L3)
 
 ```javascript
 function renderStoreModal()
@@ -4555,7 +4555,7 @@ modal.querySelectorAll('[data-reserve]').forEach(b=>b.addEventListener('click',(
 
 ### callback@13:78 — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L13)
 
 ```javascript
 (item,i)=>
@@ -4578,7 +4578,7 @@ Executa a etapa `callback@13:78` neste módulo. O contrato concreto está na ass
 
 ### callback@17:58 — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L17)
 
 ```javascript
 ()=>
@@ -4592,7 +4592,7 @@ Executa a etapa `callback@17:58` neste módulo. O contrato concreto está na ass
 
 ### callback@18:34 — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L18)
 
 ```javascript
 e=>
@@ -4609,7 +4609,7 @@ Executa a etapa `callback@18:34` neste módulo. O contrato concreto está na ass
 
 ### callback@19:53 — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L19)
 
 ```javascript
 b=>
@@ -4628,7 +4628,7 @@ b=>b.addEventListener('click',()=>addToCart(b.dataset.addItem))
 
 ### callback@19:83 — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L19)
 
 ```javascript
 ()=>
@@ -4642,7 +4642,7 @@ Executa a etapa `callback@19:83` neste módulo. O contrato concreto está na ass
 
 ### callback@20:52 — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L20)
 
 ```javascript
 b=>
@@ -4661,7 +4661,7 @@ b=>b.addEventListener('click',()=>showReserveForm(b.dataset.reserve))
 
 ### callback@20:82 — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L20)
 
 ```javascript
 ()=>
@@ -4675,7 +4675,7 @@ Executa a etapa `callback@20:82` neste módulo. O contrato concreto está na ass
 
 ### renderCartDrawer — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L23)
 
 ```javascript
 function renderCartDrawer()
@@ -4733,7 +4733,7 @@ $('[data-address-form]',backdrop)?.addEventListener('submit',saveCheckoutAddress
 
 ### callback@27:36 — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L27)
 
 ```javascript
 (sum,line)=>
@@ -4745,7 +4745,7 @@ Executa a etapa `callback@27:36` neste módulo. O contrato concreto está na ass
 
 ### callback@31:105 — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L31)
 
 ```javascript
 line=>
@@ -4759,7 +4759,7 @@ Executa a etapa `callback@31:105` neste módulo. O contrato concreto está na as
 
 ### callback@34:54 — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L34)
 
 ```javascript
 a=>
@@ -4777,7 +4777,7 @@ Executa a etapa `callback@34:54` neste módulo. O contrato concreto está na ass
 
 ### callback@45:37 — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L45)
 
 ```javascript
 e=>
@@ -4794,7 +4794,7 @@ Executa a etapa `callback@45:37` neste módulo. O contrato concreto está na ass
 
 ### callback@46:51 — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L46)
 
 ```javascript
 b=>
@@ -4822,7 +4822,7 @@ b=>b.addEventListener('click',()=>{const item=state.cart.find(i=>String(i.id)===
 
 ### callback@46:81 — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L46)
 
 ```javascript
 ()=>
@@ -4845,7 +4845,7 @@ Executa a etapa `callback@46:81` neste módulo. O contrato concreto está na ass
 
 ### callback@46:113 — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L46)
 
 ```javascript
 i=>
@@ -4859,7 +4859,7 @@ Executa a etapa `callback@46:113` neste módulo. O contrato concreto está na as
 
 ### callback@46:414 — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L46)
 
 ```javascript
 i=>
@@ -4871,7 +4871,7 @@ Executa a etapa `callback@46:414` neste módulo. O contrato concreto está na as
 
 ### callback@47:57 — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L47)
 
 ```javascript
 b=>
@@ -4890,7 +4890,7 @@ b=>b.addEventListener('click',()=>{state.cartMode=b.dataset.cartMode;render();})
 
 ### callback@47:87 — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L47)
 
 ```javascript
 ()=>
@@ -4904,7 +4904,7 @@ Executa a etapa `callback@47:87` neste módulo. O contrato concreto está na ass
 
 ### callback@50:65 — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L50)
 
 ```javascript
 ()=>
@@ -4918,7 +4918,7 @@ Executa a etapa `callback@50:65` neste módulo. O contrato concreto está na ass
 
 ### callback@51:66 — linha 51
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:51)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L51)
 
 ```javascript
 radio=>
@@ -4937,7 +4937,7 @@ radio=>radio.addEventListener('change',()=>{state.selectedAddressId=radio.value;
 
 ### callback@51:105 — linha 51
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:51)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L51)
 
 ```javascript
 ()=>
@@ -4951,7 +4951,7 @@ Executa a etapa `callback@51:105` neste módulo. O contrato concreto está na as
 
 ### callback@52:64 — linha 52
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:52)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L52)
 
 ```javascript
 event=>
@@ -4963,7 +4963,7 @@ Executa a etapa `callback@52:64` neste módulo. O contrato concreto está na ass
 
 ### callback@53:62 — linha 53
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:53)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L53)
 
 ```javascript
 ()=>
@@ -4977,7 +4977,7 @@ Executa a etapa `callback@53:62` neste módulo. O contrato concreto está na ass
 
 ### callback@54:65 — linha 54
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:54)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L54)
 
 ```javascript
 ()=>
@@ -4991,7 +4991,7 @@ Executa a etapa `callback@54:65` neste módulo. O contrato concreto está na ass
 
 ### callback@55:61 — linha 55
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:55)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L55)
 
 ```javascript
 e=>
@@ -5005,7 +5005,7 @@ Executa a etapa `callback@55:61` neste módulo. O contrato concreto está na ass
 
 ### callback@56:53 — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:56)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L56)
 
 ```javascript
 e=>
@@ -5022,7 +5022,7 @@ Executa a etapa `callback@56:53` neste módulo. O contrato concreto está na ass
 
 ### showReserveForm — linha 60
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:60)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L60)
 
 ```javascript
 function showReserveForm(itemId)
@@ -5062,7 +5062,7 @@ $('#reserve-form',modal).addEventListener('submit',async e=>{e.preventDefault();
 
 ### callback@61:36 — linha 61
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:61)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L61)
 
 ```javascript
 i=>
@@ -5076,7 +5076,7 @@ Executa a etapa `callback@61:36` neste módulo. O contrato concreto está na ass
 
 ### callback@66:270 — linha 66
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:66)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L66)
 
 ```javascript
 person=>
@@ -5090,7 +5090,7 @@ Executa a etapa `callback@66:270` neste módulo. O contrato concreto está na as
 
 ### callback@67:58 — linha 67
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:67)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L67)
 
 ```javascript
 ()=>
@@ -5104,7 +5104,7 @@ Executa a etapa `callback@67:58` neste módulo. O contrato concreto está na ass
 
 ### callback@69:54 — linha 69
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/shoppingViews.js:69)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/shoppingViews.js#L69)
 
 ```javascript
 async e=>
@@ -5136,11 +5136,11 @@ async e=>{e.preventDefault();const fields=new FormData(e.currentTarget),local=fi
 
 Ações por domínio com API e navegação injetadas; preservar autorização no servidor e tratar falhas assíncronas.
 
-Fonte: [supportActions.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js) · SHA-256 `3a59b8193a7120c110f20d80b1069b7683bd6aa5781af9a1e86bf6ef4a5bea5c`
+[LIDO NO CÓDIGO] Fonte: [supportActions.js](../Frontend/src/features/supportActions.js) · SHA-256 `3a59b8193a7120c110f20d80b1069b7683bd6aa5781af9a1e86bf6ef4a5bea5c`
 
 ### createSupportActions — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L2)
 
 ```javascript
 function createSupportActions({ $, api, esc, loadAdminData, loadAdminList, notify, pill, render, renderPage, renderSupportReplyFields, role, shortDate, state, supportDetailPath, supportMessagePath })
@@ -5191,7 +5191,7 @@ async function updateTicketStatus(id,status){try{await api(`/admin/support-ticke
 
 ### openSupportCenter — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L3)
 
 ```javascript
 async function openSupportCenter()
@@ -5217,7 +5217,7 @@ const modal=document.createElement('div');modal.id='support-modal';modal.classNa
 
 ### callback@5:275 — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L5)
 
 ```javascript
 e=>
@@ -5234,7 +5234,7 @@ Executa a etapa `callback@5:275` neste módulo. O contrato concreto está na ass
 
 ### loadSupportTicketList — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L8)
 
 ```javascript
 async function loadSupportTicketList()
@@ -5253,7 +5253,7 @@ async function loadSupportTicketList(){try{state.supportAdminView=false;state.su
 
 ### renderSupportModal — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L10)
 
 ```javascript
 function renderSupportModal()
@@ -5282,7 +5282,7 @@ root.querySelector('[data-close-support]').onclick=()=>$('#support-modal')?.remo
 
 ### callback@12:1566 — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L12)
 
 ```javascript
 t=>
@@ -5301,7 +5301,7 @@ t=>`<button class="support-ticket-row" type="button" data-user-ticket="${esc(t.i
 
 ### callback@13:54 — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L13)
 
 ```javascript
 ()=>
@@ -5315,7 +5315,7 @@ Executa a etapa `callback@13:54` neste módulo. O contrato concreto está na ass
 
 ### callback@13:231 — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L13)
 
 ```javascript
 b=>
@@ -5329,7 +5329,7 @@ Executa a etapa `callback@13:231` neste módulo. O contrato concreto está na as
 
 ### callback@13:244 — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L13)
 
 ```javascript
 ()=>
@@ -5343,7 +5343,7 @@ Executa a etapa `callback@13:244` neste módulo. O contrato concreto está na as
 
 ### callback@13:355 — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L13)
 
 ```javascript
 ()=>
@@ -5360,7 +5360,7 @@ Executa a etapa `callback@13:355` neste módulo. O contrato concreto está na as
 
 ### returnToAdminTickets — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L16)
 
 ```javascript
 async function returnToAdminTickets()
@@ -5374,7 +5374,7 @@ Executa a etapa `return To Admin Tickets` neste módulo. O contrato concreto est
 
 ### ticketConversationHtml — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L18)
 
 ```javascript
 function ticketConversationHtml(detail,isAdmin)
@@ -5401,7 +5401,7 @@ function ticketConversationHtml(detail,isAdmin){const t=detail.ticket;const tick
 
 ### callback@18:478 — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L18)
 
 ```javascript
 m=>
@@ -5423,7 +5423,7 @@ m=>`<article class="ticket-message ${m.senderRole==='ADMIN'?'staff':''}"><div><s
 
 ### openTicket — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L20)
 
 ```javascript
 async function openTicket(id,isAdmin)
@@ -5450,7 +5450,7 @@ async function openTicket(id,isAdmin){try{if(!$('#support-modal')){const dialog=
 
 ### callback@20:353 — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L20)
 
 ```javascript
 e=>
@@ -5467,7 +5467,7 @@ Executa a etapa `callback@20:353` neste módulo. O contrato concreto está na as
 
 ### callback@20:828 — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L20)
 
 ```javascript
 ()=>
@@ -5481,7 +5481,7 @@ Executa a etapa `callback@20:828` neste módulo. O contrato concreto está na as
 
 ### callback@20:1656 — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L20)
 
 ```javascript
 ()=>
@@ -5495,7 +5495,7 @@ Executa a etapa `callback@20:1656` neste módulo. O contrato concreto está na a
 
 ### callback@20:1764 — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L20)
 
 ```javascript
 ()=>
@@ -5512,7 +5512,7 @@ Executa a etapa `callback@20:1764` neste módulo. O contrato concreto está na a
 
 ### createSupportTicket — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L22)
 
 ```javascript
 async function createSupportTicket(event)
@@ -5531,7 +5531,7 @@ async function createSupportTicket(event){event.preventDefault();const form=even
 
 ### sendTicketMessage — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L24)
 
 ```javascript
 async function sendTicketMessage(event)
@@ -5557,7 +5557,7 @@ async function sendTicketMessage(event){event.preventDefault();const form=event.
 
 ### updateTicketStatus — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/features/supportActions.js:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/features/supportActions.js#L26)
 
 ```javascript
 async function updateTicketStatus(id,status)
@@ -5581,11 +5581,11 @@ async function updateTicketStatus(id,status){try{await api(`/admin/support-ticke
 
 Apresentação e interpretação de CPF, CNPJ, CEP, telefone e dinheiro. Máscara melhora digitação; não prova identidade e não substitui validação no servidor.
 
-Fonte: [inputMasks.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/inputMasks.js) · SHA-256 `244e92d3e625b6d0f1f6240f89b84e15dd3c3754c723d5c1ee5fe4748927d315`
+[LIDO NO CÓDIGO] Fonte: [inputMasks.js](../Frontend/src/inputMasks.js) · SHA-256 `244e92d3e625b6d0f1f6240f89b84e15dd3c3754c723d5c1ee5fe4748927d315`
 
 ### digitsOnly — linha 1
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/inputMasks.js:1)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/inputMasks.js#L1)
 
 ```javascript
 value =>
@@ -5599,7 +5599,7 @@ Executa a etapa `digits Only` neste módulo. O contrato concreto está na assina
 
 ### formatCpfMask — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/inputMasks.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/inputMasks.js#L3)
 
 ```javascript
 function formatCpfMask(value)
@@ -5616,7 +5616,7 @@ Executa a etapa `format Cpf Mask` neste módulo. O contrato concreto está na as
 
 ### formatCnpjMask — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/inputMasks.js:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/inputMasks.js#L11)
 
 ```javascript
 function formatCnpjMask(value)
@@ -5633,7 +5633,7 @@ Executa a etapa `format Cnpj Mask` neste módulo. O contrato concreto está na a
 
 ### formatCurrencyMask — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/inputMasks.js:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/inputMasks.js#L22)
 
 ```javascript
 function formatCurrencyMask(value)
@@ -5650,7 +5650,7 @@ Executa a etapa `format Currency Mask` neste módulo. O contrato concreto está 
 
 ### formatCurrencyValue — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/inputMasks.js:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/inputMasks.js#L27)
 
 ```javascript
 function formatCurrencyValue(decimalValue)
@@ -5670,7 +5670,7 @@ Executa a etapa `format Currency Value` neste módulo. O contrato concreto está
 
 ### parseCurrencyDecimal — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/inputMasks.js:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/inputMasks.js#L32)
 
 ```javascript
 function parseCurrencyDecimal(value)
@@ -5693,11 +5693,11 @@ Executa a etapa `parse Currency Decimal` neste módulo. O contrato concreto est�
 
 Coordenação das telas, estado e eventos. O servidor continua responsável por permissão, dinheiro, estoque e agenda. O tamanho deste módulo torna a extração gradual de telas preferível a uma reescrita simultânea.
 
-Fonte: [main.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js) · SHA-256 `59edc4dd05f4507c3c51cbf4ff34105353ab72bbf36d074e90af11362d8b413a`
+[LIDO NO CÓDIGO] Fonte: [main.js](../Frontend/src/main.js) · SHA-256 `59edc4dd05f4507c3c51cbf4ff34105353ab72bbf36d074e90af11362d8b413a`
 
 ### $ — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L43)
 
 ```javascript
 (selector, root = document) =>
@@ -5711,7 +5711,7 @@ Executa a etapa `$` neste módulo. O contrato concreto está na assinatura, nos 
 
 ### statusClass — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:56)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L56)
 
 ```javascript
 s =>
@@ -5730,7 +5730,7 @@ Executa a etapa `status Class` neste módulo. O contrato concreto está na assin
 
 ### esc — linha 57
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:57)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L57)
 
 ```javascript
 value =>
@@ -5744,7 +5744,7 @@ Executa a etapa `esc` neste módulo. O contrato concreto está na assinatura, no
 
 ### callback@57:62 — linha 57
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:57)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L57)
 
 ```javascript
 c =>
@@ -5756,7 +5756,7 @@ Executa a etapa `callback@57:62` neste módulo. O contrato concreto está na ass
 
 ### icon — linha 58
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:58)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L58)
 
 ```javascript
 function icon(name,size=18)
@@ -5771,7 +5771,7 @@ Executa a etapa `icon` neste módulo. O contrato concreto está na assinatura, n
 
 ### callback@63:23 — linha 63
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:63)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L63)
 
 ```javascript
 () =>
@@ -5799,7 +5799,7 @@ localStorage.setItem('pronto_account',JSON.stringify(hint));
 
 ### persistAccountHint — linha 72
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:72)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L72)
 
 ```javascript
 function persistAccountHint(account)
@@ -5825,7 +5825,7 @@ localStorage.setItem('pronto_account', JSON.stringify(hint));
 
 ### callback@77:24 — linha 77
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:77)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L77)
 
 ```javascript
 () =>
@@ -5848,7 +5848,7 @@ Executa a etapa `callback@77:24` neste módulo. O contrato concreto está na ass
 
 ### knownPage — linha 78
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:78)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L78)
 
 ```javascript
 page =>
@@ -5862,7 +5862,7 @@ Executa a etapa `known Page` neste módulo. O contrato concreto está na assinat
 
 ### notificationKey — linha 79
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:79)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L79)
 
 ```javascript
 accountId =>
@@ -5874,7 +5874,7 @@ Executa a etapa `notification Key` neste módulo. O contrato concreto está na a
 
 ### readLocalNotifications — linha 80
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:80)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L80)
 
 ```javascript
 () =>
@@ -5886,7 +5886,7 @@ Executa a etapa `read Local Notifications` neste módulo. O contrato concreto es
 
 ### pageContext — linha 99
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:99)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L99)
 
 ```javascript
 function pageContext()
@@ -5906,7 +5906,7 @@ Executa a etapa `page Context` neste módulo. O contrato concreto está na assin
 
 ### callback@109:9 — linha 109
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:109)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L109)
 
 ```javascript
 (context, options) =>
@@ -5920,7 +5920,7 @@ Executa a etapa `callback@109:9` neste módulo. O contrato concreto está na ass
 
 ### callback@110:11 — linha 110
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:110)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L110)
 
 ```javascript
 result =>
@@ -5937,7 +5937,7 @@ Executa a etapa `callback@110:11` neste módulo. O contrato concreto está na as
 
 ### callback@111:13 — linha 111
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:111)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L111)
 
 ```javascript
 status =>
@@ -5955,7 +5955,7 @@ Executa a etapa `callback@111:13` neste módulo. O contrato concreto está na as
 
 ### invalidatePageLoads — linha 113
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:113)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L113)
 
 ```javascript
 function invalidatePageLoads()
@@ -5969,7 +5969,7 @@ Executa a etapa `invalidate Page Loads` neste módulo. O contrato concreto está
 
 ### notify — linha 120
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:120)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L120)
 
 ```javascript
 function notify(title, message, kind = 'success', persist = false)
@@ -6004,7 +6004,7 @@ toast.querySelector('.toast-dismiss').addEventListener('click',()=>toast.remove(
 
 ### callback@127:104 — linha 127
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:127)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L127)
 
 ```javascript
 n =>
@@ -6016,7 +6016,7 @@ Executa a etapa `callback@127:104` neste módulo. O contrato concreto está na a
 
 ### callback@132:52 — linha 132
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:132)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L132)
 
 ```javascript
 item=>
@@ -6028,7 +6028,7 @@ Executa a etapa `callback@132:52` neste módulo. O contrato concreto está na as
 
 ### callback@139:68 — linha 139
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:139)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L139)
 
 ```javascript
 ()=>
@@ -6042,7 +6042,7 @@ Executa a etapa `callback@139:68` neste módulo. O contrato concreto está na as
 
 ### callback@142:16 — linha 142
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:142)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L142)
 
 ```javascript
 ()=>
@@ -6056,7 +6056,7 @@ Executa a etapa `callback@142:16` neste módulo. O contrato concreto está na as
 
 ### callback@143:16 — linha 143
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:143)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L143)
 
 ```javascript
 () =>
@@ -6070,7 +6070,7 @@ Executa a etapa `callback@143:16` neste módulo. O contrato concreto está na as
 
 ### clearSession — linha 147
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:147)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L147)
 
 ```javascript
 function clearSession()
@@ -6087,7 +6087,7 @@ Executa a etapa `clear Session` neste módulo. O contrato concreto está na assi
 
 ### callback@154:56 — linha 154
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:154)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L154)
 
 ```javascript
 dialog =>
@@ -6101,7 +6101,7 @@ Executa a etapa `callback@154:56` neste módulo. O contrato concreto está na as
 
 ### callback@158:44 — linha 158
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:158)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L158)
 
 ```javascript
 () =>
@@ -6115,7 +6115,7 @@ Executa a etapa `callback@158:44` neste módulo. O contrato concreto está na as
 
 ### role — linha 164
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:164)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L164)
 
 ```javascript
 () =>
@@ -6140,7 +6140,7 @@ Executa a etapa `role` neste módulo. O contrato concreto está na assinatura, n
 
 ### canShop — linha 169
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:169)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L169)
 
 ```javascript
 () =>
@@ -6154,7 +6154,7 @@ Executa a etapa `can Shop` neste módulo. O contrato concreto está na assinatur
 
 ### initials — linha 170
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:170)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L170)
 
 ```javascript
 name =>
@@ -6168,7 +6168,7 @@ Executa a etapa `initials` neste módulo. O contrato concreto está na assinatur
 
 ### callback@170:79 — linha 170
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:170)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L170)
 
 ```javascript
 n =>
@@ -6180,7 +6180,7 @@ Executa a etapa `callback@170:79` neste módulo. O contrato concreto está na as
 
 ### fullAddress — linha 171
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:171)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L171)
 
 ```javascript
 account =>
@@ -6194,7 +6194,7 @@ Executa a etapa `full Address` neste módulo. O contrato concreto está na assin
 
 ### displayName — linha 172
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:172)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L172)
 
 ```javascript
 () =>
@@ -6208,7 +6208,7 @@ Executa a etapa `display Name` neste módulo. O contrato concreto está na assin
 
 ### formatStatus — linha 173
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:173)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L173)
 
 ```javascript
 s =>
@@ -6222,7 +6222,7 @@ Executa a etapa `format Status` neste módulo. O contrato concreto está na assi
 
 ### pill — linha 174
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:174)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L174)
 
 ```javascript
 s =>
@@ -6236,7 +6236,7 @@ Executa a etapa `pill` neste módulo. O contrato concreto está na assinatura, n
 
 ### refundNotice — linha 175
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:175)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L175)
 
 ```javascript
 status =>
@@ -6254,7 +6254,7 @@ Executa a etapa `refund Notice` neste módulo. O contrato concreto está na assi
 
 ### applyPublicCategories — linha 177
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:177)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L177)
 
 ```javascript
 function applyPublicCategories(categories)
@@ -6274,7 +6274,7 @@ Executa a etapa `apply Public Categories` neste módulo. O contrato concreto est
 
 ### callback@177:169 — linha 177
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:177)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L177)
 
 ```javascript
 category=>
@@ -6286,7 +6286,7 @@ Executa a etapa `callback@177:169` neste módulo. O contrato concreto está na a
 
 ### callback@177:214 — linha 177
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:177)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L177)
 
 ```javascript
 category=>
@@ -6298,7 +6298,7 @@ Executa a etapa `callback@177:214` neste módulo. O contrato concreto está na a
 
 ### boot — linha 179
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:179)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L179)
 
 ```javascript
 async function boot()
@@ -6336,7 +6336,7 @@ if(mpResult==='connected'||mpResult==='error'){notify(mpResult==='connected'?'Co
 
 ### callback@181:400 — linha 181
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:181)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L181)
 
 ```javascript
 ()=>
@@ -6355,7 +6355,7 @@ Executa a etapa `callback@181:400` neste módulo. O contrato concreto está na a
 
 ### callback@197:436 — linha 197
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:197)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L197)
 
 ```javascript
 ([page])=>
@@ -6367,7 +6367,7 @@ Executa a etapa `callback@197:436` neste módulo. O contrato concreto está na a
 
 ### callback@197:735 — linha 197
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:197)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L197)
 
 ```javascript
 ()=>
@@ -6379,7 +6379,7 @@ Executa a etapa `callback@197:735` neste módulo. O contrato concreto está na a
 
 ### loadCurrentPage — linha 207
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:207)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L207)
 
 ```javascript
 async function loadCurrentPage()
@@ -6396,7 +6396,7 @@ Executa a etapa `load Current Page` neste módulo. O contrato concreto está na 
 
 ### loadAdminData — linha 209
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:209)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L209)
 
 ```javascript
 async function loadAdminData()
@@ -6419,7 +6419,7 @@ Executa a etapa `load Admin Data` neste módulo. O contrato concreto está na as
 
 ### callback@212:39 — linha 212
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:212)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L212)
 
 ```javascript
 path =>
@@ -6433,7 +6433,7 @@ Executa a etapa `callback@212:39` neste módulo. O contrato concreto está na as
 
 ### loadNotifications — linha 222
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:222)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L222)
 
 ```javascript
 async function loadNotifications()
@@ -6458,7 +6458,7 @@ const remote = await api('/account/notifications');
 
 ### addressText — linha 229
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:229)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L229)
 
 ```javascript
 address =>
@@ -6475,7 +6475,7 @@ Executa a etapa `address Text` neste módulo. O contrato concreto está na assin
 
 ### loadAddresses — linha 232
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:232)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L232)
 
 ```javascript
 async function loadAddresses()
@@ -6498,7 +6498,7 @@ const imported = await api('/account/addresses', {method:'POST', body:JSON.strin
 
 ### callback@239:52 — linha 239
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:239)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L239)
 
 ```javascript
 a=>
@@ -6510,7 +6510,7 @@ Executa a etapa `callback@239:52` neste módulo. O contrato concreto está na as
 
 ### startNotificationPolling — linha 243
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:243)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L243)
 
 ```javascript
 function startNotificationPolling()
@@ -6524,7 +6524,7 @@ Executa a etapa `start Notification Polling` neste módulo. O contrato concreto 
 
 ### stopNotificationPolling — linha 248
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:248)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L248)
 
 ```javascript
 function stopNotificationPolling()
@@ -6541,7 +6541,7 @@ Executa a etapa `stop Notification Polling` neste módulo. O contrato concreto e
 
 ### isTypingInPage — linha 253
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:253)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L253)
 
 ```javascript
 function isTypingInPage()
@@ -6558,7 +6558,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### refreshNotifications — linha 255
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:255)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L255)
 
 ```javascript
 async function refreshNotifications()
@@ -6591,7 +6591,7 @@ const orders = await api('/orders/mine');
 
 ### callback@261:57 — linha 261
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:261)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L261)
 
 ```javascript
 n =>
@@ -6603,7 +6603,7 @@ Executa a etapa `callback@261:57` neste módulo. O contrato concreto está na as
 
 ### callback@261:89 — linha 261
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:261)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L261)
 
 ```javascript
 n =>
@@ -6617,7 +6617,7 @@ Executa a etapa `callback@261:89` neste módulo. O contrato concreto está na as
 
 ### callback@262:33 — linha 262
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:262)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L262)
 
 ```javascript
 n =>
@@ -6631,7 +6631,7 @@ Executa a etapa `callback@262:33` neste módulo. O contrato concreto está na as
 
 ### callback@263:87 — linha 263
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:263)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L263)
 
 ```javascript
 n =>
@@ -6643,7 +6643,7 @@ Executa a etapa `callback@263:87` neste módulo. O contrato concreto está na as
 
 ### callback@264:13 — linha 264
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:264)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L264)
 
 ```javascript
 (a,b)=>
@@ -6655,7 +6655,7 @@ Executa a etapa `callback@264:13` neste módulo. O contrato concreto está na as
 
 ### callback@265:40 — linha 265
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:265)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L265)
 
 ```javascript
 n =>
@@ -6669,7 +6669,7 @@ Executa a etapa `callback@265:40` neste módulo. O contrato concreto está na as
 
 ### handlePaymentReturn — linha 279
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:279)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L279)
 
 ```javascript
 async function handlePaymentReturn(paymentId,result,providerPaymentId)
@@ -6696,7 +6696,7 @@ const url=new URL(location.href);for(const key of ['mp','app_payment_id','paymen
 
 ### callback@282:90 — linha 282
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:282)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L282)
 
 ```javascript
 resolve=>
@@ -6710,7 +6710,7 @@ Executa a etapa `callback@282:90` neste módulo. O contrato concreto está na as
 
 ### loadStores — linha 290
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:290)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L290)
 
 ```javascript
 async function loadStores()
@@ -6731,7 +6731,7 @@ Executa a etapa `load Stores` neste módulo. O contrato concreto está na assina
 
 ### callback@292:52 — linha 292
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:292)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L292)
 
 ```javascript
 path =>
@@ -6745,7 +6745,7 @@ Executa a etapa `callback@292:52` neste módulo. O contrato concreto está na as
 
 ### filterStores — linha 299
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:299)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L299)
 
 ```javascript
 function filterStores()
@@ -6762,7 +6762,7 @@ Executa a etapa `filter Stores` neste módulo. O contrato concreto está na assi
 
 ### callback@301:46 — linha 301
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:301)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L301)
 
 ```javascript
 store =>
@@ -6779,7 +6779,7 @@ Executa a etapa `callback@301:46` neste módulo. O contrato concreto está na as
 
 ### isCustomerOutsideStoreCity — linha 308
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:308)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L308)
 
 ```javascript
 function isCustomerOutsideStoreCity(store)
@@ -6796,7 +6796,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### render — linha 310
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:310)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L310)
 
 ```javascript
 function render()
@@ -6825,7 +6825,7 @@ if (state.booting) { app.innerHTML = '<div class="boot-screen" role="status" ari
 
 ### renderAuth — linha 321
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:321)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L321)
 
 ```javascript
 function renderAuth(...args)
@@ -6842,7 +6842,7 @@ Executa a etapa `render Auth` neste módulo. O contrato concreto está na assina
 
 ### submitRecovery — linha 323
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:323)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L323)
 
 ```javascript
 async function submitRecovery(event)
@@ -6870,7 +6870,7 @@ await api('/auth/password-recovery/reset',{method:'POST',body:JSON.stringify({em
 
 ### submitAuth — linha 343
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:343)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L343)
 
 ```javascript
 async function submitAuth(event)
@@ -6903,7 +6903,7 @@ if(!state.mustChangePassword){state.profile = await api('/account/me');state.acc
 
 ### callback@366:67 — linha 366
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:366)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L366)
 
 ```javascript
 ()=>
@@ -6915,7 +6915,7 @@ Executa a etapa `callback@366:67` neste módulo. O contrato concreto está na as
 
 ### renderShell — linha 372
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:372)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L372)
 
 ```javascript
 function renderShell()
@@ -6961,7 +6961,7 @@ $('[data-help]')?.addEventListener('click',openSupportCenter);
 
 ### callback@373:69 — linha 373
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:373)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L373)
 
 ```javascript
 ([page])=>
@@ -6973,7 +6973,7 @@ Executa a etapa `callback@373:69` neste módulo. O contrato concreto está na as
 
 ### callback@379:84 — linha 379
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:379)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L379)
 
 ```javascript
 ([page,iconName,label])=>
@@ -6991,7 +6991,7 @@ Executa a etapa `callback@379:84` neste módulo. O contrato concreto está na as
 
 ### callback@379:294 — linha 379
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:379)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L379)
 
 ```javascript
 n=>
@@ -7003,7 +7003,7 @@ Executa a etapa `callback@379:294` neste módulo. O contrato concreto está na a
 
 ### callback@383:174 — linha 383
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:383)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L383)
 
 ```javascript
 ([page,iconName,label])=>
@@ -7021,7 +7021,7 @@ Executa a etapa `callback@383:174` neste módulo. O contrato concreto está na a
 
 ### callback@383:428 — linha 383
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:383)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L383)
 
 ```javascript
 n=>
@@ -7033,7 +7033,7 @@ Executa a etapa `callback@383:428` neste módulo. O contrato concreto está na a
 
 ### callback@388:156 — linha 388
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:388)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L388)
 
 ```javascript
 n=>
@@ -7045,7 +7045,7 @@ Executa a etapa `callback@388:156` neste módulo. O contrato concreto está na a
 
 ### callback@388:285 — linha 388
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:388)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L388)
 
 ```javascript
 (n,i)=>
@@ -7057,7 +7057,7 @@ Executa a etapa `callback@388:285` neste módulo. O contrato concreto está na a
 
 ### callback@391:47 — linha 391
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:391)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L391)
 
 ```javascript
 ()=>
@@ -7080,7 +7080,7 @@ else {state.sidebarCollapsed=!state.sidebarCollapsed;$('#mobile-menu').setAttrib
 
 ### callback@395:48 — linha 395
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:395)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L395)
 
 ```javascript
 ()=>
@@ -7094,7 +7094,7 @@ Executa a etapa `callback@395:48` neste módulo. O contrato concreto está na as
 
 ### callback@396:53 — linha 396
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:396)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L396)
 
 ```javascript
 ()=>
@@ -7108,7 +7108,7 @@ Executa a etapa `callback@396:53` neste módulo. O contrato concreto está na as
 
 ### callback@397:45 — linha 397
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:397)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L397)
 
 ```javascript
 ()=>
@@ -7122,7 +7122,7 @@ Executa a etapa `callback@397:45` neste módulo. O contrato concreto está na as
 
 ### callback@398:49 — linha 398
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:398)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L398)
 
 ```javascript
 event=>
@@ -7139,7 +7139,7 @@ Executa a etapa `callback@398:49` neste módulo. O contrato concreto está na as
 
 ### navigate — linha 403
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:403)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L403)
 
 ```javascript
 async function navigate(page)
@@ -7173,7 +7173,7 @@ localStorage.setItem(notificationKey(state.account.id),JSON.stringify(state.noti
 
 ### callback@406:31 — linha 406
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:406)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L406)
 
 ```javascript
 ([allowed])=>
@@ -7185,7 +7185,7 @@ Executa a etapa `callback@406:31` neste módulo. O contrato concreto está na as
 
 ### callback@414:45 — linha 414
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:414)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L414)
 
 ```javascript
 n=>
@@ -7197,7 +7197,7 @@ Executa a etapa `callback@414:45` neste módulo. O contrato concreto está na as
 
 ### callback@415:34 — linha 415
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:415)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L415)
 
 ```javascript
 n=>
@@ -7211,7 +7211,7 @@ Executa a etapa `callback@415:34` neste módulo. O contrato concreto está na as
 
 ### callback@415:103 — linha 415
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:415)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L415)
 
 ```javascript
 ()=>
@@ -7223,7 +7223,7 @@ Executa a etapa `callback@415:103` neste módulo. O contrato concreto está na a
 
 ### callback@417:49 — linha 417
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:417)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L417)
 
 ```javascript
 n=>
@@ -7235,7 +7235,7 @@ Executa a etapa `callback@417:49` neste módulo. O contrato concreto está na as
 
 ### callback@418:102 — linha 418
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:418)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L418)
 
 ```javascript
 n=>
@@ -7247,7 +7247,7 @@ Executa a etapa `callback@418:102` neste módulo. O contrato concreto está na a
 
 ### renderPage — linha 424
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:424)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L424)
 
 ```javascript
 function renderPage()
@@ -7279,7 +7279,7 @@ content.innerHTML=feedback+fn();
 
 ### callback@431:75 — linha 431
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:431)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L431)
 
 ```javascript
 () =>
@@ -7293,7 +7293,7 @@ Executa a etapa `callback@431:75` neste módulo. O contrato concreto está na as
 
 ### openLocationPicker — linha 440
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:440)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L440)
 
 ```javascript
 async function openLocationPicker()
@@ -7344,7 +7344,7 @@ try{await initializeLocationMap(modal);const active=state.browseLocation||{city:
 
 ### callback@446:56 — linha 446
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:446)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L446)
 
 ```javascript
 ()=>
@@ -7358,7 +7358,7 @@ Executa a etapa `callback@446:56` neste módulo. O contrato concreto está na as
 
 ### callback@446:109 — linha 446
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:446)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L446)
 
 ```javascript
 e=>
@@ -7375,7 +7375,7 @@ Executa a etapa `callback@446:109` neste módulo. O contrato concreto está na a
 
 ### callback@447:56 — linha 447
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:447)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L447)
 
 ```javascript
 async()=>
@@ -7397,7 +7397,7 @@ async()=>{state.browseLocation=null;localStorage.removeItem('fooddelivery_locati
 
 ### callback@447:272 — linha 447
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:447)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L447)
 
 ```javascript
 ()=>
@@ -7409,7 +7409,7 @@ Executa a etapa `callback@447:272` neste módulo. O contrato concreto está na a
 
 ### callback@448:58 — linha 448
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:448)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L448)
 
 ```javascript
 ()=>
@@ -7423,7 +7423,7 @@ Executa a etapa `callback@448:58` neste módulo. O contrato concreto está na as
 
 ### callback@449:58 — linha 449
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:449)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L449)
 
 ```javascript
 async e=>
@@ -7448,7 +7448,7 @@ async e=>{e.preventDefault();const query=String(new FormData(e.currentTarget).ge
 
 ### callback@450:54 — linha 450
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:450)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L450)
 
 ```javascript
 ()=>
@@ -7462,7 +7462,7 @@ Executa a etapa `callback@450:54` neste módulo. O contrato concreto está na as
 
 ### callback@451:55 — linha 451
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:451)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L451)
 
 ```javascript
 async e=>
@@ -7499,7 +7499,7 @@ async e=>{e.preventDefault();const input=e.currentTarget.elements.postalCode,fee
 
 ### callback@451:994 — linha 451
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:451)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L451)
 
 ```javascript
 item=>
@@ -7513,7 +7513,7 @@ Executa a etapa `callback@451:994` neste módulo. O contrato concreto está na a
 
 ### callback@453:101 — linha 453
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:453)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L453)
 
 ```javascript
 c=>
@@ -7527,7 +7527,7 @@ Executa a etapa `callback@453:101` neste módulo. O contrato concreto está na a
 
 ### callback@454:169 — linha 454
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:454)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L454)
 
 ```javascript
 c=>
@@ -7541,7 +7541,7 @@ Executa a etapa `callback@454:169` neste módulo. O contrato concreto está na a
 
 ### callback@455:48 — linha 455
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:455)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L455)
 
 ```javascript
 b=>
@@ -7555,7 +7555,7 @@ Executa a etapa `callback@455:48` neste módulo. O contrato concreto está na as
 
 ### callback@455:61 — linha 455
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:455)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L455)
 
 ```javascript
 ()=>
@@ -7569,7 +7569,7 @@ Executa a etapa `callback@455:61` neste módulo. O contrato concreto está na as
 
 ### callback@456:172 — linha 456
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:456)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L456)
 
 ```javascript
 c=>
@@ -7583,7 +7583,7 @@ Executa a etapa `callback@456:172` neste módulo. O contrato concreto está na a
 
 ### initializeLocationMap — linha 458
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:458)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L458)
 
 ```javascript
 async function initializeLocationMap(modal)
@@ -7608,7 +7608,7 @@ async function initializeLocationMap(modal){const L=await loadLeaflet(),box=moda
 
 ### callback@458:622 — linha 458
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:458)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L458)
 
 ```javascript
 async event=>
@@ -7627,7 +7627,7 @@ async event=>{const result=modal.querySelector('[data-location-results]');result
 
 ### callback@458:1115 — linha 458
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:458)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L458)
 
 ```javascript
 ()=>
@@ -7641,7 +7641,7 @@ Executa a etapa `callback@458:1115` neste módulo. O contrato concreto está na 
 
 ### waitForGeocodeSlot — linha 459
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:459)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L459)
 
 ```javascript
 async function waitForGeocodeSlot()
@@ -7658,7 +7658,7 @@ Executa a etapa `wait For Geocode Slot` neste módulo. O contrato concreto está
 
 ### callback@459:125 — linha 459
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:459)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L459)
 
 ```javascript
 resolve=>
@@ -7672,7 +7672,7 @@ Executa a etapa `callback@459:125` neste módulo. O contrato concreto está na a
 
 ### geocodeJson — linha 460
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:460)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L460)
 
 ```javascript
 async function geocodeJson(path)
@@ -7699,7 +7699,7 @@ async function geocodeJson(path){const cacheKey=path;if(locationGeocodeCache.has
 
 ### searchBrazilPlaces — linha 461
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:461)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L461)
 
 ```javascript
 async function searchBrazilPlaces(query)
@@ -7719,7 +7719,7 @@ Executa a etapa `search Brazil Places` neste módulo. O contrato concreto está 
 
 ### callback@461:149 — linha 461
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:461)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L461)
 
 ```javascript
 record=>
@@ -7733,7 +7733,7 @@ Executa a etapa `callback@461:149` neste módulo. O contrato concreto está na a
 
 ### callback@461:190 — linha 461
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:461)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L461)
 
 ```javascript
 place=>
@@ -7745,7 +7745,7 @@ Executa a etapa `callback@461:190` neste módulo. O contrato concreto está na a
 
 ### selectDirectoryCity — linha 462
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:462)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L462)
 
 ```javascript
 async function selectDirectoryCity(modal,city)
@@ -7759,7 +7759,7 @@ Executa a etapa `select Directory City` neste módulo. O contrato concreto está
 
 ### placeFromGeocode — linha 463
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:463)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L463)
 
 ```javascript
 function placeFromGeocode(record)
@@ -7776,7 +7776,7 @@ Executa a etapa `place From Geocode` neste módulo. O contrato concreto está na
 
 ### reverseBrazilPlace — linha 464
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:464)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L464)
 
 ```javascript
 async function reverseBrazilPlace(latitude,longitude)
@@ -7799,7 +7799,7 @@ Executa a etapa `reverse Brazil Place` neste módulo. O contrato concreto está 
 
 ### chooseLocationPoint — linha 465
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:465)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L465)
 
 ```javascript
 async function chooseLocationPoint(modal,place)
@@ -7832,7 +7832,7 @@ async function chooseLocationPoint(modal,place){if(!place?.city||!place?.state)r
 
 ### renderLocationResults — linha 466
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:466)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L466)
 
 ```javascript
 function renderLocationResults(modal,places)
@@ -7858,7 +7858,7 @@ function renderLocationResults(modal,places){const box=modal.querySelector('[dat
 
 ### callback@466:299 — linha 466
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:466)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L466)
 
 ```javascript
 (place,index)=>
@@ -7875,7 +7875,7 @@ Executa a etapa `callback@466:299` neste módulo. O contrato concreto está na a
 
 ### callback@466:666 — linha 466
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:466)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L466)
 
 ```javascript
 button=>
@@ -7889,7 +7889,7 @@ Executa a etapa `callback@466:666` neste módulo. O contrato concreto está na a
 
 ### callback@466:689 — linha 466
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:466)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L466)
 
 ```javascript
 ()=>
@@ -7903,7 +7903,7 @@ Executa a etapa `callback@466:689` neste módulo. O contrato concreto está na a
 
 ### detectCurrentCity — linha 467
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:467)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L467)
 
 ```javascript
 async function detectCurrentCity(modal)
@@ -7930,7 +7930,7 @@ async function detectCurrentCity(modal){const button=modal.querySelector('[data-
 
 ### callback@467:530 — linha 467
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:467)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L467)
 
 ```javascript
 async position=>
@@ -7949,7 +7949,7 @@ async position=>{try{const {latitude,longitude}=position.coords,place=await reve
 
 ### callback@467:958 — linha 467
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:467)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L467)
 
 ```javascript
 error=>
@@ -7972,7 +7972,7 @@ error=>{const message=error.code===1?'Permita a localização no navegador ou es
 
 ### selectBrowseLocation — linha 468
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:468)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L468)
 
 ```javascript
 async function selectBrowseLocation(location,modal)
@@ -7998,7 +7998,7 @@ async function selectBrowseLocation(location,modal){if(!location?.city||!locatio
 
 ### callback@468:540 — linha 468
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:468)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L468)
 
 ```javascript
 ()=>
@@ -8010,7 +8010,7 @@ Executa a etapa `callback@468:540` neste módulo. O contrato concreto está na a
 
 ### openSupportCenter — linha 470
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:470)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L470)
 
 ```javascript
 function openSupportCenter(...args)
@@ -8027,7 +8027,7 @@ Executa a etapa `open Support Center` neste módulo. O contrato concreto está n
 
 ### loadSupportTicketList — linha 471
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:471)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L471)
 
 ```javascript
 function loadSupportTicketList(...args)
@@ -8044,7 +8044,7 @@ Executa a etapa `load Support Ticket List` neste módulo. O contrato concreto es
 
 ### renderSupportModal — linha 472
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:472)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L472)
 
 ```javascript
 function renderSupportModal(...args)
@@ -8061,7 +8061,7 @@ Executa a etapa `render Support Modal` neste módulo. O contrato concreto está 
 
 ### loadAdminList — linha 473
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:473)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L473)
 
 ```javascript
 async function loadAdminList(key)
@@ -8091,7 +8091,7 @@ try{const summary=await api('/admin/list-summary');if(pageContext().key===contex
 
 ### returnToAdminTickets — linha 482
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:482)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L482)
 
 ```javascript
 function returnToAdminTickets(...args)
@@ -8108,7 +8108,7 @@ Executa a etapa `return To Admin Tickets` neste módulo. O contrato concreto est
 
 ### ticketConversationHtml — linha 483
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:483)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L483)
 
 ```javascript
 function ticketConversationHtml(...args)
@@ -8125,7 +8125,7 @@ Executa a etapa `ticket Conversation Html` neste módulo. O contrato concreto es
 
 ### openTicket — linha 484
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:484)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L484)
 
 ```javascript
 function openTicket(...args)
@@ -8142,7 +8142,7 @@ Executa a etapa `open Ticket` neste módulo. O contrato concreto está na assina
 
 ### createSupportTicket — linha 485
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:485)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L485)
 
 ```javascript
 function createSupportTicket(...args)
@@ -8159,7 +8159,7 @@ Executa a etapa `create Support Ticket` neste módulo. O contrato concreto está
 
 ### sendTicketMessage — linha 486
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:486)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L486)
 
 ```javascript
 function sendTicketMessage(...args)
@@ -8181,7 +8181,7 @@ function sendTicketMessage(...args){return supportActions.sendTicketMessage(...a
 
 ### updateTicketStatus — linha 487
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:487)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L487)
 
 ```javascript
 function updateTicketStatus(...args)
@@ -8203,7 +8203,7 @@ function updateTicketStatus(...args){return supportActions.updateTicketStatus(..
 
 ### renderHome — linha 489
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:489)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L489)
 
 ```javascript
 function renderHome(...args)
@@ -8220,7 +8220,7 @@ Executa a etapa `render Home` neste módulo. O contrato concreto está na assina
 
 ### categoryTile — linha 491
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:491)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L491)
 
 ```javascript
 function categoryTile(...args)
@@ -8237,7 +8237,7 @@ Executa a etapa `category Tile` neste módulo. O contrato concreto está na assi
 
 ### renderAllCategories — linha 493
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:493)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L493)
 
 ```javascript
 function renderAllCategories(...args)
@@ -8254,7 +8254,7 @@ Executa a etapa `render All Categories` neste módulo. O contrato concreto está
 
 ### renderCategoryStores — linha 495
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:495)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L495)
 
 ```javascript
 function renderCategoryStores(...args)
@@ -8271,7 +8271,7 @@ Executa a etapa `render Category Stores` neste módulo. O contrato concreto est�
 
 ### storeCard — linha 497
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:497)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L497)
 
 ```javascript
 function storeCard(...args)
@@ -8288,7 +8288,7 @@ Executa a etapa `store Card` neste módulo. O contrato concreto está na assinat
 
 ### emptyState — linha 499
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:499)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L499)
 
 ```javascript
 function emptyState(icon,title,message,button,label)
@@ -8308,7 +8308,7 @@ Executa a etapa `empty State` neste módulo. O contrato concreto está na assina
 
 ### bindPage — linha 501
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:501)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L501)
 
 ```javascript
 function bindPage()
@@ -8425,7 +8425,7 @@ document.querySelectorAll('[data-close-chat]').forEach(button=>button.addEventLi
 
 ### callback@504:62 — linha 504
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:504)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L504)
 
 ```javascript
 root=>
@@ -8439,7 +8439,7 @@ Executa a etapa `callback@504:62` neste módulo. O contrato concreto está na as
 
 ### callback@506:57 — linha 506
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:506)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L506)
 
 ```javascript
 root=>
@@ -8453,7 +8453,7 @@ Executa a etapa `callback@506:57` neste módulo. O contrato concreto está na as
 
 ### callback@506:100 — linha 506
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:506)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L506)
 
 ```javascript
 ()=>
@@ -8467,7 +8467,7 @@ Executa a etapa `callback@506:100` neste módulo. O contrato concreto está na a
 
 ### callback@507:63 — linha 507
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:507)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L507)
 
 ```javascript
 root=>
@@ -8481,7 +8481,7 @@ Executa a etapa `callback@507:63` neste módulo. O contrato concreto está na as
 
 ### callback@507:147 — linha 507
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:507)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L507)
 
 ```javascript
 error=>
@@ -8495,7 +8495,7 @@ Executa a etapa `callback@507:147` neste módulo. O contrato concreto está na a
 
 ### callback@508:64 — linha 508
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:508)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L508)
 
 ```javascript
 root=>
@@ -8509,7 +8509,7 @@ Executa a etapa `callback@508:64` neste módulo. O contrato concreto está na as
 
 ### callback@509:143 — linha 509
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:509)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L509)
 
 ```javascript
 s=>
@@ -8523,7 +8523,7 @@ Executa a etapa `callback@509:143` neste módulo. O contrato concreto está na a
 
 ### callback@511:52 — linha 511
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:511)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L511)
 
 ```javascript
 input=>
@@ -8552,7 +8552,7 @@ input.addEventListener('input',()=>{input.value=formatter(input.value);});
 
 ### callback@516:36 — linha 516
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:516)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L516)
 
 ```javascript
 ()=>
@@ -8569,7 +8569,7 @@ Executa a etapa `callback@516:36` neste módulo. O contrato concreto está na as
 
 ### callback@517:36 — linha 517
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:517)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L517)
 
 ```javascript
 ()=>
@@ -8583,7 +8583,7 @@ Executa a etapa `callback@517:36` neste módulo. O contrato concreto está na as
 
 ### callback@519:63 — linha 519
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:519)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L519)
 
 ```javascript
 b=>
@@ -8602,7 +8602,7 @@ b=>b.addEventListener('click',()=>{state.category=b.dataset.categorySelect;state
 
 ### callback@519:93 — linha 519
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:519)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L519)
 
 ```javascript
 ()=>
@@ -8621,7 +8621,7 @@ Executa a etapa `callback@519:93` neste módulo. O contrato concreto está na as
 
 ### callback@520:56 — linha 520
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:520)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L520)
 
 ```javascript
 b=>
@@ -8640,7 +8640,7 @@ b=>b.addEventListener('click',()=>{state.category=b.dataset.category;state.searc
 
 ### callback@520:86 — linha 520
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:520)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L520)
 
 ```javascript
 ()=>
@@ -8659,7 +8659,7 @@ Executa a etapa `callback@520:86` neste módulo. O contrato concreto está na as
 
 ### callback@521:64 — linha 521
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:521)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L521)
 
 ```javascript
 ()=>
@@ -8673,7 +8673,7 @@ Executa a etapa `callback@521:64` neste módulo. O contrato concreto está na as
 
 ### callback@522:53 — linha 522
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:522)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L522)
 
 ```javascript
 card=>
@@ -8695,7 +8695,7 @@ card=>{const open=()=>openStore(card.dataset.store);card.addEventListener('click
 
 ### open — linha 522
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:522)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L522)
 
 ```javascript
 ()=>
@@ -8709,7 +8709,7 @@ Executa a etapa `open` neste módulo. O contrato concreto está na assinatura, n
 
 ### callback@522:173 — linha 522
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:522)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L522)
 
 ```javascript
 e=>
@@ -8726,7 +8726,7 @@ Executa a etapa `callback@522:173` neste módulo. O contrato concreto está na a
 
 ### callback@523:54 — linha 523
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:523)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L523)
 
 ```javascript
 b=>
@@ -8745,7 +8745,7 @@ b=>b.addEventListener('click',()=>runAction(b.dataset.action))
 
 ### callback@523:84 — linha 523
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:523)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L523)
 
 ```javascript
 ()=>
@@ -8759,7 +8759,7 @@ Executa a etapa `callback@523:84` neste módulo. O contrato concreto está na as
 
 ### callback@524:56 — linha 524
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:524)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L524)
 
 ```javascript
 b=>
@@ -8778,7 +8778,7 @@ b=>b.addEventListener('click',checkout)
 
 ### callback@525:60 — linha 525
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:525)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L525)
 
 ```javascript
 f=>
@@ -8797,7 +8797,7 @@ f=>f.addEventListener('submit',saveProfile)
 
 ### callback@529:67 — linha 529
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:529)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L529)
 
 ```javascript
 form=>
@@ -8816,7 +8816,7 @@ form=>form.addEventListener('submit',updateServiceCity)
 
 ### callback@530:67 — linha 530
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:530)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L530)
 
 ```javascript
 button=>
@@ -8835,7 +8835,7 @@ button=>button.addEventListener('click',()=>toggleServiceCity(button.dataset.ser
 
 ### callback@530:107 — linha 530
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:530)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L530)
 
 ```javascript
 ()=>
@@ -8849,7 +8849,7 @@ Executa a etapa `callback@530:107` neste módulo. O contrato concreto está na a
 
 ### callback@531:69 — linha 531
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:531)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L531)
 
 ```javascript
 button=>
@@ -8868,7 +8868,7 @@ button=>button.addEventListener('click',()=>deleteStoreCategory(button.dataset.s
 
 ### callback@531:109 — linha 531
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:531)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L531)
 
 ```javascript
 ()=>
@@ -8882,7 +8882,7 @@ Executa a etapa `callback@531:109` neste módulo. O contrato concreto está na a
 
 ### callback@533:64 — linha 533
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:533)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L533)
 
 ```javascript
 button=>
@@ -8901,7 +8901,7 @@ button=>button.addEventListener('click',()=>openAdminStoreEditor(button.dataset.
 
 ### callback@533:104 — linha 533
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:533)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L533)
 
 ```javascript
 ()=>
@@ -8915,7 +8915,7 @@ Executa a etapa `callback@533:104` neste módulo. O contrato concreto está na a
 
 ### callback@534:63 — linha 534
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:534)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L534)
 
 ```javascript
 f=>
@@ -8934,7 +8934,7 @@ f=>f.addEventListener('submit',changePassword)
 
 ### callback@537:63 — linha 537
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:537)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L537)
 
 ```javascript
 b=>
@@ -8956,7 +8956,7 @@ b=>b.addEventListener('click',async()=>{state.accountSection=b.dataset.accountSe
 
 ### callback@537:93 — linha 537
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:537)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L537)
 
 ```javascript
 async()=>
@@ -8973,7 +8973,7 @@ Executa a etapa `callback@537:93` neste módulo. O contrato concreto está na as
 
 ### callback@538:72 — linha 538
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:538)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L538)
 
 ```javascript
 button=>
@@ -8995,7 +8995,7 @@ button=>button.addEventListener('click',async()=>{state.adminDefinitionSection=b
 
 ### callback@538:112 — linha 538
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:538)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L538)
 
 ```javascript
 async()=>
@@ -9012,7 +9012,7 @@ Executa a etapa `callback@538:112` neste módulo. O contrato concreto está na a
 
 ### callback@539:59 — linha 539
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:539)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L539)
 
 ```javascript
 b=>
@@ -9031,7 +9031,7 @@ b=>b.addEventListener('click',()=>openTicket(b.dataset.ticketOpen,b.dataset.tick
 
 ### callback@539:89 — linha 539
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:539)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L539)
 
 ```javascript
 ()=>
@@ -9045,7 +9045,7 @@ Executa a etapa `callback@539:89` neste módulo. O contrato concreto está na as
 
 ### callback@540:61 — linha 540
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:540)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L540)
 
 ```javascript
 b=>
@@ -9064,7 +9064,7 @@ b=>b.addEventListener('click',()=>updateTicketStatus(b.dataset.ticketStatus,b.da
 
 ### callback@540:91 — linha 540
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:540)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L540)
 
 ```javascript
 ()=>
@@ -9078,7 +9078,7 @@ Executa a etapa `callback@540:91` neste módulo. O contrato concreto está na as
 
 ### callback@541:62 — linha 541
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:541)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L541)
 
 ```javascript
 f=>
@@ -9097,7 +9097,7 @@ f=>f.addEventListener('submit',sendTicketMessage)
 
 ### callback@542:61 — linha 542
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:542)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L542)
 
 ```javascript
 f=>
@@ -9116,7 +9116,7 @@ f=>f.addEventListener('submit',createSupportTicket)
 
 ### callback@543:60 — linha 543
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:543)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L543)
 
 ```javascript
 b=>
@@ -9135,7 +9135,7 @@ b=>b.addEventListener('click',loadSupportTicketList)
 
 ### callback@544:59 — linha 544
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:544)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L544)
 
 ```javascript
 b=>
@@ -9154,7 +9154,7 @@ b=>b.addEventListener('click',()=>switchRole(b.dataset.switchRole))
 
 ### callback@544:89 — linha 544
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:544)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L544)
 
 ```javascript
 ()=>
@@ -9168,7 +9168,7 @@ Executa a etapa `callback@544:89` neste módulo. O contrato concreto está na as
 
 ### callback@545:64 — linha 545
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:545)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L545)
 
 ```javascript
 f=>
@@ -9187,7 +9187,7 @@ f=>f.addEventListener('submit',requestOperatorAccess)
 
 ### callback@546:60 — linha 546
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:546)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L546)
 
 ```javascript
 f=>
@@ -9206,7 +9206,7 @@ f=>f.addEventListener('submit',requestCityAccess)
 
 ### callback@547:63 — linha 547
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:547)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L547)
 
 ```javascript
 b=>
@@ -9225,7 +9225,7 @@ b=>b.addEventListener('click',()=>reviewPlatformRequest(b.dataset.platformReview
 
 ### callback@547:93 — linha 547
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:547)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L547)
 
 ```javascript
 ()=>
@@ -9239,7 +9239,7 @@ Executa a etapa `callback@547:93` neste módulo. O contrato concreto está na as
 
 ### callback@548:60 — linha 548
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:548)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L548)
 
 ```javascript
 f=>
@@ -9258,7 +9258,7 @@ f=>f.addEventListener('submit',createStore)
 
 ### callback@549:62 — linha 549
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:549)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L549)
 
 ```javascript
 b=>
@@ -9277,7 +9277,7 @@ b=>b.addEventListener('click',()=>resubmitStore(b.dataset.resubmitStore))
 
 ### callback@549:92 — linha 549
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:549)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L549)
 
 ```javascript
 ()=>
@@ -9291,7 +9291,7 @@ Executa a etapa `callback@549:92` neste módulo. O contrato concreto está na as
 
 ### callback@551:147 — linha 551
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:551)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L551)
 
 ```javascript
 (config,summary)=>
@@ -9308,7 +9308,7 @@ Executa a etapa `callback@551:147` neste módulo. O contrato concreto está na a
 
 ### callback@551:428 — linha 551
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:551)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L551)
 
 ```javascript
 error=>
@@ -9322,7 +9322,7 @@ Executa a etapa `callback@551:428` neste módulo. O contrato concreto está na a
 
 ### callback@552:63 — linha 552
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:552)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L552)
 
 ```javascript
 button=>
@@ -9341,7 +9341,7 @@ button=>button.addEventListener('click',()=>setCatalogItemActive(button.dataset.
 
 ### callback@552:103 — linha 552
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:552)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L552)
 
 ```javascript
 ()=>
@@ -9355,7 +9355,7 @@ Executa a etapa `callback@552:103` neste módulo. O contrato concreto está na a
 
 ### callback@553:61 — linha 553
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:553)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L553)
 
 ```javascript
 button=>
@@ -9374,7 +9374,7 @@ button=>button.addEventListener('click',()=>setCatalogItemActive(button.dataset.
 
 ### callback@553:101 — linha 553
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:553)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L553)
 
 ```javascript
 ()=>
@@ -9388,7 +9388,7 @@ Executa a etapa `callback@553:101` neste módulo. O contrato concreto está na a
 
 ### callback@554:67 — linha 554
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:554)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L554)
 
 ```javascript
 form=>
@@ -9407,7 +9407,7 @@ form=>form.addEventListener('submit',createProfessional)
 
 ### callback@555:66 — linha 555
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:555)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L555)
 
 ```javascript
 button=>
@@ -9429,7 +9429,7 @@ button=>button.addEventListener('click',()=>{const person=state.merchantProfessi
 
 ### callback@555:106 — linha 555
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:555)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L555)
 
 ```javascript
 ()=>
@@ -9446,7 +9446,7 @@ Executa a etapa `callback@555:106` neste módulo. O contrato concreto está na a
 
 ### callback@555:157 — linha 555
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:555)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L555)
 
 ```javascript
 p=>
@@ -9460,7 +9460,7 @@ Executa a etapa `callback@555:157` neste módulo. O contrato concreto está na a
 
 ### callback@555:279 — linha 555
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:555)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L555)
 
 ```javascript
 error=>
@@ -9474,7 +9474,7 @@ Executa a etapa `callback@555:279` neste módulo. O contrato concreto está na a
 
 ### callback@556:67 — linha 556
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:556)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L556)
 
 ```javascript
 button=>
@@ -9493,7 +9493,7 @@ button=>button.addEventListener('click',()=>setProfessionalActive(button.dataset
 
 ### callback@556:107 — linha 556
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:556)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L556)
 
 ```javascript
 ()=>
@@ -9507,7 +9507,7 @@ Executa a etapa `callback@556:107` neste módulo. O contrato concreto está na a
 
 ### callback@557:57 — linha 557
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:557)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L557)
 
 ```javascript
 select=>
@@ -9526,7 +9526,7 @@ select=>select.addEventListener('change',()=>syncCatalogItemFields(select.form))
 
 ### callback@557:98 — linha 557
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:557)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L557)
 
 ```javascript
 ()=>
@@ -9540,7 +9540,7 @@ Executa a etapa `callback@557:98` neste módulo. O contrato concreto está na as
 
 ### callback@558:65 — linha 558
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:558)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L558)
 
 ```javascript
 select=>
@@ -9559,7 +9559,7 @@ select=>select.addEventListener('change',()=>syncCatalogItemRisk(select.form))
 
 ### callback@558:106 — linha 558
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:558)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L558)
 
 ```javascript
 ()=>
@@ -9573,7 +9573,7 @@ Executa a etapa `callback@558:106` neste módulo. O contrato concreto está na a
 
 ### callback@559:58 — linha 559
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:559)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L559)
 
 ```javascript
 button=>
@@ -9598,7 +9598,7 @@ button=>button.addEventListener('click',async()=>{
 
 ### callback@559:98 — linha 559
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:559)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L559)
 
 ```javascript
 async()=>
@@ -9618,7 +9618,7 @@ Executa a etapa `callback@559:98` neste módulo. O contrato concreto está na as
 
 ### callback@565:60 — linha 565
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:565)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L565)
 
 ```javascript
 button=>
@@ -9637,7 +9637,7 @@ button=>button.addEventListener('click',async()=>{state.adminStoreFilter=button.
 
 ### callback@565:100 — linha 565
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:565)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L565)
 
 ```javascript
 async()=>
@@ -9651,7 +9651,7 @@ Executa a etapa `callback@565:100` neste módulo. O contrato concreto está na a
 
 ### callback@566:60 — linha 566
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:566)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L566)
 
 ```javascript
 f=>
@@ -9670,7 +9670,7 @@ f=>f.addEventListener('submit',updateStore)
 
 ### callback@567:63 — linha 567
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:567)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L567)
 
 ```javascript
 f=>
@@ -9689,7 +9689,7 @@ f=>f.addEventListener('submit',createOperator)
 
 ### callback@568:68 — linha 568
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:568)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L568)
 
 ```javascript
 b=>
@@ -9708,7 +9708,7 @@ b=>b.addEventListener('click',()=>reviewOperatorApplication(b.dataset.operatorAp
 
 ### callback@568:98 — linha 568
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:568)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L568)
 
 ```javascript
 ()=>
@@ -9722,7 +9722,7 @@ Executa a etapa `callback@568:98` neste módulo. O contrato concreto está na as
 
 ### callback@569:63 — linha 569
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:569)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L569)
 
 ```javascript
 b=>
@@ -9741,7 +9741,7 @@ b=>b.addEventListener('click',()=>setOperatorActive(b.dataset.operatorActive,b.d
 
 ### callback@569:93 — linha 569
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:569)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L569)
 
 ```javascript
 ()=>
@@ -9755,7 +9755,7 @@ Executa a etapa `callback@569:93` neste módulo. O contrato concreto está na as
 
 ### callback@570:62 — linha 570
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:570)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L570)
 
 ```javascript
 b=>
@@ -9774,7 +9774,7 @@ b=>b.addEventListener('click',()=>setAccountActive(b.dataset.accountActive,b.dat
 
 ### callback@570:92 — linha 570
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:570)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L570)
 
 ```javascript
 ()=>
@@ -9788,7 +9788,7 @@ Executa a etapa `callback@570:92` neste módulo. O contrato concreto está na as
 
 ### callback@571:66 — linha 571
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:571)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L571)
 
 ```javascript
 b=>
@@ -9807,7 +9807,7 @@ b=>b.addEventListener('click',()=>openAdminAccountEditor(b.dataset.adminEditAcco
 
 ### callback@571:96 — linha 571
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:571)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L571)
 
 ```javascript
 ()=>
@@ -9821,7 +9821,7 @@ Executa a etapa `callback@571:96` neste módulo. O contrato concreto está na as
 
 ### callback@572:60 — linha 572
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:572)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L572)
 
 ```javascript
 b=>
@@ -9840,7 +9840,7 @@ b=>b.addEventListener('click',()=>setAccountRole(b.dataset.accountRole,b.dataset
 
 ### callback@572:90 — linha 572
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:572)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L572)
 
 ```javascript
 ()=>
@@ -9854,7 +9854,7 @@ Executa a etapa `callback@572:90` neste módulo. O contrato concreto está na as
 
 ### callback@573:62 — linha 573
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:573)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L573)
 
 ```javascript
 b=>
@@ -9873,7 +9873,7 @@ b=>b.addEventListener('click',()=>resetAccountPassword(b.dataset.resetPassword,b
 
 ### callback@573:92 — linha 573
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:573)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L573)
 
 ```javascript
 ()=>
@@ -9887,7 +9887,7 @@ Executa a etapa `callback@573:92` neste módulo. O contrato concreto está na as
 
 ### callback@574:63 — linha 574
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:574)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L574)
 
 ```javascript
 ()=>
@@ -9901,7 +9901,7 @@ Executa a etapa `callback@574:63` neste módulo. O contrato concreto está na as
 
 ### callback@575:62 — linha 575
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:575)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L575)
 
 ```javascript
 async()=>
@@ -9920,7 +9920,7 @@ async()=>{try{state.adminIntegrations=await api('/admin/integrations');renderPag
 
 ### callback@576:55 — linha 576
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:576)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L576)
 
 ```javascript
 async()=>
@@ -9934,7 +9934,7 @@ Executa a etapa `callback@576:55` neste módulo. O contrato concreto está na as
 
 ### callback@577:101 — linha 577
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:577)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L577)
 
 ```javascript
 ()=>
@@ -9948,7 +9948,7 @@ Executa a etapa `callback@577:101` neste módulo. O contrato concreto está na a
 
 ### callback@577:209 — linha 577
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:577)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L577)
 
 ```javascript
 e=>
@@ -9962,7 +9962,7 @@ Executa a etapa `callback@577:209` neste módulo. O contrato concreto está na a
 
 ### callback@578:82 — linha 578
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:578)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L578)
 
 ```javascript
 approved=>
@@ -9979,7 +9979,7 @@ Executa a etapa `callback@578:82` neste módulo. O contrato concreto está na as
 
 ### callback@579:60 — linha 579
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:579)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L579)
 
 ```javascript
 b=>
@@ -9998,7 +9998,7 @@ b=>b.addEventListener('click',()=>updateOrder(b.dataset.id,b.dataset.orderStatus
 
 ### callback@579:90 — linha 579
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:579)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L579)
 
 ```javascript
 ()=>
@@ -10012,7 +10012,7 @@ Executa a etapa `callback@579:90` neste módulo. O contrato concreto está na as
 
 ### callback@580:62 — linha 580
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:580)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L580)
 
 ```javascript
 b=>
@@ -10031,7 +10031,7 @@ b=>b.addEventListener('click',()=>offerDelivery(b.dataset.offerDelivery))
 
 ### callback@580:92 — linha 580
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:580)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L580)
 
 ```javascript
 ()=>
@@ -10045,7 +10045,7 @@ Executa a etapa `callback@580:92` neste módulo. O contrato concreto está na as
 
 ### callback@581:66 — linha 581
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:581)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L581)
 
 ```javascript
 b=>
@@ -10064,7 +10064,7 @@ b=>b.addEventListener('click',()=>updateReservation(b.dataset.id,b.dataset.reser
 
 ### callback@581:96 — linha 581
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:581)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L581)
 
 ```javascript
 ()=>
@@ -10078,7 +10078,7 @@ Executa a etapa `callback@581:96` neste módulo. O contrato concreto está na as
 
 ### callback@582:61 — linha 582
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:582)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L582)
 
 ```javascript
 b=>
@@ -10097,7 +10097,7 @@ b=>b.addEventListener('click',()=>approveStore(storeApprovalId(b)))
 
 ### callback@582:91 — linha 582
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:582)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L582)
 
 ```javascript
 ()=>
@@ -10111,7 +10111,7 @@ Executa a etapa `callback@582:91` neste módulo. O contrato concreto está na as
 
 ### callback@583:60 — linha 583
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:583)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L583)
 
 ```javascript
 b=>
@@ -10130,7 +10130,7 @@ b=>b.addEventListener('click',()=>setStoreActive(b.dataset.storeActive,b.dataset
 
 ### callback@583:90 — linha 583
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:583)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L583)
 
 ```javascript
 ()=>
@@ -10144,7 +10144,7 @@ Executa a etapa `callback@583:90` neste módulo. O contrato concreto está na as
 
 ### callback@585:63 — linha 585
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:585)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L585)
 
 ```javascript
 b=>
@@ -10163,7 +10163,7 @@ b=>b.addEventListener('click',()=>updateDelivery(b.dataset.id,b.dataset.delivery
 
 ### callback@585:93 — linha 585
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:585)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L585)
 
 ```javascript
 ()=>
@@ -10177,7 +10177,7 @@ Executa a etapa `callback@585:93` neste módulo. O contrato concreto está na as
 
 ### callback@586:62 — linha 586
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:586)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L586)
 
 ```javascript
 b=>
@@ -10196,7 +10196,7 @@ b=>b.addEventListener('click',()=>shareCourierLocation(b.dataset.shareLocation))
 
 ### callback@586:92 — linha 586
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:586)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L586)
 
 ```javascript
 ()=>
@@ -10210,7 +10210,7 @@ Executa a etapa `callback@586:92` neste módulo. O contrato concreto está na as
 
 ### callback@587:60 — linha 587
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:587)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L587)
 
 ```javascript
 b=>
@@ -10229,7 +10229,7 @@ b=>b.addEventListener('click',()=>openStore(b.dataset.reopenStore))
 
 ### callback@587:90 — linha 587
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:587)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L587)
 
 ```javascript
 ()=>
@@ -10243,7 +10243,7 @@ Executa a etapa `callback@587:90` neste módulo. O contrato concreto está na as
 
 ### callback@588:45 — linha 588
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:588)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L588)
 
 ```javascript
 ()=>
@@ -10257,7 +10257,7 @@ Executa a etapa `callback@588:45` neste módulo. O contrato concreto está na as
 
 ### callback@589:55 — linha 589
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:589)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L589)
 
 ```javascript
 ()=>
@@ -10271,7 +10271,7 @@ Executa a etapa `callback@589:55` neste módulo. O contrato concreto está na as
 
 ### callback@591:330 — linha 591
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:591)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L591)
 
 ```javascript
 ()=>
@@ -10285,7 +10285,7 @@ Executa a etapa `callback@591:330` neste módulo. O contrato concreto está na a
 
 ### callback@592:55 — linha 592
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:592)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L592)
 
 ```javascript
 button=>
@@ -10308,7 +10308,7 @@ button=>button.addEventListener('click',()=>{
 
 ### callback@592:95 — linha 592
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:592)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L592)
 
 ```javascript
 ()=>
@@ -10326,7 +10326,7 @@ Executa a etapa `callback@592:95` neste módulo. O contrato concreto está na as
 
 ### callback@598:66 — linha 598
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:598)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L598)
 
 ```javascript
 button=>
@@ -10345,7 +10345,7 @@ button=>button.addEventListener('click',()=>{
 
 ### callback@598:106 — linha 598
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:598)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L598)
 
 ```javascript
 ()=>
@@ -10359,7 +10359,7 @@ Executa a etapa `callback@598:106` neste módulo. O contrato concreto está na a
 
 ### callback@601:60 — linha 601
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:601)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L601)
 
 ```javascript
 button=>
@@ -10381,7 +10381,7 @@ button=>button.addEventListener('click',()=>{
 
 ### callback@601:100 — linha 601
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:601)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L601)
 
 ```javascript
 ()=>
@@ -10398,7 +10398,7 @@ Executa a etapa `callback@601:100` neste módulo. O contrato concreto está na a
 
 ### callback@605:62 — linha 605
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:605)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L605)
 
 ```javascript
 button=>
@@ -10417,7 +10417,7 @@ button=>button.addEventListener('click',()=>openChat(button.dataset.openChatType
 
 ### callback@605:102 — linha 605
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:605)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L605)
 
 ```javascript
 ()=>
@@ -10431,7 +10431,7 @@ Executa a etapa `callback@605:102` neste módulo. O contrato concreto está na a
 
 ### callback@606:57 — linha 606
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:606)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L606)
 
 ```javascript
 form=>
@@ -10450,7 +10450,7 @@ form=>form.addEventListener('submit',sendChatMessage)
 
 ### callback@607:58 — linha 607
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:607)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L607)
 
 ```javascript
 area=>
@@ -10469,7 +10469,7 @@ area=>area.addEventListener('input',()=>{state.chatDrafts[area.dataset.chatDraft
 
 ### callback@607:94 — linha 607
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:607)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L607)
 
 ```javascript
 ()=>
@@ -10481,7 +10481,7 @@ Executa a etapa `callback@607:94` neste módulo. O contrato concreto está na as
 
 ### callback@608:58 — linha 608
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:608)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L608)
 
 ```javascript
 button=>
@@ -10500,7 +10500,7 @@ button=>button.addEventListener('click',()=>closeChat(button.dataset.closeChat))
 
 ### callback@608:98 — linha 608
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:608)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L608)
 
 ```javascript
 ()=>
@@ -10514,7 +10514,7 @@ Executa a etapa `callback@608:98` neste módulo. O contrato concreto está na as
 
 ### runAction — linha 611
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:611)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L611)
 
 ```javascript
 async function runAction(action)
@@ -10533,7 +10533,7 @@ Executa a etapa `run Action` neste módulo. O contrato concreto está na assinat
 
 ### openStore — linha 617
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:617)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L617)
 
 ```javascript
 async function openStore(id)
@@ -10547,7 +10547,7 @@ Executa a etapa `open Store` neste módulo. O contrato concreto está na assinat
 
 ### callback@618:47 — linha 618
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:618)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L618)
 
 ```javascript
 s=>
@@ -10561,7 +10561,7 @@ Executa a etapa `callback@618:47` neste módulo. O contrato concreto está na as
 
 ### callback@618:271 — linha 618
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:618)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L618)
 
 ```javascript
 ()=>
@@ -10573,7 +10573,7 @@ Executa a etapa `callback@618:271` neste módulo. O contrato concreto está na a
 
 ### currentStoreOpen — linha 622
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:622)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L622)
 
 ```javascript
 function currentStoreOpen(store, schedule=state.storeHours)
@@ -10590,7 +10590,7 @@ Executa a etapa `current Store Open` neste módulo. O contrato concreto está na
 
 ### operatingHoursPanel — linha 623
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:623)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L623)
 
 ```javascript
 function operatingHoursPanel(...args)
@@ -10607,7 +10607,7 @@ Executa a etapa `operating Hours Panel` neste módulo. O contrato concreto está
 
 ### renderStoreModal — linha 625
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:625)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L625)
 
 ```javascript
 function renderStoreModal(...args)
@@ -10624,7 +10624,7 @@ Executa a etapa `render Store Modal` neste módulo. O contrato concreto está na
 
 ### addToCart — linha 627
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:627)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L627)
 
 ```javascript
 function addToCart(itemId)
@@ -10655,7 +10655,7 @@ Executa a etapa `add To Cart` neste módulo. O contrato concreto está na assina
 
 ### callback@628:36 — linha 628
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:628)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L628)
 
 ```javascript
 i=>
@@ -10669,7 +10669,7 @@ Executa a etapa `callback@628:36` neste módulo. O contrato concreto está na as
 
 ### callback@633:30 — linha 633
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:633)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L633)
 
 ```javascript
 i=>
@@ -10683,7 +10683,7 @@ Executa a etapa `callback@633:30` neste módulo. O contrato concreto está na as
 
 ### showReserveForm — linha 639
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:639)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L639)
 
 ```javascript
 function showReserveForm(...args)
@@ -10700,7 +10700,7 @@ Executa a etapa `show Reserve Form` neste módulo. O contrato concreto está na 
 
 ### renderCartDrawer — linha 641
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:641)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L641)
 
 ```javascript
 function renderCartDrawer(...args)
@@ -10717,7 +10717,7 @@ Executa a etapa `render Cart Drawer` neste módulo. O contrato concreto está na
 
 ### closeCart — linha 643
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:643)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L643)
 
 ```javascript
 function closeCart()
@@ -10731,7 +10731,7 @@ Executa a etapa `close Cart` neste módulo. O contrato concreto está na assinat
 
 ### checkout — linha 645
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:645)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L645)
 
 ```javascript
 async function checkout()
@@ -10764,7 +10764,7 @@ const response=await api('/orders',{method:'POST',body:JSON.stringify({storeId:s
 
 ### callback@649:39 — linha 649
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:649)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L649)
 
 ```javascript
 a=>
@@ -10778,7 +10778,7 @@ Executa a etapa `callback@649:39` neste módulo. O contrato concreto está na as
 
 ### callback@653:260 — linha 653
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:653)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L653)
 
 ```javascript
 line=>
@@ -10790,7 +10790,7 @@ Executa a etapa `callback@653:260` neste módulo. O contrato concreto está na a
 
 ### saveCheckoutAddress — linha 658
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:658)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L658)
 
 ```javascript
 async function saveCheckoutAddress(event)
@@ -10811,7 +10811,7 @@ state.profile=await api('/account/me');state.account=state.profile;persistAccoun
 
 ### lookupCep — linha 668
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:668)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L668)
 
 ```javascript
 async function lookupCep(form)
@@ -10849,7 +10849,7 @@ finally {delete form.dataset.cepLookup;if(button){button.disabled=false;button.t
 
 ### fill — linha 678
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:678)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L678)
 
 ```javascript
 (name,value)=>
@@ -10866,7 +10866,7 @@ Executa a etapa `fill` neste módulo. O contrato concreto está na assinatura, n
 
 ### renderCheckout — linha 685
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:685)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L685)
 
 ```javascript
 function renderCheckout(...args)
@@ -10883,7 +10883,7 @@ Executa a etapa `render Checkout` neste módulo. O contrato concreto está na as
 
 ### approvePayment — linha 687
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:687)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L687)
 
 ```javascript
 async function approvePayment()
@@ -10910,7 +10910,7 @@ try{const checkout=await api(`/payments/${state.checkout.paymentId}/checkout`,{m
 
 ### simulatePayment — linha 695
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:695)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L695)
 
 ```javascript
 async function simulatePayment(outcome)
@@ -10937,7 +10937,7 @@ try{await api(`/demo/payments/${encodeURIComponent(state.checkout.paymentId)}/${
 
 ### renderOrders — linha 705
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:705)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L705)
 
 ```javascript
 function renderOrders(...args)
@@ -10954,7 +10954,7 @@ Executa a etapa `render Orders` neste módulo. O contrato concreto está na assi
 
 ### trackingMessage — linha 707
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:707)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L707)
 
 ```javascript
 function trackingMessage(...args)
@@ -10971,7 +10971,7 @@ Executa a etapa `tracking Message` neste módulo. O contrato concreto está na a
 
 ### renderReservations — linha 709
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:709)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L709)
 
 ```javascript
 function renderReservations(...args)
@@ -10988,7 +10988,7 @@ Executa a etapa `render Reservations` neste módulo. O contrato concreto está n
 
 ### chatKey — linha 711
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:711)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L711)
 
 ```javascript
 function chatKey(type,id)
@@ -11003,7 +11003,7 @@ Executa a etapa `chat Key` neste módulo. O contrato concreto está na assinatur
 
 ### chatMessagesHtml — linha 712
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:712)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L712)
 
 ```javascript
 function chatMessagesHtml(thread)
@@ -11029,7 +11029,7 @@ function chatMessagesHtml(thread){return thread.messages.length?thread.messages.
 
 ### callback@712:85 — linha 712
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:712)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L712)
 
 ```javascript
 m=>
@@ -11051,7 +11051,7 @@ m=>`<article class="chat-message ${String(m.senderId)===String(state.account?.id
 
 ### callback@715:12 — linha 715
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:715)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L715)
 
 ```javascript
 () =>
@@ -11063,7 +11063,7 @@ Executa a etapa `callback@715:12` neste módulo. O contrato concreto está na as
 
 ### callback@716:11 — linha 716
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:716)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L716)
 
 ```javascript
 (key, thread) =>
@@ -11077,7 +11077,7 @@ Executa a etapa `callback@716:11` neste módulo. O contrato concreto está na as
 
 ### callback@718:12 — linha 718
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:718)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L718)
 
 ```javascript
 error =>
@@ -11091,7 +11091,7 @@ Executa a etapa `callback@718:12` neste módulo. O contrato concreto está na as
 
 ### stopChat — linha 720
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:720)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L720)
 
 ```javascript
 function stopChat()
@@ -11105,7 +11105,7 @@ Executa a etapa `stop Chat` neste módulo. O contrato concreto está na assinatu
 
 ### resetChatState — linha 721
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:721)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L721)
 
 ```javascript
 function resetChatState()
@@ -11119,7 +11119,7 @@ Executa a etapa `reset Chat State` neste módulo. O contrato concreto está na a
 
 ### applyChatUpdate — linha 722
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:722)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L722)
 
 ```javascript
 function applyChatUpdate(key,next)
@@ -11147,7 +11147,7 @@ box.innerHTML=chatMessagesHtml(next);
 
 ### chatPanel — linha 731
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:731)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L731)
 
 ```javascript
 function chatPanel(type,id)
@@ -11173,7 +11173,7 @@ Executa a etapa `chat Panel` neste módulo. O contrato concreto está na assinat
 
 ### openChat — linha 733
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:733)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L733)
 
 ```javascript
 async function openChat(type,id)
@@ -11187,7 +11187,7 @@ Executa a etapa `open Chat` neste módulo. O contrato concreto está na assinatu
 
 ### closeChat — linha 734
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:734)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L734)
 
 ```javascript
 function closeChat(key)
@@ -11207,7 +11207,7 @@ Executa a etapa `close Chat` neste módulo. O contrato concreto está na assinat
 
 ### sendChatMessage — linha 735
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:735)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L735)
 
 ```javascript
 async function sendChatMessage(event)
@@ -11233,7 +11233,7 @@ await chatSession.send(key,body,{
 
 ### callback@743:13 — linha 743
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:743)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L743)
 
 ```javascript
 thread=>
@@ -11247,7 +11247,7 @@ Executa a etapa `callback@743:13` neste módulo. O contrato concreto está na as
 
 ### callback@744:16 — linha 744
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:744)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L744)
 
 ```javascript
 error=>
@@ -11264,7 +11264,7 @@ Executa a etapa `callback@744:16` neste módulo. O contrato concreto está na as
 
 ### renderAdminDefinitions — linha 748
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:748)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L748)
 
 ```javascript
 function renderAdminDefinitions(...args)
@@ -11281,7 +11281,7 @@ Executa a etapa `render Admin Definitions` neste módulo. O contrato concreto es
 
 ### loadAdminAuditEvents — linha 750
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:750)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L750)
 
 ```javascript
 function loadAdminAuditEvents(...args)
@@ -11298,7 +11298,7 @@ Executa a etapa `load Admin Audit Events` neste módulo. O contrato concreto est
 
 ### openAdminStoreEditor — linha 752
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:752)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L752)
 
 ```javascript
 function openAdminStoreEditor(...args)
@@ -11315,7 +11315,7 @@ Executa a etapa `open Admin Store Editor` neste módulo. O contrato concreto est
 
 ### renderAccount — linha 754
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:754)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L754)
 
 ```javascript
 function renderAccount(...args)
@@ -11332,7 +11332,7 @@ Executa a etapa `render Account` neste módulo. O contrato concreto está na ass
 
 ### requestOperatorAccess — linha 756
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:756)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L756)
 
 ```javascript
 function requestOperatorAccess(...args)
@@ -11349,7 +11349,7 @@ Executa a etapa `request Operator Access` neste módulo. O contrato concreto est
 
 ### requestCityAccess — linha 757
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:757)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L757)
 
 ```javascript
 function requestCityAccess(...args)
@@ -11366,7 +11366,7 @@ Executa a etapa `request City Access` neste módulo. O contrato concreto está n
 
 ### refreshCitiesAfterSave — linha 759
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:759)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L759)
 
 ```javascript
 function refreshCitiesAfterSave(...args)
@@ -11383,7 +11383,7 @@ Executa a etapa `refresh Cities After Save` neste módulo. O contrato concreto e
 
 ### createServiceCity — linha 760
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:760)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L760)
 
 ```javascript
 function createServiceCity(...args)
@@ -11400,7 +11400,7 @@ Executa a etapa `create Service City` neste módulo. O contrato concreto está n
 
 ### refreshStoreCategories — linha 761
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:761)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L761)
 
 ```javascript
 function refreshStoreCategories(...args)
@@ -11417,7 +11417,7 @@ Executa a etapa `refresh Store Categories` neste módulo. O contrato concreto es
 
 ### createStoreCategory — linha 762
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:762)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L762)
 
 ```javascript
 function createStoreCategory(...args)
@@ -11434,7 +11434,7 @@ Executa a etapa `create Store Category` neste módulo. O contrato concreto está
 
 ### deleteStoreCategory — linha 763
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:763)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L763)
 
 ```javascript
 function deleteStoreCategory(...args)
@@ -11456,7 +11456,7 @@ function deleteStoreCategory(...args){return adminActions.deleteStoreCategory(..
 
 ### updateServiceCity — linha 764
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:764)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L764)
 
 ```javascript
 function updateServiceCity(...args)
@@ -11478,7 +11478,7 @@ function updateServiceCity(...args){return adminActions.updateServiceCity(...arg
 
 ### toggleServiceCity — linha 765
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:765)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L765)
 
 ```javascript
 function toggleServiceCity(...args)
@@ -11495,7 +11495,7 @@ Executa a etapa `toggle Service City` neste módulo. O contrato concreto está n
 
 ### saveAdminProfile — linha 766
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:766)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L766)
 
 ```javascript
 function saveAdminProfile(...args)
@@ -11512,7 +11512,7 @@ Executa a etapa `save Admin Profile` neste módulo. O contrato concreto está na
 
 ### openAdminAccountEditor — linha 768
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:768)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L768)
 
 ```javascript
 function openAdminAccountEditor(...args)
@@ -11529,7 +11529,7 @@ Executa a etapa `open Admin Account Editor` neste módulo. O contrato concreto e
 
 ### saveAdminAccount — linha 769
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:769)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L769)
 
 ```javascript
 function saveAdminAccount(...args)
@@ -11546,7 +11546,7 @@ Executa a etapa `save Admin Account` neste módulo. O contrato concreto está na
 
 ### saveProfile — linha 771
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:771)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L771)
 
 ```javascript
 function saveProfile(...args)
@@ -11563,7 +11563,7 @@ Executa a etapa `save Profile` neste módulo. O contrato concreto está na assin
 
 ### changePassword — linha 773
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:773)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L773)
 
 ```javascript
 function changePassword(...args)
@@ -11580,7 +11580,7 @@ Executa a etapa `change Password` neste módulo. O contrato concreto está na as
 
 ### requestPhoneVerification — linha 775
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:775)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L775)
 
 ```javascript
 function requestPhoneVerification(...args)
@@ -11597,7 +11597,7 @@ Executa a etapa `request Phone Verification` neste módulo. O contrato concreto 
 
 ### confirmPhoneVerification — linha 776
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:776)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L776)
 
 ```javascript
 function confirmPhoneVerification(...args)
@@ -11614,7 +11614,7 @@ Executa a etapa `confirm Phone Verification` neste módulo. O contrato concreto 
 
 ### switchRole — linha 778
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:778)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L778)
 
 ```javascript
 async function switchRole(nextRole)
@@ -11637,7 +11637,7 @@ Executa a etapa `switch Role` neste módulo. O contrato concreto está na assina
 
 ### renderNotifications — linha 780
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:780)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L780)
 
 ```javascript
 function renderNotifications(...args)
@@ -11654,7 +11654,7 @@ Executa a etapa `render Notifications` neste módulo. O contrato concreto está 
 
 ### renderFinance — linha 782
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:782)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L782)
 
 ```javascript
 function renderFinance(...args)
@@ -11671,7 +11671,7 @@ Executa a etapa `render Finance` neste módulo. O contrato concreto está na ass
 
 ### openNotificationTarget — linha 784
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:784)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L784)
 
 ```javascript
 async function openNotificationTarget(target,id)
@@ -11705,7 +11705,7 @@ if(id){const selectors={ORDER:`[data-order-card="${CSS.escape(id)}"]`,RESERVATIO
 
 ### callback@791:45 — linha 791
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:791)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L791)
 
 ```javascript
 ([page])=>
@@ -11717,7 +11717,7 @@ Executa a etapa `callback@791:45` neste módulo. O contrato concreto está na as
 
 ### callback@795:388 — linha 795
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:795)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L795)
 
 ```javascript
 ()=>
@@ -11731,7 +11731,7 @@ Executa a etapa `callback@795:388` neste módulo. O contrato concreto está na a
 
 ### renderMerchant — linha 798
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:798)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L798)
 
 ```javascript
 function renderMerchant(...args)
@@ -11748,7 +11748,7 @@ Executa a etapa `render Merchant` neste módulo. O contrato concreto está na as
 
 ### activeMerchantStore — linha 800
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:800)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L800)
 
 ```javascript
 function activeMerchantStore()
@@ -11765,7 +11765,7 @@ Executa a etapa `active Merchant Store` neste módulo. O contrato concreto está
 
 ### callback@800:60 — linha 800
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:800)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L800)
 
 ```javascript
 s=>
@@ -11779,7 +11779,7 @@ Executa a etapa `callback@800:60` neste módulo. O contrato concreto está na as
 
 ### selectMerchantStore — linha 801
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:801)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L801)
 
 ```javascript
 async function selectMerchantStore(event)
@@ -11793,7 +11793,7 @@ Executa a etapa `select Merchant Store` neste módulo. O contrato concreto está
 
 ### renderMerchantAll — linha 807
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:807)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L807)
 
 ```javascript
 function renderMerchantAll(...args)
@@ -11810,7 +11810,7 @@ Executa a etapa `render Merchant All` neste módulo. O contrato concreto está n
 
 ### storeCategoryOptions — linha 809
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:809)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L809)
 
 ```javascript
 function storeCategoryOptions(...args)
@@ -11827,7 +11827,7 @@ Executa a etapa `store Category Options` neste módulo. O contrato concreto est�
 
 ### storeTimezoneOptions — linha 810
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:810)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L810)
 
 ```javascript
 function storeTimezoneOptions(...args)
@@ -11844,7 +11844,7 @@ Executa a etapa `store Timezone Options` neste módulo. O contrato concreto est�
 
 ### storeFields — linha 811
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:811)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L811)
 
 ```javascript
 function storeFields(...args)
@@ -11861,7 +11861,7 @@ Executa a etapa `store Fields` neste módulo. O contrato concreto está na assin
 
 ### renderMerchantOrders — linha 813
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:813)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L813)
 
 ```javascript
 function renderMerchantOrders(...args)
@@ -11878,7 +11878,7 @@ Executa a etapa `render Merchant Orders` neste módulo. O contrato concreto est�
 
 ### merchantOrderAction — linha 815
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:815)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L815)
 
 ```javascript
 function merchantOrderAction(...args)
@@ -11895,7 +11895,7 @@ Executa a etapa `merchant Order Action` neste módulo. O contrato concreto está
 
 ### renderMerchantReservations — linha 817
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:817)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L817)
 
 ```javascript
 function renderMerchantReservations(...args)
@@ -11912,7 +11912,7 @@ Executa a etapa `render Merchant Reservations` neste módulo. O contrato concret
 
 ### reservationActions — linha 819
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:819)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L819)
 
 ```javascript
 function reservationActions(r)
@@ -11938,7 +11938,7 @@ Executa a etapa `reservation Actions` neste módulo. O contrato concreto está n
 
 ### renderCourier — linha 821
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:821)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L821)
 
 ```javascript
 function renderCourier(...args)
@@ -11955,7 +11955,7 @@ Executa a etapa `render Courier` neste módulo. O contrato concreto está na ass
 
 ### courierNext — linha 823
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:823)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L823)
 
 ```javascript
 function courierNext(...args)
@@ -11972,7 +11972,7 @@ Executa a etapa `courier Next` neste módulo. O contrato concreto está na assin
 
 ### renderAdmin — linha 825
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:825)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L825)
 
 ```javascript
 function renderAdmin(...args)
@@ -11989,7 +11989,7 @@ Executa a etapa `render Admin` neste módulo. O contrato concreto está na assin
 
 ### renderAdminAll — linha 827
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:827)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L827)
 
 ```javascript
 function renderAdminAll(...args)
@@ -12006,7 +12006,7 @@ Executa a etapa `render Admin All` neste módulo. O contrato concreto está na a
 
 ### createStore — linha 829
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:829)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L829)
 
 ```javascript
 async function createStore(event)
@@ -12031,7 +12031,7 @@ async function createStore(event){event.preventDefault();const form=new FormData
 
 ### resubmitStore — linha 830
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:830)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L830)
 
 ```javascript
 async function resubmitStore(id)
@@ -12050,7 +12050,7 @@ async function resubmitStore(id){try{await api(`/merchant/stores/${id}/resubmit`
 
 ### updateStore — linha 833
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:833)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L833)
 
 ```javascript
 async function updateStore(event)
@@ -12077,7 +12077,7 @@ async function updateStore(event){event.preventDefault();const form=new FormData
 
 ### syncCatalogItemFields — linha 835
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:835)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L835)
 
 ```javascript
 function syncCatalogItemFields(form)
@@ -12102,7 +12102,7 @@ Executa a etapa `sync Catalog Item Fields` neste módulo. O contrato concreto es
 
 ### syncCatalogItemRisk — linha 836
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:836)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L836)
 
 ```javascript
 function syncCatalogItemRisk(form)
@@ -12125,7 +12125,7 @@ Executa a etapa `sync Catalog Item Risk` neste módulo. O contrato concreto est�
 
 ### createItem — linha 837
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:837)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L837)
 
 ```javascript
 async function createItem(event)
@@ -12157,7 +12157,7 @@ async function createItem(event){event.preventDefault();const store=activeMercha
 
 ### setCatalogItemActive — linha 839
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:839)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L839)
 
 ```javascript
 async function setCatalogItemActive(id,active)
@@ -12193,7 +12193,7 @@ if(button?.isConnected){button.disabled=false;button.textContent=active?'Reativa
 
 ### callback@842:36 — linha 842
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:842)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L842)
 
 ```javascript
 row=>
@@ -12207,7 +12207,7 @@ Executa a etapa `callback@842:36` neste módulo. O contrato concreto está na as
 
 ### callback@844:64 — linha 844
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:844)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L844)
 
 ```javascript
 async()=>
@@ -12236,7 +12236,7 @@ if(button?.isConnected){button.disabled=false;button.textContent=active?'Reativa
 
 ### openCatalogItemEditor — linha 863
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:863)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L863)
 
 ```javascript
 function openCatalogItemEditor(id)
@@ -12266,7 +12266,7 @@ document.body.append(wrap);wrap.querySelectorAll('[data-close-item]').forEach(bu
 
 ### callback@864:36 — linha 864
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:864)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L864)
 
 ```javascript
 row=>
@@ -12280,7 +12280,7 @@ Executa a etapa `callback@864:36` neste módulo. O contrato concreto está na as
 
 ### callback@867:81 — linha 867
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:867)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L867)
 
 ```javascript
 button=>
@@ -12299,7 +12299,7 @@ button=>button.addEventListener('click',()=>wrap.remove())
 
 ### callback@867:121 — linha 867
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:867)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L867)
 
 ```javascript
 ()=>
@@ -12313,7 +12313,7 @@ Executa a etapa `callback@867:121` neste módulo. O contrato concreto está na a
 
 ### callback@867:171 — linha 867
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:867)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L867)
 
 ```javascript
 event=>
@@ -12330,7 +12330,7 @@ Executa a etapa `callback@867:171` neste módulo. O contrato concreto está na a
 
 ### callback@867:375 — linha 867
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:867)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L867)
 
 ```javascript
 event=>
@@ -12344,7 +12344,7 @@ Executa a etapa `callback@867:375` neste módulo. O contrato concreto está na a
 
 ### callback@867:510 — linha 867
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:867)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L867)
 
 ```javascript
 ()=>
@@ -12358,7 +12358,7 @@ Executa a etapa `callback@867:510` neste módulo. O contrato concreto está na a
 
 ### callback@867:616 — linha 867
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:867)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L867)
 
 ```javascript
 ()=>
@@ -12372,7 +12372,7 @@ Executa a etapa `callback@867:616` neste módulo. O contrato concreto está na a
 
 ### saveCatalogItem — linha 869
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:869)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L869)
 
 ```javascript
 async function saveCatalogItem(event)
@@ -12406,7 +12406,7 @@ try{await api(`/merchant/items/${item.id}`,{method:'PUT',body:JSON.stringify({na
 
 ### callback@870:84 — linha 870
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:870)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L870)
 
 ```javascript
 row=>
@@ -12420,7 +12420,7 @@ Executa a etapa `callback@870:84` neste módulo. O contrato concreto está na as
 
 ### createProfessional — linha 878
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:878)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L878)
 
 ```javascript
 async function createProfessional(event)
@@ -12445,7 +12445,7 @@ async function createProfessional(event){event.preventDefault();const form=event
 
 ### setProfessionalActive — linha 879
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:879)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L879)
 
 ```javascript
 async function setProfessionalActive(id,active)
@@ -12467,7 +12467,7 @@ async function setProfessionalActive(id,active){try{await api(`/merchant/profess
 
 ### createOperator — linha 881
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:881)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L881)
 
 ```javascript
 function createOperator(...args)
@@ -12484,7 +12484,7 @@ Executa a etapa `create Operator` neste módulo. O contrato concreto está na as
 
 ### setAccountActive — linha 883
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:883)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L883)
 
 ```javascript
 function setAccountActive(...args)
@@ -12506,7 +12506,7 @@ function setAccountActive(...args){return adminActions.setAccountActive(...args)
 
 ### setAccountRole — linha 884
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:884)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L884)
 
 ```javascript
 function setAccountRole(...args)
@@ -12528,7 +12528,7 @@ function setAccountRole(...args){return adminActions.setAccountRole(...args);}
 
 ### resetAccountPassword — linha 885
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:885)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L885)
 
 ```javascript
 function resetAccountPassword(...args)
@@ -12545,7 +12545,7 @@ Executa a etapa `reset Account Password` neste módulo. O contrato concreto est�
 
 ### reviewPlatformRequest — linha 887
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:887)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L887)
 
 ```javascript
 async function reviewPlatformRequest(id,decision)
@@ -12573,7 +12573,7 @@ async function reviewPlatformRequest(id,decision){return runOnce(`admin:review-r
 
 ### callback@887:95 — linha 887
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:887)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L887)
 
 ```javascript
 async()=>
@@ -12598,7 +12598,7 @@ async()=>{const button=document.querySelector(`[data-platform-review="${CSS.esca
 
 ### reviewOperatorApplication — linha 889
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:889)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L889)
 
 ```javascript
 function reviewOperatorApplication(...args)
@@ -12615,7 +12615,7 @@ Executa a etapa `review Operator Application` neste módulo. O contrato concreto
 
 ### setOperatorActive — linha 891
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:891)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L891)
 
 ```javascript
 function setOperatorActive(...args)
@@ -12637,7 +12637,7 @@ function setOperatorActive(...args){return adminActions.setOperatorActive(...arg
 
 ### approveStore — linha 893
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:893)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L893)
 
 ```javascript
 function approveStore(...args)
@@ -12654,7 +12654,7 @@ Executa a etapa `approve Store` neste módulo. O contrato concreto está na assi
 
 ### setStoreActive — linha 895
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:895)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L895)
 
 ```javascript
 function setStoreActive(...args)
@@ -12676,7 +12676,7 @@ function setStoreActive(...args){return adminActions.setStoreActive(...args);}
 
 ### updateOrder — linha 897
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:897)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L897)
 
 ```javascript
 function updateOrder(...args)
@@ -12698,7 +12698,7 @@ function updateOrder(...args){return orderActions.updateOrder(...args);}
 
 ### offerDelivery — linha 899
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:899)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L899)
 
 ```javascript
 function offerDelivery(...args)
@@ -12715,7 +12715,7 @@ Executa a etapa `offer Delivery` neste módulo. O contrato concreto está na ass
 
 ### updateReservation — linha 901
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:901)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L901)
 
 ```javascript
 function updateReservation(...args)
@@ -12737,7 +12737,7 @@ function updateReservation(...args){return orderActions.updateReservation(...arg
 
 ### acceptDelivery — linha 903
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:903)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L903)
 
 ```javascript
 function acceptDelivery(...args)
@@ -12754,7 +12754,7 @@ Executa a etapa `accept Delivery` neste módulo. O contrato concreto está na as
 
 ### updateDelivery — linha 905
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:905)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L905)
 
 ```javascript
 function updateDelivery(...args)
@@ -12776,7 +12776,7 @@ function updateDelivery(...args){return orderActions.updateDelivery(...args);}
 
 ### stopCourierLocation — linha 907
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:907)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L907)
 
 ```javascript
 function stopCourierLocation()
@@ -12793,7 +12793,7 @@ Executa a etapa `stop Courier Location` neste módulo. O contrato concreto está
 
 ### shareCourierLocation — linha 909
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:909)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L909)
 
 ```javascript
 function shareCourierLocation(id)
@@ -12823,7 +12823,7 @@ try{await api(`/courier/deliveries/${encodeURIComponent(id)}/location`,{method:'
 
 ### callback@913:61 — linha 913
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:913)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L913)
 
 ```javascript
 async position=>
@@ -12848,7 +12848,7 @@ try{await api(`/courier/deliveries/${encodeURIComponent(id)}/location`,{method:'
 
 ### callback@917:5 — linha 917
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:917)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L917)
 
 ```javascript
 error=>
@@ -12865,7 +12865,7 @@ Executa a etapa `callback@917:5` neste módulo. O contrato concreto está na ass
 
 ### cancelUnpaidOrder — linha 921
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:921)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L921)
 
 ```javascript
 function cancelUnpaidOrder(...args)
@@ -12882,7 +12882,7 @@ Executa a etapa `cancel Unpaid Order` neste módulo. O contrato concreto está n
 
 ### cancelUnpaidReservation — linha 922
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:922)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L922)
 
 ```javascript
 function cancelUnpaidReservation(...args)
@@ -12899,7 +12899,7 @@ Executa a etapa `cancel Unpaid Reservation` neste módulo. O contrato concreto e
 
 ### requestOrderCancellation — linha 923
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:923)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L923)
 
 ```javascript
 function requestOrderCancellation(...args)
@@ -12916,7 +12916,7 @@ Executa a etapa `request Order Cancellation` neste módulo. O contrato concreto 
 
 ### requestReservationCancellation — linha 924
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:924)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L924)
 
 ```javascript
 function requestReservationCancellation(...args)
@@ -12933,7 +12933,7 @@ Executa a etapa `request Reservation Cancellation` neste módulo. O contrato con
 
 ### decideOrderCancellation — linha 925
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:925)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L925)
 
 ```javascript
 function decideOrderCancellation(...args)
@@ -12950,7 +12950,7 @@ Executa a etapa `decide Order Cancellation` neste módulo. O contrato concreto e
 
 ### decideReservationCancellation — linha 926
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:926)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L926)
 
 ```javascript
 function decideReservationCancellation(...args)
@@ -12967,7 +12967,7 @@ Executa a etapa `decide Reservation Cancellation` neste módulo. O contrato conc
 
 ### bindPageActions — linha 928
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:928)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L928)
 
 ```javascript
 async function bindPageActions()
@@ -13014,7 +13014,7 @@ document.querySelectorAll('[data-cep]').forEach(input=>input.addEventListener('b
 
 ### callback@929:73 — linha 929
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:929)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L929)
 
 ```javascript
 button=>
@@ -13033,7 +13033,7 @@ button=>button.addEventListener('click',()=>{state.addressFormOpen=true;renderPa
 
 ### callback@929:113 — linha 929
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:929)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L929)
 
 ```javascript
 ()=>
@@ -13047,7 +13047,7 @@ Executa a etapa `callback@929:113` neste módulo. O contrato concreto está na a
 
 ### callback@930:76 — linha 930
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:930)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L930)
 
 ```javascript
 button=>
@@ -13066,7 +13066,7 @@ button=>button.addEventListener('click',()=>{state.addressFormOpen=false;renderP
 
 ### callback@930:116 — linha 930
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:930)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L930)
 
 ```javascript
 ()=>
@@ -13080,7 +13080,7 @@ Executa a etapa `callback@930:116` neste módulo. O contrato concreto está na a
 
 ### callback@931:74 — linha 931
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:931)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L931)
 
 ```javascript
 form=>
@@ -13099,7 +13099,7 @@ form=>form.addEventListener('submit',saveCheckoutAddress)
 
 ### callback@932:61 — linha 932
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:932)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L932)
 
 ```javascript
 async()=>
@@ -13118,7 +13118,7 @@ async()=>{try{await api('/account/notifications',{method:'DELETE'});localStorage
 
 ### callback@933:67 — linha 933
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:933)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L933)
 
 ```javascript
 item=>
@@ -13141,7 +13141,7 @@ item.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' ')
 
 ### activate — linha 934
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:934)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L934)
 
 ```javascript
 ()=>
@@ -13155,7 +13155,7 @@ Executa a etapa `activate` neste módulo. O contrato concreto está na assinatur
 
 ### callback@936:37 — linha 936
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:936)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L936)
 
 ```javascript
 event=>
@@ -13172,7 +13172,7 @@ Executa a etapa `callback@936:37` neste módulo. O contrato concreto está na as
 
 ### callback@938:74 — linha 938
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:938)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L938)
 
 ```javascript
 () =>
@@ -13186,7 +13186,7 @@ Executa a etapa `callback@938:74` neste módulo. O contrato concreto está na as
 
 ### callback@939:80 — linha 939
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:939)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L939)
 
 ```javascript
 () =>
@@ -13200,7 +13200,7 @@ Executa a etapa `callback@939:80` neste módulo. O contrato concreto está na as
 
 ### callback@940:66 — linha 940
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:940)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L940)
 
 ```javascript
 () =>
@@ -13214,7 +13214,7 @@ Executa a etapa `callback@940:66` neste módulo. O contrato concreto está na as
 
 ### callback@941:58 — linha 941
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:941)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L941)
 
 ```javascript
 ()=>
@@ -13228,7 +13228,7 @@ Executa a etapa `callback@941:58` neste módulo. O contrato concreto está na as
 
 ### callback@942:65 — linha 942
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:942)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L942)
 
 ```javascript
 () =>
@@ -13242,7 +13242,7 @@ Executa a etapa `callback@942:65` neste módulo. O contrato concreto está na as
 
 ### callback@943:64 — linha 943
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:943)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L943)
 
 ```javascript
 form=>
@@ -13261,7 +13261,7 @@ form=>form.addEventListener('submit',saveCommission)
 
 ### callback@944:67 — linha 944
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:944)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L944)
 
 ```javascript
 button=>
@@ -13280,7 +13280,7 @@ button=>button.addEventListener('click',connectMercadoPago)
 
 ### callback@945:60 — linha 945
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:945)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L945)
 
 ```javascript
 button=>
@@ -13299,7 +13299,7 @@ button=>button.addEventListener('click',()=>resumeOrderPayment(button.dataset.re
 
 ### callback@945:100 — linha 945
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:945)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L945)
 
 ```javascript
 ()=>
@@ -13313,7 +13313,7 @@ Executa a etapa `callback@945:100` neste módulo. O contrato concreto está na a
 
 ### callback@946:66 — linha 946
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:946)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L946)
 
 ```javascript
 button=>
@@ -13332,7 +13332,7 @@ button=>button.addEventListener('click',()=>resumeReservationPayment(button.data
 
 ### callback@946:106 — linha 946
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:946)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L946)
 
 ```javascript
 ()=>
@@ -13346,7 +13346,7 @@ Executa a etapa `callback@946:106` neste módulo. O contrato concreto está na a
 
 ### callback@947:60 — linha 947
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:947)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L947)
 
 ```javascript
 button=>
@@ -13365,7 +13365,7 @@ button=>button.addEventListener('click',()=>cancelUnpaidOrder(button.dataset.can
 
 ### callback@947:100 — linha 947
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:947)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L947)
 
 ```javascript
 ()=>
@@ -13379,7 +13379,7 @@ Executa a etapa `callback@947:100` neste módulo. O contrato concreto está na a
 
 ### callback@948:66 — linha 948
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:948)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L948)
 
 ```javascript
 button=>
@@ -13398,7 +13398,7 @@ button=>button.addEventListener('click',()=>cancelUnpaidReservation(button.datas
 
 ### callback@948:106 — linha 948
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:948)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L948)
 
 ```javascript
 ()=>
@@ -13412,7 +13412,7 @@ Executa a etapa `callback@948:106` neste módulo. O contrato concreto está na a
 
 ### callback@949:74 — linha 949
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:949)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L949)
 
 ```javascript
 button=>
@@ -13431,7 +13431,7 @@ button=>button.addEventListener('click',()=>requestOrderCancellation(button.data
 
 ### callback@949:114 — linha 949
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:949)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L949)
 
 ```javascript
 ()=>
@@ -13445,7 +13445,7 @@ Executa a etapa `callback@949:114` neste módulo. O contrato concreto está na a
 
 ### callback@950:80 — linha 950
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:950)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L950)
 
 ```javascript
 button=>
@@ -13464,7 +13464,7 @@ button=>button.addEventListener('click',()=>requestReservationCancellation(butto
 
 ### callback@950:120 — linha 950
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:950)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L950)
 
 ```javascript
 ()=>
@@ -13478,7 +13478,7 @@ Executa a etapa `callback@950:120` neste módulo. O contrato concreto está na a
 
 ### callback@951:75 — linha 951
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:951)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L951)
 
 ```javascript
 button=>
@@ -13497,7 +13497,7 @@ button=>button.addEventListener('click',()=>decideOrderCancellation(button.datas
 
 ### callback@951:115 — linha 951
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:951)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L951)
 
 ```javascript
 ()=>
@@ -13511,7 +13511,7 @@ Executa a etapa `callback@951:115` neste módulo. O contrato concreto está na a
 
 ### callback@952:81 — linha 952
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:952)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L952)
 
 ```javascript
 button=>
@@ -13530,7 +13530,7 @@ button=>button.addEventListener('click',()=>decideReservationCancellation(button
 
 ### callback@952:121 — linha 952
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:952)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L952)
 
 ```javascript
 ()=>
@@ -13544,7 +13544,7 @@ Executa a etapa `callback@952:121` neste módulo. O contrato concreto está na a
 
 ### callback@953:63 — linha 953
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:953)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L953)
 
 ```javascript
 button=>
@@ -13563,7 +13563,7 @@ button=>button.addEventListener('click',()=>setDefaultAddress(button.dataset.def
 
 ### callback@953:103 — linha 953
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:953)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L953)
 
 ```javascript
 ()=>
@@ -13577,7 +13577,7 @@ Executa a etapa `callback@953:103` neste módulo. O contrato concreto está na a
 
 ### callback@954:62 — linha 954
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:954)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L954)
 
 ```javascript
 button=>
@@ -13596,7 +13596,7 @@ button=>button.addEventListener('click',()=>deleteAddress(button.dataset.deleteA
 
 ### callback@954:102 — linha 954
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:954)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L954)
 
 ```javascript
 ()=>
@@ -13615,7 +13615,7 @@ Executa a etapa `callback@954:102` neste módulo. O contrato concreto está na a
 
 ### callback@955:58 — linha 955
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:955)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L955)
 
 ```javascript
 button=>
@@ -13634,7 +13634,7 @@ button=>button.addEventListener('click',()=>lookupCep(button.closest('form')))
 
 ### callback@955:98 — linha 955
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:955)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L955)
 
 ```javascript
 ()=>
@@ -13648,7 +13648,7 @@ Executa a etapa `callback@955:98` neste módulo. O contrato concreto está na as
 
 ### callback@956:51 — linha 956
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:956)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L956)
 
 ```javascript
 input=>
@@ -13670,7 +13670,7 @@ input=>input.addEventListener('blur',()=>{if(input.value.replace(/\D/g,'').lengt
 
 ### callback@956:88 — linha 956
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:956)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L956)
 
 ```javascript
 ()=>
@@ -13687,7 +13687,7 @@ Executa a etapa `callback@956:88` neste módulo. O contrato concreto está na as
 
 ### setDefaultAddress — linha 959
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:959)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L959)
 
 ```javascript
 function setDefaultAddress(...args)
@@ -13709,7 +13709,7 @@ function setDefaultAddress(...args){return accountActions.setDefaultAddress(...a
 
 ### deleteAddress — linha 961
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:961)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L961)
 
 ```javascript
 function deleteAddress(...args)
@@ -13731,7 +13731,7 @@ function deleteAddress(...args){return accountActions.deleteAddress(...args);}
 
 ### saveCommission — linha 963
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:963)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L963)
 
 ```javascript
 function saveCommission(...args)
@@ -13748,7 +13748,7 @@ Executa a etapa `save Commission` neste módulo. O contrato concreto está na as
 
 ### connectMercadoPago — linha 965
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:965)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L965)
 
 ```javascript
 async function connectMercadoPago(event)
@@ -13767,7 +13767,7 @@ async function connectMercadoPago(event){const button=event.currentTarget;button
 
 ### resumeOrderPayment — linha 967
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:967)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L967)
 
 ```javascript
 function resumeOrderPayment(...args)
@@ -13784,7 +13784,7 @@ Executa a etapa `resume Order Payment` neste módulo. O contrato concreto está 
 
 ### resumeReservationPayment — linha 968
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:968)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L968)
 
 ```javascript
 function resumeReservationPayment(...args)
@@ -13801,7 +13801,7 @@ Executa a etapa `resume Reservation Payment` neste módulo. O contrato concreto 
 
 ### bindEvents — linha 970
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:970)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L970)
 
 ```javascript
 function bindEvents()
@@ -13830,7 +13830,7 @@ document.addEventListener('keydown',event=>{
 
 ### callback@971:33 — linha 971
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:971)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L971)
 
 ```javascript
 event =>
@@ -13852,7 +13852,7 @@ Executa a etapa `callback@971:33` neste módulo. O contrato concreto está na as
 
 ### callback@972:67 — linha 972
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:972)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L972)
 
 ```javascript
 menu=>
@@ -13869,7 +13869,7 @@ Executa a etapa `callback@972:67` neste módulo. O contrato concreto está na as
 
 ### callback@976:39 — linha 976
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:976)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L976)
 
 ```javascript
 event=>
@@ -13886,7 +13886,7 @@ Executa a etapa `callback@976:39` neste módulo. O contrato concreto está na as
 
 ### callback@977:91 — linha 977
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:977)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L977)
 
 ```javascript
 menu=>
@@ -13900,7 +13900,7 @@ Executa a etapa `callback@977:91` neste módulo. O contrato concreto está na as
 
 ### callback@981:36 — linha 981
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:981)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L981)
 
 ```javascript
 async()=>
@@ -13918,7 +13918,7 @@ Executa a etapa `callback@981:36` neste módulo. O contrato concreto está na as
 
 ### callback@981:125 — linha 981
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:981)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L981)
 
 ```javascript
 ([allowed])=>
@@ -13930,7 +13930,7 @@ Executa a etapa `callback@981:125` neste módulo. O contrato concreto está na a
 
 ### showLogoutConfirmation — linha 983
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:983)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L983)
 
 ```javascript
 function showLogoutConfirmation()
@@ -13955,7 +13955,7 @@ dialog.querySelector('[data-confirm-logout]').addEventListener('click',()=>{dial
 
 ### callback@988:73 — linha 988
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:988)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L988)
 
 ```javascript
 ()=>
@@ -13969,7 +13969,7 @@ Executa a etapa `callback@988:73` neste módulo. O contrato concreto está na as
 
 ### callback@989:35 — linha 989
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:989)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L989)
 
 ```javascript
 event=>
@@ -13986,7 +13986,7 @@ Executa a etapa `callback@989:35` neste módulo. O contrato concreto está na as
 
 ### callback@990:74 — linha 990
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:990)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L990)
 
 ```javascript
 ()=>
@@ -14000,7 +14000,7 @@ Executa a etapa `callback@990:74` neste módulo. O contrato concreto está na as
 
 ### performLogout — linha 993
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:993)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L993)
 
 ```javascript
 async function performLogout()
@@ -14022,7 +14022,7 @@ try { await api('/auth/logout',{method:'POST'}); }
 
 ### callback@1010:67 — linha 1010
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1010)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1010)
 
 ```javascript
 (...args) =>
@@ -14036,7 +14036,7 @@ Executa a etapa `callback@1010:67` neste módulo. O contrato concreto está na a
 
 ### callback@1010:116 — linha 1010
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1010)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1010)
 
 ```javascript
 (...args) =>
@@ -14050,7 +14050,7 @@ Executa a etapa `callback@1010:116` neste módulo. O contrato concreto está na 
 
 ### callback@1010:158 — linha 1010
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1010)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1010)
 
 ```javascript
 (...args) =>
@@ -14064,7 +14064,7 @@ Executa a etapa `callback@1010:158` neste módulo. O contrato concreto está na 
 
 ### callback@1010:208 — linha 1010
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1010)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1010)
 
 ```javascript
 (...args) =>
@@ -14078,7 +14078,7 @@ Executa a etapa `callback@1010:208` neste módulo. O contrato concreto está na 
 
 ### callback@1010:258 — linha 1010
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1010)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1010)
 
 ```javascript
 (...args) =>
@@ -14092,7 +14092,7 @@ Executa a etapa `callback@1010:258` neste módulo. O contrato concreto está na 
 
 ### callback@1010:300 — linha 1010
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1010)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1010)
 
 ```javascript
 (...args) =>
@@ -14106,7 +14106,7 @@ Executa a etapa `callback@1010:300` neste módulo. O contrato concreto está na 
 
 ### callback@1011:122 — linha 1011
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1011)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1011)
 
 ```javascript
 (...args) =>
@@ -14120,7 +14120,7 @@ Executa a etapa `callback@1011:122` neste módulo. O contrato concreto está na 
 
 ### callback@1011:236 — linha 1011
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1011)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1011)
 
 ```javascript
 (...args) =>
@@ -14134,7 +14134,7 @@ Executa a etapa `callback@1011:236` neste módulo. O contrato concreto está na 
 
 ### callback@1011:288 — linha 1011
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1011)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1011)
 
 ```javascript
 (...args) =>
@@ -14148,7 +14148,7 @@ Executa a etapa `callback@1011:288` neste módulo. O contrato concreto está na 
 
 ### callback@1011:333 — linha 1011
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1011)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1011)
 
 ```javascript
 (...args) =>
@@ -14162,7 +14162,7 @@ Executa a etapa `callback@1011:333` neste módulo. O contrato concreto está na 
 
 ### callback@1011:383 — linha 1011
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1011)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1011)
 
 ```javascript
 (...args) =>
@@ -14176,7 +14176,7 @@ Executa a etapa `callback@1011:383` neste módulo. O contrato concreto está na 
 
 ### callback@1011:433 — linha 1011
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1011)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1011)
 
 ```javascript
 (...args) =>
@@ -14190,7 +14190,7 @@ Executa a etapa `callback@1011:433` neste módulo. O contrato concreto está na 
 
 ### callback@1011:475 — linha 1011
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1011)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1011)
 
 ```javascript
 (...args) =>
@@ -14204,7 +14204,7 @@ Executa a etapa `callback@1011:475` neste módulo. O contrato concreto está na 
 
 ### callback@1012:79 — linha 1012
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1012)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1012)
 
 ```javascript
 (...args) =>
@@ -14218,7 +14218,7 @@ Executa a etapa `callback@1012:79` neste módulo. O contrato concreto está na a
 
 ### callback@1012:128 — linha 1012
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1012)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1012)
 
 ```javascript
 (...args) =>
@@ -14232,7 +14232,7 @@ Executa a etapa `callback@1012:128` neste módulo. O contrato concreto está na 
 
 ### callback@1012:168 — linha 1012
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1012)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1012)
 
 ```javascript
 (...args) =>
@@ -14246,7 +14246,7 @@ Executa a etapa `callback@1012:168` neste módulo. O contrato concreto está na 
 
 ### callback@1012:206 — linha 1012
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1012)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1012)
 
 ```javascript
 (...args) =>
@@ -14260,7 +14260,7 @@ Executa a etapa `callback@1012:206` neste módulo. O contrato concreto está na 
 
 ### callback@1012:264 — linha 1012
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1012)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1012)
 
 ```javascript
 (...args) =>
@@ -14274,7 +14274,7 @@ Executa a etapa `callback@1012:264` neste módulo. O contrato concreto está na 
 
 ### callback@1013:75 — linha 1013
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1013)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1013)
 
 ```javascript
 (...args) =>
@@ -14288,7 +14288,7 @@ Executa a etapa `callback@1013:75` neste módulo. O contrato concreto está na a
 
 ### callback@1013:127 — linha 1013
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1013)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1013)
 
 ```javascript
 (...args) =>
@@ -14302,7 +14302,7 @@ Executa a etapa `callback@1013:127` neste módulo. O contrato concreto está na 
 
 ### callback@1013:172 — linha 1013
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1013)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1013)
 
 ```javascript
 (...args) =>
@@ -14316,7 +14316,7 @@ Executa a etapa `callback@1013:172` neste módulo. O contrato concreto está na 
 
 ### callback@1013:216 — linha 1013
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1013)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1013)
 
 ```javascript
 (...args) =>
@@ -14330,7 +14330,7 @@ Executa a etapa `callback@1013:216` neste módulo. O contrato concreto está na 
 
 ### callback@1013:258 — linha 1013
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1013)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1013)
 
 ```javascript
 (...args) =>
@@ -14344,7 +14344,7 @@ Executa a etapa `callback@1013:258` neste módulo. O contrato concreto está na 
 
 ### callback@1014:59 — linha 1014
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1014)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1014)
 
 ```javascript
 (...args) =>
@@ -14358,7 +14358,7 @@ Executa a etapa `callback@1014:59` neste módulo. O contrato concreto está na a
 
 ### callback@1014:150 — linha 1014
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1014)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1014)
 
 ```javascript
 (...args) =>
@@ -14372,7 +14372,7 @@ Executa a etapa `callback@1014:150` neste módulo. O contrato concreto está na 
 
 ### callback@1014:211 — linha 1014
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1014)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1014)
 
 ```javascript
 (...args) =>
@@ -14386,7 +14386,7 @@ Executa a etapa `callback@1014:211` neste módulo. O contrato concreto está na 
 
 ### callback@1014:262 — linha 1014
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1014)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1014)
 
 ```javascript
 (...args) =>
@@ -14400,7 +14400,7 @@ Executa a etapa `callback@1014:262` neste módulo. O contrato concreto está na 
 
 ### callback@1014:314 — linha 1014
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1014)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1014)
 
 ```javascript
 (...args) =>
@@ -14414,7 +14414,7 @@ Executa a etapa `callback@1014:314` neste módulo. O contrato concreto está na 
 
 ### callback@1014:400 — linha 1014
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1014)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1014)
 
 ```javascript
 (...args) =>
@@ -14428,7 +14428,7 @@ Executa a etapa `callback@1014:400` neste módulo. O contrato concreto está na 
 
 ### callback@1014:487 — linha 1014
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1014)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1014)
 
 ```javascript
 (...args) =>
@@ -14442,7 +14442,7 @@ Executa a etapa `callback@1014:487` neste módulo. O contrato concreto está na 
 
 ### callback@1014:582 — linha 1014
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1014)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1014)
 
 ```javascript
 (...args) =>
@@ -14456,7 +14456,7 @@ Executa a etapa `callback@1014:582` neste módulo. O contrato concreto está na 
 
 ### callback@1014:622 — linha 1014
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1014)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1014)
 
 ```javascript
 (...args) =>
@@ -14470,7 +14470,7 @@ Executa a etapa `callback@1014:622` neste módulo. O contrato concreto está na 
 
 ### callback@1014:660 — linha 1014
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1014)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1014)
 
 ```javascript
 (...args) =>
@@ -14484,7 +14484,7 @@ Executa a etapa `callback@1014:660` neste módulo. O contrato concreto está na 
 
 ### callback@1014:730 — linha 1014
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1014)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1014)
 
 ```javascript
 (...args) =>
@@ -14498,7 +14498,7 @@ Executa a etapa `callback@1014:730` neste módulo. O contrato concreto está na 
 
 ### callback@1020:14 — linha 1020
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/main.js:1020)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/main.js#L1020)
 
 ```javascript
 function()
@@ -14525,11 +14525,11 @@ if(keep){const next=document.getElementById(keep.id);if(next){if(next.value!==ke
 
 Navegação móvel e prioridade de destinos. As opções devem permanecer acessíveis sem depender de rolagem horizontal.
 
-Fonte: [mobileNavigation.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/mobileNavigation.js) · SHA-256 `4604fcc1df562fe43cff7697bb29b4a535d3d949487496500842bf240f179d86`
+[LIDO NO CÓDIGO] Fonte: [mobileNavigation.js](../Frontend/src/mobileNavigation.js) · SHA-256 `4604fcc1df562fe43cff7697bb29b4a535d3d949487496500842bf240f179d86`
 
 ### mobileNavigation — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/mobileNavigation.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/mobileNavigation.js#L8)
 
 ```javascript
 function mobileNavigation(links, role, limit = 4)
@@ -14549,7 +14549,7 @@ Executa a etapa `mobile Navigation` neste módulo. O contrato concreto está na 
 
 ### callback@9:36 — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/mobileNavigation.js:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/mobileNavigation.js#L9)
 
 ```javascript
 link =>
@@ -14561,7 +14561,7 @@ Executa a etapa `callback@9:36` neste módulo. O contrato concreto está na assi
 
 ### callback@10:48 — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/mobileNavigation.js:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/mobileNavigation.js#L10)
 
 ```javascript
 page =>
@@ -14575,7 +14575,7 @@ Executa a etapa `callback@10:48` neste módulo. O contrato concreto está na ass
 
 ### callback@12:23 — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/mobileNavigation.js:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/mobileNavigation.js#L12)
 
 ```javascript
 ([page]) =>
@@ -14589,11 +14589,11 @@ Executa a etapa `callback@12:23` neste módulo. O contrato concreto está na ass
 
 Consultas de página produzem um patch separado do estado global. Busca por loja/cidade, carga parcial explícita e rejeição de catálogo indisponível preservam a coerência da tela.
 
-Fonte: [pageData.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js) · SHA-256 `9bf5fd0cf80011786ff3431259721bb216dd6c0df18976b8191f86698025c7aa`
+[LIDO NO CÓDIGO] Fonte: [pageData.js](../Frontend/src/pageData.js) · SHA-256 `9bf5fd0cf80011786ff3431259721bb216dd6c0df18976b8191f86698025c7aa`
 
 ### fetchPageData — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageData.js#L3)
 
 ```javascript
 async function fetchPageData(context, { api, signal })
@@ -14636,7 +14636,7 @@ Executa a etapa `fetch Page Data` neste módulo. O contrato concreto está na as
 
 ### get — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageData.js#L4)
 
 ```javascript
 path =>
@@ -14650,7 +14650,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### collect — linha 62
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js:62)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageData.js#L62)
 
 ```javascript
 async function collect(jobs, get, data)
@@ -14670,7 +14670,7 @@ Executa a etapa `collect` neste módulo. O contrato concreto está na assinatura
 
 ### callback@63:53 — linha 63
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js:63)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageData.js#L63)
 
 ```javascript
 ([, path]) =>
@@ -14684,7 +14684,7 @@ Executa a etapa `callback@63:53` neste módulo. O contrato concreto está na ass
 
 ### callback@65:19 — linha 65
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js:65)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageData.js#L65)
 
 ```javascript
 (result, index) =>
@@ -14699,7 +14699,7 @@ Executa a etapa `callback@65:19` neste módulo. O contrato concreto está na ass
 
 ### fetchAdminData — linha 73
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js:73)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageData.js#L73)
 
 ```javascript
 async function fetchAdminData(get, pages = {}, status = 'ALL')
@@ -14725,7 +14725,7 @@ Executa a etapa `fetch Admin Data` neste módulo. O contrato concreto está na a
 
 ### callback@79:53 — linha 79
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js:79)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageData.js#L79)
 
 ```javascript
 key =>
@@ -14739,7 +14739,7 @@ Executa a etapa `callback@79:53` neste módulo. O contrato concreto está na ass
 
 ### callback@80:19 — linha 80
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js:80)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageData.js#L80)
 
 ```javascript
 (result, index) =>
@@ -14754,7 +14754,7 @@ Executa a etapa `callback@80:19` neste módulo. O contrato concreto está na ass
 
 ### callback@86:16 — linha 86
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js:86)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageData.js#L86)
 
 ```javascript
 ([key]) =>
@@ -14769,7 +14769,7 @@ Executa a etapa `callback@86:16` neste módulo. O contrato concreto está na ass
 
 ### selectedStore — linha 91
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js:91)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageData.js#L91)
 
 ```javascript
 function selectedStore(stores, id)
@@ -14786,7 +14786,7 @@ Executa a etapa `selected Store` neste módulo. O contrato concreto está na ass
 
 ### callback@92:22 — linha 92
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js:92)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageData.js#L92)
 
 ```javascript
 store =>
@@ -14800,7 +14800,7 @@ Executa a etapa `callback@92:22` neste módulo. O contrato concreto está na ass
 
 ### fetchStoreListings — linha 95
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js:95)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageData.js#L95)
 
 ```javascript
 async function fetchStoreListings(context, get)
@@ -14820,7 +14820,7 @@ Executa a etapa `fetch Store Listings` neste módulo. O contrato concreto está 
 
 ### notificationRecords — linha 101
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js:101)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageData.js#L101)
 
 ```javascript
 function notificationRecords(records)
@@ -14837,7 +14837,7 @@ Executa a etapa `notification Records` neste módulo. O contrato concreto está 
 
 ### callback@102:22 — linha 102
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js:102)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageData.js#L102)
 
 ```javascript
 record =>
@@ -14849,7 +14849,7 @@ Executa a etapa `callback@102:22` neste módulo. O contrato concreto está na as
 
 ### callback@103:11 — linha 103
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageData.js:103)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageData.js#L103)
 
 ```javascript
 (a, b) =>
@@ -14863,11 +14863,11 @@ Executa a etapa `callback@103:11` neste módulo. O contrato concreto está na as
 
 Controle de carregamento por contexto e revisão. Aborta consultas anteriores, ignora respostas obsoletas e distingue falha de lista vazia. Repetição consulta dados; não repete mutações.
 
-Fonte: [pageLoading.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageLoading.js) · SHA-256 `b76752b0e071414d981b92568f031e62c6ecae547e5e9a9e9e1d3c0c2e50a555`
+[LIDO NO CÓDIGO] Fonte: [pageLoading.js](../Frontend/src/pageLoading.js) · SHA-256 `b76752b0e071414d981b92568f031e62c6ecae547e5e9a9e9e1d3c0c2e50a555`
 
 ### createPageLoader — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageLoading.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageLoading.js#L2)
 
 ```javascript
 function createPageLoader({ getContext, load, commit, onStatus })
@@ -14893,7 +14893,7 @@ Executa a etapa `create Page Loader` neste módulo. O contrato concreto está na
 
 ### invalidate — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageLoading.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageLoading.js#L6)
 
 ```javascript
 function invalidate()
@@ -14907,7 +14907,7 @@ Executa a etapa `invalidate` neste módulo. O contrato concreto está na assinat
 
 ### run — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageLoading.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageLoading.js#L13)
 
 ```javascript
 async function run()
@@ -14931,7 +14931,7 @@ Executa a etapa `run` neste módulo. O contrato concreto está na assinatura, no
 
 ### current — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageLoading.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageLoading.js#L19)
 
 ```javascript
 () =>
@@ -14945,7 +14945,7 @@ Executa a etapa `current` neste módulo. O contrato concreto está na assinatura
 
 ### revision — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageLoading.js:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageLoading.js#L37)
 
 ```javascript
 get revision()
@@ -14960,7 +14960,7 @@ Executa a etapa `revision` neste módulo. O contrato concreto está na assinatur
 
 ### escape — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageLoading.js:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageLoading.js#L40)
 
 ```javascript
 value =>
@@ -14974,7 +14974,7 @@ Executa a etapa `escape` neste módulo. O contrato concreto está na assinatura,
 
 ### callback@41:3 — linha 41
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageLoading.js:41)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageLoading.js#L41)
 
 ```javascript
 character =>
@@ -14986,7 +14986,7 @@ Executa a etapa `callback@41:3` neste módulo. O contrato concreto está na assi
 
 ### pageLoadFeedback — linha 44
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/pageLoading.js:44)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/pageLoading.js#L44)
 
 ```javascript
 function pageLoadFeedback(status, pageName)
@@ -15012,11 +15012,11 @@ Executa a etapa `page Load Feedback` neste módulo. O contrato concreto está na
 
 Consulta de CEP com alternativa local de homologação. Falhas de conexão precisam permitir correção manual e não bloquear toda a navegação.
 
-Fonte: [postalCode.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/postalCode.js) · SHA-256 `c329963ba5a2ea2fdcf0da76bd4ff7a0627b163d26130ffba4e75f9f2a2d876d`
+[LIDO NO CÓDIGO] Fonte: [postalCode.js](../Frontend/src/postalCode.js) · SHA-256 `c329963ba5a2ea2fdcf0da76bd4ff7a0627b163d26130ffba4e75f9f2a2d876d`
 
 ### postalCodeResponse — linha 1
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/postalCode.js:1)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/postalCode.js#L1)
 
 ```javascript
 async function postalCodeResponse(cep, options={})
@@ -15039,7 +15039,7 @@ Executa a etapa `postal Code Response` neste módulo. O contrato concreto está 
 
 ### callback@4:24 — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/postalCode.js:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/postalCode.js#L4)
 
 ```javascript
 async()=>
@@ -15053,11 +15053,11 @@ Executa a etapa `callback@4:24` neste módulo. O contrato concreto está na assi
 
 Agrupamento imutável das reservas do cliente. Atendimentos em curso aparecem antes das próximas reservas, ordenadas por proximidade; registros encerrados ou vencidos ficam no histórico. A ordenação não altera estados de domínio.
 
-Fonte: [reservationList.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/reservationList.js) · SHA-256 `d35f62853cee3520df215e6c68397415c549ee291cc4c40c0171e370882e9de2`
+[LIDO NO CÓDIGO] Fonte: [reservationList.js](../Frontend/src/reservationList.js) · SHA-256 `d35f62853cee3520df215e6c68397415c549ee291cc4c40c0171e370882e9de2`
 
 ### start — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/reservationList.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/reservationList.js#L2)
 
 ```javascript
 reservation =>
@@ -15077,7 +15077,7 @@ Executa a etapa `start` neste módulo. O contrato concreto está na assinatura, 
 
 ### chronological — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/reservationList.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/reservationList.js#L6)
 
 ```javascript
 (a, b) =>
@@ -15100,7 +15100,7 @@ Executa a etapa `chronological` neste módulo. O contrato concreto está na assi
 
 ### groupCustomerReservations — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/reservationList.js:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/reservationList.js#L12)
 
 ```javascript
 function groupCustomerReservations(reservations, now = Date.now())
@@ -15124,7 +15124,7 @@ Executa a etapa `group Customer Reservations` neste módulo. O contrato concreto
 
 ### callback@26:24 — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/reservationList.js:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/reservationList.js#L26)
 
 ```javascript
 (a, b) =>
@@ -15145,7 +15145,7 @@ Executa a etapa `callback@26:24` neste módulo. O contrato concreto está na ass
 
 ### callback@30:24 — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/reservationList.js:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/reservationList.js#L30)
 
 ```javascript
 group =>
@@ -15159,11 +15159,11 @@ Executa a etapa `callback@30:24` neste módulo. O contrato concreto está na ass
 
 Inicialização da aplicação e ligação dos módulos; manter separação entre configuração e regra de negócio.
 
-Fonte: [sessionState.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/sessionState.js) · SHA-256 `faae11bb2593d2c7b3f4e556175f1bc6c0f3ac2f49708c3b2916e9c0fd694478`
+[LIDO NO CÓDIGO] Fonte: [sessionState.js](../Frontend/src/sessionState.js) · SHA-256 `faae11bb2593d2c7b3f4e556175f1bc6c0f3ac2f49708c3b2916e9c0fd694478`
 
 ### clearAccountState — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/sessionState.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/sessionState.js#L2)
 
 ```javascript
 function clearAccountState(state)
@@ -15179,11 +15179,11 @@ Executa a etapa `clear Account State` neste módulo. O contrato concreto está n
 
 Envio e moderação de capas. A imagem é normalizada para 1200 × 600, com enquadramento sem distorção. A API valida tamanho e conteúdo; apenas ADMIN publica, com prévias privadas e preservação da capa aprovada enquanto há análise.
 
-Fonte: [storeCovers.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js) · SHA-256 `60706ba584a99322c5cc245fc6b1ca5ad92726e83f0b5f7cede2810fd5323d6d`
+[LIDO NO CÓDIGO] Fonte: [storeCovers.js](../Frontend/src/storeCovers.js) · SHA-256 `60706ba584a99322c5cc245fc6b1ca5ad92726e83f0b5f7cede2810fd5323d6d`
 
 ### coverPlacement — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L6)
 
 ```javascript
 function coverPlacement(width,height,mode='contain')
@@ -15207,7 +15207,7 @@ Executa a etapa `cover Placement` neste módulo. O contrato concreto está na as
 
 ### mountStoreCover — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L12)
 
 ```javascript
 async function mountStoreCover(root,store,{onSaved=()=>{},onError=()=>{}}={})
@@ -15269,7 +15269,7 @@ finally{busy=false;submit.disabled=!image;file.disabled=false;fit.disabled=false
 
 ### callback@12:59 — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L12)
 
 ```javascript
 ()=>
@@ -15281,7 +15281,7 @@ Executa a etapa `callback@12:59` neste módulo. O contrato concreto está na ass
 
 ### callback@12:74 — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L12)
 
 ```javascript
 ()=>
@@ -15293,7 +15293,7 @@ Executa a etapa `callback@12:74` neste módulo. O contrato concreto está na ass
 
 ### showImage — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L17)
 
 ```javascript
 (container,url,alt)=>
@@ -15307,7 +15307,7 @@ Executa a etapa `show Image` neste módulo. O contrato concreto está na assinat
 
 ### draw — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L18)
 
 ```javascript
 function draw()
@@ -15327,7 +15327,7 @@ Executa a etapa `draw` neste módulo. O contrato concreto está na assinatura, n
 
 ### callback@25:34 — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L25)
 
 ```javascript
 ()=>
@@ -15360,7 +15360,7 @@ loaded.onerror=()=>{URL.revokeObjectURL(url);if(ticket===reading){error.textCont
 
 ### callback@30:19 — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L30)
 
 ```javascript
 ()=>
@@ -15385,7 +15385,7 @@ Executa a etapa `callback@30:19` neste módulo. O contrato concreto está na ass
 
 ### callback@31:20 — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L31)
 
 ```javascript
 ()=>
@@ -15407,7 +15407,7 @@ Executa a etapa `callback@31:20` neste módulo. O contrato concreto está na ass
 
 ### refresh — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L35)
 
 ```javascript
 async function refresh()
@@ -15441,7 +15441,7 @@ if(s&&s.status!=='APPROVED'){showImage(container,s.imageUrl,'Imagem enviada para
 
 ### callback@45:34 — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L45)
 
 ```javascript
 async event=>
@@ -15476,7 +15476,7 @@ finally{busy=false;submit.disabled=!image;file.disabled=false;fit.disabled=false
 
 ### mountCoverReview — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:56)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L56)
 
 ```javascript
 async function mountCoverReview(root,{onSaved=()=>{}}={})
@@ -15517,7 +15517,7 @@ catch(e){error.textContent=e.message;buttons.forEach(b=>b.disabled=false);}
 
 ### callback@56:54 — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:56)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L56)
 
 ```javascript
 ()=>
@@ -15529,7 +15529,7 @@ Executa a etapa `callback@56:54` neste módulo. O contrato concreto está na ass
 
 ### callback@66:38 — linha 66
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:66)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L66)
 
 ```javascript
 async event=>
@@ -15558,7 +15558,7 @@ catch(e){error.textContent=e.message;buttons.forEach(b=>b.disabled=false);}
 
 ### callback@67:76 — linha 67
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:67)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L67)
 
 ```javascript
 b=>
@@ -15570,7 +15570,7 @@ Executa a etapa `callback@67:76` neste módulo. O contrato concreto está na ass
 
 ### callback@67:114 — linha 67
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:67)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L67)
 
 ```javascript
 b=>
@@ -15582,7 +15582,7 @@ Executa a etapa `callback@67:114` neste módulo. O contrato concreto está na as
 
 ### callback@69:62 — linha 69
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:69)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L69)
 
 ```javascript
 b=>
@@ -15594,7 +15594,7 @@ Executa a etapa `callback@69:62` neste módulo. O contrato concreto está na ass
 
 ### callback@73:300 — linha 73
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeCovers.js:73)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeCovers.js#L73)
 
 ```javascript
 ()=>
@@ -15610,11 +15610,11 @@ Executa a etapa `callback@73:300` neste módulo. O contrato concreto está na as
 
 Editor compartilhado de turnos semanais e exceções. Consulta prévia, exige decisão sobre reservas afetadas e trata desistência, concorrência e avisos. A configuração pública não revela observações internas.
 
-Fonte: [storeHours.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js) · SHA-256 `a10da76ba85d3760452d3bf806ad4cc437b9ab662e1df592ee6ef83ebbf3ae18`
+[LIDO NO CÓDIGO] Fonte: [storeHours.js](../Frontend/src/storeHours.js) · SHA-256 `a10da76ba85d3760452d3bf806ad4cc437b9ab662e1df592ee6ef83ebbf3ae18`
 
 ### esc — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L4)
 
 ```javascript
 value=>
@@ -15628,7 +15628,7 @@ Executa a etapa `esc` neste módulo. O contrato concreto está na assinatura, no
 
 ### callback@4:55 — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L4)
 
 ```javascript
 c=>
@@ -15640,7 +15640,7 @@ Executa a etapa `callback@4:55` neste módulo. O contrato concreto está na assi
 
 ### today — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L5)
 
 ```javascript
 function today(zone)
@@ -15657,7 +15657,7 @@ Executa a etapa `today` neste módulo. O contrato concreto está na assinatura, 
 
 ### callback@5:176 — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L5)
 
 ```javascript
 p=>
@@ -15669,7 +15669,7 @@ Executa a etapa `callback@5:176` neste módulo. O contrato concreto está na ass
 
 ### callback@5:203 — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L5)
 
 ```javascript
 p=>
@@ -15681,7 +15681,7 @@ Executa a etapa `callback@5:203` neste módulo. O contrato concreto está na ass
 
 ### allDay — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L6)
 
 ```javascript
 function allDay(shifts)
@@ -15696,7 +15696,7 @@ Executa a etapa `all Day` neste módulo. O contrato concreto está na assinatura
 
 ### describe — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L7)
 
 ```javascript
 function describe(shifts)
@@ -15719,7 +15719,7 @@ Executa a etapa `describe` neste módulo. O contrato concreto está na assinatur
 
 ### callback@7:85 — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L7)
 
 ```javascript
 v=>
@@ -15735,7 +15735,7 @@ Executa a etapa `callback@7:85` neste módulo. O contrato concreto está na assi
 
 ### renderPublicHours — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L8)
 
 ```javascript
 function renderPublicHours(configuration)
@@ -15759,7 +15759,7 @@ Executa a etapa `render Public Hours` neste módulo. O contrato concreto está n
 
 ### callback@10:288 — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L10)
 
 ```javascript
 ([key,label])=>
@@ -15773,7 +15773,7 @@ Executa a etapa `callback@10:288` neste módulo. O contrato concreto está na as
 
 ### callback@10:532 — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L10)
 
 ```javascript
 e=>
@@ -15790,7 +15790,7 @@ Executa a etapa `callback@10:532` neste módulo. O contrato concreto está na as
 
 ### addShift — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L12)
 
 ```javascript
 function addShift(container,shift={opensAt:'08:00',closesAt:'18:00'})
@@ -15812,7 +15812,7 @@ row.innerHTML='<label><span>Abre às</span><input type="time" data-open required
 
 ### callback@16:39 — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L16)
 
 ```javascript
 ()=>
@@ -15826,7 +15826,7 @@ Executa a etapa `callback@16:39` neste módulo. O contrato concreto está na ass
 
 ### readShifts — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L18)
 
 ```javascript
 function readShifts(container)
@@ -15852,7 +15852,7 @@ Executa a etapa `read Shifts` neste módulo. O contrato concreto está na assina
 
 ### callback@18:191 — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L18)
 
 ```javascript
 row=>
@@ -15875,7 +15875,7 @@ Executa a etapa `callback@18:191` neste módulo. O contrato concreto está na as
 
 ### shiftEditor — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L19)
 
 ```javascript
 function shiftEditor(root,shifts,enabled=()=>true)
@@ -15897,7 +15897,7 @@ Executa a etapa `shift Editor` neste módulo. O contrato concreto está na assin
 
 ### callback@19:42 — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L19)
 
 ```javascript
 ()=>
@@ -15909,7 +15909,7 @@ Executa a etapa `callback@19:42` neste módulo. O contrato concreto está na ass
 
 ### sync — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L21)
 
 ```javascript
 function sync()
@@ -15923,7 +15923,7 @@ Executa a etapa `sync` neste módulo. O contrato concreto está na assinatura, n
 
 ### fill — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L22)
 
 ```javascript
 function fill(values)
@@ -15941,7 +15941,7 @@ Executa a etapa `fill` neste módulo. O contrato concreto está na assinatura, n
 
 ### callback@23:15 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L23)
 
 ```javascript
 ()=>
@@ -15958,7 +15958,7 @@ Executa a etapa `callback@23:15` neste módulo. O contrato concreto está na ass
 
 ### callback@24:26 — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L24)
 
 ```javascript
 ()=>
@@ -15975,7 +15975,7 @@ Executa a etapa `callback@24:26` neste módulo. O contrato concreto está na ass
 
 ### editorMarkup — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L26)
 
 ```javascript
 function editorMarkup()
@@ -15990,7 +15990,7 @@ Executa a etapa `editor Markup` neste módulo. O contrato concreto está na assi
 
 ### conflictDecision — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L27)
 
 ```javascript
 function conflictDecision(preview,zone)
@@ -16024,7 +16024,7 @@ overlay.querySelectorAll('[data-decision]').forEach(b=>b.onclick=()=>finish(b.da
 
 ### callback@28:22 — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L28)
 
 ```javascript
 resolve=>
@@ -16057,7 +16057,7 @@ overlay.querySelectorAll('[data-decision]').forEach(b=>b.onclick=()=>finish(b.da
 
 ### callback@29:126 — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L29)
 
 ```javascript
 r=>
@@ -16069,7 +16069,7 @@ Executa a etapa `callback@29:126` neste módulo. O contrato concreto está na as
 
 ### callback@32:60 — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L32)
 
 ```javascript
 ()=>
@@ -16086,7 +16086,7 @@ Executa a etapa `callback@32:60` neste módulo. O contrato concreto está na ass
 
 ### finish — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L32)
 
 ```javascript
 function finish(action)
@@ -16106,7 +16106,7 @@ Executa a etapa `finish` neste módulo. O contrato concreto está na assinatura,
 
 ### callback@33:57 — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L33)
 
 ```javascript
 b=>
@@ -16120,7 +16120,7 @@ Executa a etapa `callback@33:57` neste módulo. O contrato concreto está na ass
 
 ### callback@33:70 — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L33)
 
 ```javascript
 ()=>
@@ -16134,7 +16134,7 @@ Executa a etapa `callback@33:70` neste módulo. O contrato concreto está na ass
 
 ### callback@33:153 — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L33)
 
 ```javascript
 b=>
@@ -16148,7 +16148,7 @@ Executa a etapa `callback@33:153` neste módulo. O contrato concreto está na as
 
 ### callback@33:166 — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L33)
 
 ```javascript
 ()=>
@@ -16162,7 +16162,7 @@ Executa a etapa `callback@33:166` neste módulo. O contrato concreto está na as
 
 ### callback@33:200 — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L33)
 
 ```javascript
 e=>
@@ -16179,7 +16179,7 @@ Executa a etapa `callback@33:200` neste módulo. O contrato concreto está na as
 
 ### callback@33:276 — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L33)
 
 ```javascript
 e=>
@@ -16196,7 +16196,7 @@ Executa a etapa `callback@33:276` neste módulo. O contrato concreto está na as
 
 ### mountOperatingHours — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L36)
 
 ```javascript
 function mountOperatingHours(root,store,{configuration,onSaved=()=>{},onError=()=>{},basePath=null}={})
@@ -16246,7 +16246,7 @@ const result=await api(url,{method:'PUT',body:JSON.stringify({...payload,conflic
 
 ### callback@36:71 — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L36)
 
 ```javascript
 ()=>
@@ -16258,7 +16258,7 @@ Executa a etapa `callback@36:71` neste módulo. O contrato concreto está na ass
 
 ### callback@36:86 — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L36)
 
 ```javascript
 ()=>
@@ -16270,7 +16270,7 @@ Executa a etapa `callback@36:86` neste módulo. O contrato concreto está na ass
 
 ### callback@40:428 — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L40)
 
 ```javascript
 ()=>
@@ -16282,7 +16282,7 @@ Executa a etapa `callback@40:428` neste módulo. O contrato concreto está na as
 
 ### callback@41:148 — linha 41
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:41)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L41)
 
 ```javascript
 ()=>
@@ -16294,7 +16294,7 @@ Executa a etapa `callback@41:148` neste módulo. O contrato concreto está na as
 
 ### callback@42:71 — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L42)
 
 ```javascript
 ()=>
@@ -16308,7 +16308,7 @@ Executa a etapa `callback@42:71` neste módulo. O contrato concreto está na ass
 
 ### callback@42:91 — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L42)
 
 ```javascript
 ({editor})=>
@@ -16322,7 +16322,7 @@ Executa a etapa `callback@42:91` neste módulo. O contrato concreto está na ass
 
 ### callback@43:50 — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L43)
 
 ```javascript
 e=>
@@ -16334,7 +16334,7 @@ Executa a etapa `callback@43:50` neste módulo. O contrato concreto está na ass
 
 ### fillException — linha 44
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:44)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L44)
 
 ```javascript
 function fillException(e)
@@ -16351,7 +16351,7 @@ Executa a etapa `fill Exception` neste módulo. O contrato concreto está na ass
 
 ### renderExceptions — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L45)
 
 ```javascript
 function renderExceptions()
@@ -16375,7 +16375,7 @@ function renderExceptions(){const list=root.querySelector('.hours-exception-list
 
 ### callback@45:597 — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L45)
 
 ```javascript
 ()=>
@@ -16389,7 +16389,7 @@ Executa a etapa `callback@45:597` neste módulo. O contrato concreto está na as
 
 ### callback@45:765 — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L45)
 
 ```javascript
 ()=>
@@ -16403,7 +16403,7 @@ Executa a etapa `callback@45:765` neste módulo. O contrato concreto está na as
 
 ### callback@45:792 — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L45)
 
 ```javascript
 other=>
@@ -16415,7 +16415,7 @@ Executa a etapa `callback@45:792` neste módulo. O contrato concreto está na as
 
 ### weekly — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L46)
 
 ```javascript
 function weekly()
@@ -16435,7 +16435,7 @@ Executa a etapa `weekly` neste módulo. O contrato concreto está na assinatura,
 
 ### save — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L47)
 
 ```javascript
 async function save(next=exceptions)
@@ -16470,7 +16470,7 @@ const result=await api(url,{method:'PUT',body:JSON.stringify({...payload,conflic
 
 ### callback@48:122 — linha 48
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:48)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L48)
 
 ```javascript
 b=>
@@ -16482,7 +16482,7 @@ Executa a etapa `callback@48:122` neste módulo. O contrato concreto está na as
 
 ### callback@48:153 — linha 48
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:48)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L48)
 
 ```javascript
 b=>
@@ -16494,7 +16494,7 @@ Executa a etapa `callback@48:153` neste módulo. O contrato concreto está na as
 
 ### callback@51:143 — linha 51
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:51)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L51)
 
 ```javascript
 r=>
@@ -16506,7 +16506,7 @@ Executa a etapa `callback@51:143` neste módulo. O contrato concreto está na as
 
 ### callback@52:105 — linha 52
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:52)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L52)
 
 ```javascript
 (button,i)=>
@@ -16518,7 +16518,7 @@ Executa a etapa `callback@52:105` neste módulo. O contrato concreto está na as
 
 ### callback@54:17 — linha 54
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:54)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L54)
 
 ```javascript
 e=>
@@ -16532,7 +16532,7 @@ Executa a etapa `callback@54:17` neste módulo. O contrato concreto está na ass
 
 ### callback@55:52 — linha 55
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:55)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L55)
 
 ```javascript
 ()=>
@@ -16546,7 +16546,7 @@ Executa a etapa `callback@55:52` neste módulo. O contrato concreto está na ass
 
 ### callback@55:107 — linha 55
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:55)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L55)
 
 ```javascript
 e=>
@@ -16558,7 +16558,7 @@ Executa a etapa `callback@55:107` neste módulo. O contrato concreto está na as
 
 ### callback@56:55 — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:56)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L56)
 
 ```javascript
 ()=>
@@ -16579,7 +16579,7 @@ Executa a etapa `callback@56:55` neste módulo. O contrato concreto está na ass
 
 ### callback@56:288 — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeHours.js:56)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeHours.js#L56)
 
 ```javascript
 e=>
@@ -16593,11 +16593,11 @@ Executa a etapa `callback@56:288` neste módulo. O contrato concreto está na as
 
 Coordenadas e links de mapa. Coordenadas precisam formar um par válido; link de mapa não cadastra automaticamente uma empresa no Google.
 
-Fonte: [storeLocation.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeLocation.js) · SHA-256 `d719456f47cd3a13a8261f82aea71cca58aa85cee95621add217fdf74e72cb24`
+[LIDO NO CÓDIGO] Fonte: [storeLocation.js](../Frontend/src/storeLocation.js) · SHA-256 `d719456f47cd3a13a8261f82aea71cca58aa85cee95621add217fdf74e72cb24`
 
 ### storeMapUrl — linha 1
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeLocation.js:1)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeLocation.js#L1)
 
 ```javascript
 function storeMapUrl(store)
@@ -16617,7 +16617,7 @@ Executa a etapa `store Map Url` neste módulo. O contrato concreto está na assi
 
 ### coordinatesFromForm — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeLocation.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeLocation.js#L8)
 
 ```javascript
 function coordinatesFromForm(form)
@@ -16646,11 +16646,11 @@ Executa a etapa `coordinates From Form` neste módulo. O contrato concreto está
 
 Mapas de lojas. Seleção opcional, marcador arrastável, busca explícita, popups textuais e lista alternativa. Somente pontos publicados entram no mapa; ausência de coordenadas não oculta a loja da lista.
 
-Fonte: [storeMaps.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js) · SHA-256 `33e0cc1ec586b0be1a728b6d1511ad7545e8e702a4ead404bd3d67ddf7330a7f`
+[LIDO NO CÓDIGO] Fonte: [storeMaps.js](../Frontend/src/storeMaps.js) · SHA-256 `33e0cc1ec586b0be1a728b6d1511ad7545e8e702a4ead404bd3d67ddf7330a7f`
 
 ### cleanupStoreMaps — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L4)
 
 ```javascript
 function cleanupStoreMaps()
@@ -16672,7 +16672,7 @@ function cleanupStoreMaps(){for(const entry of maps)if(!entry.root.isConnected){
 
 ### loadLeaflet — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L6)
 
 ```javascript
 async function loadLeaflet()
@@ -16694,7 +16694,7 @@ Executa a etapa `load Leaflet` neste módulo. O contrato concreto está na assin
 
 ### callback@9:46 — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L9)
 
 ```javascript
 (resolve,reject)=>
@@ -16708,7 +16708,7 @@ Executa a etapa `callback@9:46` neste módulo. O contrato concreto está na assi
 
 ### callback@12:21 — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L12)
 
 ```javascript
 ()=>
@@ -16722,7 +16722,7 @@ Executa a etapa `callback@12:21` neste módulo. O contrato concreto está na ass
 
 ### callback@12:58 — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L12)
 
 ```javascript
 ()=>
@@ -16736,7 +16736,7 @@ Executa a etapa `callback@12:58` neste módulo. O contrato concreto está na ass
 
 ### callback@14:40 — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L14)
 
 ```javascript
 ()=>
@@ -16748,7 +16748,7 @@ Executa a etapa `callback@14:40` neste módulo. O contrato concreto está na ass
 
 ### createMap — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L18)
 
 ```javascript
 function createMap(L,root)
@@ -16772,7 +16772,7 @@ tiles.on('tileerror',()=>{message.hidden=false;message.textContent='Parte do map
 
 ### callback@23:24 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L23)
 
 ```javascript
 ()=>
@@ -16789,7 +16789,7 @@ Executa a etapa `callback@23:24` neste módulo. O contrato concreto está na ass
 
 ### callback@24:23 — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L24)
 
 ```javascript
 ()=>
@@ -16801,7 +16801,7 @@ Executa a etapa `callback@24:23` neste módulo. O contrato concreto está na ass
 
 ### callback@25:37 — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L25)
 
 ```javascript
 ()=>
@@ -16815,7 +16815,7 @@ Executa a etapa `callback@25:37` neste módulo. O contrato concreto está na ass
 
 ### point — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L27)
 
 ```javascript
 function point(store)
@@ -16832,7 +16832,7 @@ Executa a etapa `point` neste módulo. O contrato concreto está na assinatura, 
 
 ### markerIcon — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L28)
 
 ```javascript
 function markerIcon(L)
@@ -16849,7 +16849,7 @@ Executa a etapa `marker Icon` neste módulo. O contrato concreto está na assina
 
 ### storeMapFields — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L30)
 
 ```javascript
 function storeMapFields(store={})
@@ -16870,7 +16870,7 @@ Executa a etapa `store Map Fields` neste módulo. O contrato concreto está na a
 
 ### mountLocationPicker — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L36)
 
 ```javascript
 function mountLocationPicker(root)
@@ -16929,7 +16929,7 @@ form.elements.mapSearch.addEventListener('keydown',e=>{if(e.key==='Enter'){e.pre
 
 ### selected — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L39)
 
 ```javascript
 function selected()
@@ -16949,7 +16949,7 @@ Executa a etapa `selected` neste módulo. O contrato concreto está na assinatur
 
 ### move — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L40)
 
 ```javascript
 function move(latitude,longitude)
@@ -16977,7 +16977,7 @@ if(map){if(marker)marker.setLatLng([latitude,longitude]);else{marker=window.L.ma
 
 ### callback@43:215 — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L43)
 
 ```javascript
 ()=>
@@ -16991,7 +16991,7 @@ Executa a etapa `callback@43:215` neste módulo. O contrato concreto está na as
 
 ### open — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L45)
 
 ```javascript
 async function open()
@@ -17025,7 +17025,7 @@ catch(error){feedback.textContent=error.message;return false;}finally{loading=fa
 
 ### callback@48:164 — linha 48
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:48)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L48)
 
 ```javascript
 e=>
@@ -17039,7 +17039,7 @@ Executa a etapa `callback@48:164` neste módulo. O contrato concreto está na as
 
 ### callback@52:50 — linha 52
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:52)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L52)
 
 ```javascript
 ()=>
@@ -17061,7 +17061,7 @@ Executa a etapa `callback@52:50` neste módulo. O contrato concreto está na ass
 
 ### callback@53:64 — linha 53
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:53)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L53)
 
 ```javascript
 ()=>
@@ -17083,7 +17083,7 @@ Executa a etapa `callback@53:64` neste módulo. O contrato concreto está na ass
 
 ### callback@54:51 — linha 54
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:54)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L54)
 
 ```javascript
 async()=>
@@ -17119,7 +17119,7 @@ for(const place of places){const button=document.createElement('button');button.
 
 ### callback@55:86 — linha 55
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:55)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L55)
 
 ```javascript
 k=>
@@ -17131,7 +17131,7 @@ Executa a etapa `callback@55:86` neste módulo. O contrato concreto está na ass
 
 ### callback@59:33 — linha 59
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:59)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L59)
 
 ```javascript
 p=>
@@ -17145,7 +17145,7 @@ Executa a etapa `callback@59:33` neste módulo. O contrato concreto está na ass
 
 ### callback@61:190 — linha 61
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:61)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L61)
 
 ```javascript
 ()=>
@@ -17164,7 +17164,7 @@ Executa a etapa `callback@61:190` neste módulo. O contrato concreto está na as
 
 ### callback@64:54 — linha 64
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:64)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L64)
 
 ```javascript
 e=>
@@ -17181,7 +17181,7 @@ Executa a etapa `callback@64:54` neste módulo. O contrato concreto está na ass
 
 ### mountStoreDirectoryMap — linha 67
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:67)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L67)
 
 ```javascript
 function mountStoreDirectoryMap(root,stores,{onOpen=null,label='Ver lojas no mapa'}={})
@@ -17224,7 +17224,7 @@ const list=document.createElement('div');list.className='map-store-links';for(co
 
 ### callback@72:18 — linha 72
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:72)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L72)
 
 ```javascript
 async()=>
@@ -17262,7 +17262,7 @@ const list=document.createElement('div');list.className='map-store-links';for(co
 
 ### callback@75:795 — linha 75
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:75)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L75)
 
 ```javascript
 ()=>
@@ -17276,7 +17276,7 @@ Executa a etapa `callback@75:795` neste módulo. O contrato concreto está na as
 
 ### callback@78:258 — linha 78
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeMaps.js:78)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeMaps.js#L78)
 
 ```javascript
 ()=>
@@ -17292,11 +17292,11 @@ Executa a etapa `callback@78:258` neste módulo. O contrato concreto está na as
 
 Modalidades de entrega, retirada e agendamento presencial. Bandeiras são informativas; a API rejeita modalidades desativadas e exige ao menos uma opção.
 
-Fonte: [storeOptions.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeOptions.js) · SHA-256 `92b7f48083f584065e50994bdf5e6c3eabb626b3c04ce8cccfe7a5ca4264ac7d`
+[LIDO NO CÓDIGO] Fonte: [storeOptions.js](../Frontend/src/storeOptions.js) · SHA-256 `92b7f48083f584065e50994bdf5e6c3eabb626b3c04ce8cccfe7a5ca4264ac7d`
 
 ### fulfillmentFields — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeOptions.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeOptions.js#L2)
 
 ```javascript
 function fulfillmentFields(store={})
@@ -17316,7 +17316,7 @@ Executa a etapa `fulfillment Fields` neste módulo. O contrato concreto está na
 
 ### callback@2:313 — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeOptions.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeOptions.js#L2)
 
 ```javascript
 ([key,label,hint])=>
@@ -17331,7 +17331,7 @@ Executa a etapa `callback@2:313` neste módulo. O contrato concreto está na ass
 
 ### fulfillmentPayload — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeOptions.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeOptions.js#L3)
 
 ```javascript
 function fulfillmentPayload(data)
@@ -17354,7 +17354,7 @@ Executa a etapa `fulfillment Payload` neste módulo. O contrato concreto está n
 
 ### callback@3:97 — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeOptions.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeOptions.js#L3)
 
 ```javascript
 ([key])=>
@@ -17368,7 +17368,7 @@ Executa a etapa `callback@3:97` neste módulo. O contrato concreto está na assi
 
 ### fulfillmentBadges — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeOptions.js:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeOptions.js#L4)
 
 ```javascript
 function fulfillmentBadges(store)
@@ -17391,11 +17391,11 @@ Executa a etapa `fulfillment Badges` neste módulo. O contrato concreto está na
 
 Regras puras de fuso e horário para feedback imediato. A API valida novamente antes de comprar/reservar. Madrugada pertence à abertura do dia anterior.
 
-Fonte: [storeTime.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js) · SHA-256 `84e814a90d5ba18d1979b57bf5f520c69797b44baa372c4c672c1a9bd7042e0e`
+[LIDO NO CÓDIGO] Fonte: [storeTime.js](../Frontend/src/storeTime.js) · SHA-256 `84e814a90d5ba18d1979b57bf5f520c69797b44baa372c4c672c1a9bd7042e0e`
 
 ### partsAt — linha 1
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:1)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L1)
 
 ```javascript
 function partsAt(instant, timeZone)
@@ -17412,7 +17412,7 @@ Executa a etapa `parts At` neste módulo. O contrato concreto está na assinatur
 
 ### callback@6:42 — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L6)
 
 ```javascript
 part =>
@@ -17424,7 +17424,7 @@ Executa a etapa `callback@6:42` neste módulo. O contrato concreto está na assi
 
 ### callback@6:79 — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L6)
 
 ```javascript
 part =>
@@ -17438,7 +17438,7 @@ Executa a etapa `callback@6:79` neste módulo. O contrato concreto está na assi
 
 ### localDateTimeInZoneToIso — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L9)
 
 ```javascript
 function localDateTimeInZoneToIso(value, timeZone)
@@ -17463,7 +17463,7 @@ Executa a etapa `local Date Time In Zone To Iso` neste módulo. O contrato concr
 
 ### localDateTimeMinimum — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L27)
 
 ```javascript
 function localDateTimeMinimum(timeZone, minutesFromNow = 31, now = new Date())
@@ -17480,7 +17480,7 @@ Executa a etapa `local Date Time Minimum` neste módulo. O contrato concreto est
 
 ### dateTimeInZone — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L32)
 
 ```javascript
 function dateTimeInZone(value, timeZone)
@@ -17497,7 +17497,7 @@ Executa a etapa `date Time In Zone` neste módulo. O contrato concreto está na 
 
 ### intervalsForDay — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L36)
 
 ```javascript
 function intervalsForDay(configuration, day)
@@ -17515,7 +17515,7 @@ Executa a etapa `intervals For Day` neste módulo. O contrato concreto está na 
 
 ### minutes — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L39)
 
 ```javascript
 function minutes(value)
@@ -17536,7 +17536,7 @@ Executa a etapa `minutes` neste módulo. O contrato concreto está na assinatura
 
 ### exceptionIntervals — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L40)
 
 ```javascript
 function exceptionIntervals(exception)
@@ -17554,7 +17554,7 @@ Executa a etapa `exception Intervals` neste módulo. O contrato concreto está n
 
 ### isoDate — linha 41
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:41)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L41)
 
 ```javascript
 function isoDate(date)
@@ -17571,7 +17571,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### rangesForDate — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L42)
 
 ```javascript
 function rangesForDate(configuration, date)
@@ -17606,7 +17606,7 @@ if(!today){day.setUTCDate(day.getUTCDate()-1);const previous=configuration?.exce
 
 ### callback@43:47 — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L43)
 
 ```javascript
 e=>
@@ -17618,7 +17618,7 @@ Executa a etapa `callback@43:47` neste módulo. O contrato concreto está na ass
 
 ### callback@49:107 — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:49)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L49)
 
 ```javascript
 v=>
@@ -17635,7 +17635,7 @@ Executa a etapa `callback@49:107` neste módulo. O contrato concreto está na as
 
 ### callback@50:96 — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L50)
 
 ```javascript
 e=>
@@ -17649,7 +17649,7 @@ Executa a etapa `callback@50:96` neste módulo. O contrato concreto está na ass
 
 ### callback@53:22 — linha 53
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:53)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L53)
 
 ```javascript
 (a,b)=>
@@ -17661,7 +17661,7 @@ Executa a etapa `callback@53:22` neste módulo. O contrato concreto está na ass
 
 ### storeOpenAt — linha 55
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:55)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L55)
 
 ```javascript
 function storeOpenAt(configuration,timeZone,instant=new Date())
@@ -17682,7 +17682,7 @@ Executa a etapa `store Open At` neste módulo. O contrato concreto está na assi
 
 ### callback@60:49 — linha 60
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:60)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L60)
 
 ```javascript
 ([start,end])=>
@@ -17694,7 +17694,7 @@ Executa a etapa `callback@60:49` neste módulo. O contrato concreto está na ass
 
 ### storeHoursStatusRelevant — linha 62
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:62)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L62)
 
 ```javascript
 function storeHoursStatusRelevant(configuration,timeZone,instant=new Date())
@@ -17722,7 +17722,7 @@ const today=isoDate(date);date.setUTCDate(date.getUTCDate()-1);const yesterday=i
 
 ### callback@66:46 — linha 66
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:66)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L66)
 
 ```javascript
 e=>
@@ -17734,7 +17734,7 @@ Executa a etapa `callback@66:46` neste módulo. O contrato concreto está na ass
 
 ### storeScheduleAllowsLocalDateTime — linha 68
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:68)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L68)
 
 ```javascript
 function storeScheduleAllowsLocalDateTime(configuration,value)
@@ -17757,7 +17757,7 @@ Executa a etapa `store Schedule Allows Local Date Time` neste módulo. O contrat
 
 ### callback@71:49 — linha 71
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:71)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L71)
 
 ```javascript
 ([start,end])=>
@@ -17769,7 +17769,7 @@ Executa a etapa `callback@71:49` neste módulo. O contrato concreto está na ass
 
 ### storeScheduleAllowsAppointment — linha 73
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/storeTime.js:73)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/storeTime.js#L73)
 
 ```javascript
 function storeScheduleAllowsAppointment(configuration,value,duration,timeZone)
@@ -17795,11 +17795,11 @@ Executa a etapa `store Schedule Allows Appointment` neste módulo. O contrato co
 
 Controles compartilhados de resposta ao atendimento. Rótulo explícito identifica o destino, ajuda descreve limites e não solicitar senhas. Conteúdo enviado continua sujeito à autorização e validação da API.
 
-Fonte: [supportComposer.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/supportComposer.js) · SHA-256 `e978d3db28ae53e126f3ba8bafdcdec5afc62f7a73f50b29044cd022deddf9e7`
+[LIDO NO CÓDIGO] Fonte: [supportComposer.js](../Frontend/src/supportComposer.js) · SHA-256 `e978d3db28ae53e126f3ba8bafdcdec5afc62f7a73f50b29044cd022deddf9e7`
 
 ### renderSupportReplyFields — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/supportComposer.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/supportComposer.js#L2)
 
 ```javascript
 function renderSupportReplyFields(isAdmin)
@@ -17819,11 +17819,11 @@ Executa a etapa `render Support Reply Fields` neste módulo. O contrato concreto
 
 Apresentação por domínio com dependências explícitas; os eventos da página são ligados pela composição da aplicação.
 
-Fonte: [accountViews.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js) · SHA-256 `07b42845ff35568d7f11edcdc937cac25bbe21a4e9dcbb32476398c509e3702b`
+[LIDO NO CÓDIGO] Fonte: [accountViews.js](../Frontend/src/views/accountViews.js) · SHA-256 `07b42845ff35568d7f11edcdc937cac25bbe21a4e9dcbb32476398c509e3702b`
 
 ### createAccountViews — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L2)
 
 ```javascript
 function createAccountViews({ activeMerchantStore, addressText, emptyState, esc, formatCpfMask, icon, pill, renderAdminDefinitions, role, roleNames, shortDate, state })
@@ -17877,7 +17877,7 @@ Executa a etapa `create Account Views` neste módulo. O contrato concreto está 
 
 ### renderAccount — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L3)
 
 ```javascript
 function renderAccount()
@@ -17918,7 +17918,7 @@ Executa a etapa `render Account` neste módulo. O contrato concreto está na ass
 
 ### callback@7:30 — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L7)
 
 ```javascript
 ([key])=>
@@ -17932,7 +17932,7 @@ Executa a etapa `callback@7:30` neste módulo. O contrato concreto está na assi
 
 ### callback@7:93 — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L7)
 
 ```javascript
 ([key])=>
@@ -17944,7 +17944,7 @@ Executa a etapa `callback@7:93` neste módulo. O contrato concreto está na assi
 
 ### callback@17:436 — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L17)
 
 ```javascript
 uf=>
@@ -17959,7 +17959,7 @@ Executa a etapa `callback@17:436` neste módulo. O contrato concreto está na as
 
 ### callback@19:349 — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L19)
 
 ```javascript
 a=>
@@ -17976,7 +17976,7 @@ Executa a etapa `callback@19:349` neste módulo. O contrato concreto está na as
 
 ### callback@22:58 — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L22)
 
 ```javascript
 r=>
@@ -17988,7 +17988,7 @@ Executa a etapa `callback@22:58` neste módulo. O contrato concreto está na ass
 
 ### callback@22:111 — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L22)
 
 ```javascript
 r=>
@@ -18000,7 +18000,7 @@ Executa a etapa `callback@22:111` neste módulo. O contrato concreto está na as
 
 ### callback@23:246 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L23)
 
 ```javascript
 r=>
@@ -18017,7 +18017,7 @@ Executa a etapa `callback@23:246` neste módulo. O contrato concreto está na as
 
 ### callback@23:523 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L23)
 
 ```javascript
 r=>
@@ -18031,7 +18031,7 @@ Executa a etapa `callback@23:523` neste módulo. O contrato concreto está na as
 
 ### callback@23:724 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L23)
 
 ```javascript
 r=>
@@ -18045,7 +18045,7 @@ Executa a etapa `callback@23:724` neste módulo. O contrato concreto está na as
 
 ### callback@23:783 — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L23)
 
 ```javascript
 r=>
@@ -18059,7 +18059,7 @@ Executa a etapa `callback@23:783` neste módulo. O contrato concreto está na as
 
 ### callback@25:142 — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L25)
 
 ```javascript
 r=>
@@ -18080,7 +18080,7 @@ Executa a etapa `callback@25:142` neste módulo. O contrato concreto está na as
 
 ### callback@27:393 — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L27)
 
 ```javascript
 ([id,label])=>
@@ -18095,7 +18095,7 @@ Executa a etapa `callback@27:393` neste módulo. O contrato concreto está na as
 
 ### renderNotifications — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L30)
 
 ```javascript
 function renderNotifications()
@@ -18119,7 +18119,7 @@ Executa a etapa `render Notifications` neste módulo. O contrato concreto está 
 
 ### callback@33:62 — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L33)
 
 ```javascript
 n=>
@@ -18139,7 +18139,7 @@ Executa a etapa `callback@33:62` neste módulo. O contrato concreto está na ass
 
 ### renderFinance — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/accountViews.js:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/accountViews.js#L36)
 
 ```javascript
 function renderFinance()
@@ -18165,11 +18165,11 @@ Executa a etapa `render Finance` neste módulo. O contrato concreto está na ass
 
 Apresentação por domínio com dependências explícitas; os eventos da página são ligados pela composição da aplicação.
 
-Fonte: [adminViews.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js) · SHA-256 `d1c95845d9ff414e44f01e11110c152315bf30813a7e3d76b5dc26c27833c19c`
+[LIDO NO CÓDIGO] Fonte: [adminViews.js](../Frontend/src/views/adminViews.js) · SHA-256 `d1c95845d9ff414e44f01e11110c152315bf30813a7e3d76b5dc26c27833c19c`
 
 ### createAdminViews — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L2)
 
 ```javascript
 function createAdminViews({ adminAreaNames, adminPagination, adminStoreStatus, categoryEmoji, categoryOptions, emptyState, esc, filterAdminStores, formatCpfMask, icon, money, pill, renderAdminAreas, renderAdminTeamArea, roleNames, shortDate, state })
@@ -18255,7 +18255,7 @@ if(heading&&headerNode){headerNode.querySelector('h1').textContent=heading[0];he
 
 ### renderAdmin — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L3)
 
 ```javascript
 function renderAdmin()
@@ -18288,7 +18288,7 @@ if(heading&&headerNode){headerNode.querySelector('h1').textContent=heading[0];he
 
 ### callback@8:56 — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L8)
 
 ```javascript
 name=>
@@ -18302,7 +18302,7 @@ Executa a etapa `callback@8:56` neste módulo. O contrato concreto está na assi
 
 ### callback@8:140 — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L8)
 
 ```javascript
 node=>
@@ -18314,7 +18314,7 @@ Executa a etapa `callback@8:140` neste módulo. O contrato concreto está na ass
 
 ### callback@10:232 — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L10)
 
 ```javascript
 r=>
@@ -18326,7 +18326,7 @@ Executa a etapa `callback@10:232` neste módulo. O contrato concreto está na as
 
 ### callback@11:189 — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L11)
 
 ```javascript
 r=>
@@ -18338,7 +18338,7 @@ Executa a etapa `callback@11:189` neste módulo. O contrato concreto está na as
 
 ### callback@18:214 — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L18)
 
 ```javascript
 ([id,label])=>
@@ -18353,7 +18353,7 @@ Executa a etapa `callback@18:214` neste módulo. O contrato concreto está na as
 
 ### callback@21:112 — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L21)
 
 ```javascript
 ([id,label])=>
@@ -18368,7 +18368,7 @@ Executa a etapa `callback@21:112` neste módulo. O contrato concreto está na as
 
 ### renderAdminAll — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L24)
 
 ```javascript
 function renderAdminAll()
@@ -18420,7 +18420,7 @@ Executa a etapa `render Admin All` neste módulo. O contrato concreto está na a
 
 ### callback@27:60 — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L27)
 
 ```javascript
 r=>
@@ -18432,7 +18432,7 @@ Executa a etapa `callback@27:60` neste módulo. O contrato concreto está na ass
 
 ### callback@28:49 — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L28)
 
 ```javascript
 r=>
@@ -18444,7 +18444,7 @@ Executa a etapa `callback@28:49` neste módulo. O contrato concreto está na ass
 
 ### callback@33:52 — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L33)
 
 ```javascript
 r=>
@@ -18466,7 +18466,7 @@ Executa a etapa `callback@33:52` neste módulo. O contrato concreto está na ass
 
 ### callback@34:97 — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L34)
 
 ```javascript
 operator=>
@@ -18483,7 +18483,7 @@ Executa a etapa `callback@34:97` neste módulo. O contrato concreto está na ass
 
 ### callback@36:165 — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L36)
 
 ```javascript
 r=>
@@ -18495,7 +18495,7 @@ Executa a etapa `callback@36:165` neste módulo. O contrato concreto está na as
 
 ### callback@36:232 — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L36)
 
 ```javascript
 r=>
@@ -18507,7 +18507,7 @@ Executa a etapa `callback@36:232` neste módulo. O contrato concreto está na as
 
 ### callback@36:261 — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L36)
 
 ```javascript
 r=>
@@ -18527,7 +18527,7 @@ Executa a etapa `callback@36:261` neste módulo. O contrato concreto está na as
 
 ### callback@38:539 — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L38)
 
 ```javascript
 operator=>
@@ -18545,7 +18545,7 @@ Executa a etapa `callback@38:539` neste módulo. O contrato concreto está na as
 
 ### callback@40:58 — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L40)
 
 ```javascript
 r=>
@@ -18565,7 +18565,7 @@ Executa a etapa `callback@40:58` neste módulo. O contrato concreto está na ass
 
 ### callback@41:456 — linha 41
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:41)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L41)
 
 ```javascript
 ([key,label])=>
@@ -18581,7 +18581,7 @@ Executa a etapa `callback@41:456` neste módulo. O contrato concreto está na as
 
 ### callback@41:846 — linha 41
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:41)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L41)
 
 ```javascript
 s=>
@@ -18599,7 +18599,7 @@ Executa a etapa `callback@41:846` neste módulo. O contrato concreto está na as
 
 ### callback@42:755 — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L42)
 
 ```javascript
 a=>
@@ -18621,7 +18621,7 @@ Executa a etapa `callback@42:755` neste módulo. O contrato concreto está na as
 
 ### callback@42:935 — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L42)
 
 ```javascript
 r=>
@@ -18633,7 +18633,7 @@ Executa a etapa `callback@42:935` neste módulo. O contrato concreto está na as
 
 ### callback@42:1508 — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L42)
 
 ```javascript
 r=>
@@ -18653,7 +18653,7 @@ Executa a etapa `callback@42:1508` neste módulo. O contrato concreto está na a
 
 ### callback@43:1131 — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L43)
 
 ```javascript
 t=>
@@ -18671,7 +18671,7 @@ Executa a etapa `callback@43:1131` neste módulo. O contrato concreto está na a
 
 ### renderAdminDefinitions — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L46)
 
 ```javascript
 function renderAdminDefinitions()
@@ -18709,7 +18709,7 @@ Executa a etapa `render Admin Definitions` neste módulo. O contrato concreto es
 
 ### callback@50:733 — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L50)
 
 ```javascript
 uf=>
@@ -18721,7 +18721,7 @@ Executa a etapa `callback@50:733` neste módulo. O contrato concreto está na as
 
 ### callback@50:1517 — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L50)
 
 ```javascript
 city=>
@@ -18739,7 +18739,7 @@ Executa a etapa `callback@50:1517` neste módulo. O contrato concreto está na a
 
 ### callback@50:2048 — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L50)
 
 ```javascript
 uf=>
@@ -18754,7 +18754,7 @@ Executa a etapa `callback@50:2048` neste módulo. O contrato concreto está na a
 
 ### callback@51:59 — linha 51
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:51)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L51)
 
 ```javascript
 category=>
@@ -18766,7 +18766,7 @@ Executa a etapa `callback@51:59` neste módulo. O contrato concreto está na ass
 
 ### callback@51:121 — linha 51
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:51)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L51)
 
 ```javascript
 category=>
@@ -18778,7 +18778,7 @@ Executa a etapa `callback@51:121` neste módulo. O contrato concreto está na as
 
 ### callback@51:178 — linha 51
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:51)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L51)
 
 ```javascript
 name=>
@@ -18790,7 +18790,7 @@ Executa a etapa `callback@51:178` neste módulo. O contrato concreto está na as
 
 ### callback@52:60 — linha 52
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:52)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L52)
 
 ```javascript
 category=>
@@ -18802,7 +18802,7 @@ Executa a etapa `callback@52:60` neste módulo. O contrato concreto está na ass
 
 ### callback@53:982 — linha 53
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:53)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L53)
 
 ```javascript
 ([emoji,label])=>
@@ -18814,7 +18814,7 @@ Executa a etapa `callback@53:982` neste módulo. O contrato concreto está na as
 
 ### callback@53:1685 — linha 53
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:53)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L53)
 
 ```javascript
 category=>
@@ -18828,7 +18828,7 @@ Executa a etapa `callback@53:1685` neste módulo. O contrato concreto está na a
 
 ### callback@53:2258 — linha 53
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:53)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L53)
 
 ```javascript
 category=>
@@ -18842,7 +18842,7 @@ Executa a etapa `callback@53:2258` neste módulo. O contrato concreto está na a
 
 ### callback@54:495 — linha 54
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:54)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L54)
 
 ```javascript
 item=>
@@ -18864,7 +18864,7 @@ Executa a etapa `callback@54:495` neste módulo. O contrato concreto está na as
 
 ### callback@56:460 — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:56)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L56)
 
 ```javascript
 event=>
@@ -18884,7 +18884,7 @@ Executa a etapa `callback@56:460` neste módulo. O contrato concreto está na as
 
 ### callback@59:316 — linha 59
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/adminViews.js:59)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/adminViews.js#L59)
 
 ```javascript
 ([id,label])=>
@@ -18901,11 +18901,11 @@ Executa a etapa `callback@59:316` neste módulo. O contrato concreto está na as
 
 Apresentação por domínio com dependências explícitas; os eventos da página são ligados pela composição da aplicação.
 
-Fonte: [authViews.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js) · SHA-256 `1b492c6477345a3fe9fef379c3a22e7ee1218f9b0be8ed9b2288571e3219462e`
+[LIDO NO CÓDIGO] Fonte: [authViews.js](../Frontend/src/views/authViews.js) · SHA-256 `1b492c6477345a3fe9fef379c3a22e7ee1218f9b0be8ed9b2288571e3219462e`
 
 ### createAuthViews — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/authViews.js#L2)
 
 ```javascript
 function createAuthViews({ $, app, esc, icon, state, submitAuth, submitRecovery })
@@ -18949,7 +18949,7 @@ $('[data-about-modal]')?.addEventListener('keydown',event=>{if(event.key==='Esca
 
 ### renderAuth — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/authViews.js#L3)
 
 ```javascript
 function renderAuth()
@@ -18990,7 +18990,7 @@ $('[data-about-modal]')?.addEventListener('keydown',event=>{if(event.key==='Esca
 
 ### callback@36:57 — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/authViews.js#L36)
 
 ```javascript
 button =>
@@ -19009,7 +19009,7 @@ button => button.addEventListener('click', () => { state.authMode = button.datas
 
 ### callback@36:100 — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/authViews.js#L36)
 
 ```javascript
 () =>
@@ -19023,7 +19023,7 @@ Executa a etapa `callback@36:100` neste módulo. O contrato concreto está na as
 
 ### callback@37:57 — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/authViews.js#L37)
 
 ```javascript
 ()=>
@@ -19037,7 +19037,7 @@ Executa a etapa `callback@37:57` neste módulo. O contrato concreto está na ass
 
 ### callback@38:60 — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/authViews.js#L38)
 
 ```javascript
 event=>
@@ -19049,7 +19049,7 @@ Executa a etapa `callback@38:60` neste módulo. O contrato concreto está na ass
 
 ### callback@39:54 — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/authViews.js#L39)
 
 ```javascript
 event=>
@@ -19061,7 +19061,7 @@ Executa a etapa `callback@39:54` neste módulo. O contrato concreto está na ass
 
 ### callback@40:55 — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/authViews.js#L40)
 
 ```javascript
 ()=>
@@ -19075,7 +19075,7 @@ Executa a etapa `callback@40:55` neste módulo. O contrato concreto está na ass
 
 ### callback@41:56 — linha 41
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:41)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/authViews.js#L41)
 
 ```javascript
 button=>
@@ -19094,7 +19094,7 @@ button=>button.addEventListener('click',()=>{const modal=$('[data-about-modal]')
 
 ### callback@41:96 — linha 41
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:41)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/authViews.js#L41)
 
 ```javascript
 ()=>
@@ -19108,7 +19108,7 @@ Executa a etapa `callback@41:96` neste módulo. O contrato concreto está na ass
 
 ### callback@42:59 — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/authViews.js#L42)
 
 ```javascript
 button=>
@@ -19127,7 +19127,7 @@ button=>button.addEventListener('click',()=>{$('[data-about-modal]').hidden=true
 
 ### callback@42:99 — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/authViews.js#L42)
 
 ```javascript
 ()=>
@@ -19141,7 +19141,7 @@ Executa a etapa `callback@42:99` neste módulo. O contrato concreto está na ass
 
 ### callback@43:53 — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/authViews.js#L43)
 
 ```javascript
 event=>
@@ -19156,7 +19156,7 @@ Executa a etapa `callback@43:53` neste módulo. O contrato concreto está na ass
 
 ### callback@44:55 — linha 44
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/authViews.js:44)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/authViews.js#L44)
 
 ```javascript
 event=>
@@ -19173,11 +19173,11 @@ Executa a etapa `callback@44:55` neste módulo. O contrato concreto está na ass
 
 Apresentação por domínio com dependências explícitas; os eventos da página são ligados pela composição da aplicação.
 
-Fonte: [courierViews.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/courierViews.js) · SHA-256 `665e02a4af48685a25f127836f88bf06884699fe7ffd6bc7d716a75eb325ae34`
+[LIDO NO CÓDIGO] Fonte: [courierViews.js](../Frontend/src/views/courierViews.js) · SHA-256 `665e02a4af48685a25f127836f88bf06884699fe7ffd6bc7d716a75eb325ae34`
 
 ### createCourierViews — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/courierViews.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/courierViews.js#L2)
 
 ```javascript
 function createCourierViews({ chatPanel, emptyState, esc, money, pill, state })
@@ -19209,7 +19209,7 @@ Executa a etapa `create Courier Views` neste módulo. O contrato concreto está 
 
 ### renderCourier — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/courierViews.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/courierViews.js#L3)
 
 ```javascript
 function renderCourier()
@@ -19236,7 +19236,7 @@ Executa a etapa `render Courier` neste módulo. O contrato concreto está na ass
 
 ### callback@6:71 — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/courierViews.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/courierViews.js#L6)
 
 ```javascript
 o=>
@@ -19253,7 +19253,7 @@ Executa a etapa `callback@6:71` neste módulo. O contrato concreto está na assi
 
 ### callback@8:52 — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/courierViews.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/courierViews.js#L8)
 
 ```javascript
 d=>
@@ -19274,7 +19274,7 @@ Executa a etapa `callback@8:52` neste módulo. O contrato concreto está na assi
 
 ### courierNext — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/courierViews.js:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/courierViews.js#L11)
 
 ```javascript
 function courierNext(d)
@@ -19298,11 +19298,11 @@ Executa a etapa `courier Next` neste módulo. O contrato concreto está na assin
 
 Apresentação por domínio com dependências explícitas; os eventos da página são ligados pela composição da aplicação.
 
-Fonte: [customerViews.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/customerViews.js) · SHA-256 `bcb8a75282c88a554a53c8561dbb90e9cf814be26e15f88622a1cac6c8ea865b`
+[LIDO NO CÓDIGO] Fonte: [customerViews.js](../Frontend/src/views/customerViews.js) · SHA-256 `bcb8a75282c88a554a53c8561dbb90e9cf814be26e15f88622a1cac6c8ea865b`
 
 ### createCustomerViews — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/customerViews.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/customerViews.js#L2)
 
 ```javascript
 function createCustomerViews({ chatPanel, dateTimeInZone, emptyState, esc, formatStatus, groupCustomerReservations, money, pill, refundNotice, shortDate, state })
@@ -19358,7 +19358,7 @@ Executa a etapa `create Customer Views` neste módulo. O contrato concreto está
 
 ### renderOrders — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/customerViews.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/customerViews.js#L3)
 
 ```javascript
 function renderOrders()
@@ -19390,7 +19390,7 @@ Executa a etapa `render Orders` neste módulo. O contrato concreto está na assi
 
 ### callback@6:32 — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/customerViews.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/customerViews.js#L6)
 
 ```javascript
 order=>
@@ -19418,7 +19418,7 @@ Executa a etapa `callback@6:32` neste módulo. O contrato concreto está na assi
 
 ### callback@8:50 — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/customerViews.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/customerViews.js#L8)
 
 ```javascript
 line=>
@@ -19432,7 +19432,7 @@ Executa a etapa `callback@8:50` neste módulo. O contrato concreto está na assi
 
 ### trackingMessage — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/customerViews.js:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/customerViews.js#L12)
 
 ```javascript
 function trackingMessage(order)
@@ -19453,7 +19453,7 @@ Executa a etapa `tracking Message` neste módulo. O contrato concreto está na a
 
 ### renderReservations — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/customerViews.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/customerViews.js#L19)
 
 ```javascript
 function renderReservations()
@@ -19482,7 +19482,7 @@ Executa a etapa `render Reservations` neste módulo. O contrato concreto está n
 
 ### callback@22:32 — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/customerViews.js:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/customerViews.js#L22)
 
 ```javascript
 group=>
@@ -19507,7 +19507,7 @@ Executa a etapa `callback@22:32` neste módulo. O contrato concreto está na ass
 
 ### callback@22:121 — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/customerViews.js:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/customerViews.js#L22)
 
 ```javascript
 r=>
@@ -19532,7 +19532,7 @@ Executa a etapa `callback@22:121` neste módulo. O contrato concreto está na as
 
 ### renderCheckout — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/customerViews.js:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/customerViews.js#L25)
 
 ```javascript
 function renderCheckout()
@@ -19560,7 +19560,7 @@ Executa a etapa `render Checkout` neste módulo. O contrato concreto está na as
 
 ### callback@34:399 — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/customerViews.js:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/customerViews.js#L34)
 
 ```javascript
 line=>
@@ -19576,11 +19576,11 @@ Executa a etapa `callback@34:399` neste módulo. O contrato concreto está na as
 
 Apresentação por domínio com dependências explícitas; os eventos da página são ligados pela composição da aplicação.
 
-Fonte: [discoveryViews.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js) · SHA-256 `3dd712e18bbcebffae1052c884ca5fed0264be95f3ec884b35fc357e673d85fa`
+[LIDO NO CÓDIGO] Fonte: [discoveryViews.js](../Frontend/src/views/discoveryViews.js) · SHA-256 `3dd712e18bbcebffae1052c884ca5fed0264be95f3ec884b35fc357e673d85fa`
 
 ### createDiscoveryViews — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L2)
 
 ```javascript
 function createDiscoveryViews({ apiAssetUrl, categoryEmoji, categoryMatches, categoryOptions, categoryStyles, emptyState, esc, fulfillmentBadges, icon, state })
@@ -19617,7 +19617,7 @@ Executa a etapa `create Discovery Views` neste módulo. O contrato concreto est�
 
 ### renderHome — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L3)
 
 ```javascript
 function renderHome()
@@ -19644,7 +19644,7 @@ Executa a etapa `render Home` neste módulo. O contrato concreto está na assina
 
 ### callback@5:56 — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L5)
 
 ```javascript
 category=>
@@ -19658,7 +19658,7 @@ Executa a etapa `callback@5:56` neste módulo. O contrato concreto está na assi
 
 ### callback@5:112 — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L5)
 
 ```javascript
 store=>
@@ -19672,7 +19672,7 @@ Executa a etapa `callback@5:112` neste módulo. O contrato concreto está na ass
 
 ### callback@5:171 — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L5)
 
 ```javascript
 section=>
@@ -19684,7 +19684,7 @@ Executa a etapa `callback@5:171` neste módulo. O contrato concreto está na ass
 
 ### callback@6:45 — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L6)
 
 ```javascript
 (name,order)=>
@@ -19698,7 +19698,7 @@ Executa a etapa `callback@6:45` neste módulo. O contrato concreto está na assi
 
 ### callback@6:132 — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L6)
 
 ```javascript
 store=>
@@ -19712,7 +19712,7 @@ Executa a etapa `callback@6:132` neste módulo. O contrato concreto está na ass
 
 ### callback@6:200 — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L6)
 
 ```javascript
 item=>
@@ -19724,7 +19724,7 @@ Executa a etapa `callback@6:200` neste módulo. O contrato concreto está na ass
 
 ### callback@6:232 — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L6)
 
 ```javascript
 (a,b)=>
@@ -19736,7 +19736,7 @@ Executa a etapa `callback@6:232` neste módulo. O contrato concreto está na ass
 
 ### callback@8:29 — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L8)
 
 ```javascript
 section=>
@@ -19750,7 +19750,7 @@ Executa a etapa `callback@8:29` neste módulo. O contrato concreto está na assi
 
 ### callback@8:335 — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L8)
 
 ```javascript
 (store,index)=>
@@ -19764,7 +19764,7 @@ Executa a etapa `callback@8:335` neste módulo. O contrato concreto está na ass
 
 ### callback@9:87 — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L9)
 
 ```javascript
 (store,index)=>
@@ -19778,7 +19778,7 @@ Executa a etapa `callback@9:87` neste módulo. O contrato concreto está na assi
 
 ### callback@13:95 — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L13)
 
 ```javascript
 (item,index)=>
@@ -19792,7 +19792,7 @@ Executa a etapa `callback@13:95` neste módulo. O contrato concreto está na ass
 
 ### categoryTile — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L19)
 
 ```javascript
 function categoryTile(item,index=0)
@@ -19812,7 +19812,7 @@ Executa a etapa `category Tile` neste módulo. O contrato concreto está na assi
 
 ### callback@20:36 — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L20)
 
 ```javascript
 store=>
@@ -19826,7 +19826,7 @@ Executa a etapa `callback@20:36` neste módulo. O contrato concreto está na ass
 
 ### renderAllCategories — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L24)
 
 ```javascript
 function renderAllCategories()
@@ -19843,7 +19843,7 @@ Executa a etapa `render All Categories` neste módulo. O contrato concreto está
 
 ### callback@25:49 — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L25)
 
 ```javascript
 (name,index)=>
@@ -19857,7 +19857,7 @@ Executa a etapa `callback@25:49` neste módulo. O contrato concreto está na ass
 
 ### callback@25:136 — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L25)
 
 ```javascript
 store=>
@@ -19871,7 +19871,7 @@ Executa a etapa `callback@25:136` neste módulo. O contrato concreto está na as
 
 ### callback@26:349 — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L26)
 
 ```javascript
 (item,index)=>
@@ -19885,7 +19885,7 @@ Executa a etapa `callback@26:349` neste módulo. O contrato concreto está na as
 
 ### renderCategoryStores — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L29)
 
 ```javascript
 function renderCategoryStores()
@@ -19908,7 +19908,7 @@ Executa a etapa `render Category Stores` neste módulo. O contrato concreto est�
 
 ### callback@31:36 — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L31)
 
 ```javascript
 store=>
@@ -19922,7 +19922,7 @@ Executa a etapa `callback@31:36` neste módulo. O contrato concreto está na ass
 
 ### callback@32:595 — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L32)
 
 ```javascript
 (store,index)=>
@@ -19936,7 +19936,7 @@ Executa a etapa `callback@32:595` neste módulo. O contrato concreto está na as
 
 ### storeCard — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/discoveryViews.js:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/discoveryViews.js#L35)
 
 ```javascript
 function storeCard(store,index=0)
@@ -19958,11 +19958,11 @@ Executa a etapa `store Card` neste módulo. O contrato concreto está na assinat
 
 Apresentação por domínio com dependências explícitas; os eventos da página são ligados pela composição da aplicação.
 
-Fonte: [merchantViews.js](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js) · SHA-256 `2f762ad655e5d9699ad959e99a5490d4846539b16bb252e3d3d98b0d57be5d70`
+[LIDO NO CÓDIGO] Fonte: [merchantViews.js](../Frontend/src/views/merchantViews.js) · SHA-256 `2f762ad655e5d9699ad959e99a5490d4846539b16bb252e3d3d98b0d57be5d70`
 
 ### createMerchantViews — linha 2
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:2)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L2)
 
 ```javascript
 function createMerchantViews({ activeMerchantStore, catalogItemIcon, categoryOptions, chatPanel, dateTimeInZone, displayName, emptyState, esc, formatCurrencyValue, fulfillmentFields, money, pill, reservationActions, shortDate, state, storeMapFields })
@@ -20041,7 +20041,7 @@ if(merchantHeadings[selected]&&headerNode){headerNode.querySelector('h1').textCo
 
 ### renderMerchant — linha 3
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:3)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L3)
 
 ```javascript
 function renderMerchant()
@@ -20078,7 +20078,7 @@ if(merchantHeadings[selected]&&headerNode){headerNode.querySelector('h1').textCo
 
 ### callback@9:26 — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L9)
 
 ```javascript
 node=>
@@ -20092,7 +20092,7 @@ Executa a etapa `callback@9:26` neste módulo. O contrato concreto está na assi
 
 ### callback@10:28 — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L10)
 
 ```javascript
 node=>
@@ -20106,7 +20106,7 @@ Executa a etapa `callback@10:28` neste módulo. O contrato concreto está na ass
 
 ### callback@11:29 — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L11)
 
 ```javascript
 node=>
@@ -20120,7 +20120,7 @@ Executa a etapa `callback@11:29` neste módulo. O contrato concreto está na ass
 
 ### callback@12:29 — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L12)
 
 ```javascript
 node=>
@@ -20134,7 +20134,7 @@ Executa a etapa `callback@12:29` neste módulo. O contrato concreto está na ass
 
 ### callback@13:28 — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L13)
 
 ```javascript
 node=>
@@ -20148,7 +20148,7 @@ Executa a etapa `callback@13:28` neste módulo. O contrato concreto está na ass
 
 ### callback@20:1138 — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L20)
 
 ```javascript
 o=>
@@ -20162,7 +20162,7 @@ Executa a etapa `callback@20:1138` neste módulo. O contrato concreto está na a
 
 ### callback@21:53 — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L21)
 
 ```javascript
 r=>
@@ -20176,7 +20176,7 @@ Executa a etapa `callback@21:53` neste módulo. O contrato concreto está na ass
 
 ### callback@22:536 — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L22)
 
 ```javascript
 s=>
@@ -20193,7 +20193,7 @@ Executa a etapa `callback@22:536` neste módulo. O contrato concreto está na as
 
 ### callback@22:762 — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L22)
 
 ```javascript
 ([id,label])=>
@@ -20208,7 +20208,7 @@ Executa a etapa `callback@22:762` neste módulo. O contrato concreto está na as
 
 ### renderMerchantAll — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L25)
 
 ```javascript
 function renderMerchantAll()
@@ -20239,7 +20239,7 @@ Executa a etapa `render Merchant All` neste módulo. O contrato concreto está n
 
 ### callback@32:234 — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L32)
 
 ```javascript
 o=>
@@ -20253,7 +20253,7 @@ Executa a etapa `callback@32:234` neste módulo. O contrato concreto está na as
 
 ### callback@33:232 — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L33)
 
 ```javascript
 (item,i)=>
@@ -20272,7 +20272,7 @@ Executa a etapa `callback@33:232` neste módulo. O contrato concreto está na as
 
 ### storeCategoryOptions — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L40)
 
 ```javascript
 function storeCategoryOptions(selected='')
@@ -20292,7 +20292,7 @@ Executa a etapa `store Category Options` neste módulo. O contrato concreto est�
 
 ### callback@40:80 — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L40)
 
 ```javascript
 c=>
@@ -20309,7 +20309,7 @@ Executa a etapa `callback@40:80` neste módulo. O contrato concreto está na ass
 
 ### storeTimezoneOptions — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L42)
 
 ```javascript
 function storeTimezoneOptions(selected='America/Sao_Paulo')
@@ -20329,7 +20329,7 @@ Executa a etapa `store Timezone Options` neste módulo. O contrato concreto est�
 
 ### callback@42:246 — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L42)
 
 ```javascript
 ([value,label])=>
@@ -20344,7 +20344,7 @@ Executa a etapa `callback@42:246` neste módulo. O contrato concreto está na as
 
 ### storeFields — linha 44
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:44)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L44)
 
 ```javascript
 function storeFields()
@@ -20361,7 +20361,7 @@ Executa a etapa `store Fields` neste módulo. O contrato concreto está na assin
 
 ### renderMerchantOrders — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L46)
 
 ```javascript
 function renderMerchantOrders()
@@ -20384,7 +20384,7 @@ Executa a etapa `render Merchant Orders` neste módulo. O contrato concreto est�
 
 ### callback@49:229 — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:49)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L49)
 
 ```javascript
 o=>
@@ -20403,7 +20403,7 @@ Executa a etapa `callback@49:229` neste módulo. O contrato concreto está na as
 
 ### callback@49:464 — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:49)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L49)
 
 ```javascript
 i=>
@@ -20417,7 +20417,7 @@ Executa a etapa `callback@49:464` neste módulo. O contrato concreto está na as
 
 ### merchantOrderAction — linha 52
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:52)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L52)
 
 ```javascript
 function merchantOrderAction(order)
@@ -20445,7 +20445,7 @@ Executa a etapa `merchant Order Action` neste módulo. O contrato concreto está
 
 ### renderMerchantReservations — linha 61
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:61)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L61)
 
 ```javascript
 function renderMerchantReservations()
@@ -20472,7 +20472,7 @@ Executa a etapa `render Merchant Reservations` neste módulo. O contrato concret
 
 ### callback@64:664 — linha 64
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:64)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L64)
 
 ```javascript
 person=>
@@ -20489,7 +20489,7 @@ Executa a etapa `callback@64:664` neste módulo. O contrato concreto está na as
 
 ### callback@65:154 — linha 65
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:65)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L65)
 
 ```javascript
 r=>
@@ -20509,7 +20509,7 @@ Executa a etapa `callback@65:154` neste módulo. O contrato concreto está na as
 
 ### operatingHoursPanel — linha 68
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Frontend/src/views/merchantViews.js:68)
+[LIDO NO CÓDIGO] [Abrir implementação](../Frontend/src/views/merchantViews.js#L68)
 
 ```javascript
 function operatingHoursPanel()

@@ -1,6 +1,6 @@
 # Banco de produção e recuperação
 
-Revisão de 11/11/2026. Estes procedimentos são para PostgreSQL; a demonstração H2 do Render continua descartável.
+Revisão de 11/11/2026. Estes procedimentos são para PostgreSQL; o pacote opcional de demonstração H2 usa dados descartáveis.
 
 ## Contas separadas
 
@@ -71,7 +71,7 @@ Gere o par de chaves em uma máquina sua: `age-keygen -o chave-backup.txt`. Guar
 
 Limites que continuam valendo:
 - Os artefatos do GitHub são um destino externo ao Render e ao Supabase, mas não são um cofre independente: expiram em 30 dias e dependem da conta do GitHub. Para retenção longa, copie periodicamente para um terceiro destino sob seu controle.
-- `JWT_SECRET`, `PRIVATE_CONFIG_ENCRYPTION_KEY` e as demais chaves **não** entram na cópia. Sem elas, os tokens do Mercado Pago salvos no banco não podem ser lidos. Guarde-as em cofre separado.
+- `JWT_SECRET`, `PRIVATE_CONFIG_ENCRYPTION_KEY` e as demais chaves **não** entram na cópia. [LIDO NO CÓDIGO] `PrivateCipher.java:15` depende de PRIVATE_CONFIG_ENCRYPTION_KEY para configurações privadas e MFA. Os tokens OAuth do Mercado Pago usam MP_TOKEN_ENCRYPTION_KEY (`MarketplaceTokenCipher.java:40`). JWT_SECRET mantém a validade das sessões assinadas. Guarde-as em cofre separado.
 - As capas são copiadas para uma pasta; o envio de volta ao bucket do ambiente restaurado é manual.
 - O dump cobre só o schema `fooddelivery`. Usuários do Supabase Auth e outros schemas não são usados pela aplicação e não entram.
 

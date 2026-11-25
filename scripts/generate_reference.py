@@ -79,7 +79,7 @@ def generate(language,files,filename):
         txt=lambda n: data[n.start_byte:n.end_byte].decode()
         rel=path.relative_to(ROOT)
         context=CONTEXT.get(path.parent.name if language=='java' else path.stem, {'views':'Apresentação por domínio com dependências explícitas; os eventos da página são ligados pela composição da aplicação.', 'features':'Ações por domínio com API e navegação injetadas; preservar autorização no servidor e tratar falhas assíncronas.', 'media':'Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado.'}.get(path.parent.name, 'Inicialização da aplicação e ligação dos módulos; manter separação entre configuração e regra de negócio.'))
-        out += [f'## {rel}', '',context,'',f'Fonte: [{path.name}]({path}) · SHA-256 `{hashlib.sha256(data).hexdigest()}`','']
+        out += [f'## {rel}', '',context,'',f'[LIDO NO CÓDIGO] Fonte: [{path.name}](../{path.relative_to(ROOT).as_posix()}) · SHA-256 `{hashlib.sha256(data).hexdigest()}`','']
         declarations=[n for n in walk(tree.root_node) if n.type in ('record_declaration','enum_declaration')]
         for n in declarations:
             header=txt(n).split('{',1)[0]
@@ -109,7 +109,7 @@ def generate(language,files,filename):
                         value=compact(txt(condition))
                         if value not in conditions:conditions.append(value)
             effects=[line.strip() for line in source.splitlines() if re.search(r'\.save\(|\.delete|\.set[A-Z]|\.update|\.send|\.transition|\.paid\(|\.advance|\.requestFullRefund|\.innerHTML\s*=|\.textContent\s*=|localStorage\.|sessionStorage\.|\.addEventListener|\.fetch\(|await api\(',line)]
-            out += [f'### {name} — linha {n.start_point.row+1}', '', f'[Abrir implementação]({path}:{n.start_point.row+1})', '',f'```{language}',signature,'```','',describe(name,n.type),'']
+            out += [f'### {name} — linha {n.start_point.row+1}', '', f'[LIDO NO CÓDIGO] [Abrir implementação](../{rel.as_posix()}#L{n.start_point.row+1})', '',f'```{language}',signature,'```','',describe(name,n.type),'']
             if calls:out += ['**Colaborações:** '+ '; '.join(f'`{compact(c)}`' for c in calls)+'.','']
             if guards:out += ['**Rejeições locais:**']+['- `'+g.replace('`','\\`')+'`' for g in guards]+['']
             if conditions:out += ['**Decisões condicionais examinadas:**']+['- `'+c.replace('`','\\`')+'`' for c in conditions]+['']
@@ -131,7 +131,7 @@ for path in sorted((ROOT/'Frontend').rglob('*.js')):
     if 'node_modules' in path.parts:continue
     for line,text in enumerate(path.read_text().splitlines(),1):
         for key in re.findall(r'\bdata-[a-z][a-z0-9-]*',text):attrs.setdefault(key,(path,line))
-for key,(path,line) in sorted(attrs.items()):inventory.append(f'| `{key}` | [{path.name}:{line}]({path}:{line}) |')
+for key,(path,line) in sorted(attrs.items()):inventory.append(f'| `{key}` | [{path.name}:{line}](../{path.relative_to(ROOT).as_posix()}#L{line}) |')
 inventory += ['', '## Contratos HTTP declarados','', 'A rota efetiva combina o prefixo da classe e o sufixo do método. `SecurityConfig` decide acesso público/autenticado; `@PreAuthorize` e as verificações de titularidade no corpo restringem a operação. Uma anotação ausente não significa acesso público.','']
 parser=Parser(Language(tree_sitter_java.language()))
 for path in sorted((ROOT/'Backend/src/main/java').rglob('*.java')):
@@ -148,14 +148,14 @@ for path in sorted((ROOT/'Backend/src/main/java').rglob('*.java')):
         routes.append((n.start_point.row+1,text(name),compact(class_head),compact(head)))
     if routes:
         inventory += [f'### {path.stem}','']
-        for line,name,cls,head in routes:inventory += [f'- [{name}]({path}:{line})',f'  - Classe: `{cls}`',f'  - Método: `{head}`']
+        for line,name,cls,head in routes:inventory += [f'- [{name}](../{path.relative_to(ROOT).as_posix()}#L{line})',f'  - Classe: `{cls}`',f'  - Método: `{head}`']
         inventory.append('')
 latest_migration=max(int(re.search(r'V(\d+)',p.name)[1]) for p in (ROOT/'Backend/src/main/resources/db').rglob('V*.sql'))
 inventory += ['## Migrações e razão da separação','', f'Flyway executa a sequência V1–V{latest_migration}. V9 tem variantes H2/PostgreSQL para diferenças de mecanismo. O perfil escolhe uma variante, nunca as duas. Os demais scripts são comuns. Hibernate valida o resultado; não é proprietário do esquema.','', '| Versão / arquivo | DDL e finalidade identificável |','|---|---|']
 for path in sorted((ROOT/'Backend/src/main/resources/db').rglob('*.sql'),key=lambda p:(int(re.search(r'V(\d+)',p.name)[1]),str(p))):
     statements=[compact(s) for s in path.read_text().split(';') if s.strip()]
     tables=sorted(set(re.findall(r'(?:TABLE(?: IF NOT EXISTS)?|INDEX[^;]*? ON)\s+([a-z_]+)',path.read_text(),re.I)))
-    inventory.append(f'| [{path.name}]({path}) | {len(statements)} instruções; relações/índices: '+', '.join(f'`{t}`' for t in tables)+' |')
+    inventory.append(f'| [{path.name}](../{path.relative_to(ROOT).as_posix()}) | {len(statements)} instruções; relações/índices: '+', '.join(f'`{t}`' for t in tables)+' |')
 inventory += ['', '## Arquivos de operação','', '| Arquivo | Papel e avaliação |','|---|---|', '| `scripts/dev.py` | Supervisor local; identifica serviços existentes para não iniciar cópias. Seis testes unitários cobrem sondagem/reutilização. |', '| `scripts/homologacao.py` | Supervisor isolado; não lê `.env`, gera chave própria, valida portas e inicia fixtures. SO_REUSEADDR permite reinício após fechamento sem compartilhar listener ocupado. |', '| `Frontend/scripts/start.py` | Servidor local de arquivos e proxy exclusivo de demonstração; não é servidor de borda para produção. |', '| `Backend/scripts/backup-db.sh` | Dump e checksum. Ensaio PostgreSQL descartável coberto por test_postgres.py; recuperação completa de produção permanece pendente. |', '| `Backend/scripts/restore-db.sh` | Confere checksum e confirmação de banco; é destrutivo no destino escolhido. Não foi executado no banco real. |', '| `scripts/test_homologacao.py` | Contratos da simulação, cinco logins por execução; não rodar repetidamente junto de outros logins sem considerar rate limit. |', '| `scripts/test_jornadas.py` | CRUD, autorização, suporte, administração e sequência completa de entrega em fixtures. |', '| `.github/workflows` | Qualidade/segurança declaradas; presença de YAML não demonstra execução bem-sucedida no GitHub. |', '| `Frontend/styles.css` / `theme.css` | Base e refinamentos de componentes, responsividade e foco; estilos sobrepostos exigem inspeção do resultado computado. |', '| `Frontend/index.html` / `demo.html` | Entrada normal e caixa de mensagens fictícias; metadados e carregamento de módulos. |', '| `Frontend/runtime-config.js` | Em estático mantém modo normal; o servidor fictício fornece marcador explícito de homologação. |', '| `Backend/src/main/resources/application*.yml` | Configuração por perfil; credenciais privadas e ambiente não devem ser publicados como documentação. |', '']
 (ROOT/'Documentacao/Inventario_Interfaces_e_Dados.md').write_text('\n'.join(inventory))
 print('Inventario_Interfaces_e_Dados.md',len(attrs),'atributos')

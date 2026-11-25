@@ -1,6 +1,6 @@
 # Modelo de dados do backend
 
-**Banco:** PostgreSQL 17 · **Migrações:** Flyway em `Backend/src/main/resources/db/`; versões comuns V1–V8 e V10–V23, com V9 adaptada em `migration-postgres` e `migration-h2`.
+**Banco:** PostgreSQL 17 · **Migrações:** Flyway em `Backend/src/main/resources/db/`; versões comuns V1–V8 e V10–V31, com V9 adaptada em `migration-postgres` e `migration-h2`.
 
 ## Entidades e relações
 

@@ -195,21 +195,6 @@ Funcionamento, contrato, compatibilidade dos endpoints antigos e evidências: [C
 
 O frontend central ainda concentra muitos renderizadores e ações. Chat e paginação agora têm módulos próprios; outros domínios continuam exigindo avaliação de volume, paginação e extração gradual. Notificações mantêm polling. Não foi realizado benchmark de carga nesta rodada nem se afirma conclusão de toda a arquitetura.
 
-### Matriz de conclusão
+### Aceite para lançamento
 
-| Prioridade | Pendência / consequência | Correção e critério de conclusão |
-|---|---|---|
-| P1 | Não existe banco de produção; demonstração perde dados em reinícios | Provisionar banco novo e armazenamento persistente de capas. Reiniciar/republicar e comprovar preservação. Não há migração de banco existente a executar. |
-| P1 | Pagamentos/estornos ainda sem homologação completa do fornecedor | Testar OAuth, assinatura, duplicidade, atraso, recusa e estorno no sandbox; conciliar valores e estados com o provedor. |
-| P1 | Recuperação depende apenas de ensaios de banco descartável | Implantar cópia externa cifrada de banco e capas, proteção separada de chaves, retenção e recuperação conjunta com tempo medido. |
-| P1 | Segurança operacional ainda não ativada em ambiente comercial | Ativar MFA no administrador real, guardar recuperação, configurar domínio/origens/cookies, monitoramento e alerta; ensaiar incidente. |
-| P1/P2 | Recuperação de conta e automações dependem de canais externos | Homologar SMTP como canal de recuperação; só anunciar WhatsApp depois de validar templates, vínculo, pedidos e entrega real. WhatsApp pode ficar desabilitado no lançamento. |
-| Corrigido localmente | Concorrência de aberturas do chat | Identidade por abertura, cancelamento e testes automatizados aprovados. |
-| Parcialmente resolvido | Listas completas com volume | Quatro listas administrativas paginadas; demais domínios e medição de carga permanecem pendentes. |
-| P2 | Limitação de tentativas em memória por processo | Validar topologia de proxy e orçamento por usuário; antes de múltiplas réplicas, usar contador compartilhado. Não confiar em cabeçalho de IP arbitrário. |
-| P2 | Trilha de auditoria e retenção de mensagens incompletas | Definir eventos/retencão, restringir acesso e implementar expurgo/anonimização compatível com obrigações de histórico. Testar que não destrói evidência financeira. |
-| P2 | Acessibilidade e uso por pessoas pouco experientes parcialmente avaliados | Testar teclado, zoom 200%, leitor de tela, aparelhos físicos e tarefas acompanhadas; registrar falhas e repetir após corrigir. |
-| P2 | Conta SQL da aplicação ainda é dona do seu esquema | A configuração atual já retira superprivilégios. Como endurecimento adicional, separar credencial de migração da credencial de execução, com teste de permissões necessárias. |
-| P2/P3 | Cobertura de análise de dependências não é completa | Manter Semgrep e acrescentar análise de vulnerabilidades de dependências efetivamente executada, sem depender apenas do SBOM ou de jobs ignorados. |
-
-Repasse Pix automático, cadastro automático no Google Maps e aplicativo nativo não estão implementados. A geração de capas por IA foi retirada por decisão do proprietário e não é uma pendência. Corrigir um defeito não exige reintroduzir funções removidas.
+[EXECUTADO] Resultados de 25/11, limites e ações operacionais estão na [tabela de aceite](Aceite_2026-11-25.md).
