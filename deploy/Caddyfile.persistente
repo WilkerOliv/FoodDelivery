@@ -2,7 +2,7 @@
 	admin off
 	auto_https off
 	servers {
-		# O balanceador do Render fica em faixa privada e acrescenta o cliente ao fim do X-Forwarded-For.
+		# Confirme no piloto se o peer do balanceador está em faixa privada antes de confiar na identificação.
 		# Em modo estrito, o Caddy lê da direita e ignora valores forjados pelo visitante.
 		trusted_proxies static private_ranges
 		trusted_proxies_strict
