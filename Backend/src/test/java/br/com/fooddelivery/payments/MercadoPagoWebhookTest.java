@@ -53,7 +53,32 @@ class MercadoPagoWebhookTest {
         exercise("10.00", "123", "refunded", "10.00", true);
     }
 
+    @Test void duplicateAndOutOfOrderEventsKeepFinancialState() {
+        Payment payment = new Payment(mock(br.com.fooddelivery.orders.Order.class));
+        payment.confirm("123");
+        payment.confirm("123");
+        payment.fail("123");
+        assertEquals(PaymentStatus.PAID, payment.getStatus());
+        payment.requestFullRefund();
+        UUID key = payment.getRefundIdempotencyKey();
+        payment.requestFullRefund();
+        assertEquals(key, payment.getRefundIdempotencyKey());
+        payment.refundSucceeded("456");
+        payment.confirm("123");
+        payment.fail("123");
+        assertEquals(PaymentStatus.REFUNDED, payment.getStatus());
+    }
+
+    @Test void unavailableProviderAndWrongCurrencyDoNotChangeState() {
+        exercise("10.00","123","approved","0", false, "USD", false);
+        exercise("10.00","123","approved","0", false, "BRL", true);
+    }
+
     private void exercise(String amount, String id, String status, String refunded, boolean accepted) {
+        exercise(amount, id, status, refunded, accepted, "BRL", false);
+    }
+
+    private void exercise(String amount, String id, String status, String refunded, boolean accepted, String currency, boolean unavailable) {
         var owner = new br.com.fooddelivery.identity.Account("owner@example.test", "QA", "encoded");
         var store = new br.com.fooddelivery.catalog.Store(owner, "Loja QA", null, "Rua QA", "Mercados");
         var order = new br.com.fooddelivery.orders.Order(owner, store,
@@ -69,8 +94,8 @@ class MercadoPagoWebhookTest {
         var builder = RestClient.builder();
         var server = MockRestServiceServer.bindTo(builder).build();
         server.expect(requestTo("https://api.mercadopago.com/v1/payments/123"))
-            .andRespond(withSuccess("{\"id\":\"" + id + "\",\"external_reference\":\"" + payment.getId()
-                + "\",\"currency_id\":\"BRL\",\"transaction_amount\":" + amount
+            .andRespond(unavailable ? withServerError() : withSuccess("{\"id\":\"" + id + "\",\"external_reference\":\"" + payment.getId()
+                + "\",\"currency_id\":\"" + currency + "\",\"transaction_amount\":" + amount
                 + ",\"status\":\"" + status + "\",\"transaction_amount_refunded\":" + refunded + "}", MediaType.APPLICATION_JSON));
         var properties = new MercadoPagoProperties();
         properties.setSandbox(true);
@@ -83,7 +108,7 @@ class MercadoPagoWebhookTest {
         } else {
             var error = assertThrows(ResponseStatusException.class,
                 () -> controller.receive("123", "payment", payment.getId(), null, null));
-            assertEquals(409, error.getStatusCode().value());
+            assertEquals(unavailable ? 502 : 409, error.getStatusCode().value());
             verifyNoInteractions(service, refunds);
         }
         server.verify();
