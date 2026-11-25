@@ -1,6 +1,6 @@
 """Exercita a resolução de endereço no Caddy descartável, somente em loopback."""
 from pathlib import Path
-import subprocess, tempfile, time, urllib.request
+import re, subprocess, tempfile, time, urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 with tempfile.TemporaryDirectory() as tmp:
     path = Path(tmp) / 'Caddyfile'
@@ -8,7 +8,9 @@ with tempfile.TemporaryDirectory() as tmp:
     marker = 'handle /healthz {'
     assert source.count(marker) == 1
     path.write_text(source.replace(marker, 'handle /qa {\n respond "{client_ip}"\n }\n '+marker))
-    command = ['docker','run','--rm','-d','-p','127.0.0.1::10000','-v',f'{path}:/etc/caddy/Caddyfile:ro','caddy:2.10.2']
+    dockerfile = (ROOT / 'deploy/Dockerfile.persistente').read_text()
+    proxy_image = re.search(r'^FROM (\S+) AS proxy$', dockerfile, re.MULTILINE).group(1)
+    command = ['docker','run','--rm','-d','-p','127.0.0.1::10000','-v',f'{path}:/etc/caddy/Caddyfile:ro',proxy_image]
     container = subprocess.check_output(command,text=True).strip()
     try:
         address = subprocess.check_output(['docker','port',container,'10000/tcp'],text=True).strip()
