@@ -1,5 +1,7 @@
 # Chat e listas administrativas
 
+> [NÃO VERIFICADO] Escopo da revisão de 25/11: instruções e resultados históricos sem evidência individual nesta página aguardam confirmação. Os testes repetidos têm comando e resultado na [matriz de aceite](Aceite_2026-11-25.md).
+
 [NÃO VERIFICADO] Relato histórico de 13/11/2026. Esta entrega não provisiona banco de produção nem homologa fornecedores externos.
 
 ## Conversas

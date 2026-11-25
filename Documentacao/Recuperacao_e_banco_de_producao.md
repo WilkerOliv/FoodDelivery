@@ -1,5 +1,7 @@
 # Banco de produção e recuperação
 
+> [NÃO VERIFICADO] Escopo da revisão de 25/11: instruções e resultados históricos sem evidência individual nesta página aguardam confirmação. Os testes repetidos têm comando e resultado na [matriz de aceite](Aceite_2026-11-25.md).
+
 Revisão de 11/11/2026. Estes procedimentos são para PostgreSQL; o pacote opcional de demonstração H2 usa dados descartáveis.
 
 ## Contas separadas

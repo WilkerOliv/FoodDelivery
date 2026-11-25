@@ -1,5 +1,7 @@
 # Publicação e verificações de segurança
 
+> [NÃO VERIFICADO] Escopo da revisão de 25/11: instruções e resultados históricos sem evidência individual nesta página aguardam confirmação. Os testes repetidos têm comando e resultado na [matriz de aceite](Aceite_2026-11-25.md).
+
 ## Inicialização da homologação no Render
 
 O gateway abre `0.0.0.0:$PORT` antes de a API Java concluir a inicialização. A API permanece acessível apenas por loopback, em `127.0.0.1:8181`.

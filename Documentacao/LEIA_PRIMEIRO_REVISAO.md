@@ -1,5 +1,7 @@
 # Documentação da revisão do FoodDelivery
 
+> [NÃO VERIFICADO] Escopo da revisão de 25/11: instruções e resultados históricos sem evidência individual nesta página aguardam confirmação. Os testes repetidos têm comando e resultado na [matriz de aceite](Aceite_2026-11-25.md).
+
 Atualização: 24/11/2026. Os guias descrevem o código atual; relatórios de validação datados registram somente o escopo executado naquela data. Planos antigos e descrições substituídas foram retirados; seu histórico permanece no Git.
 
 ## Por onde começar

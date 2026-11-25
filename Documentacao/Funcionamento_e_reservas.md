@@ -1,5 +1,7 @@
 # Funcionamento da loja e reservas
 
+> [NÃO VERIFICADO] Escopo da revisão de 25/11: instruções e resultados históricos sem evidência individual nesta página aguardam confirmação. Os testes repetidos têm comando e resultado na [matriz de aceite](Aceite_2026-11-25.md).
+
 Revisão: 05/11/2026. Este documento descreve a implementação atual e seus testes. Valores e contas usados na homologação são fictícios.
 
 ## 1. Configuração pelo vendedor e pelo administrador

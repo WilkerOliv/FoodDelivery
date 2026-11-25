@@ -1,5 +1,7 @@
 # Plugins disponíveis para o FoodDelivery
 
+> [NÃO VERIFICADO] Escopo da revisão de 25/11: instruções e resultados históricos sem evidência individual nesta página aguardam confirmação. Os testes repetidos têm comando e resultado na [matriz de aceite](Aceite_2026-11-25.md).
+
 Conferido em 24/11/2026. Inventário do ambiente de desenvolvimento do proprietário,
 não uma lista de bibliotecas ou serviços exigidos para executar o FoodDelivery.
 

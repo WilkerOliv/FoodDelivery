@@ -1,5 +1,7 @@
 # Modelo de dados do backend
 
+> [NÃO VERIFICADO] Escopo da revisão de 25/11: instruções e resultados históricos sem evidência individual nesta página aguardam confirmação. Os testes repetidos têm comando e resultado na [matriz de aceite](Aceite_2026-11-25.md).
+
 **Banco:** PostgreSQL 17 · **Migrações:** Flyway em `Backend/src/main/resources/db/`; versões comuns V1–V8 e V10–V31, com V9 adaptada em `migration-postgres` e `migration-h2`.
 
 ## Entidades e relações

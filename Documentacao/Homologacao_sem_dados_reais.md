@@ -1,5 +1,7 @@
 # Homologação local sem dados reais
 
+> [NÃO VERIFICADO] Escopo da revisão de 25/11: instruções e resultados históricos sem evidência individual nesta página aguardam confirmação. Os testes repetidos têm comando e resultado na [matriz de aceite](Aceite_2026-11-25.md).
+
 Atualizado em 04/11/2026.
 
 ## Iniciar

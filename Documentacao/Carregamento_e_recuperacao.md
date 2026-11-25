@@ -1,5 +1,7 @@
 # Carregamento, sessão e recuperação de consultas
 
+> [NÃO VERIFICADO] Escopo da revisão de 25/11: instruções e resultados históricos sem evidência individual nesta página aguardam confirmação. Os testes repetidos têm comando e resultado na [matriz de aceite](Aceite_2026-11-25.md).
+
 Implementação revisada entre 06 e 07/11/2026; verificação manual local em 07/11. Ambiente: `http://127.0.0.1:5180`, perfil isolado `homologacao`, contas e registros fictícios.
 
 ## Responsabilidades e motivos
