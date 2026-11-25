@@ -7,7 +7,7 @@ with tempfile.TemporaryDirectory() as tmp:
     source = (ROOT/'deploy/Caddyfile.persistente').read_text()
     marker = 'handle /healthz {'
     assert source.count(marker) == 1
-    path.write_text(source.replace(marker, 'handle /qa {\n respond "{client_ip}"\n }\n '+marker))
+    path.write_text(source.replace(marker, 'handle /qa {\n respond "{quota_peer}"\n }\n '+marker))
     dockerfile = (ROOT / 'deploy/Dockerfile.persistente').read_text()
     proxy_image = re.search(r'^FROM (\S+) AS proxy$', dockerfile, re.MULTILINE).group(1)
     command = ['docker','run','--rm','-d','-p','127.0.0.1::10000','-v',f'{path}:/etc/caddy/Caddyfile:ro',proxy_image]
@@ -29,7 +29,8 @@ with tempfile.TemporaryDirectory() as tmp:
         assert selected('203.0.113.8') == selected('198.51.100.4, 203.0.113.8') == '203.0.113.8'
         assert selected('malformed') == peer
         assert selected('2001:zz::1') == peer
-        assert selected('2001:db8::7') == '2001:db8::7'
-        print('PASS: peer TCP, cadeia estrita, IPv6 válido e fallback para valores inválidos')
+        ipv6 = selected('2001:db8::7')
+        assert ipv6 == peer, (ipv6, peer)
+        print('PASS: peer TCP, cadeia estrita, IPv6 e valores inválidos usam o peer TCP')
     finally:
         subprocess.run(['docker','rm','-f',container],check=True,stdout=subprocess.DEVNULL)
