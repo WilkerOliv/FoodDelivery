@@ -57,7 +57,7 @@ Destino externo, retenção, cifragem, agendamento e ensaio conjunto de banco/ar
 
 ## Cópia externa cifrada (implementada em 17/11/2026; ainda sem execução real)
 
-`Backend/scripts/backup-offsite.sh` gera um pacote único com o dump do schema privado (`fooddelivery`), as capas do bucket privado e um manifesto, cifrado com [age](https://age-encryption.org). A cópia usa só a chave **pública** (`BACKUP_AGE_RECIPIENT`); a identidade privada fica fora do GitHub e do Render. `Backend/scripts/restore-offsite.sh` verifica o SHA-256, decifra, recusa caminhos inseguros, restaura o banco com `restore-db.sh` (que exige a confirmação do banco de destino) e copia as capas para uma pasta. Ao final imprime o tempo gasto, que serve de RTO do ensaio.
+`Backend/scripts/backup-offsite.sh` gera um pacote único com o dump do schema privado (`fooddelivery`), as capas do bucket privado e um manifesto, cifrado com [age](https://age-encryption.org). A cópia usa só a chave **pública** (`BACKUP_AGE_RECIPIENT`); a identidade privada fica fora do GitHub e do Render. `Backend/scripts/restore-offsite.sh` verifica o SHA-256, decifra, recusa caminhos inseguros, restaura o banco com `restore-db.sh` (que exige a confirmação do banco de destino) e copia as capas para uma pasta. O tempo impresso mede a execução do script. Para obter o RTO, inclua também a obtenção das chaves, a reposição das capas e a validação funcional até o restabelecimento do serviço.
 
 O fluxo `.github/workflows/backup-externo.yml` roda todos os dias às 06:17 UTC e sob demanda, e guarda o pacote cifrado como artefato por 30 dias. Esse é o **RPO máximo teórico de 24 horas**; ele só vale depois do primeiro ensaio. Configure estes segredos do repositório:
 
