@@ -9,7 +9,7 @@ SELECT length(:'app_password') >= 24 AS valid_password \gset
 BEGIN;
 CREATE ROLE fooddelivery_app LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD :'app_password';
 -- O administrador gerenciado precisa poder assumir o novo papel para atribuir o schema.
-GRANT fooddelivery_app TO CURRENT_USER;
+GRANT fooddelivery_app TO CURRENT_USER WITH SET TRUE;
 CREATE SCHEMA fooddelivery AUTHORIZATION fooddelivery_app;
 REVOKE ALL ON SCHEMA fooddelivery FROM PUBLIC;
 ALTER ROLE fooddelivery_app SET search_path TO fooddelivery;
