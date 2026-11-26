@@ -116,8 +116,6 @@ jobs:
         working-directory: Backend
         run: mvn --batch-mode org.cyclonedx:cyclonedx-maven-plugin:2.9.1:makeAggregateBom
       - name: Scan resolved dependencies for known vulnerabilities
-        env:
-          TRIVY_IGNOREFILE: .trivyignore.yaml
         uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # v0.35.0
         with:
           version: v0.69.3

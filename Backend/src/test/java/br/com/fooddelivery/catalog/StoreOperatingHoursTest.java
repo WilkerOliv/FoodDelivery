@@ -1,6 +1,6 @@
 package br.com.fooddelivery.catalog;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import br.com.fooddelivery.identity.Account;
 import java.time.Instant;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StoreOperatingHoursTest {
-    private final StoreOperatingHours hours = new StoreOperatingHours(new ObjectMapper().findAndRegisterModules());
+    private final StoreOperatingHours hours = new StoreOperatingHours(tools.jackson.databind.json.JsonMapper.builder().findAndAddModules().build());
 
     private Store store() {
         Account owner = new Account("hours@example.com", "Hours", "encoded");

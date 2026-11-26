@@ -19,19 +19,19 @@ class AuthenticatedAccessManagerTest {
     @Test
     void deniesAnonymousAuthenticationByDefault() {
         var anonymous = new TestingAuthenticationToken("anonymous", "", "ROLE_ANONYMOUS");
-        assertFalse(manager.check(() -> anonymous, context).isGranted());
+        assertFalse(manager.authorize(() -> anonymous, context).isGranted());
     }
 
     @Test
     void allowsAuthenticatedJwtWhenPasswordChangeIsNotRequired() {
         var jwt = new JwtAuthenticationToken(token(false), List.of());
-        assertTrue(manager.check(() -> jwt, context).isGranted());
+        assertTrue(manager.authorize(() -> jwt, context).isGranted());
     }
 
     @Test
     void blocksOtherRoutesUntilForcedPasswordChangeIsComplete() {
         var jwt = new JwtAuthenticationToken(token(true), List.of());
-        assertFalse(manager.check(() -> jwt, context).isGranted());
+        assertFalse(manager.authorize(() -> jwt, context).isGranted());
     }
 
     private static Jwt token(boolean passwordChangeRequired) {

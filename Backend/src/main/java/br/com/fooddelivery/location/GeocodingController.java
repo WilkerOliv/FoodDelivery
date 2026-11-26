@@ -1,6 +1,6 @@
 package br.com.fooddelivery.location;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.databind.JsonNode;
 import java.net.URI;
 import java.time.Duration;
 import java.util.Map;

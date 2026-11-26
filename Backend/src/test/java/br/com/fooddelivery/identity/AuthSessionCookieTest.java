@@ -34,7 +34,7 @@ class AuthSessionCookieTest {
 
     @Test
     void accountSerializationNeverExposesPasswordHash() throws Exception {
-        String serialized = new com.fasterxml.jackson.databind.ObjectMapper().findAndRegisterModules()
+        String serialized = tools.jackson.databind.json.JsonMapper.builder().findAndAddModules().build()
                 .writeValueAsString(new Account("private@example.com", "Private", "bcrypt-secret-hash"));
         assertFalse(serialized.contains("passwordHash"));
         assertFalse(serialized.contains("bcrypt-secret-hash"));

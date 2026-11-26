@@ -1,7 +1,7 @@
 package br.com.fooddelivery.catalog;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 import java.time.*;
 import java.util.*;
 import org.springframework.stereotype.Service;
@@ -23,19 +23,19 @@ public class StoreOperatingHours {
     private Configuration read(boolean enabled,String weeklyJson,String exceptionsJson){
         try{
             var node=mapper.readTree(weeklyJson);Map<DayOfWeek,List<Interval>> shifts=new EnumMap<>(DayOfWeek.class);
-            node.fields().forEachRemaining(entry->{DayOfWeek day=DayOfWeek.valueOf(entry.getKey());List<Interval> values=new ArrayList<>();
+            node.properties().forEach(entry->{DayOfWeek day=DayOfWeek.valueOf(entry.getKey());List<Interval> values=new ArrayList<>();
                 if(entry.getValue().isArray())entry.getValue().forEach(value->values.add(mapper.convertValue(value,Interval.class)));
                 else values.add(mapper.convertValue(entry.getValue(),Interval.class));shifts.put(day,values);});
             List<ExceptionHours> exceptions=mapper.readValue(exceptionsJson,mapper.getTypeFactory().constructCollectionType(ArrayList.class,ExceptionHours.class));
             return validate(new Configuration(enabled,Map.of(),exceptions,shifts));
-        }catch(JsonProcessingException|RuntimeException ex){throw new IllegalStateException("A configuração de horário desta loja está inválida.",ex);}
+        }catch(RuntimeException ex){throw new IllegalStateException("A configuração de horário desta loja está inválida.",ex);}
     }
     public Configuration save(Store store,Configuration input){
         Configuration config=validate(input);
         try{store.setOperatingHours(config.enabled(),mapper.writeValueAsString(config.weeklyShifts()),mapper.writeValueAsString(config.exceptions()));return config;}
-        catch(JsonProcessingException ex){throw new IllegalArgumentException("Não foi possível salvar os horários da loja.",ex);}
+        catch(JacksonException ex){throw new IllegalArgumentException("Não foi possível salvar os horários da loja.",ex);}
     }
-    public Configuration save(StoreProfessional professional,Configuration input){var config=validate(input);try{professional.setOperatingHours(config.enabled(),mapper.writeValueAsString(config.weeklyShifts()),mapper.writeValueAsString(config.exceptions()));return config;}catch(JsonProcessingException error){throw new IllegalArgumentException("Não foi possível salvar a disponibilidade do profissional.");}}
+    public Configuration save(StoreProfessional professional,Configuration input){var config=validate(input);try{professional.setOperatingHours(config.enabled(),mapper.writeValueAsString(config.weeklyShifts()),mapper.writeValueAsString(config.exceptions()));return config;}catch(JacksonException error){throw new IllegalArgumentException("Não foi possível salvar a disponibilidade do profissional.");}}
     public boolean fits(StoreProfessional professional,ZoneId zone,Instant start,Instant end){return fits(read(professional),zone,start,end);}
     public Configuration validate(Configuration input){
         if(input==null)throw new IllegalArgumentException("Informe a configuração de funcionamento.");
