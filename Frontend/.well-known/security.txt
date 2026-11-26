@@ -1,0 +1,4 @@
+Contact: https://github.com/WilkerOliv/FoodDelivery/security/advisories/new
+Expires: 2027-05-25T00:00:00Z
+Preferred-Languages: pt-BR, en
+Policy: https://github.com/WilkerOliv/FoodDelivery/blob/main/SECURITY.md

@@ -21,6 +21,7 @@ RUN cat /usr/local/bin/caddy.orig > /usr/local/bin/caddy \
 COPY --from=build /build/target/food-delivery-api-*.jar /app/api.jar
 COPY Frontend/index.html Frontend/styles.css Frontend/theme.css Frontend/favicon.ico Frontend/favicon.svg /app/web/
 COPY Frontend/src /app/web/src
+COPY Frontend/.well-known/security.txt /app/web/.well-known/security.txt
 COPY deploy/Caddyfile.persistente /app/Caddyfile
 COPY deploy/persistente.py /app/launcher.py
 USER 10001:10001
