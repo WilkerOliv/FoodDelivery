@@ -1,5 +1,7 @@
 # Definições administrativas
 
+> [NÃO VERIFICADO] Escopo da revisão de 25/11: instruções e resultados históricos sem evidência individual nesta página aguardam confirmação. Os testes repetidos têm comando e resultado na [matriz de aceite](Aceite_2026-11-25.md).
+
 Esta área é exclusiva do perfil `ADMIN`. O item **Minha conta** passa a se chamar **Definições** apenas para o administrador; os demais perfis continuam vendo **Minha conta**.
 
 ## Seções

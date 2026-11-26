@@ -1,5 +1,7 @@
 # Publicação gratuita de homologação
 
+> [NÃO VERIFICADO] Escopo da revisão de 25/11: instruções e resultados históricos sem evidência individual nesta página aguardam confirmação. Os testes repetidos têm comando e resultado na [matriz de aceite](Aceite_2026-11-25.md).
+
 Este guia descreve exclusivamente a **demonstração descartável**. O `render.yaml` atual corresponde ao [piloto persistente com Supabase](Persistencia_gratuita.md). Para aquele ambiente, siga o guia de persistência; os dados não devem ser tratados como descartáveis.
 
 ## Finalidade

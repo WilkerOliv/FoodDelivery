@@ -1,6 +1,6 @@
 # Referência completa de funções — backend Java
 
-Gerada a partir da árvore sintática do código final. Inclui funções explícitas, métodos privados, construtores e callbacks. Não é uma certificação de segurança: use junto da análise de engenharia e da matriz de testes. Cobertura estrutural: **153 arquivos e 1167 funções explícitas**. Hash agregado: `dffa63057059db96d9134ce02135cc5839aad931138184ac4faac03e8b9f83e6`.
+Gerada a partir da árvore sintática do código final. Inclui funções explícitas, métodos privados, construtores e callbacks. Não é uma certificação de segurança: use junto da análise de engenharia e da matriz de testes. Cobertura estrutural: **153 arquivos e 1172 funções explícitas**. Hash agregado: `33151f62e180f50f48762832a886edc857297c1df1cbf1dad2d20754814588e7`.
 
 Cada seção identifica localização, assinatura, regras locais, chamadas e efeitos observáveis. Getters implícitos de `record`, métodos herdados de bibliotecas e APIs nativas são descritos por seus contratos, não reproduzidos como código do projeto.
 
@@ -10,11 +10,11 @@ Regeneração: criar ambiente Python isolado, instalar `scripts/reference-requir
 
 Inicialização da aplicação e ligação dos módulos; manter separação entre configuração e regra de negócio.
 
-Fonte: [FoodDeliveryApplication.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/FoodDeliveryApplication.java) · SHA-256 `4a15a7b8b81e8e62c51d5deeca77cb698f9b86f4f5f39eca6af07c65450f1757`
+[LIDO NO CÓDIGO] Fonte: [FoodDeliveryApplication.java](../Backend/src/main/java/br/com/fooddelivery/FoodDeliveryApplication.java) · SHA-256 `4a15a7b8b81e8e62c51d5deeca77cb698f9b86f4f5f39eca6af07c65450f1757`
 
 ### main — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/FoodDeliveryApplication.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/FoodDeliveryApplication.java#L9)
 
 ```java
 public static void main(String[] args)
@@ -30,11 +30,11 @@ Executa a etapa `main` neste módulo. O contrato concreto está na assinatura, n
 
 Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
 
-Fonte: [AdminAuditEvent.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java) · SHA-256 `88576f48d1593d69068992340989fb2e6ac89442012025da4f227606bc975676`
+[LIDO NO CÓDIGO] Fonte: [AdminAuditEvent.java](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java) · SHA-256 `88576f48d1593d69068992340989fb2e6ac89442012025da4f227606bc975676`
 
 ### AdminAuditEvent — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java#L24)
 
 ```java
 protected AdminAuditEvent()
@@ -46,7 +46,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### AdminAuditEvent — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java#L26)
 
 ```java
 public AdminAuditEvent(UUID actorId, String action, String targetType, String targetId, String summary)
@@ -60,7 +60,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### required — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java#L34)
 
 ```java
 private static String required(String value, int max)
@@ -84,7 +84,7 @@ Executa a etapa `required` neste módulo. O contrato concreto está na assinatur
 
 ### clean — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java#L39)
 
 ```java
 private static String clean(String value, int max)
@@ -109,7 +109,7 @@ Executa a etapa `clean` neste módulo. O contrato concreto está na assinatura, 
 
 ### getId — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java#L46)
 
 ```java
 public UUID getId()
@@ -124,7 +124,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getActorId — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java#L47)
 
 ```java
 public UUID getActorId()
@@ -139,7 +139,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAction — linha 48
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java:48)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java#L48)
 
 ```java
 public String getAction()
@@ -154,7 +154,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getTargetType — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java:49)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java#L49)
 
 ```java
 public String getTargetType()
@@ -169,7 +169,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getTargetId — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java#L50)
 
 ```java
 public String getTargetId()
@@ -184,7 +184,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getSummary — linha 51
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java:51)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java#L51)
 
 ```java
 public String getSummary()
@@ -199,7 +199,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCreatedAt — linha 52
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java:52)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditEvent.java#L52)
 
 ```java
 public Instant getCreatedAt()
@@ -216,11 +216,11 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
 
-Fonte: [AdminAuditRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditRepository.java) · SHA-256 `1534ee3b37fb6fafe926f8bd1a311403971cfeda891d6116d1aab036cc98ab06`
+[LIDO NO CÓDIGO] Fonte: [AdminAuditRepository.java](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditRepository.java) · SHA-256 `1534ee3b37fb6fafe926f8bd1a311403971cfeda891d6116d1aab036cc98ab06`
 
 ### findAllByOrderByCreatedAtDesc — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditRepository.java#L9)
 
 ```java
 Page<AdminAuditEvent> findAllByOrderByCreatedAtDesc(Pageable pageable);
@@ -236,11 +236,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
 
-Fonte: [AdminAuditService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java) · SHA-256 `75a902333d50762d9352b150757f2183113bafa5893e0400f6c7a055ed832a2c`
+[LIDO NO CÓDIGO] Fonte: [AdminAuditService.java](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java) · SHA-256 `75a902333d50762d9352b150757f2183113bafa5893e0400f6c7a055ed832a2c`
 
 ### AdminAuditService — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java#L12)
 
 ```java
 public AdminAuditService(AdminAuditRepository events)
@@ -252,7 +252,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### recordCurrent — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java#L14)
 
 ```java
 @Transactional public void recordCurrent(String action, String targetType, Object targetId, String summary)
@@ -272,7 +272,7 @@ Executa a etapa `record Current` neste módulo. O contrato concreto está na ass
 
 ### record — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java#L22)
 
 ```java
 @Transactional public void record(UUID actorId, String action, String targetType, Object targetId, String summary)
@@ -294,7 +294,7 @@ events.save(new AdminAuditEvent(actorId, action, targetType,
 
 ### latest — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminAuditService.java#L28)
 
 ```java
 @Transactional(readOnly = true) public Page<AdminAuditEvent> latest(int page, int size)
@@ -313,7 +313,7 @@ Executa a etapa `latest` neste módulo. O contrato concreto está na assinatura,
 
 Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
 
-Fonte: [AdminCategoryController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java) · SHA-256 `0e2cfd4bc103512c716d510883fda3a50daf3eedebac4591f4d43bc9647f0522`
+[LIDO NO CÓDIGO] Fonte: [AdminCategoryController.java](../Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java) · SHA-256 `0e2cfd4bc103512c716d510883fda3a50daf3eedebac4591f4d43bc9647f0522`
 
 **Contrato de dados/estados:**
 ```java
@@ -330,7 +330,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### AdminCategoryController — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java#L22)
 
 ```java
 public AdminCategoryController(StoreCategoryRepository storeCategories, StoreRepository stores, AdminAuditService auditService)
@@ -342,7 +342,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### storeCategories — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java#L27)
 
 ```java
 @GetMapping("/store-categories") @org.springframework.transaction.annotation.Transactional(readOnly = true) public List<AdminStoreCategoryView> storeCategories()
@@ -359,7 +359,7 @@ Executa a etapa `store Categories` neste módulo. O contrato concreto está na a
 
 ### createStoreCategory — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java#L37)
 
 ```java
 @PostMapping("/store-categories") @ResponseStatus(HttpStatus.CREATED) @org.springframework.transaction.annotation.Transactional public AdminStoreCategoryView createStoreCategory(@Valid @RequestBody StoreCategoryRequest request)
@@ -389,7 +389,7 @@ StoreCategory saved = storeCategories.save(category);
 
 ### deleteStoreCategory — linha 52
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java:52)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminCategoryController.java#L52)
 
 ```java
 @DeleteMapping("/store-categories/{id}") @org.springframework.transaction.annotation.Transactional @ResponseStatus(HttpStatus.NO_CONTENT) public void deleteStoreCategory(@PathVariable UUID id)
@@ -416,7 +416,7 @@ storeCategories.delete(category);
 
 Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
 
-Fonte: [AdminController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java) · SHA-256 `efa22e1cdfab4491f1c9918796e34cf2917a3fcf4aca59d1127052e7d4acb25f`
+[LIDO NO CÓDIGO] Fonte: [AdminController.java](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java) · SHA-256 `efa22e1cdfab4491f1c9918796e34cf2917a3fcf4aca59d1127052e7d4acb25f`
 
 **Contrato de dados/estados:**
 ```java
@@ -492,7 +492,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### AdminController — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L38)
 
 ```java
 public AdminController(AccountRepository accounts, StoreRepository stores, PasswordEncoder encoder, NotificationService notifications, StoreCategoryRepository storeCategories, AdminAuditService auditService, br.com.fooddelivery.identity.PasswordRecoveryService recovery, br.com.fooddelivery.catalog.StoreHoursChangeService hoursChanges)
@@ -504,7 +504,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### updateAccountProfile — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L50)
 
 ```java
 @PutMapping("/accounts/{id}/profile") @org.springframework.transaction.annotation.Transactional public AdminAccountView updateAccountProfile(@PathVariable UUID id, @Valid @RequestBody AdminProfileUpdate request)
@@ -544,7 +544,7 @@ Account saved = accounts.save(account);
 
 ### clean — linha 79
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:79)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L79)
 
 ```java
 private static String clean(String value)
@@ -564,7 +564,7 @@ Executa a etapa `clean` neste módulo. O contrato concreto está na assinatura, 
 
 ### phoneDigits — linha 80
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:80)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L80)
 
 ```java
 private static String phoneDigits(String value)
@@ -584,7 +584,7 @@ Executa a etapa `phone Digits` neste módulo. O contrato concreto está na assin
 
 ### updateStoreProfile — linha 82
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:82)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L82)
 
 ```java
 @PutMapping("/stores/{id}/profile") @org.springframework.transaction.annotation.Transactional public AdminStoreView updateStoreProfile(@PathVariable UUID id,@Valid @RequestBody br.com.fooddelivery.catalog.CatalogController.StoreRequest request)
@@ -615,7 +615,7 @@ stores.save(store);
 
 ### createOperator — linha 97
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:97)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L97)
 
 ```java
 @PostMapping("/operators") @ResponseStatus(HttpStatus.CREATED) @org.springframework.transaction.annotation.Transactional public Account createOperator(@Valid @RequestBody OperatorRequest request)
@@ -654,7 +654,7 @@ Account saved=accounts.save(account);
 
 ### operators — linha 119
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:119)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L119)
 
 ```java
 @GetMapping("/operators") public List<OperatorView> operators()
@@ -671,7 +671,7 @@ Executa a etapa `operators` neste módulo. O contrato concreto está na assinatu
 
 ### allAccounts — linha 124
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:124)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L124)
 
 ```java
 @GetMapping("/accounts") public List<AdminAccountView> allAccounts()
@@ -688,7 +688,7 @@ Executa a etapa `all Accounts` neste módulo. O contrato concreto está na assin
 
 ### operatorPage — linha 129
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:129)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L129)
 
 ```java
 @GetMapping("/operators/page") @org.springframework.transaction.annotation.Transactional(readOnly = true) public AdminPage<OperatorView> operatorPage(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="25") int size)
@@ -705,7 +705,7 @@ Executa a etapa `operator Page` neste módulo. O contrato concreto está na assi
 
 ### accountPage — linha 135
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:135)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L135)
 
 ```java
 @GetMapping("/accounts/page") @org.springframework.transaction.annotation.Transactional(readOnly = true) public AdminPage<AdminAccountView> accountPage(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="25") int size)
@@ -722,7 +722,7 @@ Executa a etapa `account Page` neste módulo. O contrato concreto está na assin
 
 ### storePage — linha 141
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:141)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L141)
 
 ```java
 @GetMapping("/stores/page") @org.springframework.transaction.annotation.Transactional(readOnly = true) public AdminPage<AdminStoreView> storePage(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="25") int size, @RequestParam(defaultValue="ALL") String status)
@@ -742,7 +742,7 @@ Executa a etapa `store Page` neste módulo. O contrato concreto está na assinat
 
 ### setAccountActive — linha 156
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:156)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L156)
 
 ```java
 @PatchMapping("/accounts/{id}/active") @org.springframework.transaction.annotation.Transactional public AdminAccountView setAccountActive(@PathVariable UUID id, @RequestBody AccountActivity request)
@@ -774,7 +774,7 @@ ownedStores.forEach(store -> { store.setActive(false); store.setApproved(false);
 
 ### setRoleActive — linha 172
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:172)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L172)
 
 ```java
 @PatchMapping("/accounts/{id}/roles/{role}") @org.springframework.transaction.annotation.Transactional public AdminAccountView setRoleActive(@PathVariable UUID id, @PathVariable AccountRole role, @RequestBody AccountActivity request)
@@ -806,7 +806,7 @@ ownedStores.forEach(store -> { store.setActive(false); store.setApproved(false);
 
 ### resetPassword — linha 188
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:188)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L188)
 
 ```java
 @PostMapping("/accounts/{id}/password-reset") @org.springframework.transaction.annotation.Transactional public Map<String, Object> resetPassword(@PathVariable UUID id)
@@ -828,7 +828,7 @@ accounts.save(account);
 
 ### pendingApplications — linha 200
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:200)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L200)
 
 ```java
 @GetMapping("/operator-applications") public List<OperatorView> pendingApplications()
@@ -845,7 +845,7 @@ Executa a etapa `pending Applications` neste módulo. O contrato concreto está 
 
 ### approveApplication — linha 205
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:205)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L205)
 
 ```java
 @PatchMapping("/operator-applications/{id}/approve") @org.springframework.transaction.annotation.Transactional public OperatorView approveApplication(@PathVariable UUID id)
@@ -871,7 +871,7 @@ notifications.send(saved, "Acesso aprovado", "Seu acesso de "+(saved.getRole()==
 
 ### rejectApplication — linha 216
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:216)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L216)
 
 ```java
 @PatchMapping("/operator-applications/{id}/reject") @org.springframework.transaction.annotation.Transactional public OperatorView rejectApplication(@PathVariable UUID id)
@@ -894,7 +894,7 @@ notifications.send(saved, "Solicitação analisada", "Sua solicitação de acess
 
 ### deactivate — linha 227
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:227)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L227)
 
 ```java
 @PatchMapping("/operators/{id}/deactivate") @org.springframework.transaction.annotation.Transactional public Map<String, String> deactivate(@PathVariable UUID id)
@@ -925,7 +925,7 @@ ownedStores.forEach(store -> { store.setActive(false); store.setApproved(false);
 
 ### activate — linha 245
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:245)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L245)
 
 ```java
 @PatchMapping("/operators/{id}/activate") @org.springframework.transaction.annotation.Transactional public Map<String, String> activate(@PathVariable UUID id)
@@ -954,7 +954,7 @@ accounts.save(account);
 
 ### stores — linha 258
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:258)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L258)
 
 ```java
 @GetMapping("/stores") @org.springframework.transaction.annotation.Transactional(readOnly = true) public List<AdminStoreView> stores()
@@ -971,7 +971,7 @@ Executa a etapa `stores` neste módulo. O contrato concreto está na assinatura,
 
 ### adminStoreView — linha 263
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:263)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L263)
 
 ```java
 private static AdminStoreView adminStoreView(Store store)
@@ -988,7 +988,7 @@ Executa a etapa `admin Store View` neste módulo. O contrato concreto está na a
 
 ### approveStore — linha 269
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:269)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L269)
 
 ```java
 @PatchMapping("/stores/{id}/approval") @org.springframework.transaction.annotation.Transactional public Store approveStore(@PathVariable UUID id, @RequestBody Approval request)
@@ -1020,7 +1020,7 @@ Store saved=stores.save(store);
 
 ### setStoreActive — linha 282
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:282)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L282)
 
 ```java
 @PatchMapping("/stores/{id}/active") @org.springframework.transaction.annotation.Transactional public Store setStoreActive(@PathVariable UUID id, @RequestBody StoreActivity request)
@@ -1048,7 +1048,7 @@ Store saved=stores.save(store);
 
 ### setCommission — linha 293
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:293)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L293)
 
 ```java
 @PatchMapping("/stores/{id}/commission") @org.springframework.transaction.annotation.Transactional public Map<String, Object> setCommission(@PathVariable UUID id, @Valid @RequestBody Commission request)
@@ -1071,7 +1071,7 @@ stores.save(store);
 
 ### auditEvents — linha 303
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:303)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L303)
 
 ```java
 @GetMapping("/audit-events") @org.springframework.transaction.annotation.Transactional(readOnly = true) public org.springframework.data.domain.Page<AdminAuditView> auditEvents( @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "50") int size)
@@ -1088,7 +1088,7 @@ Executa a etapa `audit Events` neste módulo. O contrato concreto está na assin
 
 ### audit — linha 311
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:311)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L311)
 
 ```java
 private void audit(String action, String targetType, Object targetId, String summary)
@@ -1102,7 +1102,7 @@ Executa a etapa `audit` neste módulo. O contrato concreto está na assinatura, 
 
 ### operatorView — linha 315
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:315)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L315)
 
 ```java
 private static OperatorView operatorView(Account account)
@@ -1122,7 +1122,7 @@ Executa a etapa `operator View` neste módulo. O contrato concreto está na assi
 
 ### adminAccountView — linha 321
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:321)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L321)
 
 ```java
 private static AdminAccountView adminAccountView(Account account)
@@ -1142,7 +1142,7 @@ Executa a etapa `admin Account View` neste módulo. O contrato concreto está na
 
 ### OperatorRequest — linha 332
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java:332)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminController.java#L332)
 
 ```java
 public OperatorRequest
@@ -1162,7 +1162,7 @@ Executa a etapa `Operator Request` neste módulo. O contrato concreto está na a
 
 Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
 
-Fonte: [AdminCoverageController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java) · SHA-256 `8a3cf0ade3f90410844eca0ee3d7bbc46625fbcf5830f91c83459229a28bceb6`
+[LIDO NO CÓDIGO] Fonte: [AdminCoverageController.java](../Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java) · SHA-256 `8a3cf0ade3f90410844eca0ee3d7bbc46625fbcf5830f91c83459229a28bceb6`
 
 **Contrato de dados/estados:**
 ```java
@@ -1179,7 +1179,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### AdminCoverageController — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java#L20)
 
 ```java
 public AdminCoverageController(ServiceCityRepository serviceCities, AdminAuditService auditService)
@@ -1191,7 +1191,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### serviceCities — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java#L24)
 
 ```java
 @GetMapping("/service-cities") public List<ServiceCityView> serviceCities()
@@ -1208,7 +1208,7 @@ Executa a etapa `service Cities` neste módulo. O contrato concreto está na ass
 
 ### createServiceCity — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java#L29)
 
 ```java
 @PostMapping("/service-cities") @ResponseStatus(HttpStatus.CREATED) @org.springframework.transaction.annotation.Transactional public ServiceCityView createServiceCity(@Valid @RequestBody ServiceCityRequest request)
@@ -1236,7 +1236,7 @@ ServiceCity saved = serviceCities.save(new ServiceCity(city, state, request.post
 
 ### updateServiceCity — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java#L42)
 
 ```java
 @PutMapping("/service-cities/{id}") @org.springframework.transaction.annotation.Transactional public ServiceCityView updateServiceCity(@PathVariable UUID id, @Valid @RequestBody ServiceCityRequest request)
@@ -1262,7 +1262,7 @@ ServiceCity saved = serviceCities.save(city);
 
 ### of — linha 63
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java:63)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminCoverageController.java#L63)
 
 ```java
 static ServiceCityView of(ServiceCity city)
@@ -1281,7 +1281,7 @@ Executa a etapa `of` neste módulo. O contrato concreto está na assinatura, nos
 
 Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
 
-Fonte: [AdminIntegrationStatusController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java) · SHA-256 `92fd6e1fc3960eff151769a32a321c0c3e057ee1df4b8a5a7125b535ed876d00`
+[LIDO NO CÓDIGO] Fonte: [AdminIntegrationStatusController.java](../Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java) · SHA-256 `92fd6e1fc3960eff151769a32a321c0c3e057ee1df4b8a5a7125b535ed876d00`
 
 **Contrato de dados/estados:**
 ```java
@@ -1291,7 +1291,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### setting — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java#L25)
 
 ```java
 private String setting(String key,String fallback)
@@ -1311,7 +1311,7 @@ Executa a etapa `setting` neste módulo. O contrato concreto está na assinatura
 
 ### integrations — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java#L26)
 
 ```java
 @GetMapping("/integrations") public List<IntegrationView> integrations()
@@ -1328,7 +1328,7 @@ Executa a etapa `integrations` neste módulo. O contrato concreto está na assin
 
 ### ready — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java#L38)
 
 ```java
 private static boolean ready(String... values)
@@ -1345,7 +1345,7 @@ Executa a etapa `ready` neste módulo. O contrato concreto está na assinatura, 
 
 ### integration — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminIntegrationStatusController.java#L40)
 
 ```java
 private static IntegrationView integration(String id, String name, boolean ready, String variables)
@@ -1365,11 +1365,11 @@ Executa a etapa `integration` neste módulo. O contrato concreto está na assina
 
 Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
 
-Fonte: [AdminListSummaryController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminListSummaryController.java) · SHA-256 `4d467d3e38b3fec90d1ad2266e004740e0c05797efbebd4e1def5e8c11a72ebf`
+[LIDO NO CÓDIGO] Fonte: [AdminListSummaryController.java](../Backend/src/main/java/br/com/fooddelivery/admin/AdminListSummaryController.java) · SHA-256 `4d467d3e38b3fec90d1ad2266e004740e0c05797efbebd4e1def5e8c11a72ebf`
 
 ### AdminListSummaryController — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminListSummaryController.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminListSummaryController.java#L19)
 
 ```java
 public AdminListSummaryController(StoreRepository stores, AccountRepository accounts, SupportTicketRepository tickets)
@@ -1381,7 +1381,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### summary — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminListSummaryController.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminListSummaryController.java#L22)
 
 ```java
 @GetMapping @Transactional(readOnly=true) public Map<String, Long> summary()
@@ -1400,7 +1400,7 @@ Executa a etapa `summary` neste módulo. O contrato concreto está na assinatura
 
 Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
 
-Fonte: [AdminMfaController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminMfaController.java) · SHA-256 `5e4dd54305ebcbee08858239704a735d77416d049f97b0d9a30668a085738937`
+[LIDO NO CÓDIGO] Fonte: [AdminMfaController.java](../Backend/src/main/java/br/com/fooddelivery/admin/AdminMfaController.java) · SHA-256 `5e4dd54305ebcbee08858239704a735d77416d049f97b0d9a30668a085738937`
 
 **Contrato de dados/estados:**
 ```java
@@ -1410,7 +1410,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### AdminMfaController — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminMfaController.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminMfaController.java#L14)
 
 ```java
 public AdminMfaController(AdminMfaService service)
@@ -1422,7 +1422,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### id — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminMfaController.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminMfaController.java#L15)
 
 ```java
 private UUID id(Authentication a)
@@ -1439,7 +1439,7 @@ Executa a etapa `id` neste módulo. O contrato concreto está na assinatura, nos
 
 ### status — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminMfaController.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminMfaController.java#L16)
 
 ```java
 @GetMapping public Object status(Authentication a)
@@ -1456,7 +1456,7 @@ Executa a etapa `status` neste módulo. O contrato concreto está na assinatura,
 
 ### begin — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminMfaController.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminMfaController.java#L17)
 
 ```java
 @PostMapping("/begin") public Object begin(Authentication a,@Valid @RequestBody Request r)
@@ -1473,7 +1473,7 @@ Executa a etapa `begin` neste módulo. O contrato concreto está na assinatura, 
 
 ### enable — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminMfaController.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminMfaController.java#L18)
 
 ```java
 @PostMapping("/enable") public Object enable(Authentication a,@Valid @RequestBody Request r)
@@ -1496,7 +1496,7 @@ Executa a etapa `enable` neste módulo. O contrato concreto está na assinatura,
 
 ### disable — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminMfaController.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminMfaController.java#L19)
 
 ```java
 @PostMapping("/disable") public Object disable(Authentication a,@Valid @RequestBody Request r)
@@ -1521,7 +1521,7 @@ Executa a etapa `disable` neste módulo. O contrato concreto está na assinatura
 
 Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
 
-Fonte: [AdminPage.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminPage.java) · SHA-256 `45859ea5f12a36f8fdc280b8d52312e4ec563467da61f1ac7c1adb186bbdafc2`
+[LIDO NO CÓDIGO] Fonte: [AdminPage.java](../Backend/src/main/java/br/com/fooddelivery/admin/AdminPage.java) · SHA-256 `45859ea5f12a36f8fdc280b8d52312e4ec563467da61f1ac7c1adb186bbdafc2`
 
 **Contrato de dados/estados:**
 ```java
@@ -1531,7 +1531,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### request — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminPage.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminPage.java#L10)
 
 ```java
 public static PageRequest request(int page, int size, String field)
@@ -1554,7 +1554,7 @@ Executa a etapa `request` neste módulo. O contrato concreto está na assinatura
 
 ### from — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/AdminPage.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/AdminPage.java#L15)
 
 ```java
 public static <T> AdminPage<T> from(Page<T> page)
@@ -1573,7 +1573,7 @@ Executa a etapa `from` neste módulo. O contrato concreto está na assinatura, n
 
 Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
 
-Fonte: [IntegrationSettingsController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/IntegrationSettingsController.java) · SHA-256 `a0026c775b8a6ed6a474e9b6edada5073c27d752fc36165d3ec751a87c3efde8`
+[LIDO NO CÓDIGO] Fonte: [IntegrationSettingsController.java](../Backend/src/main/java/br/com/fooddelivery/admin/IntegrationSettingsController.java) · SHA-256 `a0026c775b8a6ed6a474e9b6edada5073c27d752fc36165d3ec751a87c3efde8`
 
 **Contrato de dados/estados:**
 ```java
@@ -1583,7 +1583,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### IntegrationSettingsController — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/IntegrationSettingsController.java:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/IntegrationSettingsController.java#L12)
 
 ```java
 public IntegrationSettingsController(IntegrationSettings settings)
@@ -1595,7 +1595,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### status — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/IntegrationSettingsController.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/IntegrationSettingsController.java#L13)
 
 ```java
 @GetMapping public Object status()
@@ -1612,7 +1612,7 @@ Executa a etapa `status` neste módulo. O contrato concreto está na assinatura,
 
 ### update — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/IntegrationSettingsController.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/IntegrationSettingsController.java#L14)
 
 ```java
 @PutMapping public Object update(Authentication auth,@Valid @RequestBody Request request)
@@ -1640,7 +1640,7 @@ Executa a etapa `update` neste módulo. O contrato concreto está na assinatura,
 
 Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
 
-Fonte: [ReconciliationController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/ReconciliationController.java) · SHA-256 `c247cda2d8f63d9ad5b119ab90f0239ad5ffa7709d9bfc43313f64815a8c04a9`
+[LIDO NO CÓDIGO] Fonte: [ReconciliationController.java](../Backend/src/main/java/br/com/fooddelivery/admin/ReconciliationController.java) · SHA-256 `c247cda2d8f63d9ad5b119ab90f0239ad5ffa7709d9bfc43313f64815a8c04a9`
 
 **Contrato de dados/estados:**
 ```java
@@ -1650,7 +1650,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### ReconciliationController — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/ReconciliationController.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/ReconciliationController.java#L14)
 
 ```java
 public ReconciliationController(PaymentReconciliationService service,PaymentReconciliationRepository reports)
@@ -1662,7 +1662,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### list — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/ReconciliationController.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/ReconciliationController.java#L15)
 
 ```java
 @GetMapping public Object list(@RequestParam(defaultValue="0")int page)
@@ -1679,7 +1679,7 @@ Executa a etapa `list` neste módulo. O contrato concreto está na assinatura, n
 
 ### reconcile — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/ReconciliationController.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/ReconciliationController.java#L16)
 
 ```java
 @PostMapping("/{paymentId}") public Object reconcile(@PathVariable UUID paymentId,@Valid @RequestBody Request request,Authentication auth)
@@ -1698,7 +1698,7 @@ Executa a etapa `reconcile` neste módulo. O contrato concreto está na assinatu
 
 Administração. Operações exigem papel ADMIN; alterações sensíveis instrumentadas são registradas sem copiar segredos para a auditoria.
 
-Fonte: [RefundAdminController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/RefundAdminController.java) · SHA-256 `b2b512c34a7b398579c06e5df94dde1ba9a072400f92f38a2df16a2dc33b4278`
+[LIDO NO CÓDIGO] Fonte: [RefundAdminController.java](../Backend/src/main/java/br/com/fooddelivery/admin/RefundAdminController.java) · SHA-256 `b2b512c34a7b398579c06e5df94dde1ba9a072400f92f38a2df16a2dc33b4278`
 
 **Contrato de dados/estados:**
 ```java
@@ -1710,7 +1710,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### RefundAdminController — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/RefundAdminController.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/RefundAdminController.java#L21)
 
 ```java
 public RefundAdminController(PaymentRepository payments)
@@ -1722,7 +1722,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### list — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/RefundAdminController.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/RefundAdminController.java#L25)
 
 ```java
 @GetMapping @Transactional(readOnly = true) public List<RefundCase> list()
@@ -1739,7 +1739,7 @@ Executa a etapa `list` neste módulo. O contrato concreto está na assinatura, n
 
 ### view — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/admin/RefundAdminController.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/admin/RefundAdminController.java#L32)
 
 ```java
 private static RefundCase view(Payment payment)
@@ -1761,11 +1761,11 @@ Executa a etapa `view` neste módulo. O contrato concreto está na assinatura, n
 
 Transporte HTTP e sessão. Cookies não ficam acessíveis ao JavaScript; mensagens de falha precisam distinguir autorização, validação e indisponibilidade.
 
-Fonte: [ApiExceptionHandler.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java) · SHA-256 `b9401fb48e5242e8afa38a49641b911e8ab2455c06ab97d23e54d7ca27d1b56c`
+[LIDO NO CÓDIGO] Fonte: [ApiExceptionHandler.java](../Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java) · SHA-256 `b9401fb48e5242e8afa38a49641b911e8ab2455c06ab97d23e54d7ca27d1b56c`
 
 ### malformedRequest — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java#L19)
 
 ```java
 @ExceptionHandler({org.springframework.http.converter.HttpMessageNotReadableException.class, org.springframework.web.method.annotation.MethodArgumentTypeMismatchException.class, org.springframework.web.bind.MissingServletRequestParameterException.class}) ResponseEntity<Map<String,String>> malformedRequest(Exception exception)
@@ -1782,7 +1782,7 @@ Executa a etapa `malformed Request` neste módulo. O contrato concreto está na 
 
 ### unauthenticated — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java#L26)
 
 ```java
 @ExceptionHandler(AuthenticationException.class) ResponseEntity<Map<String, String>> unauthenticated(AuthenticationException exception)
@@ -1799,7 +1799,7 @@ Executa a etapa `unauthenticated` neste módulo. O contrato concreto está na as
 
 ### forbidden — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java#L32)
 
 ```java
 @ExceptionHandler(AccessDeniedException.class) ResponseEntity<Map<String, String>> forbidden(AccessDeniedException exception)
@@ -1816,7 +1816,7 @@ Executa a etapa `forbidden` neste módulo. O contrato concreto está na assinatu
 
 ### responseStatus — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java#L38)
 
 ```java
 @ExceptionHandler(ResponseStatusException.class) ResponseEntity<Map<String, String>> responseStatus(ResponseStatusException exception)
@@ -1836,7 +1836,7 @@ Executa a etapa `response Status` neste módulo. O contrato concreto está na as
 
 ### conflict — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java#L45)
 
 ```java
 @ExceptionHandler(IllegalArgumentException.class) ResponseEntity<Map<String, String>> conflict(IllegalArgumentException exception)
@@ -1853,7 +1853,7 @@ Executa a etapa `conflict` neste módulo. O contrato concreto está na assinatur
 
 ### invalidTransition — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java#L50)
 
 ```java
 @ExceptionHandler(IllegalStateException.class) ResponseEntity<Map<String, String>> invalidTransition(IllegalStateException exception)
@@ -1870,7 +1870,7 @@ Executa a etapa `invalid Transition` neste módulo. O contrato concreto está na
 
 ### notFound — linha 55
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java:55)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java#L55)
 
 ```java
 @ExceptionHandler(NoSuchElementException.class) ResponseEntity<Map<String, String>> notFound(NoSuchElementException exception)
@@ -1890,7 +1890,7 @@ Executa a etapa `not Found` neste módulo. O contrato concreto está na assinatu
 
 ### concurrentChange — linha 62
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java:62)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java#L62)
 
 ```java
 @ExceptionHandler({org.springframework.dao.OptimisticLockingFailureException.class,org.springframework.dao.PessimisticLockingFailureException.class}) ResponseEntity<Map<String,String>> concurrentChange(Exception exception)
@@ -1907,7 +1907,7 @@ Executa a etapa `concurrent Change` neste módulo. O contrato concreto está na 
 
 ### internalError — linha 65
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java:65)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java#L65)
 
 ```java
 @ExceptionHandler(Exception.class) ResponseEntity<Map<String, String>> internalError(Exception exception)
@@ -1924,7 +1924,7 @@ Executa a etapa `internal Error` neste módulo. O contrato concreto está na ass
 
 ### validation — linha 72
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java:72)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java#L72)
 
 ```java
 @ExceptionHandler(MethodArgumentNotValidException.class) ResponseEntity<Map<String, String>> validation(MethodArgumentNotValidException exception)
@@ -1941,7 +1941,7 @@ Executa a etapa `validation` neste módulo. O contrato concreto está na assinat
 
 ### duplicate — linha 80
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java:80)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/api/ApiExceptionHandler.java#L80)
 
 ```java
 @ExceptionHandler(DataIntegrityViolationException.class) ResponseEntity<Map<String, String>> duplicate(DataIntegrityViolationException exception)
@@ -1960,11 +1960,11 @@ Executa a etapa `duplicate` neste módulo. O contrato concreto está na assinatu
 
 Transporte HTTP e sessão. Cookies não ficam acessíveis ao JavaScript; mensagens de falha precisam distinguir autorização, validação e indisponibilidade.
 
-Fonte: [HealthController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/api/HealthController.java) · SHA-256 `1087c493c11d4bf2c30049adce590fdd6a195355e5dde263f1f84aafaf154fda`
+[LIDO NO CÓDIGO] Fonte: [HealthController.java](../Backend/src/main/java/br/com/fooddelivery/api/HealthController.java) · SHA-256 `1087c493c11d4bf2c30049adce590fdd6a195355e5dde263f1f84aafaf154fda`
 
 ### status — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/api/HealthController.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/api/HealthController.java#L11)
 
 ```java
 @GetMapping("/status") public Map<String, String> status()
@@ -1983,7 +1983,7 @@ Executa a etapa `status` neste módulo. O contrato concreto está na assinatura,
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [BookingAvailabilityController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java) · SHA-256 `965ef77331c40072987ffc8163ea98d6404ab439c2a6e6c830fb2ed015930989`
+[LIDO NO CÓDIGO] Fonte: [BookingAvailabilityController.java](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java) · SHA-256 `965ef77331c40072987ffc8163ea98d6404ab439c2a6e6c830fb2ed015930989`
 
 **Contrato de dados/estados:**
 ```java
@@ -1999,7 +1999,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### BookingAvailabilityController — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L18)
 
 ```java
 public BookingAvailabilityController(StoreRepository stores,StoreProfessionalRepository professionals,StoreOperatingHours hours,StoreHoursChangeService changes,CatalogItemRepository items,ReservationSlotRepository slots,AdminAuditService audit)
@@ -2011,7 +2011,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### actor — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L19)
 
 ```java
 private UUID actor(Authentication a)
@@ -2028,7 +2028,7 @@ Executa a etapa `actor` neste módulo. O contrato concreto está na assinatura, 
 
 ### owned — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L20)
 
 ```java
 private Store owned(UUID id,Authentication a,boolean admin)
@@ -2051,7 +2051,7 @@ Executa a etapa `owned` neste módulo. O contrato concreto está na assinatura, 
 
 ### professional — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L21)
 
 ```java
 private StoreProfessional professional(Store s,UUID id)
@@ -2074,7 +2074,7 @@ Executa a etapa `professional` neste módulo. O contrato concreto está na assin
 
 ### policy — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L23)
 
 ```java
 private Policy policy(Store s)
@@ -2091,7 +2091,7 @@ Executa a etapa `policy` neste módulo. O contrato concreto está na assinatura,
 
 ### publicPolicy — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L24)
 
 ```java
 @GetMapping("/stores/{id}/booking-policy") @Transactional(readOnly=true) public Policy publicPolicy(@PathVariable UUID id)
@@ -2108,7 +2108,7 @@ Executa a etapa `public Policy` neste módulo. O contrato concreto está na assi
 
 ### merchantPolicy — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L25)
 
 ```java
 @GetMapping("/merchant/stores/{id}/booking-policy") @PreAuthorize("hasRole('MERCHANT')") @Transactional public Policy merchantPolicy(@PathVariable UUID id,Authentication a)
@@ -2125,7 +2125,7 @@ Executa a etapa `merchant Policy` neste módulo. O contrato concreto está na as
 
 ### merchantPolicySave — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L26)
 
 ```java
 @PutMapping("/merchant/stores/{id}/booking-policy") @PreAuthorize("hasRole('MERCHANT')") @Transactional public Policy merchantPolicySave(@PathVariable UUID id,Authentication a,@Valid @RequestBody Policy r)
@@ -2142,7 +2142,7 @@ Executa a etapa `merchant Policy Save` neste módulo. O contrato concreto está 
 
 ### adminPolicy — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L27)
 
 ```java
 @GetMapping("/admin/stores/{id}/booking-policy") @PreAuthorize("hasRole('ADMIN')") @Transactional public Policy adminPolicy(@PathVariable UUID id,Authentication a)
@@ -2159,7 +2159,7 @@ Executa a etapa `admin Policy` neste módulo. O contrato concreto está na assin
 
 ### adminPolicySave — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L28)
 
 ```java
 @PutMapping("/admin/stores/{id}/booking-policy") @PreAuthorize("hasRole('ADMIN')") @Transactional public Policy adminPolicySave(@PathVariable UUID id,Authentication a,@Valid @RequestBody Policy r)
@@ -2176,7 +2176,7 @@ Executa a etapa `admin Policy Save` neste módulo. O contrato concreto está na 
 
 ### save — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L29)
 
 ```java
 private Policy save(Store s,Authentication a,Policy r)
@@ -2193,7 +2193,7 @@ Executa a etapa `save` neste módulo. O contrato concreto está na assinatura, n
 
 ### merchantHours — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L30)
 
 ```java
 @GetMapping("/merchant/stores/{id}/professionals/{pid}/availability") @PreAuthorize("hasRole('MERCHANT')") @Transactional public Object merchantHours(@PathVariable UUID id,@PathVariable UUID pid,Authentication a)
@@ -2210,7 +2210,7 @@ Executa a etapa `merchant Hours` neste módulo. O contrato concreto está na ass
 
 ### merchantPreview — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L31)
 
 ```java
 @PostMapping("/merchant/stores/{id}/professionals/{pid}/availability/preview") @PreAuthorize("hasRole('MERCHANT')") public Object merchantPreview(@PathVariable UUID id,@PathVariable UUID pid,Authentication a,@RequestBody StoreHoursChangeService.ChangeRequest r)
@@ -2227,7 +2227,7 @@ Executa a etapa `merchant Preview` neste módulo. O contrato concreto está na a
 
 ### merchantSave — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L32)
 
 ```java
 @PutMapping("/merchant/stores/{id}/professionals/{pid}/availability") @PreAuthorize("hasRole('MERCHANT')") public Object merchantSave(@PathVariable UUID id,@PathVariable UUID pid,Authentication a,@RequestBody StoreHoursChangeService.ChangeRequest r)
@@ -2244,7 +2244,7 @@ Executa a etapa `merchant Save` neste módulo. O contrato concreto está na assi
 
 ### adminProfessionals — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L33)
 
 ```java
 @GetMapping("/admin/stores/{id}/professionals") @PreAuthorize("hasRole('ADMIN')") @Transactional public Object adminProfessionals(@PathVariable UUID id,Authentication a)
@@ -2261,7 +2261,7 @@ Executa a etapa `admin Professionals` neste módulo. O contrato concreto está n
 
 ### adminHours — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L34)
 
 ```java
 @GetMapping("/admin/stores/{id}/professionals/{pid}/availability") @PreAuthorize("hasRole('ADMIN')") @Transactional public Object adminHours(@PathVariable UUID id,@PathVariable UUID pid,Authentication a)
@@ -2278,7 +2278,7 @@ Executa a etapa `admin Hours` neste módulo. O contrato concreto está na assina
 
 ### adminPreview — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L35)
 
 ```java
 @PostMapping("/admin/stores/{id}/professionals/{pid}/availability/preview") @PreAuthorize("hasRole('ADMIN')") public Object adminPreview(@PathVariable UUID id,@PathVariable UUID pid,Authentication a,@RequestBody StoreHoursChangeService.ChangeRequest r)
@@ -2295,7 +2295,7 @@ Executa a etapa `admin Preview` neste módulo. O contrato concreto está na assi
 
 ### adminSave — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L36)
 
 ```java
 @PutMapping("/admin/stores/{id}/professionals/{pid}/availability") @PreAuthorize("hasRole('ADMIN')") public Object adminSave(@PathVariable UUID id,@PathVariable UUID pid,Authentication a,@RequestBody StoreHoursChangeService.ChangeRequest r)
@@ -2312,7 +2312,7 @@ Executa a etapa `admin Save` neste módulo. O contrato concreto está na assinat
 
 ### available — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/BookingAvailabilityController.java#L38)
 
 ```java
 @GetMapping("/stores/{id}/availability") @Transactional(readOnly=true) public Object available(@PathVariable UUID id,@RequestParam UUID serviceItemId,@RequestParam LocalDate date,@RequestParam(required=false)UUID professionalId)
@@ -2343,7 +2343,7 @@ Executa a etapa `available` neste módulo. O contrato concreto está na assinatu
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [CatalogController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java) · SHA-256 `d8a44eb4ff1fe369c402c178314ddd936d47a3c505a98acb9c4305449c30a940`
+[LIDO NO CÓDIGO] Fonte: [CatalogController.java](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java) · SHA-256 `d8a44eb4ff1fe369c402c178314ddd936d47a3c505a98acb9c4305449c30a940`
 
 **Contrato de dados/estados:**
 ```java
@@ -2403,7 +2403,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### CatalogController — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L29)
 
 ```java
 public CatalogController(StoreRepository stores, CatalogItemRepository items, AccountRepository accounts, PlatformRequestRepository platformRequests, ServiceCityRepository serviceCities, StoreCategoryRepository storeCategories, StoreProfessionalRepository professionals, StoreOperatingHours operatingHours,StoreHoursChangeService hoursChanges)
@@ -2415,7 +2415,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### categories — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L32)
 
 ```java
 @GetMapping("/store-categories") @Transactional(readOnly=true) public List<StoreCategories.Category> categories()
@@ -2432,7 +2432,7 @@ Executa a etapa `categories` neste módulo. O contrato concreto está na assinat
 
 ### locations — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L38)
 
 ```java
 @GetMapping("/store-locations") @Transactional(readOnly=true) public List<LocationView> locations()
@@ -2449,7 +2449,7 @@ Executa a etapa `locations` neste módulo. O contrato concreto está na assinatu
 
 ### stores — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L47)
 
 ```java
 @GetMapping("/stores") @Transactional(readOnly=true) public List<StoreView> stores(@RequestParam(required=false) String city,@RequestParam(required=false) String state)
@@ -2471,7 +2471,7 @@ Executa a etapa `stores` neste módulo. O contrato concreto está na assinatura,
 
 ### items — linha 54
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:54)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L54)
 
 ```java
 @GetMapping("/stores/{id}/items") @Transactional(readOnly=true) public List<CatalogItemView> items(@PathVariable UUID id)
@@ -2494,7 +2494,7 @@ Executa a etapa `items` neste módulo. O contrato concreto está na assinatura, 
 
 ### createStore — linha 59
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:59)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L59)
 
 ```java
 @PostMapping("/merchant/stores") @ResponseStatus(HttpStatus.CREATED) @PreAuthorize("hasRole('MERCHANT')") @Transactional public StoreView createStore(@Valid @RequestBody StoreRequest req, Authentication auth)
@@ -2519,7 +2519,7 @@ Store store=new Store(owner, req.name(), req.description(), req.address(), req.c
 
 ### myStores — linha 67
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:67)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L67)
 
 ```java
 @GetMapping("/merchant/stores/mine") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true) public List<StoreView> myStores(Authentication auth)
@@ -2536,7 +2536,7 @@ Executa a etapa `my Stores` neste módulo. O contrato concreto está na assinatu
 
 ### resubmitStore — linha 70
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:70)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L70)
 
 ```java
 @PostMapping("/merchant/stores/{id}/resubmit") @PreAuthorize("hasRole('MERCHANT')") @ResponseStatus(HttpStatus.CREATED) @Transactional public StoreView resubmitStore(@PathVariable UUID id,Authentication auth)
@@ -2564,7 +2564,7 @@ public StoreView resubmitStore(@PathVariable UUID id,Authentication auth){Store 
 
 ### updateStore — linha 72
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:72)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L72)
 
 ```java
 @PutMapping("/merchant/stores/{id}") @PreAuthorize("hasRole('MERCHANT')") @Transactional public StoreView updateStore(@PathVariable UUID id, @Valid @RequestBody StoreRequest req, Authentication auth)
@@ -2595,7 +2595,7 @@ store.update(req.name(), req.description(), req.address(), req.city().trim(), re
 
 ### merchantHours — linha 80
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:80)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L80)
 
 ```java
 @GetMapping("/merchant/stores/{id}/hours") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true) public StoreOperatingHours.Configuration merchantHours(@PathVariable UUID id, Authentication auth)
@@ -2612,7 +2612,7 @@ Executa a etapa `merchant Hours` neste módulo. O contrato concreto está na ass
 
 ### previewHours — linha 82
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:82)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L82)
 
 ```java
 @PostMapping("/merchant/stores/{id}/hours/preview") @PreAuthorize("hasRole('MERCHANT')") public StoreHoursChangeService.Preview previewHours(@PathVariable UUID id,@RequestBody StoreHoursChangeService.ChangeRequest request,Authentication auth)
@@ -2629,7 +2629,7 @@ Executa a etapa `preview Hours` neste módulo. O contrato concreto está na assi
 
 ### updateMerchantHours — linha 84
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:84)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L84)
 
 ```java
 @PutMapping("/merchant/stores/{id}/hours") @PreAuthorize("hasRole('MERCHANT')") public StoreHoursChangeService.Saved updateMerchantHours(@PathVariable UUID id,@RequestBody StoreHoursChangeService.ChangeRequest request,Authentication auth)
@@ -2651,7 +2651,7 @@ public StoreHoursChangeService.Saved updateMerchantHours(@PathVariable UUID id,@
 
 ### administratorHours — linha 86
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:86)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L86)
 
 ```java
 @GetMapping("/admin/stores/{id}/hours") @PreAuthorize("hasRole('ADMIN')") @Transactional(readOnly=true) public StoreOperatingHours.Configuration administratorHours(@PathVariable UUID id)
@@ -2668,7 +2668,7 @@ Executa a etapa `administrator Hours` neste módulo. O contrato concreto está n
 
 ### administratorPreviewHours — linha 88
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:88)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L88)
 
 ```java
 @PostMapping("/admin/stores/{id}/hours/preview") @PreAuthorize("hasRole('ADMIN')") public StoreHoursChangeService.Preview administratorPreviewHours(@PathVariable UUID id,@RequestBody StoreHoursChangeService.ChangeRequest request,Authentication auth)
@@ -2685,7 +2685,7 @@ Executa a etapa `administrator Preview Hours` neste módulo. O contrato concreto
 
 ### administratorSaveHours — linha 90
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:90)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L90)
 
 ```java
 @PutMapping("/admin/stores/{id}/hours") @PreAuthorize("hasRole('ADMIN')") public StoreHoursChangeService.Saved administratorSaveHours(@PathVariable UUID id,@RequestBody StoreHoursChangeService.ChangeRequest request,Authentication auth)
@@ -2707,7 +2707,7 @@ public StoreHoursChangeService.Saved administratorSaveHours(@PathVariable UUID i
 
 ### publicHours — linha 92
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:92)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L92)
 
 ```java
 @GetMapping("/stores/{id}/hours") @Transactional(readOnly=true) public StoreOperatingHours.Configuration publicHours(@PathVariable UUID id)
@@ -2724,7 +2724,7 @@ Executa a etapa `public Hours` neste módulo. O contrato concreto está na assin
 
 ### createItem — linha 102
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:102)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L102)
 
 ```java
 @PostMapping("/merchant/stores/{id}/items") @ResponseStatus(HttpStatus.CREATED) @PreAuthorize("hasRole('MERCHANT')") public CatalogItemView createItem(@PathVariable UUID id, @Valid @RequestBody ItemRequest req, Authentication auth)
@@ -2749,7 +2749,7 @@ return CatalogItemView.of(items.save(new CatalogItem(store, req.name(), req.desc
 
 ### myStoreItems — linha 108
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:108)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L108)
 
 ```java
 @GetMapping("/merchant/stores/{id}/items") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true) public List<CatalogItemView> myStoreItems(@PathVariable UUID id, Authentication auth)
@@ -2766,7 +2766,7 @@ Executa a etapa `my Store Items` neste módulo. O contrato concreto está na ass
 
 ### storeProfessionals — linha 114
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:114)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L114)
 
 ```java
 @GetMapping("/stores/{id}/professionals") @Transactional(readOnly=true) public List<ProfessionalView> storeProfessionals(@PathVariable UUID id)
@@ -2789,7 +2789,7 @@ Executa a etapa `store Professionals` neste módulo. O contrato concreto está n
 
 ### myProfessionals — linha 119
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:119)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L119)
 
 ```java
 @GetMapping("/merchant/stores/{id}/professionals") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true) public List<ProfessionalView> myProfessionals(@PathVariable UUID id, Authentication auth)
@@ -2806,7 +2806,7 @@ Executa a etapa `my Professionals` neste módulo. O contrato concreto está na a
 
 ### createProfessional — linha 123
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:123)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L123)
 
 ```java
 @PostMapping("/merchant/stores/{id}/professionals") @PreAuthorize("hasRole('MERCHANT')") @ResponseStatus(HttpStatus.CREATED) @Transactional public ProfessionalView createProfessional(@PathVariable UUID id,@Valid @RequestBody ProfessionalRequest request,Authentication auth)
@@ -2828,7 +2828,7 @@ Store store=owned(id,auth); return ProfessionalView.of(professionals.save(new St
 
 ### updateProfessional — linha 127
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:127)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L127)
 
 ```java
 @PutMapping("/merchant/professionals/{id}") @PreAuthorize("hasRole('MERCHANT')") @Transactional public ProfessionalView updateProfessional(@PathVariable UUID id,@Valid @RequestBody ProfessionalRequest request,Authentication auth)
@@ -2856,7 +2856,7 @@ professional.updateName(request.name()); return ProfessionalView.of(professional
 
 ### setProfessionalActive — linha 133
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:133)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L133)
 
 ```java
 @PatchMapping("/merchant/professionals/{id}/active") @PreAuthorize("hasRole('MERCHANT')") @Transactional public ProfessionalView setProfessionalActive(@PathVariable UUID id,@RequestBody ProfessionalActiveRequest request,Authentication auth)
@@ -2884,7 +2884,7 @@ professional.setActive(request.active()); return ProfessionalView.of(professiona
 
 ### updateItem — linha 139
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:139)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L139)
 
 ```java
 @PutMapping("/merchant/items/{id}") @PreAuthorize("hasRole('MERCHANT')") @Transactional public CatalogItemView updateItem(@PathVariable UUID id, @Valid @RequestBody ItemRequest req, Authentication auth)
@@ -2913,7 +2913,7 @@ item.update(req.name(), req.description(), req.priceCents(), req.stock(), req.ac
 
 ### deactivateItem — linha 144
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:144)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L144)
 
 ```java
 @DeleteMapping("/merchant/items/{id}") @PreAuthorize("hasRole('MERCHANT')") @ResponseStatus(HttpStatus.NO_CONTENT) @Transactional public void deactivateItem(@PathVariable UUID id,Authentication auth)
@@ -2939,7 +2939,7 @@ Executa a etapa `deactivate Item` neste módulo. O contrato concreto está na as
 
 ### owned — linha 151
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:151)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L151)
 
 ```java
 private Store owned(UUID id, Authentication auth)
@@ -2962,7 +2962,7 @@ Executa a etapa `owned` neste módulo. O contrato concreto está na assinatura, 
 
 ### current — linha 156
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:156)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L156)
 
 ```java
 private Account current(Authentication auth)
@@ -2979,7 +2979,7 @@ Executa a etapa `current` neste módulo. O contrato concreto está na assinatura
 
 ### subject — linha 157
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:157)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L157)
 
 ```java
 private UUID subject(Authentication auth)
@@ -2996,7 +2996,7 @@ Executa a etapa `subject` neste módulo. O contrato concreto está na assinatura
 
 ### validateCategory — linha 158
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:158)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L158)
 
 ```java
 private void validateCategory(String category)
@@ -3016,7 +3016,7 @@ Executa a etapa `validate Category` neste módulo. O contrato concreto está na 
 
 ### of — linha 175
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:175)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L175)
 
 ```java
 static ProfessionalView of(StoreProfessional p)
@@ -3033,7 +3033,7 @@ Executa a etapa `of` neste módulo. O contrato concreto está na assinatura, nos
 
 ### of — linha 179
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:179)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L179)
 
 ```java
 static StoreView of(Store s)
@@ -3050,7 +3050,7 @@ Executa a etapa `of` neste módulo. O contrato concreto está na assinatura, nos
 
 ### of — linha 185
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java:185)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogController.java#L185)
 
 ```java
 static CatalogItemView of(CatalogItem i)
@@ -3069,11 +3069,11 @@ Executa a etapa `of` neste módulo. O contrato concreto está na assinatura, nos
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [CatalogItem.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java) · SHA-256 `a87e6355e279146116517599b884cb1ef09f2aa4f188901d96968863104de41a`
+[LIDO NO CÓDIGO] Fonte: [CatalogItem.java](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java) · SHA-256 `a87e6355e279146116517599b884cb1ef09f2aa4f188901d96968863104de41a`
 
 ### CatalogItem — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L24)
 
 ```java
 protected CatalogItem()
@@ -3085,7 +3085,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### CatalogItem — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L25)
 
 ```java
 public CatalogItem(Store store, String name, String description, long priceCents, int stock, boolean serviceItem)
@@ -3097,7 +3097,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### CatalogItem — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L28)
 
 ```java
 public CatalogItem(Store store, String name, String description, long priceCents, int stock, boolean serviceItem, boolean payAfterService)
@@ -3109,7 +3109,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### CatalogItem — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L31)
 
 ```java
 public CatalogItem(Store store, String name, String description, long priceCents, int stock, boolean serviceItem, boolean payAfterService, int appointmentDurationMinutes)
@@ -3130,7 +3130,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getId — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L36)
 
 ```java
 public UUID getId()
@@ -3145,7 +3145,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStore — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L37)
 
 ```java
 public Store getStore()
@@ -3160,7 +3160,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getName — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L38)
 
 ```java
 public String getName()
@@ -3175,7 +3175,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getDescription — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L39)
 
 ```java
 public String getDescription()
@@ -3190,7 +3190,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getPriceCents — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L40)
 
 ```java
 public long getPriceCents()
@@ -3205,7 +3205,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStock — linha 41
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:41)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L41)
 
 ```java
 public int getStock()
@@ -3220,7 +3220,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isActive — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L42)
 
 ```java
 public boolean isActive()
@@ -3235,7 +3235,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isServiceItem — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L43)
 
 ```java
 public boolean isServiceItem()
@@ -3250,7 +3250,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isPayAfterService — linha 44
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:44)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L44)
 
 ```java
 public boolean isPayAfterService()
@@ -3265,7 +3265,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAppointmentDurationMinutes — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L45)
 
 ```java
 public int getAppointmentDurationMinutes()
@@ -3280,7 +3280,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### update — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L46)
 
 ```java
 public void update(String name, String description, long priceCents, int stock, boolean active, boolean serviceItem, boolean payAfterService)
@@ -3294,7 +3294,7 @@ Executa a etapa `update` neste módulo. O contrato concreto está na assinatura,
 
 ### update — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:49)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L49)
 
 ```java
 public void update(String name, String description, long priceCents, int stock, boolean active, boolean serviceItem, boolean payAfterService, int appointmentDurationMinutes)
@@ -3315,7 +3315,7 @@ Executa a etapa `update` neste módulo. O contrato concreto está na assinatura,
 
 ### validateDuration — linha 55
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:55)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L55)
 
 ```java
 private static void validateDuration(boolean serviceItem, int duration)
@@ -3333,7 +3333,7 @@ Executa a etapa `validate Duration` neste módulo. O contrato concreto está na 
 
 ### reserve — linha 58
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:58)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L58)
 
 ```java
 public void reserve(int quantity)
@@ -3352,7 +3352,7 @@ Executa a etapa `reserve` neste módulo. O contrato concreto está na assinatura
 
 ### restore — linha 62
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:62)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L62)
 
 ```java
 public void restore(int quantity)
@@ -3367,7 +3367,7 @@ Executa a etapa `restore` neste módulo. O contrato concreto está na assinatura
 
 ### deactivate — linha 63
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java:63)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItem.java#L63)
 
 ```java
 public void deactivate()
@@ -3381,11 +3381,11 @@ Executa a etapa `deactivate` neste módulo. O contrato concreto está na assinat
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [CatalogItemRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItemRepository.java) · SHA-256 `177f17625e50e94ddc6b06bf708ffe3c369bc74242e26a47cc967a967a392d9d`
+[LIDO NO CÓDIGO] Fonte: [CatalogItemRepository.java](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItemRepository.java) · SHA-256 `177f17625e50e94ddc6b06bf708ffe3c369bc74242e26a47cc967a967a392d9d`
 
 ### findByStoreIdAndActiveTrue — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItemRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItemRepository.java#L10)
 
 ```java
 List<CatalogItem> findByStoreIdAndActiveTrue(UUID storeId);
@@ -3399,7 +3399,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByStoreId — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItemRepository.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItemRepository.java#L11)
 
 ```java
 List<CatalogItem> findByStoreId(UUID storeId);
@@ -3413,7 +3413,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### deactivateOwned — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItemRepository.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/CatalogItemRepository.java#L13)
 
 ```java
 @Modifying(clearAutomatically = true, flushAutomatically = true) @Query("update CatalogItem item set item.active = false, item.version = item.version + 1 " + "where item.id = :itemId and item.active = true and item.store.id in " + "(select store.id from Store store where store.owner.id = :ownerId)") int deactivateOwned(@Param("itemId") UUID itemId, @Param("ownerId") UUID ownerId);
@@ -3429,11 +3429,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [Store.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java) · SHA-256 `6aa7f4cac163c53e3c923c4f81f423cdda5eb8db9ae77889a39d0e0104786e4c`
+[LIDO NO CÓDIGO] Fonte: [Store.java](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java) · SHA-256 `6aa7f4cac163c53e3c923c4f81f423cdda5eb8db9ae77889a39d0e0104786e4c`
 
 ### getBookingNoticeMinutes — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L35)
 
 ```java
 public int getBookingNoticeMinutes()
@@ -3448,7 +3448,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getBookingStepMinutes — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L35)
 
 ```java
 public int getBookingStepMinutes()
@@ -3463,7 +3463,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAutomaticCancellationNoticeMinutes — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L35)
 
 ```java
 public int getAutomaticCancellationNoticeMinutes()
@@ -3478,7 +3478,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### configureBookingPolicy — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L36)
 
 ```java
 public void configureBookingPolicy(int notice,int step,int cancellation)
@@ -3498,7 +3498,7 @@ Executa a etapa `configure Booking Policy` neste módulo. O contrato concreto es
 
 ### Store — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L43)
 
 ```java
 protected Store()
@@ -3510,7 +3510,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### Store — linha 44
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:44)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L44)
 
 ```java
 public Store(Account owner, String name, String description, String address, String category)
@@ -3522,7 +3522,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getId — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L47)
 
 ```java
 public UUID getId()
@@ -3537,7 +3537,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getOwner — linha 48
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:48)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L48)
 
 ```java
 public Account getOwner()
@@ -3552,7 +3552,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getName — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:49)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L49)
 
 ```java
 public String getName()
@@ -3567,7 +3567,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getDescription — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L50)
 
 ```java
 public String getDescription()
@@ -3582,7 +3582,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAddress — linha 51
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:51)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L51)
 
 ```java
 public String getAddress()
@@ -3597,7 +3597,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCity — linha 52
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:52)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L52)
 
 ```java
 public String getCity()
@@ -3612,7 +3612,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getState — linha 53
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:53)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L53)
 
 ```java
 public String getState()
@@ -3627,7 +3627,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getLatitude — linha 54
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:54)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L54)
 
 ```java
 public Double getLatitude()
@@ -3642,7 +3642,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getLongitude — linha 54
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:54)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L54)
 
 ```java
 public Double getLongitude()
@@ -3657,7 +3657,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isDeliveryEnabled — linha 55
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:55)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L55)
 
 ```java
 public boolean isDeliveryEnabled()
@@ -3672,7 +3672,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isPickupEnabled — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:56)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L56)
 
 ```java
 public boolean isPickupEnabled()
@@ -3687,7 +3687,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isInPersonEnabled — linha 57
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:57)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L57)
 
 ```java
 public boolean isInPersonEnabled()
@@ -3702,7 +3702,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### configureFulfillment — linha 58
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:58)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L58)
 
 ```java
 public void configureFulfillment(Boolean delivery,Boolean pickup,Boolean inPerson)
@@ -3723,7 +3723,7 @@ Executa a etapa `configure Fulfillment` neste módulo. O contrato concreto está
 
 ### requireFulfillment — linha 63
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:63)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L63)
 
 ```java
 public void requireFulfillment(br.com.fooddelivery.orders.FulfillmentType type)
@@ -3745,7 +3745,7 @@ Executa a etapa `require Fulfillment` neste módulo. O contrato concreto está n
 
 ### requireInPerson — linha 68
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:68)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L68)
 
 ```java
 public void requireInPerson()
@@ -3763,7 +3763,7 @@ Executa a etapa `require In Person` neste módulo. O contrato concreto está na 
 
 ### getCnpj — linha 69
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:69)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L69)
 
 ```java
 public String getCnpj()
@@ -3778,7 +3778,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCategory — linha 70
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:70)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L70)
 
 ```java
 public String getCategory()
@@ -3793,7 +3793,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getTimezone — linha 71
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:71)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L71)
 
 ```java
 public String getTimezone()
@@ -3808,7 +3808,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isOperatingHoursEnabled — linha 72
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:72)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L72)
 
 ```java
 public boolean isOperatingHoursEnabled()
@@ -3823,7 +3823,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getWeeklyHoursJson — linha 73
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:73)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L73)
 
 ```java
 public String getWeeklyHoursJson()
@@ -3838,7 +3838,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getHoursExceptionsJson — linha 74
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:74)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L74)
 
 ```java
 public String getHoursExceptionsJson()
@@ -3853,7 +3853,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCoverImageUrl — linha 75
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:75)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L75)
 
 ```java
 public String getCoverImageUrl()
@@ -3868,7 +3868,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isActive — linha 76
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:76)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L76)
 
 ```java
 public boolean isActive()
@@ -3883,7 +3883,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isApproved — linha 77
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:77)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L77)
 
 ```java
 public boolean isApproved()
@@ -3898,7 +3898,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isAvailable — linha 78
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:78)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L78)
 
 ```java
 public boolean isAvailable()
@@ -3915,7 +3915,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getMarketplaceFeeBps — linha 79
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:79)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L79)
 
 ```java
 @JsonIgnore public int getMarketplaceFeeBps()
@@ -3930,7 +3930,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getDeliveryFeeCents — linha 80
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:80)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L80)
 
 ```java
 public long getDeliveryFeeCents()
@@ -3945,7 +3945,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setDeliveryFeeCents — linha 81
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:81)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L81)
 
 ```java
 public void setDeliveryFeeCents(long feeCents)
@@ -3963,7 +3963,7 @@ Executa a etapa `set Delivery Fee Cents` neste módulo. O contrato concreto est�
 
 ### setMarketplaceFeeBps — linha 82
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:82)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L82)
 
 ```java
 public void setMarketplaceFeeBps(int feeBps)
@@ -3981,7 +3981,7 @@ Executa a etapa `set Marketplace Fee Bps` neste módulo. O contrato concreto est
 
 ### setLocation — linha 83
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:83)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L83)
 
 ```java
 public void setLocation(String city, String state)
@@ -3998,7 +3998,7 @@ Executa a etapa `set Location` neste módulo. O contrato concreto está na assin
 
 ### setCoordinates — linha 84
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:84)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L84)
 
 ```java
 public void setCoordinates(Double latitude,Double longitude)
@@ -4020,7 +4020,7 @@ Executa a etapa `set Coordinates` neste módulo. O contrato concreto está na as
 
 ### setCnpjOnce — linha 85
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:85)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L85)
 
 ```java
 public void setCnpjOnce(String value)
@@ -4042,7 +4042,7 @@ Executa a etapa `set Cnpj Once` neste módulo. O contrato concreto está na assi
 
 ### correctCnpjByAdministrator — linha 86
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:86)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L86)
 
 ```java
 public void correctCnpjByAdministrator(String value)
@@ -4066,7 +4066,7 @@ Executa a etapa `correct Cnpj By Administrator` neste módulo. O contrato concre
 
 ### update — linha 87
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:87)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L87)
 
 ```java
 public void update(String name, String description, String address, String city, String state, String category, boolean active, long deliveryFeeCents)
@@ -4080,7 +4080,7 @@ Executa a etapa `update` neste módulo. O contrato concreto está na assinatura,
 
 ### setApproved — linha 90
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:90)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L90)
 
 ```java
 public void setApproved(boolean approved)
@@ -4092,7 +4092,7 @@ Executa a etapa `set Approved` neste módulo. O contrato concreto está na assin
 
 ### setActive — linha 91
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:91)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L91)
 
 ```java
 public void setActive(boolean active)
@@ -4104,7 +4104,7 @@ Executa a etapa `set Active` neste módulo. O contrato concreto está na assinat
 
 ### setTimezone — linha 92
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:92)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L92)
 
 ```java
 public void setTimezone(String timezone)
@@ -4124,7 +4124,7 @@ Executa a etapa `set Timezone` neste módulo. O contrato concreto está na assin
 
 ### setCoverImageUrl — linha 97
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:97)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L97)
 
 ```java
 public void setCoverImageUrl(String coverImageUrl)
@@ -4136,7 +4136,7 @@ Executa a etapa `set Cover Image Url` neste módulo. O contrato concreto está n
 
 ### setOperatingHours — linha 98
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/Store.java:98)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/Store.java#L98)
 
 ```java
 public void setOperatingHours(boolean enabled, String weeklyHoursJson, String hoursExceptionsJson)
@@ -4156,7 +4156,7 @@ Executa a etapa `set Operating Hours` neste módulo. O contrato concreto está n
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [StoreAssetController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java) · SHA-256 `3794eb1846e540660e43488e264080ff2ad36e01d1ff838ce0ed0735c8a780dd`
+[LIDO NO CÓDIGO] Fonte: [StoreAssetController.java](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java) · SHA-256 `3794eb1846e540660e43488e264080ff2ad36e01d1ff838ce0ed0735c8a780dd`
 
 **Contrato de dados/estados:**
 ```java
@@ -4184,7 +4184,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### StoreAssetController — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java#L31)
 
 ```java
 public StoreAssetController(StoreRepository stores,StoreCoverSubmissionRepository submissions, AdminAuditService audit,NotificationService notifications, StoreImageStorage storage)
@@ -4196,7 +4196,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### submit — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java#L38)
 
 ```java
 @PostMapping("/merchant/stores/{id}/cover") @PreAuthorize("hasRole('MERCHANT')") @ResponseStatus(HttpStatus.CREATED) @Transactional public CoverView submit(@PathVariable UUID id,@Valid @RequestBody CoverRequest request,Authentication auth)
@@ -4228,7 +4228,7 @@ return view(submissions.save(new StoreCoverSubmission(store,name)));
 
 ### afterCompletion — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:49)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java#L49)
 
 ```java
 @Override public void afterCompletion(int status)
@@ -4250,7 +4250,7 @@ Executa a etapa `after Completion` neste módulo. O contrato concreto está na a
 
 ### mine — linha 55
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:55)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java#L55)
 
 ```java
 @GetMapping("/merchant/stores/{id}/cover-submission") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true) public CoverState mine(@PathVariable UUID id,Authentication auth)
@@ -4270,7 +4270,7 @@ Executa a etapa `mine` neste módulo. O contrato concreto está na assinatura, n
 
 ### ownPublishedImage — linha 61
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:61)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java#L61)
 
 ```java
 @GetMapping("/merchant/stores/{id}/published-cover") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly=true) public ResponseEntity<byte[]> ownPublishedImage(@PathVariable UUID id,Authentication auth)
@@ -4290,7 +4290,7 @@ Executa a etapa `own Published Image` neste módulo. O contrato concreto está n
 
 ### pending — linha 68
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:68)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java#L68)
 
 ```java
 @GetMapping("/admin/store-covers") @PreAuthorize("hasRole('ADMIN')") @Transactional(readOnly=true) public List<CoverView> pending()
@@ -4307,7 +4307,7 @@ Executa a etapa `pending` neste módulo. O contrato concreto está na assinatura
 
 ### review — linha 71
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:71)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java#L71)
 
 ```java
 @PatchMapping("/admin/store-covers/{id}/review") @PreAuthorize("hasRole('ADMIN')") @Transactional public CoverView review(@PathVariable UUID id,@Valid @RequestBody ReviewRequest request,Authentication auth)
@@ -4339,7 +4339,7 @@ notifications.sendLinked(store.getOwner(),request.approved()?"Capa aprovada":"Re
 
 ### privateImage — linha 87
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:87)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java#L87)
 
 ```java
 @GetMapping("/store-cover-submissions/{id}/image") @Transactional(readOnly=true) public ResponseEntity<byte[]> privateImage(@PathVariable UUID id,Authentication auth)
@@ -4359,7 +4359,7 @@ Executa a etapa `private Image` neste módulo. O contrato concreto está na assi
 
 ### readCover — linha 94
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:94)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java#L94)
 
 ```java
 @GetMapping("/store-assets/{fileName}") @Transactional(readOnly=true) public ResponseEntity<byte[]> readCover(@PathVariable String fileName)
@@ -4380,7 +4380,7 @@ Executa a etapa `read Cover` neste módulo. O contrato concreto está na assinat
 
 ### file — linha 100
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:100)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java#L100)
 
 ```java
 private ResponseEntity<byte[]> file(String name,boolean confidential)
@@ -4407,7 +4407,7 @@ Executa a etapa `file` neste módulo. O contrato concreto está na assinatura, n
 
 ### validName — linha 109
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:109)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java#L109)
 
 ```java
 private static boolean validName(String name)
@@ -4424,7 +4424,7 @@ Executa a etapa `valid Name` neste módulo. O contrato concreto está na assinat
 
 ### subject — linha 110
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:110)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java#L110)
 
 ```java
 private static UUID subject(Authentication auth)
@@ -4441,7 +4441,7 @@ Executa a etapa `subject` neste módulo. O contrato concreto está na assinatura
 
 ### requireOwner — linha 111
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:111)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java#L111)
 
 ```java
 private static void requireOwner(Store store,Authentication auth)
@@ -4461,7 +4461,7 @@ Executa a etapa `require Owner` neste módulo. O contrato concreto está na assi
 
 ### view — linha 112
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:112)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java#L112)
 
 ```java
 private CoverView view(StoreCoverSubmission submission)
@@ -4478,7 +4478,7 @@ Executa a etapa `view` neste módulo. O contrato concreto está na assinatura, n
 
 ### sanitize — linha 114
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java:114)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreAssetController.java#L114)
 
 ```java
 static byte[] sanitize(String dataUrl)
@@ -4518,7 +4518,7 @@ try{reader.setInput(input,true,true);if(reader.getWidth(0)!=WIDTH||reader.getHei
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [StoreCategories.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategories.java) · SHA-256 `4591853c1e76b3009ec9723d37ed8a28372092e4fca83e593e23be1607494421`
+[LIDO NO CÓDIGO] Fonte: [StoreCategories.java](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategories.java) · SHA-256 `4591853c1e76b3009ec9723d37ed8a28372092e4fca83e593e23be1607494421`
 
 **Contrato de dados/estados:**
 ```java
@@ -4528,7 +4528,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### StoreCategories — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategories.java:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategories.java#L6)
 
 ```java
 private StoreCategories()
@@ -4540,7 +4540,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### isSupported — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategories.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategories.java#L21)
 
 ```java
 public static boolean isSupported(String value)
@@ -4563,11 +4563,11 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [StoreCategory.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java) · SHA-256 `beeb822bcff2d0b1083b51db2b3d375c80ca1d9206e54bfb2e5084514effc2e4`
+[LIDO NO CÓDIGO] Fonte: [StoreCategory.java](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java) · SHA-256 `beeb822bcff2d0b1083b51db2b3d375c80ca1d9206e54bfb2e5084514effc2e4`
 
 ### StoreCategory — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java#L34)
 
 ```java
 protected StoreCategory()
@@ -4579,7 +4579,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### StoreCategory — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java#L36)
 
 ```java
 public StoreCategory(String name, String emoji)
@@ -4593,7 +4593,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### slugify — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java#L42)
 
 ```java
 private static String slugify(String value)
@@ -4616,7 +4616,7 @@ Executa a etapa `slugify` neste módulo. O contrato concreto está na assinatura
 
 ### getId — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java#L50)
 
 ```java
 public UUID getId()
@@ -4631,7 +4631,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getSlug — linha 51
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java:51)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java#L51)
 
 ```java
 public String getSlug()
@@ -4646,7 +4646,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getName — linha 52
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java:52)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java#L52)
 
 ```java
 public String getName()
@@ -4661,7 +4661,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getEmoji — linha 53
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java:53)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java#L53)
 
 ```java
 public String getEmoji()
@@ -4676,7 +4676,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCreatedAt — linha 54
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java:54)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategory.java#L54)
 
 ```java
 public Instant getCreatedAt()
@@ -4693,11 +4693,11 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [StoreCategoryRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategoryRepository.java) · SHA-256 `f429404ae6b2eb500fe19d8aae61e30df4037ab80e164be74f777bba943283c6`
+[LIDO NO CÓDIGO] Fonte: [StoreCategoryRepository.java](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategoryRepository.java) · SHA-256 `f429404ae6b2eb500fe19d8aae61e30df4037ab80e164be74f777bba943283c6`
 
 ### findAllByOrderByNameAsc — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategoryRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategoryRepository.java#L9)
 
 ```java
 List<StoreCategory> findAllByOrderByNameAsc();
@@ -4711,7 +4711,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findBySlugIgnoreCase — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategoryRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategoryRepository.java#L10)
 
 ```java
 Optional<StoreCategory> findBySlugIgnoreCase(String slug);
@@ -4725,7 +4725,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByNameIgnoreCase — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategoryRepository.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCategoryRepository.java#L11)
 
 ```java
 Optional<StoreCategory> findByNameIgnoreCase(String name);
@@ -4741,11 +4741,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [StoreCoverSubmission.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java) · SHA-256 `713d71e3c1d11f29c38781ac7849ca045641ac8854ede2e9453d2994cc77db15`
+[LIDO NO CÓDIGO] Fonte: [StoreCoverSubmission.java](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java) · SHA-256 `713d71e3c1d11f29c38781ac7849ca045641ac8854ede2e9453d2994cc77db15`
 
 ### StoreCoverSubmission — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java#L18)
 
 ```java
 protected StoreCoverSubmission()
@@ -4757,7 +4757,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### StoreCoverSubmission — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java#L19)
 
 ```java
 public StoreCoverSubmission(Store store,String fileName)
@@ -4769,7 +4769,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### supersede — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java#L20)
 
 ```java
 public void supersede()
@@ -4783,7 +4783,7 @@ Executa a etapa `supersede` neste módulo. O contrato concreto está na assinatu
 
 ### review — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java#L21)
 
 ```java
 public void review(boolean approved,String note,UUID reviewer)
@@ -4805,7 +4805,7 @@ Executa a etapa `review` neste módulo. O contrato concreto está na assinatura,
 
 ### requirePending — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java#L26)
 
 ```java
 private void requirePending()
@@ -4825,7 +4825,7 @@ Executa a etapa `require Pending` neste módulo. O contrato concreto está na as
 
 ### getId — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java#L27)
 
 ```java
 public UUID getId()
@@ -4840,7 +4840,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStore — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java#L28)
 
 ```java
 public Store getStore()
@@ -4855,7 +4855,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getFileName — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java#L29)
 
 ```java
 public String getFileName()
@@ -4870,7 +4870,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStatus — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java#L30)
 
 ```java
 public String getStatus()
@@ -4885,7 +4885,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getReviewNote — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java#L31)
 
 ```java
 public String getReviewNote()
@@ -4900,7 +4900,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCreatedAt — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java#L32)
 
 ```java
 public Instant getCreatedAt()
@@ -4915,7 +4915,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getReviewedAt — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmission.java#L33)
 
 ```java
 public Instant getReviewedAt()
@@ -4932,11 +4932,11 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [StoreCoverSubmissionRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmissionRepository.java) · SHA-256 `73d0c78e15444257defbcdf1d229a7a409bfc25259cb4eb40586b7dc87bbbdc1`
+[LIDO NO CÓDIGO] Fonte: [StoreCoverSubmissionRepository.java](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmissionRepository.java) · SHA-256 `73d0c78e15444257defbcdf1d229a7a409bfc25259cb4eb40586b7dc87bbbdc1`
 
 ### findByStoreIdAndStatus — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmissionRepository.java:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmissionRepository.java#L7)
 
 ```java
 List<StoreCoverSubmission> findByStoreIdAndStatus(UUID storeId,String status);
@@ -4950,7 +4950,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findFirstByStoreIdOrderByCreatedAtDesc — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmissionRepository.java:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmissionRepository.java#L8)
 
 ```java
 Optional<StoreCoverSubmission> findFirstByStoreIdOrderByCreatedAtDesc(UUID storeId);
@@ -4964,7 +4964,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByStatusOrderByCreatedAtAsc — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmissionRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmissionRepository.java#L9)
 
 ```java
 List<StoreCoverSubmission> findByStatusOrderByCreatedAtAsc(String status);
@@ -4978,7 +4978,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### countByStoreIdAndCreatedAtAfter — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmissionRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmissionRepository.java#L10)
 
 ```java
 long countByStoreIdAndCreatedAtAfter(UUID storeId,java.time.Instant since);
@@ -4992,7 +4992,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findStoreId — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmissionRepository.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmissionRepository.java#L11)
 
 ```java
 @Query("select submission.store.id from StoreCoverSubmission submission where submission.id=:id") Optional<UUID> findStoreId(@Param("id") UUID id);
@@ -5006,7 +5006,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByIdForUpdate — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmissionRepository.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreCoverSubmissionRepository.java#L13)
 
 ```java
 @Lock(LockModeType.PESSIMISTIC_WRITE) @Query("select submission from StoreCoverSubmission submission where submission.id=:id") Optional<StoreCoverSubmission> findByIdForUpdate(@Param("id") UUID id);
@@ -5022,7 +5022,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [StoreHoursChangeService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java) · SHA-256 `c4f63131eb299470751c7deec5236fa586dbda70566e26ff8233d595a58cdfa6`
+[LIDO NO CÓDIGO] Fonte: [StoreHoursChangeService.java](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java) · SHA-256 `c4f63131eb299470751c7deec5236fa586dbda70566e26ff8233d595a58cdfa6`
 
 **Contrato de dados/estados:**
 ```java
@@ -5056,7 +5056,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### StoreHoursChangeService — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L21)
 
 ```java
 public StoreHoursChangeService(StoreRepository stores,StoreOperatingHours hours,ReservationRepository reservations,ReservationSlotRepository slots,PaymentRepository payments,NotificationService notifications,AdminAuditService audit)
@@ -5068,7 +5068,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### configuration — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L23)
 
 ```java
 public StoreOperatingHours.Configuration configuration()
@@ -5083,7 +5083,7 @@ Executa a etapa `configuration` neste módulo. O contrato concreto está na assi
 
 ### owned — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L29)
 
 ```java
 private Store owned(UUID storeId,UUID ownerId,boolean administrator)
@@ -5106,7 +5106,7 @@ Executa a etapa `owned` neste módulo. O contrato concreto está na assinatura, 
 
 ### future — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L30)
 
 ```java
 private List<Reservation> future(Store store)
@@ -5123,7 +5123,7 @@ Executa a etapa `future` neste módulo. O contrato concreto está na assinatura,
 
 ### requireSafeTimezoneChange — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L32)
 
 ```java
 public void requireSafeTimezoneChange(Store store,String requested)
@@ -5148,7 +5148,7 @@ Executa a etapa `require Safe Timezone Change` neste módulo. O contrato concret
 
 ### shortName — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L37)
 
 ```java
 private static String shortName(String value)
@@ -5168,7 +5168,7 @@ Executa a etapa `short Name` neste módulo. O contrato concreto está na assinat
 
 ### revision — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L38)
 
 ```java
 private static String revision(Store store)
@@ -5188,7 +5188,7 @@ Executa a etapa `revision` neste módulo. O contrato concreto está na assinatur
 
 ### fits — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L42)
 
 ```java
 private boolean fits(Store s,StoreProfessional scoped,StoreOperatingHours.Configuration config,Reservation r)
@@ -5208,7 +5208,7 @@ Executa a etapa `fits` neste módulo. O contrato concreto está na assinatura, n
 
 ### affected — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L43)
 
 ```java
 private List<Reservation> affected(Store s,StoreProfessional scoped,StoreOperatingHours.Configuration config,List<Reservation> future)
@@ -5225,7 +5225,7 @@ Executa a etapa `affected` neste módulo. O contrato concreto está na assinatur
 
 ### scopedProfessional — linha 44
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:44)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L44)
 
 ```java
 private StoreProfessional scopedProfessional(Store s,UUID id)
@@ -5248,7 +5248,7 @@ Executa a etapa `scoped Professional` neste módulo. O contrato concreto está n
 
 ### scopedRevision — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L45)
 
 ```java
 private String scopedRevision(Store s,StoreProfessional p)
@@ -5268,7 +5268,7 @@ Executa a etapa `scoped Revision` neste módulo. O contrato concreto está na as
 
 ### scopedFuture — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L46)
 
 ```java
 private List<Reservation> scopedFuture(Store s,StoreProfessional p)
@@ -5288,7 +5288,7 @@ Executa a etapa `scoped Future` neste módulo. O contrato concreto está na assi
 
 ### previewProfessional — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L47)
 
 ```java
 @Transactional public Preview previewProfessional(UUID storeId,UUID professionalId,UUID actor,ChangeRequest request,boolean admin)
@@ -5305,7 +5305,7 @@ Executa a etapa `preview Professional` neste módulo. O contrato concreto está 
 
 ### saveProfessional — linha 48
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:48)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L48)
 
 ```java
 @Transactional public Saved saveProfessional(UUID storeId,UUID professionalId,UUID actor,ChangeRequest request,boolean admin)
@@ -5322,7 +5322,7 @@ Executa a etapa `save Professional` neste módulo. O contrato concreto está na 
 
 ### previewScope — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:49)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L49)
 
 ```java
 private Preview previewScope(Store s,StoreProfessional p,ChangeRequest request)
@@ -5339,7 +5339,7 @@ Executa a etapa `preview Scope` neste módulo. O contrato concreto está na assi
 
 ### preview — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L50)
 
 ```java
 @Transactional public Preview preview(UUID storeId,UUID ownerId,ChangeRequest request)
@@ -5356,7 +5356,7 @@ Executa a etapa `preview` neste módulo. O contrato concreto está na assinatura
 
 ### preview — linha 51
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:51)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L51)
 
 ```java
 @Transactional public Preview preview(UUID storeId,UUID ownerId,ChangeRequest request,boolean administrator)
@@ -5373,7 +5373,7 @@ Executa a etapa `preview` neste módulo. O contrato concreto está na assinatura
 
 ### save — linha 52
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:52)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L52)
 
 ```java
 @Transactional public Saved save(UUID storeId,UUID ownerId,ChangeRequest request)
@@ -5390,7 +5390,7 @@ Executa a etapa `save` neste módulo. O contrato concreto está na assinatura, n
 
 ### save — linha 53
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:53)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L53)
 
 ```java
 @Transactional public Saved save(UUID storeId,UUID ownerId,ChangeRequest request,boolean administrator)
@@ -5407,7 +5407,7 @@ Executa a etapa `save` neste módulo. O contrato concreto está na assinatura, n
 
 ### saveScope — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java:56)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreHoursChangeService.java#L56)
 
 ```java
 private Saved saveScope(Store s,StoreProfessional scoped,UUID ownerId,ChangeRequest request)
@@ -5456,7 +5456,7 @@ if(!affected.isEmpty())notifications.sendLinked(s.getOwner(),"Expediente atualiz
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [StoreOperatingHours.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java) · SHA-256 `8889530dddab5bb0c64badc78c97a7e7976f418870a87c65c840a09f2948cb6c`
+[LIDO NO CÓDIGO] Fonte: [StoreOperatingHours.java](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java) · SHA-256 `8889530dddab5bb0c64badc78c97a7e7976f418870a87c65c840a09f2948cb6c`
 
 **Contrato de dados/estados:**
 ```java
@@ -5478,7 +5478,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### StoreOperatingHours — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L13)
 
 ```java
 public StoreOperatingHours(ObjectMapper mapper)
@@ -5490,7 +5490,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### ExceptionHours — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L16)
 
 ```java
 public ExceptionHours(LocalDate date,boolean closed,String opensAt,String closesAt,String note)
@@ -5502,7 +5502,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### Configuration — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L19)
 
 ```java
 public Configuration(boolean enabled,Map<DayOfWeek,Interval> weekly,List<ExceptionHours> exceptions)
@@ -5514,7 +5514,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### read — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L21)
 
 ```java
 public Configuration read(Store store)
@@ -5531,7 +5531,7 @@ Executa a etapa `read` neste módulo. O contrato concreto está na assinatura, n
 
 ### read — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L22)
 
 ```java
 public Configuration read(StoreProfessional professional)
@@ -5548,7 +5548,7 @@ Executa a etapa `read` neste módulo. O contrato concreto está na assinatura, n
 
 ### read — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L23)
 
 ```java
 private Configuration read(boolean enabled,String weeklyJson,String exceptionsJson)
@@ -5571,7 +5571,7 @@ Executa a etapa `read` neste módulo. O contrato concreto está na assinatura, n
 
 ### save — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L33)
 
 ```java
 public Configuration save(Store store,Configuration input)
@@ -5596,7 +5596,7 @@ try{store.setOperatingHours(config.enabled(),mapper.writeValueAsString(config.we
 
 ### save — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L38)
 
 ```java
 public Configuration save(StoreProfessional professional,Configuration input)
@@ -5621,7 +5621,7 @@ public Configuration save(StoreProfessional professional,Configuration input){va
 
 ### fits — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L39)
 
 ```java
 public boolean fits(StoreProfessional professional,ZoneId zone,Instant start,Instant end)
@@ -5638,7 +5638,7 @@ Executa a etapa `fits` neste módulo. O contrato concreto está na assinatura, n
 
 ### validate — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L40)
 
 ```java
 public Configuration validate(Configuration input)
@@ -5685,7 +5685,7 @@ Executa a etapa `validate` neste módulo. O contrato concreto está na assinatur
 
 ### normalize — linha 61
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:61)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L61)
 
 ```java
 private static List<Interval> normalize(List<Interval> values)
@@ -5715,7 +5715,7 @@ Executa a etapa `normalize` neste módulo. O contrato concreto está na assinatu
 
 ### rejectOverlap — linha 68
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:68)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L68)
 
 ```java
 private static void rejectOverlap(List<int[]> ranges)
@@ -5735,7 +5735,7 @@ Executa a etapa `reject Overlap` neste módulo. O contrato concreto está na ass
 
 ### minute — linha 69
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:69)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L69)
 
 ```java
 private static int minute(String value,boolean closing)
@@ -5760,7 +5760,7 @@ Executa a etapa `minute` neste módulo. O contrato concreto está na assinatura,
 
 ### endMinute — linha 74
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:74)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L74)
 
 ```java
 private static int endMinute(Interval value)
@@ -5780,7 +5780,7 @@ Executa a etapa `end Minute` neste módulo. O contrato concreto está na assinat
 
 ### exceptionFor — linha 75
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:75)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L75)
 
 ```java
 private static ExceptionHours exceptionFor(Configuration config,LocalDate date)
@@ -5797,7 +5797,7 @@ Executa a etapa `exception For` neste módulo. O contrato concreto está na assi
 
 ### anchored — linha 76
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:76)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L76)
 
 ```java
 private static List<Interval> anchored(Configuration config,LocalDate date)
@@ -5817,7 +5817,7 @@ Executa a etapa `anchored` neste módulo. O contrato concreto está na assinatur
 
 ### dayRanges — linha 77
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:77)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L77)
 
 ```java
 private static List<int[]> dayRanges(Configuration config,LocalDate date)
@@ -5842,7 +5842,7 @@ Executa a etapa `day Ranges` neste módulo. O contrato concreto está na assinat
 
 ### boundary — linha 85
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:85)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L85)
 
 ```java
 private static Instant boundary(LocalDate date,int minute,ZoneId zone)
@@ -5862,7 +5862,7 @@ Executa a etapa `boundary` neste módulo. O contrato concreto está na assinatur
 
 ### isOpenAt — linha 86
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:86)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L86)
 
 ```java
 public boolean isOpenAt(Store store,Instant instant)
@@ -5879,7 +5879,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isOpenAt — linha 87
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:87)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L87)
 
 ```java
 public boolean isOpenAt(Configuration config,ZoneId zone,Instant instant)
@@ -5896,7 +5896,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### fits — linha 88
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:88)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L88)
 
 ```java
 public boolean fits(Store store,Instant start,Instant end)
@@ -5913,7 +5913,7 @@ Executa a etapa `fits` neste módulo. O contrato concreto está na assinatura, n
 
 ### fits — linha 90
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:90)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L90)
 
 ```java
 public boolean fits(Configuration config,ZoneId zone,Instant start,Instant end)
@@ -5938,7 +5938,7 @@ Executa a etapa `fits` neste módulo. O contrato concreto está na assinatura, n
 
 ### requireOpenForInterval — linha 97
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:97)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L97)
 
 ```java
 public void requireOpenForInterval(Store store,Instant start,Instant end)
@@ -5958,7 +5958,7 @@ Executa a etapa `require Open For Interval` neste módulo. O contrato concreto e
 
 ### requireOpenNow — linha 98
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:98)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L98)
 
 ```java
 public void requireOpenNow(Store store)
@@ -5978,7 +5978,7 @@ Executa a etapa `require Open Now` neste módulo. O contrato concreto está na a
 
 ### requireOpenAt — linha 99
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java:99)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreOperatingHours.java#L99)
 
 ```java
 public void requireOpenAt(Store store,Instant instant)
@@ -6000,11 +6000,11 @@ Executa a etapa `require Open At` neste módulo. O contrato concreto está na as
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [StoreProfessional.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java) · SHA-256 `3c8ea12809a42a844fafc044c308b6f7b7112c72a1a2b9a1ef77f482ff8d582d`
+[LIDO NO CÓDIGO] Fonte: [StoreProfessional.java](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java) · SHA-256 `3c8ea12809a42a844fafc044c308b6f7b7112c72a1a2b9a1ef77f482ff8d582d`
 
 ### isOperatingHoursEnabled — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java#L16)
 
 ```java
 public boolean isOperatingHoursEnabled()
@@ -6019,7 +6019,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getWeeklyHoursJson — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java#L16)
 
 ```java
 public String getWeeklyHoursJson()
@@ -6034,7 +6034,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getHoursExceptionsJson — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java#L16)
 
 ```java
 public String getHoursExceptionsJson()
@@ -6049,7 +6049,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setOperatingHours — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java#L17)
 
 ```java
 public void setOperatingHours(boolean enabled,String weekly,String exceptions)
@@ -6061,7 +6061,7 @@ Executa a etapa `set Operating Hours` neste módulo. O contrato concreto está n
 
 ### StoreProfessional — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java#L18)
 
 ```java
 protected StoreProfessional()
@@ -6073,7 +6073,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### StoreProfessional — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java#L19)
 
 ```java
 public StoreProfessional(Store store,String name)
@@ -6087,7 +6087,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getId — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java#L20)
 
 ```java
 public UUID getId()
@@ -6102,7 +6102,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStore — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java#L20)
 
 ```java
 public Store getStore()
@@ -6117,7 +6117,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getName — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java#L20)
 
 ```java
 public String getName()
@@ -6132,7 +6132,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isActive — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java#L20)
 
 ```java
 public boolean isActive()
@@ -6147,7 +6147,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### updateName — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java#L21)
 
 ```java
 public void updateName(String name)
@@ -6161,7 +6161,7 @@ Executa a etapa `update Name` neste módulo. O contrato concreto está na assina
 
 ### setActive — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessional.java#L22)
 
 ```java
 public void setActive(boolean active)
@@ -6175,11 +6175,11 @@ Executa a etapa `set Active` neste módulo. O contrato concreto está na assinat
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [StoreProfessionalRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessionalRepository.java) · SHA-256 `050ae4028fd0720c09a982a145bd6f2ca936868d0ea0457dba5c1f3304c58d69`
+[LIDO NO CÓDIGO] Fonte: [StoreProfessionalRepository.java](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessionalRepository.java) · SHA-256 `050ae4028fd0720c09a982a145bd6f2ca936868d0ea0457dba5c1f3304c58d69`
 
 ### findByStoreIdOrderByNameAsc — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessionalRepository.java:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessionalRepository.java#L8)
 
 ```java
 List<StoreProfessional> findByStoreIdOrderByNameAsc(UUID storeId);
@@ -6193,7 +6193,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByStoreIdAndActiveTrueOrderByNameAsc — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessionalRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreProfessionalRepository.java#L9)
 
 ```java
 List<StoreProfessional> findByStoreIdAndActiveTrueOrderByNameAsc(UUID storeId);
@@ -6209,11 +6209,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Catálogo, publicação e disponibilidade. A aprovação administrativa é independente de pagamento. CNPJ é opcional. Propriedade da loja e limites de entrada devem ser validados na API.
 
-Fonte: [StoreRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java) · SHA-256 `83b1e69a9165dc6329845010092f3e76c203d9b4bd162c052849546f6380fc5c`
+[LIDO NO CÓDIGO] Fonte: [StoreRepository.java](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java) · SHA-256 `83b1e69a9165dc6329845010092f3e76c203d9b4bd162c052849546f6380fc5c`
 
 ### findByIdForUpdate — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java#L7)
 
 ```java
 @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE) @org.springframework.data.jpa.repository.Query("select store from Store store where store.id=:id") Optional<Store> findByIdForUpdate(@org.springframework.data.repository.query.Param("id") UUID id);
@@ -6227,7 +6227,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByActiveTrueAndApprovedTrue — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java#L10)
 
 ```java
 List<Store> findByActiveTrueAndApprovedTrue();
@@ -6241,7 +6241,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByOwnerId — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java#L11)
 
 ```java
 List<Store> findByOwnerId(UUID ownerId);
@@ -6255,7 +6255,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByActiveAndApproved — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java#L12)
 
 ```java
 org.springframework.data.domain.Page<Store> findByActiveAndApproved(boolean active, boolean approved, org.springframework.data.domain.Pageable pageable);
@@ -6269,7 +6269,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByActiveFalse — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java#L13)
 
 ```java
 org.springframework.data.domain.Page<Store> findByActiveFalse(org.springframework.data.domain.Pageable pageable);
@@ -6283,7 +6283,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### countByActiveAndApproved — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java#L14)
 
 ```java
 long countByActiveAndApproved(boolean active, boolean approved);
@@ -6297,7 +6297,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### countByActiveFalse — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java#L15)
 
 ```java
 long countByActiveFalse();
@@ -6311,7 +6311,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### countByCategoryIgnoreCase — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java#L16)
 
 ```java
 long countByCategoryIgnoreCase(String category);
@@ -6325,7 +6325,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByCoverImageUrl — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/catalog/StoreRepository.java#L17)
 
 ```java
 Optional<Store> findByCoverImageUrl(String coverImageUrl);
@@ -6341,11 +6341,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Conversa operacional. Participantes autorizados são determinados pelo pedido/reserva; conhecer um identificador não concede acesso.
 
-Fonte: [OperationMessage.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java) · SHA-256 `c1ea16ebca9255a23a5bd6da5880c25805d504a598b0f0a2ae2d353a9e113e23`
+[LIDO NO CÓDIGO] Fonte: [OperationMessage.java](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java) · SHA-256 `c1ea16ebca9255a23a5bd6da5880c25805d504a598b0f0a2ae2d353a9e113e23`
 
 ### OperationMessage — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java#L22)
 
 ```java
 protected OperationMessage()
@@ -6357,7 +6357,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### OperationMessage — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java#L23)
 
 ```java
 private OperationMessage(Account sender, String body)
@@ -6376,7 +6376,7 @@ private OperationMessage(Account sender, String body) { this.sender = sender; th
 
 ### forOrder — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java#L24)
 
 ```java
 public static OperationMessage forOrder(Order order, Account sender, String body)
@@ -6391,7 +6391,7 @@ Executa a etapa `for Order` neste módulo. O contrato concreto está na assinatu
 
 ### forReservation — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java#L25)
 
 ```java
 public static OperationMessage forReservation(Reservation reservation, Account sender, String body)
@@ -6406,7 +6406,7 @@ Executa a etapa `for Reservation` neste módulo. O contrato concreto está na as
 
 ### forDelivery — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java#L26)
 
 ```java
 public static OperationMessage forDelivery(DeliveryTask delivery, Account sender, String body)
@@ -6421,7 +6421,7 @@ Executa a etapa `for Delivery` neste módulo. O contrato concreto está na assin
 
 ### getId — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java#L27)
 
 ```java
 public UUID getId()
@@ -6436,7 +6436,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getSender — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java#L28)
 
 ```java
 public Account getSender()
@@ -6451,7 +6451,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getBody — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java#L29)
 
 ```java
 public String getBody()
@@ -6466,7 +6466,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCreatedAt — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessage.java#L30)
 
 ```java
 public Instant getCreatedAt()
@@ -6483,7 +6483,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Conversa operacional. Participantes autorizados são determinados pelo pedido/reserva; conhecer um identificador não concede acesso.
 
-Fonte: [OperationMessageController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java) · SHA-256 `476871495dcd537c5924bb28bf68f9ab74ed421a7ef60e7975e68c3f07877e3e`
+[LIDO NO CÓDIGO] Fonte: [OperationMessageController.java](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java) · SHA-256 `476871495dcd537c5924bb28bf68f9ab74ed421a7ef60e7975e68c3f07877e3e`
 
 **Contrato de dados/estados:**
 ```java
@@ -6505,7 +6505,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### OperationMessageController — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L43)
 
 ```java
 public OperationMessageController(OperationMessageRepository messages, OrderRepository orders, ReservationRepository reservations, DeliveryRepository deliveries, AccountRepository accounts, NotificationService notifications)
@@ -6517,7 +6517,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### orderMessages — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L50)
 
 ```java
 @GetMapping("/orders/{id}/messages") @PreAuthorize("hasAnyRole('CUSTOMER','MERCHANT')") @Transactional(readOnly = true) public ThreadView orderMessages(@PathVariable UUID id, Authentication auth)
@@ -6542,7 +6542,7 @@ Executa a etapa `order Messages` neste módulo. O contrato concreto está na ass
 
 ### sendOrderMessage — linha 64
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:64)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L64)
 
 ```java
 @PostMapping("/orders/{id}/messages") @ResponseStatus(HttpStatus.CREATED) @PreAuthorize("hasAnyRole('CUSTOMER','MERCHANT')") @Transactional public ThreadView sendOrderMessage(@PathVariable UUID id, @Valid @RequestBody SendMessage request, Authentication auth)
@@ -6574,7 +6574,7 @@ notifications.sendUnreadOnceLinked(recipient, "Nova mensagem sobre o pedido " + 
 
 ### reservationMessages — linha 80
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:80)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L80)
 
 ```java
 @GetMapping("/reservations/{id}/messages") @PreAuthorize("hasAnyRole('CUSTOMER','MERCHANT')") @Transactional(readOnly = true) public ThreadView reservationMessages(@PathVariable UUID id, Authentication auth)
@@ -6599,7 +6599,7 @@ Executa a etapa `reservation Messages` neste módulo. O contrato concreto está 
 
 ### sendReservationMessage — linha 94
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:94)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L94)
 
 ```java
 @PostMapping("/reservations/{id}/messages") @ResponseStatus(HttpStatus.CREATED) @PreAuthorize("hasAnyRole('CUSTOMER','MERCHANT')") @Transactional public ThreadView sendReservationMessage(@PathVariable UUID id, @Valid @RequestBody SendMessage request, Authentication auth)
@@ -6631,7 +6631,7 @@ notifications.sendUnreadOnceLinked(recipient, "Nova mensagem sobre a reserva " +
 
 ### deliveryMessages — linha 110
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:110)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L110)
 
 ```java
 @GetMapping("/deliveries/{id}/messages") @PreAuthorize("hasAnyRole('CUSTOMER','COURIER')") @Transactional(readOnly = true) public ThreadView deliveryMessages(@PathVariable UUID id, Authentication auth)
@@ -6651,7 +6651,7 @@ Executa a etapa `delivery Messages` neste módulo. O contrato concreto está na 
 
 ### sendDeliveryMessage — linha 121
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:121)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L121)
 
 ```java
 @PostMapping("/deliveries/{id}/messages") @ResponseStatus(HttpStatus.CREATED) @PreAuthorize("hasAnyRole('CUSTOMER','COURIER')") @Transactional public ThreadView sendDeliveryMessage(@PathVariable UUID id, @Valid @RequestBody SendMessage request, Authentication auth)
@@ -6681,7 +6681,7 @@ notifications.sendUnreadOnceLinked(recipient, "Nova mensagem do chat de entrega 
 
 ### newestFirst — linha 138
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:138)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L138)
 
 ```java
 private PageRequest newestFirst()
@@ -6698,7 +6698,7 @@ Executa a etapa `newest First` neste módulo. O contrato concreto está na assin
 
 ### chronological — linha 139
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:139)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L139)
 
 ```java
 private List<MessageView> chronological(List<OperationMessage> newestFirst)
@@ -6715,7 +6715,7 @@ Executa a etapa `chronological` neste módulo. O contrato concreto está na assi
 
 ### view — linha 140
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:140)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L140)
 
 ```java
 private MessageView view(OperationMessage m)
@@ -6732,7 +6732,7 @@ Executa a etapa `view` neste módulo. O contrato concreto está na assinatura, n
 
 ### account — linha 141
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:141)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L141)
 
 ```java
 private Account account(UUID id)
@@ -6749,7 +6749,7 @@ Executa a etapa `account` neste módulo. O contrato concreto está na assinatura
 
 ### subject — linha 142
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:142)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L142)
 
 ```java
 private UUID subject(Authentication auth)
@@ -6766,7 +6766,7 @@ Executa a etapa `subject` neste módulo. O contrato concreto está na assinatura
 
 ### requireOrderParticipant — linha 143
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:143)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L143)
 
 ```java
 private void requireOrderParticipant(Order o, UUID user)
@@ -6786,7 +6786,7 @@ Executa a etapa `require Order Participant` neste módulo. O contrato concreto e
 
 ### requireReservationParticipant — linha 144
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:144)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L144)
 
 ```java
 private void requireReservationParticipant(Reservation r, UUID user)
@@ -6806,7 +6806,7 @@ Executa a etapa `require Reservation Participant` neste módulo. O contrato conc
 
 ### requireDeliveryParticipant — linha 145
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:145)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L145)
 
 ```java
 private void requireDeliveryParticipant(Order order, Account courier, UUID user)
@@ -6826,7 +6826,7 @@ Executa a etapa `require Delivery Participant` neste módulo. O contrato concret
 
 ### shortId — linha 148
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:148)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L148)
 
 ```java
 private static String shortId(UUID id)
@@ -6843,7 +6843,7 @@ Executa a etapa `short Id` neste módulo. O contrato concreto está na assinatur
 
 ### isUnpaid — linha 149
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:149)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L149)
 
 ```java
 private boolean isUnpaid(OrderStatus status)
@@ -6858,7 +6858,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isTerminal — linha 150
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:150)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L150)
 
 ```java
 private boolean isTerminal(OrderStatus status)
@@ -6873,7 +6873,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isTerminal — linha 151
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:151)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L151)
 
 ```java
 private boolean isTerminal(ReservationStatus status)
@@ -6888,7 +6888,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### terminalOrderMessage — linha 152
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:152)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L152)
 
 ```java
 private String terminalOrderMessage(OrderStatus status)
@@ -6905,7 +6905,7 @@ Executa a etapa `terminal Order Message` neste módulo. O contrato concreto est�
 
 ### terminalReservationMessage — linha 153
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:153)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L153)
 
 ```java
 private String terminalReservationMessage(ReservationStatus status)
@@ -6922,7 +6922,7 @@ Executa a etapa `terminal Reservation Message` neste módulo. O contrato concret
 
 ### ThreadView — linha 158
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java:158)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageController.java#L158)
 
 ```java
 public ThreadView
@@ -6938,11 +6938,11 @@ Executa a etapa `Thread View` neste módulo. O contrato concreto está na assina
 
 Conversa operacional. Participantes autorizados são determinados pelo pedido/reserva; conhecer um identificador não concede acesso.
 
-Fonte: [OperationMessageRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageRepository.java) · SHA-256 `c934cbf92e713080f355817915cab585c1cea66b5db803b004f18c0778a7159a`
+[LIDO NO CÓDIGO] Fonte: [OperationMessageRepository.java](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageRepository.java) · SHA-256 `c934cbf92e713080f355817915cab585c1cea66b5db803b004f18c0778a7159a`
 
 ### findByOrder_IdOrderByCreatedAtDesc — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageRepository.java#L9)
 
 ```java
 List<OperationMessage> findByOrder_IdOrderByCreatedAtDesc(UUID id, Pageable pageable);
@@ -6956,7 +6956,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByReservation_IdOrderByCreatedAtDesc — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageRepository.java#L10)
 
 ```java
 List<OperationMessage> findByReservation_IdOrderByCreatedAtDesc(UUID id, Pageable pageable);
@@ -6970,7 +6970,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByDeliveryTask_IdOrderByCreatedAtDesc — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageRepository.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/communication/OperationMessageRepository.java#L11)
 
 ```java
 List<OperationMessage> findByDeliveryTask_IdOrderByCreatedAtDesc(UUID id, Pageable pageable);
@@ -6986,11 +6986,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria.
 
-Fonte: [AdminBootstrap.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AdminBootstrap.java) · SHA-256 `0bb588c43792d796ea9ba5ff085c1b28cc745d64a1df817d40eb31e0a2d1f584`
+[LIDO NO CÓDIGO] Fonte: [AdminBootstrap.java](../Backend/src/main/java/br/com/fooddelivery/config/AdminBootstrap.java) · SHA-256 `0bb588c43792d796ea9ba5ff085c1b28cc745d64a1df817d40eb31e0a2d1f584`
 
 ### AdminBootstrap — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AdminBootstrap.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AdminBootstrap.java#L15)
 
 ```java
 public AdminBootstrap(AccountRepository accounts,PasswordEncoder encoder)
@@ -7002,7 +7002,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### run — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AdminBootstrap.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AdminBootstrap.java#L16)
 
 ```java
 @Override public void run(ApplicationArguments args)
@@ -7034,11 +7034,11 @@ if(!accounts.existsByEmailIgnoreCase(email)){Account admin=new Account(email.tri
 
 Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria.
 
-Fonte: [AuthenticatedAccessManager.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticatedAccessManager.java) · SHA-256 `41096f4f44c13cd8df99cb7ecbe208d71c7609ab221265b041654462b2328d48`
+[LIDO NO CÓDIGO] Fonte: [AuthenticatedAccessManager.java](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticatedAccessManager.java) · SHA-256 `41096f4f44c13cd8df99cb7ecbe208d71c7609ab221265b041654462b2328d48`
 
 ### check — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticatedAccessManager.java:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticatedAccessManager.java#L12)
 
 ```java
 @Override public AuthorizationDecision check(Supplier<Authentication> authentication, RequestAuthorizationContext context)
@@ -7061,7 +7061,7 @@ Executa a etapa `check` neste módulo. O contrato concreto está na assinatura, 
 
 Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria.
 
-Fonte: [AuthenticationRateLimitFilter.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java) · SHA-256 `7cb760fcea7e250cef0edb59a5646ad936ccbf64ec06c03b6b496421c252a925`
+[LIDO NO CÓDIGO] Fonte: [AuthenticationRateLimitFilter.java](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java) · SHA-256 `43cfcc5248d33dec5c610f690de14ba351f26a7d4260961f6090f6c09115b453`
 
 **Contrato de dados/estados:**
 ```java
@@ -7075,9 +7075,101 @@ private record Permit(long retryAfter, Window window)
 ```
 Os componentes do record são seus acessores públicos implícitos; suas anotações definem validação quando o controlador usa `@Valid`. Enum limita valores aceitos, mas as transições também precisam das regras de domínio.
 
-### doFilterInternal — linha 35
+### AuthenticationRateLimitFilter — linha 44
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L44)
+
+```java
+public AuthenticationRateLimitFilter()
+```
+
+Constrói a instância e recebe suas dependências/dados iniciais; a construção não deve substituir autorização da operação.
+
+**Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### AuthenticationRateLimitFilter — linha 46
+
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L46)
+
+```java
+public AuthenticationRateLimitFilter(String clientAddressHeader)
+```
+
+Constrói a instância e recebe suas dependências/dados iniciais; a construção não deve substituir autorização da operação.
+
+**Colaborações:** `clientAddressHeader.trim`.
+
+**Decisões condicionais examinadas:**
+- `clientAddressHeader == null`
+
+**Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### peerAddress — linha 50
+
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L50)
+
+```java
+private String peerAddress(HttpServletRequest request)
+```
+
+Executa a etapa `peer Address` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
+
+**Colaborações:** `String.valueOf`; `request.getRemoteAddr`; `clientAddressHeader.isEmpty`; `isLoopback`; `request.getHeader`; `isLiteralAddress`; `candidate.trim`.
+
+**Decisões condicionais examinadas:**
+- `(clientAddressHeader.isEmpty() || !isLoopback(remote))`
+- `candidate != null && isLiteralAddress(candidate.trim())`
+
+**Saída declarada:**
+- `return remote;`
+- `return candidate != null && isLiteralAddress(candidate.trim()) ? candidate.trim().toLowerCase(Locale.ROOT) : remote;`
+
+**Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### isLoopback — linha 57
+
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L57)
+
+```java
+private static boolean isLoopback(String address)
+```
+
+Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado pode compor a resposta pública.
+
+**Colaborações:** `address.equals`; `address.startsWith`.
+
+**Saída declarada:**
+- `return address.equals("::1") || address.equals("0:0:0:0:0:0:0:1") || address.startsWith("127.");`
+
+**Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### isLiteralAddress — linha 62
+
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L62)
+
+```java
+private static boolean isLiteralAddress(String value)
+```
+
+Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado pode compor a resposta pública.
+
+**Colaborações:** `IPV4.matcher`; `value.contains`; `IPV6.matcher`; `java.net.InetAddress.getByName`.
+
+**Decisões condicionais examinadas:**
+- `(IPV4.matcher(value).matches())`
+- `(!value.contains(":") || !IPV6.matcher(value).matches())`
+
+**Saída declarada:**
+- `return true;`
+- `return false;`
+- `return true;`
+- `return false;`
+
+**Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
+
+### doFilterInternal — linha 73
+
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L73)
 
 ```java
 @Override protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException
@@ -7085,7 +7177,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 Executa a etapa `do Filter Internal` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `limitFor`; `request.getMethod`; `request.getRequestURI`; `chain.doFilter`; `String.valueOf`; `request.getRemoteAddr`; `request.getInputStream`; `response.sendError`; `JSON.readTree`; `json.get`; `email.isTextual`; `email.textValue`; `normalized.isBlank`; `normalized.length`; `digest`; `SecurityContextHolder.getContext`; `jwt.isAuthenticated`; `jwt.getToken`; `limit.key`; `acquire`; `limit.maxAttempts`; `limit.windowMillis`; `System.currentTimeMillis`; `primary.retryAfter`; `coarse.retryAfter`; `release`; `response.setStatus`; `response.setHeader`; `Long.toString`; `response.setContentType`; `response.setCharacterEncoding`; `response.getWriter`; `response.getStatus`.
+**Colaborações:** `limitFor`; `request.getMethod`; `request.getRequestURI`; `chain.doFilter`; `peerAddress`; `request.getInputStream`; `response.sendError`; `JSON.readTree`; `json.get`; `email.isTextual`; `email.textValue`; `normalized.isBlank`; `normalized.length`; `digest`; `SecurityContextHolder.getContext`; `jwt.isAuthenticated`; `jwt.getToken`; `limit.key`; `acquire`; `limit.maxAttempts`; `limit.windowMillis`; `System.currentTimeMillis`; `primary.retryAfter`; `coarse.retryAfter`; `release`; `response.setStatus`; `response.setHeader`; `Long.toString`; `response.setContentType`; `response.setCharacterEncoding`; `response.getWriter`; `response.getStatus`.
 
 **Decisões condicionais examinadas:**
 - `(limit == null)`
@@ -7117,9 +7209,9 @@ response.setCharacterEncoding("UTF-8");
 
 **Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### digest — linha 96
+### digest — linha 134
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java:96)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L134)
 
 ```java
 private static String digest(String value)
@@ -7137,9 +7229,9 @@ Executa a etapa `digest` neste módulo. O contrato concreto está na assinatura,
 
 **Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### release — linha 104
+### release — linha 142
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java:104)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L142)
 
 ```java
 private synchronized void release(Permit permit)
@@ -7154,9 +7246,9 @@ Executa a etapa `release` neste módulo. O contrato concreto está na assinatura
 
 **Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### acquire — linha 110
+### acquire — linha 148
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java:110)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L148)
 
 ```java
 private synchronized Permit acquire(String key, int maxAttempts, long windowMillis, long now)
@@ -7179,9 +7271,9 @@ Executa a etapa `acquire` neste módulo. O contrato concreto está na assinatura
 
 **Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### evictExpired — linha 125
+### evictExpired — linha 163
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java:125)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L163)
 
 ```java
 private void evictExpired(long now)
@@ -7196,9 +7288,9 @@ Executa a etapa `evict Expired` neste módulo. O contrato concreto está na assi
 
 **Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### limitFor — linha 130
+### limitFor — linha 168
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java:130)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L168)
 
 ```java
 private static Limit limitFor(String method, String path)
@@ -7229,9 +7321,9 @@ Executa a etapa `limit For` neste módulo. O contrato concreto está na assinatu
 
 **Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### Window — linha 149
+### Window — linha 187
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java:149)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L187)
 
 ```java
 private Window(long startedAt, int count)
@@ -7241,9 +7333,9 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 **Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### ReplayBodyRequest — linha 154
+### ReplayBodyRequest — linha 192
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java:154)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L192)
 
 ```java
 private ReplayBodyRequest(HttpServletRequest request, byte[] body)
@@ -7253,9 +7345,9 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 **Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### getInputStream — linha 155
+### getInputStream — linha 193
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java:155)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L193)
 
 ```java
 @Override public ServletInputStream getInputStream()
@@ -7277,9 +7369,9 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 **Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### read — linha 158
+### read — linha 196
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java:158)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L196)
 
 ```java
 @Override public int read()
@@ -7294,9 +7386,9 @@ Executa a etapa `read` neste módulo. O contrato concreto está na assinatura, n
 
 **Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### read — linha 159
+### read — linha 197
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java:159)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L197)
 
 ```java
 @Override public int read(byte[] target, int offset, int length)
@@ -7311,9 +7403,9 @@ Executa a etapa `read` neste módulo. O contrato concreto está na assinatura, n
 
 **Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### isFinished — linha 160
+### isFinished — linha 198
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java:160)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L198)
 
 ```java
 @Override public boolean isFinished()
@@ -7328,9 +7420,9 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 **Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### isReady — linha 161
+### isReady — linha 199
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java:161)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L199)
 
 ```java
 @Override public boolean isReady()
@@ -7343,9 +7435,9 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 **Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### setReadListener — linha 162
+### setReadListener — linha 200
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java:162)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L200)
 
 ```java
 @Override public void setReadListener(ReadListener listener)
@@ -7358,9 +7450,9 @@ Executa a etapa `set Read Listener` neste módulo. O contrato concreto está na 
 
 **Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### getReader — linha 165
+### getReader — linha 203
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java:165)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/AuthenticationRateLimitFilter.java#L203)
 
 ```java
 @Override public BufferedReader getReader()
@@ -7379,11 +7471,11 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria.
 
-Fonte: [CookieOrBearerTokenResolver.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/CookieOrBearerTokenResolver.java) · SHA-256 `212c2ae6c8cb9b5c87b733c4b54cf5f59eb5ee78e638e0a50dce40f377a71f6a`
+[LIDO NO CÓDIGO] Fonte: [CookieOrBearerTokenResolver.java](../Backend/src/main/java/br/com/fooddelivery/config/CookieOrBearerTokenResolver.java) · SHA-256 `212c2ae6c8cb9b5c87b733c4b54cf5f59eb5ee78e638e0a50dce40f377a71f6a`
 
 ### CookieOrBearerTokenResolver — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/CookieOrBearerTokenResolver.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/CookieOrBearerTokenResolver.java#L13)
 
 ```java
 public CookieOrBearerTokenResolver()
@@ -7395,7 +7487,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### CookieOrBearerTokenResolver — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/CookieOrBearerTokenResolver.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/CookieOrBearerTokenResolver.java#L14)
 
 ```java
 public CookieOrBearerTokenResolver(String cookieName)
@@ -7407,7 +7499,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### resolve — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/CookieOrBearerTokenResolver.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/CookieOrBearerTokenResolver.java#L16)
 
 ```java
 @Override public String resolve(HttpServletRequest request)
@@ -7437,11 +7529,11 @@ Executa a etapa `resolve` neste módulo. O contrato concreto está na assinatura
 
 Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria.
 
-Fonte: [DemoBootstrap.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoBootstrap.java) · SHA-256 `54a6b395f10f99f1101bba85ef639ea9d394a5a948d51461df1cfaf4b621bfcc`
+[LIDO NO CÓDIGO] Fonte: [DemoBootstrap.java](../Backend/src/main/java/br/com/fooddelivery/config/DemoBootstrap.java) · SHA-256 `54a6b395f10f99f1101bba85ef639ea9d394a5a948d51461df1cfaf4b621bfcc`
 
 ### DemoBootstrap — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoBootstrap.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/DemoBootstrap.java#L21)
 
 ```java
 public DemoBootstrap(AccountRepository accounts, StoreRepository stores, CatalogItemRepository items, ServiceCityRepository cities, StoreProfessionalRepository professionals, PasswordEncoder encoder)
@@ -7453,7 +7545,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### run — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoBootstrap.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/DemoBootstrap.java#L25)
 
 ```java
 @Override @Transactional public void run(ApplicationArguments args)
@@ -7486,7 +7578,7 @@ professionals.save(new StoreProfessional(barber,"Profissional B"));
 
 ### create — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoBootstrap.java:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/DemoBootstrap.java#L43)
 
 ```java
 private Account create(String name, AccountRole role, String cpf)
@@ -7515,11 +7607,11 @@ return accounts.save(account);
 
 Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria.
 
-Fonte: [DemoController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoController.java) · SHA-256 `b0304c16c88a0175771408d6d194cb99698a3fbbc5b1a8cd8cbbba2b7459e3cb`
+[LIDO NO CÓDIGO] Fonte: [DemoController.java](../Backend/src/main/java/br/com/fooddelivery/config/DemoController.java) · SHA-256 `b0304c16c88a0175771408d6d194cb99698a3fbbc5b1a8cd8cbbba2b7459e3cb`
 
 ### DemoController — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoController.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/DemoController.java#L21)
 
 ```java
 public DemoController(DemoEnvironment demo, PaymentRepository payments, PaymentService service, br.com.fooddelivery.identity.AccountRepository accounts)
@@ -7531,7 +7623,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### status — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoController.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/DemoController.java#L24)
 
 ```java
 @GetMapping("/status") public Object status()
@@ -7548,7 +7640,7 @@ Executa a etapa `status` neste módulo. O contrato concreto está na assinatura,
 
 ### messages — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoController.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/DemoController.java#L25)
 
 ```java
 @GetMapping("/messages") @PreAuthorize("hasRole('ADMIN')") public Object messages()
@@ -7565,7 +7657,7 @@ Executa a etapa `messages` neste módulo. O contrato concreto está na assinatur
 
 ### payment — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoController.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/DemoController.java#L28)
 
 ```java
 @PostMapping("/payments/{id}/{outcome}") @PreAuthorize("hasRole('CUSTOMER')") @Transactional public Object payment(@PathVariable UUID id, @PathVariable String outcome, Authentication auth)
@@ -7594,7 +7686,7 @@ Executa a etapa `payment` neste módulo. O contrato concreto está na assinatura
 
 Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria.
 
-Fonte: [DemoEnvironment.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoEnvironment.java) · SHA-256 `ec88dc8cbf930c9dcfc81a12d5e967319e90a6f2072d610146890c356f708f34`
+[LIDO NO CÓDIGO] Fonte: [DemoEnvironment.java](../Backend/src/main/java/br/com/fooddelivery/config/DemoEnvironment.java) · SHA-256 `ec88dc8cbf930c9dcfc81a12d5e967319e90a6f2072d610146890c356f708f34`
 
 **Contrato de dados/estados:**
 ```java
@@ -7604,7 +7696,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### DemoEnvironment — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoEnvironment.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/DemoEnvironment.java#L14)
 
 ```java
 public DemoEnvironment(Environment environment)
@@ -7624,7 +7716,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### enabled — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoEnvironment.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/DemoEnvironment.java#L19)
 
 ```java
 public boolean enabled()
@@ -7639,7 +7731,7 @@ Executa a etapa `enabled` neste módulo. O contrato concreto está na assinatura
 
 ### capture — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoEnvironment.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/DemoEnvironment.java#L20)
 
 ```java
 public synchronized void capture(String channel, String recipient, String code)
@@ -7659,7 +7751,7 @@ Executa a etapa `capture` neste módulo. O contrato concreto está na assinatura
 
 ### messages — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoEnvironment.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/DemoEnvironment.java#L25)
 
 ```java
 public synchronized List<Message> messages()
@@ -7678,11 +7770,11 @@ Executa a etapa `messages` neste módulo. O contrato concreto está na assinatur
 
 Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria.
 
-Fonte: [DemoExternalGuard.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoExternalGuard.java) · SHA-256 `7c263811288e2c945fd7956208b4058ced526f000ca6ed0e725ab9b6dc480832`
+[LIDO NO CÓDIGO] Fonte: [DemoExternalGuard.java](../Backend/src/main/java/br/com/fooddelivery/config/DemoExternalGuard.java) · SHA-256 `7c263811288e2c945fd7956208b4058ced526f000ca6ed0e725ab9b6dc480832`
 
 ### doFilterInternal — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/DemoExternalGuard.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/DemoExternalGuard.java#L14)
 
 ```java
 @Override protected void doFilterInternal(HttpServletRequest request,HttpServletResponse response,FilterChain chain) throws ServletException,IOException
@@ -7709,11 +7801,11 @@ response.setStatus(409);response.setCharacterEncoding("UTF-8");response.setConte
 
 Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria.
 
-Fonte: [ProductionGuard.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/ProductionGuard.java) · SHA-256 `286d5b9e7b4f206bb8f8b51cfec49a87bb5ce47c9830bcc90d23a4083c9da49d`
+[LIDO NO CÓDIGO] Fonte: [ProductionGuard.java](../Backend/src/main/java/br/com/fooddelivery/config/ProductionGuard.java) · SHA-256 `286d5b9e7b4f206bb8f8b51cfec49a87bb5ce47c9830bcc90d23a4083c9da49d`
 
 ### ProductionGuard — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/ProductionGuard.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/ProductionGuard.java#L13)
 
 ```java
 public ProductionGuard(Environment environment)
@@ -7725,7 +7817,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### run — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/ProductionGuard.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/ProductionGuard.java#L14)
 
 ```java
 @Override public void run(ApplicationArguments args)
@@ -7739,7 +7831,7 @@ Executa a etapa `run` neste módulo. O contrato concreto está na assinatura, no
 
 ### validate — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/ProductionGuard.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/ProductionGuard.java#L15)
 
 ```java
 public static void validate(Environment env)
@@ -7769,7 +7861,7 @@ Executa a etapa `validate` neste módulo. O contrato concreto está na assinatur
 
 ### httpsOrigin — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/ProductionGuard.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/ProductionGuard.java#L25)
 
 ```java
 private static void httpsOrigin(String input)
@@ -7792,11 +7884,11 @@ Executa a etapa `https Origin` neste módulo. O contrato concreto está na assin
 
 Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria.
 
-Fonte: [SecurityConfig.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java) · SHA-256 `af8591f10468ea00233b194300b87175078e8e797fd9a84573110417c6fba5cd`
+[LIDO NO CÓDIGO] Fonte: [SecurityConfig.java](../Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java) · SHA-256 `258d50ad5685d1dbc64db848e922cac8ca2f3f526e1f1f1f716231b70a245fec`
 
 ### authenticatedAccessManager — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java#L43)
 
 ```java
 @Bean AuthenticatedAccessManager authenticatedAccessManager()
@@ -7811,7 +7903,7 @@ Executa a etapa `authenticated Access Manager` neste módulo. O contrato concret
 
 ### passwordEncoder — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java#L46)
 
 ```java
 @Bean PasswordEncoder passwordEncoder()
@@ -7826,7 +7918,7 @@ Executa a etapa `password Encoder` neste módulo. O contrato concreto está na a
 
 ### userDetailsService — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java:49)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java#L49)
 
 ```java
 @Bean UserDetailsService userDetailsService(AccountRepository accounts)
@@ -7843,7 +7935,7 @@ Executa a etapa `user Details Service` neste módulo. O contrato concreto está 
 
 ### authenticationProvider — linha 60
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java:60)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java#L60)
 
 ```java
 @Bean DaoAuthenticationProvider authenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder)
@@ -7865,7 +7957,7 @@ provider.setPasswordEncoder(passwordEncoder);
 
 ### authenticationManager — linha 67
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java:67)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java#L67)
 
 ```java
 @Bean AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception
@@ -7882,7 +7974,7 @@ Executa a etapa `authentication Manager` neste módulo. O contrato concreto est�
 
 ### jwtSecretKey — linha 72
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java:72)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java#L72)
 
 ```java
 @Bean SecretKey jwtSecretKey(@Value("${app.security.jwt-secret}") String encodedSecret)
@@ -7905,7 +7997,7 @@ Executa a etapa `jwt Secret Key` neste módulo. O contrato concreto está na ass
 
 ### jwtEncoder — linha 79
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java:79)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java#L79)
 
 ```java
 @Bean JwtEncoder jwtEncoder(SecretKey key)
@@ -7920,7 +8012,7 @@ Executa a etapa `jwt Encoder` neste módulo. O contrato concreto está na assina
 
 ### jwtDecoder — linha 82
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java:82)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java#L82)
 
 ```java
 @Bean JwtDecoder jwtDecoder(SecretKey key, AccountRepository accounts)
@@ -7948,7 +8040,7 @@ decoder.setJwtValidator(new DelegatingOAuth2TokenValidator<>(
 
 ### jwtAuthenticationConverter — linha 111
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java:111)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java#L111)
 
 ```java
 @Bean JwtAuthenticationConverter jwtAuthenticationConverter()
@@ -7972,7 +8064,7 @@ converter.setJwtGrantedAuthoritiesConverter(authorities);
 
 ### corsConfigurationSource — linha 121
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java:121)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java#L121)
 
 ```java
 @Bean CorsConfigurationSource corsConfigurationSource(@Value("${app.web.allowed-origins}") String configuredOrigins)
@@ -7997,10 +8089,10 @@ config.setAllowCredentials(true);
 
 ### securityFilterChain — linha 134
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java:134)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SecurityConfig.java#L134)
 
 ```java
-@Bean SecurityFilterChain securityFilterChain(HttpSecurity http, DaoAuthenticationProvider provider, JwtAuthenticationConverter jwtConverter, AuthenticatedAccessManager authenticatedAccessManager, @Value("${app.web.allowed-origins}") String configuredOrigins, @Value("${app.security.cookie-name:fooddelivery_session}") String cookieName) throws Exception
+@Bean SecurityFilterChain securityFilterChain(HttpSecurity http, DaoAuthenticationProvider provider, JwtAuthenticationConverter jwtConverter, AuthenticatedAccessManager authenticatedAccessManager, @Value("${app.web.allowed-origins}") String configuredOrigins, @Value("${app.security.cookie-name:fooddelivery_session}") String cookieName, @Value("${app.security.client-address-header:}") String clientAddressHeader) throws Exception
 ```
 
 Executa a etapa `security Filter Chain` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
@@ -8008,7 +8100,7 @@ Executa a etapa `security Filter Chain` neste módulo. O contrato concreto está
 **Colaborações:** `http .cors`; `cors.configurationSource`; `corsConfigurationSource`; `csrf.disable`; `headers .contentTypeOptions`; `org.springframework.security.config.Customizer.withDefaults`; `frame.deny`; `csp.policyDirectives`; `referrer.policy`; `policy.policy`; `auth .requestMatchers`; `session.sessionCreationPolicy`; `oauth .bearerTokenResolver`; `jwt.jwtAuthenticationConverter`.
 
 **Saída declarada:**
-- `return http .cors(cors -> cors.configurationSource(corsConfigurationSource(configuredOrigins))) .csrf(csrf -> csrf.disable()) .headers(headers -> headers .contentTypeOptions(org.springframework.security.config.Customizer.withDefaults()) .cacheControl(org.springframework.security.config.Customizer.withDefaults()) .frameOptions(frame -> frame.deny()) .contentSecurityPolicy(csp -> csp.policyDirectives( "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'")) .referrerPolicy(referrer -> referrer.policy( org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy.SAME_ORIGIN)) .permissionsPolicy(policy -> policy.policy( "camera=(), microphone=(), geolocation=(self)"))) .authenticationProvider(provider) .addFilterBefore(new SessionOriginFilter(configuredOrigins,cookieName), UsernamePasswordAuthenticationFilter.class) .addFilterAfter(new AuthenticationRateLimitFilter(), org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter.class) .authorizeHttpRequests(auth -> auth .requestMatchers(HttpMethod.GET, "/api/v1/demo/status").permitAll() .requestMatchers(HttpMethod.POST, "/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/logout", "/api/v1/auth/operator-applications", "/api/v1/auth/password-recovery", "/api/v1/auth/password-recovery/reset").permitAll() .requestMatchers(HttpMethod.GET, "/api/v1/payments/mercadopago/callback").permitAll() .requestMatchers(HttpMethod.GET, "/api/v1/store-assets/**").permitAll() .requestMatchers(HttpMethod.GET, "/api/v1/store-categories").permitAll() .requestMatchers(HttpMethod.GET, "/api/v1/store-locations", "/api/v1/stores/**").permitAll() .requestMatchers(HttpMethod.GET, "/api/v1/geography/search", "/api/v1/geography/reverse").permitAll() .requestMatchers(HttpMethod.POST, "/api/v1/webhooks/mercadopago","/api/v1/webhooks/whatsapp").permitAll() .requestMatchers(HttpMethod.GET,"/api/v1/webhooks/whatsapp").permitAll() .requestMatchers(HttpMethod.GET, "/api/v1/status", "/actuator/health", "/actuator/health/**").permitAll() .requestMatchers(HttpMethod.POST, "/api/v1/account/password").authenticated() .anyRequest().access(authenticatedAccessManager)) .sessionManagement(session -> session.sessionCreationPolicy(org.springframework.security.config.http.SessionCreationPolicy.STATELESS)) .oauth2ResourceServer(oauth -> oauth .bearerTokenResolver(new CookieOrBearerTokenResolver(cookieName)) .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtConverter))) .build();`
+- `return http .cors(cors -> cors.configurationSource(corsConfigurationSource(configuredOrigins))) .csrf(csrf -> csrf.disable()) .headers(headers -> headers .contentTypeOptions(org.springframework.security.config.Customizer.withDefaults()) .cacheControl(org.springframework.security.config.Customizer.withDefaults()) .frameOptions(frame -> frame.deny()) .contentSecurityPolicy(csp -> csp.policyDirectives( "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'")) .referrerPolicy(referrer -> referrer.policy( org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy.SAME_ORIGIN)) .permissionsPolicy(policy -> policy.policy( "camera=(), microphone=(), geolocation=(self)"))) .authenticationProvider(provider) .addFilterBefore(new SessionOriginFilter(configuredOrigins,cookieName), UsernamePasswordAuthenticationFilter.class) .addFilterAfter(new AuthenticationRateLimitFilter(clientAddressHeader),org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter.class) .authorizeHttpRequests(auth -> auth .requestMatchers(HttpMethod.GET, "/api/v1/demo/status").permitAll() .requestMatchers(HttpMethod.POST, "/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/logout", "/api/v1/auth/operator-applications", "/api/v1/auth/password-recovery", "/api/v1/auth/password-recovery/reset").permitAll() .requestMatchers(HttpMethod.GET, "/api/v1/payments/mercadopago/callback").permitAll() .requestMatchers(HttpMethod.GET, "/api/v1/store-assets/**").permitAll() .requestMatchers(HttpMethod.GET, "/api/v1/store-categories").permitAll() .requestMatchers(HttpMethod.GET, "/api/v1/store-locations", "/api/v1/stores/**").permitAll() .requestMatchers(HttpMethod.GET, "/api/v1/geography/search", "/api/v1/geography/reverse").permitAll() .requestMatchers(HttpMethod.POST, "/api/v1/webhooks/mercadopago","/api/v1/webhooks/whatsapp").permitAll() .requestMatchers(HttpMethod.GET,"/api/v1/webhooks/whatsapp").permitAll() .requestMatchers(HttpMethod.GET, "/api/v1/status", "/actuator/health", "/actuator/health/**").permitAll() .requestMatchers(HttpMethod.POST, "/api/v1/account/password").authenticated() .anyRequest().access(authenticatedAccessManager)) .sessionManagement(session -> session.sessionCreationPolicy(org.springframework.security.config.http.SessionCreationPolicy.STATELESS)) .oauth2ResourceServer(oauth -> oauth .bearerTokenResolver(new CookieOrBearerTokenResolver(cookieName)) .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtConverter))) .build();`
 
 **Decisão de engenharia:** Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
@@ -8016,11 +8108,11 @@ Executa a etapa `security Filter Chain` neste módulo. O contrato concreto está
 
 Configuração e fronteira HTTP. Autenticação, origem, cookies, limitação e isolamento de homologação são definidos aqui. Configuração de produção requer validação operacional própria.
 
-Fonte: [SessionOriginFilter.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SessionOriginFilter.java) · SHA-256 `6cbf0a90270b88456cfc75e3312673c0beb4ddc0e4875456dee8b573a1ff15a6`
+[LIDO NO CÓDIGO] Fonte: [SessionOriginFilter.java](../Backend/src/main/java/br/com/fooddelivery/config/SessionOriginFilter.java) · SHA-256 `6cbf0a90270b88456cfc75e3312673c0beb4ddc0e4875456dee8b573a1ff15a6`
 
 ### SessionOriginFilter — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SessionOriginFilter.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SessionOriginFilter.java#L20)
 
 ```java
 public SessionOriginFilter(String configuredOrigins)
@@ -8032,7 +8124,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### SessionOriginFilter — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SessionOriginFilter.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SessionOriginFilter.java#L23)
 
 ```java
 public SessionOriginFilter(String configuredOrigins, String cookieName)
@@ -8046,7 +8138,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### doFilterInternal — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SessionOriginFilter.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SessionOriginFilter.java#L29)
 
 ```java
 @Override protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException
@@ -8072,7 +8164,7 @@ response.sendError(HttpServletResponse.SC_FORBIDDEN, "Origem da sessão não aut
 
 ### hasSessionCookie — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SessionOriginFilter.java:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SessionOriginFilter.java#L42)
 
 ```java
 private boolean hasSessionCookie(HttpServletRequest request)
@@ -8095,7 +8187,7 @@ Executa a etapa `has Session Cookie` neste módulo. O contrato concreto está na
 
 ### isMutation — linha 51
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/config/SessionOriginFilter.java:51)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/config/SessionOriginFilter.java#L51)
 
 ```java
 private static boolean isMutation(String method)
@@ -8114,7 +8206,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Entrega. Somente o entregador responsável acessa a tarefa. O pedido precisa estar pronto; a conclusão da entrega conclui o pedido e a visualização final omite endereço e observação.
 
-Fonte: [DeliveryController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java) · SHA-256 `8b4c471771be537f33b24158bb3d8d143421935f38b73f35cce89fd87da48baf`
+[LIDO NO CÓDIGO] Fonte: [DeliveryController.java](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java) · SHA-256 `8b4c471771be537f33b24158bb3d8d143421935f38b73f35cce89fd87da48baf`
 
 **Contrato de dados/estados:**
 ```java
@@ -8142,7 +8234,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### DeliveryController — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java#L16)
 
 ```java
 public DeliveryController(DeliveryRepository d,OrderRepository o,AccountRepository a,br.com.fooddelivery.finance.CourierFinanceService finance)
@@ -8154,7 +8246,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### offer — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java#L17)
 
 ```java
 @PostMapping("/merchant/orders/{orderId}/delivery") @ResponseStatus(HttpStatus.CREATED) @PreAuthorize("hasRole('MERCHANT')") @org.springframework.transaction.annotation.Transactional public DeliveryTask offer(@PathVariable UUID orderId,Authentication a)
@@ -8185,7 +8277,7 @@ public DeliveryTask offer(@PathVariable UUID orderId,Authentication a){Order o=o
 
 ### offers — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java#L20)
 
 ```java
 @GetMapping("/courier/offers") @PreAuthorize("hasRole('COURIER')") @org.springframework.transaction.annotation.Transactional(readOnly=true) public List<OfferView> offers()
@@ -8202,7 +8294,7 @@ Executa a etapa `offers` neste módulo. O contrato concreto está na assinatura,
 
 ### mine — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java#L21)
 
 ```java
 @GetMapping("/courier/deliveries") @PreAuthorize("hasRole('COURIER')") @org.springframework.transaction.annotation.Transactional(readOnly=true) public List<AssignedView> mine(Authentication a)
@@ -8219,7 +8311,7 @@ Executa a etapa `mine` neste módulo. O contrato concreto está na assinatura, n
 
 ### accept — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java#L22)
 
 ```java
 @PostMapping("/courier/offers/{id}/accept") @PreAuthorize("hasRole('COURIER')") @org.springframework.transaction.annotation.Transactional public DeliveryTask accept(@PathVariable UUID id,Authentication a)
@@ -8248,7 +8340,7 @@ public DeliveryTask accept(@PathVariable UUID id,Authentication a){var task=deli
 
 ### progress — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java#L24)
 
 ```java
 @PatchMapping("/courier/deliveries/{id}") @PreAuthorize("hasRole('COURIER')") @org.springframework.transaction.annotation.Transactional public AssignedView progress(@PathVariable UUID id,@Valid @RequestBody Update u,Authentication a)
@@ -8277,7 +8369,7 @@ public AssignedView progress(@PathVariable UUID id,@Valid @RequestBody Update u,
 
 ### location — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java#L26)
 
 ```java
 @PatchMapping("/courier/deliveries/{id}/location") @PreAuthorize("hasRole('COURIER')") @org.springframework.transaction.annotation.Transactional public void location(@PathVariable UUID id,@Valid @RequestBody LocationUpdate u,Authentication a)
@@ -8302,7 +8394,7 @@ Executa a etapa `location` neste módulo. O contrato concreto está na assinatur
 
 ### subject — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java#L27)
 
 ```java
 private UUID subject(Authentication a)
@@ -8319,7 +8411,7 @@ Executa a etapa `subject` neste módulo. O contrato concreto está na assinatura
 
 ### requireReady — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java#L31)
 
 ```java
 private void requireReady(Order order)
@@ -8339,7 +8431,7 @@ Executa a etapa `require Ready` neste módulo. O contrato concreto está na assi
 
 ### view — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryController.java#L32)
 
 ```java
 private AssignedView view(DeliveryTask d)
@@ -8361,11 +8453,11 @@ Executa a etapa `view` neste módulo. O contrato concreto está na assinatura, n
 
 Entrega. Somente o entregador responsável acessa a tarefa. O pedido precisa estar pronto; a conclusão da entrega conclui o pedido e a visualização final omite endereço e observação.
 
-Fonte: [DeliveryRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryRepository.java) · SHA-256 `33bf7915783919645cf298ac220938dc1d8cfe3c8d78c2970079ec9cd3c571e9`
+[LIDO NO CÓDIGO] Fonte: [DeliveryRepository.java](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryRepository.java) · SHA-256 `33bf7915783919645cf298ac220938dc1d8cfe3c8d78c2970079ec9cd3c571e9`
 
 ### findByStatusOrderByCreatedAt — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryRepository.java:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryRepository.java#L7)
 
 ```java
 List<DeliveryTask> findByStatusOrderByCreatedAt(DeliveryStatus status);
@@ -8379,7 +8471,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByCourierIdOrderByCreatedAtDesc — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryRepository.java:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryRepository.java#L8)
 
 ```java
 List<DeliveryTask> findByCourierIdOrderByCreatedAtDesc(UUID id);
@@ -8393,7 +8485,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByOrderId — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryRepository.java#L9)
 
 ```java
 Optional<DeliveryTask> findByOrderId(UUID id);
@@ -8407,7 +8499,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### claim — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryRepository.java#L10)
 
 ```java
 @Modifying(clearAutomatically=true,flushAutomatically=true) @Transactional @Query("update DeliveryTask d set d.courier=:courier, d.status=br.com.fooddelivery.delivery.DeliveryStatus.ASSIGNED, d.version=d.version+1 where d.id=:id and d.courier is null and d.status=br.com.fooddelivery.delivery.DeliveryStatus.OFFERED") int claim(@Param("id") UUID id,@Param("courier") br.com.fooddelivery.identity.Account courier);
@@ -8423,7 +8515,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Entrega. Somente o entregador responsável acessa a tarefa. O pedido precisa estar pronto; a conclusão da entrega conclui o pedido e a visualização final omite endereço e observação.
 
-Fonte: [DeliveryStatus.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryStatus.java) · SHA-256 `43d203b641d5d2c889b7fe8e9a893122ac49bdf0c6ff1c04fccf4599d5986c64`
+[LIDO NO CÓDIGO] Fonte: [DeliveryStatus.java](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryStatus.java) · SHA-256 `43d203b641d5d2c889b7fe8e9a893122ac49bdf0c6ff1c04fccf4599d5986c64`
 
 **Contrato de dados/estados:**
 ```java
@@ -8437,11 +8529,11 @@ Sem função explícita: contrato declarativo, enum ou inicializador. Os campos 
 
 Entrega. Somente o entregador responsável acessa a tarefa. O pedido precisa estar pronto; a conclusão da entrega conclui o pedido e a visualização final omite endereço e observação.
 
-Fonte: [DeliveryTask.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java) · SHA-256 `4a6d34ee68a04289ae903cd4e2d74529a10cc66840934ae52790f8d0d74fffc0`
+[LIDO NO CÓDIGO] Fonte: [DeliveryTask.java](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java) · SHA-256 `4a6d34ee68a04289ae903cd4e2d74529a10cc66840934ae52790f8d0d74fffc0`
 
 ### DeliveryTask — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L22)
 
 ```java
 protected DeliveryTask()
@@ -8453,7 +8545,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### DeliveryTask — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L22)
 
 ```java
 public DeliveryTask(Order order)
@@ -8465,7 +8557,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getCourierFeeCents — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L23)
 
 ```java
 public Long getCourierFeeCents()
@@ -8480,7 +8572,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setCourierFeeOnce — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L24)
 
 ```java
 public void setCourierFeeOnce(long amount)
@@ -8499,7 +8591,7 @@ Executa a etapa `set Courier Fee Once` neste módulo. O contrato concreto está 
 
 ### getId — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L25)
 
 ```java
 public UUID getId()
@@ -8514,7 +8606,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getOrder — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L25)
 
 ```java
 public Order getOrder()
@@ -8529,7 +8621,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCourier — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L25)
 
 ```java
 public Account getCourier()
@@ -8544,7 +8636,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStatus — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L25)
 
 ```java
 public DeliveryStatus getStatus()
@@ -8559,7 +8651,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCreatedAt — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L25)
 
 ```java
 public Instant getCreatedAt()
@@ -8574,7 +8666,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### assign — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L26)
 
 ```java
 public void assign(Account courier)
@@ -8592,7 +8684,7 @@ Executa a etapa `assign` neste módulo. O contrato concreto está na assinatura,
 
 ### requireCancellable — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L27)
 
 ```java
 public void requireCancellable()
@@ -8610,7 +8702,7 @@ Executa a etapa `require Cancellable` neste módulo. O contrato concreto está n
 
 ### cancel — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L28)
 
 ```java
 public void cancel()
@@ -8624,7 +8716,7 @@ Executa a etapa `cancel` neste módulo. O contrato concreto está na assinatura,
 
 ### advance — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L29)
 
 ```java
 public void advance(DeliveryStatus next)
@@ -8643,7 +8735,7 @@ Executa a etapa `advance` neste módulo. O contrato concreto está na assinatura
 
 ### updateLocation — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L30)
 
 ```java
 public void updateLocation(double latitude,double longitude)
@@ -8663,7 +8755,7 @@ Executa a etapa `update Location` neste módulo. O contrato concreto está na as
 
 ### getCourierLatitude — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L31)
 
 ```java
 public Double getCourierLatitude()
@@ -8678,7 +8770,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCourierLongitude — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L31)
 
 ```java
 public Double getCourierLongitude()
@@ -8693,7 +8785,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getLocationUpdatedAt — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/delivery/DeliveryTask.java#L31)
 
 ```java
 public Instant getLocationUpdatedAt()
@@ -8710,11 +8802,11 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Remuneração e repasses do entregador. O valor por entrega é definido pela administração e congelado na tarefa. Crédito único, saldo sob bloqueio, reautenticação, código de verificação, idempotência e aprovação protegem o registro; nenhuma transferência externa é presumida.
 
-Fonte: [CourierCompensation.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierCompensation.java) · SHA-256 `44450503d38a9fa6b9b2a971ccaedeb06b04d1104549c7ed94b1aab713772e85`
+[LIDO NO CÓDIGO] Fonte: [CourierCompensation.java](../Backend/src/main/java/br/com/fooddelivery/finance/CourierCompensation.java) · SHA-256 `44450503d38a9fa6b9b2a971ccaedeb06b04d1104549c7ed94b1aab713772e85`
 
 ### isConfigured — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierCompensation.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierCompensation.java#L10)
 
 ```java
 public boolean isConfigured()
@@ -8729,7 +8821,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAmountCents — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierCompensation.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierCompensation.java#L10)
 
 ```java
 public long getAmountCents()
@@ -8744,7 +8836,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getUpdatedAt — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierCompensation.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierCompensation.java#L10)
 
 ```java
 public Instant getUpdatedAt()
@@ -8759,7 +8851,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### configure — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierCompensation.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierCompensation.java#L11)
 
 ```java
 public void configure(long amount)
@@ -8781,11 +8873,11 @@ Executa a etapa `configure` neste módulo. O contrato concreto está na assinatu
 
 Remuneração e repasses do entregador. O valor por entrega é definido pela administração e congelado na tarefa. Crédito único, saldo sob bloqueio, reautenticação, código de verificação, idempotência e aprovação protegem o registro; nenhuma transferência externa é presumida.
 
-Fonte: [CourierCompensationRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierCompensationRepository.java) · SHA-256 `ae45babc62d7a3e66a5915a8c3b894f4ff679b16db1e4d6e7cbe09da7e0dff98`
+[LIDO NO CÓDIGO] Fonte: [CourierCompensationRepository.java](../Backend/src/main/java/br/com/fooddelivery/finance/CourierCompensationRepository.java) · SHA-256 `ae45babc62d7a3e66a5915a8c3b894f4ff679b16db1e4d6e7cbe09da7e0dff98`
 
 ### lockPolicy — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierCompensationRepository.java:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierCompensationRepository.java#L6)
 
 ```java
 @Lock(LockModeType.PESSIMISTIC_WRITE) @Query("select c from CourierCompensation c where c.id=1") Optional<CourierCompensation> lockPolicy();
@@ -8801,11 +8893,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Remuneração e repasses do entregador. O valor por entrega é definido pela administração e congelado na tarefa. Crédito único, saldo sob bloqueio, reautenticação, código de verificação, idempotência e aprovação protegem o registro; nenhuma transferência externa é presumida.
 
-Fonte: [CourierEarning.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierEarning.java) · SHA-256 `5cc54cb77d09693ea0691cf406e756d9ed316a3196382f7493f4453264f5baaf`
+[LIDO NO CÓDIGO] Fonte: [CourierEarning.java](../Backend/src/main/java/br/com/fooddelivery/finance/CourierEarning.java) · SHA-256 `5cc54cb77d09693ea0691cf406e756d9ed316a3196382f7493f4453264f5baaf`
 
 ### CourierEarning — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierEarning.java:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierEarning.java#L12)
 
 ```java
 protected CourierEarning()
@@ -8817,7 +8909,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### CourierEarning — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierEarning.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierEarning.java#L13)
 
 ```java
 public CourierEarning(UUID deliveryId,UUID courierId,long amount)
@@ -8835,7 +8927,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getId — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierEarning.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierEarning.java#L14)
 
 ```java
 public UUID getId()
@@ -8850,7 +8942,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getDeliveryId — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierEarning.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierEarning.java#L14)
 
 ```java
 public UUID getDeliveryId()
@@ -8865,7 +8957,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAmountCents — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierEarning.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierEarning.java#L14)
 
 ```java
 public long getAmountCents()
@@ -8880,7 +8972,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCreatedAt — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierEarning.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierEarning.java#L14)
 
 ```java
 public Instant getCreatedAt()
@@ -8897,11 +8989,11 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Remuneração e repasses do entregador. O valor por entrega é definido pela administração e congelado na tarefa. Crédito único, saldo sob bloqueio, reautenticação, código de verificação, idempotência e aprovação protegem o registro; nenhuma transferência externa é presumida.
 
-Fonte: [CourierEarningRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierEarningRepository.java) · SHA-256 `5985d746197fa585b6dfe236fa008e29ab9d3db0d816dde5968806edc6235b05`
+[LIDO NO CÓDIGO] Fonte: [CourierEarningRepository.java](../Backend/src/main/java/br/com/fooddelivery/finance/CourierEarningRepository.java) · SHA-256 `5985d746197fa585b6dfe236fa008e29ab9d3db0d816dde5968806edc6235b05`
 
 ### existsByDeliveryId — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierEarningRepository.java:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierEarningRepository.java#L7)
 
 ```java
 boolean existsByDeliveryId(UUID deliveryId);
@@ -8915,7 +9007,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### total — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierEarningRepository.java:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierEarningRepository.java#L8)
 
 ```java
 @Query("select coalesce(sum(e.amountCents),0) from CourierEarning e where e.courierId=:id") long total(@Param("id") UUID id);
@@ -8929,7 +9021,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByCourierIdOrderByCreatedAtDesc — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierEarningRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierEarningRepository.java#L9)
 
 ```java
 Page<CourierEarning> findByCourierIdOrderByCreatedAtDesc(UUID id,Pageable page);
@@ -8945,7 +9037,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Remuneração e repasses do entregador. O valor por entrega é definido pela administração e congelado na tarefa. Crédito único, saldo sob bloqueio, reautenticação, código de verificação, idempotência e aprovação protegem o registro; nenhuma transferência externa é presumida.
 
-Fonte: [CourierFinanceController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java) · SHA-256 `952c15f8920854bb275b1a739c3ea6042c53d09971c8181e35a275dd39e53013`
+[LIDO NO CÓDIGO] Fonte: [CourierFinanceController.java](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java) · SHA-256 `952c15f8920854bb275b1a739c3ea6042c53d09971c8181e35a275dd39e53013`
 
 **Contrato de dados/estados:**
 ```java
@@ -8979,7 +9071,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### CourierFinanceController — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java#L14)
 
 ```java
 public CourierFinanceController(CourierFinanceService finance)
@@ -8991,7 +9083,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### actor — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java#L15)
 
 ```java
 private UUID actor(Authentication a)
@@ -9008,7 +9100,7 @@ Executa a etapa `actor` neste módulo. O contrato concreto está na assinatura, 
 
 ### mine — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java#L16)
 
 ```java
 @GetMapping("/courier/finance") @PreAuthorize("hasRole('COURIER')") public Object mine(Authentication a,@RequestParam(defaultValue="0") int page)
@@ -9025,7 +9117,7 @@ Executa a etapa `mine` neste módulo. O contrato concreto está na assinatura, n
 
 ### code — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java#L17)
 
 ```java
 @PostMapping("/courier/payout-code") @PreAuthorize("hasRole('COURIER')") public Object code(Authentication a,@Valid @RequestBody Password r)
@@ -9042,7 +9134,7 @@ Executa a etapa `code` neste módulo. O contrato concreto está na assinatura, n
 
 ### request — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java#L18)
 
 ```java
 @PostMapping("/courier/payouts") @PreAuthorize("hasRole('COURIER')") public Object request(Authentication a,@Valid @RequestBody Request r)
@@ -9065,7 +9157,7 @@ Executa a etapa `request` neste módulo. O contrato concreto está na assinatura
 
 ### cancel — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java#L19)
 
 ```java
 @PostMapping("/courier/payouts/{id}/cancel") @PreAuthorize("hasRole('COURIER')") public Object cancel(Authentication a,@PathVariable UUID id)
@@ -9082,7 +9174,7 @@ Executa a etapa `cancel` neste módulo. O contrato concreto está na assinatura,
 
 ### admin — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java#L20)
 
 ```java
 @GetMapping("/admin/courier-finance") @PreAuthorize("hasRole('ADMIN')") public Object admin(@RequestParam(defaultValue="0") int page)
@@ -9099,7 +9191,7 @@ Executa a etapa `admin` neste módulo. O contrato concreto está na assinatura, 
 
 ### policy — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java#L21)
 
 ```java
 @PostMapping("/admin/courier-finance/policy") @PreAuthorize("hasRole('ADMIN')") public Object policy(Authentication a,@Valid @RequestBody Policy r)
@@ -9116,7 +9208,7 @@ Executa a etapa `policy` neste módulo. O contrato concreto está na assinatura,
 
 ### decision — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java#L22)
 
 ```java
 @PostMapping("/admin/courier-finance/payouts/{id}/decision") @PreAuthorize("hasRole('ADMIN')") public Object decision(Authentication a,@PathVariable UUID id,@Valid @RequestBody Decision r)
@@ -9133,7 +9225,7 @@ Executa a etapa `decision` neste módulo. O contrato concreto está na assinatur
 
 ### paid — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceController.java#L23)
 
 ```java
 @PostMapping("/admin/courier-finance/payouts/{id}/paid") @PreAuthorize("hasRole('ADMIN')") public Object paid(Authentication a,@PathVariable UUID id,@Valid @RequestBody Paid r)
@@ -9157,7 +9249,7 @@ Executa a etapa `paid` neste módulo. O contrato concreto está na assinatura, n
 
 Remuneração e repasses do entregador. O valor por entrega é definido pela administração e congelado na tarefa. Crédito único, saldo sob bloqueio, reautenticação, código de verificação, idempotência e aprovação protegem o registro; nenhuma transferência externa é presumida.
 
-Fonte: [CourierFinanceService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java) · SHA-256 `f644040a327022f77d052f42ad6c35b0deb4ab4c12a44dc5fafc66b06dce3e29`
+[LIDO NO CÓDIGO] Fonte: [CourierFinanceService.java](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java) · SHA-256 `f644040a327022f77d052f42ad6c35b0deb4ab4c12a44dc5fafc66b06dce3e29`
 
 **Contrato de dados/estados:**
 ```java
@@ -9185,7 +9277,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### CourierFinanceService — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L18)
 
 ```java
 public CourierFinanceService(CourierCompensationRepository policies,CourierEarningRepository earnings,CourierPayoutRepository payouts,AccountRepository accounts,PasswordEncoder encoder,PasswordRecoveryService verification,NotificationService notifications,AdminAuditService audit)
@@ -9197,7 +9289,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### policy — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L23)
 
 ```java
 @Transactional(readOnly=true) public Policy policy()
@@ -9214,7 +9306,7 @@ Executa a etapa `policy` neste módulo. O contrato concreto está na assinatura,
 
 ### requiredFee — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L24)
 
 ```java
 @Transactional(readOnly=true) public long requiredFee()
@@ -9237,7 +9329,7 @@ Executa a etapa `required Fee` neste módulo. O contrato concreto está na assin
 
 ### account — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L25)
 
 ```java
 private Account account(UUID id)
@@ -9254,7 +9346,7 @@ Executa a etapa `account` neste módulo. O contrato concreto está na assinatura
 
 ### reauthenticate — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L26)
 
 ```java
 private Account reauthenticate(UUID id,String password)
@@ -9277,7 +9369,7 @@ Executa a etapa `reauthenticate` neste módulo. O contrato concreto está na ass
 
 ### configure — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L27)
 
 ```java
 @Transactional public Policy configure(UUID admin,long amount,String password)
@@ -9294,7 +9386,7 @@ Executa a etapa `configure` neste módulo. O contrato concreto está na assinatu
 
 ### requireAdmin — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L28)
 
 ```java
 private void requireAdmin(Account account)
@@ -9314,7 +9406,7 @@ Executa a etapa `require Admin` neste módulo. O contrato concreto está na assi
 
 ### creditDelivered — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L29)
 
 ```java
 @Transactional public void creditDelivered(DeliveryTask task)
@@ -9346,7 +9438,7 @@ notifications.sendLinked(task.getCourier(),"Ganho de entrega registrado","A remu
 
 ### summary — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L37)
 
 ```java
 @Transactional(readOnly=true) public Summary summary(UUID courier)
@@ -9369,7 +9461,7 @@ Executa a etapa `summary` neste módulo. O contrato concreto está na assinatura
 
 ### requestCode — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L38)
 
 ```java
 @Transactional public void requestCode(UUID courier,String password)
@@ -9389,7 +9481,7 @@ Executa a etapa `request Code` neste módulo. O contrato concreto está na assin
 
 ### request — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L39)
 
 ```java
 @Transactional public PayoutView request(UUID courier,long amount,UUID key,String password,String code)
@@ -9425,7 +9517,7 @@ var saved=payouts.save(new CourierPayout(courier,amount,a.getCpf(),key));audit.r
 
 ### cancel — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:49)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L49)
 
 ```java
 @Transactional public PayoutView cancel(UUID courier,UUID id)
@@ -9448,7 +9540,7 @@ Executa a etapa `cancel` neste módulo. O contrato concreto está na assinatura,
 
 ### decide — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L50)
 
 ```java
 @Transactional public Approved decide(UUID admin,UUID id,boolean approved,String note,String password)
@@ -9473,7 +9565,7 @@ Executa a etapa `decide` neste módulo. O contrato concreto está na assinatura,
 
 ### paid — linha 51
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:51)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L51)
 
 ```java
 @Transactional public PayoutView paid(UUID admin,UUID id,String reference,String password)
@@ -9498,7 +9590,7 @@ Executa a etapa `paid` neste módulo. O contrato concreto está na assinatura, n
 
 ### lockedPayout — linha 52
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:52)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L52)
 
 ```java
 private CourierPayout lockedPayout(UUID id)
@@ -9515,7 +9607,7 @@ Executa a etapa `locked Payout` neste módulo. O contrato concreto está na assi
 
 ### mine — linha 53
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:53)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L53)
 
 ```java
 @Transactional(readOnly=true) public Page<PayoutView> mine(UUID courier,int page)
@@ -9532,7 +9624,7 @@ Executa a etapa `mine` neste módulo. O contrato concreto está na assinatura, n
 
 ### all — linha 54
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:54)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L54)
 
 ```java
 @Transactional(readOnly=true) public Page<PayoutView> all(int page)
@@ -9549,7 +9641,7 @@ Executa a etapa `all` neste módulo. O contrato concreto está na assinatura, no
 
 ### earnings — linha 55
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:55)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L55)
 
 ```java
 @Transactional(readOnly=true) public Page<CourierEarning> earnings(UUID courier,int page)
@@ -9566,7 +9658,7 @@ Executa a etapa `earnings` neste módulo. O contrato concreto está na assinatur
 
 ### view — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java:56)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierFinanceService.java#L56)
 
 ```java
 private PayoutView view(CourierPayout p)
@@ -9585,7 +9677,7 @@ Executa a etapa `view` neste módulo. O contrato concreto está na assinatura, n
 
 Remuneração e repasses do entregador. O valor por entrega é definido pela administração e congelado na tarefa. Crédito único, saldo sob bloqueio, reautenticação, código de verificação, idempotência e aprovação protegem o registro; nenhuma transferência externa é presumida.
 
-Fonte: [CourierPayout.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java) · SHA-256 `bd554650efb4c18ce2df47761e778ad0e89a7573a5018116f9697e92c49aa746`
+[LIDO NO CÓDIGO] Fonte: [CourierPayout.java](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java) · SHA-256 `bd554650efb4c18ce2df47761e778ad0e89a7573a5018116f9697e92c49aa746`
 
 **Contrato de dados/estados:**
 ```java
@@ -9595,7 +9687,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### CourierPayout — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L21)
 
 ```java
 protected CourierPayout()
@@ -9607,7 +9699,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### CourierPayout — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L22)
 
 ```java
 public CourierPayout(UUID courierId,long amount,String cpf,UUID key)
@@ -9625,7 +9717,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getId — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L23)
 
 ```java
 public UUID getId()
@@ -9640,7 +9732,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCourierId — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L23)
 
 ```java
 public UUID getCourierId()
@@ -9655,7 +9747,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAmountCents — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L23)
 
 ```java
 public long getAmountCents()
@@ -9670,7 +9762,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getDestinationCpf — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L23)
 
 ```java
 public String getDestinationCpf()
@@ -9685,7 +9777,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStatus — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L23)
 
 ```java
 public Status getStatus()
@@ -9700,7 +9792,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getRequestKey — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L23)
 
 ```java
 public UUID getRequestKey()
@@ -9715,7 +9807,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCreatedAt — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L23)
 
 ```java
 public Instant getCreatedAt()
@@ -9730,7 +9822,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getDecidedAt — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L23)
 
 ```java
 public Instant getDecidedAt()
@@ -9745,7 +9837,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getPaidAt — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L23)
 
 ```java
 public Instant getPaidAt()
@@ -9760,7 +9852,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getExternalReference — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L23)
 
 ```java
 public String getExternalReference()
@@ -9775,7 +9867,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getDecisionNote — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L23)
 
 ```java
 public String getDecisionNote()
@@ -9790,7 +9882,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### cancel — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L24)
 
 ```java
 public void cancel()
@@ -9810,7 +9902,7 @@ Executa a etapa `cancel` neste módulo. O contrato concreto está na assinatura,
 
 ### decide — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L25)
 
 ```java
 public void decide(boolean approve,UUID actor,String note)
@@ -9833,7 +9925,7 @@ Executa a etapa `decide` neste módulo. O contrato concreto está na assinatura,
 
 ### recordPaid — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayout.java#L26)
 
 ```java
 public void recordPaid(UUID actor,String reference)
@@ -9861,11 +9953,11 @@ Executa a etapa `record Paid` neste módulo. O contrato concreto está na assina
 
 Remuneração e repasses do entregador. O valor por entrega é definido pela administração e congelado na tarefa. Crédito único, saldo sob bloqueio, reautenticação, código de verificação, idempotência e aprovação protegem o registro; nenhuma transferência externa é presumida.
 
-Fonte: [CourierPayoutRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayoutRepository.java) · SHA-256 `e1bdba41663d5dde612898b37d3bc756129037c34b1e232296c2faba34fd660d`
+[LIDO NO CÓDIGO] Fonte: [CourierPayoutRepository.java](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayoutRepository.java) · SHA-256 `e1bdba41663d5dde612898b37d3bc756129037c34b1e232296c2faba34fd660d`
 
 ### findByCourierIdAndRequestKey — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayoutRepository.java:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayoutRepository.java#L7)
 
 ```java
 Optional<CourierPayout> findByCourierIdAndRequestKey(UUID courierId,UUID key);
@@ -9879,7 +9971,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### total — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayoutRepository.java:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayoutRepository.java#L8)
 
 ```java
 @Query("select coalesce(sum(p.amountCents),0) from CourierPayout p where p.courierId=:id and p.status in :statuses") long total(@Param("id") UUID id,@Param("statuses") Collection<CourierPayout.Status> statuses);
@@ -9893,7 +9985,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByCourierIdOrderByCreatedAtDesc — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayoutRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayoutRepository.java#L9)
 
 ```java
 Page<CourierPayout> findByCourierIdOrderByCreatedAtDesc(UUID id,Pageable page);
@@ -9907,7 +9999,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findAllByOrderByCreatedAtDesc — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/finance/CourierPayoutRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/finance/CourierPayoutRepository.java#L10)
 
 ```java
 Page<CourierPayout> findAllByOrderByCreatedAtDesc(Pageable page);
@@ -9923,11 +10015,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [Account.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java) · SHA-256 `acb63672df88feac92ae839774cf65043991d8ee862f95693d1f03732fae5b93`
+[LIDO NO CÓDIGO] Fonte: [Account.java](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java) · SHA-256 `acb63672df88feac92ae839774cf65043991d8ee862f95693d1f03732fae5b93`
 
 ### Account — linha 93
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:93)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L93)
 
 ```java
 protected Account()
@@ -9939,7 +10031,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### Account — linha 95
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:95)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L95)
 
 ```java
 public Account(String email, String name, String passwordHash)
@@ -9951,7 +10043,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getId — linha 101
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:101)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L101)
 
 ```java
 public UUID getId()
@@ -9966,7 +10058,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getEmail — linha 102
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:102)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L102)
 
 ```java
 public String getEmail()
@@ -9981,7 +10073,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getName — linha 103
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:103)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L103)
 
 ```java
 public String getName()
@@ -9996,7 +10088,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getPasswordHash — linha 104
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:104)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L104)
 
 ```java
 public String getPasswordHash()
@@ -10011,7 +10103,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getRole — linha 105
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:105)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L105)
 
 ```java
 public AccountRole getRole()
@@ -10026,7 +10118,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isActive — linha 106
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:106)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L106)
 
 ```java
 public boolean isActive()
@@ -10041,7 +10133,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getOperatorApplicationStatus — linha 107
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:107)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L107)
 
 ```java
 public String getOperatorApplicationStatus()
@@ -10056,7 +10148,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCpf — linha 108
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:108)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L108)
 
 ```java
 public String getCpf()
@@ -10071,7 +10163,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getGrantedRoles — linha 109
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:109)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L109)
 
 ```java
 public List<AccountRole> getGrantedRoles()
@@ -10092,7 +10184,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getRegisteredRoles — linha 114
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:114)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L114)
 
 ```java
 public List<AccountRole> getRegisteredRoles()
@@ -10109,7 +10201,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getRequestedOperatorRole — linha 115
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:115)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L115)
 
 ```java
 public AccountRole getRequestedOperatorRole()
@@ -10124,7 +10216,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isPasswordChangeRequired — linha 116
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:116)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L116)
 
 ```java
 public boolean isPasswordChangeRequired()
@@ -10139,7 +10231,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCredentialVersion — linha 117
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:117)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L117)
 
 ```java
 public int getCredentialVersion()
@@ -10154,7 +10246,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCreatedAt — linha 118
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:118)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L118)
 
 ```java
 public Instant getCreatedAt()
@@ -10169,7 +10261,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getPhone — linha 119
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:119)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L119)
 
 ```java
 public String getPhone()
@@ -10184,7 +10276,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isPhoneVerified — linha 120
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:120)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L120)
 
 ```java
 public boolean isPhoneVerified()
@@ -10199,7 +10291,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAddressLine — linha 121
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:121)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L121)
 
 ```java
 public String getAddressLine()
@@ -10214,7 +10306,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAddressComplement — linha 122
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:122)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L122)
 
 ```java
 public String getAddressComplement()
@@ -10229,7 +10321,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getNeighborhood — linha 123
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:123)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L123)
 
 ```java
 public String getNeighborhood()
@@ -10244,7 +10336,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCity — linha 124
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:124)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L124)
 
 ```java
 public String getCity()
@@ -10259,7 +10351,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getState — linha 125
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:125)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L125)
 
 ```java
 public String getState()
@@ -10274,7 +10366,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getPostalCode — linha 126
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:126)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L126)
 
 ```java
 public String getPostalCode()
@@ -10289,7 +10381,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setRole — linha 127
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:127)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L127)
 
 ```java
 public void setRole(AccountRole role)
@@ -10306,7 +10398,7 @@ Executa a etapa `set Role` neste módulo. O contrato concreto está na assinatur
 
 ### deactivate — linha 134
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:134)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L134)
 
 ```java
 public void deactivate()
@@ -10318,7 +10410,7 @@ Executa a etapa `deactivate` neste módulo. O contrato concreto está na assinat
 
 ### submitOperatorApplication — linha 135
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:135)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L135)
 
 ```java
 public void submitOperatorApplication(AccountRole requestedRole)
@@ -10342,7 +10434,7 @@ Executa a etapa `submit Operator Application` neste módulo. O contrato concreto
 
 ### approveOperatorApplication — linha 144
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:144)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L144)
 
 ```java
 public void approveOperatorApplication()
@@ -10362,7 +10454,7 @@ Executa a etapa `approve Operator Application` neste módulo. O contrato concret
 
 ### rejectOperatorApplication — linha 151
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:151)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L151)
 
 ```java
 public void rejectOperatorApplication()
@@ -10382,7 +10474,7 @@ Executa a etapa `reject Operator Application` neste módulo. O contrato concreto
 
 ### activate — linha 157
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:157)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L157)
 
 ```java
 public void activate()
@@ -10394,7 +10486,7 @@ Executa a etapa `activate` neste módulo. O contrato concreto está na assinatur
 
 ### setRoleActive — linha 159
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:159)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L159)
 
 ```java
 public void setRoleActive(AccountRole requestedRole, boolean enabled)
@@ -10415,7 +10507,7 @@ Executa a etapa `set Role Active` neste módulo. O contrato concreto está na as
 
 ### setCpfOnce — linha 170
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:170)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L170)
 
 ```java
 public void setCpfOnce(String value)
@@ -10438,7 +10530,7 @@ Executa a etapa `set Cpf Once` neste módulo. O contrato concreto está na assin
 
 ### setCpfByAdministrator — linha 178
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:178)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L178)
 
 ```java
 public void setCpfByAdministrator(String value)
@@ -10459,7 +10551,7 @@ Executa a etapa `set Cpf By Administrator` neste módulo. O contrato concreto es
 
 ### changeEmailByAdministrator — linha 184
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:184)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L184)
 
 ```java
 public void changeEmailByAdministrator(String value)
@@ -10479,7 +10571,7 @@ Executa a etapa `change Email By Administrator` neste módulo. O contrato concre
 
 ### changePassword — linha 190
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:190)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L190)
 
 ```java
 public void changePassword(String encodedPassword)
@@ -10493,7 +10585,7 @@ Executa a etapa `change Password` neste módulo. O contrato concreto está na as
 
 ### requirePasswordChange — linha 191
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:191)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L191)
 
 ```java
 public void requirePasswordChange(String encodedPassword)
@@ -10507,7 +10599,7 @@ Executa a etapa `require Password Change` neste módulo. O contrato concreto est
 
 ### getActiveRoles — linha 193
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:193)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L193)
 
 ```java
 private Set<AccountRole> getActiveRoles()
@@ -10524,7 +10616,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### parseRoles — linha 194
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:194)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L194)
 
 ```java
 private static Set<AccountRole> parseRoles(String value)
@@ -10544,7 +10636,7 @@ Executa a etapa `parse Roles` neste módulo. O contrato concreto está na assina
 
 ### encodeRoles — linha 200
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:200)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L200)
 
 ```java
 private static String encodeRoles(Set<AccountRole> roles)
@@ -10561,7 +10653,7 @@ Executa a etapa `encode Roles` neste módulo. O contrato concreto está na assin
 
 ### updateProfile — linha 202
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:202)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L202)
 
 ```java
 public void updateProfile(String name, String phone, String addressLine, String addressComplement, String neighborhood, String city, String state, String postalCode)
@@ -10580,7 +10672,7 @@ Executa a etapa `update Profile` neste módulo. O contrato concreto está na ass
 
 ### markPhoneVerified — linha 217
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:217)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L217)
 
 ```java
 public void markPhoneVerified()
@@ -10592,7 +10684,7 @@ Executa a etapa `mark Phone Verified` neste módulo. O contrato concreto está n
 
 ### updateAddress — linha 219
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Account.java:219)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Account.java#L219)
 
 ```java
 public void updateAddress(String addressLine, String addressComplement, String neighborhood, String city, String state, String postalCode)
@@ -10606,11 +10698,11 @@ Executa a etapa `update Address` neste módulo. O contrato concreto está na ass
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [AccountRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java) · SHA-256 `818595c78ea1b04a9708ed0389ba1ee0f7ce3b9f2c9bda59652a19387c2e9e3e`
+[LIDO NO CÓDIGO] Fonte: [AccountRepository.java](../Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java) · SHA-256 `818595c78ea1b04a9708ed0389ba1ee0f7ce3b9f2c9bda59652a19387c2e9e3e`
 
 ### findOperators — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java#L14)
 
 ```java
 @Query("select a from Account a where a.grantedRoleCodes like '%MERCHANT%' or a.grantedRoleCodes like '%COURIER%'") org.springframework.data.domain.Page<Account> findOperators(org.springframework.data.domain.Pageable pageable);
@@ -10624,7 +10716,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### countOperators — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java#L16)
 
 ```java
 @Query("select count(a) from Account a where a.grantedRoleCodes like '%MERCHANT%' or a.grantedRoleCodes like '%COURIER%'") long countOperators();
@@ -10638,7 +10730,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByEmailIgnoreCase — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java#L18)
 
 ```java
 Optional<Account> findByEmailIgnoreCase(String email);
@@ -10652,7 +10744,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByEmailForUpdate — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java#L19)
 
 ```java
 @Lock(LockModeType.PESSIMISTIC_WRITE) @Query("select a from Account a where lower(a.email) = lower(:email)") Optional<Account> findByEmailForUpdate(@Param("email") String email);
@@ -10666,7 +10758,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### existsByEmailIgnoreCase — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java#L22)
 
 ```java
 boolean existsByEmailIgnoreCase(String email);
@@ -10680,7 +10772,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### existsByEmailIgnoreCaseAndIdNot — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java#L23)
 
 ```java
 boolean existsByEmailIgnoreCaseAndIdNot(String email, UUID id);
@@ -10694,7 +10786,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### existsByCpf — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java#L24)
 
 ```java
 boolean existsByCpf(String cpf);
@@ -10708,7 +10800,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByCpf — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java#L25)
 
 ```java
 Optional<Account> findByCpf(String cpf);
@@ -10722,7 +10814,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByRoleIn — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java#L26)
 
 ```java
 List<Account> findByRoleIn(Collection<AccountRole> roles);
@@ -10736,7 +10828,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByOperatorApplicationStatus — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java#L27)
 
 ```java
 List<Account> findByOperatorApplicationStatus(String status);
@@ -10750,7 +10842,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByIdForUpdate — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AccountRepository.java#L28)
 
 ```java
 @Lock(LockModeType.PESSIMISTIC_WRITE) @Query("select a from Account a where a.id = :id") Optional<Account> findByIdForUpdate(@Param("id") UUID id);
@@ -10766,7 +10858,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [AccountRole.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AccountRole.java) · SHA-256 `9bf8eb9f5ac66c43bd9f2fc4bd56aeb129ef5fc384cca174c36dc551504e825b`
+[LIDO NO CÓDIGO] Fonte: [AccountRole.java](../Backend/src/main/java/br/com/fooddelivery/identity/AccountRole.java) · SHA-256 `9bf8eb9f5ac66c43bd9f2fc4bd56aeb129ef5fc384cca174c36dc551504e825b`
 
 **Contrato de dados/estados:**
 ```java
@@ -10780,11 +10872,11 @@ Sem função explícita: contrato declarativo, enum ou inicializador. Os campos 
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [AdminMfa.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java) · SHA-256 `d85d30c6ffb7814404a23ed3691dd59726c548277cd798263e126893f72b7f8b`
+[LIDO NO CÓDIGO] Fonte: [AdminMfa.java](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java) · SHA-256 `d85d30c6ffb7814404a23ed3691dd59726c548277cd798263e126893f72b7f8b`
 
 ### AdminMfa — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java#L15)
 
 ```java
 protected AdminMfa()
@@ -10796,7 +10888,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### AdminMfa — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java#L15)
 
 ```java
 public AdminMfa(UUID account,String secret)
@@ -10808,7 +10900,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### isEnabled — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java#L16)
 
 ```java
 public boolean isEnabled()
@@ -10823,7 +10915,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getEncryptedSecret — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java#L16)
 
 ```java
 public String getEncryptedSecret()
@@ -10838,7 +10930,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getLastCounter — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java#L16)
 
 ```java
 public long getLastCounter()
@@ -10853,7 +10945,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getRecoveryHashes — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java#L16)
 
 ```java
 public String getRecoveryHashes()
@@ -10868,7 +10960,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getUpdatedAt — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java#L16)
 
 ```java
 public Instant getUpdatedAt()
@@ -10883,7 +10975,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### ready — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java#L17)
 
 ```java
 public boolean ready()
@@ -10905,7 +10997,7 @@ Executa a etapa `ready` neste módulo. O contrato concreto está na assinatura, 
 
 ### failed — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java#L18)
 
 ```java
 public void failed()
@@ -10922,7 +11014,7 @@ Executa a etapa `failed` neste módulo. O contrato concreto está na assinatura,
 
 ### accepted — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java#L19)
 
 ```java
 public void accepted(long counter)
@@ -10934,7 +11026,7 @@ Executa a etapa `accepted` neste módulo. O contrato concreto está na assinatur
 
 ### enable — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java#L20)
 
 ```java
 public void enable(String hashes)
@@ -10948,7 +11040,7 @@ Executa a etapa `enable` neste módulo. O contrato concreto está na assinatura,
 
 ### useRecovery — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfa.java#L21)
 
 ```java
 public void useRecovery(String hashes)
@@ -10962,7 +11054,7 @@ Executa a etapa `use Recovery` neste módulo. O contrato concreto está na assin
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [AdminMfaRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaRepository.java) · SHA-256 `276a313f08bf41881d66ef4eba10a7ef4272339d0a7c6484541a858f102ab8e5`
+[LIDO NO CÓDIGO] Fonte: [AdminMfaRepository.java](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaRepository.java) · SHA-256 `276a313f08bf41881d66ef4eba10a7ef4272339d0a7c6484541a858f102ab8e5`
 
 Sem função explícita: contrato declarativo, enum ou inicializador. Os campos e as anotações da fonte são o contrato deste arquivo.
 
@@ -10970,11 +11062,11 @@ Sem função explícita: contrato declarativo, enum ou inicializador. Os campos 
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [AdminMfaService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java) · SHA-256 `3b2b58dc027aac70cdaf6fdc6021f40ea1a40617af1721f6600cbd99a2d57fde`
+[LIDO NO CÓDIGO] Fonte: [AdminMfaService.java](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java) · SHA-256 `3b2b58dc027aac70cdaf6fdc6021f40ea1a40617af1721f6600cbd99a2d57fde`
 
 ### AdminMfaService — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java#L16)
 
 ```java
 public AdminMfaService(AdminMfaRepository records,AccountRepository accounts,PrivateCipher cipher,PasswordEncoder encoder,ObjectMapper mapper,AdminAuditService audit)
@@ -10986,7 +11078,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### admin — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java#L17)
 
 ```java
 private Account admin(UUID id,String password)
@@ -11009,7 +11101,7 @@ Executa a etapa `admin` neste módulo. O contrato concreto está na assinatura, 
 
 ### status — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java#L18)
 
 ```java
 @Transactional(readOnly=true) public Object status(UUID id)
@@ -11026,7 +11118,7 @@ Executa a etapa `status` neste módulo. O contrato concreto está na assinatura,
 
 ### begin — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java#L19)
 
 ```java
 @Transactional public Object begin(UUID id,String password)
@@ -11054,7 +11146,7 @@ Executa a etapa `begin` neste módulo. O contrato concreto está na assinatura, 
 
 ### enable — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java#L20)
 
 ```java
 @Transactional public List<String> enable(UUID id,String password,String code)
@@ -11082,7 +11174,7 @@ Executa a etapa `enable` neste módulo. O contrato concreto está na assinatura,
 
 ### disable — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java#L21)
 
 ```java
 @Transactional public boolean disable(UUID id,String password,String code)
@@ -11112,7 +11204,7 @@ Executa a etapa `disable` neste módulo. O contrato concreto está na assinatura
 
 ### authenticate — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java#L22)
 
 ```java
 @Transactional public boolean authenticate(UUID accountId,String code)
@@ -11129,7 +11221,7 @@ Executa a etapa `authenticate` neste módulo. O contrato concreto está na assin
 
 ### hashes — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java#L23)
 
 ```java
 private List<String> hashes(AdminMfa r)
@@ -11149,7 +11241,7 @@ Executa a etapa `hashes` neste módulo. O contrato concreto está na assinatura,
 
 ### accept — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AdminMfaService.java#L24)
 
 ```java
 private boolean accept(AdminMfa r,UUID id,String code,boolean recoveryAllowed)
@@ -11180,7 +11272,7 @@ Executa a etapa `accept` neste módulo. O contrato concreto está na assinatura,
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [AuthController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java) · SHA-256 `de939b76517521080eb87345763f8eb7d7a8e155526611886b4486570150132a`
+[LIDO NO CÓDIGO] Fonte: [AuthController.java](../Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java) · SHA-256 `de939b76517521080eb87345763f8eb7d7a8e155526611886b4486570150132a`
 
 **Contrato de dados/estados:**
 ```java
@@ -11223,7 +11315,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### AuthController — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java#L26)
 
 ```java
 public AuthController(AuthService authService, PasswordEncoder passwordEncoder, PasswordRecoveryService recovery, AuthSessionCookie sessionCookie)
@@ -11235,7 +11327,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### register — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java#L34)
 
 ```java
 @PostMapping("/register") @ResponseStatus(HttpStatus.CREATED) public Map<String, Object> register(@Valid @RequestBody RegisterRequest request)
@@ -11252,7 +11344,7 @@ Executa a etapa `register` neste módulo. O contrato concreto está na assinatur
 
 ### applyForOperator — linha 41
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java:41)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java#L41)
 
 ```java
 @PostMapping("/operator-applications") @org.springframework.web.bind.annotation.ResponseStatus(HttpStatus.GONE) public Map<String, Object> applyForOperator(@Valid @RequestBody OperatorApplicationRequest request)
@@ -11267,7 +11359,7 @@ Executa a etapa `apply For Operator` neste módulo. O contrato concreto está na
 
 ### login — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java#L47)
 
 ```java
 @PostMapping("/login") public ResponseEntity<Map<String, Object>> login(@Valid @RequestBody LoginRequest request)
@@ -11284,7 +11376,7 @@ Executa a etapa `login` neste módulo. O contrato concreto está na assinatura, 
 
 ### logout — linha 52
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java:52)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java#L52)
 
 ```java
 @PostMapping("/logout") public ResponseEntity<Void> logout()
@@ -11301,7 +11393,7 @@ Executa a etapa `logout` neste módulo. O contrato concreto está na assinatura,
 
 ### requestPasswordRecovery — linha 57
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java:57)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java#L57)
 
 ```java
 @PostMapping("/password-recovery") @ResponseStatus(HttpStatus.ACCEPTED) public Map<String, String> requestPasswordRecovery(@Valid @RequestBody RecoveryRequest request)
@@ -11318,7 +11410,7 @@ Executa a etapa `request Password Recovery` neste módulo. O contrato concreto e
 
 ### resetPassword — linha 64
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java:64)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthController.java#L64)
 
 ```java
 @PostMapping("/password-recovery/reset") public Map<String, String> resetPassword(@Valid @RequestBody RecoveryResetRequest request)
@@ -11343,11 +11435,11 @@ Executa a etapa `reset Password` neste módulo. O contrato concreto está na ass
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [AuthService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java) · SHA-256 `21f69ff1a5aa7e59bb17c11cfc7d4e31842308e0308cb33bcc4a1e8fcc3af3c6`
+[LIDO NO CÓDIGO] Fonte: [AuthService.java](../Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java) · SHA-256 `21f69ff1a5aa7e59bb17c11cfc7d4e31842308e0308cb33bcc4a1e8fcc3af3c6`
 
 ### AuthService — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java#L22)
 
 ```java
 public AuthService(AccountRepository accounts, AuthenticationManager authenticationManager, JwtEncoder jwtEncoder)
@@ -11359,7 +11451,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### register — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java#L28)
 
 ```java
 @Transactional public Account register(String name, String email, String password, String cpf, org.springframework.security.crypto.password.PasswordEncoder encoder)
@@ -11376,7 +11468,7 @@ Executa a etapa `register` neste módulo. O contrato concreto está na assinatur
 
 ### createAccount — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java#L33)
 
 ```java
 private Account createAccount(String name, String email, String password, String cpf, org.springframework.security.crypto.password.PasswordEncoder encoder)
@@ -11410,7 +11502,7 @@ return accounts.save(account);
 
 ### login — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java#L47)
 
 ```java
 public Map<String,Object> login(String email,String password)
@@ -11427,7 +11519,7 @@ Executa a etapa `login` neste módulo. O contrato concreto está na assinatura, 
 
 ### login — linha 48
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java:48)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java#L48)
 
 ```java
 public Map<String, Object> login(String email, String password,String code)
@@ -11450,7 +11542,7 @@ Executa a etapa `login` neste módulo. O contrato concreto está na assinatura, 
 
 ### issueToken — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java:56)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java#L56)
 
 ```java
 public Map<String, Object> issueToken(Account account)
@@ -11467,7 +11559,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### accountView — linha 75
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java:75)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthService.java#L75)
 
 ```java
 private static Map<String, Object> accountView(Account account)
@@ -11486,11 +11578,11 @@ Executa a etapa `account View` neste módulo. O contrato concreto está na assin
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [AuthSessionCookie.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthSessionCookie.java) · SHA-256 `4c6f031f6f69e710295335bc024a93798eccf64cbd728cf3e0db4ed5319f84ae`
+[LIDO NO CÓDIGO] Fonte: [AuthSessionCookie.java](../Backend/src/main/java/br/com/fooddelivery/identity/AuthSessionCookie.java) · SHA-256 `4c6f031f6f69e710295335bc024a93798eccf64cbd728cf3e0db4ed5319f84ae`
 
 ### AuthSessionCookie — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthSessionCookie.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthSessionCookie.java#L19)
 
 ```java
 public AuthSessionCookie(@Value("${app.security.cookie-secure:false}") boolean secure)
@@ -11502,7 +11594,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### issue — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthSessionCookie.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthSessionCookie.java#L23)
 
 ```java
 public ResponseCookie issue(String token)
@@ -11519,7 +11611,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### clear — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthSessionCookie.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthSessionCookie.java#L33)
 
 ```java
 public ResponseCookie clear()
@@ -11536,7 +11628,7 @@ Executa a etapa `clear` neste módulo. O contrato concreto está na assinatura, 
 
 ### responseWithToken — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/AuthSessionCookie.java:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/AuthSessionCookie.java#L43)
 
 ```java
 public ResponseEntity<Map<String, Object>> responseWithToken(Map<String, Object> tokenResponse)
@@ -11561,11 +11653,11 @@ Executa a etapa `response With Token` neste módulo. O contrato concreto está n
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [Cnpj.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Cnpj.java) · SHA-256 `11b28e38ca45669030a21f0baa55d70696f5d1b76973c8952bd3ab8d30650322`
+[LIDO NO CÓDIGO] Fonte: [Cnpj.java](../Backend/src/main/java/br/com/fooddelivery/identity/Cnpj.java) · SHA-256 `11b28e38ca45669030a21f0baa55d70696f5d1b76973c8952bd3ab8d30650322`
 
 ### Cnpj — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Cnpj.java:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Cnpj.java#L4)
 
 ```java
 private Cnpj()
@@ -11577,7 +11669,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### normalize — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Cnpj.java:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Cnpj.java#L5)
 
 ```java
 public static String normalize(String value)
@@ -11597,7 +11689,7 @@ Executa a etapa `normalize` neste módulo. O contrato concreto está na assinatu
 
 ### isValid — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Cnpj.java:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Cnpj.java#L6)
 
 ```java
 public static boolean isValid(String value)
@@ -11618,7 +11710,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### digit — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Cnpj.java:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Cnpj.java#L12)
 
 ```java
 private static int digit(String value,int[] weights)
@@ -11640,11 +11732,11 @@ Executa a etapa `digit` neste módulo. O contrato concreto está na assinatura, 
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [Cpf.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Cpf.java) · SHA-256 `e52f1c362e110bbf1198b937bc9fe5482f3f644965a7548ec83cc978fae7b540`
+[LIDO NO CÓDIGO] Fonte: [Cpf.java](../Backend/src/main/java/br/com/fooddelivery/identity/Cpf.java) · SHA-256 `e52f1c362e110bbf1198b937bc9fe5482f3f644965a7548ec83cc978fae7b540`
 
 ### Cpf — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Cpf.java:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Cpf.java#L4)
 
 ```java
 private Cpf()
@@ -11656,7 +11748,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### isValid — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Cpf.java:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Cpf.java#L6)
 
 ```java
 public static boolean isValid(String value)
@@ -11679,7 +11771,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### checkDigit — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Cpf.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Cpf.java#L15)
 
 ```java
 private static int checkDigit(String value, int weight)
@@ -11701,11 +11793,11 @@ Executa a etapa `check Digit` neste módulo. O contrato concreto está na assina
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [CustomerAddress.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java) · SHA-256 `9559da34948d9242fc5918dbc23aa0b09212879402ee7882a4914428302376f1`
+[LIDO NO CÓDIGO] Fonte: [CustomerAddress.java](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java) · SHA-256 `9559da34948d9242fc5918dbc23aa0b09212879402ee7882a4914428302376f1`
 
 ### CustomerAddress — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java#L20)
 
 ```java
 protected CustomerAddress()
@@ -11717,7 +11809,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### CustomerAddress — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java#L21)
 
 ```java
 public CustomerAddress(Account account, String label, String addressLine, String complement, String neighborhood, String city, String state, String postalCode, boolean isDefault)
@@ -11731,7 +11823,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### update — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java#L25)
 
 ```java
 public void update(String label, String addressLine, String complement, String neighborhood, String city, String state, String postalCode)
@@ -11743,7 +11835,7 @@ Executa a etapa `update` neste módulo. O contrato concreto está na assinatura,
 
 ### getId — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java#L30)
 
 ```java
 public UUID getId()
@@ -11758,7 +11850,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAccount — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java#L31)
 
 ```java
 public Account getAccount()
@@ -11773,7 +11865,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getLabel — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java#L32)
 
 ```java
 public String getLabel()
@@ -11788,7 +11880,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAddressLine — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java#L33)
 
 ```java
 public String getAddressLine()
@@ -11803,7 +11895,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAddressComplement — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java#L34)
 
 ```java
 public String getAddressComplement()
@@ -11818,7 +11910,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getNeighborhood — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java#L35)
 
 ```java
 public String getNeighborhood()
@@ -11833,7 +11925,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCity — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java#L36)
 
 ```java
 public String getCity()
@@ -11848,7 +11940,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getState — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java#L37)
 
 ```java
 public String getState()
@@ -11863,7 +11955,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getPostalCode — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java#L38)
 
 ```java
 public String getPostalCode()
@@ -11878,7 +11970,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isDefaultAddress — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java#L39)
 
 ```java
 public boolean isDefaultAddress()
@@ -11893,7 +11985,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setDefaultAddress — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddress.java#L40)
 
 ```java
 public void setDefaultAddress(boolean value)
@@ -11907,7 +11999,7 @@ Executa a etapa `set Default Address` neste módulo. O contrato concreto está n
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [CustomerAddressController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java) · SHA-256 `641960ba42d817bbb84a412e78dc34121c6a3c46e04b332b84a1b2cd3cf38ea8`
+[LIDO NO CÓDIGO] Fonte: [CustomerAddressController.java](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java) · SHA-256 `641960ba42d817bbb84a412e78dc34121c6a3c46e04b332b84a1b2cd3cf38ea8`
 
 **Contrato de dados/estados:**
 ```java
@@ -11927,7 +12019,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### CustomerAddressController — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java#L22)
 
 ```java
 public CustomerAddressController(CustomerAddressRepository addresses, AccountRepository accounts)
@@ -11939,7 +12031,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### list — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java#L26)
 
 ```java
 @GetMapping @Transactional(readOnly = true) public List<AddressView> list(Authentication auth)
@@ -11956,7 +12048,7 @@ Executa a etapa `list` neste módulo. O contrato concreto está na assinatura, n
 
 ### create — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java#L32)
 
 ```java
 @PostMapping @ResponseStatus(HttpStatus.CREATED) @Transactional public AddressView create(@Valid @RequestBody AddressRequest request, Authentication auth)
@@ -11982,7 +12074,7 @@ CustomerAddress saved = addresses.save(new CustomerAddress(account, label(reques
 
 ### update — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java#L45)
 
 ```java
 @PutMapping("/{id}") @Transactional public AddressView update(@PathVariable UUID id, @Valid @RequestBody AddressRequest request, Authentication auth)
@@ -12008,7 +12100,7 @@ address.update(label(request.label()), request.addressLine().trim(), clean(reque
 
 ### makeDefault — linha 57
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java:57)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java#L57)
 
 ```java
 @PatchMapping("/{id}/default") @Transactional public AddressView makeDefault(@PathVariable UUID id, Authentication auth)
@@ -12025,7 +12117,7 @@ Executa a etapa `make Default` neste módulo. O contrato concreto está na assin
 
 ### delete — linha 66
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java:66)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java#L66)
 
 ```java
 @DeleteMapping("/{id}") @ResponseStatus(HttpStatus.NO_CONTENT) @Transactional public void delete(@PathVariable UUID id, Authentication auth)
@@ -12050,7 +12142,7 @@ else { address.getAccount().updateAddress(null, null, null, null, null, null); a
 
 ### setDefault — linha 80
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java:80)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java#L80)
 
 ```java
 private void setDefault(UUID owner, CustomerAddress selected)
@@ -12069,7 +12161,7 @@ addresses.findByAccountIdOrderByDefaultAddressDescIdAsc(owner).forEach(a -> a.se
 
 ### updateProfileAddress — linha 83
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java:83)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java#L83)
 
 ```java
 private void updateProfileAddress(Account account, CustomerAddress address)
@@ -12089,7 +12181,7 @@ accounts.save(account);
 
 ### clean — linha 88
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java:88)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java#L88)
 
 ```java
 private static String clean(String value)
@@ -12109,7 +12201,7 @@ Executa a etapa `clean` neste módulo. O contrato concreto está na assinatura, 
 
 ### label — linha 89
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java:89)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java#L89)
 
 ```java
 private static String label(String value)
@@ -12129,7 +12221,7 @@ Executa a etapa `label` neste módulo. O contrato concreto está na assinatura, 
 
 ### normalizeCep — linha 90
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java:90)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java#L90)
 
 ```java
 private static String normalizeCep(String value)
@@ -12146,7 +12238,7 @@ Executa a etapa `normalize Cep` neste módulo. O contrato concreto está na assi
 
 ### subject — linha 91
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java:91)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java#L91)
 
 ```java
 private static UUID subject(Authentication auth)
@@ -12163,7 +12255,7 @@ Executa a etapa `subject` neste módulo. O contrato concreto está na assinatura
 
 ### from — linha 99
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java:99)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressController.java#L99)
 
 ```java
 static AddressView from(CustomerAddress a)
@@ -12182,11 +12274,11 @@ Executa a etapa `from` neste módulo. O contrato concreto está na assinatura, n
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [CustomerAddressRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressRepository.java) · SHA-256 `b8a2df7ad757a900ea4045975dea90fca634d72edda09f6e9e6f5be88faa0702`
+[LIDO NO CÓDIGO] Fonte: [CustomerAddressRepository.java](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressRepository.java) · SHA-256 `b8a2df7ad757a900ea4045975dea90fca634d72edda09f6e9e6f5be88faa0702`
 
 ### findByAccountIdOrderByDefaultAddressDescIdAsc — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressRepository.java#L9)
 
 ```java
 List<CustomerAddress> findByAccountIdOrderByDefaultAddressDescIdAsc(UUID accountId);
@@ -12200,7 +12292,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByIdAndAccountId — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressRepository.java#L10)
 
 ```java
 Optional<CustomerAddress> findByIdAndAccountId(UUID id, UUID accountId);
@@ -12214,7 +12306,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### existsByAccountId — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressRepository.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/CustomerAddressRepository.java#L11)
 
 ```java
 boolean existsByAccountId(UUID accountId);
@@ -12230,11 +12322,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [PasswordRecoveryService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java) · SHA-256 `c4e8d39c825d7920b3662502832cc10d21404d63af4e367c8b62cef0ce215062`
+[LIDO NO CÓDIGO] Fonte: [PasswordRecoveryService.java](../Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java) · SHA-256 `c4e8d39c825d7920b3662502832cc10d21404d63af4e367c8b62cef0ce215062`
 
 ### PasswordRecoveryService — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java#L18)
 
 ```java
 public PasswordRecoveryService(AccountRepository accounts, RecoveryCodeRepository codes, RecoveryMessageSender sender, PasswordEncoder encoder)
@@ -12251,7 +12343,7 @@ this.accounts = accounts; this.codes = codes; this.sender = sender; this.encoder
 
 ### requestPasswordReset — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java#L23)
 
 ```java
 @Transactional public void requestPasswordReset(String email, String channel)
@@ -12265,7 +12357,7 @@ Executa a etapa `request Password Reset` neste módulo. O contrato concreto est�
 
 ### resetPassword — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java#L29)
 
 ```java
 @Transactional public boolean resetPassword(String email, String channel, String rawCode, String newPassword)
@@ -12292,7 +12384,7 @@ Executa a etapa `reset Password` neste módulo. O contrato concreto está na ass
 
 ### requestPhoneVerification — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java#L43)
 
 ```java
 @Transactional public void requestPhoneVerification(Account account)
@@ -12312,7 +12404,7 @@ Executa a etapa `request Phone Verification` neste módulo. O contrato concreto 
 
 ### invalidatePhoneCodes — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java:49)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java#L49)
 
 ```java
 @Transactional public void invalidatePhoneCodes(Account account)
@@ -12333,7 +12425,7 @@ codes.deleteForPurpose(account.getId(),"PAYOUT_VERIFY");
 
 ### verifyPhone — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java:56)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java#L56)
 
 ```java
 @Transactional public boolean verifyPhone(Account account, String rawCode)
@@ -12356,7 +12448,7 @@ Executa a etapa `verify Phone` neste módulo. O contrato concreto está na assin
 
 ### requestPayoutVerification — linha 64
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java:64)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java#L64)
 
 ```java
 @Transactional public void requestPayoutVerification(Account account)
@@ -12383,7 +12475,7 @@ sender.sendEmail(account.getEmail(),code);
 
 ### verifyPayout — linha 73
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java:73)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java#L73)
 
 ```java
 @Transactional public boolean verifyPayout(Account account,String rawCode)
@@ -12406,7 +12498,7 @@ Executa a etapa `verify Payout` neste módulo. O contrato concreto está na assi
 
 ### issue — linha 80
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java:80)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java#L80)
 
 ```java
 private void issue(Account account, String purpose, String channel, boolean phoneVerification)
@@ -12441,7 +12533,7 @@ else sender.sendWhatsApp(account.getPhone(), code);
 
 ### latest — linha 99
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java:99)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java#L99)
 
 ```java
 private RecoveryCode latest(Account account, String purpose)
@@ -12458,7 +12550,7 @@ Executa a etapa `latest` neste módulo. O contrato concreto está na assinatura,
 
 ### normalize — linha 103
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java:103)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/PasswordRecoveryService.java#L103)
 
 ```java
 private static String normalize(String email)
@@ -12480,7 +12572,7 @@ Executa a etapa `normalize` neste módulo. O contrato concreto está na assinatu
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [ProfileController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java) · SHA-256 `de3e218283d526fa29a4d08ed82b3d16fb6a12bd302da8251062587eb5ac1df1`
+[LIDO NO CÓDIGO] Fonte: [ProfileController.java](../Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java) · SHA-256 `de3e218283d526fa29a4d08ed82b3d16fb6a12bd302da8251062587eb5ac1df1`
 
 **Contrato de dados/estados:**
 ```java
@@ -12516,7 +12608,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### ProfileController — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java#L17)
 
 ```java
 public ProfileController(AccountRepository accounts,org.springframework.security.crypto.password.PasswordEncoder encoder,AuthService authService,AuthSessionCookie sessionCookie,PasswordRecoveryService recovery)
@@ -12528,7 +12620,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### me — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java#L18)
 
 ```java
 @GetMapping("/me") public Account me(Authentication auth)
@@ -12545,7 +12637,7 @@ Executa a etapa `me` neste módulo. O contrato concreto está na assinatura, nos
 
 ### update — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java#L19)
 
 ```java
 @PutMapping("/profile") public Account update(@Valid @RequestBody ProfileUpdate p,Authentication auth)
@@ -12576,7 +12668,7 @@ Executa a etapa `update` neste módulo. O contrato concreto está na assinatura,
 
 ### applyForOperator — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java#L20)
 
 ```java
 @PostMapping("/operator-applications") @org.springframework.web.bind.annotation.ResponseStatus(org.springframework.http.HttpStatus.GONE) public Account applyForOperator(@Valid @RequestBody OperatorApplication p,Authentication auth)
@@ -12591,7 +12683,7 @@ Executa a etapa `apply For Operator` neste módulo. O contrato concreto está na
 
 ### changePassword — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java#L21)
 
 ```java
 @PostMapping("/password") public org.springframework.http.ResponseEntity<java.util.Map<String,Object>> changePassword(@Valid @RequestBody PasswordChange p,Authentication auth)
@@ -12621,7 +12713,7 @@ Executa a etapa `change Password` neste módulo. O contrato concreto está na as
 
 ### requestPhoneVerification — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java#L22)
 
 ```java
 @PostMapping("/phone-verification") @org.springframework.web.bind.annotation.ResponseStatus(org.springframework.http.HttpStatus.ACCEPTED) public java.util.Map<String,String> requestPhoneVerification(Authentication auth)
@@ -12638,7 +12730,7 @@ Executa a etapa `request Phone Verification` neste módulo. O contrato concreto 
 
 ### confirmPhone — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java#L23)
 
 ```java
 @PostMapping("/phone-verification/confirm") public java.util.Map<String,String> confirmPhone(@Valid @RequestBody PhoneVerification p,Authentication auth)
@@ -12666,7 +12758,7 @@ Executa a etapa `confirm Phone` neste módulo. O contrato concreto está na assi
 
 ### clean — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java#L24)
 
 ```java
 private String clean(String value)
@@ -12686,7 +12778,7 @@ Executa a etapa `clean` neste módulo. O contrato concreto está na assinatura, 
 
 ### subject — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java#L25)
 
 ```java
 private UUID subject(Authentication a)
@@ -12703,7 +12795,7 @@ Executa a etapa `subject` neste módulo. O contrato concreto está na assinatura
 
 ### OperatorApplication — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/ProfileController.java#L37)
 
 ```java
 public OperatorApplication
@@ -12723,11 +12815,11 @@ Executa a etapa `Operator Application` neste módulo. O contrato concreto está 
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [RecoveryCode.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java) · SHA-256 `2650b44c882e134fef7539aae2c72a226b8fff01d0088f891a030f9451af746d`
+[LIDO NO CÓDIGO] Fonte: [RecoveryCode.java](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java) · SHA-256 `2650b44c882e134fef7539aae2c72a226b8fff01d0088f891a030f9451af746d`
 
 ### RecoveryCode — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java#L23)
 
 ```java
 protected RecoveryCode()
@@ -12739,7 +12831,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### RecoveryCode — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java#L24)
 
 ```java
 RecoveryCode(Account account, String purpose, String channel, String codeHash, Instant now)
@@ -12753,7 +12845,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getId — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java#L28)
 
 ```java
 public UUID getId()
@@ -12768,7 +12860,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAccount — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java#L29)
 
 ```java
 public Account getAccount()
@@ -12783,7 +12875,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getPurpose — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java#L30)
 
 ```java
 public String getPurpose()
@@ -12798,7 +12890,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getChannel — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java#L31)
 
 ```java
 public String getChannel()
@@ -12813,7 +12905,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCodeHash — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java#L32)
 
 ```java
 public String getCodeHash()
@@ -12828,7 +12920,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getExpiresAt — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java#L33)
 
 ```java
 public Instant getExpiresAt()
@@ -12843,7 +12935,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getNextAllowedAt — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java#L34)
 
 ```java
 public Instant getNextAllowedAt()
@@ -12858,7 +12950,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getConsumedAt — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java#L35)
 
 ```java
 public Instant getConsumedAt()
@@ -12873,7 +12965,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAttempts — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java#L36)
 
 ```java
 public int getAttempts()
@@ -12888,7 +12980,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isReadyAt — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java#L37)
 
 ```java
 public boolean isReadyAt(Instant now)
@@ -12905,7 +12997,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### recordFailedAttempt — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java#L38)
 
 ```java
 public void recordFailedAttempt()
@@ -12922,7 +13014,7 @@ Executa a etapa `record Failed Attempt` neste módulo. O contrato concreto está
 
 ### consume — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCode.java#L39)
 
 ```java
 public void consume(Instant now)
@@ -12936,11 +13028,11 @@ Executa a etapa `consume` neste módulo. O contrato concreto está na assinatura
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [RecoveryCodeRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCodeRepository.java) · SHA-256 `2fb486f4928e9c35178e82b898cabec3623b06bc51dbac1578fd4c562106ee4d`
+[LIDO NO CÓDIGO] Fonte: [RecoveryCodeRepository.java](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCodeRepository.java) · SHA-256 `2fb486f4928e9c35178e82b898cabec3623b06bc51dbac1578fd4c562106ee4d`
 
 ### findLatest — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCodeRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCodeRepository.java#L10)
 
 ```java
 @Query("select c from RecoveryCode c where c.account.id = :accountId and c.purpose = :purpose order by c.createdAt desc") java.util.List<RecoveryCode> findLatest(@Param("accountId") UUID accountId, @Param("purpose") String purpose);
@@ -12954,7 +13046,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### deleteForPurpose — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCodeRepository.java:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryCodeRepository.java#L12)
 
 ```java
 @Modifying @Query("delete from RecoveryCode c where c.account.id = :accountId and c.purpose = :purpose") void deleteForPurpose(@Param("accountId") UUID accountId, @Param("purpose") String purpose);
@@ -12970,11 +13062,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [RecoveryMessageSender.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryMessageSender.java) · SHA-256 `5c9d5f465e4cee58e631dc9a91e00b5fdbde205f033308710f11e458bb3f666d`
+[LIDO NO CÓDIGO] Fonte: [RecoveryMessageSender.java](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryMessageSender.java) · SHA-256 `5c9d5f465e4cee58e631dc9a91e00b5fdbde205f033308710f11e458bb3f666d`
 
 ### setting — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryMessageSender.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryMessageSender.java#L30)
 
 ```java
 private String setting(String key,String fallback)
@@ -12994,7 +13086,7 @@ Executa a etapa `setting` neste módulo. O contrato concreto está na assinatura
 
 ### RecoveryMessageSender — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryMessageSender.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryMessageSender.java#L32)
 
 ```java
 public RecoveryMessageSender(ObjectProvider<JavaMailSender> mailSender, @Value("${app.recovery.email-from}") String emailFrom, @Value("${app.recovery.whatsapp.enabled:false}") boolean whatsappEnabled, @Value("${app.recovery.whatsapp.graph-version:v23.0}") String graphVersion, @Value("${app.recovery.whatsapp.phone-number-id:}") String phoneNumberId, @Value("${app.recovery.whatsapp.access-token:}") String accessToken, @Value("${app.recovery.whatsapp.template-name:fooddelivery_password_recovery}") String templateName, @Value("${app.recovery.whatsapp.language:pt_BR}") String language)
@@ -13013,7 +13105,7 @@ factory.setReadTimeout(Duration.ofSeconds(10));
 
 ### sendEmail — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryMessageSender.java:49)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryMessageSender.java#L49)
 
 ```java
 public void sendEmail(String recipient, String code)
@@ -13047,7 +13139,7 @@ sender.send(message);
 
 ### sendWhatsApp — linha 62
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/RecoveryMessageSender.java:62)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/RecoveryMessageSender.java#L62)
 
 ```java
 public void sendWhatsApp(String phone, String code)
@@ -13081,11 +13173,11 @@ Executa a etapa `send Whats App` neste módulo. O contrato concreto está na ass
 
 Identidade e dados pessoais. A API deve conferir titularidade antes de ler ou alterar dados; credenciais e verificações pertencem ao servidor, nunca à interface.
 
-Fonte: [Totp.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Totp.java) · SHA-256 `679f86f2b0507f7d51bc7ee05ea17f35e0566b325105e816cda0215e38b29f18`
+[LIDO NO CÓDIGO] Fonte: [Totp.java](../Backend/src/main/java/br/com/fooddelivery/identity/Totp.java) · SHA-256 `679f86f2b0507f7d51bc7ee05ea17f35e0566b325105e816cda0215e38b29f18`
 
 ### Totp — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Totp.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Totp.java#L9)
 
 ```java
 private Totp()
@@ -13097,7 +13189,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### secret — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Totp.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Totp.java#L10)
 
 ```java
 public static String secret()
@@ -13114,7 +13206,7 @@ Executa a etapa `secret` neste módulo. O contrato concreto está na assinatura,
 
 ### code — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Totp.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Totp.java#L11)
 
 ```java
 public static String code(String encoded,long counter)
@@ -13139,7 +13231,7 @@ Executa a etapa `code` neste módulo. O contrato concreto está na assinatura, n
 
 ### matchingCounter — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/identity/Totp.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/identity/Totp.java#L14)
 
 ```java
 public static long matchingCounter(String secret,String code,long epochSeconds,long last)
@@ -13164,11 +13256,11 @@ Executa a etapa `matching Counter` neste módulo. O contrato concreto está na a
 
 Busca e geocodificação. Provedores podem falhar, não conceder CEP ou retornar uma região ambígua; o usuário precisa revisar a cidade. Homologação usa coordenadas fictícias.
 
-Fonte: [DemoGeocodingController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/location/DemoGeocodingController.java) · SHA-256 `1decd4bcfb449979c640056d257703625abfa03f22cad16b74010762aec2d95b`
+[LIDO NO CÓDIGO] Fonte: [DemoGeocodingController.java](../Backend/src/main/java/br/com/fooddelivery/location/DemoGeocodingController.java) · SHA-256 `1decd4bcfb449979c640056d257703625abfa03f22cad16b74010762aec2d95b`
 
 ### city — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/location/DemoGeocodingController.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/location/DemoGeocodingController.java#L9)
 
 ```java
 private static Map<String,Object> city(boolean iepe)
@@ -13188,7 +13280,7 @@ Executa a etapa `city` neste módulo. O contrato concreto está na assinatura, n
 
 ### search — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/location/DemoGeocodingController.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/location/DemoGeocodingController.java#L15)
 
 ```java
 @GetMapping("/search") public Object search(@RequestParam String query)
@@ -13211,7 +13303,7 @@ Executa a etapa `search` neste módulo. O contrato concreto está na assinatura,
 
 ### reverse — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/location/DemoGeocodingController.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/location/DemoGeocodingController.java#L21)
 
 ```java
 @GetMapping("/reverse") public Object reverse(@RequestParam double latitude,@RequestParam double longitude)
@@ -13236,7 +13328,7 @@ Executa a etapa `reverse` neste módulo. O contrato concreto está na assinatura
 
 Busca e geocodificação. Provedores podem falhar, não conceder CEP ou retornar uma região ambígua; o usuário precisa revisar a cidade. Homologação usa coordenadas fictícias.
 
-Fonte: [GeocodingController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/location/GeocodingController.java) · SHA-256 `841a0fdda04b4b1ced938d44cd0c4f9ea785b7ee02ad859056f4e5db990a3772`
+[LIDO NO CÓDIGO] Fonte: [GeocodingController.java](../Backend/src/main/java/br/com/fooddelivery/location/GeocodingController.java) · SHA-256 `841a0fdda04b4b1ced938d44cd0c4f9ea785b7ee02ad859056f4e5db990a3772`
 
 **Contrato de dados/estados:**
 ```java
@@ -13246,7 +13338,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### GeocodingController — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/location/GeocodingController.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/location/GeocodingController.java#L28)
 
 ```java
 public GeocodingController()
@@ -13265,7 +13357,7 @@ requestFactory.setReadTimeout(Duration.ofSeconds(8));
 
 ### search — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/location/GeocodingController.java:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/location/GeocodingController.java#L40)
 
 ```java
 @GetMapping("/search") public JsonNode search(@RequestParam("query") String query)
@@ -13289,7 +13381,7 @@ Executa a etapa `search` neste módulo. O contrato concreto está na assinatura,
 
 ### reverse — linha 57
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/location/GeocodingController.java:57)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/location/GeocodingController.java#L57)
 
 ```java
 @GetMapping("/reverse") public JsonNode reverse(@RequestParam double latitude, @RequestParam double longitude)
@@ -13312,7 +13404,7 @@ Executa a etapa `reverse` neste módulo. O contrato concreto está na assinatura
 
 ### lookup — linha 74
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/location/GeocodingController.java:74)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/location/GeocodingController.java#L74)
 
 ```java
 private JsonNode lookup(URI uri)
@@ -13343,11 +13435,11 @@ Executa a etapa `lookup` neste módulo. O contrato concreto está na assinatura,
 
 Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado.
 
-Fonte: [LimitedImageSubscriber.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java) · SHA-256 `13d6d62637c869f50d2ab6677f84377b80325a5213d3d639daf27106e7dab4df`
+[LIDO NO CÓDIGO] Fonte: [LimitedImageSubscriber.java](../Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java) · SHA-256 `13d6d62637c869f50d2ab6677f84377b80325a5213d3d639daf27106e7dab4df`
 
 ### getBody — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java#L18)
 
 ```java
 @Override public CompletionStage<byte[]> getBody()
@@ -13362,7 +13454,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### onSubscribe — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java#L19)
 
 ```java
 @Override public void onSubscribe(Flow.Subscription subscription)
@@ -13376,7 +13468,7 @@ Executa a etapa `on Subscribe` neste módulo. O contrato concreto está na assin
 
 ### onNext — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java#L23)
 
 ```java
 @Override public void onNext(List<ByteBuffer> buffers)
@@ -13396,7 +13488,7 @@ Executa a etapa `on Next` neste módulo. O contrato concreto está na assinatura
 
 ### onError — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java#L36)
 
 ```java
 @Override public void onError(Throwable error)
@@ -13410,7 +13502,7 @@ Executa a etapa `on Error` neste módulo. O contrato concreto está na assinatur
 
 ### onComplete — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/LimitedImageSubscriber.java#L37)
 
 ```java
 @Override public void onComplete()
@@ -13426,11 +13518,11 @@ Executa a etapa `on Complete` neste módulo. O contrato concreto está na assina
 
 Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado.
 
-Fonte: [LocalStoreImageStorage.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java) · SHA-256 `8f9dabd683bf42ea11ce9b0b9ec245e2289d8ed3200bdb49bd318bf6b04a198a`
+[LIDO NO CÓDIGO] Fonte: [LocalStoreImageStorage.java](../Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java) · SHA-256 `8f9dabd683bf42ea11ce9b0b9ec245e2289d8ed3200bdb49bd318bf6b04a198a`
 
 ### LocalStoreImageStorage — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java#L9)
 
 ```java
 public LocalStoreImageStorage(String directory)
@@ -13444,7 +13536,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### path — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java#L10)
 
 ```java
 private Path path(String name)
@@ -13461,7 +13553,7 @@ Executa a etapa `path` neste módulo. O contrato concreto está na assinatura, n
 
 ### put — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java#L11)
 
 ```java
 public void put(String name, byte[] image) throws IOException
@@ -13481,7 +13573,7 @@ Executa a etapa `put` neste módulo. O contrato concreto está na assinatura, no
 
 ### read — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java#L16)
 
 ```java
 public Optional<byte[]> read(String name) throws IOException
@@ -13506,7 +13598,7 @@ Executa a etapa `read` neste módulo. O contrato concreto está na assinatura, n
 
 ### delete — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/LocalStoreImageStorage.java#L25)
 
 ```java
 public void delete(String name) throws IOException
@@ -13527,11 +13619,11 @@ public void delete(String name) throws IOException { Files.deleteIfExists(path(n
 
 Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado.
 
-Fonte: [StoreImageStorage.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java) · SHA-256 `79751a5c9da8ce1810fdb17300ff758853378cc0f8c301382f2ccc0571cc149a`
+[LIDO NO CÓDIGO] Fonte: [StoreImageStorage.java](../Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java) · SHA-256 `79751a5c9da8ce1810fdb17300ff758853378cc0f8c301382f2ccc0571cc149a`
 
 ### put — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java#L9)
 
 ```java
 void put(String name, byte[] image) throws IOException;
@@ -13545,7 +13637,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### read — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java#L10)
 
 ```java
 Optional<byte[]> read(String name) throws IOException;
@@ -13559,7 +13651,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### delete — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java#L11)
 
 ```java
 void delete(String name) throws IOException;
@@ -13573,7 +13665,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### validateName — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorage.java#L12)
 
 ```java
 static void validateName(String name)
@@ -13595,11 +13687,11 @@ Executa a etapa `validate Name` neste módulo. O contrato concreto está na assi
 
 Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado.
 
-Fonte: [StoreImageStorageConfiguration.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorageConfiguration.java) · SHA-256 `0b5cab75b69bede725b3b0a613fd4e3a6d463dab70fd44233eb9409dc061ce80`
+[LIDO NO CÓDIGO] Fonte: [StoreImageStorageConfiguration.java](../Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorageConfiguration.java) · SHA-256 `0b5cab75b69bede725b3b0a613fd4e3a6d463dab70fd44233eb9409dc061ce80`
 
 ### storeImageStorage — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorageConfiguration.java:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/StoreImageStorageConfiguration.java#L8)
 
 ```java
 @Bean StoreImageStorage storeImageStorage(Environment env)
@@ -13625,11 +13717,11 @@ Executa a etapa `store Image Storage` neste módulo. O contrato concreto está n
 
 Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado.
 
-Fonte: [SupabaseStoreImageStorage.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java) · SHA-256 `a2f0408afd16d5242ee9b4c7a8aff29e6fa4c79d17ada2aed76b974f65f87c5b`
+[LIDO NO CÓDIGO] Fonte: [SupabaseStoreImageStorage.java](../Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java) · SHA-256 `5d4038dc382f2342b49823891dfc502def34b3b6c92623c8da12a918b44af7bf`
 
 ### SupabaseStoreImageStorage — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java#L14)
 
 ```java
 public SupabaseStoreImageStorage(String projectUrl,String bucket,String key)
@@ -13643,7 +13735,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### SupabaseStoreImageStorage — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java#L18)
 
 ```java
 SupabaseStoreImageStorage(String projectUrl,String bucket,String key,HttpClient client)
@@ -13665,7 +13757,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### request — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java#L28)
 
 ```java
 private HttpRequest.Builder request(String name)
@@ -13673,16 +13765,19 @@ private HttpRequest.Builder request(String name)
 
 Executa a etapa `request` neste módulo. O contrato concreto está na assinatura, nos efeitos e nas condições abaixo; callbacks recebem o evento/elemento da operação que os contém.
 
-**Colaborações:** `StoreImageStorage.validateName`; `HttpRequest.newBuilder`; `base.resolve`; `Duration.ofSeconds`.
+**Colaborações:** `StoreImageStorage.validateName`; `HttpRequest.newBuilder`; `base.resolve`; `Duration.ofSeconds`; `key.startsWith`; `request.header`.
+
+**Decisões condicionais examinadas:**
+- `(!key.startsWith("sb_secret_"))`
 
 **Saída declarada:**
-- `return HttpRequest.newBuilder(base.resolve(name)).timeout(Duration.ofSeconds(20)) .header("Authorization","Bearer "+key).header("apikey",key);`
+- `return request;`
 
 **Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### send — linha 33
+### send — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java#L36)
 
 ```java
 private HttpResponse<byte[]> send(HttpRequest request) throws IOException
@@ -13706,9 +13801,9 @@ var pending = client.sendAsync(request, info -> new LimitedImageSubscriber());
 
 **Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### put — linha 47
+### put — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java#L50)
 
 ```java
 public void put(String name,byte[] image) throws IOException
@@ -13728,9 +13823,9 @@ Executa a etapa `put` neste módulo. O contrato concreto está na assinatura, no
 
 **Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### read — linha 53
+### read — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java:53)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java#L56)
 
 ```java
 public Optional<byte[]> read(String name) throws IOException
@@ -13755,9 +13850,9 @@ Executa a etapa `read` neste módulo. O contrato concreto está na assinatura, n
 
 **Decisão de engenharia:** Armazenamento de capas isolado da moderação; limitar tamanho, proteger credenciais e manter o bucket privado. Evite mover esta regra apenas para o navegador; ao alterar o contrato, atualize consumidores e testes do domínio.
 
-### delete — linha 61
+### delete — linha 64
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java:61)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/media/SupabaseStoreImageStorage.java#L64)
 
 ```java
 public void delete(String name) throws IOException
@@ -13779,11 +13874,11 @@ Executa a etapa `delete` neste módulo. O contrato concreto está na assinatura,
 
 Avisos privados. A conta destinatária limita leitura e alterações; destinos internos tipados relacionam o aviso à operação.
 
-Fonte: [AccountNotification.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java) · SHA-256 `69777abe09b9a60dc56c0b32c1b41036120c0fef86e1cd32b932855fa9036305`
+[LIDO NO CÓDIGO] Fonte: [AccountNotification.java](../Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java) · SHA-256 `69777abe09b9a60dc56c0b32c1b41036120c0fef86e1cd32b932855fa9036305`
 
 ### AccountNotification — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java#L43)
 
 ```java
 protected AccountNotification()
@@ -13795,7 +13890,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### AccountNotification — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java#L45)
 
 ```java
 public AccountNotification(Account account, String title, String message, String kind)
@@ -13807,7 +13902,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### AccountNotification — linha 52
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java:52)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java#L52)
 
 ```java
 public AccountNotification(Account account, String title, String message, String kind, NotificationTarget targetType, UUID targetId)
@@ -13819,7 +13914,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getId — linha 59
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java:59)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java#L59)
 
 ```java
 public UUID getId()
@@ -13834,7 +13929,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getTitle — linha 60
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java:60)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java#L60)
 
 ```java
 public String getTitle()
@@ -13849,7 +13944,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getMessage — linha 61
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java:61)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java#L61)
 
 ```java
 public String getMessage()
@@ -13864,7 +13959,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getKind — linha 62
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java:62)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java#L62)
 
 ```java
 public String getKind()
@@ -13879,7 +13974,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCreatedAt — linha 63
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java:63)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java#L63)
 
 ```java
 public Instant getCreatedAt()
@@ -13894,7 +13989,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getReadAt — linha 64
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java:64)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java#L64)
 
 ```java
 public Instant getReadAt()
@@ -13909,7 +14004,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getTargetType — linha 65
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java:65)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java#L65)
 
 ```java
 public NotificationTarget getTargetType()
@@ -13924,7 +14019,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getTargetId — linha 66
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java:66)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java#L66)
 
 ```java
 public UUID getTargetId()
@@ -13939,7 +14034,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### markRead — linha 67
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java:67)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/AccountNotification.java#L67)
 
 ```java
 public void markRead()
@@ -13958,11 +14053,11 @@ Executa a etapa `mark Read` neste módulo. O contrato concreto está na assinatu
 
 Avisos privados. A conta destinatária limita leitura e alterações; destinos internos tipados relacionam o aviso à operação.
 
-Fonte: [NotificationController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationController.java) · SHA-256 `f42580adfbcc8f4381bd2745665a1b68a42caa0c9b76af2360e8cefbac4fb926`
+[LIDO NO CÓDIGO] Fonte: [NotificationController.java](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationController.java) · SHA-256 `f42580adfbcc8f4381bd2745665a1b68a42caa0c9b76af2360e8cefbac4fb926`
 
 ### NotificationController — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationController.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationController.java#L15)
 
 ```java
 public NotificationController(NotificationService service)
@@ -13974,7 +14069,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### list — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationController.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationController.java#L17)
 
 ```java
 @GetMapping public List<AccountNotification> list(Authentication auth)
@@ -13991,7 +14086,7 @@ Executa a etapa `list` neste módulo. O contrato concreto está na assinatura, n
 
 ### read — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationController.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationController.java#L20)
 
 ```java
 @PatchMapping("/{id}/read") public AccountNotification read(@PathVariable UUID id, Authentication auth)
@@ -14008,7 +14103,7 @@ Executa a etapa `read` neste módulo. O contrato concreto está na assinatura, n
 
 ### clear — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationController.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationController.java#L25)
 
 ```java
 @DeleteMapping @ResponseStatus(HttpStatus.NO_CONTENT) public void clear(Authentication auth)
@@ -14022,7 +14117,7 @@ Executa a etapa `clear` neste módulo. O contrato concreto está na assinatura, 
 
 ### subject — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationController.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationController.java#L29)
 
 ```java
 private UUID subject(Authentication auth)
@@ -14041,11 +14136,11 @@ Executa a etapa `subject` neste módulo. O contrato concreto está na assinatura
 
 Avisos privados. A conta destinatária limita leitura e alterações; destinos internos tipados relacionam o aviso à operação.
 
-Fonte: [NotificationRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationRepository.java) · SHA-256 `e9bd3c43ebbba29676a52cb7e72ee881d34058c50387f321019a91e50affa9f8`
+[LIDO NO CÓDIGO] Fonte: [NotificationRepository.java](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationRepository.java) · SHA-256 `e9bd3c43ebbba29676a52cb7e72ee881d34058c50387f321019a91e50affa9f8`
 
 ### findTop100ByAccountIdOrderByCreatedAtDesc — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationRepository.java#L9)
 
 ```java
 List<AccountNotification> findTop100ByAccountIdOrderByCreatedAtDesc(UUID accountId);
@@ -14059,7 +14154,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByIdAndAccountId — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationRepository.java#L10)
 
 ```java
 Optional<AccountNotification> findByIdAndAccountId(UUID id, UUID accountId);
@@ -14073,7 +14168,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### deleteByAccountId — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationRepository.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationRepository.java#L11)
 
 ```java
 long deleteByAccountId(UUID accountId);
@@ -14087,7 +14182,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### existsByAccountIdAndTitleAndReadAtIsNull — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationRepository.java:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationRepository.java#L12)
 
 ```java
 boolean existsByAccountIdAndTitleAndReadAtIsNull(UUID accountId, String title);
@@ -14103,11 +14198,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Avisos privados. A conta destinatária limita leitura e alterações; destinos internos tipados relacionam o aviso à operação.
 
-Fonte: [NotificationService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java) · SHA-256 `edb192ac4b8e7343e1edcd850fbed0ce702f1dd808271d2c1760f30005a3ddf6`
+[LIDO NO CÓDIGO] Fonte: [NotificationService.java](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java) · SHA-256 `edb192ac4b8e7343e1edcd850fbed0ce702f1dd808271d2c1760f30005a3ddf6`
 
 ### NotificationService — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java#L15)
 
 ```java
 public NotificationService(NotificationRepository notifications, AccountRepository accounts)
@@ -14119,7 +14214,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### send — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java#L20)
 
 ```java
 @Transactional public void send(Account recipient, String title, String message, String kind)
@@ -14138,7 +14233,7 @@ notifications.save(new AccountNotification(recipient, title, message, kind));
 
 ### sendLinked — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java#L25)
 
 ```java
 @Transactional public void sendLinked(Account recipient, String title, String message, String kind, NotificationTarget targetType, UUID targetId)
@@ -14157,7 +14252,7 @@ notifications.save(new AccountNotification(recipient, title, message, kind, targ
 
 ### sendUnreadOnce — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java#L32)
 
 ```java
 @Transactional public void sendUnreadOnce(Account recipient, String title, String message, String kind)
@@ -14182,7 +14277,7 @@ notifications.save(new AccountNotification(recipient, title, message, kind));
 
 ### sendUnreadOnceLinked — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java#L38)
 
 ```java
 @Transactional public void sendUnreadOnceLinked(Account recipient, String title, String message, String kind, NotificationTarget targetType, UUID targetId)
@@ -14207,7 +14302,7 @@ notifications.save(new AccountNotification(recipient, title, message, kind, targ
 
 ### list — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java#L45)
 
 ```java
 @Transactional(readOnly = true) public List<AccountNotification> list(UUID accountId)
@@ -14224,7 +14319,7 @@ Executa a etapa `list` neste módulo. O contrato concreto está na assinatura, n
 
 ### markRead — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java#L50)
 
 ```java
 @Transactional public AccountNotification markRead(UUID accountId, UUID notificationId)
@@ -14241,7 +14336,7 @@ Executa a etapa `mark Read` neste módulo. O contrato concreto está na assinatu
 
 ### clear — linha 58
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java:58)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java#L58)
 
 ```java
 @Transactional public void clear(UUID accountId)
@@ -14260,7 +14355,7 @@ notifications.deleteByAccountId(accountId);
 
 ### account — linha 63
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java:63)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationService.java#L63)
 
 ```java
 @Transactional(readOnly = true) public Account account(UUID id)
@@ -14279,7 +14374,7 @@ Executa a etapa `account` neste módulo. O contrato concreto está na assinatura
 
 Avisos privados. A conta destinatária limita leitura e alterações; destinos internos tipados relacionam o aviso à operação.
 
-Fonte: [NotificationTarget.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/notifications/NotificationTarget.java) · SHA-256 `31973cdb55ad6c60dadcb2cab839cf57ff2d9ef288d6dcc13490f799cba48309`
+[LIDO NO CÓDIGO] Fonte: [NotificationTarget.java](../Backend/src/main/java/br/com/fooddelivery/notifications/NotificationTarget.java) · SHA-256 `31973cdb55ad6c60dadcb2cab839cf57ff2d9ef288d6dcc13490f799cba48309`
 
 **Contrato de dados/estados:**
 ```java
@@ -14293,7 +14388,7 @@ Sem função explícita: contrato declarativo, enum ou inicializador. Os campos 
 
 Pedidos e estoque. A transação precisa manter pedido, pagamento e estoque coerentes; estados e bloqueios impedem operações fora de sequência.
 
-Fonte: [FulfillmentType.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/FulfillmentType.java) · SHA-256 `1338249d31fca82866374f858327c6f33ef46dcdbc87c3f0bae7b01076e8655e`
+[LIDO NO CÓDIGO] Fonte: [FulfillmentType.java](../Backend/src/main/java/br/com/fooddelivery/orders/FulfillmentType.java) · SHA-256 `1338249d31fca82866374f858327c6f33ef46dcdbc87c3f0bae7b01076e8655e`
 
 **Contrato de dados/estados:**
 ```java
@@ -14307,11 +14402,11 @@ Sem função explícita: contrato declarativo, enum ou inicializador. Os campos 
 
 Pedidos e estoque. A transação precisa manter pedido, pagamento e estoque coerentes; estados e bloqueios impedem operações fora de sequência.
 
-Fonte: [Order.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java) · SHA-256 `072b5abdc8f6640707b476db5c9b94ae47a4b1e7a41ee2f990ee2b333b146c33`
+[LIDO NO CÓDIGO] Fonte: [Order.java](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java) · SHA-256 `072b5abdc8f6640707b476db5c9b94ae47a4b1e7a41ee2f990ee2b333b146c33`
 
 ### Order — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L29)
 
 ```java
 protected Order()
@@ -14323,7 +14418,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### Order — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L30)
 
 ```java
 public Order(Account customer, Store store, FulfillmentType type, String address, long subtotal,long deliveryFee, String customerNote)
@@ -14337,7 +14432,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### normalizeNote — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L31)
 
 ```java
 private static String normalizeNote(String note)
@@ -14362,7 +14457,7 @@ Executa a etapa `normalize Note` neste módulo. O contrato concreto está na ass
 
 ### addLine — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L32)
 
 ```java
 public void addLine(UUID itemId,String name,int quantity,long unitPrice)
@@ -14376,7 +14471,7 @@ Executa a etapa `add Line` neste módulo. O contrato concreto está na assinatur
 
 ### getId — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L33)
 
 ```java
 public UUID getId()
@@ -14391,7 +14486,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCustomer — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L33)
 
 ```java
 public Account getCustomer()
@@ -14406,7 +14501,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStore — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L33)
 
 ```java
 public Store getStore()
@@ -14421,7 +14516,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStatus — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L33)
 
 ```java
 public OrderStatus getStatus()
@@ -14436,7 +14531,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getFulfillmentType — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L34)
 
 ```java
 public FulfillmentType getFulfillmentType()
@@ -14451,7 +14546,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getDeliveryAddress — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L34)
 
 ```java
 public String getDeliveryAddress()
@@ -14466,7 +14561,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getTotalCents — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L34)
 
 ```java
 public long getTotalCents()
@@ -14481,7 +14576,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getSubtotalCents — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L35)
 
 ```java
 public long getSubtotalCents()
@@ -14496,7 +14591,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getDeliveryFeeCents — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L35)
 
 ```java
 public long getDeliveryFeeCents()
@@ -14511,7 +14606,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCurrency — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L36)
 
 ```java
 public String getCurrency()
@@ -14526,7 +14621,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCreatedAt — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L36)
 
 ```java
 public Instant getCreatedAt()
@@ -14541,7 +14636,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getLines — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L36)
 
 ```java
 public List<OrderLine> getLines()
@@ -14556,7 +14651,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCustomerNote — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L37)
 
 ```java
 public String getCustomerNote()
@@ -14571,7 +14666,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCancellationRequestedAt — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L37)
 
 ```java
 public Instant getCancellationRequestedAt()
@@ -14586,7 +14681,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCancellationRequestStatus — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L37)
 
 ```java
 public String getCancellationRequestStatus()
@@ -14601,7 +14696,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCancellationRequestNote — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L37)
 
 ```java
 public String getCancellationRequestNote()
@@ -14616,7 +14711,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### requestCancellation — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L38)
 
 ```java
 public void requestCancellation(String note)
@@ -14643,7 +14738,7 @@ Executa a etapa `request Cancellation` neste módulo. O contrato concreto está 
 
 ### decideCancellation — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L39)
 
 ```java
 public void decideCancellation(boolean accepted)
@@ -14664,7 +14759,7 @@ Executa a etapa `decide Cancellation` neste módulo. O contrato concreto está n
 
 ### paid — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L40)
 
 ```java
 public void paid()
@@ -14682,7 +14777,7 @@ Executa a etapa `paid` neste módulo. O contrato concreto está na assinatura, n
 
 ### cancelUnpaid — linha 41
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:41)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L41)
 
 ```java
 public void cancelUnpaid()
@@ -14700,7 +14795,7 @@ Executa a etapa `cancel Unpaid` neste módulo. O contrato concreto está na assi
 
 ### transition — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L42)
 
 ```java
 public void transition(OrderStatus next)
@@ -14722,7 +14817,7 @@ Executa a etapa `transition` neste módulo. O contrato concreto está na assinat
 
 ### OrderLine — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L46)
 
 ```java
 protected OrderLine()
@@ -14734,7 +14829,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### OrderLine — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L46)
 
 ```java
 OrderLine(UUID id,String name,int quantity,long price)
@@ -14746,7 +14841,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getItemId — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L47)
 
 ```java
 public UUID getItemId()
@@ -14761,7 +14856,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getName — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L47)
 
 ```java
 public String getName()
@@ -14776,7 +14871,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getQuantity — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L47)
 
 ```java
 public int getQuantity()
@@ -14791,7 +14886,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getUnitPriceCents — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/Order.java:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/Order.java#L47)
 
 ```java
 public long getUnitPriceCents()
@@ -14808,7 +14903,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Pedidos e estoque. A transação precisa manter pedido, pagamento e estoque coerentes; estados e bloqueios impedem operações fora de sequência.
 
-Fonte: [OrderController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java) · SHA-256 `7e5045629233346a285676369bd403ec261b012c68fe9a5497d7107075e25894`
+[LIDO NO CÓDIGO] Fonte: [OrderController.java](../Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java) · SHA-256 `7e5045629233346a285676369bd403ec261b012c68fe9a5497d7107075e25894`
 
 **Contrato de dados/estados:**
 ```java
@@ -14877,7 +14972,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### OrderController — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java#L38)
 
 ```java
 public OrderController(OrderService service, OrderRepository orders, PaymentRepository payments, DeliveryRepository deliveries)
@@ -14889,7 +14984,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### create — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java#L45)
 
 ```java
 @PostMapping("/orders") @ResponseStatus(HttpStatus.CREATED) @PreAuthorize("hasRole('CUSTOMER')") @Transactional public CheckoutResponse create(@Valid @RequestBody CreateOrder request, Authentication auth)
@@ -14906,7 +15001,7 @@ Executa a etapa `create` neste módulo. O contrato concreto está na assinatura,
 
 ### mine — linha 57
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java:57)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java#L57)
 
 ```java
 @GetMapping("/orders/mine") @PreAuthorize("hasRole('CUSTOMER')") @Transactional(readOnly = true) public List<OrderView> mine(Authentication auth)
@@ -14924,7 +15019,7 @@ Executa a etapa `mine` neste módulo. O contrato concreto está na assinatura, n
 
 ### merchantOrders — linha 67
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java:67)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java#L67)
 
 ```java
 @GetMapping("/merchant/orders") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly = true) public List<OrderView> merchantOrders(Authentication auth)
@@ -14941,7 +15036,7 @@ Executa a etapa `merchant Orders` neste módulo. O contrato concreto está na as
 
 ### cancelUnpaid — linha 76
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java:76)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java#L76)
 
 ```java
 @PostMapping("/orders/{id}/cancel") @PreAuthorize("hasRole('CUSTOMER')") @Transactional public OrderView cancelUnpaid(@PathVariable UUID id, Authentication auth)
@@ -14958,7 +15053,7 @@ Executa a etapa `cancel Unpaid` neste módulo. O contrato concreto está na assi
 
 ### requestCancellation — linha 84
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java:84)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java#L84)
 
 ```java
 @PostMapping("/orders/{id}/cancellation-request") @PreAuthorize("hasRole('CUSTOMER')") @Transactional public OrderView requestCancellation(@PathVariable UUID id,@Valid @RequestBody CancellationRequest request,Authentication auth)
@@ -14975,7 +15070,7 @@ Executa a etapa `request Cancellation` neste módulo. O contrato concreto está 
 
 ### decideCancellation — linha 92
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java:92)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java#L92)
 
 ```java
 @PatchMapping("/merchant/orders/{id}/cancellation-request") @PreAuthorize("hasRole('MERCHANT')") @Transactional public OrderView decideCancellation(@PathVariable UUID id,@Valid @RequestBody CancellationDecision request,Authentication auth)
@@ -14992,7 +15087,7 @@ Executa a etapa `decide Cancellation` neste módulo. O contrato concreto está n
 
 ### status — linha 100
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java:100)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java#L100)
 
 ```java
 @PatchMapping("/merchant/orders/{id}/status") @PreAuthorize("hasRole('MERCHANT')") @Transactional public OrderView status(@PathVariable UUID id, @Valid @RequestBody StatusChange request, Authentication auth)
@@ -15009,7 +15104,7 @@ Executa a etapa `status` neste módulo. O contrato concreto está na assinatura,
 
 ### view — linha 108
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java:108)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java#L108)
 
 ```java
 private OrderView view(Order order, Payment payment, boolean includeTracking)
@@ -15030,7 +15125,7 @@ Executa a etapa `view` neste módulo. O contrato concreto está na assinatura, n
 
 ### subject — linha 123
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java:123)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderController.java#L123)
 
 ```java
 private UUID subject(Authentication auth)
@@ -15049,11 +15144,11 @@ Executa a etapa `subject` neste módulo. O contrato concreto está na assinatura
 
 Pedidos e estoque. A transação precisa manter pedido, pagamento e estoque coerentes; estados e bloqueios impedem operações fora de sequência.
 
-Fonte: [OrderRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderRepository.java) · SHA-256 `27412b8f3ccb328700126513590b2c004dc5184f14453e7f0a8699a90b4936ef`
+[LIDO NO CÓDIGO] Fonte: [OrderRepository.java](../Backend/src/main/java/br/com/fooddelivery/orders/OrderRepository.java) · SHA-256 `27412b8f3ccb328700126513590b2c004dc5184f14453e7f0a8699a90b4936ef`
 
 ### findByCustomerIdOrderByCreatedAtDesc — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderRepository.java:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderRepository.java#L6)
 
 ```java
 List<Order> findByCustomerIdOrderByCreatedAtDesc(UUID id);
@@ -15067,7 +15162,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByStoreOwnerIdOrderByCreatedAtDesc — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderRepository.java:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderRepository.java#L6)
 
 ```java
 List<Order> findByStoreOwnerIdOrderByCreatedAtDesc(UUID id);
@@ -15081,7 +15176,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByStatusAndCreatedAtBefore — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderRepository.java:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderRepository.java#L6)
 
 ```java
 List<Order> findByStatusAndCreatedAtBefore(OrderStatus status,java.time.Instant before);
@@ -15095,7 +15190,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByIdForUpdate — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderRepository.java:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderRepository.java#L7)
 
 ```java
 @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE) @Query("select o from Order o where o.id=:id") Optional<Order> findByIdForUpdate(@Param("id") UUID id);
@@ -15109,7 +15204,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### completedByCategorySince — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderRepository.java#L10)
 
 ```java
 @Query("select o.store.category, count(o) from Order o where o.status = br.com.fooddelivery.orders.OrderStatus.COMPLETED and o.createdAt >= :since and o.store.active = true and o.store.approved = true and (:city is null or lower(o.store.city) = lower(:city)) and (:state is null or lower(o.store.state) = lower(:state)) group by o.store.category") List<Object[]> completedByCategorySince(@Param("since") java.time.Instant since, @Param("city") String city, @Param("state") String state);
@@ -15125,7 +15220,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Pedidos e estoque. A transação precisa manter pedido, pagamento e estoque coerentes; estados e bloqueios impedem operações fora de sequência.
 
-Fonte: [OrderService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java) · SHA-256 `2831c07a282325c3b13e30ba803ca593abd45d329878b7355921a935656f8013`
+[LIDO NO CÓDIGO] Fonte: [OrderService.java](../Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java) · SHA-256 `2831c07a282325c3b13e30ba803ca593abd45d329878b7355921a935656f8013`
 
 **Contrato de dados/estados:**
 ```java
@@ -15135,7 +15230,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### OrderService — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java#L18)
 
 ```java
 public OrderService(OrderRepository orders,AccountRepository accounts,StoreRepository stores,CatalogItemRepository items,PaymentRepository payments,NotificationService notifications,StoreOperatingHours operatingHours,br.com.fooddelivery.delivery.DeliveryRepository deliveries)
@@ -15147,7 +15242,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### create — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java#L19)
 
 ```java
 @Transactional public Order create(UUID customerId,UUID storeId,FulfillmentType type,String address,String customerNote,List<RequestedLine> requested)
@@ -15186,7 +15281,7 @@ Order saved=orders.save(order);payments.save(new Payment(saved));return saved;
 
 ### customerOrders — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java#L33)
 
 ```java
 @Transactional(readOnly=true) public List<Order> customerOrders(UUID id)
@@ -15203,7 +15298,7 @@ Executa a etapa `customer Orders` neste módulo. O contrato concreto está na as
 
 ### merchantTransition — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java#L34)
 
 ```java
 @Transactional public Order merchantTransition(UUID id,UUID merchantId,OrderStatus status)
@@ -15238,7 +15333,7 @@ notifications.sendLinked(order.getCustomer(),"Pedido atualizado",order.getStore(
 
 ### cancelUnpaidByCustomer — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java#L50)
 
 ```java
 @Transactional public Order cancelUnpaidByCustomer(UUID id,UUID customerId)
@@ -15274,7 +15369,7 @@ notifications.send(order.getStore().getOwner(),"Pedido cancelado pelo cliente","
 
 ### requestCustomerCancellation — linha 63
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java:63)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java#L63)
 
 ```java
 @Transactional public Order requestCustomerCancellation(UUID id,UUID customerId,String note)
@@ -15308,7 +15403,7 @@ return orders.save(order);
 
 ### decideCustomerCancellation — linha 75
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java:75)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java#L75)
 
 ```java
 @Transactional public Order decideCustomerCancellation(UUID id,UUID merchantId,boolean accepted)
@@ -15341,7 +15436,7 @@ return orders.save(order);
 
 ### cancelDelivery — linha 89
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java:89)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderService.java#L89)
 
 ```java
 private void cancelDelivery(UUID orderId)
@@ -15362,7 +15457,7 @@ private void cancelDelivery(UUID orderId){deliveries.findByOrderId(orderId).ifPr
 
 Pedidos e estoque. A transação precisa manter pedido, pagamento e estoque coerentes; estados e bloqueios impedem operações fora de sequência.
 
-Fonte: [OrderStatus.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderStatus.java) · SHA-256 `0921db69057dc9e73908b7fcb52708f6fd303e83c11b172bc2e5b81d51eac5e8`
+[LIDO NO CÓDIGO] Fonte: [OrderStatus.java](../Backend/src/main/java/br/com/fooddelivery/orders/OrderStatus.java) · SHA-256 `0921db69057dc9e73908b7fcb52708f6fd303e83c11b172bc2e5b81d51eac5e8`
 
 **Contrato de dados/estados:**
 ```java
@@ -15372,7 +15467,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### descriptionPtBr — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/orders/OrderStatus.java:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/orders/OrderStatus.java#L4)
 
 ```java
 public String descriptionPtBr()
@@ -15389,11 +15484,11 @@ Executa a etapa `description Pt Br` neste módulo. O contrato concreto está na 
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [DevelopmentPaymentController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/DevelopmentPaymentController.java) · SHA-256 `663a08bc82c3f91d1684426775685b09f6d742f8ef6be81ec66e430a7a417c7d`
+[LIDO NO CÓDIGO] Fonte: [DevelopmentPaymentController.java](../Backend/src/main/java/br/com/fooddelivery/payments/DevelopmentPaymentController.java) · SHA-256 `663a08bc82c3f91d1684426775685b09f6d742f8ef6be81ec66e430a7a417c7d`
 
 ### DevelopmentPaymentController — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/DevelopmentPaymentController.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/DevelopmentPaymentController.java#L13)
 
 ```java
 public DevelopmentPaymentController(PaymentService service,PaymentRepository payments)
@@ -15405,7 +15500,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### get — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/DevelopmentPaymentController.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/DevelopmentPaymentController.java#L14)
 
 ```java
 @GetMapping("/{id}") @PreAuthorize("hasRole('CUSTOMER')") public Payment get(@PathVariable UUID id,Authentication auth)
@@ -15428,7 +15523,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### approve — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/DevelopmentPaymentController.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/DevelopmentPaymentController.java#L15)
 
 ```java
 @PostMapping("/{id}/approve") @PreAuthorize("hasRole('CUSTOMER')") public Payment approve(@PathVariable UUID id,Authentication auth)
@@ -15453,7 +15548,7 @@ Executa a etapa `approve` neste módulo. O contrato concreto está na assinatura
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [MarketplaceAccountService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java) · SHA-256 `973d258559c9f162a06fe594f7504edaa5c47dd4bc8c7bf2bdcd0de8eed6aa5f`
+[LIDO NO CÓDIGO] Fonte: [MarketplaceAccountService.java](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java) · SHA-256 `973d258559c9f162a06fe594f7504edaa5c47dd4bc8c7bf2bdcd0de8eed6aa5f`
 
 **Contrato de dados/estados:**
 ```java
@@ -15463,7 +15558,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### MarketplaceAccountService — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java#L31)
 
 ```java
 public MarketplaceAccountService(StorePaymentAccountRepository links, StoreRepository stores, MercadoPagoProperties properties, MarketplaceTokenCipher cipher, MarketplaceTokenRefreshService tokenRefresh, @Qualifier("mercadoPagoRestClient") RestClient http)
@@ -15475,7 +15570,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### authorizationUrl — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java#L40)
 
 ```java
 @Transactional public String authorizationUrl(UUID storeId, UUID ownerId)
@@ -15497,7 +15592,7 @@ link.beginAuthorization(sha256Hex(state),cipher.encrypt(verifier));links.save(li
 
 ### completeAuthorization — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java:56)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java#L56)
 
 ```java
 @Transactional public void completeAuthorization(String code,String state)
@@ -15516,7 +15611,7 @@ links.save(link);
 
 ### accessTokenForStore — linha 71
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java:71)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java#L71)
 
 ```java
 @Transactional public String accessTokenForStore(UUID storeId)
@@ -15542,7 +15637,7 @@ Executa a etapa `access Token For Store` neste módulo. O contrato concreto est�
 
 ### status — linha 83
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java:83)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java#L83)
 
 ```java
 @Transactional(readOnly=true) public ConnectionStatus status(UUID storeId,UUID ownerId)
@@ -15559,7 +15654,7 @@ Executa a etapa `status` neste módulo. O contrato concreto está na assinatura,
 
 ### post — linha 92
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java:92)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java#L92)
 
 ```java
 private Map<String,Object> post(String path,String bearer,Map<String,?> body,String error)
@@ -15582,7 +15677,7 @@ Executa a etapa `post` neste módulo. O contrato concreto está na assinatura, n
 
 ### requireOAuth — linha 100
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java:100)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java#L100)
 
 ```java
 private void requireOAuth()
@@ -15602,7 +15697,7 @@ Executa a etapa `require OAuth` neste módulo. O contrato concreto está na assi
 
 ### randomToken — linha 101
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java:101)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java#L101)
 
 ```java
 private String randomToken(int size)
@@ -15619,7 +15714,7 @@ Executa a etapa `random Token` neste módulo. O contrato concreto está na assin
 
 ### sha256 — linha 102
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java:102)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java#L102)
 
 ```java
 private static byte[] sha256(byte[] bytes)
@@ -15639,7 +15734,7 @@ Executa a etapa `sha256` neste módulo. O contrato concreto está na assinatura,
 
 ### sha256Hex — linha 103
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java:103)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java#L103)
 
 ```java
 private static String sha256Hex(String value)
@@ -15656,7 +15751,7 @@ Executa a etapa `sha256 Hex` neste módulo. O contrato concreto está na assinat
 
 ### text — linha 104
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java:104)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java#L104)
 
 ```java
 private static String text(Map<String,Object> body,String key)
@@ -15680,7 +15775,7 @@ Executa a etapa `text` neste módulo. O contrato concreto está na assinatura, n
 
 ### number — linha 105
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java:105)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceAccountService.java#L105)
 
 ```java
 private static long number(Map<String,Object> body,String key,long fallback)
@@ -15703,11 +15798,11 @@ Executa a etapa `number` neste módulo. O contrato concreto está na assinatura,
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [MarketplaceTokenCipher.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenCipher.java) · SHA-256 `a7d76bd91b58360ffd13a3b276bc40dc84e6014934eb5208618c3beb90d74726`
+[LIDO NO CÓDIGO] Fonte: [MarketplaceTokenCipher.java](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenCipher.java) · SHA-256 `a7d76bd91b58360ffd13a3b276bc40dc84e6014934eb5208618c3beb90d74726`
 
 ### MarketplaceTokenCipher — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenCipher.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenCipher.java#L16)
 
 ```java
 public MarketplaceTokenCipher(MercadoPagoProperties properties)
@@ -15719,7 +15814,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### encrypt — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenCipher.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenCipher.java#L18)
 
 ```java
 public String encrypt(String value)
@@ -15739,7 +15834,7 @@ Executa a etapa `encrypt` neste módulo. O contrato concreto está na assinatura
 
 ### decrypt — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenCipher.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenCipher.java#L29)
 
 ```java
 public String decrypt(String value)
@@ -15759,7 +15854,7 @@ Executa a etapa `decrypt` neste módulo. O contrato concreto está na assinatura
 
 ### key — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenCipher.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenCipher.java#L38)
 
 ```java
 private SecretKeySpec key()
@@ -15786,11 +15881,11 @@ Executa a etapa `key` neste módulo. O contrato concreto está na assinatura, no
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [MarketplaceTokenRefreshService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenRefreshService.java) · SHA-256 `5259d4eaa303c3c09260f548c12cca0d93b5b128be8a1cef276c2df1b146f4e8`
+[LIDO NO CÓDIGO] Fonte: [MarketplaceTokenRefreshService.java](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenRefreshService.java) · SHA-256 `5259d4eaa303c3c09260f548c12cca0d93b5b128be8a1cef276c2df1b146f4e8`
 
 ### MarketplaceTokenRefreshService — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenRefreshService.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenRefreshService.java#L23)
 
 ```java
 public MarketplaceTokenRefreshService(StorePaymentAccountRepository links, MercadoPagoProperties properties, MarketplaceTokenCipher cipher, @Qualifier("mercadoPagoRestClient") RestClient http)
@@ -15802,7 +15897,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### refreshIfNeeded — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenRefreshService.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenRefreshService.java#L31)
 
 ```java
 @Transactional(propagation = Propagation.REQUIRES_NEW) public String refreshIfNeeded(UUID storeId)
@@ -15835,7 +15930,7 @@ links.save(link);
 
 ### text — linha 62
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenRefreshService.java:62)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenRefreshService.java#L62)
 
 ```java
 private static String text(Map<String, Object> body, String key)
@@ -15859,7 +15954,7 @@ Executa a etapa `text` neste módulo. O contrato concreto está na assinatura, n
 
 ### number — linha 70
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenRefreshService.java:70)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MarketplaceTokenRefreshService.java#L70)
 
 ```java
 private static long number(Map<String, Object> body, String key, long fallback)
@@ -15882,11 +15977,11 @@ Executa a etapa `number` neste módulo. O contrato concreto está na assinatura,
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [MercadoPagoAccountController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoAccountController.java) · SHA-256 `aab5b7a1dc409325a1ad1dd59b8a632da3f90a86c48b571bb327e3c2f4ba3fbb`
+[LIDO NO CÓDIGO] Fonte: [MercadoPagoAccountController.java](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoAccountController.java) · SHA-256 `aab5b7a1dc409325a1ad1dd59b8a632da3f90a86c48b571bb327e3c2f4ba3fbb`
 
 ### MercadoPagoAccountController — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoAccountController.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoAccountController.java#L16)
 
 ```java
 public MercadoPagoAccountController(MarketplaceAccountService service,MercadoPagoProperties properties)
@@ -15898,7 +15993,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### connect — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoAccountController.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoAccountController.java#L18)
 
 ```java
 @PostMapping("/merchant/stores/{storeId}/mercadopago/connect") @PreAuthorize("hasRole('MERCHANT')") public Map<String,String> connect(@PathVariable UUID storeId,Authentication auth)
@@ -15915,7 +16010,7 @@ Executa a etapa `connect` neste módulo. O contrato concreto está na assinatura
 
 ### status — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoAccountController.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoAccountController.java#L24)
 
 ```java
 @GetMapping("/merchant/stores/{storeId}/mercadopago/status") @PreAuthorize("hasRole('MERCHANT')") public MarketplaceAccountService.ConnectionStatus status(@PathVariable UUID storeId,Authentication auth)
@@ -15932,7 +16027,7 @@ Executa a etapa `status` neste módulo. O contrato concreto está na assinatura,
 
 ### callback — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoAccountController.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoAccountController.java#L28)
 
 ```java
 @GetMapping("/payments/mercadopago/callback") public RedirectView callback(@RequestParam(required=false) String code,@RequestParam(required=false) String state, @RequestParam(required=false) String error)
@@ -15956,7 +16051,7 @@ Executa a etapa `callback` neste módulo. O contrato concreto está na assinatur
 
 ### subject — linha 41
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoAccountController.java:41)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoAccountController.java#L41)
 
 ```java
 private UUID subject(Authentication auth)
@@ -15975,7 +16070,7 @@ Executa a etapa `subject` neste módulo. O contrato concreto está na assinatura
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [MercadoPagoCheckoutService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoCheckoutService.java) · SHA-256 `2553536dd07340dd64266143eed8afbeedff6bc6f94b262f3d84938c3a12d535`
+[LIDO NO CÓDIGO] Fonte: [MercadoPagoCheckoutService.java](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoCheckoutService.java) · SHA-256 `2553536dd07340dd64266143eed8afbeedff6bc6f94b262f3d84938c3a12d535`
 
 **Contrato de dados/estados:**
 ```java
@@ -15985,7 +16080,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### MercadoPagoCheckoutService — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoCheckoutService.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoCheckoutService.java#L33)
 
 ```java
 public MercadoPagoCheckoutService(PaymentRepository payments,MarketplaceAccountService marketplaceAccounts,MercadoPagoProperties properties,Environment environment,PaymentService paymentService,@Qualifier("mercadoPagoRestClient") RestClient http,StoreOperatingHours operatingHours)
@@ -15997,7 +16092,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### create — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoCheckoutService.java:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoCheckoutService.java#L35)
 
 ```java
 @Transactional public CheckoutView create(UUID paymentId,UUID customerId)
@@ -16058,7 +16153,7 @@ payment.checkoutCreated(preferenceId,checkoutUrl);payments.save(payment);
 
 ### returnUrl — linha 89
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoCheckoutService.java:89)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoCheckoutService.java#L89)
 
 ```java
 private String returnUrl(String result,Payment payment,String page)
@@ -16075,7 +16170,7 @@ Executa a etapa `return Url` neste módulo. O contrato concreto está na assinat
 
 ### syncFromProvider — linha 92
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoCheckoutService.java:92)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoCheckoutService.java#L92)
 
 ```java
 @Transactional public PaymentController.PaymentView syncFromProvider(UUID paymentId,UUID customerId,String providerPaymentId)
@@ -16111,7 +16206,7 @@ Executa a etapa `sync From Provider` neste módulo. O contrato concreto está na
 
 ### item — linha 113
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoCheckoutService.java:113)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoCheckoutService.java#L113)
 
 ```java
 private Map<String,Object> item(String id,String title,int quantity,long unitPriceCents)
@@ -16130,11 +16225,11 @@ Executa a etapa `item` neste módulo. O contrato concreto está na assinatura, n
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [MercadoPagoConfiguration.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoConfiguration.java) · SHA-256 `0a3490491056afbe3e78f0c421fa3129c8fa5018c031ffb20e19cf7e199db7e8`
+[LIDO NO CÓDIGO] Fonte: [MercadoPagoConfiguration.java](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoConfiguration.java) · SHA-256 `0a3490491056afbe3e78f0c421fa3129c8fa5018c031ffb20e19cf7e199db7e8`
 
 ### mercadoPagoRestClient — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoConfiguration.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoConfiguration.java#L14)
 
 ```java
 @Bean("mercadoPagoRestClient") RestClient mercadoPagoRestClient()
@@ -16158,11 +16253,11 @@ requestFactory.setReadTimeout(Duration.ofSeconds(15));
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [MercadoPagoProperties.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java) · SHA-256 `7b85909897bbef195d3195a7366d7de7f34ba0285e0e397292ef5f56d1bc6225`
+[LIDO NO CÓDIGO] Fonte: [MercadoPagoProperties.java](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java) · SHA-256 `7b85909897bbef195d3195a7366d7de7f34ba0285e0e397292ef5f56d1bc6225`
 
 ### setPrivateSettings — linha 6
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:6)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L6)
 
 ```java
 @org.springframework.beans.factory.annotation.Autowired public void setPrivateSettings(br.com.fooddelivery.settings.IntegrationSettings settings)
@@ -16174,7 +16269,7 @@ Executa a etapa `set Private Settings` neste módulo. O contrato concreto está 
 
 ### MercadoPagoProperties — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L17)
 
 ```java
 public MercadoPagoProperties()
@@ -16186,7 +16281,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### MercadoPagoProperties — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L18)
 
 ```java
 public MercadoPagoProperties(String clientId,String clientSecret,String redirectUri,String frontendUrl,String tokenEncryptionKey,String webhookSecret,String notificationBaseUrl,boolean sandbox,boolean testWebhookSignature,String currency)
@@ -16198,7 +16293,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### clientId — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L19)
 
 ```java
 public String clientId()
@@ -16218,7 +16313,7 @@ Executa a etapa `client Id` neste módulo. O contrato concreto está na assinatu
 
 ### getClientId — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L20)
 
 ```java
 public String getClientId()
@@ -16233,7 +16328,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setClientId — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L21)
 
 ```java
 public void setClientId(String value)
@@ -16245,7 +16340,7 @@ Executa a etapa `set Client Id` neste módulo. O contrato concreto está na assi
 
 ### clientSecret — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L22)
 
 ```java
 public String clientSecret()
@@ -16265,7 +16360,7 @@ Executa a etapa `client Secret` neste módulo. O contrato concreto está na assi
 
 ### getClientSecret — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L23)
 
 ```java
 public String getClientSecret()
@@ -16280,7 +16375,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setClientSecret — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L24)
 
 ```java
 public void setClientSecret(String value)
@@ -16292,7 +16387,7 @@ Executa a etapa `set Client Secret` neste módulo. O contrato concreto está na 
 
 ### redirectUri — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L25)
 
 ```java
 public String redirectUri()
@@ -16307,7 +16402,7 @@ Executa a etapa `redirect Uri` neste módulo. O contrato concreto está na assin
 
 ### getRedirectUri — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L26)
 
 ```java
 public String getRedirectUri()
@@ -16322,7 +16417,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setRedirectUri — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L27)
 
 ```java
 public void setRedirectUri(String value)
@@ -16334,7 +16429,7 @@ Executa a etapa `set Redirect Uri` neste módulo. O contrato concreto está na a
 
 ### frontendUrl — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L28)
 
 ```java
 public String frontendUrl()
@@ -16349,7 +16444,7 @@ Executa a etapa `frontend Url` neste módulo. O contrato concreto está na assin
 
 ### getFrontendUrl — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L29)
 
 ```java
 public String getFrontendUrl()
@@ -16364,7 +16459,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setFrontendUrl — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L30)
 
 ```java
 public void setFrontendUrl(String value)
@@ -16376,7 +16471,7 @@ Executa a etapa `set Frontend Url` neste módulo. O contrato concreto está na a
 
 ### tokenEncryptionKey — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L31)
 
 ```java
 public String tokenEncryptionKey()
@@ -16391,7 +16486,7 @@ Executa a etapa `token Encryption Key` neste módulo. O contrato concreto está 
 
 ### getTokenEncryptionKey — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L32)
 
 ```java
 public String getTokenEncryptionKey()
@@ -16406,7 +16501,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setTokenEncryptionKey — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L33)
 
 ```java
 public void setTokenEncryptionKey(String value)
@@ -16418,7 +16513,7 @@ Executa a etapa `set Token Encryption Key` neste módulo. O contrato concreto es
 
 ### webhookSecret — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L34)
 
 ```java
 public String webhookSecret()
@@ -16438,7 +16533,7 @@ Executa a etapa `webhook Secret` neste módulo. O contrato concreto está na ass
 
 ### getWebhookSecret — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L35)
 
 ```java
 public String getWebhookSecret()
@@ -16453,7 +16548,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setWebhookSecret — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L36)
 
 ```java
 public void setWebhookSecret(String value)
@@ -16465,7 +16560,7 @@ Executa a etapa `set Webhook Secret` neste módulo. O contrato concreto está na
 
 ### notificationBaseUrl — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L37)
 
 ```java
 public String notificationBaseUrl()
@@ -16480,7 +16575,7 @@ Executa a etapa `notification Base Url` neste módulo. O contrato concreto está
 
 ### getNotificationBaseUrl — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L38)
 
 ```java
 public String getNotificationBaseUrl()
@@ -16495,7 +16590,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setNotificationBaseUrl — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L39)
 
 ```java
 public void setNotificationBaseUrl(String value)
@@ -16507,7 +16602,7 @@ Executa a etapa `set Notification Base Url` neste módulo. O contrato concreto e
 
 ### sandbox — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L40)
 
 ```java
 public boolean sandbox()
@@ -16522,7 +16617,7 @@ Executa a etapa `sandbox` neste módulo. O contrato concreto está na assinatura
 
 ### getSandbox — linha 41
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:41)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L41)
 
 ```java
 public boolean getSandbox()
@@ -16537,7 +16632,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setSandbox — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L42)
 
 ```java
 public void setSandbox(boolean value)
@@ -16549,7 +16644,7 @@ Executa a etapa `set Sandbox` neste módulo. O contrato concreto está na assina
 
 ### testWebhookSignature — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L43)
 
 ```java
 public boolean testWebhookSignature()
@@ -16564,7 +16659,7 @@ Executa a etapa `test Webhook Signature` neste módulo. O contrato concreto est�
 
 ### getTestWebhookSignature — linha 44
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:44)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L44)
 
 ```java
 public boolean getTestWebhookSignature()
@@ -16579,7 +16674,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setTestWebhookSignature — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L45)
 
 ```java
 public void setTestWebhookSignature(boolean value)
@@ -16591,7 +16686,7 @@ Executa a etapa `set Test Webhook Signature` neste módulo. O contrato concreto 
 
 ### currency — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L46)
 
 ```java
 public String currency()
@@ -16606,7 +16701,7 @@ Executa a etapa `currency` neste módulo. O contrato concreto está na assinatur
 
 ### getCurrency — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L47)
 
 ```java
 public String getCurrency()
@@ -16621,7 +16716,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setCurrency — linha 48
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:48)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L48)
 
 ```java
 public void setCurrency(String value)
@@ -16633,7 +16728,7 @@ Executa a etapa `set Currency` neste módulo. O contrato concreto está na assin
 
 ### oauthConfigured — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:49)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L49)
 
 ```java
 public boolean oauthConfigured()
@@ -16650,7 +16745,7 @@ Executa a etapa `oauth Configured` neste módulo. O contrato concreto está na a
 
 ### checkoutConfigured — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L50)
 
 ```java
 public boolean checkoutConfigured()
@@ -16667,7 +16762,7 @@ Executa a etapa `checkout Configured` neste módulo. O contrato concreto está n
 
 ### webhookConfigured — linha 51
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:51)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L51)
 
 ```java
 public boolean webhookConfigured()
@@ -16684,7 +16779,7 @@ Executa a etapa `webhook Configured` neste módulo. O contrato concreto está na
 
 ### hasNotificationUrl — linha 52
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:52)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L52)
 
 ```java
 public boolean hasNotificationUrl()
@@ -16701,7 +16796,7 @@ Executa a etapa `has Notification Url` neste módulo. O contrato concreto está 
 
 ### present — linha 53
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java:53)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoProperties.java#L53)
 
 ```java
 private static boolean present(String value)
@@ -16720,11 +16815,11 @@ Executa a etapa `present` neste módulo. O contrato concreto está na assinatura
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [MercadoPagoRefundService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java) · SHA-256 `f28f342243fc52eed5112fcfc719ad6a7ca165bf3bf4fddeb34bec9f27a74feb`
+[LIDO NO CÓDIGO] Fonte: [MercadoPagoRefundService.java](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java) · SHA-256 `f28f342243fc52eed5112fcfc719ad6a7ca165bf3bf4fddeb34bec9f27a74feb`
 
 ### MercadoPagoRefundService — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java#L30)
 
 ```java
 public MercadoPagoRefundService(PaymentRepository payments, MarketplaceAccountService marketplaceAccounts, NotificationService notifications)
@@ -16736,7 +16831,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### createHttpClient — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java#L37)
 
 ```java
 private static RestClient createHttpClient()
@@ -16758,7 +16853,7 @@ factory.setReadTimeout(Duration.ofSeconds(15));
 
 ### attempt — linha 44
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java:44)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java#L44)
 
 ```java
 @Transactional public void attempt(UUID paymentId)
@@ -16795,7 +16890,7 @@ notifications.send(paymentCustomer(payment), "Estorno em processamento",
 
 ### providerConfirmedRefund — linha 97
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java:97)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java#L97)
 
 ```java
 @Transactional public void providerConfirmedRefund(String providerPaymentId)
@@ -16818,7 +16913,7 @@ Executa a etapa `provider Confirmed Refund` neste módulo. O contrato concreto e
 
 ### ambiguousFailure — linha 107
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java:107)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java#L107)
 
 ```java
 private void ambiguousFailure(Payment payment)
@@ -16835,7 +16930,7 @@ Executa a etapa `ambiguous Failure` neste módulo. O contrato concreto está na 
 
 ### notifyRefundComplete — linha 115
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java:115)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java#L115)
 
 ```java
 private void notifyRefundComplete(Payment payment, String storeName)
@@ -16854,7 +16949,7 @@ notifications.send(paymentCustomer(payment), "Estorno confirmado",
 
 ### paymentCustomer — linha 120
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java:120)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoRefundService.java#L120)
 
 ```java
 private br.com.fooddelivery.identity.Account paymentCustomer(Payment payment)
@@ -16876,11 +16971,11 @@ Executa a etapa `payment Customer` neste módulo. O contrato concreto está na a
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [MercadoPagoWebhookController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoWebhookController.java) · SHA-256 `2fe97e695e0eeec984cda7f1a1a13f3747b6694468aa70cf00f95cf10cea2dfc`
+[LIDO NO CÓDIGO] Fonte: [MercadoPagoWebhookController.java](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoWebhookController.java) · SHA-256 `2fe97e695e0eeec984cda7f1a1a13f3747b6694468aa70cf00f95cf10cea2dfc`
 
 ### MercadoPagoWebhookController — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoWebhookController.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoWebhookController.java#L29)
 
 ```java
 public MercadoPagoWebhookController(PaymentRepository payments,PaymentService paymentService,MercadoPagoRefundService refundService,MarketplaceAccountService marketplaceAccounts,MercadoPagoProperties properties,@Qualifier("mercadoPagoRestClient") RestClient http)
@@ -16892,7 +16987,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### receive — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoWebhookController.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoWebhookController.java#L31)
 
 ```java
 @PostMapping @ResponseStatus(HttpStatus.OK) public Map<String,String> receive(@RequestParam(name="data.id",required=false) String dataId, @RequestParam(required=false) String type,@RequestParam(name="payment_id") UUID internalPaymentId, @RequestHeader(name="x-signature",required=false) String signature, @RequestHeader(name="x-request-id",required=false) String requestId)
@@ -16926,7 +17021,7 @@ Executa a etapa `receive` neste módulo. O contrato concreto está na assinatura
 
 ### validSignature — linha 57
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoWebhookController.java:57)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/MercadoPagoWebhookController.java#L57)
 
 ```java
 private boolean validSignature(String dataId,String requestId,String signature)
@@ -16957,11 +17052,11 @@ Executa a etapa `valid Signature` neste módulo. O contrato concreto está na as
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [Payment.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java) · SHA-256 `9b3e20f0a79b68cc2afab360548f9eb7d10d9fe782a5903d3f0a98986dafcc3f`
+[LIDO NO CÓDIGO] Fonte: [Payment.java](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java) · SHA-256 `9b3e20f0a79b68cc2afab360548f9eb7d10d9fe782a5903d3f0a98986dafcc3f`
 
 ### Payment — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L26)
 
 ```java
 protected Payment()
@@ -16973,7 +17068,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### Payment — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L27)
 
 ```java
 public Payment(Order order)
@@ -16987,7 +17082,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### Payment — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L28)
 
 ```java
 public Payment(Reservation reservation)
@@ -17001,7 +17096,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getId — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L29)
 
 ```java
 public UUID getId()
@@ -17016,7 +17111,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAmountCents — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L29)
 
 ```java
 public long getAmountCents()
@@ -17031,7 +17126,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStatus — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L29)
 
 ```java
 public PaymentStatus getStatus()
@@ -17046,7 +17141,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getOrder — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L29)
 
 ```java
 public Order getOrder()
@@ -17061,7 +17156,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getReservation — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L29)
 
 ```java
 public Reservation getReservation()
@@ -17076,7 +17171,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getProviderPreferenceId — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L30)
 
 ```java
 public String getProviderPreferenceId()
@@ -17091,7 +17186,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCheckoutUrl — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L30)
 
 ```java
 public String getCheckoutUrl()
@@ -17106,7 +17201,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getProviderReference — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L31)
 
 ```java
 public String getProviderReference()
@@ -17121,7 +17216,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getRefundProviderReference — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L31)
 
 ```java
 public String getRefundProviderReference()
@@ -17136,7 +17231,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getRefundAttempts — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L32)
 
 ```java
 public int getRefundAttempts()
@@ -17151,7 +17246,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getLastRefundAttemptAt — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L32)
 
 ```java
 public Instant getLastRefundAttemptAt()
@@ -17166,7 +17261,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getRefundLastError — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L32)
 
 ```java
 public String getRefundLastError()
@@ -17181,7 +17276,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### checkoutCreated — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L33)
 
 ```java
 public void checkoutCreated(String preferenceId,String url)
@@ -17199,7 +17294,7 @@ Executa a etapa `checkout Created` neste módulo. O contrato concreto está na a
 
 ### confirm — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L34)
 
 ```java
 public void confirm(String reference)
@@ -17217,7 +17312,7 @@ Executa a etapa `confirm` neste módulo. O contrato concreto está na assinatura
 
 ### fail — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L35)
 
 ```java
 public void fail(String reference)
@@ -17235,7 +17330,7 @@ Executa a etapa `fail` neste módulo. O contrato concreto está na assinatura, n
 
 ### cancelPendingCheckout — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L36)
 
 ```java
 public void cancelPendingCheckout()
@@ -17254,7 +17349,7 @@ Executa a etapa `cancel Pending Checkout` neste módulo. O contrato concreto est
 
 ### requestFullRefund — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L37)
 
 ```java
 public void requestFullRefund()
@@ -17278,7 +17373,7 @@ Executa a etapa `request Full Refund` neste módulo. O contrato concreto está n
 
 ### getRefundIdempotencyKey — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L42)
 
 ```java
 public UUID getRefundIdempotencyKey()
@@ -17293,7 +17388,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### beginRefundAttempt — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L43)
 
 ```java
 public boolean beginRefundAttempt()
@@ -17314,7 +17409,7 @@ Executa a etapa `begin Refund Attempt` neste módulo. O contrato concreto está 
 
 ### refundAccepted — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L47)
 
 ```java
 public void refundAccepted(String providerRefundId)
@@ -17326,7 +17421,7 @@ Executa a etapa `refund Accepted` neste módulo. O contrato concreto está na as
 
 ### refundSucceeded — linha 48
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:48)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L48)
 
 ```java
 public void refundSucceeded(String providerRefundId)
@@ -17338,7 +17433,7 @@ Executa a etapa `refund Succeeded` neste módulo. O contrato concreto está na a
 
 ### refundNeedsReview — linha 49
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:49)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L49)
 
 ```java
 public void refundNeedsReview(String safeReason)
@@ -17350,7 +17445,7 @@ Executa a etapa `refund Needs Review` neste módulo. O contrato concreto está n
 
 ### refundAttemptFailed — linha 50
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/Payment.java:50)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/Payment.java#L50)
 
 ```java
 public void refundAttemptFailed(String safeReason)
@@ -17364,7 +17459,7 @@ Executa a etapa `refund Attempt Failed` neste módulo. O contrato concreto está
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [PaymentController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentController.java) · SHA-256 `a9ecf1e01d0dee8e7c5388b296f20533596133a12e9a3a470991bc7a608a47f4`
+[LIDO NO CÓDIGO] Fonte: [PaymentController.java](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentController.java) · SHA-256 `a9ecf1e01d0dee8e7c5388b296f20533596133a12e9a3a470991bc7a608a47f4`
 
 **Contrato de dados/estados:**
 ```java
@@ -17380,7 +17475,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### PaymentController — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentController.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentController.java#L15)
 
 ```java
 public PaymentController(PaymentRepository payments,MercadoPagoCheckoutService checkout)
@@ -17392,7 +17487,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### createCheckout — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentController.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentController.java#L17)
 
 ```java
 @PostMapping("/{id}/checkout") public MercadoPagoCheckoutService.CheckoutView createCheckout(@PathVariable UUID id,Authentication auth)
@@ -17409,7 +17504,7 @@ Executa a etapa `create Checkout` neste módulo. O contrato concreto está na as
 
 ### get — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentController.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentController.java#L22)
 
 ```java
 @GetMapping("/{id}") @org.springframework.transaction.annotation.Transactional(readOnly=true) public PaymentView get(@PathVariable UUID id,Authentication auth)
@@ -17435,7 +17530,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### sync — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentController.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentController.java#L31)
 
 ```java
 @PostMapping("/{id}/sync") public PaymentView sync(@PathVariable UUID id,@RequestBody SyncRequest request,Authentication auth)
@@ -17452,7 +17547,7 @@ Executa a etapa `sync` neste módulo. O contrato concreto está na assinatura, n
 
 ### subject — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentController.java:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentController.java#L34)
 
 ```java
 private UUID subject(Authentication auth)
@@ -17471,11 +17566,11 @@ Executa a etapa `subject` neste módulo. O contrato concreto está na assinatura
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [PaymentReconciliation.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java) · SHA-256 `6d3cd0081b48337a1f3168ceb07d5cecb73972f79c5157a23675041c134432bf`
+[LIDO NO CÓDIGO] Fonte: [PaymentReconciliation.java](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java) · SHA-256 `6d3cd0081b48337a1f3168ceb07d5cecb73972f79c5157a23675041c134432bf`
 
 ### PaymentReconciliation — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java#L14)
 
 ```java
 protected PaymentReconciliation()
@@ -17487,7 +17582,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### PaymentReconciliation — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java#L15)
 
 ```java
 public PaymentReconciliation(UUID payment,UUID actor,String result,String status,String summary)
@@ -17499,7 +17594,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getId — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java#L16)
 
 ```java
 public UUID getId()
@@ -17514,7 +17609,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getPaymentId — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java#L16)
 
 ```java
 public UUID getPaymentId()
@@ -17529,7 +17624,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getResult — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java#L16)
 
 ```java
 public String getResult()
@@ -17544,7 +17639,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getProviderStatus — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java#L16)
 
 ```java
 public String getProviderStatus()
@@ -17559,7 +17654,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getSummary — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java#L16)
 
 ```java
 public String getSummary()
@@ -17574,7 +17669,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCreatedAt — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliation.java#L16)
 
 ```java
 public Instant getCreatedAt()
@@ -17591,11 +17686,11 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [PaymentReconciliationRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationRepository.java) · SHA-256 `9845bf599ad7450472787f7b6a79acc497a20597daf77f67da095c2bbd964d52`
+[LIDO NO CÓDIGO] Fonte: [PaymentReconciliationRepository.java](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationRepository.java) · SHA-256 `9845bf599ad7450472787f7b6a79acc497a20597daf77f67da095c2bbd964d52`
 
 ### findAllByOrderByCreatedAtDesc — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationRepository.java:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationRepository.java#L5)
 
 ```java
 Page<PaymentReconciliation> findAllByOrderByCreatedAtDesc(Pageable page);
@@ -17611,11 +17706,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [PaymentReconciliationService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationService.java) · SHA-256 `e4c57e8c546d9dcd38cd6c29e08b5b80cfb21738e2e7574165385144791fc830`
+[LIDO NO CÓDIGO] Fonte: [PaymentReconciliationService.java](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationService.java) · SHA-256 `e4c57e8c546d9dcd38cd6c29e08b5b80cfb21738e2e7574165385144791fc830`
 
 ### PaymentReconciliationService — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationService.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationService.java#L15)
 
 ```java
 public PaymentReconciliationService(PaymentRepository payments,MarketplaceAccountService accounts,PaymentService service,MercadoPagoRefundService refunds,@Qualifier("mercadoPagoRestClient") RestClient http,PaymentReconciliationRepository reports,PlatformTransactionManager manager,DemoEnvironment demo,AdminAuditService audit)
@@ -17627,7 +17722,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### reconcile — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationService.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationService.java#L16)
 
 ```java
 public PaymentReconciliation reconcile(UUID id,UUID actor,String suppliedProviderId)
@@ -17676,7 +17771,7 @@ else if("refunded".equals(status)){if(current.getStatus()==PaymentStatus.PENDING
 
 ### validate — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationService.java:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationService.java#L36)
 
 ```java
 public static String validate(Payment local,Map<String,Object> remote,String id)
@@ -17704,7 +17799,7 @@ Executa a etapa `validate` neste módulo. O contrato concreto está na assinatur
 
 ### safeStatus — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationService.java:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationService.java#L43)
 
 ```java
 private static String safeStatus(Map<String,Object> value)
@@ -17725,7 +17820,7 @@ Executa a etapa `safe Status` neste módulo. O contrato concreto está na assina
 
 ### record — linha 44
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationService.java:44)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentReconciliationService.java#L44)
 
 ```java
 private PaymentReconciliation record(UUID id,UUID actor,String result,String status,String summary)
@@ -17750,11 +17845,11 @@ private PaymentReconciliation record(UUID id,UUID actor,String result,String sta
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [PaymentRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java) · SHA-256 `1d7b5ef3d49a31d3a306b05ee73aabdc8f60670c24d0a0d83656a703864f77e0`
+[LIDO NO CÓDIGO] Fonte: [PaymentRepository.java](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java) · SHA-256 `1d7b5ef3d49a31d3a306b05ee73aabdc8f60670c24d0a0d83656a703864f77e0`
 
 ### findByOrderId — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java#L7)
 
 ```java
 Optional<Payment> findByOrderId(UUID id);
@@ -17768,7 +17863,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByReservationId — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java#L8)
 
 ```java
 Optional<Payment> findByReservationId(UUID id);
@@ -17782,7 +17877,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByProviderReference — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java#L9)
 
 ```java
 Optional<Payment> findByProviderReference(String reference);
@@ -17796,7 +17891,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findWithOperationById — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java#L10)
 
 ```java
 @Query("select p from Payment p left join fetch p.order left join fetch p.order.store left join fetch p.reservation left join fetch p.reservation.store where p.id=:id") Optional<Payment> findWithOperationById(@Param("id") UUID id);
@@ -17810,7 +17905,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByStatusInOrderByLastRefundAttemptAtAsc — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java#L12)
 
 ```java
 List<Payment> findByStatusInOrderByLastRefundAttemptAtAsc(Collection<PaymentStatus> statuses);
@@ -17824,7 +17919,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByStatusOrderByLastRefundAttemptAtAsc — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java#L13)
 
 ```java
 List<Payment> findByStatusOrderByLastRefundAttemptAtAsc(PaymentStatus status);
@@ -17838,7 +17933,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByStatusAndRefundProviderReferenceIsNullOrderByLastRefundAttemptAtAsc — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentRepository.java#L14)
 
 ```java
 List<Payment> findByStatusAndRefundProviderReferenceIsNullOrderByLastRefundAttemptAtAsc(PaymentStatus status);
@@ -17854,11 +17949,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [PaymentService.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentService.java) · SHA-256 `0e0524d0a9538108a505087584e569da56ecb56ac3704c79893e1de66552122c`
+[LIDO NO CÓDIGO] Fonte: [PaymentService.java](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentService.java) · SHA-256 `0e0524d0a9538108a505087584e569da56ecb56ac3704c79893e1de66552122c`
 
 ### PaymentService — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentService.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentService.java#L15)
 
 ```java
 public PaymentService(PaymentRepository payments,OrderRepository orders,NotificationService notifications)
@@ -17870,7 +17965,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### confirmForDevelopment — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentService.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentService.java#L16)
 
 ```java
 @Transactional public Payment confirmForDevelopment(UUID paymentId)
@@ -17887,7 +17982,7 @@ Executa a etapa `confirm For Development` neste módulo. O contrato concreto est
 
 ### confirmProvider — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentService.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentService.java#L17)
 
 ```java
 @Transactional public Payment confirmProvider(UUID paymentId,String providerReference)
@@ -17925,7 +18020,7 @@ else if(reservation.getStatus()==br.com.fooddelivery.reservations.ReservationSta
 
 ### failProvider — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentService.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentService.java#L32)
 
 ```java
 @Transactional public Payment failProvider(UUID paymentId,String providerReference)
@@ -17948,7 +18043,7 @@ Executa a etapa `fail Provider` neste módulo. O contrato concreto está na assi
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [PaymentStatus.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/PaymentStatus.java) · SHA-256 `e2b4939529c34a2dcdc94b891cecc0f5aafb4258c30208f0ff69ffac497a8c9b`
+[LIDO NO CÓDIGO] Fonte: [PaymentStatus.java](../Backend/src/main/java/br/com/fooddelivery/payments/PaymentStatus.java) · SHA-256 `e2b4939529c34a2dcdc94b891cecc0f5aafb4258c30208f0ff69ffac497a8c9b`
 
 **Contrato de dados/estados:**
 ```java
@@ -17962,11 +18057,11 @@ Sem função explícita: contrato declarativo, enum ou inicializador. Os campos 
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [RefundRetryJob.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/RefundRetryJob.java) · SHA-256 `7328034ba0220c06f44935915f3f59f7bbf94f0ff355569678a782e6ba936791`
+[LIDO NO CÓDIGO] Fonte: [RefundRetryJob.java](../Backend/src/main/java/br/com/fooddelivery/payments/RefundRetryJob.java) · SHA-256 `7328034ba0220c06f44935915f3f59f7bbf94f0ff355569678a782e6ba936791`
 
 ### RefundRetryJob — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/RefundRetryJob.java:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/RefundRetryJob.java#L12)
 
 ```java
 public RefundRetryJob(PaymentRepository payments, MercadoPagoRefundService refunds)
@@ -17978,7 +18073,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### processPendingRefunds — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/RefundRetryJob.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/RefundRetryJob.java#L17)
 
 ```java
 @Scheduled(fixedDelay = 30000) public void processPendingRefunds()
@@ -17994,11 +18089,11 @@ Executa a etapa `process Pending Refunds` neste módulo. O contrato concreto est
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [StorePaymentAccount.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java) · SHA-256 `e3260ef17bac48e0bf7d50bdc160e5675260a3dfbe9e5acd733c0b651edaed15`
+[LIDO NO CÓDIGO] Fonte: [StorePaymentAccount.java](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java) · SHA-256 `e3260ef17bac48e0bf7d50bdc160e5675260a3dfbe9e5acd733c0b651edaed15`
 
 ### StorePaymentAccount — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java#L23)
 
 ```java
 protected StorePaymentAccount()
@@ -18010,7 +18105,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### StorePaymentAccount — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java#L24)
 
 ```java
 public StorePaymentAccount(Store store)
@@ -18022,7 +18117,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getStore — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java#L25)
 
 ```java
 public Store getStore()
@@ -18037,7 +18132,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getMpUserId — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java#L25)
 
 ```java
 public String getMpUserId()
@@ -18052,7 +18147,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getTokenExpiresAt — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java#L25)
 
 ```java
 public Instant getTokenExpiresAt()
@@ -18067,7 +18162,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isConnected — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java#L26)
 
 ```java
 public boolean isConnected()
@@ -18084,7 +18179,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### accessTokenEncrypted — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java#L27)
 
 ```java
 String accessTokenEncrypted()
@@ -18099,7 +18194,7 @@ Executa a etapa `access Token Encrypted` neste módulo. O contrato concreto est�
 
 ### refreshTokenEncrypted — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java#L27)
 
 ```java
 String refreshTokenEncrypted()
@@ -18114,7 +18209,7 @@ Executa a etapa `refresh Token Encrypted` neste módulo. O contrato concreto est
 
 ### stateHash — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java#L28)
 
 ```java
 String stateHash()
@@ -18129,7 +18224,7 @@ Executa a etapa `state Hash` neste módulo. O contrato concreto está na assinat
 
 ### stateExpiresAt — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java#L28)
 
 ```java
 Instant stateExpiresAt()
@@ -18144,7 +18239,7 @@ Executa a etapa `state Expires At` neste módulo. O contrato concreto está na a
 
 ### codeVerifierEncrypted — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java#L28)
 
 ```java
 String codeVerifierEncrypted()
@@ -18159,7 +18254,7 @@ Executa a etapa `code Verifier Encrypted` neste módulo. O contrato concreto est
 
 ### beginAuthorization — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java#L29)
 
 ```java
 void beginAuthorization(String stateHash,String verifierCiphertext)
@@ -18178,7 +18273,7 @@ void beginAuthorization(String stateHash,String verifierCiphertext){this.stateHa
 
 ### completeAuthorization — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java#L30)
 
 ```java
 void completeAuthorization(String userId,String access,String refresh,long expiresSeconds)
@@ -18197,7 +18292,7 @@ void completeAuthorization(String userId,String access,String refresh,long expir
 
 ### refresh — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java#L31)
 
 ```java
 void refresh(String access,String refresh,long expiresSeconds)
@@ -18216,7 +18311,7 @@ void refresh(String access,String refresh,long expiresSeconds){this.accessTokenE
 
 ### clearAuthorizationState — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccount.java#L32)
 
 ```java
 void clearAuthorizationState()
@@ -18237,11 +18332,11 @@ void clearAuthorizationState(){this.stateHash=null;this.stateExpiresAt=null;this
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [StorePaymentAccountRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccountRepository.java) · SHA-256 `6abf4371eddec2ef82b6e03a284ce4c99660da5c1ce192490dd1b78bdc618df0`
+[LIDO NO CÓDIGO] Fonte: [StorePaymentAccountRepository.java](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccountRepository.java) · SHA-256 `6abf4371eddec2ef82b6e03a284ce4c99660da5c1ce192490dd1b78bdc618df0`
 
 ### findByStoreId — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccountRepository.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccountRepository.java#L13)
 
 ```java
 Optional<StorePaymentAccount> findByStoreId(UUID storeId);
@@ -18255,7 +18350,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByStoreIdForUpdate — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccountRepository.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccountRepository.java#L14)
 
 ```java
 @Lock(LockModeType.PESSIMISTIC_WRITE) @Query("select link from StorePaymentAccount link where link.store.id=:storeId") Optional<StorePaymentAccount> findByStoreIdForUpdate(@Param("storeId") UUID storeId);
@@ -18269,7 +18364,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByStateHashAndStateExpiresAtAfter — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccountRepository.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/StorePaymentAccountRepository.java#L17)
 
 ```java
 Optional<StorePaymentAccount> findByStateHashAndStateExpiresAtAfter(String stateHash,Instant now);
@@ -18285,11 +18380,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Pagamentos e estornos. O provedor confirma dinheiro real; navegador não é fonte de verdade. Repetições, eventos atrasados e cancelamentos devem preservar o estado financeiro.
 
-Fonte: [UnpaidCheckoutExpirationJob.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/UnpaidCheckoutExpirationJob.java) · SHA-256 `5b2d530e01b4a024ebc2f62f65551c82e19e5affdfd8ca7c37ae82f4f5727fe9`
+[LIDO NO CÓDIGO] Fonte: [UnpaidCheckoutExpirationJob.java](../Backend/src/main/java/br/com/fooddelivery/payments/UnpaidCheckoutExpirationJob.java) · SHA-256 `5b2d530e01b4a024ebc2f62f65551c82e19e5affdfd8ca7c37ae82f4f5727fe9`
 
 ### UnpaidCheckoutExpirationJob — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/UnpaidCheckoutExpirationJob.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/UnpaidCheckoutExpirationJob.java#L25)
 
 ```java
 public UnpaidCheckoutExpirationJob(OrderRepository orders,ReservationRepository reservations,ReservationSlotRepository slots, PaymentRepository payments,CatalogItemRepository items,NotificationService notifications)
@@ -18301,7 +18396,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### expireUnpaidOperations — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/payments/UnpaidCheckoutExpirationJob.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/payments/UnpaidCheckoutExpirationJob.java#L30)
 
 ```java
 @Scheduled(fixedDelay=60000) @Transactional public void expireUnpaidOperations()
@@ -18331,11 +18426,11 @@ notifications.send(reservation.getStore().getOwner(),"Reserva expirada","Uma res
 
 Cobertura e solicitações. A conta permanece única; aprovação vincula acesso/cidade/loja sem pedir novo cadastro dos mesmos dados.
 
-Fonte: [CityMatcher.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/CityMatcher.java) · SHA-256 `5034e4fc6fe0fe0834310df58d74e89d9c17e2b1bee6ddca7cee5f6a46a43458`
+[LIDO NO CÓDIGO] Fonte: [CityMatcher.java](../Backend/src/main/java/br/com/fooddelivery/platform/CityMatcher.java) · SHA-256 `5034e4fc6fe0fe0834310df58d74e89d9c17e2b1bee6ddca7cee5f6a46a43458`
 
 ### CityMatcher — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/CityMatcher.java:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/CityMatcher.java#L8)
 
 ```java
 private CityMatcher()
@@ -18347,7 +18442,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### sameCity — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/CityMatcher.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/CityMatcher.java#L10)
 
 ```java
 public static boolean sameCity(String customerCity, String customerState, String storeCity, String storeState)
@@ -18364,7 +18459,7 @@ Executa a etapa `same City` neste módulo. O contrato concreto está na assinatu
 
 ### allowPayAfterService — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/CityMatcher.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/CityMatcher.java#L17)
 
 ```java
 public static boolean allowPayAfterService(boolean sellerAllowsIt, String customerCity, String customerState, String storeCity, String storeState)
@@ -18381,7 +18476,7 @@ Executa a etapa `allow Pay After Service` neste módulo. O contrato concreto est
 
 ### normalize — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/CityMatcher.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/CityMatcher.java#L22)
 
 ```java
 private static String normalize(String value)
@@ -18404,11 +18499,11 @@ Executa a etapa `normalize` neste módulo. O contrato concreto está na assinatu
 
 Cobertura e solicitações. A conta permanece única; aprovação vincula acesso/cidade/loja sem pedir novo cadastro dos mesmos dados.
 
-Fonte: [PlatformRequest.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java) · SHA-256 `e6aaa1a143027d33d63188bab2f4646f7e1e77acffd29b809be914b0a7c321ab`
+[LIDO NO CÓDIGO] Fonte: [PlatformRequest.java](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java) · SHA-256 `e6aaa1a143027d33d63188bab2f4646f7e1e77acffd29b809be914b0a7c321ab`
 
 ### PlatformRequest — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L25)
 
 ```java
 protected PlatformRequest()
@@ -18420,7 +18515,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### PlatformRequest — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L26)
 
 ```java
 private PlatformRequest(Account account,String type,AccountRole role,String city,String state,String postalCode,Store store)
@@ -18432,7 +18527,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### role — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L27)
 
 ```java
 public static PlatformRequest role(Account a,AccountRole r)
@@ -18447,7 +18542,7 @@ Executa a etapa `role` neste módulo. O contrato concreto está na assinatura, n
 
 ### city — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L28)
 
 ```java
 public static PlatformRequest city(Account a,String c,String s,String p)
@@ -18462,7 +18557,7 @@ Executa a etapa `city` neste módulo. O contrato concreto está na assinatura, n
 
 ### store — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L29)
 
 ```java
 public static PlatformRequest store(Account a,Store store)
@@ -18479,7 +18574,7 @@ Executa a etapa `store` neste módulo. O contrato concreto está na assinatura, 
 
 ### review — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L30)
 
 ```java
 public void review(boolean approve,Account reviewer,String note)
@@ -18500,7 +18595,7 @@ Executa a etapa `review` neste módulo. O contrato concreto está na assinatura,
 
 ### getId — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L31)
 
 ```java
 public UUID getId()
@@ -18515,7 +18610,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAccount — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L31)
 
 ```java
 public Account getAccount()
@@ -18530,7 +18625,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getRequestType — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L31)
 
 ```java
 public String getRequestType()
@@ -18545,7 +18640,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStatus — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L31)
 
 ```java
 public String getStatus()
@@ -18560,7 +18655,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getRequestedRole — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L31)
 
 ```java
 public AccountRole getRequestedRole()
@@ -18575,7 +18670,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCity — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L31)
 
 ```java
 public String getCity()
@@ -18590,7 +18685,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getState — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L31)
 
 ```java
 public String getState()
@@ -18605,7 +18700,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getPostalCode — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L31)
 
 ```java
 public String getPostalCode()
@@ -18620,7 +18715,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStore — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L31)
 
 ```java
 public Store getStore()
@@ -18635,7 +18730,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getReviewNote — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L31)
 
 ```java
 public String getReviewNote()
@@ -18650,7 +18745,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCreatedAt — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L31)
 
 ```java
 public Instant getCreatedAt()
@@ -18665,7 +18760,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getReviewedAt — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequest.java#L31)
 
 ```java
 public Instant getReviewedAt()
@@ -18682,7 +18777,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Cobertura e solicitações. A conta permanece única; aprovação vincula acesso/cidade/loja sem pedir novo cadastro dos mesmos dados.
 
-Fonte: [PlatformRequestController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java) · SHA-256 `5f10769e29b285ed46d9d84a1b60c1b02daff66c84909105c5a6f2c9ad6964fe`
+[LIDO NO CÓDIGO] Fonte: [PlatformRequestController.java](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java) · SHA-256 `5f10769e29b285ed46d9d84a1b60c1b02daff66c84909105c5a6f2c9ad6964fe`
 
 **Contrato de dados/estados:**
 ```java
@@ -18710,7 +18805,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### PlatformRequestController — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java#L22)
 
 ```java
 public PlatformRequestController(PlatformRequestRepository requests,AccountRepository accounts,StoreRepository stores,ServiceCityRepository cities,NotificationService notifications)
@@ -18722,7 +18817,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### mine — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java#L24)
 
 ```java
 @GetMapping("/account/platform-requests") @Transactional(readOnly=true) public List<RequestView> mine(Authentication auth)
@@ -18739,7 +18834,7 @@ Executa a etapa `mine` neste módulo. O contrato concreto está na assinatura, n
 
 ### requestRole — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java#L26)
 
 ```java
 @PostMapping("/account/platform-requests/roles") @ResponseStatus(HttpStatus.CREATED) @Transactional public RequestView requestRole(@Valid @RequestBody RoleRequest body,Authentication auth)
@@ -18775,7 +18870,7 @@ return RequestView.of(requests.save(PlatformRequest.role(account,requested)));
 
 ### requestCity — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java#L36)
 
 ```java
 @PostMapping("/account/platform-requests/cities") @ResponseStatus(HttpStatus.CREATED) @Transactional public RequestView requestCity(@Valid @RequestBody CityRequest body,Authentication auth)
@@ -18808,7 +18903,7 @@ return RequestView.of(requests.save(PlatformRequest.city(account,city,state,cep)
 
 ### all — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java#L45)
 
 ```java
 @GetMapping("/admin/platform-requests") @PreAuthorize("hasRole('ADMIN')") @Transactional(readOnly=true) public List<RequestView> all()
@@ -18825,7 +18920,7 @@ Executa a etapa `all` neste módulo. O contrato concreto está na assinatura, no
 
 ### review — linha 48
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java:48)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java#L48)
 
 ```java
 @PatchMapping("/admin/platform-requests/{id}/review") @PreAuthorize("hasRole('ADMIN')") @Transactional public RequestView review(@PathVariable UUID id,@Valid @RequestBody Review body,Authentication auth)
@@ -18868,7 +18963,7 @@ notifications.send(owner,approve?"Solicitação aprovada":"Solicitação não ap
 
 ### approvedMessage — linha 66
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java:66)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java#L66)
 
 ```java
 private String approvedMessage(PlatformRequest r,boolean approved)
@@ -18891,7 +18986,7 @@ Executa a etapa `approved Message` neste módulo. O contrato concreto está na a
 
 ### account — linha 67
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java:67)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java#L67)
 
 ```java
 private Account account(UUID id)
@@ -18908,7 +19003,7 @@ Executa a etapa `account` neste módulo. O contrato concreto está na assinatura
 
 ### subject — linha 67
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java:67)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java#L67)
 
 ```java
 private UUID subject(Authentication a)
@@ -18925,7 +19020,7 @@ Executa a etapa `subject` neste módulo. O contrato concreto está na assinatura
 
 ### of — linha 70
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java:70)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestController.java#L70)
 
 ```java
 static RequestView of(PlatformRequest r)
@@ -18947,11 +19042,11 @@ Executa a etapa `of` neste módulo. O contrato concreto está na assinatura, nos
 
 Cobertura e solicitações. A conta permanece única; aprovação vincula acesso/cidade/loja sem pedir novo cadastro dos mesmos dados.
 
-Fonte: [PlatformRequestRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java) · SHA-256 `652c673ce605c2da885d2f534307be28d01a20ee4b81b620a0552a9ee1498c8e`
+[LIDO NO CÓDIGO] Fonte: [PlatformRequestRepository.java](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java) · SHA-256 `652c673ce605c2da885d2f534307be28d01a20ee4b81b620a0552a9ee1498c8e`
 
 ### findAccountId — linha 5
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java:5)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java#L5)
 
 ```java
 @org.springframework.data.jpa.repository.Query("select request.account.id from PlatformRequest request where request.id=:id") Optional<UUID> findAccountId(@org.springframework.data.repository.query.Param("id") UUID id);
@@ -18965,7 +19060,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByIdForUpdate — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java#L7)
 
 ```java
 @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE) @org.springframework.data.jpa.repository.Query("select request from PlatformRequest request where request.id=:id") Optional<PlatformRequest> findByIdForUpdate(@org.springframework.data.repository.query.Param("id") UUID id);
@@ -18979,7 +19074,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByAccountIdOrderByCreatedAtDesc — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java#L10)
 
 ```java
 List<PlatformRequest> findByAccountIdOrderByCreatedAtDesc(UUID accountId);
@@ -18993,7 +19088,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findAllByOrderByCreatedAtDesc — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java#L11)
 
 ```java
 List<PlatformRequest> findAllByOrderByCreatedAtDesc();
@@ -19007,7 +19102,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### existsByAccountIdAndRequestTypeAndStatus — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java#L12)
 
 ```java
 boolean existsByAccountIdAndRequestTypeAndStatus(UUID accountId,String type,String status);
@@ -19021,7 +19116,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### existsByAccountIdAndRequestTypeAndRequestedRoleAndStatus — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java#L13)
 
 ```java
 boolean existsByAccountIdAndRequestTypeAndRequestedRoleAndStatus(UUID accountId,String type,br.com.fooddelivery.identity.AccountRole role,String status);
@@ -19035,7 +19130,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### existsByAccountIdAndRequestTypeAndCityIgnoreCaseAndStateIgnoreCaseAndStatus — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java#L14)
 
 ```java
 boolean existsByAccountIdAndRequestTypeAndCityIgnoreCaseAndStateIgnoreCaseAndStatus(UUID accountId,String type,String city,String state,String status);
@@ -19049,7 +19144,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findFirstByStoreIdOrderByCreatedAtDesc — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/PlatformRequestRepository.java#L15)
 
 ```java
 Optional<PlatformRequest> findFirstByStoreIdOrderByCreatedAtDesc(UUID storeId);
@@ -19065,11 +19160,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Cobertura e solicitações. A conta permanece única; aprovação vincula acesso/cidade/loja sem pedir novo cadastro dos mesmos dados.
 
-Fonte: [ServiceCity.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java) · SHA-256 `9d56a73003d3b0d57d650d2b67d3203dc937763ad8503d1ea90ff394152f886a`
+[LIDO NO CÓDIGO] Fonte: [ServiceCity.java](../Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java) · SHA-256 `9d56a73003d3b0d57d650d2b67d3203dc937763ad8503d1ea90ff394152f886a`
 
 ### ServiceCity — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java#L15)
 
 ```java
 protected ServiceCity()
@@ -19081,7 +19176,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### ServiceCity — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java#L16)
 
 ```java
 public ServiceCity(String city,String state,String postalCode)
@@ -19098,7 +19193,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### enable — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java#L17)
 
 ```java
 public void enable(String postalCode)
@@ -19115,7 +19210,7 @@ Executa a etapa `enable` neste módulo. O contrato concreto está na assinatura,
 
 ### update — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java#L18)
 
 ```java
 public void update(String city,String state,String postalCode,boolean enabled)
@@ -19132,7 +19227,7 @@ Executa a etapa `update` neste módulo. O contrato concreto está na assinatura,
 
 ### getId — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java#L19)
 
 ```java
 public UUID getId()
@@ -19147,7 +19242,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCity — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java#L19)
 
 ```java
 public String getCity()
@@ -19162,7 +19257,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getState — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java#L19)
 
 ```java
 public String getState()
@@ -19177,7 +19272,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getPostalCode — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java#L19)
 
 ```java
 public String getPostalCode()
@@ -19192,7 +19287,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isEnabled — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/ServiceCity.java#L19)
 
 ```java
 public boolean isEnabled()
@@ -19209,11 +19304,11 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Cobertura e solicitações. A conta permanece única; aprovação vincula acesso/cidade/loja sem pedir novo cadastro dos mesmos dados.
 
-Fonte: [ServiceCityRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/ServiceCityRepository.java) · SHA-256 `3cefe29178ee6c7c648d0986182ffdff7fcf71a84b2fda34679b0504d234f919`
+[LIDO NO CÓDIGO] Fonte: [ServiceCityRepository.java](../Backend/src/main/java/br/com/fooddelivery/platform/ServiceCityRepository.java) · SHA-256 `3cefe29178ee6c7c648d0986182ffdff7fcf71a84b2fda34679b0504d234f919`
 
 ### findByCityIgnoreCaseAndStateIgnoreCase — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/ServiceCityRepository.java:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/ServiceCityRepository.java#L4)
 
 ```java
 Optional<ServiceCity> findByCityIgnoreCaseAndStateIgnoreCase(String city,String state);
@@ -19227,7 +19322,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByEnabledTrue — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/ServiceCityRepository.java:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/ServiceCityRepository.java#L4)
 
 ```java
 List<ServiceCity> findByEnabledTrue();
@@ -19241,7 +19336,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findAllByOrderByCityAscStateAsc — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/platform/ServiceCityRepository.java:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/platform/ServiceCityRepository.java#L4)
 
 ```java
 List<ServiceCity> findAllByOrderByCityAscStateAsc();
@@ -19257,11 +19352,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Agenda e capacidade. A loja é bloqueada durante a criação; o profissional e o intervalo inteiro determinam conflitos. Datas são interpretadas no fuso da loja.
 
-Fonte: [DevelopmentReservationPaymentController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/DevelopmentReservationPaymentController.java) · SHA-256 `821eaee3249ee70d7335db6ee1e364124adb6d8fe89932d2dfcfd330308bee27`
+[LIDO NO CÓDIGO] Fonte: [DevelopmentReservationPaymentController.java](../Backend/src/main/java/br/com/fooddelivery/reservations/DevelopmentReservationPaymentController.java) · SHA-256 `821eaee3249ee70d7335db6ee1e364124adb6d8fe89932d2dfcfd330308bee27`
 
 ### DevelopmentReservationPaymentController — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/DevelopmentReservationPaymentController.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/DevelopmentReservationPaymentController.java#L16)
 
 ```java
 public DevelopmentReservationPaymentController(ReservationRepository reservations,PaymentRepository payments,PaymentService paymentService)
@@ -19273,7 +19368,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### approve — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/DevelopmentReservationPaymentController.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/DevelopmentReservationPaymentController.java#L17)
 
 ```java
 @PostMapping("/{id}/approve-payment") @PreAuthorize("hasRole('CUSTOMER')") public Object approve(@PathVariable UUID id,Authentication auth)
@@ -19298,11 +19393,11 @@ Executa a etapa `approve` neste módulo. O contrato concreto está na assinatura
 
 Agenda e capacidade. A loja é bloqueada durante a criação; o profissional e o intervalo inteiro determinam conflitos. Datas são interpretadas no fuso da loja.
 
-Fonte: [Reservation.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java) · SHA-256 `82c1221cf7b3e81e82e6e1f03bd741082b9e779f49432c556280b75dfcaef8a6`
+[LIDO NO CÓDIGO] Fonte: [Reservation.java](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java) · SHA-256 `82c1221cf7b3e81e82e6e1f03bd741082b9e779f49432c556280b75dfcaef8a6`
 
 ### Reservation — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L33)
 
 ```java
 protected Reservation()
@@ -19314,7 +19409,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### Reservation — linha 34
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:34)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L34)
 
 ```java
 public Reservation(Store store,Account customer,Instant startsAt,UUID catalogItemId,String serviceName,long amount,String customerNote)
@@ -19328,7 +19423,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### Reservation — linha 35
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:35)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L35)
 
 ```java
 public Reservation(Store store,Account customer,Instant startsAt,UUID catalogItemId,String serviceName,long amount,String customerNote,boolean payAfterService)
@@ -19342,7 +19437,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### Reservation — linha 36
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:36)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L36)
 
 ```java
 public Reservation(Store store,Account customer,Instant startsAt,UUID catalogItemId,String serviceName,long amount,String customerNote,boolean payAfterService,StoreProfessional professional,Instant endsAt)
@@ -19366,7 +19461,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getId — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L37)
 
 ```java
 public UUID getId()
@@ -19381,7 +19476,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStore — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L37)
 
 ```java
 public Store getStore()
@@ -19396,7 +19491,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCustomer — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L37)
 
 ```java
 public Account getCustomer()
@@ -19411,7 +19506,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStartsAt — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L37)
 
 ```java
 public Instant getStartsAt()
@@ -19426,7 +19521,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getEndsAt — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L37)
 
 ```java
 public Instant getEndsAt()
@@ -19441,7 +19536,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCreatedAt — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L37)
 
 ```java
 public Instant getCreatedAt()
@@ -19456,7 +19551,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getServiceName — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L37)
 
 ```java
 public String getServiceName()
@@ -19471,7 +19566,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCatalogItemId — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L37)
 
 ```java
 public UUID getCatalogItemId()
@@ -19486,7 +19581,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getProfessional — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L37)
 
 ```java
 public StoreProfessional getProfessional()
@@ -19501,7 +19596,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAmountCents — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L37)
 
 ```java
 public long getAmountCents()
@@ -19516,7 +19611,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStatus — linha 37
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:37)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L37)
 
 ```java
 public ReservationStatus getStatus()
@@ -19531,7 +19626,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCustomerNote — linha 38
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:38)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L38)
 
 ```java
 public String getCustomerNote()
@@ -19546,7 +19641,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCancellationRequestedAt — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L39)
 
 ```java
 public Instant getCancellationRequestedAt()
@@ -19561,7 +19656,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCancellationRequestStatus — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L39)
 
 ```java
 public String getCancellationRequestStatus()
@@ -19576,7 +19671,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCancellationRequestNote — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L39)
 
 ```java
 public String getCancellationRequestNote()
@@ -19591,7 +19686,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### requestCancellation — linha 40
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:40)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L40)
 
 ```java
 public void requestCancellation(String note)
@@ -19618,7 +19713,7 @@ Executa a etapa `request Cancellation` neste módulo. O contrato concreto está 
 
 ### decideCancellation — linha 41
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:41)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L41)
 
 ```java
 public void decideCancellation(boolean accepted)
@@ -19639,7 +19734,7 @@ Executa a etapa `decide Cancellation` neste módulo. O contrato concreto está n
 
 ### isPayAfterService — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L42)
 
 ```java
 public boolean isPayAfterService()
@@ -19654,7 +19749,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### isOperatingHoursOverride — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L43)
 
 ```java
 public boolean isOperatingHoursOverride()
@@ -19669,7 +19764,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getOperatingHoursNotice — linha 44
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:44)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L44)
 
 ```java
 public String getOperatingHoursNotice()
@@ -19684,7 +19779,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getOperatingHoursChangedAt — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L45)
 
 ```java
 public Instant getOperatingHoursChangedAt()
@@ -19699,7 +19794,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### keepAfterHoursChange — linha 46
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:46)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L46)
 
 ```java
 public void keepAfterHoursChange()
@@ -19713,7 +19808,7 @@ Executa a etapa `keep After Hours Change` neste módulo. O contrato concreto est
 
 ### clearHoursOverride — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L47)
 
 ```java
 public void clearHoursOverride()
@@ -19725,7 +19820,7 @@ Executa a etapa `clear Hours Override` neste módulo. O contrato concreto está 
 
 ### cancelForHoursChange — linha 48
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:48)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L48)
 
 ```java
 public void cancelForHoursChange()
@@ -19746,7 +19841,7 @@ Executa a etapa `cancel For Hours Change` neste módulo. O contrato concreto est
 
 ### confirmPayment — linha 53
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:53)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L53)
 
 ```java
 public void confirmPayment()
@@ -19764,7 +19859,7 @@ Executa a etapa `confirm Payment` neste módulo. O contrato concreto está na as
 
 ### cancelUnpaid — linha 54
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:54)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L54)
 
 ```java
 public void cancelUnpaid()
@@ -19782,7 +19877,7 @@ Executa a etapa `cancel Unpaid` neste módulo. O contrato concreto está na assi
 
 ### expireUnpaid — linha 55
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:55)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L55)
 
 ```java
 public void expireUnpaid()
@@ -19797,7 +19892,7 @@ Executa a etapa `expire Unpaid` neste módulo. O contrato concreto está na assi
 
 ### change — linha 56
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java:56)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/Reservation.java#L56)
 
 ```java
 public void change(ReservationStatus next)
@@ -19821,7 +19916,7 @@ Executa a etapa `change` neste módulo. O contrato concreto está na assinatura,
 
 Agenda e capacidade. A loja é bloqueada durante a criação; o profissional e o intervalo inteiro determinam conflitos. Datas são interpretadas no fuso da loja.
 
-Fonte: [ReservationController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java) · SHA-256 `d20eedf9b5ce45c50ec0d33433d7bd9a3c716295cb86e0c44f90f25a7e7ed2c1`
+[LIDO NO CÓDIGO] Fonte: [ReservationController.java](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java) · SHA-256 `d20eedf9b5ce45c50ec0d33433d7bd9a3c716295cb86e0c44f90f25a7e7ed2c1`
 
 **Contrato de dados/estados:**
 ```java
@@ -19869,7 +19964,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### ReservationController — linha 47
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java:47)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java#L47)
 
 ```java
 public ReservationController(ReservationRepository reservations, ReservationSlotRepository slots, StoreRepository stores, AccountRepository accounts, CatalogItemRepository items, NotificationService notifications, PaymentRepository payments, StoreProfessionalRepository professionals, br.com.fooddelivery.catalog.StoreOperatingHours operatingHours)
@@ -19881,7 +19976,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### create — linha 62
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java:62)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java#L62)
 
 ```java
 @PostMapping("/reservations") @ResponseStatus(HttpStatus.CREATED) @PreAuthorize("hasRole('CUSTOMER')") @Transactional public CreateResponse create(@Valid @RequestBody Request request, Authentication auth)
@@ -19930,7 +20025,7 @@ payment = payments.save(new Payment(reservation));
 
 ### mine — linha 111
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java:111)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java#L111)
 
 ```java
 @GetMapping("/reservations/mine") @PreAuthorize("hasRole('CUSTOMER')") @Transactional(readOnly = true) public List<ReservationView> mine(Authentication auth)
@@ -19948,7 +20043,7 @@ Executa a etapa `mine` neste módulo. O contrato concreto está na assinatura, n
 
 ### merchant — linha 121
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java:121)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java#L121)
 
 ```java
 @GetMapping("/merchant/reservations") @PreAuthorize("hasRole('MERCHANT')") @Transactional(readOnly = true) public List<ReservationView> merchant(Authentication auth)
@@ -19965,7 +20060,7 @@ Executa a etapa `merchant` neste módulo. O contrato concreto está na assinatur
 
 ### cancelUnpaid — linha 131
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java:131)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java#L131)
 
 ```java
 @PostMapping("/reservations/{id}/cancel") @PreAuthorize("hasRole('CUSTOMER')") @Transactional public ReservationView cancelUnpaid(@PathVariable UUID id, Authentication auth)
@@ -20002,7 +20097,7 @@ return view(reservations.save(reservation), payment);
 
 ### requestCancellation — linha 155
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java:155)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java#L155)
 
 ```java
 @PostMapping("/reservations/{id}/cancellation-request") @PreAuthorize("hasRole('CUSTOMER')") @Transactional public ReservationView requestCancellation(@PathVariable UUID id,@Valid @RequestBody CancellationNote request,Authentication auth)
@@ -20042,7 +20137,7 @@ if(!alreadyRequested)notifications.sendLinked(reservation.getStore().getOwner(),
 
 ### decideCancellation — linha 176
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java:176)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java#L176)
 
 ```java
 @PatchMapping("/merchant/reservations/{id}/cancellation-request") @PreAuthorize("hasRole('MERCHANT')") @Transactional public ReservationView decideCancellation(@PathVariable UUID id,@Valid @RequestBody CancellationDecision request,Authentication auth)
@@ -20076,7 +20171,7 @@ return view(reservations.save(reservation),payment);
 
 ### update — linha 191
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java:191)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java#L191)
 
 ```java
 @PatchMapping("/merchant/reservations/{id}") @PreAuthorize("hasRole('MERCHANT')") @Transactional public ReservationView update(@PathVariable UUID id, @Valid @RequestBody Change change, Authentication auth)
@@ -20110,7 +20205,7 @@ return view(reservations.save(reservation), payment);
 
 ### view — linha 219
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java:219)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java#L219)
 
 ```java
 private static ReservationView view(Reservation reservation, Payment payment)
@@ -20131,7 +20226,7 @@ Executa a etapa `view` neste módulo. O contrato concreto está na assinatura, n
 
 ### subject — linha 228
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java:228)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationController.java#L228)
 
 ```java
 private UUID subject(Authentication auth)
@@ -20150,11 +20245,11 @@ Executa a etapa `subject` neste módulo. O contrato concreto está na assinatura
 
 Agenda e capacidade. A loja é bloqueada durante a criação; o profissional e o intervalo inteiro determinam conflitos. Datas são interpretadas no fuso da loja.
 
-Fonte: [ReservationRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationRepository.java) · SHA-256 `364e7f21794c8a468ef6f5f871c452af236ef69926c4a61d8adc481a6765cf73`
+[LIDO NO CÓDIGO] Fonte: [ReservationRepository.java](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationRepository.java) · SHA-256 `364e7f21794c8a468ef6f5f871c452af236ef69926c4a61d8adc481a6765cf73`
 
 ### findByCustomerIdOrderByStartsAtDesc — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationRepository.java:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationRepository.java#L7)
 
 ```java
 List<Reservation> findByCustomerIdOrderByStartsAtDesc(UUID id);
@@ -20168,7 +20263,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByStoreOwnerIdOrderByStartsAt — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationRepository.java:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationRepository.java#L7)
 
 ```java
 List<Reservation> findByStoreOwnerIdOrderByStartsAt(UUID id);
@@ -20182,7 +20277,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### existsByStoreIdAndStartsAt — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationRepository.java:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationRepository.java#L7)
 
 ```java
 boolean existsByStoreIdAndStartsAt(UUID store,Instant startsAt);
@@ -20196,7 +20291,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByStatusAndCreatedAtBefore — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationRepository.java:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationRepository.java#L7)
 
 ```java
 List<Reservation> findByStatusAndCreatedAtBefore(ReservationStatus status,Instant before);
@@ -20210,7 +20305,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### lockFutureForHours — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationRepository.java:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationRepository.java#L8)
 
 ```java
 @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE) @Query("select r from Reservation r where r.store.id=:storeId and r.status in :statuses and r.endsAt > :now order by r.id") List<Reservation> lockFutureForHours(@Param("storeId") UUID storeId,@Param("statuses") Collection<ReservationStatus> statuses,@Param("now") Instant now);
@@ -20224,7 +20319,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### completedByCategorySince — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationRepository.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationRepository.java#L11)
 
 ```java
 @Query("select r.store.category, count(r) from Reservation r where r.status = br.com.fooddelivery.reservations.ReservationStatus.COMPLETED and r.createdAt >= :since and r.store.active = true and r.store.approved = true and (:city is null or lower(r.store.city) = lower(:city)) and (:state is null or lower(r.store.state) = lower(:state)) group by r.store.category") List<Object[]> completedByCategorySince(@Param("since") Instant since, @Param("city") String city, @Param("state") String state);
@@ -20240,11 +20335,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Agenda e capacidade. A loja é bloqueada durante a criação; o profissional e o intervalo inteiro determinam conflitos. Datas são interpretadas no fuso da loja.
 
-Fonte: [ReservationSlot.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlot.java) · SHA-256 `750330d05a81527f315c66fef5dfb9dd9a4503d06bb6c9e2245376f8de400e38`
+[LIDO NO CÓDIGO] Fonte: [ReservationSlot.java](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlot.java) · SHA-256 `750330d05a81527f315c66fef5dfb9dd9a4503d06bb6c9e2245376f8de400e38`
 
 ### ReservationSlot — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlot.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlot.java#L18)
 
 ```java
 protected ReservationSlot()
@@ -20256,7 +20351,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### ReservationSlot — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlot.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlot.java#L19)
 
 ```java
 public ReservationSlot(UUID storeId,UUID reservationId,Instant startsAt,Instant endsAt,UUID professionalId)
@@ -20271,7 +20366,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### overlaps — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlot.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlot.java#L20)
 
 ```java
 public boolean overlaps(Instant start,Instant end)
@@ -20288,7 +20383,7 @@ Executa a etapa `overlaps` neste módulo. O contrato concreto está na assinatur
 
 ### getSlotKey — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlot.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlot.java#L21)
 
 ```java
 public UUID getSlotKey()
@@ -20305,11 +20400,11 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Agenda e capacidade. A loja é bloqueada durante a criação; o profissional e o intervalo inteiro determinam conflitos. Datas são interpretadas no fuso da loja.
 
-Fonte: [ReservationSlotRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java) · SHA-256 `92c92985d64d53cbcc142387cdd65e23681f383e57ce3c0e1eae1a9a8a505011`
+[LIDO NO CÓDIGO] Fonte: [ReservationSlotRepository.java](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java) · SHA-256 `92c92985d64d53cbcc142387cdd65e23681f383e57ce3c0e1eae1a9a8a505011`
 
 ### findAcrossInterval — linha 7
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java:7)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java#L7)
 
 ```java
 @org.springframework.data.jpa.repository.Query("select s from ReservationSlot s where s.storeId=:id and s.startsAt < :end and s.endsAt > :start") java.util.List<ReservationSlot> findAcrossInterval(@org.springframework.data.repository.query.Param("id") UUID id,@org.springframework.data.repository.query.Param("start")java.time.Instant start,@org.springframework.data.repository.query.Param("end")java.time.Instant end);
@@ -20323,7 +20418,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### existsByStoreIdAndStartsAt — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java#L9)
 
 ```java
 boolean existsByStoreIdAndStartsAt(UUID storeId,java.time.Instant startsAt);
@@ -20337,7 +20432,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### existsByStoreIdAndProfessionalIdAndStartsAt — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java#L10)
 
 ```java
 boolean existsByStoreIdAndProfessionalIdAndStartsAt(UUID storeId,UUID professionalId,java.time.Instant startsAt);
@@ -20351,7 +20446,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### existsByStoreIdAndProfessionalIdIsNullAndStartsAt — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java#L11)
 
 ```java
 boolean existsByStoreIdAndProfessionalIdIsNullAndStartsAt(UUID storeId,java.time.Instant startsAt);
@@ -20365,7 +20460,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findOverlapping — linha 12
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java:12)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java#L12)
 
 ```java
 @org.springframework.data.jpa.repository.Query("select s from ReservationSlot s where s.storeId=:storeId and s.slotKey=:slotKey and s.startsAt < :endsAt and s.endsAt > :startsAt") java.util.List<ReservationSlot> findOverlapping(@org.springframework.data.repository.query.Param("storeId") UUID storeId, @org.springframework.data.repository.query.Param("slotKey") UUID slotKey, @org.springframework.data.repository.query.Param("startsAt") java.time.Instant startsAt, @org.springframework.data.repository.query.Param("endsAt") java.time.Instant endsAt);
@@ -20379,7 +20474,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### occupiedResources — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java#L17)
 
 ```java
 @org.springframework.data.jpa.repository.Query("select s.slotKey from ReservationSlot s where s.storeId=:storeId and s.startsAt < :endsAt and s.endsAt > :startsAt") java.util.List<UUID> occupiedResources(@org.springframework.data.repository.query.Param("storeId") UUID storeId, @org.springframework.data.repository.query.Param("startsAt") java.time.Instant startsAt, @org.springframework.data.repository.query.Param("endsAt") java.time.Instant endsAt);
@@ -20393,7 +20488,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### occupiedProfessionalIds — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java#L21)
 
 ```java
 @org.springframework.data.jpa.repository.Query("select s.professionalId from ReservationSlot s where s.storeId=:storeId and s.startsAt=:startsAt and s.professionalId is not null") java.util.List<UUID> occupiedProfessionalIds(@org.springframework.data.repository.query.Param("storeId") UUID storeId,@org.springframework.data.repository.query.Param("startsAt") java.time.Instant startsAt);
@@ -20407,7 +20502,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### deleteByReservationId — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationSlotRepository.java#L23)
 
 ```java
 void deleteByReservationId(UUID reservationId);
@@ -20423,7 +20518,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Agenda e capacidade. A loja é bloqueada durante a criação; o profissional e o intervalo inteiro determinam conflitos. Datas são interpretadas no fuso da loja.
 
-Fonte: [ReservationStatus.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationStatus.java) · SHA-256 `285c1819e756a0e0f532b2135ff4161d0571717cd6d35a6780ac279c5d623452`
+[LIDO NO CÓDIGO] Fonte: [ReservationStatus.java](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationStatus.java) · SHA-256 `285c1819e756a0e0f532b2135ff4161d0571717cd6d35a6780ac279c5d623452`
 
 **Contrato de dados/estados:**
 ```java
@@ -20433,7 +20528,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### descriptionPtBr — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/reservations/ReservationStatus.java:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/reservations/ReservationStatus.java#L4)
 
 ```java
 public String descriptionPtBr()
@@ -20450,11 +20545,11 @@ Executa a etapa `description Pt Br` neste módulo. O contrato concreto está na 
 
 Configuração privada. Uma lista permitida restringe alterações, novos segredos são cifrados com AES-GCM e contexto autenticado, e a API informa presença sem devolver credenciais. Chaves mestras permanecem no servidor.
 
-Fonte: [IntegrationSettings.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/IntegrationSettings.java) · SHA-256 `4d1d2e2cdf7910f29bee6f8289e02492a78d25f126dc334d7feaac89e9001f0c`
+[LIDO NO CÓDIGO] Fonte: [IntegrationSettings.java](../Backend/src/main/java/br/com/fooddelivery/settings/IntegrationSettings.java) · SHA-256 `4d1d2e2cdf7910f29bee6f8289e02492a78d25f126dc334d7feaac89e9001f0c`
 
 ### IntegrationSettings — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/IntegrationSettings.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/settings/IntegrationSettings.java#L13)
 
 ```java
 public IntegrationSettings(PrivateSettingRepository settings,PrivateCipher cipher,AccountRepository accounts,PasswordEncoder encoder,AdminAuditService audit)
@@ -20466,7 +20561,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### value — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/IntegrationSettings.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/settings/IntegrationSettings.java#L14)
 
 ```java
 @Transactional(readOnly=true) public String value(String key,String fallback)
@@ -20489,7 +20584,7 @@ Executa a etapa `value` neste módulo. O contrato concreto está na assinatura, 
 
 ### status — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/IntegrationSettings.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/settings/IntegrationSettings.java#L15)
 
 ```java
 @Transactional(readOnly=true) public Object status()
@@ -20506,7 +20601,7 @@ Executa a etapa `status` neste módulo. O contrato concreto está na assinatura,
 
 ### update — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/IntegrationSettings.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/settings/IntegrationSettings.java#L16)
 
 ```java
 @Transactional public void update(UUID actor,String password,Map<String,String> values,List<String> remove)
@@ -20536,7 +20631,7 @@ for(String key:remove){validateKey(key);settings.deleteById(key);}for(var entry:
 
 ### validateKey — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/IntegrationSettings.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/settings/IntegrationSettings.java#L21)
 
 ```java
 private static void validateKey(String key)
@@ -20556,7 +20651,7 @@ Executa a etapa `validate Key` neste módulo. O contrato concreto está na assin
 
 ### validate — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/IntegrationSettings.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/settings/IntegrationSettings.java#L22)
 
 ```java
 private static void validate(String key,String v)
@@ -20592,11 +20687,11 @@ Executa a etapa `validate` neste módulo. O contrato concreto está na assinatur
 
 Configuração privada. Uma lista permitida restringe alterações, novos segredos são cifrados com AES-GCM e contexto autenticado, e a API informa presença sem devolver credenciais. Chaves mestras permanecem no servidor.
 
-Fonte: [PrivateCipher.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/PrivateCipher.java) · SHA-256 `c214735edcd47a3f878c8b756f4399198336b93b52e87f3e8f36f9ba902a5aba`
+[LIDO NO CÓDIGO] Fonte: [PrivateCipher.java](../Backend/src/main/java/br/com/fooddelivery/settings/PrivateCipher.java) · SHA-256 `c214735edcd47a3f878c8b756f4399198336b93b52e87f3e8f36f9ba902a5aba`
 
 ### PrivateCipher — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/PrivateCipher.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/settings/PrivateCipher.java#L13)
 
 ```java
 public PrivateCipher(@Value("${app.private.encryption-key:}")String key)
@@ -20608,7 +20703,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### configured — linha 14
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/PrivateCipher.java:14)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/settings/PrivateCipher.java#L14)
 
 ```java
 public boolean configured()
@@ -20626,7 +20721,7 @@ Executa a etapa `configured` neste módulo. O contrato concreto está na assinat
 
 ### key — linha 15
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/PrivateCipher.java:15)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/settings/PrivateCipher.java#L15)
 
 ```java
 private SecretKeySpec key()
@@ -20649,7 +20744,7 @@ Executa a etapa `key` neste módulo. O contrato concreto está na assinatura, no
 
 ### fingerprint — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/PrivateCipher.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/settings/PrivateCipher.java#L16)
 
 ```java
 public String fingerprint(String context,String value)
@@ -20669,7 +20764,7 @@ Executa a etapa `fingerprint` neste módulo. O contrato concreto está na assina
 
 ### encrypt — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/PrivateCipher.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/settings/PrivateCipher.java#L17)
 
 ```java
 public String encrypt(String context,String value)
@@ -20695,7 +20790,7 @@ public String encrypt(String context,String value){try{byte[] nonce=new byte[12]
 
 ### decrypt — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/PrivateCipher.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/settings/PrivateCipher.java#L18)
 
 ```java
 public String decrypt(String context,String value)
@@ -20726,11 +20821,11 @@ public String decrypt(String context,String value){try{byte[] packed=Base64.getD
 
 Configuração privada. Uma lista permitida restringe alterações, novos segredos são cifrados com AES-GCM e contexto autenticado, e a API informa presença sem devolver credenciais. Chaves mestras permanecem no servidor.
 
-Fonte: [PrivateSetting.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/PrivateSetting.java) · SHA-256 `4f12bafe593642459833994c46ebbe49bd329509bc9ec1a200d6bdf2b821c2c4`
+[LIDO NO CÓDIGO] Fonte: [PrivateSetting.java](../Backend/src/main/java/br/com/fooddelivery/settings/PrivateSetting.java) · SHA-256 `4f12bafe593642459833994c46ebbe49bd329509bc9ec1a200d6bdf2b821c2c4`
 
 ### PrivateSetting — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/PrivateSetting.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/settings/PrivateSetting.java#L9)
 
 ```java
 protected PrivateSetting()
@@ -20742,7 +20837,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### PrivateSetting — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/PrivateSetting.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/settings/PrivateSetting.java#L9)
 
 ```java
 public PrivateSetting(String key,String encrypted)
@@ -20756,7 +20851,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getEncryptedValue — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/PrivateSetting.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/settings/PrivateSetting.java#L10)
 
 ```java
 public String getEncryptedValue()
@@ -20773,7 +20868,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Configuração privada. Uma lista permitida restringe alterações, novos segredos são cifrados com AES-GCM e contexto autenticado, e a API informa presença sem devolver credenciais. Chaves mestras permanecem no servidor.
 
-Fonte: [PrivateSettingRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/settings/PrivateSettingRepository.java) · SHA-256 `7f104352b5b8ff5872233a37970122a0d016bd893e5c3a7a2293f265b2182a75`
+[LIDO NO CÓDIGO] Fonte: [PrivateSettingRepository.java](../Backend/src/main/java/br/com/fooddelivery/settings/PrivateSettingRepository.java) · SHA-256 `7f104352b5b8ff5872233a37970122a0d016bd893e5c3a7a2293f265b2182a75`
 
 Sem função explícita: contrato declarativo, enum ou inicializador. Os campos e as anotações da fonte são o contrato deste arquivo.
 
@@ -20781,11 +20876,11 @@ Sem função explícita: contrato declarativo, enum ou inicializador. Os campos 
 
 Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável.
 
-Fonte: [SupportTicket.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java) · SHA-256 `6e1e771a14dad52dfa57e2863b30b452b8c0565993c4c4560c0b35c896bafaae`
+[LIDO NO CÓDIGO] Fonte: [SupportTicket.java](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java) · SHA-256 `6e1e771a14dad52dfa57e2863b30b452b8c0565993c4c4560c0b35c896bafaae`
 
 ### SupportTicket — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java#L18)
 
 ```java
 protected SupportTicket()
@@ -20797,7 +20892,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### SupportTicket — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java#L19)
 
 ```java
 public SupportTicket(Account account, String subject, String category)
@@ -20809,7 +20904,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### getId — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java#L20)
 
 ```java
 public UUID getId()
@@ -20824,7 +20919,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getAccount — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java#L20)
 
 ```java
 public Account getAccount()
@@ -20839,7 +20934,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getSubject — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java#L20)
 
 ```java
 public String getSubject()
@@ -20854,7 +20949,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCategory — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java#L21)
 
 ```java
 public String getCategory()
@@ -20869,7 +20964,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getStatus — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java#L21)
 
 ```java
 public SupportTicketStatus getStatus()
@@ -20884,7 +20979,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCreatedAt — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java#L22)
 
 ```java
 public Instant getCreatedAt()
@@ -20899,7 +20994,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getUpdatedAt — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java#L22)
 
 ```java
 public Instant getUpdatedAt()
@@ -20914,7 +21009,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### setStatus — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java#L23)
 
 ```java
 public void setStatus(SupportTicketStatus status)
@@ -20933,7 +21028,7 @@ public void setStatus(SupportTicketStatus status){this.status=status; this.updat
 
 ### touch — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicket.java#L24)
 
 ```java
 public void touch()
@@ -20954,7 +21049,7 @@ public void touch(){this.updatedAt=Instant.now();}
 
 Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável.
 
-Fonte: [SupportTicketController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java) · SHA-256 `8a1a7da5bec18968006da9eb695226d84e0d815e5f4e7bb8834a30adba8175d5`
+[LIDO NO CÓDIGO] Fonte: [SupportTicketController.java](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java) · SHA-256 `8a1a7da5bec18968006da9eb695226d84e0d815e5f4e7bb8834a30adba8175d5`
 
 **Contrato de dados/estados:**
 ```java
@@ -20994,7 +21089,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### SupportTicketController — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L26)
 
 ```java
 public SupportTicketController(SupportTicketRepository tickets, SupportTicketMessageRepository messages, AccountRepository accounts, NotificationService notifications)
@@ -21006,7 +21101,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### mine — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L31)
 
 ```java
 @GetMapping("/support/tickets/mine") @PreAuthorize("hasAnyRole('CUSTOMER','MERCHANT','COURIER','ADMIN')") @Transactional(readOnly=true) public List<TicketView> mine(Authentication auth)
@@ -21023,7 +21118,7 @@ Executa a etapa `mine` neste módulo. O contrato concreto está na assinatura, n
 
 ### create — linha 39
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:39)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L39)
 
 ```java
 @PostMapping("/support/tickets") @ResponseStatus(HttpStatus.CREATED) @PreAuthorize("hasAnyRole('CUSTOMER','MERCHANT','COURIER')") @Transactional public TicketDetail create(@Valid @RequestBody CreateRequest request, Authentication auth)
@@ -21053,7 +21148,7 @@ accounts.findByRoleIn(List.of(AccountRole.ADMIN)).forEach(admin -> notifications
 
 ### mineDetail — linha 54
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:54)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L54)
 
 ```java
 @GetMapping("/support/tickets/{id}") @PreAuthorize("hasAnyRole('CUSTOMER','MERCHANT','COURIER')") @Transactional(readOnly=true) public TicketDetail mineDetail(@PathVariable UUID id, Authentication auth)
@@ -21070,7 +21165,7 @@ Executa a etapa `mine Detail` neste módulo. O contrato concreto está na assina
 
 ### reply — linha 59
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:59)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L59)
 
 ```java
 @PostMapping("/support/tickets/{id}/messages") @PreAuthorize("hasAnyRole('CUSTOMER','MERCHANT','COURIER')") @Transactional public TicketDetail reply(@PathVariable UUID id,@Valid @RequestBody MessageRequest request,Authentication auth)
@@ -21096,7 +21191,7 @@ messages.save(new SupportTicketMessage(ticket,account(subject(auth)),request.bod
 
 ### all — linha 70
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:70)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L70)
 
 ```java
 @GetMapping("/admin/support-tickets") @PreAuthorize("hasRole('ADMIN')") @Transactional(readOnly=true) public List<TicketView> all()
@@ -21113,7 +21208,7 @@ Executa a etapa `all` neste módulo. O contrato concreto está na assinatura, no
 
 ### page — linha 75
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:75)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L75)
 
 ```java
 @GetMapping("/admin/support-tickets/page") @PreAuthorize("hasRole('ADMIN')") @Transactional(readOnly=true) public br.com.fooddelivery.admin.AdminPage<TicketView> page(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="25") int size)
@@ -21130,7 +21225,7 @@ Executa a etapa `page` neste módulo. O contrato concreto está na assinatura, n
 
 ### adminDetail — linha 86
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:86)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L86)
 
 ```java
 @GetMapping("/admin/support-tickets/{id}") @PreAuthorize("hasRole('ADMIN')") @Transactional(readOnly=true) public TicketDetail adminDetail(@PathVariable UUID id)
@@ -21147,7 +21242,7 @@ Executa a etapa `admin Detail` neste módulo. O contrato concreto está na assin
 
 ### adminReply — linha 91
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:91)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L91)
 
 ```java
 @PostMapping("/admin/support-tickets/{id}/messages") @PreAuthorize("hasRole('ADMIN')") @Transactional public TicketDetail adminReply(@PathVariable UUID id,@Valid @RequestBody MessageRequest request,Authentication auth)
@@ -21176,7 +21271,7 @@ notifications.sendUnreadOnceLinked(ticket.getAccount(),"Resposta do atendimento"
 
 ### updateStatus — linha 102
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:102)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L102)
 
 ```java
 @PatchMapping("/admin/support-tickets/{id}/status") @PreAuthorize("hasRole('ADMIN')") @Transactional public TicketView updateStatus(@PathVariable UUID id,@Valid @RequestBody StatusRequest request)
@@ -21198,7 +21293,7 @@ SupportTicket ticket=ticket(id); ticket.setStatus(request.status());
 
 ### owned — linha 110
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:110)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L110)
 
 ```java
 private SupportTicket owned(UUID id,UUID owner)
@@ -21221,7 +21316,7 @@ Executa a etapa `owned` neste módulo. O contrato concreto está na assinatura, 
 
 ### ticket — linha 111
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:111)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L111)
 
 ```java
 private SupportTicket ticket(UUID id)
@@ -21238,7 +21333,7 @@ Executa a etapa `ticket` neste módulo. O contrato concreto está na assinatura,
 
 ### account — linha 112
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:112)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L112)
 
 ```java
 private Account account(UUID id)
@@ -21255,7 +21350,7 @@ Executa a etapa `account` neste módulo. O contrato concreto está na assinatura
 
 ### subject — linha 113
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:113)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L113)
 
 ```java
 private UUID subject(Authentication auth)
@@ -21272,7 +21367,7 @@ Executa a etapa `subject` neste módulo. O contrato concreto está na assinatura
 
 ### notifyAdmins — linha 114
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:114)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L114)
 
 ```java
 private void notifyAdmins(SupportTicket ticket)
@@ -21291,7 +21386,7 @@ private void notifyAdmins(SupportTicket ticket){accounts.findByRoleIn(List.of(Ac
 
 ### view — linha 115
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:115)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L115)
 
 ```java
 private TicketView view(SupportTicket ticket)
@@ -21311,7 +21406,7 @@ Executa a etapa `view` neste módulo. O contrato concreto está na assinatura, n
 
 ### detail — linha 119
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java:119)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketController.java#L119)
 
 ```java
 private TicketDetail detail(SupportTicket ticket)
@@ -21330,11 +21425,11 @@ Executa a etapa `detail` neste módulo. O contrato concreto está na assinatura,
 
 Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável.
 
-Fonte: [SupportTicketMessage.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java) · SHA-256 `df4e66ec4d5d2f695ab82c903cc7c5c79163ce076760ebe57e74f5f8fb635452`
+[LIDO NO CÓDIGO] Fonte: [SupportTicketMessage.java](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java) · SHA-256 `df4e66ec4d5d2f695ab82c903cc7c5c79163ce076760ebe57e74f5f8fb635452`
 
 ### SupportTicketMessage — linha 16
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java:16)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java#L16)
 
 ```java
 protected SupportTicketMessage()
@@ -21346,7 +21441,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### SupportTicketMessage — linha 17
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java:17)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java#L17)
 
 ```java
 public SupportTicketMessage(SupportTicket ticket, Account sender, String body)
@@ -21363,7 +21458,7 @@ public SupportTicketMessage(SupportTicket ticket, Account sender, String body){t
 
 ### getId — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java#L18)
 
 ```java
 public UUID getId()
@@ -21378,7 +21473,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getTicket — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java#L18)
 
 ```java
 public SupportTicket getTicket()
@@ -21393,7 +21488,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getSender — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java#L18)
 
 ```java
 public Account getSender()
@@ -21408,7 +21503,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getBody — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java#L19)
 
 ```java
 public String getBody()
@@ -21423,7 +21518,7 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 ### getCreatedAt — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessage.java#L19)
 
 ```java
 public Instant getCreatedAt()
@@ -21440,11 +21535,11 @@ Consulta ou deriva o valor indicado pelo nome; o chamador decide se esse dado po
 
 Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável.
 
-Fonte: [SupportTicketMessageRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessageRepository.java) · SHA-256 `fbae1d56d92e31a1fbf2fa68e9fee765f3eec65e0a5fafa34d500b3e138218d3`
+[LIDO NO CÓDIGO] Fonte: [SupportTicketMessageRepository.java](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessageRepository.java) · SHA-256 `fbae1d56d92e31a1fbf2fa68e9fee765f3eec65e0a5fafa34d500b3e138218d3`
 
 ### findByTicketIdOrderByCreatedAtAsc — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessageRepository.java:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessageRepository.java#L8)
 
 ```java
 List<SupportTicketMessage> findByTicketIdOrderByCreatedAtAsc(UUID ticketId);
@@ -21458,7 +21553,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findTopByTicketIdOrderByCreatedAtDesc — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessageRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketMessageRepository.java#L9)
 
 ```java
 SupportTicketMessage findTopByTicketIdOrderByCreatedAtDesc(UUID ticketId);
@@ -21474,11 +21569,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável.
 
-Fonte: [SupportTicketRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketRepository.java) · SHA-256 `2eca4ef50a9c7925a9f63248ef55919617330b952f607c09449c9f8acab5ef04`
+[LIDO NO CÓDIGO] Fonte: [SupportTicketRepository.java](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketRepository.java) · SHA-256 `2eca4ef50a9c7925a9f63248ef55919617330b952f607c09449c9f8acab5ef04`
 
 ### findByAccountIdOrderByUpdatedAtDesc — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketRepository.java:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketRepository.java#L8)
 
 ```java
 List<SupportTicket> findByAccountIdOrderByUpdatedAtDesc(UUID accountId);
@@ -21492,7 +21587,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### countByStatusNot — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketRepository.java#L9)
 
 ```java
 long countByStatusNot(SupportTicketStatus status);
@@ -21508,7 +21603,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Atendimento. Cliente vê seus chamados e administrador gerencia a fila. Mensagens são dados, não HTML executável.
 
-Fonte: [SupportTicketStatus.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/support/SupportTicketStatus.java) · SHA-256 `1545779f214c6ffe03aced2f7a0d07ecb6036f15cd4f584b32c46a51786dfee2`
+[LIDO NO CÓDIGO] Fonte: [SupportTicketStatus.java](../Backend/src/main/java/br/com/fooddelivery/support/SupportTicketStatus.java) · SHA-256 `1545779f214c6ffe03aced2f7a0d07ecb6036f15cd4f584b32c46a51786dfee2`
 
 **Contrato de dados/estados:**
 ```java
@@ -21522,7 +21617,7 @@ Sem função explícita: contrato declarativo, enum ou inicializador. Os campos 
 
 Automação por comandos. Vínculo com telefone verificado, assinatura do webhook, deduplicação, carrinho cifrado, confirmação explícita e fila de respostas separam mensagens de confirmação financeira. O bot não declara pagamento por mensagem.
 
-Fonte: [DemoWhatsAppController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/DemoWhatsAppController.java) · SHA-256 `4024382b8bc9609e1cc2c4c21ddec10418c5034832c3e212856ab07f96ba066d`
+[LIDO NO CÓDIGO] Fonte: [DemoWhatsAppController.java](../Backend/src/main/java/br/com/fooddelivery/whatsapp/DemoWhatsAppController.java) · SHA-256 `4024382b8bc9609e1cc2c4c21ddec10418c5034832c3e212856ab07f96ba066d`
 
 **Contrato de dados/estados:**
 ```java
@@ -21532,7 +21627,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### DemoWhatsAppController — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/DemoWhatsAppController.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/DemoWhatsAppController.java#L10)
 
 ```java
 public DemoWhatsAppController(WhatsAppCommerce commerce)
@@ -21544,7 +21639,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### accept — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/DemoWhatsAppController.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/DemoWhatsAppController.java#L11)
 
 ```java
 @PostMapping public Object accept(@Valid @RequestBody Request r)
@@ -21563,11 +21658,11 @@ Executa a etapa `accept` neste módulo. O contrato concreto está na assinatura,
 
 Automação por comandos. Vínculo com telefone verificado, assinatura do webhook, deduplicação, carrinho cifrado, confirmação explícita e fila de respostas separam mensagens de confirmação financeira. O bot não declara pagamento por mensagem.
 
-Fonte: [WhatsAppBinding.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppBinding.java) · SHA-256 `93a409f25bd728a0d09b478266c4a618524b9a206ee834b5fe1c225744e81304`
+[LIDO NO CÓDIGO] Fonte: [WhatsAppBinding.java](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppBinding.java) · SHA-256 `93a409f25bd728a0d09b478266c4a618524b9a206ee834b5fe1c225744e81304`
 
 ### WhatsAppBinding — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppBinding.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppBinding.java#L11)
 
 ```java
 protected WhatsAppBinding()
@@ -21579,7 +21674,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### WhatsAppBinding — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppBinding.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppBinding.java#L11)
 
 ```java
 WhatsAppBinding(String hash,UUID account,int version)
@@ -21593,11 +21688,11 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 Automação por comandos. Vínculo com telefone verificado, assinatura do webhook, deduplicação, carrinho cifrado, confirmação explícita e fila de respostas separam mensagens de confirmação financeira. O bot não declara pagamento por mensagem.
 
-Fonte: [WhatsAppBindingRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppBindingRepository.java) · SHA-256 `13f232db74bb53c8e334b8f4b4bd143305f1c37178643da1f3164d65ec85d7dc`
+[LIDO NO CÓDIGO] Fonte: [WhatsAppBindingRepository.java](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppBindingRepository.java) · SHA-256 `13f232db74bb53c8e334b8f4b4bd143305f1c37178643da1f3164d65ec85d7dc`
 
 ### findByAccountId — linha 4
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppBindingRepository.java:4)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppBindingRepository.java#L4)
 
 ```java
 Optional<WhatsAppBinding> findByAccountId(UUID id);
@@ -21613,7 +21708,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Automação por comandos. Vínculo com telefone verificado, assinatura do webhook, deduplicação, carrinho cifrado, confirmação explícita e fila de respostas separam mensagens de confirmação financeira. O bot não declara pagamento por mensagem.
 
-Fonte: [WhatsAppCommerce.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java) · SHA-256 `f25ddbdfbbbcc0f34919092b544782602d371cb341523cc74af565fd9ee706a1`
+[LIDO NO CÓDIGO] Fonte: [WhatsAppCommerce.java](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java) · SHA-256 `f25ddbdfbbbcc0f34919092b544782602d371cb341523cc74af565fd9ee706a1`
 
 **Contrato de dados/estados:**
 ```java
@@ -21623,7 +21718,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### WhatsAppCommerce — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java#L22)
 
 ```java
 public WhatsAppCommerce(WhatsAppBindingRepository bindings,WhatsAppSessionRepository sessions,WhatsAppEventRepository events,WhatsAppReplyRepository replies,AccountRepository accounts,StoreRepository stores,CatalogItemRepository items,OrderService orders,PaymentRepository payments,PrivateCipher cipher,IntegrationSettings settings,PasswordEncoder encoder,ObjectMapper mapper,Environment environment,AdminAuditService audit)
@@ -21635,7 +21730,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### enabled — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java#L23)
 
 ```java
 public boolean enabled()
@@ -21652,7 +21747,7 @@ Executa a etapa `enabled` neste módulo. O contrato concreto está na assinatura
 
 ### setting — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java#L24)
 
 ```java
 public String setting(String key,String fallback)
@@ -21669,7 +21764,7 @@ Executa a etapa `setting` neste módulo. O contrato concreto está na assinatura
 
 ### normalizePhone — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java#L25)
 
 ```java
 public static String normalizePhone(String phone)
@@ -21694,7 +21789,7 @@ Executa a etapa `normalize Phone` neste módulo. O contrato concreto está na as
 
 ### hash — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java#L26)
 
 ```java
 private String hash(String phone)
@@ -21711,7 +21806,7 @@ Executa a etapa `hash` neste módulo. O contrato concreto está na assinatura, n
 
 ### bind — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java#L27)
 
 ```java
 @Transactional public Object bind(UUID id,String password)
@@ -21745,7 +21840,7 @@ Executa a etapa `bind` neste módulo. O contrato concreto está na assinatura, n
 
 ### unlink — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java#L28)
 
 ```java
 @Transactional public Object unlink(UUID id,String password)
@@ -21773,7 +21868,7 @@ Executa a etapa `unlink` neste módulo. O contrato concreto está na assinatura,
 
 ### status — linha 29
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java:29)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java#L29)
 
 ```java
 @Transactional(readOnly=true) public Object status(UUID id)
@@ -21790,7 +21885,7 @@ Executa a etapa `status` neste módulo. O contrato concreto está na assinatura,
 
 ### accept — linha 30
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java:30)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java#L30)
 
 ```java
 @Transactional public void accept(String id,String from,String text)
@@ -21821,7 +21916,7 @@ Executa a etapa `accept` neste módulo. O contrato concreto está na assinatura,
 
 ### text — linha 32
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java:32)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java#L32)
 
 ```java
 static Response text(String value)
@@ -21836,7 +21931,7 @@ Executa a etapa `text` neste módulo. O contrato concreto está na assinatura, n
 
 ### process — linha 33
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java:33)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java#L33)
 
 ```java
 @Transactional public void process(String id)
@@ -21871,7 +21966,7 @@ String reply=response.text();if(reply.length()>3600)reply=reply.substring(0,3550
 
 ### site — linha 42
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java:42)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java#L42)
 
 ```java
 private String site()
@@ -21888,7 +21983,7 @@ Executa a etapa `site` neste módulo. O contrato concreto está na assinatura, n
 
 ### money — linha 43
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java:43)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java#L43)
 
 ```java
 private static String money(long cents)
@@ -21905,7 +22000,7 @@ Executa a etapa `money` neste módulo. O contrato concreto está na assinatura, 
 
 ### available — linha 44
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java:44)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java#L44)
 
 ```java
 private List<Store> available(Account a)
@@ -21922,7 +22017,7 @@ Executa a etapa `available` neste módulo. O contrato concreto está na assinatu
 
 ### answer — linha 45
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java:45)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppCommerce.java#L45)
 
 ```java
 private Response answer(Account a,Cart cart,String raw)
@@ -21994,7 +22089,7 @@ Executa a etapa `answer` neste módulo. O contrato concreto está na assinatura,
 
 Automação por comandos. Vínculo com telefone verificado, assinatura do webhook, deduplicação, carrinho cifrado, confirmação explícita e fila de respostas separam mensagens de confirmação financeira. O bot não declara pagamento por mensagem.
 
-Fonte: [WhatsAppController.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java) · SHA-256 `9c53a1f709b3d357db2c78a7056b5da836e8c20a72804488e609be694166d9e1`
+[LIDO NO CÓDIGO] Fonte: [WhatsAppController.java](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java) · SHA-256 `9c53a1f709b3d357db2c78a7056b5da836e8c20a72804488e609be694166d9e1`
 
 **Contrato de dados/estados:**
 ```java
@@ -22004,7 +22099,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### WhatsAppController — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java#L19)
 
 ```java
 public WhatsAppController(WhatsAppCommerce commerce,ObjectMapper mapper,WhatsAppEventRepository events,WhatsAppReplyRepository replies)
@@ -22016,7 +22111,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### id — linha 20
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java:20)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java#L20)
 
 ```java
 private UUID id(Authentication a)
@@ -22033,7 +22128,7 @@ Executa a etapa `id` neste módulo. O contrato concreto está na assinatura, nos
 
 ### status — linha 21
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java:21)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java#L21)
 
 ```java
 @GetMapping("/account/whatsapp-link") public Object status(Authentication a)
@@ -22050,7 +22145,7 @@ Executa a etapa `status` neste módulo. O contrato concreto está na assinatura,
 
 ### bind — linha 22
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java:22)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java#L22)
 
 ```java
 @PostMapping("/account/whatsapp-link") public Object bind(Authentication a,@Valid @RequestBody Password request)
@@ -22067,7 +22162,7 @@ Executa a etapa `bind` neste módulo. O contrato concreto está na assinatura, n
 
 ### unbind — linha 23
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java:23)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java#L23)
 
 ```java
 @DeleteMapping("/account/whatsapp-link") public Object unbind(Authentication a,@Valid @RequestBody Password request)
@@ -22084,7 +22179,7 @@ Executa a etapa `unbind` neste módulo. O contrato concreto está na assinatura,
 
 ### verify — linha 25
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java:25)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java#L25)
 
 ```java
 @GetMapping(value="/webhooks/whatsapp",produces="text/plain") public String verify(@RequestParam(name="hub.mode")String mode,@RequestParam(name="hub.verify_token")String token,@RequestParam(name="hub.challenge")String challenge)
@@ -22107,7 +22202,7 @@ Executa a etapa `verify` neste módulo. O contrato concreto está na assinatura,
 
 ### validSignature — linha 26
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java:26)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java#L26)
 
 ```java
 public static boolean validSignature(byte[] body,String secret,String signature)
@@ -22129,7 +22224,7 @@ Executa a etapa `valid Signature` neste módulo. O contrato concreto está na as
 
 ### receive — linha 27
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java:27)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java#L27)
 
 ```java
 @PostMapping("/webhooks/whatsapp") public Object receive(@RequestBody byte[] body,@RequestHeader(name="X-Hub-Signature-256",required=false)String signature)
@@ -22161,7 +22256,7 @@ Executa a etapa `receive` neste módulo. O contrato concreto está na assinatura
 
 ### admin — linha 28
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java:28)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppController.java#L28)
 
 ```java
 @GetMapping("/admin/whatsapp-status") @PreAuthorize("hasRole('ADMIN')") public Object admin()
@@ -22180,11 +22275,11 @@ Executa a etapa `admin` neste módulo. O contrato concreto está na assinatura, 
 
 Automação por comandos. Vínculo com telefone verificado, assinatura do webhook, deduplicação, carrinho cifrado, confirmação explícita e fila de respostas separam mensagens de confirmação financeira. O bot não declara pagamento por mensagem.
 
-Fonte: [WhatsAppEvent.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEvent.java) · SHA-256 `28872ecedbe02546b43c599b727a67f0699cfb2ee0c8ab47955ed3ec99d5f90d`
+[LIDO NO CÓDIGO] Fonte: [WhatsAppEvent.java](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEvent.java) · SHA-256 `28872ecedbe02546b43c599b727a67f0699cfb2ee0c8ab47955ed3ec99d5f90d`
 
 ### WhatsAppEvent — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEvent.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEvent.java#L13)
 
 ```java
 protected WhatsAppEvent()
@@ -22196,7 +22291,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### WhatsAppEvent — linha 13
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEvent.java:13)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEvent.java#L13)
 
 ```java
 WhatsAppEvent(String id,String hash,String phone,String text)
@@ -22210,11 +22305,11 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 Automação por comandos. Vínculo com telefone verificado, assinatura do webhook, deduplicação, carrinho cifrado, confirmação explícita e fila de respostas separam mensagens de confirmação financeira. O bot não declara pagamento por mensagem.
 
-Fonte: [WhatsAppEventRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEventRepository.java) · SHA-256 `a6242a0c4abc6536e800f6e38ba480442f104b28d029988094e472112cf6f9cc`
+[LIDO NO CÓDIGO] Fonte: [WhatsAppEventRepository.java](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEventRepository.java) · SHA-256 `a6242a0c4abc6536e800f6e38ba480442f104b28d029988094e472112cf6f9cc`
 
 ### lock — linha 8
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEventRepository.java:8)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEventRepository.java#L8)
 
 ```java
 @Lock(LockModeType.PESSIMISTIC_WRITE) @Query("select e from WhatsAppEvent e where e.messageId=:id") Optional<WhatsAppEvent> lock(@Param("id")String id);
@@ -22228,7 +22323,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### findByStatusOrderByCreatedAt — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEventRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEventRepository.java#L9)
 
 ```java
 List<WhatsAppEvent> findByStatusOrderByCreatedAt(String status,Pageable page);
@@ -22242,7 +22337,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### countByPhoneHashAndCreatedAtAfter — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEventRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEventRepository.java#L10)
 
 ```java
 long countByPhoneHashAndCreatedAtAfter(String hash,java.time.Instant after);
@@ -22256,7 +22351,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### countByStatus — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEventRepository.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppEventRepository.java#L11)
 
 ```java
 long countByStatus(String status);
@@ -22272,11 +22367,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Automação por comandos. Vínculo com telefone verificado, assinatura do webhook, deduplicação, carrinho cifrado, confirmação explícita e fila de respostas separam mensagens de confirmação financeira. O bot não declara pagamento por mensagem.
 
-Fonte: [WhatsAppReply.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppReply.java) · SHA-256 `30e1220d4bb1f538f6c60d9b7abd11a48faea7b94ebaa7d68618507033b1e378`
+[LIDO NO CÓDIGO] Fonte: [WhatsAppReply.java](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppReply.java) · SHA-256 `30e1220d4bb1f538f6c60d9b7abd11a48faea7b94ebaa7d68618507033b1e378`
 
 ### WhatsAppReply — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppReply.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppReply.java#L18)
 
 ```java
 protected WhatsAppReply()
@@ -22288,7 +22383,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### WhatsAppReply — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppReply.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppReply.java#L18)
 
 ```java
 WhatsAppReply(String message,String phone,String text,UUID payment,UUID customer)
@@ -22302,11 +22397,11 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 Automação por comandos. Vínculo com telefone verificado, assinatura do webhook, deduplicação, carrinho cifrado, confirmação explícita e fila de respostas separam mensagens de confirmação financeira. O bot não declara pagamento por mensagem.
 
-Fonte: [WhatsAppReplyRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppReplyRepository.java) · SHA-256 `b2634d65d708ec3fd52c901f9ffadb7d760c9a941a354a1875a2856e8c6ae199`
+[LIDO NO CÓDIGO] Fonte: [WhatsAppReplyRepository.java](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppReplyRepository.java) · SHA-256 `b2634d65d708ec3fd52c901f9ffadb7d760c9a941a354a1875a2856e8c6ae199`
 
 ### lock — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppReplyRepository.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppReplyRepository.java#L9)
 
 ```java
 @Lock(LockModeType.PESSIMISTIC_WRITE) @Query("select r from WhatsAppReply r where r.id=:id") Optional<WhatsAppReply> lock(@Param("id")UUID id);
@@ -22320,7 +22415,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### due — linha 10
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppReplyRepository.java:10)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppReplyRepository.java#L10)
 
 ```java
 @Query("select r from WhatsAppReply r where r.status in ('PENDING','SENDING') and r.nextAttemptAt < :now order by r.createdAt") List<WhatsAppReply> due(@Param("now")Instant now,Pageable page);
@@ -22334,7 +22429,7 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 ### countByStatus — linha 11
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppReplyRepository.java:11)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppReplyRepository.java#L11)
 
 ```java
 long countByStatus(String status);
@@ -22350,11 +22445,11 @@ Implementação fornecida pelo Spring Data/contrato da interface. O nome derivad
 
 Automação por comandos. Vínculo com telefone verificado, assinatura do webhook, deduplicação, carrinho cifrado, confirmação explícita e fila de respostas separam mensagens de confirmação financeira. O bot não declara pagamento por mensagem.
 
-Fonte: [WhatsAppSession.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppSession.java) · SHA-256 `33bf0ac0b3bc0bfba572969c0340149cca19a3e6c969098bb612a4681be15f47`
+[LIDO NO CÓDIGO] Fonte: [WhatsAppSession.java](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppSession.java) · SHA-256 `33bf0ac0b3bc0bfba572969c0340149cca19a3e6c969098bb612a4681be15f47`
 
 ### WhatsAppSession — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppSession.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppSession.java#L9)
 
 ```java
 protected WhatsAppSession()
@@ -22366,7 +22461,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 ### WhatsAppSession — linha 9
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppSession.java:9)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppSession.java#L9)
 
 ```java
 WhatsAppSession(String hash,String state)
@@ -22380,7 +22475,7 @@ Constrói a instância e recebe suas dependências/dados iniciais; a construçã
 
 Automação por comandos. Vínculo com telefone verificado, assinatura do webhook, deduplicação, carrinho cifrado, confirmação explícita e fila de respostas separam mensagens de confirmação financeira. O bot não declara pagamento por mensagem.
 
-Fonte: [WhatsAppSessionRepository.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppSessionRepository.java) · SHA-256 `8d796526765ff2a4c26fd83579d85580c18293d32ab5c36e3fd10ee7b4fbcead`
+[LIDO NO CÓDIGO] Fonte: [WhatsAppSessionRepository.java](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppSessionRepository.java) · SHA-256 `8d796526765ff2a4c26fd83579d85580c18293d32ab5c36e3fd10ee7b4fbcead`
 
 Sem função explícita: contrato declarativo, enum ou inicializador. Os campos e as anotações da fonte são o contrato deste arquivo.
 
@@ -22388,7 +22483,7 @@ Sem função explícita: contrato declarativo, enum ou inicializador. Os campos 
 
 Automação por comandos. Vínculo com telefone verificado, assinatura do webhook, deduplicação, carrinho cifrado, confirmação explícita e fila de respostas separam mensagens de confirmação financeira. O bot não declara pagamento por mensagem.
 
-Fonte: [WhatsAppWorker.java](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppWorker.java) · SHA-256 `43a5e09a595db47c615811b655b36d08f3647357df6f1df266eec0c29ee1d395`
+[LIDO NO CÓDIGO] Fonte: [WhatsAppWorker.java](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppWorker.java) · SHA-256 `43a5e09a595db47c615811b655b36d08f3647357df6f1df266eec0c29ee1d395`
 
 **Contrato de dados/estados:**
 ```java
@@ -22398,7 +22493,7 @@ Os componentes do record são seus acessores públicos implícitos; suas anotaç
 
 ### WhatsAppWorker — linha 18
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppWorker.java:18)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppWorker.java#L18)
 
 ```java
 public WhatsAppWorker(WhatsAppCommerce commerce,WhatsAppEventRepository events,WhatsAppReplyRepository replies,PrivateCipher cipher,DemoEnvironment demo,MercadoPagoCheckoutService checkout,PlatformTransactionManager manager)
@@ -22417,7 +22512,7 @@ public WhatsAppWorker(WhatsAppCommerce commerce,WhatsAppEventRepository events,W
 
 ### tick — linha 19
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppWorker.java:19)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppWorker.java#L19)
 
 ```java
 @Scheduled(fixedDelayString="${app.whatsapp.poll-ms:3000}") public void tick()
@@ -22438,7 +22533,7 @@ Executa a etapa `tick` neste módulo. O contrato concreto está na assinatura, n
 
 ### send — linha 24
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppWorker.java:24)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppWorker.java#L24)
 
 ```java
 private void send(UUID id)
@@ -22475,7 +22570,7 @@ else{String token=commerce.setting("WHATSAPP_ACCESS_TOKEN",""),phoneId=commerce.
 
 ### finish — linha 31
 
-[Abrir implementação](/home/wilker/Projetos/FoodDelivery/Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppWorker.java:31)
+[LIDO NO CÓDIGO] [Abrir implementação](../Backend/src/main/java/br/com/fooddelivery/whatsapp/WhatsAppWorker.java#L31)
 
 ```java
 private void finish(Outgoing outgoing,boolean success)

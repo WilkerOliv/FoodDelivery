@@ -22,11 +22,11 @@ O ambiente é isolado e não movimenta dinheiro. Não substituir homologação d
 
 [Inicialização, nova publicação e verificações de segurança no GitHub](Documentacao/Publicacao_e_verificacoes_de_seguranca.md), com os limites de CodeQL em repositórios privados e a análise gratuita disponível.
 
-[Validação da homologação publicada](Documentacao/Validacao_homologacao_publicada_2026-11-05.md): evidências, correção do limite de login compartilhado pelo gateway e etapas que ainda precisam de verificação externa e visual.
+[Validação e estado atual](Documentacao/Aceite_2026-11-25.md): resultados locais, última publicação registrada e verificações externas ainda pendentes.
 
 ## Desenvolvimento e validação
 
-Configuração normal: [backend e operação](Backend/README.md). Validação e comandos reproduzíveis: [matriz de testes](Documentacao/Validacao_2026-11-04.md). O teste de esquema usa chave exclusiva de teste; produção exige segredo próprio.
+Configuração normal: [backend e operação](Backend/README.md). Validação e comandos reproduzíveis: [matriz de testes](Documentacao/Aceite_2026-11-25.md). O teste de esquema usa chave exclusiva de teste; produção exige segredo próprio.
 
 Capas: vendedor envia foto/logo em proporção 2:1; publicação exige aprovação administrativa. [Fluxo, segurança e operação](Documentacao/Capas_das_lojas.md).
 
@@ -38,11 +38,11 @@ Localização opcional no mapa e modalidades de atendimento: [configuração, co
 
 [Fidelidade da homologação](Documentacao/Fidelidade_da_homologacao.md): regras compartilhadas, diferenças dos simuladores e critérios de validação antes da operação real.
 
-Relatório da continuação manual: [Validação manual complementar — 06/11/2026](Documentacao/Validacao_manual_complementar_2026-11-06.md), com o defeito do aceite de entrega, a correção e a repetição manual concluída após o deploy de `4c55b8a`, além dos limites da evidência.
+Continuação de engenharia: [Carregamento e recuperação — 07/11/2026](Documentacao/Carregamento_e_recuperacao.md), com testes de sessão, falha de rede e conferência dos quatro perfis. A [matriz de aceite](Documentacao/Aceite_2026-11-25.md) distingue o que está implementado das dependências para operação real.
 
-Continuação de engenharia: [Carregamento e recuperação — 07/11/2026](Documentacao/Carregamento_e_recuperacao.md), com testes de sessão, falha de rede e conferência dos quatro perfis. [Plano de conclusão](Documentacao/Plano_de_conclusao.md) distingue o que está implementado das dependências para operação real.
+### Organização e persistência
 
-### Organização e persistência (14/11/2026)
+- [Arquitetura e operação](Documentacao/Arquitetura_e_operacao.md).
+- [Banco e imagens persistentes](Documentacao/Persistencia_gratuita.md): procedimento de instalação e limites; a publicação registrada e os testes pendentes estão no relatório de validação.
 
-- [Módulos, limpeza e validação](Documentacao/Modularizacao_e_validacao_2026-11-14.md).
-- [Banco e imagens persistentes](Documentacao/Persistencia_gratuita.md): conta e armazenamento configurados; conexão SQL e publicação pendentes de validação. Alterar variáveis sem publicar a imagem persistente não converte a demonstração.
+Ferramentas de desenvolvimento: [plugins disponíveis](Documentacao/Plugins_disponiveis.md).

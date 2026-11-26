@@ -1,6 +1,8 @@
 # Banco de produção e recuperação
 
-Revisão de 11/11/2026. Estes procedimentos são para PostgreSQL; a demonstração H2 do Render continua descartável.
+> [NÃO VERIFICADO] Escopo da revisão de 25/11: instruções e resultados históricos sem evidência individual nesta página aguardam confirmação. Os testes repetidos têm comando e resultado na [matriz de aceite](Aceite_2026-11-25.md).
+
+Revisão de 11/11/2026. Estes procedimentos são para PostgreSQL; o pacote opcional de demonstração H2 usa dados descartáveis.
 
 ## Contas separadas
 
@@ -55,7 +57,7 @@ Destino externo, retenção, cifragem, agendamento e ensaio conjunto de banco/ar
 
 ## Cópia externa cifrada (implementada em 17/11/2026; ainda sem execução real)
 
-`Backend/scripts/backup-offsite.sh` gera um pacote único com o dump do schema privado (`fooddelivery`), as capas do bucket privado e um manifesto, cifrado com [age](https://age-encryption.org). A cópia usa só a chave **pública** (`BACKUP_AGE_RECIPIENT`); a identidade privada fica fora do GitHub e do Render. `Backend/scripts/restore-offsite.sh` verifica o SHA-256, decifra, recusa caminhos inseguros, restaura o banco com `restore-db.sh` (que exige a confirmação do banco de destino) e copia as capas para uma pasta. Ao final imprime o tempo gasto, que serve de RTO do ensaio.
+`Backend/scripts/backup-offsite.sh` gera um pacote único com o dump do schema privado (`fooddelivery`), as capas do bucket privado e um manifesto, cifrado com [age](https://age-encryption.org). A cópia usa só a chave **pública** (`BACKUP_AGE_RECIPIENT`); a identidade privada fica fora do GitHub e do Render. `Backend/scripts/restore-offsite.sh` verifica o SHA-256, decifra, recusa caminhos inseguros, restaura o banco com `restore-db.sh` (que exige a confirmação do banco de destino) e copia as capas para uma pasta. O tempo impresso mede a execução do script. Para obter o RTO, inclua também a obtenção das chaves, a reposição das capas e a validação funcional até o restabelecimento do serviço.
 
 O fluxo `.github/workflows/backup-externo.yml` roda todos os dias às 06:17 UTC e sob demanda, e guarda o pacote cifrado como artefato por 30 dias. Esse é o **RPO máximo teórico de 24 horas**; ele só vale depois do primeiro ensaio. Configure estes segredos do repositório:
 
@@ -71,7 +73,7 @@ Gere o par de chaves em uma máquina sua: `age-keygen -o chave-backup.txt`. Guar
 
 Limites que continuam valendo:
 - Os artefatos do GitHub são um destino externo ao Render e ao Supabase, mas não são um cofre independente: expiram em 30 dias e dependem da conta do GitHub. Para retenção longa, copie periodicamente para um terceiro destino sob seu controle.
-- `JWT_SECRET`, `PRIVATE_CONFIG_ENCRYPTION_KEY` e as demais chaves **não** entram na cópia. Sem elas, os tokens do Mercado Pago salvos no banco não podem ser lidos. Guarde-as em cofre separado.
+- `JWT_SECRET`, `PRIVATE_CONFIG_ENCRYPTION_KEY` e as demais chaves **não** entram na cópia. [LIDO NO CÓDIGO] `PrivateCipher.java:15` depende de PRIVATE_CONFIG_ENCRYPTION_KEY para configurações privadas e MFA. Os tokens OAuth do Mercado Pago usam MP_TOKEN_ENCRYPTION_KEY (`MarketplaceTokenCipher.java:40`). JWT_SECRET mantém a validade das sessões assinadas. Guarde-as em cofre separado.
 - As capas são copiadas para uma pasta; o envio de volta ao bucket do ambiente restaurado é manual.
 - O dump cobre só o schema `fooddelivery`. Usuários do Supabase Auth e outros schemas não são usados pela aplicação e não entram.
 

@@ -1,5 +1,7 @@
 # Banco e capas persistentes com plano gratuito
 
+> [NÃO VERIFICADO] Escopo da revisão de 25/11: instruções e resultados históricos sem evidência individual nesta página aguardam confirmação. Os testes repetidos têm comando e resultado na [matriz de aceite](Aceite_2026-11-25.md).
+
 Atualizado em 16/11/2026. **Conta Supabase criada, conexão SQL com TLS confirmada, schema privado e Storage configurados. Publicação persistente em validação.** As credenciais ficam no ambiente privado do Render e em arquivo local protegido fora do repositório; não são versionadas.
 
 ## Escolha e limites
@@ -96,4 +98,4 @@ Testados localmente: adaptador de disco, contrato HTTP simulado do Storage, limi
 
 Testado com Supabase real em 15/11/2026: envio de PNG sintético, leitura autenticada com bytes idênticos, recusa de acesso público ao bucket e remoção do objeto de teste. O schema `fooddelivery` pertence a `fooddelivery_app`, sem privilégios administrativos.
 
-A conexão SQL real e o login administrativo foram confirmados em 16/11. Publicação e reinício no Render ainda precisam constar como aprovados no relatório de ativação antes de considerar a migração concluída. Consulte [estado de ativação](Ativacao_persistencia_2026-11-16.md). Comportamento de pausa/franquia, pagamentos reais e restauração externa conjunta permanecem fora dessa validação. Não houve contratação de plano pago.
+A conexão SQL, o login administrativo e a publicação persistente foram registrados em 16–17/11. Isso não confirma a versão publicada hoje. Consulte o [estado de validação](Aceite_2026-11-25.md) para os resultados e pendências: jornada de capas, sessão após nova publicação, pagamentos e restauração externa conjunta. Não houve contratação de plano pago nesta revisão.

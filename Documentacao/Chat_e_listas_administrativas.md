@@ -1,6 +1,8 @@
 # Chat e listas administrativas
 
-Implementação e validação local concluídas em 13/11/2026. Esta entrega não provisiona banco de produção nem homologa fornecedores externos.
+> [NÃO VERIFICADO] Escopo da revisão de 25/11: instruções e resultados históricos sem evidência individual nesta página aguardam confirmação. Os testes repetidos têm comando e resultado na [matriz de aceite](Aceite_2026-11-25.md).
+
+[NÃO VERIFICADO] Relato histórico de 13/11/2026. Esta entrega não provisiona banco de produção nem homologa fornecedores externos.
 
 ## Conversas
 
@@ -50,4 +52,4 @@ O resumo consulta contagens globais: seus indicadores não são o tamanho da pá
 
 Esta paginação cobre quatro listas administrativas. Solicitações, reembolsos, histórico de mensagens e listas de cliente/vendedor ainda precisam de avaliação específica de volume. Busca textual, índices adicionais e custo das consultas devem ser definidos com medições. Paginação por deslocamento não é uma fotografia imutável: alterações simultâneas podem mudar a posição dos registros entre consultas.
 
-Permanecem os bloqueadores de lançamento descritos no [plano de conclusão](Plano_de_conclusao.md): persistência, fornecedores reais de teste, recuperação completa, monitoramento e aceite de acessibilidade. A revisão local não comprova que o Render já executa esta versão.
+Permanecem os bloqueadores de lançamento descritos na [matriz de aceite](Aceite_2026-11-25.md): persistência, fornecedores reais de teste, recuperação completa, monitoramento e aceite de acessibilidade. A revisão local não comprova que o Render já executa esta versão.

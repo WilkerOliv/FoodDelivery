@@ -1,0 +1,1057 @@
+etiqueta	alvo	digest	componente	versão	alerta	gravidade	versões corrigidas
+[EXECUTADO]	maven	SBOM	org.apache.logging.log4j:log4j-api	2.24.3	CVE-2026-49844	MEDIUM	2.25.5, 2.26.1
+[EXECUTADO]	maven	SBOM	org.springframework:spring-webmvc	6.2.19	CVE-2026-47884	CRITICAL	7.0.9
+[EXECUTADO]	maven	SBOM	org.springframework:spring-webmvc	6.2.19	CVE-2026-47890	CRITICAL	7.0.9
+[EXECUTADO]	maven-final	SBOM	org.springframework:spring-webmvc	6.2.19	CVE-2026-47884	CRITICAL	7.0.9
+[EXECUTADO]	maven-final	SBOM	org.springframework:spring-webmvc	6.2.19	CVE-2026-47890	CRITICAL	7.0.9
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	c-ares	1.34.6-r0	CVE-2026-33630	HIGH	1.34.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2026-5773	HIGH	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2026-6276	HIGH	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2026-8286	HIGH	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2026-8927	HIGH	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2026-92392	HIGH	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2025-13034	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2026-1965	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2026-3783	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2026-3784	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2026-3805	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2026-4873	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2026-5545	MEDIUM	8.14.1-r3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2026-6253	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2026-6429	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2026-7168	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2026-8924	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2025-14524	LOW	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	curl	8.14.1-r2	CVE-2025-14819	LOW	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcap	2.76-r0	CVE-2026-4878	HIGH	2.78-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcap-getcap	2.76-r0	CVE-2026-4878	HIGH	2.78-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcap-setcap	2.76-r0	CVE-2026-4878	HIGH	2.78-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcap-utils	2.76-r0	CVE-2026-4878	HIGH	2.78-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcap2	2.76-r0	CVE-2026-4878	HIGH	2.78-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-31789	CRITICAL	3.5.6-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-14456	HIGH	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-28387	HIGH	3.5.6-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-28388	HIGH	3.5.6-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-28389	HIGH	3.5.6-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-28390	HIGH	3.5.6-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-45447	HIGH	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-107496	MEDIUM	3.5.9-r1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-18798	MEDIUM	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-2673	MEDIUM	3.5.6-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-31790	MEDIUM	3.5.6-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-34182	MEDIUM	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-34183	MEDIUM	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-42764	MEDIUM	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-45445	MEDIUM	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-63072	MEDIUM	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-63076	MEDIUM	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-95691	MEDIUM	3.5.9-r1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-95692	MEDIUM	3.5.9-r1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-14457	LOW	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-34180	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-34181	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-42766	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-42767	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-42768	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-42769	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-42770	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-45446	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-54874	LOW	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-63073	LOW	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-63074	LOW	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-63075	LOW	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-7383	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-75803	LOW	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-88822	LOW	3.5.9-r1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-88823	LOW	3.5.9-r1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcrypto3	3.5.5-r0	CVE-2026-9076	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2026-5773	HIGH	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2026-6276	HIGH	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2026-8286	HIGH	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2026-8927	HIGH	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2026-92392	HIGH	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2025-13034	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2026-1965	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2026-3783	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2026-3784	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2026-3805	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2026-4873	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2026-5545	MEDIUM	8.14.1-r3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2026-6253	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2026-6429	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2026-7168	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2026-8924	MEDIUM	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2025-14524	LOW	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libcurl	8.14.1-r2	CVE-2025-14819	LOW	8.14.1-r4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-31789	CRITICAL	3.5.6-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-14456	HIGH	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-28387	HIGH	3.5.6-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-28388	HIGH	3.5.6-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-28389	HIGH	3.5.6-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-28390	HIGH	3.5.6-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-45447	HIGH	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-107496	MEDIUM	3.5.9-r1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-18798	MEDIUM	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-2673	MEDIUM	3.5.6-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-31790	MEDIUM	3.5.6-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-34182	MEDIUM	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-34183	MEDIUM	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-42764	MEDIUM	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-45445	MEDIUM	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-63072	MEDIUM	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-63076	MEDIUM	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-95691	MEDIUM	3.5.9-r1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-95692	MEDIUM	3.5.9-r1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-14457	LOW	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-34180	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-34181	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-42766	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-42767	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-42768	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-42769	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-42770	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-45446	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-54874	LOW	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-63073	LOW	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-63074	LOW	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-63075	LOW	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-7383	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-75803	LOW	3.5.8-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-88822	LOW	3.5.9-r1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-88823	LOW	3.5.9-r1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	libssl3	3.5.5-r0	CVE-2026-9076	LOW	3.5.7-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	musl	1.2.5-r10	CVE-2026-107891	HIGH	1.2.5-r13
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	musl	1.2.5-r10	CVE-2026-40200	HIGH	1.2.5-r12
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	musl	1.2.5-r10	CVE-2026-6042	MEDIUM	1.2.5-r11
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	musl-utils	1.2.5-r10	CVE-2026-107891	HIGH	1.2.5-r13
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	musl-utils	1.2.5-r10	CVE-2026-40200	HIGH	1.2.5-r12
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	musl-utils	1.2.5-r10	CVE-2026-6042	MEDIUM	1.2.5-r11
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	nghttp2-libs	1.65.0-r0	CVE-2026-27135	HIGH	1.68.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	zlib	1.3.1-r2	CVE-2026-22184	HIGH	1.3.2-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	zlib	1.3.1-r2	CVE-2026-85091	HIGH	1.3.2-r1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	zlib	1.3.1-r2	CVE-2026-27171	MEDIUM	1.3.2-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	zlib	1.3.1-r2	CVE-2026-4738	MEDIUM	1.4-r0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	filippo.io/edwards25519	v1.1.0	CVE-2026-26958	LOW	1.1.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/caddyserver/caddy/v2	v2.10.2	CVE-2026-27586	HIGH	2.11.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/caddyserver/caddy/v2	v2.10.2	CVE-2026-27587	HIGH	2.11.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/caddyserver/caddy/v2	v2.10.2	CVE-2026-27588	HIGH	2.11.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/caddyserver/caddy/v2	v2.10.2	CVE-2026-27590	HIGH	2.11.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/caddyserver/caddy/v2	v2.10.2	CVE-2026-45135	HIGH	2.11.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/caddyserver/caddy/v2	v2.10.2	CVE-2026-52844	HIGH	2.11.4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/caddyserver/caddy/v2	v2.10.2	CVE-2026-52845	HIGH	2.11.4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/caddyserver/caddy/v2	v2.10.2	CVE-2026-27585	MEDIUM	2.11.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/caddyserver/caddy/v2	v2.10.2	CVE-2026-27589	MEDIUM	2.11.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/caddyserver/caddy/v2	v2.10.2	CVE-2026-45692	MEDIUM	2.11.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/caddyserver/caddy/v2	v2.10.2	CVE-2026-52846	MEDIUM	2.11.4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/caddyserver/caddy/v2	v2.10.2	CVE-2026-77281	MEDIUM	2.11.4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/caddyserver/caddy/v2	v2.10.2	GHSA-gx7w-56w6-g48x	MEDIUM	2.11.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/caddyserver/caddy/v2	v2.10.2	CVE-2026-55458	LOW	2.11.5
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/cloudflare/circl	v1.6.1	CVE-2026-1229	LOW	1.6.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/go-chi/chi/v5	v5.2.2	CVE-2025-69725	MEDIUM	5.2.4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/go-chi/chi/v5	v5.2.2	CVE-2026-114437	MEDIUM	5.4.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/go-chi/chi/v5	v5.2.2	GHSA-3fxj-6jh8-hvhx	MEDIUM	5.3.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/go-jose/go-jose/v3	v3.0.4	CVE-2026-116587	HIGH	não informada pelo scanner
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/go-jose/go-jose/v3	v3.0.4	CVE-2026-34986	HIGH	3.0.5
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/go-jose/go-jose/v3	v3.0.4	CVE-2026-116585	MEDIUM	não informada pelo scanner
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/go-jose/go-jose/v3	v3.0.4	CVE-2026-116586	MEDIUM	não informada pelo scanner
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/go-jose/go-jose/v4	v4.0.5	CVE-2026-116587	HIGH	4.1.6
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/go-jose/go-jose/v4	v4.0.5	CVE-2026-34986	HIGH	4.1.4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/go-jose/go-jose/v4	v4.0.5	CVE-2026-116585	MEDIUM	4.1.5
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/go-jose/go-jose/v4	v4.0.5	CVE-2026-116586	MEDIUM	4.1.5
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/google/cel-go	v0.26.0	GHSA-gcjh-h69q-9w9g	MEDIUM	0.29.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/klauspost/compress	v1.18.0	CVE-2026-63209	HIGH	1.18.7
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/quic-go/quic-go	v0.54.0	CVE-2025-59530	HIGH	0.49.1, 0.54.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/quic-go/quic-go	v0.54.0	CVE-2025-64702	MEDIUM	0.57.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/quic-go/quic-go	v0.54.0	CVE-2026-40898	MEDIUM	0.59.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/slackhq/nebula	v1.9.5	CVE-2026-25793	HIGH	1.10.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/slackhq/nebula	v1.9.5	CVE-2025-62820	MEDIUM	1.9.7
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/smallstep/certificates	v0.28.4	CVE-2025-44005	CRITICAL	0.29.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/smallstep/certificates	v0.28.4	CVE-2026-30836	CRITICAL	0.30.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/smallstep/certificates	v0.28.4	CVE-2025-66406	MEDIUM	0.29.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	github.com/smallstep/certificates	v0.28.4	CVE-2026-40097	LOW	0.30.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	go.opentelemetry.io/otel	v1.37.0	CVE-2026-29181	HIGH	1.41.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	go.opentelemetry.io/otel/exporters/otlp/otlptrace	v1.37.0	CVE-2026-81870	LOW	1.45.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc	v1.37.0	CVE-2026-81870	LOW	1.45.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	go.opentelemetry.io/otel/sdk	v1.37.0	CVE-2026-24051	HIGH	1.40.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	go.opentelemetry.io/otel/sdk	v1.37.0	CVE-2026-39883	HIGH	1.43.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	go.opentelemetry.io/otel/sdk	v1.37.0	CVE-2026-128085	MEDIUM	1.47.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	go.opentelemetry.io/otel/sdk	v1.37.0	CVE-2026-81870	LOW	1.45.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	go.opentelemetry.io/otel/trace	v1.37.0	CVE-2026-128085	MEDIUM	1.47.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2025-47913	HIGH	0.43.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2026-39828	HIGH	0.52.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2026-39829	HIGH	0.52.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2026-39830	HIGH	0.52.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2026-39831	HIGH	0.52.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2026-39832	HIGH	0.52.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2026-39835	HIGH	0.52.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2026-42508	HIGH	0.52.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2026-46597	HIGH	0.52.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2026-56854	HIGH	0.55.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2025-47914	MEDIUM	0.45.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2025-58181	MEDIUM	0.45.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2026-39827	MEDIUM	0.52.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2026-39833	MEDIUM	0.52.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2026-39834	MEDIUM	0.52.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2026-46598	MEDIUM	0.52.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2026-56855	MEDIUM	0.56.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	CVE-2026-78662	MEDIUM	0.56.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/crypto	v0.40.0	GO-2026-5932	UNKNOWN	0.58.1-0.20261009181718-2f1f834330b2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2026-25681	HIGH	0.55.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2026-27136	HIGH	0.55.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2026-33814	HIGH	0.53.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2026-39821	HIGH	0.57.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2026-46600	HIGH	0.56.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2026-78661	HIGH	0.62.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2026-78669	HIGH	0.60.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2025-47911	MEDIUM	0.45.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2025-58190	MEDIUM	0.45.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2026-25680	MEDIUM	0.55.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2026-42502	MEDIUM	0.55.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2026-42506	MEDIUM	0.55.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2026-78659	MEDIUM	0.60.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2026-78660	MEDIUM	0.60.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2026-78663	MEDIUM	0.60.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2026-97032	MEDIUM	0.60.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/net	v0.42.0	CVE-2026-97045	MEDIUM	0.62.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/sys	v0.34.0	CVE-2026-39824	UNKNOWN	0.44.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/text	v0.27.0	CVE-2026-56851	HIGH	0.41.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	golang.org/x/text	v0.27.0	CVE-2026-56852	HIGH	0.39.0
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	google.golang.org/grpc	v1.73.0	CVE-2026-33186	CRITICAL	1.79.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	google.golang.org/grpc	v1.73.0	CVE-2026-84304	HIGH	1.83.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	google.golang.org/grpc	v1.73.0	CVE-2026-84445	HIGH	1.82.2, 1.83.2, 1.84.0-dev.0.20260825144003-d5a41119e0e3, 1.85.0-dev.0.20260825072537-93e31b48545e
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	google.golang.org/grpc	v1.73.0	GHSA-hrxh-6v49-42gf	HIGH	1.82.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	google.golang.org/grpc	v1.73.0	CVE-2026-84303	MEDIUM	1.83.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-68121	CRITICAL	1.24.13, 1.25.7, 1.26.0-rc.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-61726	HIGH	1.24.12, 1.25.6
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-61729	HIGH	1.24.11, 1.25.5
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-111943	HIGH	1.26.10, 1.27.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-25679	HIGH	1.25.8, 1.26.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-27145	HIGH	1.25.11, 1.26.4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-32280	HIGH	1.25.9, 1.26.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-32281	HIGH	1.25.9, 1.26.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-32283	HIGH	1.25.9, 1.26.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-33811	HIGH	1.25.10, 1.26.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-33814	HIGH	1.25.10, 1.26.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-33818	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-39820	HIGH	1.25.10, 1.26.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-39821	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-39822	HIGH	1.25.12, 1.26.5, 1.27.0-rc.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-39836	HIGH	1.25.10, 1.26.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-42499	HIGH	1.25.10, 1.26.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-42504	HIGH	1.25.11, 1.26.4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-56853	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-56858	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-56859	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-56860	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-56862	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-78667	HIGH	1.26.9, 1.27.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-78669	HIGH	1.26.9, 1.27.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-97031	HIGH	1.26.9, 1.27.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-47910	MEDIUM	1.25.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-47912	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-58183	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-58185	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-58187	MEDIUM	1.24.9, 1.25.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-58188	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-58189	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-61723	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-61724	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-61725	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-61727	MEDIUM	1.24.11, 1.25.5
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-61728	MEDIUM	1.24.12, 1.25.6
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-61730	MEDIUM	1.24.12, 1.25.6
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-27142	MEDIUM	1.25.8, 1.26.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-32282	MEDIUM	1.25.9, 1.26.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-32288	MEDIUM	1.25.9, 1.26.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-32289	MEDIUM	1.25.9, 1.26.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-39823	MEDIUM	1.25.10, 1.26.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-39825	MEDIUM	1.25.10, 1.26.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-39826	MEDIUM	1.25.10, 1.26.3
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-42505	MEDIUM	1.25.12, 1.26.5, 1.27.0-rc.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-42507	MEDIUM	1.25.11, 1.26.4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-56866	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-78659	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-78660	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-78663	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-94439	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-94440	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-94448	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-97030	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-97032	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-97054	MEDIUM	1.26.11, 1.27.4
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2025-58186	LOW	1.24.8, 1.25.2
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-27139	LOW	1.25.8, 1.26.1
+[EXECUTADO]	caddy_2.10.2	caddy@sha256:c3d7ee5d2b11f9dc54f947f68a734c84e9c9666c92c88a7f30b9cba5da182adb	stdlib	v1.25.0	CVE-2026-56857	LOW	1.26.9, 1.27.2
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	libcrypto3	3.5.9-r0	CVE-2026-107496	MEDIUM	3.5.9-r1
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	libcrypto3	3.5.9-r0	CVE-2026-95691	MEDIUM	3.5.9-r1
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	libcrypto3	3.5.9-r0	CVE-2026-95692	MEDIUM	3.5.9-r1
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	libcrypto3	3.5.9-r0	CVE-2026-88822	LOW	3.5.9-r1
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	libcrypto3	3.5.9-r0	CVE-2026-88823	LOW	3.5.9-r1
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	libssl3	3.5.9-r0	CVE-2026-107496	MEDIUM	3.5.9-r1
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	libssl3	3.5.9-r0	CVE-2026-95691	MEDIUM	3.5.9-r1
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	libssl3	3.5.9-r0	CVE-2026-95692	MEDIUM	3.5.9-r1
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	libssl3	3.5.9-r0	CVE-2026-88822	LOW	3.5.9-r1
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	libssl3	3.5.9-r0	CVE-2026-88823	LOW	3.5.9-r1
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	zlib	1.3.2-r1	CVE-2026-4738	MEDIUM	1.4-r0
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	github.com/go-jose/go-jose/v3	v3.0.5	CVE-2026-116587	HIGH	não informada pelo scanner
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	github.com/go-jose/go-jose/v3	v3.0.5	CVE-2026-116585	MEDIUM	não informada pelo scanner
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	github.com/go-jose/go-jose/v3	v3.0.5	CVE-2026-116586	MEDIUM	não informada pelo scanner
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	go.opentelemetry.io/otel/sdk	v1.46.0	CVE-2026-128085	MEDIUM	1.47.0
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	go.opentelemetry.io/otel/sdk/log	v0.22.0	CVE-2026-128085	MEDIUM	1.47.0
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	go.opentelemetry.io/otel/trace	v1.46.0	CVE-2026-128085	MEDIUM	1.47.0
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	golang.org/x/crypto	v0.57.0	GO-2026-5932	UNKNOWN	0.58.1-0.20261009181718-2f1f834330b2
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	golang.org/x/net	v0.60.0	CVE-2026-78661	HIGH	0.62.0
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	golang.org/x/net	v0.60.0	CVE-2026-97045	MEDIUM	0.62.0
+[EXECUTADO]	caddy_2-alpine	caddy@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0	stdlib	v1.27.3	CVE-2026-97054	MEDIUM	1.26.11, 1.27.4
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-107364	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-112315	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-112316	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-112317	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-112318	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-112319	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-112320	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-112321	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-112322	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-112323	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-118380	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-119079	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-40355	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-40356	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-71199	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-71200	HIGH	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-107708	MEDIUM	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-107778	MEDIUM	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-107884	MEDIUM	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-111423	MEDIUM	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	krb5-libs	1.22.2-r1	CVE-2026-112314	MEDIUM	1.22.3-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	libcrypto3	3.5.9-r0	CVE-2026-107496	MEDIUM	3.5.9-r1
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	libcrypto3	3.5.9-r0	CVE-2026-95691	MEDIUM	3.5.9-r1
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	libcrypto3	3.5.9-r0	CVE-2026-95692	MEDIUM	3.5.9-r1
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	libcrypto3	3.5.9-r0	CVE-2026-88822	LOW	3.5.9-r1
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	libcrypto3	3.5.9-r0	CVE-2026-88823	LOW	3.5.9-r1
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	libssl3	3.5.9-r0	CVE-2026-107496	MEDIUM	3.5.9-r1
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	libssl3	3.5.9-r0	CVE-2026-95691	MEDIUM	3.5.9-r1
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	libssl3	3.5.9-r0	CVE-2026-95692	MEDIUM	3.5.9-r1
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	libssl3	3.5.9-r0	CVE-2026-88822	LOW	3.5.9-r1
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	libssl3	3.5.9-r0	CVE-2026-88823	LOW	3.5.9-r1
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	libxml2	2.13.9-r2	CVE-2026-86144	HIGH	2.13.9-r3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	libxslt	1.1.43-r3	CVE-2026-125350	HIGH	1.1.43-r4
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	libxslt	1.1.43-r3	CVE-2026-87636	HIGH	1.1.43-r4
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	libxslt	1.1.43-r3	CVE-2026-9947	HIGH	1.1.43-r4
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	libxslt	1.1.43-r3	CVE-2025-10911	MEDIUM	1.1.43-r4
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	zlib	1.3.2-r1	CVE-2026-4738	MEDIUM	1.4-r0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	github.com/moby/sys/user	v0.1.0	CVE-2026-61801	MEDIUM	0.4.1
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	golang.org/x/sys	v0.1.0	CVE-2026-39824	UNKNOWN	0.44.0
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-68121	CRITICAL	1.24.13, 1.25.7, 1.26.0-rc.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-61726	HIGH	1.24.12, 1.25.6
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-61729	HIGH	1.24.11, 1.25.5
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-111943	HIGH	1.26.10, 1.27.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-25679	HIGH	1.25.8, 1.26.1
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-27145	HIGH	1.25.11, 1.26.4
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-32280	HIGH	1.25.9, 1.26.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-32281	HIGH	1.25.9, 1.26.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-32283	HIGH	1.25.9, 1.26.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-33811	HIGH	1.25.10, 1.26.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-33814	HIGH	1.25.10, 1.26.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-33818	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-39820	HIGH	1.25.10, 1.26.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-39821	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-39822	HIGH	1.25.12, 1.26.5, 1.27.0-rc.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-39836	HIGH	1.25.10, 1.26.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-42499	HIGH	1.25.10, 1.26.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-42504	HIGH	1.25.11, 1.26.4
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-56853	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-56858	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-56859	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-56860	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-56862	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-78667	HIGH	1.26.9, 1.27.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-78669	HIGH	1.26.9, 1.27.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-97031	HIGH	1.26.9, 1.27.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-47912	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-58183	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-58185	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-58187	MEDIUM	1.24.9, 1.25.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-58188	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-58189	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-61723	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-61724	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-61725	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-61727	MEDIUM	1.24.11, 1.25.5
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-61728	MEDIUM	1.24.12, 1.25.6
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-61730	MEDIUM	1.24.12, 1.25.6
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-27142	MEDIUM	1.25.8, 1.26.1
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-32282	MEDIUM	1.25.9, 1.26.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-32288	MEDIUM	1.25.9, 1.26.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-32289	MEDIUM	1.25.9, 1.26.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-39823	MEDIUM	1.25.10, 1.26.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-39825	MEDIUM	1.25.10, 1.26.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-39826	MEDIUM	1.25.10, 1.26.3
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-42505	MEDIUM	1.25.12, 1.26.5, 1.27.0-rc.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-42507	MEDIUM	1.25.11, 1.26.4
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-56866	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-78659	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-78660	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-78663	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-94439	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-94440	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-94448	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-97030	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-97032	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-97054	MEDIUM	1.26.11, 1.27.4
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2025-58186	LOW	1.24.8, 1.25.2
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-27139	LOW	1.25.8, 1.26.1
+[EXECUTADO]	postgres_17-alpine	postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb	stdlib	v1.24.6	CVE-2026-56857	LOW	1.26.9, 1.27.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	libcrypto3	3.5.9-r0	CVE-2026-107496	MEDIUM	3.5.9-r1
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	libcrypto3	3.5.9-r0	CVE-2026-95691	MEDIUM	3.5.9-r1
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	libcrypto3	3.5.9-r0	CVE-2026-95692	MEDIUM	3.5.9-r1
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	libcrypto3	3.5.9-r0	CVE-2026-88822	LOW	3.5.9-r1
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	libcrypto3	3.5.9-r0	CVE-2026-88823	LOW	3.5.9-r1
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	libssl3	3.5.9-r0	CVE-2026-107496	MEDIUM	3.5.9-r1
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	libssl3	3.5.9-r0	CVE-2026-95691	MEDIUM	3.5.9-r1
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	libssl3	3.5.9-r0	CVE-2026-95692	MEDIUM	3.5.9-r1
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	libssl3	3.5.9-r0	CVE-2026-88822	LOW	3.5.9-r1
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	libssl3	3.5.9-r0	CVE-2026-88823	LOW	3.5.9-r1
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	libxml2	2.13.9-r2	CVE-2026-86144	HIGH	2.13.9-r3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	golang.org/x/sys	v0.1.0	CVE-2026-39824	UNKNOWN	0.44.0
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-68121	CRITICAL	1.24.13, 1.25.7, 1.26.0-rc.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-61726	HIGH	1.24.12, 1.25.6
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-61729	HIGH	1.24.11, 1.25.5
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-111943	HIGH	1.26.10, 1.27.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-25679	HIGH	1.25.8, 1.26.1
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-27145	HIGH	1.25.11, 1.26.4
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-32280	HIGH	1.25.9, 1.26.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-32281	HIGH	1.25.9, 1.26.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-32283	HIGH	1.25.9, 1.26.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-33811	HIGH	1.25.10, 1.26.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-33814	HIGH	1.25.10, 1.26.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-33818	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-39820	HIGH	1.25.10, 1.26.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-39821	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-39822	HIGH	1.25.12, 1.26.5, 1.27.0-rc.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-39836	HIGH	1.25.10, 1.26.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-42499	HIGH	1.25.10, 1.26.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-42504	HIGH	1.25.11, 1.26.4
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-56853	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-56858	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-56859	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-56860	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-56862	HIGH	1.25.13, 1.26.6, 1.27.0-rc.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-78667	HIGH	1.26.9, 1.27.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-78669	HIGH	1.26.9, 1.27.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-97031	HIGH	1.26.9, 1.27.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-47912	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-58183	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-58185	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-58187	MEDIUM	1.24.9, 1.25.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-58188	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-58189	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-61723	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-61724	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-61725	MEDIUM	1.24.8, 1.25.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-61727	MEDIUM	1.24.11, 1.25.5
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-61728	MEDIUM	1.24.12, 1.25.6
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-61730	MEDIUM	1.24.12, 1.25.6
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-27142	MEDIUM	1.25.8, 1.26.1
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-32282	MEDIUM	1.25.9, 1.26.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-32288	MEDIUM	1.25.9, 1.26.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-32289	MEDIUM	1.25.9, 1.26.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-39823	MEDIUM	1.25.10, 1.26.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-39825	MEDIUM	1.25.10, 1.26.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-39826	MEDIUM	1.25.10, 1.26.3
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-42505	MEDIUM	1.25.12, 1.26.5, 1.27.0-rc.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-42507	MEDIUM	1.25.11, 1.26.4
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-56866	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-78659	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-78660	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-78663	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-94439	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-94440	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-94448	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-97030	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-97032	MEDIUM	1.26.9, 1.27.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-97054	MEDIUM	1.26.11, 1.27.4
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2025-58186	LOW	1.24.8, 1.25.2
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-27139	LOW	1.25.8, 1.26.1
+[EXECUTADO]	postgres-remote	postgres@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73	stdlib	v1.24.6	CVE-2026-56857	LOW	1.26.9, 1.27.2
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	apt	2.8.3	CVE-2026-109518	HIGH	2.8.4ubuntu0.1
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2025-11495	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2025-69644	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2025-69645	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2025-69646	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2025-69652	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-15003	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-19548	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-3441	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-3442	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-4647	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-6844	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-6845	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-6846	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-90801	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-90802	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-90803	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-90804	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-90828	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-90829	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-90830	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-90831	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-91779	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-91780	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-91781	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2026-91782	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils	2.42-4ubuntu2.10	CVE-2025-1150	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2025-11495	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2025-69644	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2025-69645	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2025-69646	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2025-69652	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-15003	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-19548	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-3441	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-3442	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-4647	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-6844	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-6845	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-6846	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-90801	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-90802	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-90803	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-90804	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-90828	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-90829	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-90830	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-90831	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-91779	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-91780	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-91781	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2026-91782	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-common	2.42-4ubuntu2.10	CVE-2025-1150	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2025-11495	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2025-69644	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2025-69645	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2025-69646	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2025-69652	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-15003	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-19548	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-3441	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-3442	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-4647	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-6844	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-6845	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-6846	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-90801	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-90802	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-90803	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-90804	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-90828	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-90829	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-90830	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-90831	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-91779	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-91780	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-91781	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2026-91782	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	binutils-x86-64-linux-gnu	2.42-4ubuntu2.10	CVE-2025-1150	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	bsdutils	1:2.39.3-9ubuntu6.6	CVE-2026-76642	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	curl	8.5.0-2ubuntu10.15	CVE-2026-86409	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	curl	8.5.0-2ubuntu10.15	CVE-2026-86414	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	curl	8.5.0-2ubuntu10.15	CVE-2026-87862	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	curl	8.5.0-2ubuntu10.15	CVE-2026-87863	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	curl	8.5.0-2ubuntu10.15	CVE-2026-87864	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	curl	8.5.0-2ubuntu10.15	CVE-2026-92388	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	curl	8.5.0-2ubuntu10.15	CVE-2026-92389	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	curl	8.5.0-2ubuntu10.15	CVE-2026-92391	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	curl	8.5.0-2ubuntu10.15	CVE-2026-94266	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	dash	0.5.12-6ubuntu5	CVE-2026-102473	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	dash	0.5.12-6ubuntu5	CVE-2026-102474	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	dirmngr	2.4.4-2ubuntu17.6	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	git	1:2.43.0-1ubuntu7.3	CVE-2024-52005	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	git-man	1:2.43.0-1ubuntu7.3	CVE-2024-52005	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	gnupg	2.4.4-2ubuntu17.6	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	gnupg-utils	2.4.4-2ubuntu17.6	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	gpg	2.4.4-2ubuntu17.6	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	gpg-agent	2.4.4-2ubuntu17.6	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	gpgconf	2.4.4-2ubuntu17.6	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	gpgsm	2.4.4-2ubuntu17.6	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	gpgv	2.4.4-2ubuntu17.6	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	keyboxd	2.4.4-2ubuntu17.6	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libapt-pkg6.0t64	2.8.3	CVE-2026-109518	HIGH	2.8.4ubuntu0.1
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2025-11495	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2025-69644	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2025-69645	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2025-69646	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2025-69652	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-15003	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-19548	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-3441	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-3442	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-4647	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-6844	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-6845	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-6846	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-90801	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-90802	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-90803	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-90804	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-90828	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-90829	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-90830	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-90831	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-91779	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-91780	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-91781	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2026-91782	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbinutils	2.42-4ubuntu2.10	CVE-2025-1150	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libblkid1	2.39.3-9ubuntu6.6	CVE-2026-76642	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libbrotli1	1.1.0-2build2	CVE-2026-111497	HIGH	1.1.0-2ubuntu0.1
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libc-bin	2.39-0ubuntu8.9	CVE-2026-18374	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libc-bin	2.39-0ubuntu8.9	CVE-2026-84243	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libc-bin	2.39-0ubuntu8.9	CVE-2026-8674	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libc-bin	2.39-0ubuntu8.9	CVE-2026-86805	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libc-bin	2.39-0ubuntu8.9	CVE-2026-95818	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libc-bin	2.39-0ubuntu8.9	CVE-2026-97399	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libc6	2.39-0ubuntu8.9	CVE-2026-18374	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libc6	2.39-0ubuntu8.9	CVE-2026-84243	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libc6	2.39-0ubuntu8.9	CVE-2026-8674	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libc6	2.39-0ubuntu8.9	CVE-2026-86805	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libc6	2.39-0ubuntu8.9	CVE-2026-95818	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libc6	2.39-0ubuntu8.9	CVE-2026-97399	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2025-11495	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2025-69644	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2025-69645	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2025-69646	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2025-69652	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-15003	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-19548	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-3441	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-3442	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-4647	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-6844	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-6845	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-6846	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-90801	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-90802	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-90803	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-90804	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-90828	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-90829	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-90830	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-90831	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-91779	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-91780	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-91781	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2026-91782	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf-nobfd0	2.42-4ubuntu2.10	CVE-2025-1150	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2025-11495	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2025-69644	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2025-69645	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2025-69646	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2025-69652	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-15003	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-19548	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-3441	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-3442	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-4647	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-6844	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-6845	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-6846	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-90801	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-90802	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-90803	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-90804	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-90828	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-90829	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-90830	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-90831	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-91779	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-91780	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-91781	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2026-91782	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libctf0	2.42-4ubuntu2.10	CVE-2025-1150	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl3t64-gnutls	8.5.0-2ubuntu10.15	CVE-2026-86409	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl3t64-gnutls	8.5.0-2ubuntu10.15	CVE-2026-86414	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl3t64-gnutls	8.5.0-2ubuntu10.15	CVE-2026-87862	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl3t64-gnutls	8.5.0-2ubuntu10.15	CVE-2026-87863	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl3t64-gnutls	8.5.0-2ubuntu10.15	CVE-2026-87864	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl3t64-gnutls	8.5.0-2ubuntu10.15	CVE-2026-92388	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl3t64-gnutls	8.5.0-2ubuntu10.15	CVE-2026-92389	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl3t64-gnutls	8.5.0-2ubuntu10.15	CVE-2026-92391	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl3t64-gnutls	8.5.0-2ubuntu10.15	CVE-2026-94266	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl4t64	8.5.0-2ubuntu10.15	CVE-2026-86409	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl4t64	8.5.0-2ubuntu10.15	CVE-2026-86414	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl4t64	8.5.0-2ubuntu10.15	CVE-2026-87862	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl4t64	8.5.0-2ubuntu10.15	CVE-2026-87863	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl4t64	8.5.0-2ubuntu10.15	CVE-2026-87864	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl4t64	8.5.0-2ubuntu10.15	CVE-2026-92388	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl4t64	8.5.0-2ubuntu10.15	CVE-2026-92389	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl4t64	8.5.0-2ubuntu10.15	CVE-2026-92391	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libcurl4t64	8.5.0-2ubuntu10.15	CVE-2026-94266	LOW	8.5.0-2ubuntu10.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libexpat1	2.6.1-2ubuntu0.6	CVE-2025-66382	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libexpat1	2.6.1-2ubuntu0.6	CVE-2026-102633	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libexpat1	2.6.1-2ubuntu0.6	CVE-2026-113351	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libexpat1	2.6.1-2ubuntu0.6	CVE-2026-115506	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libexpat1	2.6.1-2ubuntu0.6	CVE-2026-117610	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libexpat1	2.6.1-2ubuntu0.6	CVE-2026-118370	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libexpat1	2.6.1-2ubuntu0.6	CVE-2026-124317	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libexpat1	2.6.1-2ubuntu0.6	CVE-2026-128241	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libexpat1	2.6.1-2ubuntu0.6	CVE-2026-134703	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libexpat1	2.6.1-2ubuntu0.6	CVE-2026-77214	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libexpat1	2.6.1-2ubuntu0.6	CVE-2026-93990	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libfreetype6	2.13.2+dfsg-1ubuntu0.1	CVE-2026-95512	MEDIUM	2.13.2+dfsg-1ubuntu0.2
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgnutls30t64	3.8.3-1.1ubuntu3.6	CVE-2026-67693	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgnutls30t64	3.8.3-1.1ubuntu3.6	CVE-2026-88647	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgnutls30t64	3.8.3-1.1ubuntu3.6	CVE-2026-88648	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgnutls30t64	3.8.3-1.1ubuntu3.6	CVE-2026-95184	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgnutls30t64	3.8.3-1.1ubuntu3.6	CVE-2026-95210	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2025-11495	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2025-69644	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2025-69645	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2025-69646	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2025-69652	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-15003	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-19548	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-3441	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-3442	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-4647	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-6844	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-6845	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-6846	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-90801	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-90802	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-90803	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-90804	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-90828	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-90829	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-90830	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-90831	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-91779	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-91780	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-91781	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2026-91782	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgprofng0	2.42-4ubuntu2.10	CVE-2025-1150	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-107364	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-107708	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-107778	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-107884	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-112314	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-112315	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-112316	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-112317	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-112318	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-112319	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-112320	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-112321	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-112322	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-112323	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-118380	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-119079	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-71199	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libgssapi-krb5-2	1.20.1-6ubuntu2.10	CVE-2026-71200	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-107364	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-107708	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-107778	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-107884	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-112314	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-112315	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-112316	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-112317	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-112318	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-112319	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-112320	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-112321	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-112322	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-112323	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-118380	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-119079	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-71199	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libk5crypto3	1.20.1-6ubuntu2.10	CVE-2026-71200	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-107364	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-107708	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-107778	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-107884	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-112314	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-112315	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-112316	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-112317	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-112318	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-112319	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-112320	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-112321	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-112322	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-112323	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-118380	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-119079	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-71199	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5-3	1.20.1-6ubuntu2.10	CVE-2026-71200	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-107364	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-107708	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-107778	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-107884	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-112314	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-112315	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-112316	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-112317	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-112318	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-112319	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-112320	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-112321	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-112322	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-112323	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-118380	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-119079	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-71199	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libkrb5support0	1.20.1-6ubuntu2.10	CVE-2026-71200	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libmount1	2.39.3-9ubuntu6.6	CVE-2026-76642	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libpcre2-8-0	10.42-4ubuntu2.1	CVE-2026-103111	MEDIUM	10.42-4ubuntu2.2
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libpcre2-8-0	10.42-4ubuntu2.1	CVE-2026-86145	MEDIUM	10.42-4ubuntu2.2
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libpcre2-8-0	10.42-4ubuntu2.1	CVE-2026-89156	MEDIUM	10.42-4ubuntu2.2
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libpcre2-8-0	10.42-4ubuntu2.1	CVE-2026-89157	MEDIUM	10.42-4ubuntu2.2
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libpcre2-8-0	10.42-4ubuntu2.1	CVE-2026-89158	MEDIUM	10.42-4ubuntu2.2
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libpcre2-8-0	10.42-4ubuntu2.1	CVE-2026-89160	MEDIUM	10.42-4ubuntu2.2
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libpcre2-8-0	10.42-4ubuntu2.1	CVE-2026-89161	MEDIUM	10.42-4ubuntu2.2
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libperl5.38t64	5.38.2-3.2ubuntu0.6	CVE-2026-82560	MEDIUM	5.38.2-3.2ubuntu0.7
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libpng16-16t64	1.6.43-5ubuntu0.6	CVE-2026-46675	MEDIUM	1.6.43-5ubuntu0.7
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	librtmp1	2.4+20151223.gitfa8646d.1-2build7	CVE-2026-112061	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsasl2-2	2.1.28+dfsg1-5ubuntu3.1	CVE-2026-107161	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsasl2-modules-db	2.1.28+dfsg1-5ubuntu3.1	CVE-2026-107161	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2025-11495	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2025-69644	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2025-69645	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2025-69646	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2025-69652	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-15003	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-19548	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-3441	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-3442	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-4647	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-6844	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-6845	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-6846	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-90801	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-90802	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-90803	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-90804	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-90828	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-90829	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-90830	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-90831	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-91779	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-91780	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-91781	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2026-91782	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsframe1	2.42-4ubuntu2.10	CVE-2025-1150	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsmartcols1	2.39.3-9ubuntu6.6	CVE-2026-76642	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsqlite3-0	3.45.1-1ubuntu2.8	CVE-2026-119371	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsqlite3-0	3.45.1-1ubuntu2.8	CVE-2026-119372	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsqlite3-0	3.45.1-1ubuntu2.8	CVE-2026-119373	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsqlite3-0	3.45.1-1ubuntu2.8	CVE-2026-119374	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsqlite3-0	3.45.1-1ubuntu2.8	CVE-2026-119375	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsqlite3-0	3.45.1-1ubuntu2.8	CVE-2026-119376	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsqlite3-0	3.45.1-1ubuntu2.8	CVE-2026-119377	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsqlite3-0	3.45.1-1ubuntu2.8	CVE-2026-119378	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsqlite3-0	3.45.1-1ubuntu2.8	CVE-2026-119379	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsqlite3-0	3.45.1-1ubuntu2.8	CVE-2026-119591	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libssl3t64	3.0.13-0ubuntu3.15	CVE-2026-84782	HIGH	3.0.13-0ubuntu3.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libssl3t64	3.0.13-0ubuntu3.15	CVE-2026-35189	LOW	3.0.13-0ubuntu3.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libssl3t64	3.0.13-0ubuntu3.15	CVE-2026-54872	LOW	3.0.13-0ubuntu3.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libssl3t64	3.0.13-0ubuntu3.15	CVE-2026-75805	LOW	3.0.13-0ubuntu3.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libssl3t64	3.0.13-0ubuntu3.15	CVE-2026-75806	LOW	3.0.13-0ubuntu3.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libssl3t64	3.0.13-0ubuntu3.15	CVE-2026-77696	LOW	3.0.13-0ubuntu3.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsystemd0	255.4-1ubuntu8.17	CVE-2026-121876	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libsystemd0	255.4-1ubuntu8.17	CVE-2026-40228	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libudev1	255.4-1ubuntu8.17	CVE-2026-121876	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libudev1	255.4-1ubuntu8.17	CVE-2026-40228	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	libuuid1	2.39.3-9ubuntu6.6	CVE-2026-76642	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	locales	2.39-0ubuntu8.9	CVE-2026-18374	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	locales	2.39-0ubuntu8.9	CVE-2026-84243	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	locales	2.39-0ubuntu8.9	CVE-2026-8674	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	locales	2.39-0ubuntu8.9	CVE-2026-86805	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	locales	2.39-0ubuntu8.9	CVE-2026-95818	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	locales	2.39-0ubuntu8.9	CVE-2026-97399	MEDIUM	2.39-0ubuntu8.12
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	login	1:4.13+dfsg1-4ubuntu3.2	CVE-2024-56433	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	mount	2.39.3-9ubuntu6.6	CVE-2026-76642	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssh-client	1:9.6p1-3ubuntu13.19	CVE-2026-106552	MEDIUM	1:9.6p1-3ubuntu13.20
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssh-client	1:9.6p1-3ubuntu13.19	CVE-2026-106553	MEDIUM	1:9.6p1-3ubuntu13.20
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssh-client	1:9.6p1-3ubuntu13.19	CVE-2026-106555	MEDIUM	1:9.6p1-3ubuntu13.20
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssh-client	1:9.6p1-3ubuntu13.19	CVE-2026-106582	MEDIUM	1:9.6p1-3ubuntu13.20
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssh-client	1:9.6p1-3ubuntu13.19	CVE-2026-106583	MEDIUM	1:9.6p1-3ubuntu13.20
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssh-client	1:9.6p1-3ubuntu13.19	CVE-2026-106584	MEDIUM	1:9.6p1-3ubuntu13.20
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssh-client	1:9.6p1-3ubuntu13.19	CVE-2026-106585	MEDIUM	1:9.6p1-3ubuntu13.20
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssh-client	1:9.6p1-3ubuntu13.19	CVE-2026-106586	MEDIUM	1:9.6p1-3ubuntu13.20
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssh-client	1:9.6p1-3ubuntu13.19	CVE-2026-106587	MEDIUM	1:9.6p1-3ubuntu13.20
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssh-client	1:9.6p1-3ubuntu13.19	CVE-2026-110928	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssl	3.0.13-0ubuntu3.15	CVE-2026-84782	HIGH	3.0.13-0ubuntu3.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssl	3.0.13-0ubuntu3.15	CVE-2026-35189	LOW	3.0.13-0ubuntu3.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssl	3.0.13-0ubuntu3.15	CVE-2026-54872	LOW	3.0.13-0ubuntu3.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssl	3.0.13-0ubuntu3.15	CVE-2026-75805	LOW	3.0.13-0ubuntu3.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssl	3.0.13-0ubuntu3.15	CVE-2026-75806	LOW	3.0.13-0ubuntu3.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	openssl	3.0.13-0ubuntu3.15	CVE-2026-77696	LOW	3.0.13-0ubuntu3.16
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	passwd	1:4.13+dfsg1-4ubuntu3.2	CVE-2024-56433	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	perl	5.38.2-3.2ubuntu0.6	CVE-2026-82560	MEDIUM	5.38.2-3.2ubuntu0.7
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	perl-base	5.38.2-3.2ubuntu0.6	CVE-2026-82560	MEDIUM	5.38.2-3.2ubuntu0.7
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	perl-modules-5.38	5.38.2-3.2ubuntu0.6	CVE-2026-82560	MEDIUM	5.38.2-3.2ubuntu0.7
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	tar	1.35+dfsg-3ubuntu0.4	CVE-2026-18477	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	tar	1.35+dfsg-3ubuntu0.4	CVE-2026-18508	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	util-linux	2.39.3-9ubuntu6.6	CVE-2026-76642	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	wget	1.21.4-1ubuntu4.5	CVE-2021-31879	MEDIUM	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	wget	1.21.4-1ubuntu4.5	CVE-2024-10524	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	wget	1.21.4-1ubuntu4.5	CVE-2026-16599	LOW	não informada pelo scanner
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	zlib1g	1:1.3.dfsg-3.1ubuntu2.2	CVE-2026-85091	MEDIUM	1:1.3.dfsg-3.1ubuntu2.3
+[EXECUTADO]	maven_3.9-eclipse-temurin-21	maven@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320	com.google.guava:guava	33.6.0-jre	CVE-2026-102554	HIGH	33.7.2
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	bsdutils	1:2.41.3-3ubuntu2.2	CVE-2026-76642	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	bsdutils	1:2.41.3-3ubuntu2.2	CVE-2026-78408	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	bsdutils	1:2.41.3-3ubuntu2.2	CVE-2026-78410	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	dash	0.5.12-12ubuntu3	CVE-2026-102473	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	dash	0.5.12-12ubuntu3	CVE-2026-102474	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	dirmngr	2.4.8-4ubuntu3.1	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	gnupg	2.4.8-4ubuntu3.1	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	gpg	2.4.8-4ubuntu3.1	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	gpg-agent	2.4.8-4ubuntu3.1	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	gpgconf	2.4.8-4ubuntu3.1	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	gpgsm	2.4.8-4ubuntu3.1	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	gpgv	2.4.8-4ubuntu3.1	CVE-2026-105712	LOW	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libblkid1	2.41.3-3ubuntu2.2	CVE-2026-76642	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libblkid1	2.41.3-3ubuntu2.2	CVE-2026-78408	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libblkid1	2.41.3-3ubuntu2.2	CVE-2026-78410	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libexpat1	2.7.4-1ubuntu0.2	CVE-2025-66382	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libexpat1	2.7.4-1ubuntu0.2	CVE-2026-102633	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libexpat1	2.7.4-1ubuntu0.2	CVE-2026-113351	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libexpat1	2.7.4-1ubuntu0.2	CVE-2026-115506	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libexpat1	2.7.4-1ubuntu0.2	CVE-2026-117610	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libexpat1	2.7.4-1ubuntu0.2	CVE-2026-118370	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libexpat1	2.7.4-1ubuntu0.2	CVE-2026-124317	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libexpat1	2.7.4-1ubuntu0.2	CVE-2026-128241	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libexpat1	2.7.4-1ubuntu0.2	CVE-2026-134703	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libexpat1	2.7.4-1ubuntu0.2	CVE-2026-77214	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libexpat1	2.7.4-1ubuntu0.2	CVE-2026-93990	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgnutls30t64	3.8.12-2ubuntu1.1	CVE-2026-67693	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgnutls30t64	3.8.12-2ubuntu1.1	CVE-2026-88647	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgnutls30t64	3.8.12-2ubuntu1.1	CVE-2026-88648	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgnutls30t64	3.8.12-2ubuntu1.1	CVE-2026-95184	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgnutls30t64	3.8.12-2ubuntu1.1	CVE-2026-95210	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-107364	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-107708	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-107778	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-107884	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-111423	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-112314	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-112315	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-112316	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-112317	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-112318	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-112319	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-112320	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-112321	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-112322	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-112323	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-118380	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-119079	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-71199	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libgssapi-krb5-2	1.22.1-2ubuntu4.1	CVE-2026-71200	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-107364	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-107708	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-107778	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-107884	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-111423	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-112314	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-112315	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-112316	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-112317	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-112318	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-112319	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-112320	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-112321	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-112322	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-112323	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-118380	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-119079	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-71199	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libk5crypto3	1.22.1-2ubuntu4.1	CVE-2026-71200	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-107364	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-107708	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-107778	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-107884	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-111423	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-112314	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-112315	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-112316	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-112317	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-112318	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-112319	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-112320	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-112321	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-112322	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-112323	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-118380	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-119079	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-71199	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5-3	1.22.1-2ubuntu4.1	CVE-2026-71200	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-107364	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-107708	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-107778	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-107884	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-111423	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-112314	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-112315	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-112316	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-112317	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-112318	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-112319	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-112320	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-112321	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-112322	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-112323	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-118380	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-119079	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-71199	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libkrb5support0	1.22.1-2ubuntu4.1	CVE-2026-71200	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libmount1	2.41.3-3ubuntu2.2	CVE-2026-76642	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libmount1	2.41.3-3ubuntu2.2	CVE-2026-78408	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libmount1	2.41.3-3ubuntu2.2	CVE-2026-78410	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libp11-kit0	0.26.2-2	CVE-2026-13757	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsasl2-2	2.1.28+dfsg1-9ubuntu3	CVE-2026-107161	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsasl2-modules-db	2.1.28+dfsg1-9ubuntu3	CVE-2026-107161	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsmartcols1	2.41.3-3ubuntu2.2	CVE-2026-76642	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsmartcols1	2.41.3-3ubuntu2.2	CVE-2026-78408	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsmartcols1	2.41.3-3ubuntu2.2	CVE-2026-78410	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsqlite3-0	3.46.1-9ubuntu0.3	CVE-2026-119371	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsqlite3-0	3.46.1-9ubuntu0.3	CVE-2026-119372	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsqlite3-0	3.46.1-9ubuntu0.3	CVE-2026-119373	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsqlite3-0	3.46.1-9ubuntu0.3	CVE-2026-119374	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsqlite3-0	3.46.1-9ubuntu0.3	CVE-2026-119375	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsqlite3-0	3.46.1-9ubuntu0.3	CVE-2026-119376	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsqlite3-0	3.46.1-9ubuntu0.3	CVE-2026-119377	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsqlite3-0	3.46.1-9ubuntu0.3	CVE-2026-119378	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsqlite3-0	3.46.1-9ubuntu0.3	CVE-2026-119379	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsqlite3-0	3.46.1-9ubuntu0.3	CVE-2026-119591	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsystemd0	259.9-0ubuntu0.1	CVE-2026-121876	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libsystemd0	259.9-0ubuntu0.1	CVE-2026-40228	LOW	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libudev1	259.9-0ubuntu0.1	CVE-2026-121876	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libudev1	259.9-0ubuntu0.1	CVE-2026-40228	LOW	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libuuid1	2.41.3-3ubuntu2.2	CVE-2026-76642	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libuuid1	2.41.3-3ubuntu2.2	CVE-2026-78408	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	libuuid1	2.41.3-3ubuntu2.2	CVE-2026-78410	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	login	1:4.16.0-2+really2.41.3-3ubuntu2.2	CVE-2026-76642	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	login	1:4.16.0-2+really2.41.3-3ubuntu2.2	CVE-2026-78408	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	login	1:4.16.0-2+really2.41.3-3ubuntu2.2	CVE-2026-78410	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	login.defs	1:4.17.4-2ubuntu3	CVE-2024-56433	LOW	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	mount	2.41.3-3ubuntu2.2	CVE-2026-76642	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	mount	2.41.3-3ubuntu2.2	CVE-2026-78408	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	mount	2.41.3-3ubuntu2.2	CVE-2026-78410	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	p11-kit	0.26.2-2	CVE-2026-13757	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	p11-kit-modules	0.26.2-2	CVE-2026-13757	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	passwd	1:4.17.4-2ubuntu3	CVE-2024-56433	LOW	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	perl-base	5.40.1-7ubuntu0.3	CVE-2026-48962	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	perl-base	5.40.1-7ubuntu0.3	CVE-2026-82560	MEDIUM	5.40.1-7ubuntu0.4
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	perl-base	5.40.1-7ubuntu0.3	CVE-2026-9538	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	rust-coreutils	0.10.0-1ubuntu2~26.04.1	CVE-2026-35370	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	rust-coreutils	0.10.0-1ubuntu2~26.04.1	CVE-2026-35371	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	tar	1.35+dfsg-4ubuntu0.4	CVE-2026-18477	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	tar	1.35+dfsg-4ubuntu0.4	CVE-2026-18508	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	util-linux	2.41.3-3ubuntu2.2	CVE-2026-76642	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	util-linux	2.41.3-3ubuntu2.2	CVE-2026-78408	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	util-linux	2.41.3-3ubuntu2.2	CVE-2026-78410	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	wget	1.25.0-2ubuntu4.4	CVE-2021-31879	MEDIUM	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	wget	1.25.0-2ubuntu4.4	CVE-2026-16599	LOW	não informada pelo scanner
+[EXECUTADO]	eclipse-temurin_21-jre	eclipse-temurin@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d	stdlib	v1.27.3	CVE-2026-97054	MEDIUM	1.26.11, 1.27.4
