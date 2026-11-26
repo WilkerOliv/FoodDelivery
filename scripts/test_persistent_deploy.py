@@ -45,6 +45,19 @@ class ConfigurationTests(unittest.TestCase):
                 with self.subTest(fields=tuple(extra)), self.assertRaises(ValueError):
                     launcher.configuration({**env, **extra})
 
+    def test_runtime_role_uses_separate_migrator(self):
+        with tempfile.NamedTemporaryFile() as ca:
+            env = environment(ca.name)
+            env.update(DATABASE_USERNAME='fooddelivery_runtime.project',
+                       SPRING_FLYWAY_USER='fooddelivery_app.project',
+                       SPRING_FLYWAY_PASSWORD=secrets.token_urlsafe(32))
+            launcher.configuration(env)
+            for override in ({'SPRING_FLYWAY_USER': 'fooddelivery_app.other'},
+                             {'SPRING_FLYWAY_PASSWORD': ''},
+                             {'SPRING_FLYWAY_PASSWORD': env['DATABASE_PASSWORD']}):
+                with self.subTest(fields=tuple(override)), self.assertRaises(ValueError):
+                    launcher.configuration({**env, **override})
+
     def test_requires_verified_tls_and_restricted_role(self):
         with tempfile.NamedTemporaryFile() as ca:
             env = environment(ca.name)
@@ -63,6 +76,10 @@ class ConfigurationTests(unittest.TestCase):
 
 
 def container_test():
+    postgres_image = os.environ.get('QA_POSTGRES_IMAGE', 'postgres:17-alpine')
+    if postgres_image not in ('postgres:16-alpine', 'postgres:17-alpine'):
+        raise ValueError('Use PostgreSQL descartável 16 ou 17.')
+
     suffix = secrets.token_hex(5)
     network, db, app = ['fd-persist-' + kind + '-' + suffix for kind in ('net', 'db', 'app')]
     created = []
@@ -83,10 +100,10 @@ def container_test():
         run('docker', 'network', 'create', network, stdout=subprocess.DEVNULL)
         try:
             run('docker', 'run', '-d', '--name', db, '--network', network, '--network-alias', 'qa-db',
-                '-v', f'{folder}:/tls:ro', '-v', f'{ROOT}/deploy/postgres/supabase-private-schema.sql:/docker-entrypoint-initdb.d/10-app.sql:ro',
+                '-v', f'{folder}:/tls:ro', 
                 '-e', 'POSTGRES_PASSWORD=' + secrets.token_urlsafe(32),
                 '-e', 'APP_DATABASE_PASSWORD=' + env['DATABASE_PASSWORD'],
-                '--entrypoint', 'sh', 'postgres:17-alpine', '-c',
+                '--entrypoint', 'sh', postgres_image, '-c',
                 'cp /tls/server.key /tmp/server.key && chown postgres:postgres /tmp/server.key && chmod 600 /tmp/server.key && exec docker-entrypoint.sh postgres -c ssl=on -c ssl_cert_file=/tls/ca.crt -c ssl_key_file=/tmp/server.key',
                 stdout=subprocess.DEVNULL)
             created.append(db)
@@ -97,11 +114,21 @@ def container_test():
                 time.sleep(1)
             else:
                 raise AssertionError('PostgreSQL não iniciou.')
-            run('docker', 'run', '-d', '--name', app, '--network', network, '--memory=512m', '--cpus=1',
-                '--cap-drop=ALL', '--security-opt', 'no-new-privileges',  # reproduz as restrições do Render
-                '-p', '127.0.0.1::10000', '--env-file', str(envfile),
-                '-v', f'{folder}/ca.crt:/run/secrets/ca.crt:ro', 'fooddelivery-persistent:qa', stdout=subprocess.DEVNULL)
-            created.append(app)
+            def sql(role, statement):
+                return run('docker', 'exec', '-i', db, 'psql', '-XAtq', '-U', role, '-d', 'postgres',
+                           '-v', 'ON_ERROR_STOP=1', input=statement, capture_output=True).stdout.strip()
+            sql('postgres', 'CREATE ROLE qa_manager LOGIN CREATEROLE NOSUPERUSER; GRANT CREATE ON DATABASE postgres TO qa_manager;')
+            sql('qa_manager', (ROOT / 'deploy/postgres/supabase-private-schema.sql').read_text())
+            assert sql('qa_manager', "BEGIN; SET LOCAL ROLE fooddelivery_app; SELECT current_user; ROLLBACK;") == 'fooddelivery_app'
+            extra = folder / 'qa-migrations'
+            extra.mkdir(mode=0o755)
+            def start_app():
+                run('docker', 'run', '-d', '--name', app, '--network', network, '--memory=512m', '--cpus=1',
+                    '--cap-drop=ALL', '--security-opt', 'no-new-privileges',  # reproduz as restrições do Render
+                    '-p', '127.0.0.1::10000', '--env-file', str(envfile),
+                    '-v', f'{extra}:/qa-migrations:ro', '-v', f'{folder}/ca.crt:/run/secrets/ca.crt:ro', 'fooddelivery-persistent:qa', stdout=subprocess.DEVNULL)
+                created.append(app)
+            start_app()
             port = run('docker', 'port', app, '10000/tcp', capture_output=True).stdout.strip().rsplit(':', 1)[1]
             base = 'http://127.0.0.1:' + port
             def request(path, body=None, cookie=None, origin=env['RENDER_EXTERNAL_URL'], extra=None):
@@ -156,11 +183,38 @@ def container_test():
             with request('/api/v1/auth/login', {'email': 'outra-pessoa@example.test', 'password': 'senha-incorreta-123'},
                          extra={'X-Forwarded-For': '198.51.100.21'}) as response:
                 assert response.status == 401, response.status
-            # Stable signing key and PostgreSQL preserve the account and existing login.
-            run('docker', 'restart', app, stdout=subprocess.DEVNULL)
+            # Upgrade an already migrated database and redeploy with the runtime login.
+            run('docker', 'rm', '-f', app, stdout=subprocess.DEVNULL)
+            created.remove(app)
+            runtime_password = secrets.token_urlsafe(32)
+            provision = (ROOT / 'deploy/postgres/supabase-runtime-role.sql').read_text()
+            run('docker', 'exec', '-i', db, 'psql', '-d', 'postgres', '-U', 'qa_manager', '-v', 'ON_ERROR_STOP=1',
+                input=provision + "\nALTER ROLE fooddelivery_runtime PASSWORD '" + runtime_password + "';",
+                stdout=subprocess.DEVNULL)
+            privileges = run('docker', 'exec', db, 'psql', '-U', 'fooddelivery_runtime', '-d', 'postgres',
+                '-Atc', """SELECT has_schema_privilege(current_user,'fooddelivery','CREATE'),
+                                  has_table_privilege(current_user,'flyway_schema_history','INSERT'),
+                                  has_table_privilege(current_user,'admin_audit_events','DELETE'),
+                                  has_table_privilege(current_user,'admin_audit_events','INSERT'),
+                                  has_table_privilege(current_user,'accounts','UPDATE'),
+                                  has_table_privilege(current_user,'admin_audit_events','UPDATE'),
+                                  has_table_privilege(current_user,'flyway_schema_history','UPDATE'),
+                                  has_table_privilege(current_user,'flyway_schema_history','DELETE')""",
+                capture_output=True).stdout.strip()
+            assert privileges == 'f|f|f|t|t|f|f|f', privileges
+            # Este arquivo existe somente no contêiner descartável.
+            (extra / 'V9999__qa_migration.sql').write_text('CREATE TABLE qa_migration AS SELECT current_user AS executor;')
+            env['SPRING_FLYWAY_LOCATIONS'] = 'classpath:db/migration-common,classpath:db/migration-postgres,filesystem:/qa-migrations'
+            env.update(SPRING_FLYWAY_USER=env['DATABASE_USERNAME'],
+                       SPRING_FLYWAY_PASSWORD=env['DATABASE_PASSWORD'],
+                       DATABASE_USERNAME='fooddelivery_runtime', DATABASE_PASSWORD=runtime_password)
+            envfile.write_text(''.join(f'{k}={v}\n' for k, v in env.items()))
+            start_app()
             port = run('docker', 'port', app, '10000/tcp', capture_output=True).stdout.strip().rsplit(':', 1)[1]
             base = 'http://127.0.0.1:' + port
             ready()
+            assert sql('fooddelivery_runtime', 'SELECT executor FROM fooddelivery.qa_migration') == 'fooddelivery_app'
+
             with request('/api/v1/account/me', cookie=cookie) as response:
                 assert response.status == 200 and json.load(response)['id'] == identity['id']
             with request('/api/v1/auth/login', {'email': 'admin@example.test', 'password': 'DemoLocal!2026#Teste'}) as response:
@@ -174,6 +228,18 @@ def container_test():
                 pass
             run('docker', 'start', db, stdout=subprocess.DEVNULL)
             ready()
+            # Reverter somente a configuração, preservando dados, papéis e sessão.
+            run('docker', 'rm', '-f', app, stdout=subprocess.DEVNULL)
+            created.remove(app)
+            env['DATABASE_USERNAME'] = env.pop('SPRING_FLYWAY_USER')
+            env['DATABASE_PASSWORD'] = env.pop('SPRING_FLYWAY_PASSWORD')
+            envfile.write_text(''.join(f'{k}={v}\n' for k, v in env.items()))
+            start_app()
+            port = run('docker', 'port', app, '10000/tcp', capture_output=True).stdout.strip().rsplit(':', 1)[1]
+            base = 'http://127.0.0.1:' + port
+            ready()
+            with request('/api/v1/account/me', cookie=cookie) as response:
+                assert response.status == 200 and json.load(response)['id'] == identity['id']
             print('PASS: PostgreSQL TLS verificado, migrações privadas, proxy, cookie seguro, origem, ausência de seed demo, conta/sessão após reinício e recuperação após queda do banco.')
         except Exception:
             if app in created:
