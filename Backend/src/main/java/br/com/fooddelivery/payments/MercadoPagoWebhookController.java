@@ -2,7 +2,7 @@ package br.com.fooddelivery.payments;
 
 import br.com.fooddelivery.orders.Order;
 import br.com.fooddelivery.reservations.Reservation;
-import java.math.BigDecimal;
+import java.time.Instant;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Map;
@@ -19,6 +19,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @RestController
 @RequestMapping("/api/v1/webhooks/mercadopago")
 public class MercadoPagoWebhookController {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(MercadoPagoWebhookController.class);
+    private static ResponseStatusException rejected(HttpStatus status, String message) {
+        log.warn("Webhook Mercado Pago recusado: status={}", status.value());
+        return new ResponseStatusException(status, message);
+    }
     private final PaymentRepository payments;
     private final PaymentService paymentService;
     private final MercadoPagoRefundService refundService;
@@ -35,18 +40,16 @@ public class MercadoPagoWebhookController {
             @RequestHeader(name="x-signature",required=false) String signature,
             @RequestHeader(name="x-request-id",required=false) String requestId){
         if(!"payment".equals(type)||dataId==null||dataId.isBlank())return Map.of("status","ignored");
-        if(!validSignature(dataId,requestId,signature))throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Assinatura de webhook inválida.");
-        Payment payment=payments.findWithOperationById(internalPaymentId).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
+        if(!validSignature(dataId,requestId,signature))throw rejected(HttpStatus.UNAUTHORIZED,"Assinatura de webhook inválida.");
+        Payment payment=payments.findWithOperationById(internalPaymentId).orElseThrow(()->rejected(HttpStatus.NOT_FOUND, "Pagamento não encontrado."));
         Order order=payment.getOrder();Reservation reservation=payment.getReservation();
         var store=order!=null?order.getStore():reservation.getStore();
-        String accessToken=marketplaceAccounts.accessTokenForStore(store.getId());
         Map<String,Object> mpPayment;
-        try{mpPayment=http.get().uri("https://api.mercadopago.com/v1/payments/{id}",dataId).header("Authorization","Bearer "+accessToken).retrieve().body(new ParameterizedTypeReference<>(){});}
-        catch(RuntimeException error){throw new ResponseStatusException(HttpStatus.BAD_GATEWAY,"Não foi possível validar a notificação com o Mercado Pago.");}
-        if(mpPayment==null||!internalPaymentId.toString().equals(String.valueOf(mpPayment.get("external_reference"))))throw new ResponseStatusException(HttpStatus.CONFLICT,"O pagamento recebido não corresponde ao registro local.");
-        BigDecimal amount=new BigDecimal(String.valueOf(mpPayment.get("transaction_amount")));
-        String currency=String.valueOf(mpPayment.get("currency_id"));
-        if(amount.movePointRight(2).longValueExact()!=payment.getAmountCents()||!"BRL".equals(currency))throw new ResponseStatusException(HttpStatus.CONFLICT,"O valor ou a moeda do pagamento não corresponde ao pedido.");
+        try{String accessToken=marketplaceAccounts.accessTokenForStore(store.getId());
+            mpPayment=http.get().uri("https://api.mercadopago.com/v1/payments/{id}",dataId).header("Authorization","Bearer "+accessToken).retrieve().body(new ParameterizedTypeReference<>(){});}
+        catch(RuntimeException error){throw rejected(HttpStatus.BAD_GATEWAY,"Não foi possível validar a notificação com o Mercado Pago.");}
+        String mismatch = PaymentReconciliationService.validate(payment, mpPayment, dataId);
+        if (mismatch != null) throw rejected(HttpStatus.CONFLICT, mismatch);
         String status=String.valueOf(mpPayment.get("status"));
         if("approved".equals(status))paymentService.confirmProvider(internalPaymentId,dataId);
         else if("refunded".equals(status))refundService.providerConfirmedRefund(dataId);
@@ -54,12 +57,24 @@ public class MercadoPagoWebhookController {
         return Map.of("status","processed");
     }
 
+    // Accept the seconds and milliseconds representations used in provider documentation.
+    static boolean freshTimestamp(String timestamp, Instant now, int toleranceSeconds) {
+        if (timestamp == null || !timestamp.matches("[0-9]{10}|[0-9]{13}")) return false;
+        try {
+            long value = Long.parseLong(timestamp);
+            Instant signedAt = timestamp.length() == 13 ? Instant.ofEpochMilli(value) : Instant.ofEpochSecond(value);
+            return !signedAt.isBefore(now.minusSeconds(toleranceSeconds)) && !signedAt.isAfter(now.plusSeconds(toleranceSeconds));
+        } catch (RuntimeException invalid) {
+            return false;
+        }
+    }
+
     private boolean validSignature(String dataId,String requestId,String signature){
         if(properties.testWebhookSignature()&&properties.sandbox())return true;
         if(!properties.webhookConfigured()||signature==null||requestId==null)return false;
         String timestamp=null,provided=null;
         for(String part:signature.split(",")){String[] pair=part.trim().split("=",2);if(pair.length!=2)continue;if(pair[0].equals("ts"))timestamp=pair[1];if(pair[0].equals("v1"))provided=pair[1];}
-        if(timestamp==null||provided==null)return false;
+        if(timestamp==null||provided==null||!provided.matches("[a-fA-F0-9]{64}")||!freshTimestamp(timestamp, Instant.now(), properties.getWebhookToleranceSeconds()))return false;
         String manifest="id:"+dataId.toLowerCase(java.util.Locale.ROOT)+";request-id:"+requestId+";ts:"+timestamp+";";
         try{Mac mac=Mac.getInstance("HmacSHA256");mac.init(new SecretKeySpec(properties.webhookSecret().getBytes(StandardCharsets.UTF_8),"HmacSHA256"));String expected=java.util.HexFormat.of().formatHex(mac.doFinal(manifest.getBytes(StandardCharsets.UTF_8)));return MessageDigest.isEqual(expected.getBytes(StandardCharsets.US_ASCII),provided.toLowerCase(java.util.Locale.ROOT).getBytes(StandardCharsets.US_ASCII));}
         catch(Exception e){return false;}

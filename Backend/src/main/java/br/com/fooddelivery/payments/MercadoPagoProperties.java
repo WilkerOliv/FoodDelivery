@@ -13,6 +13,12 @@ public class MercadoPagoProperties {
  private String notificationBaseUrl;
  private boolean sandbox;
  private boolean testWebhookSignature;
+ private int webhookToleranceSeconds = 300;
+ public int getWebhookToleranceSeconds(){return webhookToleranceSeconds;}
+ public void setWebhookToleranceSeconds(int seconds){
+     if(seconds < 1 || seconds > 3600) throw new IllegalArgumentException("Tolerância do webhook deve ser de 1 a 3600 segundos.");
+     webhookToleranceSeconds=seconds;
+ }
  private String currency;
  public MercadoPagoProperties(){}
  public MercadoPagoProperties(String clientId,String clientSecret,String redirectUri,String frontendUrl,String tokenEncryptionKey,String webhookSecret,String notificationBaseUrl,boolean sandbox,boolean testWebhookSignature,String currency){this.clientId=clientId;this.clientSecret=clientSecret;this.redirectUri=redirectUri;this.frontendUrl=frontendUrl;this.tokenEncryptionKey=tokenEncryptionKey;this.webhookSecret=webhookSecret;this.notificationBaseUrl=notificationBaseUrl;this.sandbox=sandbox;this.testWebhookSignature=testWebhookSignature;this.currency=currency;}
