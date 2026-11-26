@@ -20,7 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -102,7 +102,7 @@ public final class AuthenticationRateLimitFilter extends OncePerRequestFilter {
                     String normalized = email.textValue().trim().toLowerCase(Locale.ROOT);
                     if (!normalized.isBlank() && normalized.length() <= 254) subject = "account:" + digest(normalized);
                 }
-            } catch (IOException invalidJson) {
+            } catch (tools.jackson.core.JacksonException invalidJson) {
                 // The controller still receives the original bytes and returns the validation error.
             }
         } else {

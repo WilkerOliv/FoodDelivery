@@ -1,7 +1,7 @@
 package br.com.fooddelivery.identity;
 import br.com.fooddelivery.settings.PrivateCipher;
 import br.com.fooddelivery.admin.AdminAuditService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import java.util.*;
 import java.time.Instant;
 import java.net.URLEncoder;

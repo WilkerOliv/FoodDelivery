@@ -5,7 +5,7 @@ import br.com.fooddelivery.identity.Account;
 import br.com.fooddelivery.notifications.NotificationService;
 import br.com.fooddelivery.payments.*;
 import br.com.fooddelivery.reservations.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import java.time.*;
 import java.util.*;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ class StoreHoursChangeServiceTest {
     final Store store=new Store(owner,"Loja",null,"Rua","Barbearias");
     final StoreRepository stores=mock(StoreRepository.class);final ReservationRepository reservations=mock(ReservationRepository.class);
     final ReservationSlotRepository slots=mock(ReservationSlotRepository.class);final PaymentRepository payments=mock(PaymentRepository.class);
-    final NotificationService notifications=mock(NotificationService.class);final StoreOperatingHours hours=new StoreOperatingHours(new ObjectMapper().findAndRegisterModules());
+    final NotificationService notifications=mock(NotificationService.class);final StoreOperatingHours hours=new StoreOperatingHours(tools.jackson.databind.json.JsonMapper.builder().findAndAddModules().build());
     final StoreHoursChangeService service=new StoreHoursChangeService(stores,hours,reservations,slots,payments,notifications,mock(AdminAuditService.class));
     StoreHoursChangeServiceTest(){ReflectionTestUtils.setField(owner,"id",ownerId);ReflectionTestUtils.setField(store,"id",storeId);store.setTimezone("UTC");when(stores.findByIdForUpdate(storeId)).thenReturn(Optional.of(store));}
     Reservation reservation(boolean payAfter){var start=Instant.parse("2030-01-02T10:00:00Z");var r=new Reservation(store,customer,start,UUID.randomUUID(),"Corte",2500,null,payAfter);ReflectionTestUtils.setField(r,"id",UUID.randomUUID());when(reservations.lockFutureForHours(eq(storeId),any(),any())).thenReturn(List.of(r));return r;}

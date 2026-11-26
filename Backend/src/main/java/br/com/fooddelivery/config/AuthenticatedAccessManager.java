@@ -10,7 +10,7 @@ import org.springframework.security.web.access.intercept.RequestAuthorizationCon
 /** Default-deny policy for every route not explicitly public in SecurityConfig. */
 public final class AuthenticatedAccessManager implements AuthorizationManager<RequestAuthorizationContext> {
     @Override
-    public AuthorizationDecision check(Supplier<Authentication> authentication, RequestAuthorizationContext context) {
+    public AuthorizationDecision authorize(Supplier<? extends Authentication> authentication, RequestAuthorizationContext context) {
         Authentication current = authentication.get();
         if (!(current instanceof JwtAuthenticationToken jwt) || !current.isAuthenticated()) {
             return new AuthorizationDecision(false);
