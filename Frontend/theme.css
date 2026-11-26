@@ -663,3 +663,8 @@ body.dialog-open{overflow:hidden;}
   .stat-grid[data-admin-area="stats"] .stat-card small,
   .stat-grid[data-admin-area="stats"] .stat-card span { font-size: 14px; line-height: 1.5; }
 }
+
+#auth-form .field input:focus-visible {
+  outline: 3px solid #943008;
+  outline-offset: 2px;
+}
